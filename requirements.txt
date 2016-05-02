@@ -1,14 +1,13 @@
 click
 flake8
 # NOTE: Both GDAL and Numpy versions need to match the once installed on the
-# system level. 
+# system level.
 # This probably needs to be adjusted, no 2.1.0 yet on OpenSUSE
 GDAL==2.0.1 --global-option=build_ext --global-option="-I/usr/include/gdal"
-# Also Numpy needs the system level numpy-devel files. Not very portable.
 numpy==1.11 --global-option=build_ext --global-option="-I/usr/lib64/python3.5/site-packages/numpy/core/include/numpy"
 pip>=8.1.1
 python-dotenv==0.5.0
-rasterio
 snakemake
 Sphinx
+tox
 wheel>=0.25
