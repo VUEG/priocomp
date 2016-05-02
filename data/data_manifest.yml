@@ -1,0 +1,11 @@
+DATA_PROVIDER_URL: "beehub.nl" 
+PROVIDE:
+  agrobiodiversity_species_richness:
+    metadata_uri: https://beehub.nl/environmental-geography-group/provide/agrobiodiversity_species_richness/datapackage.json
+    resource_uri: https://beehub.nl/environmental-geography-group/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif
+  carbon_sequestration:
+    metadata_uri: https://beehub.nl/environmental-geography-group/provide/carbon_sequestration/datapackage.json
+    resource_uri: https://beehub.nl/environmental-geography-group/provide/carbon_sequestration/carbon_sequestration.tif
+  cultural_landscape_index_agro:
+    metadata_uri: https://beehub.nl/environmental-geography-group/provide/cultural_landscape_index_agro/datapackage.json
+    resource_uri: https://beehub.nl/environmental-geography-group/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif
