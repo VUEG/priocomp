@@ -9,7 +9,8 @@ dependencies:
   - click
   - flake8
   - GDAL>=2.0.0
-  - numpy=1.11
+  - numpy=1.10
+  - rasterio
   - snakemake
   - Sphinx
   - tox
