@@ -1,9 +1,15 @@
-priocomp
-==============================
 
-Prioritiation method comparison for conservation and ecosystem services supply in Europe
+## Comparing spatial prioritization methods for biodiversity conservation and ecosystem service supply in Europe
 
-Project Organization
+__Version:__ 0.0.1  
+
+### Introduction
+
+
+
+### Project organization
+
+
 ------------
 
     ├── LICENSE
@@ -49,3 +55,12 @@ Project Organization
     │       └── visualize.py
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
+
+
+### License
+
+See [LICENSE file](LICENSE.md).
+
+### Contributors
+
++ Joona Lehtomäki <joona.lehtomaki@gmail.com>
