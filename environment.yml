@@ -1,0 +1,17 @@
+name: priocomp
+channels:
+  - defaults
+  - bioconda
+  - mutirri
+  - r
+dependencies:
+  - python=3.*
+  - click
+  - flake8
+  - GDAL>=2.0.0
+  - numpy=1.11
+  - snakemake
+  - Sphinx
+  - tox
+  - pip:
+      - python-dotenv
