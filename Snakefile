@@ -1,5 +1,6 @@
 import os
 import requests
+from snakemake import logger
 from snakemake.remote.HTTP import RemoteProvider as HTTPRemoteProvider
 HTTP = HTTPRemoteProvider()
 
@@ -34,7 +35,7 @@ rule all:
     input:
         expand(["data/external/{dataset}/datapackage.json", "data/external/{dataset}/{dataset}.tif"], dataset=PROVIDE_DATASETS)
 
-rule get_beehub_data:
+rule get_provide_data:
     input:
         HTTP.remote(expand(["beehub.nl/environmental-geography-group/provide/{dataset}/datapackage.json",
                             "beehub.nl/environmental-geography-group/provide/{dataset}/{dataset}.tif"], dataset=PROVIDE_DATASETS),
@@ -46,3 +47,28 @@ rule get_beehub_data:
     run:
         for i in range(0, len(input)):
             shell("mv {0} {1}".format(input[i], output[i]))
+
+rule harmonize_data:
+    input:
+        expand("data/external/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS)
+    output:
+        expand("data/interim/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS)
+    params:
+        # Snap raster
+        like_raster = "data/external/carbon_sequestration/carbon_sequestration.tif",
+        # Target CRS
+        dst_src = 3035
+    message:
+        "Harmonizing datasets..."
+    run:
+        for i, s_raster in enumerate(input):
+            # No need to process the snap raster, just copy it
+            if s_raster == params['like_raster']:
+                logger.info(" [{0}/{1}] Copying dataset {2}".format(i+1, len(input), s_raster))
+                shell("cp {0} {1}".format(input[i], output[i]))
+                continue
+            # No need to process the snap raster
+            logger.info(" [{0}/{1}] Warping dataset {2}".format(i+1, len(input), s_raster))
+            shell("rio warp " + input[i] + " --like " + params['like_raster'] + \
+                  " " + output[i] + " --dst-crs " + str(params['dst_src']) + \
+                  " --co 'COMPRESS=DEFLATE' --threads {threads}")
