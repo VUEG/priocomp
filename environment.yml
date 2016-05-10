@@ -12,6 +12,12 @@ dependencies:
   - GDAL>=2.0.0
   - numpy=1.10
   - rasterio
+  - r
+  - r-devtools
+  - r-ggplot2
+  - r-raster
+  - r-recommended
+  - r-testthat
   - snakemake
   - Sphinx
   - tox
