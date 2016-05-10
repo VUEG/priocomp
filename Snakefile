@@ -16,6 +16,8 @@ dotenv.load_dotenv(dotenv_path)
 # Set up a remote provider
 HTTP = HTTPRemoteProvider()
 
+DATADRYAD_DATASETS = ['woodprod_average']
+
 PROVIDE_DATASETS = ['agrobiodiversity_species_richness',
                     'carbon_sequestration',
                     'cultural_landscape_index_agro',
@@ -42,12 +44,12 @@ rule get_datadryad_data:
     input:
         HTTP.remote(expand(["beehub.nl/environmental-geography-group/datadryad/forest_production_europe/datapackage.json",
                             "beehub.nl/environmental-geography-group/datadryad/forest_production_europe/README.txt",
-                            "beehub.nl/environmental-geography-group/datadryad/forest_production_europe/woodprod_average.tif"]),
+                            "beehub.nl/environmental-geography-group/datadryad/forest_production_europe/{dataset}.tif"], dataset=DATADRYAD_DATASETS),
                     username=os.environ.get("BEEHUB_USERNAME"), password=os.environ.get("BEEHUB_PASSWORD"), keep_local=False)
     output:
-        "data/external/datadryad/forest_production_europe/datapackage.json",
-        "data/external/datadryad/forest_production_europe/README.txt",
-        "data/external/datadryad/forest_production_europe/woodprod_average.tif"
+        expand(["data/external/datadryad/forest_production_europe/datapackage.json",
+                "data/external/datadryad/forest_production_europe/README.txt",
+                "data/external/datadryad/forest_production_europe/{dataset}.tif"], dataset=DATADRYAD_DATASETS)
     log:
         "logs/data_datadryad.log"
     run:
@@ -83,12 +85,14 @@ rule get_provide_data:
 
 rule harmonize_data:
     input:
-        expand("data/external/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS)
+        expand("data/external/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/external/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
     output:
-        expand("data/interim/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS)
+        expand("data/interim/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/interim/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
     params:
         # Snap raster
-        like_raster = "data/external/carbon_sequestration/carbon_sequestration.tif",
+        like_raster = "data/external/provide/carbon_sequestration/carbon_sequestration.tif",
         # Target CRS
         dst_src = 3035
     message:
