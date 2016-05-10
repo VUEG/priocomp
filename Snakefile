@@ -6,7 +6,7 @@ from snakemake import logger
 from snakemake.remote.HTTP import RemoteProvider as HTTPRemoteProvider
 
 
-#-- GLOBALS --------------------------------------------------------------------
+## GLOBALS ---------------------------------------------------------------------
 
 # dotenv project variables
 dotenv_path = '.env'
@@ -14,8 +14,6 @@ dotenv.load_dotenv(dotenv_path)
 
 # Set up a remote provider
 HTTP = HTTPRemoteProvider()
-
-#-- PROJECT RULES --------------------------------------------------------------
 
 PROVIDE_DATASETS = ['agrobiodiversity_species_richness',
                     'carbon_sequestration',
@@ -31,11 +29,13 @@ PROVIDE_DATASETS = ['agrobiodiversity_species_richness',
                     'species_richness_farmland_birds_original1',
                     'species_richness_vascular_plants']
 
+# PROJECT RULES ----------------------------------------------------------------
+
 rule all:
     input:
         expand(["data/external/{dataset}/datapackage.json", "data/external/{dataset}/{dataset}.tif"], dataset=PROVIDE_DATASETS)
 
-#-- Data -----------------------------------------------------------------------
+## Data ------------------------------------------------------------------------
 
 rule get_provide_data:
     input:
@@ -56,7 +56,7 @@ rule get_provide_data:
             shell("mv {0} {1}".format(input[i], output[i]))
             logger.info("Downloaded {0} to {1}".format(input[i], output[i]))
 
-#-- Data pre-processing --------------------------------------------------------
+## Data pre-processing ---------------------------------------------------------
 
 rule harmonize_data:
     input:
