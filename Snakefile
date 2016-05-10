@@ -1,21 +1,21 @@
+import dotenv
+import logging
 import os
 import requests
 from snakemake import logger
 from snakemake.remote.HTTP import RemoteProvider as HTTPRemoteProvider
-HTTP = HTTPRemoteProvider()
 
-#################################################################################
-# GLOBALS                                                                       #
-#################################################################################
 
-import dotenv
+#-- GLOBALS --------------------------------------------------------------------
+
+# dotenv project variables
 dotenv_path = '.env'
 dotenv.load_dotenv(dotenv_path)
 
+# Set up a remote provider
+HTTP = HTTPRemoteProvider()
 
-#################################################################################
-# PROJECT RULES                                                                 #
-#################################################################################
+#-- PROJECT RULES --------------------------------------------------------------
 
 PROVIDE_DATASETS = ['agrobiodiversity_species_richness',
                     'carbon_sequestration',
@@ -41,12 +41,18 @@ rule get_provide_data:
                             "beehub.nl/environmental-geography-group/provide/{dataset}/{dataset}.tif"], dataset=PROVIDE_DATASETS),
                     username=os.environ.get("BEEHUB_USERNAME"), password=os.environ.get("BEEHUB_PASSWORD"), keep_local=False)
     output:
-        expand(["data/external/{dataset}/datapackage.json", "data/external/{dataset}/{dataset}.tif"], dataset=PROVIDE_DATASETS)
-    message:
-        "Downloaded data from BeeHub"
+        expand(["data/external/PROVIDE/{dataset}/datapackage.json", "data/external/{dataset}/{dataset}.tif"], dataset=PROVIDE_DATASETS)
+    log:
+        "logs/data_provide.log"
     run:
+        # Configure logger
+        fileHandler = logging.FileHandler(log[0])
+        fileHandler.setFormatter(logging.Formatter('%(asctime)s - %(message)s'))
+        logger.logger.addHandler(fileHandler)
+
         for i in range(0, len(input)):
             shell("mv {0} {1}".format(input[i], output[i]))
+            logger.info("Downloaded {0} to {1}".format(input[i], output[i]))
 
 rule harmonize_data:
     input:
