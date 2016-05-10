@@ -2,6 +2,7 @@ import dotenv
 import logging
 import os
 import requests
+import yaml
 from snakemake import logger
 from snakemake.remote.HTTP import RemoteProvider as HTTPRemoteProvider
 
@@ -35,7 +36,29 @@ rule all:
     input:
         expand(["data/external/{dataset}/datapackage.json", "data/external/{dataset}/{dataset}.tif"], dataset=PROVIDE_DATASETS)
 
-## Data ------------------------------------------------------------------------
+## Get data --------------------------------------------------------------------
+
+rule get_datadryad_data:
+    input:
+        HTTP.remote(expand(["beehub.nl/environmental-geography-group/datadryad/forest_production_europe/datapackage.json",
+                            "beehub.nl/environmental-geography-group/datadryad/forest_production_europe/README.txt",
+                            "beehub.nl/environmental-geography-group/datadryad/forest_production_europe/woodprod_average.tif"]),
+                    username=os.environ.get("BEEHUB_USERNAME"), password=os.environ.get("BEEHUB_PASSWORD"), keep_local=False)
+    output:
+        "data/external/datadryad/forest_production_europe/datapackage.json",
+        "data/external/datadryad/forest_production_europe/README.txt",
+        "data/external/datadryad/forest_production_europe/woodprod_average.tif"
+    log:
+        "logs/data_datadryad.log"
+    run:
+        # Configure logger
+        fileHandler = logging.FileHandler(log[0])
+        fileHandler.setFormatter(logging.Formatter('%(asctime)s - %(message)s'))
+        logger.logger.addHandler(fileHandler)
+
+        for i in range(0, len(input)):
+            shell("mv {0} {1}".format(input[i], output[i]))
+            logger.info("Downloaded {0} to {1}".format(input[i], output[i]))
 
 rule get_provide_data:
     input:
@@ -43,7 +66,7 @@ rule get_provide_data:
                             "beehub.nl/environmental-geography-group/provide/{dataset}/{dataset}.tif"], dataset=PROVIDE_DATASETS),
                     username=os.environ.get("BEEHUB_USERNAME"), password=os.environ.get("BEEHUB_PASSWORD"), keep_local=False)
     output:
-        expand(["data/external/PROVIDE/{dataset}/datapackage.json", "data/external/{dataset}/{dataset}.tif"], dataset=PROVIDE_DATASETS)
+        expand(["data/external/provide/{dataset}/datapackage.json", "data/external/provide/{dataset}/{dataset}.tif"], dataset=PROVIDE_DATASETS)
     log:
         "logs/data_provide.log"
     run:
