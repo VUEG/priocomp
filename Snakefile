@@ -35,6 +35,8 @@ rule all:
     input:
         expand(["data/external/{dataset}/datapackage.json", "data/external/{dataset}/{dataset}.tif"], dataset=PROVIDE_DATASETS)
 
+#-- Data -----------------------------------------------------------------------
+
 rule get_provide_data:
     input:
         HTTP.remote(expand(["beehub.nl/environmental-geography-group/provide/{dataset}/datapackage.json",
@@ -53,6 +55,8 @@ rule get_provide_data:
         for i in range(0, len(input)):
             shell("mv {0} {1}".format(input[i], output[i]))
             logger.info("Downloaded {0} to {1}".format(input[i], output[i]))
+
+#-- Data pre-processing --------------------------------------------------------
 
 rule harmonize_data:
     input:
