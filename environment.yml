@@ -8,12 +8,14 @@ dependencies:
   - python=3.*
   - click
   - flake8
+  - flask
   - GDAL>=2.0.0
   - numpy=1.10
   - rasterio
   - snakemake
   - Sphinx
   - tox
+  - yaml
   - pip:
       - easywebdav
       - python-dotenv
