@@ -71,3 +71,6 @@ data/
 
 # Snakemake
 .snakemake
+
+# R
+.Rproj.user
