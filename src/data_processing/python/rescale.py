@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-
+import click
 import numpy as np
 import os
 import rasterio
@@ -51,10 +51,22 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE'):
             raise TypeError("Method {} not implemented".format(method))
 
         # Write the product.
-        profile = rasterio.default_gtiff_profile()
+        profile = in_src.profile
         # Rescaled data is always float32, and we have only 1 band
-        profile.update(dtype=rasterio.float32, count=1, compress=compress, height=rescaled_data.shape[0],
-                       width=rescaled_data.shape[1])
+        profile.update(dtype=rasterio.float32, compress=compress)
 
         with rasterio.open(output_raster, 'w', **profile) as dst:
             dst.write(rescaled_data.astype(rasterio.float32), 1)
+
+@click.command()
+@click.option('-m', '--method', default='normalize', help='Rescaling method used.')
+@click.argument('infile', nargs=1, type=click.Path(exists=True))
+@click.argument('outfile', nargs=1)
+def cli(infile, outfile, method):
+    click.echo(click.style('Rescaling file {}'.format(infile), fg='green'))
+    rescale_raster(infile, outfile, method)
+    click.echo(click.style('Done!', fg='green'))
+
+
+if __name__ == '__main__':
+    cli()
