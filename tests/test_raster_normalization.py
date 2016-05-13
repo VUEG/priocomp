@@ -58,7 +58,7 @@ def test_normalization_value_rank():
     def compare_ranks(x, y):
         org_rank = scipy.stats.rankdata(x, method='ordinal')
         new_rank = scipy.stats.rankdata(y, method='ordinal')
-        return (org_rank == new_rank)
+        return (org_rank == new_rank).all()
 
     assert compare_ranks(positive_float_data_0_1, normalize(positive_float_data_0_1))
     assert compare_ranks(positive_float_data_0_100, normalize(positive_float_data_0_100))
@@ -93,6 +93,6 @@ def test_raster_rescaling_read_write(tmpdir):
             # Re-read the raster and see if it's the same
             with rasterio.open(str(outfile)) as new_src:
                 new_x = new_src.read(1)
-                assert (x == new_x).all()
+                npt.assert_almost_equal(x, new_x, decimal=4)
 
     read_write_reread(os.path.join(os.path.dirname(__file__), 'data/test_positive_float_data_0_1.tif'))
