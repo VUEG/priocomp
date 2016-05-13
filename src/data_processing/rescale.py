@@ -72,6 +72,7 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE', verb
             click.echo(click.style(' mean after rescaling:    {}'.format(rescaled_data.mean()), fg='green'))
             click.echo(click.style(' upper Q after rescaling: {}'.format(q75), fg='green'))
             click.echo(click.style(' max after rescaling:     {}'.format(rescaled_data.max()), fg='green'))
+            click.echo(click.style('\n saving data to:          {}\n'.format(output_raster), fg='green'))
 
         # Write the product.
         profile = in_src.profile
