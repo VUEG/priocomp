@@ -19,6 +19,7 @@ dependencies:
   - r-raster
   - r-recommended
   - r-testthat
+  - scipy
   - snakemake
   - Sphinx
   - tox
