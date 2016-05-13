@@ -5,7 +5,9 @@ import requests
 import yaml
 from snakemake import logger
 from snakemake.remote.HTTP import RemoteProvider as HTTPRemoteProvider
+from importlib.machinery import SourceFileLoader
 
+rescale = SourceFileLoader("data_processing.rescale", "src/data_processing/rescale.py").load_module()
 
 ## GLOBALS ---------------------------------------------------------------------
 
@@ -88,8 +90,8 @@ rule harmonize_data:
         expand("data/external/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
         expand("data/external/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
     output:
-        expand("data/interim/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-        expand("data/interim/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
+        expand("data/interim/harmonized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/interim/harmonized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
     params:
         # Snap raster
         like_raster = "data/external/provide/carbon_sequestration/carbon_sequestration.tif",
@@ -109,3 +111,18 @@ rule harmonize_data:
             shell("rio warp " + input[i] + " --like " + params['like_raster'] + \
                   " " + output[i] + " --dst-crs " + str(params['dst_src']) + \
                   " --co 'COMPRESS=DEFLATE' --threads {threads}")
+
+rule rescale_data:
+    input:
+        expand("data/interim/harmonized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/interim/harmonized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
+    output:
+        expand("data/interim/rescaled/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/interim/rescaled/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
+    message:
+        "Rescaling data..."
+    run:
+        for i, s_raster in enumerate(input):
+            # No need to process the snap raster
+            logger.info(" [{0}/{1}] Rescaling dataset {2}".format(i+1, len(input), s_raster))
+            rescale.rescale_raster(input[i], output[i], method="normalize", verbose=True)
