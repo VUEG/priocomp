@@ -1,6 +1,8 @@
 import dotenv
 import logging
+import numpy as np
 import os
+import rasterio
 import requests
 import yaml
 from snakemake import logger
@@ -84,6 +86,51 @@ rule get_provide_data:
             logger.info("Downloaded {0} to {1}".format(input[i], output[i]))
 
 ## Data pre-processing ---------------------------------------------------------
+
+rule build_data_coverage:
+    input:
+        expand("data/interim/rescaled/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/interim/rescaled/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
+    output:
+        "data/processed/common/data_coverage.tif"
+    log:
+        "logs/build_data_coverage.log"
+    message:
+        "Building data coverage raster..."
+    run:
+        # In the first round, get the shape of the rasters and construct
+        # a np.array to hold the binary data maskas. NOTE: the assumption
+        # here is the all data have the same dimension
+        dims = None
+        masks = None
+        profile = None
+        for i, s_raster in enumerate(input):
+            with rasterio.open(s_raster) as in_src:
+                if i == 0:
+                    dims = in_src.shape
+                    # Also store template profile
+                    profile = in_src.profile
+                    masks = np.zeros((len(input), dims[0], dims[1]), dtype=np.uint16)
+                else:
+                    if in_src.shape != dims:
+                        logger.warning(" WARNING: Dimensions for {} don't match, skipping".format(s_raster))
+                        continue
+                # Place a binary version of the current raster mask into the
+                # container
+                logger.info(" [{0}/{1}] Reading mask from {2}".format(i+1, len(input), s_raster))
+                mask = in_src.read_masks(1)
+                # We're using the GDAL type mask where any values above from
+                # 0 are actual data values. Convert (in-place) to binary.
+                np.place(mask, mask > 0, 1)
+                masks[i] = mask
+
+        logger.info(" Summing mask information and saving to {}".format(output))
+        data_coverage = masks.sum(axis=0)
+        # Write the product.
+        profile.update(dtype=rasterio.uint16, compress="DEFLATE")
+
+        with rasterio.open(output[0], 'w', **profile) as dst:
+            dst.write(data_coverage.astype(rasterio.uint16), 1)
 
 rule harmonize_data:
     input:
