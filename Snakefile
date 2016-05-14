@@ -36,6 +36,8 @@ PROVIDE_DATASETS = ['agrobiodiversity_species_richness',
                     'species_richness_farmland_birds_original1',
                     'species_richness_vascular_plants']
 
+SHP_COMPONENTS = ["dbf", "prj", "shx", "shp"]
+
 # PROJECT RULES ----------------------------------------------------------------
 
 rule all:
@@ -56,6 +58,28 @@ rule get_datadryad_data:
                 "data/external/datadryad/forest_production_europe/{dataset}.tif"], dataset=DATADRYAD_DATASETS)
     log:
         "logs/data_datadryad.log"
+    run:
+        # Configure logger
+        fileHandler = logging.FileHandler(log[0])
+        fileHandler.setFormatter(logging.Formatter('%(asctime)s - %(message)s'))
+        logger.logger.addHandler(fileHandler)
+
+        for i in range(0, len(input)):
+            shell("mv {0} {1}".format(input[i], output[i]))
+            logger.info("Downloaded {0} to {1}".format(input[i], output[i]))
+
+rule get_nuts_data:
+    input:
+        HTTP.remote(expand(["beehub.nl/environmental-geography-group/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0.{ext}",
+                            "beehub.nl/environmental-geography-group/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2.{ext}"],
+                            ext=SHP_COMPONENTS),
+                    username=os.environ.get("BEEHUB_USERNAME"), password=os.environ.get("BEEHUB_PASSWORD"), keep_local=False)
+    output:
+        expand(["data/processed/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0.{ext}",
+                "data/processed/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2.{ext}"],
+                ext=SHP_COMPONENTS)
+    log:
+        "logs/data_nuts.log"
     run:
         # Configure logger
         fileHandler = logging.FileHandler(log[0])
