@@ -75,3 +75,6 @@ data/
 # R
 .Rproj.user
 .Rhistory
+
+# Common
+*~
