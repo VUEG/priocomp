@@ -123,8 +123,8 @@ rule get_provide_data:
 
 rule build_data_coverage:
     input:
-        expand("data/interim/rescaled/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-        expand("data/interim/rescaled/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
+        expand("data/processed/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/processed/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
     output:
         "data/processed/common/data_coverage.tif"
     log:
@@ -257,15 +257,11 @@ rule rescale_data:
         expand("data/interim/harmonized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
         expand("data/interim/harmonized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
     output:
-        expand("data/interim/rescaled/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-        expand("data/interim/rescaled/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
+        expand("data/processed/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/processed/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
     message:
         "Rescaling data..."
     run:
-        for item in input:
-            print(item)
-        for item in output:
-            print(item)
         for i, s_raster in enumerate(input):
             # No need to process the snap raster
             logger.info(" [{0}/{1}] Rescaling dataset {2}".format(i+1, len(input), s_raster))
