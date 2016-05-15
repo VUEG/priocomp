@@ -42,6 +42,12 @@ PROVIDE_DATASETS = ['agrobiodiversity_species_richness',
 
 SHP_COMPONENTS = ["dbf", "prj", "shx", "shp"]
 
+# Analysis extent
+PROJECT_EXTENT = {"bottom": 1000000.0, "left": 2000000.0, "right": 6526000.0,
+                  "top": 5410000.0}
+# EPSG for project
+PROJECT_CRS = 3035
+
 # PROJECT RULES ----------------------------------------------------------------
 
 rule all:
@@ -160,74 +166,52 @@ rule build_data_coverage:
         with rasterio.open(output[0], 'w', **profile) as dst:
             dst.write(data_coverage.astype(rasterio.uint16), 1)
 
-rule clip_datasets:
-    input:
-        #clipper=,
-        targets=expand(["data/interim/rescaled/provide/{dataset}/{dataset}.tif"], dataset=PROVIDE_DATASETS) + \
-                expand(["data/interim/rescaled/datadryad/forest_production_europe/{dataset}.tif"], dataset=DATADRYAD_DATASETS)
-    output:
-        expand(["data/processed/provide/{dataset}/{dataset}.tif"], dataset=PROVIDE_DATASETS) + \
-        expand(["data/processed/datadryad/forest_production_europe/{dataset}.tif"], dataset=DATADRYAD_DATASETS)
-    message:
-        "Clipping datasets..."
-    run:
-        for i, s_raster in enumerate(input.targets):
-            ds = gdal.Open(s_raster)
-            srcband = ds.GetRasterBand(1)
-            nodata = srcband.GetNoDataValue()
-            clipped_raster = raster_clipper.clip_raster(ds, input.clipper, nodata=nodata)
-            print(clipped_raster)
-            sys.exit(0)
-
-
 rule harmonize_data:
     input:
-        expand("data/external/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-        expand("data/external/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
+        external=expand("data/external/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+                 expand("data/external/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS),
+        like_raster="data/external/datadryad/forest_production_europe/woodprod_average.tif",
+        clip_shp=expand("data/processed/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0_subset.{ext}",
+                         ext=SHP_COMPONENTS)
     output:
-        rasters=expand("data/interim/harmonized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-                expand("data/interim/harmonized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS),
-        extent_yml="data/extent.yml"
-    params:
-        # Snap raster
-        like_raster = "data/external/datadryad/forest_production_europe/woodprod_average.tif",
-        # Target CRS
-        dst_src = 3035
+        warped=temp(expand("data/interim/warped/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+                     expand("data/interim/warped/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)),
+        harmonized=expand("data/interim/harmonized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+                   expand("data/interim/harmonized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
     message:
         "Harmonizing datasets..."
     run:
-        for i, s_raster in enumerate(input):
+        ndatasets = len(input.external)
+        for i, s_raster in enumerate(input.external):
+            ## WARP
             # Target raster
-            t_raster = s_raster.replace("external", "interim/harmonized")
+            warped_raster = s_raster.replace("external", "interim/warped")
             # No need to process the snap raster, just copy it
-            if s_raster == params['like_raster']:
-                logger.info(" [{0}/{1}] Copying dataset {2}".format(i+1, len(input), s_raster))
-                logger.debug(" [{0}/{1}] Target dataset {2}".format(i+1, len(input), t_raster))
-                shell("cp {s_raster} {t_raster}")
-                # Generate extents.yml that can be used by other rules
-                bounds = {}
-                with rasterio.open(t_raster) as in_src:
-                    bounds["bounds"] = {"left": in_src.bounds[0],
-                                        "bottom": in_src.bounds[1],
-                                        "right": in_src.bounds[2],
-                                        "top": in_src.bounds[3]}
-                with open(output.extent_yml, 'w') as outfile:
-                    outfile.write( yaml.dump(bounds) )
-                logger.info(" [{0}/{1}] Wrote {2}".format(i+1, len(input), output.extent_yml))
-                continue
-            logger.info(" [{0}/{1}] Warping dataset {2}".format(i+1, len(input), s_raster))
-            logger.debug(" [{0}/{1}] Target dataset {2}".format(i+1, len(input), t_raster))
-            shell("rio warp " + s_raster + " --like " + params['like_raster'] + \
-                  " " + t_raster + " --dst-crs " + str(params['dst_src']) + \
-                  " --co 'COMPRESS=DEFLATE' --threads {threads}")
+            if s_raster == input.like_raster:
+                logger.info(" [{0}/{1} step 1] Copying dataset {2}".format(i+1, ndatasets, s_raster))
+                logger.debug(" [{0}/{1} step 1] Target dataset {2}".format(i+1, ndatasets, warped_raster))
+                shell("cp {s_raster} {warped_raster}")
+            else:
+                logger.info(" [{0}/{1} step 1] Warping dataset {2}".format(i+1, ndatasets, s_raster))
+                logger.debug(" [{0}/{1} step 1] Target dataset {2}".format(i+1, ndatasets, warped_raster))
+                shell("rio warp " + s_raster + " --like " + input.like_raster + \
+                      " " + warped_raster + " --dst-crs " + str(PROJECT_CRS) + \
+                      " --co 'COMPRESS=DEFLATE' --threads {threads}")
+
+            ## CLIP
+            harmonized_raster = warped_raster.replace("interim/warped", "interim/harmonized")
+            clip_shp = utils.pick_from_list(input.clip_shp, ".shp")
+            logger.info(" [{0}/{1} step 2] Clipping dataset {2}".format(i+1, ndatasets, warped_raster))
+            logger.debug(" [{0}/{1} step 2] Target dataset {2}".format(i+1, ndatasets, harmonized_raster))
+            shell("gdalwarp -cutline {clip_shp} {warped_raster} {harmonized_raster} -co COMPRESS=DEFLATE")
 
 rule preprocess_nuts_data:
     input:
-        shp="data/external/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0.shp",
-        extent_yml="data/extent.yml"
+        shp=expand("data/external/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0.{ext}",
+                   ext=SHP_COMPONENTS)
     output:
-        reprojected=expand("data/interim/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0.{ext}",
-                           ext=SHP_COMPONENTS),
+        reprojected=temp(expand("data/interim/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0.{ext}",
+                                ext=SHP_COMPONENTS)),
         processed=expand("data/processed/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0_subset.{ext}",
                          ext=SHP_COMPONENTS)
     params:
@@ -246,15 +230,15 @@ rule preprocess_nuts_data:
         "Clipping and selecting NUTS level 0 data..."
     run:
         # Read in the bounds as used in harmonize_data rule
-        bounds = yaml.load(open(input.extent_yml, 'r'))
-        bleft = bounds["bounds"]["left"] + params.offset[0]
-        bbottom = bounds["bounds"]["bottom"] + params.offset[1]
-        bright = bounds["bounds"]["right"] + params.offset[2]
-        btop = bounds["bounds"]["top"] + params.offset[3]
+        bleft = PROJECT_EXTENT["left"] + params.offset[0]
+        bbottom = PROJECT_EXTENT["bottom"] + params.offset[1]
+        bright = PROJECT_EXTENT["right"] + params.offset[2]
+        btop = PROJECT_EXTENT["top"] + params.offset[3]
         bounds = "{0} {1} {2} {3}".format(bleft, bbottom, bright, btop)
         # Reproject to EPSG:3035 from EPSG:4258
+        input_shp = utils.pick_from_list(input.shp, ".shp")
         reprojected_shp = utils.pick_from_list(output.reprojected, ".shp")
-        shell('ogr2ogr {reprojected_shp} -t_srs "EPSG:3035" {input.shp}')
+        shell('ogr2ogr {reprojected_shp} -t_srs "EPSG:3035" {input_shp}')
         logger.debug("Reprojected NUTS data from EPSG:4258 to EPSG:3035")
         # Clip shapefile using ogr2ogr, syntax:
         # ogr2ogr output.shp input.shp -clipsrc <left> <bottom> <right> <top>
