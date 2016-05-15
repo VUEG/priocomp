@@ -80,14 +80,14 @@
             <styleFont description="Noto Sans,12,-1,0,50,0,0,0,0,0" style=""/>
           </style>
         </styles>
-        <ComposerItem pagey="105" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="204.787" y="105" visibility="1" zValue="2" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="32.7703" outlineWidth="0.3" excludeFromExports="0" uuid="{8cc2b84d-e117-48ad-ba02-ef5cf7947d5f}" height="96" itemRotation="0" frame="false" pagex="204.787">
+        <ComposerItem pagey="105" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="204.787" y="105" visibility="1" zValue="2" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="33.325" outlineWidth="0.3" excludeFromExports="0" uuid="{8cc2b84d-e117-48ad-ba02-ef5cf7947d5f}" height="96" itemRotation="0" frame="false" pagex="204.787">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
         </ComposerItem>
       </ComposerLegend>
       <ComposerMap mapRotation="0" keepLayerSet="false" id="0" previewMode="Cache" drawCanvasItems="true">
-        <Extent ymin="1051143.02800346701405942" xmin="2338023.13471709424629807" ymax="5428752.72546862810850143" xmax="6671190.09413692448288202"/>
+        <Extent ymin="1364054.61161317001096904" xmin="2434944.1028008870780468" ymax="5347664.30867645237594843" xmax="6378111.06182291731238365"/>
         <LayerSet/>
         <Grid/>
         <ComposerMapGrid rightAnnotationDirection="0" gridFramePenColor="0,0,0,255" show="0" bottomAnnotationPosition="1" annotationPrecision="3" showAnnotation="0" topFrameDivisions="0" uuid="{0c8f8bef-574c-4787-b012-359618b269c5}" leftAnnotationDirection="0" topAnnotationPosition="1" rightAnnotationDisplay="0" offsetX="0" offsetY="0" rightFrameDivisions="0" gridStyle="0" annotationFontColor="0,0,0,255" intervalX="0" gridFrameSideFlags="15" intervalY="0" bottomAnnotationDirection="0" leftAnnotationDisplay="0" leftFrameDivisions="0" frameFillColor1="255,255,255,255" annotationExpression="" frameFillColor2="0,0,0,255" crossLength="3" gridFramePenThickness="0.5" bottomAnnotationDisplay="0" unit="0" topAnnotationDisplay="0" leftAnnotationPosition="1" blendMode="0" gridFrameStyle="0" rightAnnotationPosition="1" gridFrameWidth="2" name="Grid 1" annotationFormat="0" bottomFrameDivisions="0" topAnnotationDirection="0" frameAnnotationDistance="1">
@@ -184,24 +184,23 @@
         <map-layer-style name=""/>
       </map-layer-style-manager>
       <pipe>
-        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="13" classificationMinMaxOrigin="CumulativeCutFullExtentEstimated" band="1" classificationMin="0" type="singlebandpseudocolor">
+        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="12" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
           <rasterTransparency/>
           <rastershader>
             <colorrampshader colorRampType="INTERPOLATED" clip="0">
-              <item alpha="255" value="0" label="0" color="#2c7bb6"/>
-              <item alpha="255" value="1" label="1" color="#5397c5"/>
-              <item alpha="255" value="2" label="2" color="#7ab4d5"/>
-              <item alpha="255" value="3" label="3" color="#a1d1e5"/>
-              <item alpha="255" value="4" label="4" color="#bee1df"/>
-              <item alpha="255" value="5" label="5" color="#d8edd2"/>
-              <item alpha="255" value="6" label="6" color="#f2f9c5"/>
-              <item alpha="255" value="7" label="7" color="#fef2b0"/>
-              <item alpha="255" value="8" label="8" color="#fed993"/>
-              <item alpha="255" value="9" label="9" color="#fdc076"/>
-              <item alpha="255" value="10" label="10" color="#faa25b"/>
-              <item alpha="255" value="11" label="11" color="#ee7446"/>
-              <item alpha="255" value="12" label="12" color="#e24631"/>
-              <item alpha="255" value="13" label="13" color="#d7191c"/>
+              <item alpha="255" value="0" label="0.000000" color="#2c7bb6"/>
+              <item alpha="255" value="1" label="1.000000" color="#569ac7"/>
+              <item alpha="255" value="2" label="2.000000" color="#80b9d8"/>
+              <item alpha="255" value="3" label="3.000000" color="#abd9e9"/>
+              <item alpha="255" value="4" label="4.000000" color="#c7e5db"/>
+              <item alpha="255" value="5" label="5.000000" color="#e3f2cd"/>
+              <item alpha="255" value="6" label="6.000000" color="#ffffbf"/>
+              <item alpha="255" value="7" label="7.000000" color="#fee49f"/>
+              <item alpha="255" value="8" label="8.000000" color="#fdc980"/>
+              <item alpha="255" value="9" label="9.000000" color="#fdae61"/>
+              <item alpha="255" value="10" label="10.000000" color="#f07c4a"/>
+              <item alpha="255" value="11" label="11.000000" color="#e34a33"/>
+              <item alpha="255" value="12" label="12.000000" color="#d7191c"/>
             </colorrampshader>
           </rastershader>
         </rasterrenderer>

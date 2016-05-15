@@ -15,8 +15,11 @@
         <customproperties/>
       </layer-tree-layer>
     </layer-tree-group>
-    <layer-tree-group expanded="0" checked="Qt::Unchecked" name="eurostat">
+    <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="eurostat">
       <customproperties/>
+      <layer-tree-layer expanded="1" checked="Qt::Checked" id="NUTS_RG_01M_2013_level2_subset20160515185622148" name="NUTS_RG_01M_2013_level2_subset">
+        <customproperties/>
+      </layer-tree-layer>
       <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="NUTS_RG_01M_2013_level220160515123654528" name="NUTS_RG_01M_2013_level2">
         <customproperties/>
       </layer-tree-layer>
@@ -132,9 +135,6 @@
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="erosion_prevention20160515124515839" name="erosion_prevention">
             <customproperties/>
           </layer-tree-layer>
-          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="flood_regulation_supply20160515124654849" name="flood_regulation_supply">
-            <customproperties/>
-          </layer-tree-layer>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="floodregulation20160515124754969" name="floodregulation">
             <customproperties/>
           </layer-tree-layer>
@@ -142,9 +142,6 @@
             <customproperties/>
           </layer-tree-layer>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="nature_tourism20160515125406655" name="nature_tourism">
-            <customproperties/>
-          </layer-tree-layer>
-          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="pollination_flows20160515125509450" name="pollination_flows">
             <customproperties/>
           </layer-tree-layer>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="pollination_visitprob20160515125635579" name="pollination_visitprob">
@@ -170,84 +167,32 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>-3616077.27570730447769165</xmin>
-      <ymin>-2572525.35312630841508508</ymin>
-      <xmax>2037402.46068791206926107</xmax>
-      <ymax>2693083.86952987546101213</ymax>
+      <xmin>2598169.23563725547865033</xmin>
+      <ymin>1558593.82194566889666021</ymin>
+      <xmax>6390914.02753565460443497</xmax>
+      <ymax>4750756.74528159946203232</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
     <destinationsrs>
       <spatialrefsys>
-        <proj4>+proj=aea +lat_1=32.5 +lat_2=54.5 +lat_0=51.4 +lon_0=22.65 +x_0=0 +y_0=0 +ellps=WGS72 +towgs84=0,0,4.5,0,0,0.554,0.2263 +units=m +no_defs</proj4>
-        <srsid>100000</srsid>
-        <srid>0</srid>
-        <authid>USER:100000</authid>
-        <description> * Generated CRS (+proj=aea +lat_1=32.5 +lat_2=54.5 +lat_0=51.4 +lon_0=22.65 +x_0=0 +y_0=0 +ellps=WGS72 +towgs84=0,0,4.5,0,0,0.554,0.2263 +units=m +no_defs)</description>
-        <projectionacronym>aea</projectionacronym>
-        <ellipsoidacronym>WGS72</ellipsoidacronym>
+        <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+        <srsid>1000</srsid>
+        <srid>3035</srid>
+        <authid>EPSG:3035</authid>
+        <description>ETRS89 / ETRS-LAEA</description>
+        <projectionacronym>laea</projectionacronym>
+        <ellipsoidacronym>GRS80</ellipsoidacronym>
         <geographicflag>false</geographicflag>
       </spatialrefsys>
     </destinationsrs>
     <rendermaptile>0</rendermaptile>
     <layer_coordinate_transform_info>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="erosion_prevention20160515124515839"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="pollination_flows20160301200359819"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="species_richness_vascular_plants20160301200616041"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="carbon_sequestration20160515124203661"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="nature_tourism20160515125406655"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:4258" srcDatumTransform="-1" destDatumTransform="-1" layerid="NUTS_RG_01M_201320160329101644767"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:4258" srcDatumTransform="-1" destDatumTransform="-1" layerid="NUTS_BN_01M_201320160329101523628"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="species_richness_farmland_birds_original120160301200548588"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="hdr20160323120839146"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:4258" srcDatumTransform="-1" destDatumTransform="-1" layerid="nuts_rg_01m_2013_level220160407115535900"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="megamammal_richness_cgrs_eu20160330103421894"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="ne_10m_admin_0_countries_copy20160301182010310"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="woodprod_average20160401101647907"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="carbon_sequestration20160301182523525"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="erosion_prevention20160301183354823"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:4258" srcDatumTransform="-1" destDatumTransform="-1" layerid="NUTS_SEPA_LI_201320160329101721919"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="WDPA_Feb2016_shapefile_polygons20160330152546966"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="pollination_visitprob20160301200509338"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="megabird_richness_eoagrid_eu20160330103450738"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="pollination_visitprob20160515125635579"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="ne_10m_admin_0_countries20160301181637729"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:4258" srcDatumTransform="-1" destDatumTransform="-1" layerid="NUTS_RG_01M_2013_level220160515123654528"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="b2020a1200020160324103058317"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="megafauna20160301200137246"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="hdr20160331110601917"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="species_richness_vascular_plants20160515125752950"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="data_coverage20160514150322188"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="w001001x20160323120637978"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="megafauna20160515125208529"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="floodregulation20160301200052410"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="jynx_torquilla_a1200020160331150128301"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="agrobiodiversity_species_richness20160515123915732"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="cultural_landscape_index_agro20160301182835187"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="woodprod_average20160515123812462"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="woodprod_201020160301210455978"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:4258" srcDatumTransform="-1" destDatumTransform="-1" layerid="NUTS_RG_01M_2013_level020160515123645319"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="species_richness_farmland_birds_original120160515125713008"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="flood_regulation_supply20160515124654849"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="aquila_clanga_a1200020160331150019558"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="cultural_landscape_index_forest20160515124418821"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="megafauna20160515125113906"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="floodregulation20160515124754969"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="data_coverage20160515124040075"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:4258" srcDatumTransform="-1" destDatumTransform="-1" layerid="NUTS_JOIN_LI_201320160329101615199"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:4258" srcDatumTransform="-1" destDatumTransform="-1" layerid="NUTS_LB_201320160329101633999"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="cultural_landscape_index_forest20160301183201722"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="sta20160323120700265"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="nature_tourismtif20160301200241057"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="megafauna20160515124829165"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="agrobiodiversity_species_richness20160301181422145"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="test_out20160509173926731"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="cultural_landscape_index_agro20160515124334224"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="woodprod_201020160401101741401"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="pollination_flows20160515125509450"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="NUTS_RG_01M_2013_level0_subset20160515123631057"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="contextual_data_extent20160514125203246"/>
-      <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="flood_regulation_supply20160301195948315"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:4258" srcDatumTransform="-1" destDatumTransform="-1" layerid="NUTS_RG_01M_2013_level220160515123654528"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="ne_10m_admin_0_countries20160301181637729"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="NUTS_RG_01M_2013_level2_subset20160515185622148"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="ne_10m_admin_0_countries_copy20160301182010310"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="species_richness_vascular_plants20160515125752950"/>
     </layer_coordinate_transform_info>
   </mapcanvas>
   <layer-tree-canvas>
@@ -284,14 +229,13 @@
       <item>cultural_landscape_index_agro20160515124334224</item>
       <item>cultural_landscape_index_forest20160515124418821</item>
       <item>erosion_prevention20160515124515839</item>
-      <item>flood_regulation_supply20160515124654849</item>
       <item>floodregulation20160515124754969</item>
       <item>megafauna20160515124829165</item>
       <item>nature_tourism20160515125406655</item>
-      <item>pollination_flows20160515125509450</item>
       <item>pollination_visitprob20160515125635579</item>
       <item>species_richness_farmland_birds_original120160515125713008</item>
       <item>species_richness_vascular_plants20160515125752950</item>
+      <item>NUTS_RG_01M_2013_level2_subset20160515185622148</item>
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
@@ -309,7 +253,12 @@
         </filegroup>
       </legendlayer>
     </legendgroup>
-    <legendgroup open="false" checked="Qt::Unchecked" name="eurostat">
+    <legendgroup open="true" checked="Qt::PartiallyChecked" name="eurostat">
+      <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="NUTS_RG_01M_2013_level2_subset" showFeatureCount="0">
+        <filegroup open="true" hidden="false">
+          <legendlayerfile isInOverview="0" layerid="NUTS_RG_01M_2013_level2_subset20160515185622148" visible="1"/>
+        </filegroup>
+      </legendlayer>
       <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="NUTS_RG_01M_2013_level2" showFeatureCount="0">
         <filegroup open="true" hidden="false">
           <legendlayerfile isInOverview="0" layerid="NUTS_RG_01M_2013_level220160515123654528" visible="0"/>
@@ -473,11 +422,6 @@
               <legendlayerfile isInOverview="0" layerid="erosion_prevention20160515124515839" visible="0"/>
             </filegroup>
           </legendlayer>
-          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="flood_regulation_supply" showFeatureCount="0">
-            <filegroup open="false" hidden="false">
-              <legendlayerfile isInOverview="0" layerid="flood_regulation_supply20160515124654849" visible="0"/>
-            </filegroup>
-          </legendlayer>
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="floodregulation" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="floodregulation20160515124754969" visible="0"/>
@@ -491,11 +435,6 @@
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="nature_tourism" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="nature_tourism20160515125406655" visible="0"/>
-            </filegroup>
-          </legendlayer>
-          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="pollination_flows" showFeatureCount="0">
-            <filegroup open="false" hidden="false">
-              <legendlayerfile isInOverview="0" layerid="pollination_flows20160515125509450" visible="0"/>
             </filegroup>
           </legendlayer>
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="pollination_visitprob" showFeatureCount="0">
@@ -614,14 +553,14 @@
         <multilineenabled fieldname="" on=""/>
         <selectedonly on=""/>
       </labelattributes>
-      <annotationform></annotationform>
+      <annotationform>.</annotationform>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions/>
-      <editform></editform>
+      <editform>.</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath></editforminitfilepath>
+      <editforminitfilepath>.</editforminitfilepath>
       <editforminitcode><![CDATA[]]></editforminitcode>
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
@@ -720,14 +659,14 @@
         <multilineenabled fieldname="" on=""/>
         <selectedonly on=""/>
       </labelattributes>
-      <annotationform></annotationform>
+      <annotationform>.</annotationform>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions/>
-      <editform></editform>
+      <editform>.</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath></editforminitfilepath>
+      <editforminitfilepath>.</editforminitfilepath>
       <editforminitcode><![CDATA[]]></editforminitcode>
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
@@ -826,14 +765,14 @@
         <multilineenabled fieldname="" on=""/>
         <selectedonly on=""/>
       </labelattributes>
-      <annotationform></annotationform>
+      <annotationform>.</annotationform>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions/>
-      <editform></editform>
+      <editform>.</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath></editforminitfilepath>
+      <editforminitfilepath>.</editforminitfilepath>
       <editforminitcode><![CDATA[]]></editforminitcode>
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
@@ -842,6 +781,50 @@
         <rowstyles/>
         <fieldstyles/>
       </conditionalstyles>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <id>NUTS_RG_01M_2013_level2_subset20160515185622148</id>
+      <datasource>../../data/processed/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2_subset.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>NUTS_RG_01M_2013_level2_subset</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
+          <srsid>100002</srsid>
+          <srid>0</srid>
+          <authid>USER:100002</authid>
+          <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer gradient="BlackToWhite" opacity="1" alphaBand="-1" type="singlebandgray" grayBand="1">
+          <rasterTransparency/>
+          <contrastEnhancement>
+            <minValue>9</minValue>
+            <maxValue>263</maxValue>
+            <algorithm>StretchToMinimumMaximum</algorithm>
+          </contrastEnhancement>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
     </maplayer>
     <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>WDPA_Feb2016_shapefile_polygons20160330152546966</id>
@@ -1799,55 +1782,6 @@
       </map-layer-style-manager>
       <pipe>
         <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
-          <rasterTransparency/>
-          <rastershader>
-            <colorrampshader colorRampType="INTERPOLATED" clip="0">
-              <item alpha="255" value="0" label="0.000000" color="#f7fbff"/>
-              <item alpha="255" value="0.2" label="0.200000" color="#d1e2f2"/>
-              <item alpha="255" value="0.4" label="0.400000" color="#9ac7e0"/>
-              <item alpha="255" value="0.6" label="0.600000" color="#519ccc"/>
-              <item alpha="255" value="0.8" label="0.800000" color="#1c6bb0"/>
-              <item alpha="255" value="1" label="1.000000" color="#08306b"/>
-            </colorrampshader>
-          </rastershader>
-        </rasterrenderer>
-        <brightnesscontrast brightness="0" contrast="0"/>
-        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
-        <rasterresampler maxOversampling="2"/>
-      </pipe>
-      <blendMode>0</blendMode>
-    </maplayer>
-    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
-      <id>flood_regulation_supply20160515124654849</id>
-      <datasource>../../data/processed/provide/flood_regulation_supply/flood_regulation_supply.tif</datasource>
-      <keywordList>
-        <value></value>
-      </keywordList>
-      <layername>flood_regulation_supply</layername>
-      <srs>
-        <spatialrefsys>
-          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
-          <srsid>1000</srsid>
-          <srid>3035</srid>
-          <authid>EPSG:3035</authid>
-          <description>ETRS89 / ETRS-LAEA</description>
-          <projectionacronym>laea</projectionacronym>
-          <ellipsoidacronym>GRS80</ellipsoidacronym>
-          <geographicflag>false</geographicflag>
-        </spatialrefsys>
-      </srs>
-      <customproperties>
-        <property key="identify/format" value="Value"/>
-      </customproperties>
-      <provider>gdal</provider>
-      <noData>
-        <noDataList bandNo="1" useSrcNoData="1"/>
-      </noData>
-      <map-layer-style-manager current="">
-        <map-layer-style name=""/>
-      </map-layer-style-manager>
-      <pipe>
-        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
           <rasterTransparency/>
           <rastershader>
             <colorrampshader colorRampType="INTERPOLATED" clip="0">
@@ -3365,54 +3299,6 @@
       <blendMode>0</blendMode>
     </maplayer>
     <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
-      <id>pollination_flows20160515125509450</id>
-      <datasource>../../data/processed/provide/pollination_flows/pollination_flows.tif</datasource>
-      <keywordList>
-        <value></value>
-      </keywordList>
-      <layername>pollination_flows</layername>
-      <srs>
-        <spatialrefsys>
-          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
-          <srsid>1000</srsid>
-          <srid>3035</srid>
-          <authid>EPSG:3035</authid>
-          <description>ETRS89 / ETRS-LAEA</description>
-          <projectionacronym>laea</projectionacronym>
-          <ellipsoidacronym>GRS80</ellipsoidacronym>
-          <geographicflag>false</geographicflag>
-        </spatialrefsys>
-      </srs>
-      <customproperties>
-        <property key="identify/format" value="Value"/>
-      </customproperties>
-      <provider>gdal</provider>
-      <noData>
-        <noDataList bandNo="1" useSrcNoData="1"/>
-      </noData>
-      <map-layer-style-manager current="">
-        <map-layer-style name=""/>
-      </map-layer-style-manager>
-      <pipe>
-        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
-          <rasterTransparency/>
-          <rastershader>
-            <colorrampshader colorRampType="INTERPOLATED" clip="0">
-              <item alpha="255" value="0" label="0.000000" color="#e66101"/>
-              <item alpha="255" value="0.25" label="0.250000" color="#fdb863"/>
-              <item alpha="255" value="0.5" label="0.500000" color="#f7f7f7"/>
-              <item alpha="255" value="0.75" label="0.750000" color="#b2abd2"/>
-              <item alpha="255" value="1" label="1.000000" color="#5e3c99"/>
-            </colorrampshader>
-          </rastershader>
-        </rasterrenderer>
-        <brightnesscontrast brightness="0" contrast="0"/>
-        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
-        <rasterresampler maxOversampling="2"/>
-      </pipe>
-      <blendMode>0</blendMode>
-    </maplayer>
-    <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
       <id>pollination_visitprob20160301200509338</id>
       <datasource>../../../../../data/EG/PROVIDE/data/provide/pollination_visitprob/pollination_visitprob.tif</datasource>
       <keywordList>
@@ -3884,12 +3770,13 @@
       <DegreeFormat type="QString">D</DegreeFormat>
     </PositionPrecision>
     <WCSUrl type="QString"></WCSUrl>
-    <WMSContactPhone type="QString"></WMSContactPhone>
     <WMSServiceCapabilities type="bool">false</WMSServiceCapabilities>
+    <WMSContactPhone type="QString"></WMSContactPhone>
     <WMSServiceAbstract type="QString"></WMSServiceAbstract>
+    <WMSContactPosition type="QString"></WMSContactPosition>
     <WMSAddWktGeometry type="bool">false</WMSAddWktGeometry>
     <Measure>
-      <Ellipsoid type="QString">WGS72</Ellipsoid>
+      <Ellipsoid type="QString">GRS80</Ellipsoid>
     </Measure>
     <WMSPrecision type="QString">8</WMSPrecision>
     <WFSTLayers>
@@ -3909,14 +3796,14 @@
     <Digitizing>
       <DefaultSnapToleranceUnit type="int">2</DefaultSnapToleranceUnit>
       <LayerSnappingList type="QStringList">
+        <value>NUTS_RG_01M_2013_level020160515123645319</value>
+        <value>NUTS_RG_01M_2013_level0_subset20160515123631057</value>
+        <value>NUTS_RG_01M_2013_level220160515123654528</value>
         <value>WDPA_Feb2016_shapefile_polygons20160330152546966</value>
         <value>megabird_richness_eoagrid_eu20160330103450738</value>
         <value>megamammal_richness_cgrs_eu20160330103421894</value>
         <value>ne_10m_admin_0_countries20160301181637729</value>
         <value>ne_10m_admin_0_countries_copy20160301182010310</value>
-        <value>NUTS_RG_01M_2013_level0_subset20160515123631057</value>
-        <value>NUTS_RG_01M_2013_level020160515123645319</value>
-        <value>NUTS_RG_01M_2013_level220160515123654528</value>
       </LayerSnappingList>
       <LayerSnappingEnabledList type="QStringList">
         <value>enabled</value>
@@ -3969,15 +3856,15 @@
     <Macros>
       <pythonCode type="QString"></pythonCode>
     </Macros>
-    <WMSAccessConstraints type="QString"></WMSAccessConstraints>
+    <WMSAccessConstraints type="QString">None</WMSAccessConstraints>
     <WCSLayers type="QStringList"/>
     <Legend>
       <filterByMap type="bool">false</filterByMap>
     </Legend>
     <SpatialRefSys>
-      <ProjectCRSProj4String type="QString">+proj=aea +lat_1=32.5 +lat_2=54.5 +lat_0=51.4 +lon_0=22.65 +x_0=0 +y_0=0 +ellps=WGS72 +towgs84=0,0,4.5,0,0,0.554,0.2263 +units=m +no_defs</ProjectCRSProj4String>
-      <ProjectCrs type="QString">USER:100000</ProjectCrs>
-      <ProjectCRSID type="int">100000</ProjectCRSID>
+      <ProjectCRSProj4String type="QString">+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</ProjectCRSProj4String>
+      <ProjectCrs type="QString">EPSG:3035</ProjectCrs>
+      <ProjectCRSID type="int">1000</ProjectCRSID>
       <ProjectionsEnabled type="int">1</ProjectionsEnabled>
     </SpatialRefSys>
     <DefaultStyles>
@@ -3988,11 +3875,11 @@
       <AlphaInt type="int">255</AlphaInt>
       <ColorRamp type="QString"></ColorRamp>
     </DefaultStyles>
-    <WMSFees type="QString"></WMSFees>
+    <WMSFees type="QString">conditions unknown</WMSFees>
     <WMSImageQuality type="int">90</WMSImageQuality>
     <Measurement>
-      <DistanceUnits type="QString"></DistanceUnits>
-      <AreaUnits type="QString"></AreaUnits>
+      <DistanceUnits type="QString">meters</DistanceUnits>
+      <AreaUnits type="QString">m2</AreaUnits>
     </Measurement>
     <WMSUrl type="QString"></WMSUrl>
   </properties>
