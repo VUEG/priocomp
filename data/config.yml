@@ -1,0 +1,2 @@
+# EPSG: 3035
+t_srs: "+ellps=GRS80 +lat_0=52 +lon_0=10 +no_defs +proj=laea +towgs84=0,0,0,0,0,0,0 +units=m +x_0=4321000 +y_0=3210000"
