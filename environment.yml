@@ -21,6 +21,7 @@ dependencies:
   - r-raster
   - r-recommended
   - r-testthat
+  - rpy2
   - scipy
   - snakemake
   - Sphinx
