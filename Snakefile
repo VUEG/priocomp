@@ -1,4 +1,5 @@
 import dotenv
+import fiona
 import gdal
 import logging
 import numpy as np
@@ -46,6 +47,17 @@ PROJECT_EXTENT = {"bottom": 1000000.0, "left": 2000000.0, "right": 6526000.0,
                   "top": 5410000.0}
 # EPSG for project
 PROJECT_CRS = 3035
+
+# Offset the bounds given in extent_yml. Values are in order
+# (left, bottom, right, top) and interpreted in the CRS units. values
+# are added to bounds given by extent.yml
+OFFSET = (100000, 100000, 0, 0)
+# Which eurostat countries are included in the processed output? The
+# following countries have been removed:
+# "CY", "CH", "IS", "HR", "NO", "ME", "MT", "MK", "TR"
+PROJECT_COUNTRIES = ["AT", "BE", "BG", "CZ", "DE", "DK", "ES", "EL", "EE",
+                     "FR", "FI", "IT", "HU", "IE", "NL", "LU", "LI", "LT",
+                     "LV", "PL", "SE", "RO", "PT", "SK", "SI", "UK"]
 
 # PROJECT RULES ----------------------------------------------------------------
 
@@ -205,7 +217,7 @@ rule harmonize_data:
             logger.debug(" [{0}/{1} step 2] Target dataset {2}".format(i+1, ndatasets, harmonized_raster))
             shell("gdalwarp -cutline {clip_shp} {warped_raster} {harmonized_raster} -co COMPRESS=DEFLATE")
 
-rule preprocess_nuts_data:
+rule preprocess_nuts_level0_data:
     input:
         shp=expand("data/external/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0.{ext}",
                    ext=SHP_COMPONENTS)
@@ -214,31 +226,19 @@ rule preprocess_nuts_data:
                                 ext=SHP_COMPONENTS)),
         processed=expand("data/processed/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0_subset.{ext}",
                          ext=SHP_COMPONENTS)
-    params:
-        # Offset the bounds given in extent_yml. Values are in order
-        # (left, bottom, right, top) and interpreted in the CRS units. values
-        # are added to bounds given by extent.yml
-        offset = (100000, 100000, 0, 0),
-        # Which eurostat countries are included in the processed output? The
-        # following countries have been removed:
-        # "CY", "CH", "IS", "HR", "NO", "ME", "MT", "MK", "TR"
-        countries = ["AT", "BE", "BG", "CZ", "DE", "DK", "ES", "EL", "EE",
-                     "FR", "FI", "IT", "HU", "IE", "NL", "LU", "LI", "LT",
-                     "LV", "PL", "SE", "RO", "PT", "SK", "SI", "UK"]
-
     message:
-        "Clipping and selecting NUTS level 0 data..."
+        "Pre-processing NUTS level 0 data..."
     run:
         # Read in the bounds as used in harmonize_data rule
-        bleft = PROJECT_EXTENT["left"] + params.offset[0]
-        bbottom = PROJECT_EXTENT["bottom"] + params.offset[1]
-        bright = PROJECT_EXTENT["right"] + params.offset[2]
-        btop = PROJECT_EXTENT["top"] + params.offset[3]
+        bleft = PROJECT_EXTENT["left"] + OFFSET[0]
+        bbottom = PROJECT_EXTENT["bottom"] + OFFSET[1]
+        bright = PROJECT_EXTENT["right"] + OFFSET[2]
+        btop = PROJECT_EXTENT["top"] + OFFSET[3]
         bounds = "{0} {1} {2} {3}".format(bleft, bbottom, bright, btop)
         # Reproject to EPSG:3035 from EPSG:4258
         input_shp = utils.pick_from_list(input.shp, ".shp")
         reprojected_shp = utils.pick_from_list(output.reprojected, ".shp")
-        shell('ogr2ogr {reprojected_shp} -t_srs "EPSG:3035" {input_shp}')
+        shell('ogr2ogr {reprojected_shp} -t_srs "EPSG:{PROJECT_CRS}" {input_shp}')
         logger.debug("Reprojected NUTS data from EPSG:4258 to EPSG:3035")
         # Clip shapefile using ogr2ogr, syntax:
         # ogr2ogr output.shp input.shp -clipsrc <left> <bottom> <right> <top>
@@ -247,9 +247,71 @@ rule preprocess_nuts_data:
         #  1. Select a subset of counties (defined by params.countries)
         #  2. Clip output to an extent (given by bounds)
         # Build the -where clause for ogr2ogr
-        where_clause = "NUTS_ID IN ({})".format(", ".join(["'" + item + "'" for item in params.countries]))
+        where_clause = "NUTS_ID IN ({})".format(", ".join(["'" + item + "'" for item in PROJECT_COUNTRIES]))
         shell('ogr2ogr -where "{where_clause}" {processed_shp} {reprojected_shp} -clipsrc {bounds}')
         logger.debug("Clipped NUTS data to analysis bounds: {}".format(bounds))
+        logger.debug("Selected only a subset of eurostat countries")
+
+rule preprocess_nuts_level2_data:
+    input:
+        shp=expand("data/external/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2.{ext}",
+                   ext=SHP_COMPONENTS)
+    output:
+        reprojected=temp(expand("data/interim/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2.{ext}",
+                                ext=SHP_COMPONENTS)),
+        enhanced=temp(expand("data/interim/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2_enhanced.{ext}",
+                                ext=SHP_COMPONENTS)),
+        processed=expand("data/processed/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2_subset.{ext}",
+                         ext=SHP_COMPONENTS)
+    message:
+        "Pre-processing NUTS level 2 data..."
+    run:
+        # Read in the bounds as used in harmonize_data rule
+        bleft = PROJECT_EXTENT["left"] + OFFSET[0]
+        bbottom = PROJECT_EXTENT["bottom"] + OFFSET[1]
+        bright = PROJECT_EXTENT["right"] + OFFSET[2]
+        btop = PROJECT_EXTENT["top"] + OFFSET[3]
+        bounds = "{0} {1} {2} {3}".format(bleft, bbottom, bright, btop)
+        # Reproject to EPSG:3035 from EPSG:4258
+        input_shp = utils.pick_from_list(input.shp, ".shp")
+        reprojected_shp = utils.pick_from_list(output.reprojected, ".shp")
+        shell('ogr2ogr {reprojected_shp} -t_srs "EPSG:{PROJECT_CRS}" {input_shp}')
+        logger.debug("Reprojected NUTS level 2 data from EPSG:4258 to EPSG:3035")
+
+        # The Pre-processing steps need to be done:
+        #  1. Tease apart country code from field NUTS_ID
+        #  2. Create a running ID field that can be used as value in the
+        #     rasterized version
+        enhanced_shp = utils.pick_from_list(output.enhanced, ".shp")
+        with fiona.drivers():
+            with fiona.open(reprojected_shp) as source:
+                meta = source.meta
+                meta['schema']['geometry'] = 'Polygon'
+                # Insert new fields
+                meta['schema']['properties']['ID'] = 'int'
+                meta['schema']['properties']['country'] = 'str'
+
+                ID = 1
+                with fiona.open(enhanced_shp, 'w', **meta) as sink:
+                    # Loop over features
+                    for f in source:
+                        # Check the country code part of NUTS_ID (2 first
+                        # charatcters). NOTE: we're effectively doing filtering
+                        # here.
+                        country_code = f['properties']['NUTS_ID'][0:2]
+                        if country_code in PROJECT_COUNTRIES:
+                            f['properties']['ID'] = ID
+                            ID += 1
+                            f['properties']['country'] = country_code
+                            # Write the record out.
+                            sink.write(f)
+
+        # Clip shapefile using ogr2ogr, syntax:
+        # ogr2ogr output.shp input.shp -clipsrc <left> <bottom> <right> <top>
+        processed_shp = utils.pick_from_list(output.processed, ".shp")
+        # Clip output to an extent (given by bounds)
+        shell('ogr2ogr {processed_shp} {enhanced_shp} -clipsrc {bounds}')
+        logger.debug("Clipped NUTS level 2 data to analysis bounds: {}".format(bounds))
         logger.debug("Selected only a subset of eurostat countries")
 
 rule rescale_data:
