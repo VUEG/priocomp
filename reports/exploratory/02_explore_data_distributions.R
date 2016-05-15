@@ -50,5 +50,5 @@ png(filename = "reports/figures/processed_rasters_boxplot.png", width = 1200,
     height = 1000)
 par(mar = c(3, 18, 3, 3))
 boxplot(raster::stack(processed_files), maxpixels = 1000000, horizontal = TRUE, las = 2,
-        main = "Processed (harmonized + normalized) values", ylab = "Value")
+        main = "Processed (harmonized + normalized) values", xlab = "Value")
 dev.off()
