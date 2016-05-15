@@ -13,7 +13,6 @@ from importlib.machinery import SourceFileLoader
 
 utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 rescale = SourceFileLoader("data_processing.rescale", "src/data_processing/rescale.py").load_module()
-raster_clipper = SourceFileLoader("data_processing.raster_clipper", "src/data_processing/raster_clipper.py").load_module()
 
 ## GLOBALS ---------------------------------------------------------------------
 
@@ -52,7 +51,8 @@ PROJECT_CRS = 3035
 
 rule all:
     input:
-        expand(["data/external/{dataset}/datapackage.json", "data/external/{dataset}/{dataset}.tif"], dataset=PROVIDE_DATASETS)
+        expand("data/processed/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/processed/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
 
 ## Get data --------------------------------------------------------------------
 
