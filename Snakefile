@@ -31,11 +31,11 @@ PROVIDE_DATASETS = ['agrobiodiversity_species_richness',
                     'cultural_landscape_index_agro',
                     'cultural_landscape_index_forest',
                     'erosion_prevention',
-                    'flood_regulation_supply',
+                    #'flood_regulation_supply',
                     'floodregulation',
                     'megafauna',
                     'nature_tourism',
-                    'pollination_flows',
+                    #'pollination_flows',
                     'pollination_visitprob',
                     'species_richness_farmland_birds_original1',
                     'species_richness_vascular_plants']
@@ -64,7 +64,8 @@ PROJECT_COUNTRIES = ["AT", "BE", "BG", "CZ", "DE", "DK", "ES", "EL", "EE",
 rule all:
     input:
         expand("data/processed/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-        expand("data/processed/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
+        expand("data/processed/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS),
+        "data/processed/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2_subset.tif"
 
 ## Get data --------------------------------------------------------------------
 
