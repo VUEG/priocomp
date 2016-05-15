@@ -63,8 +63,8 @@ PROJECT_COUNTRIES = ["AT", "BE", "BG", "CZ", "DE", "DK", "ES", "EL", "EE",
 
 rule all:
     input:
-        expand("data/processed/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-        expand("data/processed/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS),
+        expand("data/processed/features/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/processed/features/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS),
         "data/processed/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2_subset.tif"
 
 ## Get data --------------------------------------------------------------------
@@ -136,8 +136,8 @@ rule get_provide_data:
 
 rule build_data_coverage:
     input:
-        expand("data/processed/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-        expand("data/processed/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
+        expand("data/processed/features/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/processed/features/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
     output:
         "data/processed/common/data_coverage.tif"
     log:
@@ -340,8 +340,8 @@ rule rescale_data:
         expand("data/interim/harmonized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
         expand("data/interim/harmonized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
     output:
-        expand("data/processed/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-        expand("data/processed/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
+        expand("data/processed/features/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/processed/features/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
     message:
         "Rescaling data..."
     run:
