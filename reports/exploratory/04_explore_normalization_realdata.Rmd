@@ -1,0 +1,101 @@
+---
+title: Comparing prioritization
+date: "May 20, 2016"
+output: html_notebook
+---
+
+```{r setup, echo=FALSE,message=FALSE,warning=FALSE}
+library(grid)
+library(gridExtra)
+library(protectr)
+library(raster)
+library(rasterVis)
+library(viridis)
+library(zonator)
+```
+
+```{r function-defintions,echo=TRUE}
+
+normalize <- function(x) {
+  min <- raster::minValue(x)
+  max <- raster::maxValue(x)
+  return((x - min) / (max - min))
+}
+
+ol_normalize <- function(x) {
+  min <- raster::minValue(x)
+  return((x - min) / raster::cellStats(x - min, "sum"))
+}
+
+standardize <- function(x) {
+  mean <- raster::cellStats(x, "mean")
+  sd <- raster::cellStats(x, "sd", asSample = FALSE)
+  return((x - mean) / sd)
+}
+
+IQRize <- function(x) {
+  x_values <- raster::getValues(x)
+  med <- median(x_values)
+  iqr <- IQR(x_values, na.rm = TRUE)
+  return((x - med) / iqr)
+}
+
+```
+
+## Using Zonation tutorial data
+
+```{r read-feature,echo=TRUE}
+z_tutorial_dir <- "~/dev/git-data/zonation-tutorial"
+z_tutorial_data_dir <- file.path(z_tutorial_dir, "data")
+tutorial_files <- list.files(path = z_tutorial_data_dir, pattern = "species.+\\.tif", 
+                             full.names = TRUE)
+sp_rasters <- raster::stack(tutorial_files)
+levelplot(sp_rasters, margin = FALSE, col.regions = viridis, layout = c(3, 3))
+```
+
+```{r sp-histograms,echo=TRUE}
+rasterVis::histogram(sp_rasters)
+```
+
+## Prioritization based on normalized data sets (RWR)
+
+```{r normalize-everything,echo=TRUE}
+ol_sp_rasters <- ol_normalize(sp_rasters)
+sum_sp_rasters <- sum(ol_sp_rasters, na.rm = TRUE)
+# Replace 0 with NA
+sum_sp_rasters[sum_sp_rasters ==  0] <- NA
+ranks <- rank(raster::getValues(sum_sp_rasters), ties.method = "random", na.last = "keep")
+# Scale to range [0, 1]
+ranks <- ranks / max(ranks, na.rm = TRUE)
+e <- raster::extent(sp_rasters)
+rank_sp_rasters <- raster(e, nrows = nrow(sum_sp_rasters), ncols = ncol(sum_sp_rasters),
+                           vals = ranks)
+
+z_colors_spectral <- zonator::zlegend('spectral')
+z_colors_RdYlBu <- z_colors_spectral
+z_colors_RdYlBu$colors <- rev(brewer.pal(7, "RdYlBu"))  
+```
+```{r plot-rwr, echo=FALSE}
+(p1 <- levelplot(rank_sp_rasters, margin = FALSE, main = "RWR",
+                 par.settings = rasterTheme(region = z_colors_RdYlBu$colors), 
+                 at = z_colors_RdYlBu$values))
+```
+
+
+
+```{r read-in-caz-results, echo=FALSE}
+caz_rank <- raster(file.path(z_tutorial_dir, "basic", "basic_output", 
+                             "01_core_area_zonation", "01_core_area_zonation.rank.asc"))
+(p2 <- (levelplot(caz_rank, margin = FALSE,
+                  par.settings = rasterTheme(region = z_colors_RdYlBu$colors), 
+                  at = z_colors_RdYlBu$values, main = "Core-area Zonation")))
+```
+
+```{r read-in-abf-results, echo=FALSE}
+abf_rank <- raster(file.path(z_tutorial_dir, "basic", "basic_output", 
+                             "02_additive_benefit_function", 
+                             "output_02_additive_benefit_function.rank.asc"))
+(p3 <- levelplot(abf_rank, margin = FALSE,
+                 par.settings = rasterTheme(region = z_colors_RdYlBu$colors), 
+                 at = z_colors_RdYlBu$values, main = "Additive benefit function"))
+```
