@@ -116,3 +116,24 @@ grid.arrange(
   ncol = 3, nrow = 2)
 ```
 
+## Prioritization based on normalized data sets (RWR)
+
+```{r normalize-everything}
+ol_features <- ol_normalize(features)
+sum_ol_features <- raster::calc(ol_features, sum)
+ranks <- rank(raster::getValues(sum_ol_features), ties.method = "random")
+# Scale in range [0, 1]
+ranks <- rev(ranks) / max(ranks)
+rank_ol_features <- raster(e, nrows = nrow(sum_ol_features), ncols = ncol(sum_ol_features),
+                           vals = ranks)
+
+z_colors_spectral <- zonator::zlegend('spectral')
+z_colors_RdYlBu <- z_colors_spectral
+z_colors_RdYlBu$colors <- rev(brewer.pal(7, "RdYlBu"))  
+
+levelplot(rank_ol_features, margin = FALSE,
+          par.settings = rasterTheme(region = z_colors_RdYlBu$colors), 
+          at = z_colors_RdYlBu$values)
+```
+
+
