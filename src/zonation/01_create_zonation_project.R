@@ -1,7 +1,8 @@
 # NOTE: you will need the latest version for this to work
 # zonator > 0.5.0
-# devtools::install_github("cbig/zonator")
-library(dplyr)
+if (!require("zonator")) {
+  devtools::install_github("cbig/zonator", dependencies = TRUE)
+}
 library(raster)
 library(zonator)
 
@@ -23,7 +24,7 @@ project_name <- "priocomp"
 create_zproject(name = project_name, dir = zsetup_root, variants = variants,
                 dat_template_file = "analyses/zonation/template.dat",
                 spp_template_dir = "data/processed/features",
-                override_path = "../../../data/processed",
+                override_path = "../../../data/processed/features",
                 recursive = TRUE, overwrite = TRUE, debug = TRUE)
 priocomp_zproject <- load_zproject(zsetup_root)
 
