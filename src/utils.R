@@ -1,5 +1,6 @@
 library(R.cache)
 library(zonator)
+library(rgdal)
 
 # Common data -------------------------------------------------------------
 
@@ -198,4 +199,115 @@ write_groups <- function(x, filename, overwrite = FALSE) {
               col.names = FALSE)
   message("Wrote groups file ", filename)
   return(invisible(NULL))
+}
+
+# PPA --------------------------------------------------------------------------
+
+postprocess_ppa <- function(root_path, variants, ppa_shp) {
+
+  variant_dirs <- sapply(variants, function(x) file.path(root_path, x))
+
+  # Shapefile containing the planning units (PLU) as used in the post-processing
+  # analysis (PPA)
+  PPA_units_sp <- readOGR(ppa_shp, ogrListLayers(ppa_shp))
+
+  # Adjust the number output format
+  options(scipen = 500)
+
+  # Loop over all variant dirs and post-process PPA files
+  for (variant in variant_dirs) {
+
+    # Define the location of output dir
+    output_dir <- file.path(variant, paste0(basename(variant), "_out"))
+
+    # Define the bat-file
+    variant_bat <- list.files(path = root_path,
+                              pattern = paste0(basename(variant), ".bat"),
+                              full.names = TRUE)
+
+    if (file.exists(output_dir)) {
+
+      # Parse the bat-file
+
+      bat_data <- read.table(variant_bat, stringsAsFactors = FALSE)
+      variant_outputs <- bat_data$V6
+      variant_outputs <- gsub("\\.txt", "", variant_outputs)
+      variant_outputs <- file.path(root_path, variant_outputs)
+
+      for (variant_output in variant_outputs) {
+
+        # Find the PPA file
+        nwout_file <- paste0(variant_output, ".nwout.1.spp_data.txt")
+
+        if (!file.exists(nwout_file)) {
+          warning("Output file ", nwout_file, " not found")
+        } else {
+          # Read in the PPA file
+          dat <- zonator::read_ppa_lsm(nwout_file)
+          # Get just the basename
+          nwout_base <- unlist(strsplit(basename(nwout_file), "\\."))[1]
+
+          # PPA data has 3 items
+          output1 <- file.path(output_dir, paste0(nwout_base, "_nwout1.csv"))
+          output2 <- file.path(output_dir, paste0(nwout_base, "_nwout2.csv"))
+          output3 <- file.path(output_dir, paste0(nwout_base, "_nwout3.csv"))
+
+          # Save each item in a CSV file
+          write.table(dat[[1]], file = output1, sep = ";", row.names = FALSE)
+          write.table(dat[[2]], file = output2, sep = ";", row.names = FALSE)
+          write.table(dat[[3]], file = output3, sep = ";", row.names = FALSE)
+          message("3 CSV files created")
+
+          # Make two copies of the spatial data, because two data items need
+          # to be attached. Item 2 cannot be attached to spatial data. Use
+          # new ID running series.
+          PPA_units_sp1 <- PPA_units_sp
+          PPA_units_sp3 <- PPA_units_sp
+
+          # Check that all PLUs are found in the PPA results
+          if (nrow(dat[[1]]) != nrow(PPA_units_sp)) {
+            missing <- which(!PPA_units_sp$ID %in% dat[[1]]$Unit)
+            warning("Following ", length(missing),
+                    " PLUs not found in PPA data item 1:\n",
+                    paste(missing, collapse = " "))
+          }
+          if (nrow(dat[[3]]) != nrow(PPA_units_sp)) {
+            missing <- which(!PPA_units_sp$ID %in% dat[[1]]$Unit)
+            warning("Following ", length(missing),
+                    " PLUs not found in PPA data item 3:\n",
+                    paste(missing, collapse = " "))
+          }
+
+          PPA_units_sp1@data <- merge(PPA_units_sp1@data, dat[[1]],
+                                      by.x = "ID", by.y = "Unit", all.x = TRUE)
+          PPA_units_sp3@data <- merge(PPA_units_sp3@data, dat[[3]],
+                                      by.x = "ID", by.y = "Unit_number",
+                                      all.x = TRUE)
+
+          output1_sp <- gsub(".csv", ".shp", output1)
+          output3_sp <- gsub(".csv", ".shp", output3)
+
+          if (file.exists(output1_sp)) {
+            file.remove(output1_sp)
+            message("Existing shapefile ", output1_sp, " deleted")
+          }
+          if (file.exists(output3_sp)) {
+            file.remove(output3_sp)
+            message("Existing shapefile ", output3_sp, " deleted")
+          }
+
+          writeOGR(PPA_units_sp1, output1_sp,
+                   layer = gsub(".shp", "", output1_sp),
+                   driver = "ESRI Shapefile")
+          message("Shapefile ", output1_sp, " created")
+          writeOGR(PPA_units_sp3, output3_sp,
+                   layer = gsub(".shp", "", output3_sp),
+                   driver = "ESRI Shapefile")
+          message("Shapefile ", output3_sp, " created")
+        }
+      }
+    } else {
+      warning("Results dir ", output_dir, " not found")
+    }
+  }
 }
