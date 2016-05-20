@@ -35,8 +35,8 @@ PROVIDE_DATASETS = ['agrobiodiversity_species_richness',
                     'floodregulation',
                     'megafauna',
                     'nature_tourism',
-                    #'pollination_flows',
-                    'pollination_visitprob',
+                    'pollination_flows',
+                    #'pollination_visitprob',
                     'species_richness_farmland_birds_original1',
                     'species_richness_vascular_plants']
 
@@ -351,3 +351,18 @@ rule rescale_data:
             # NOTE: looping over input and output only works if they have
             # exactly the same definition. Otherwise order may vary.
             rescale.rescale_raster(input[i], output[i], method="normalize", verbose=True)
+
+## Set up and run analyses -----------------------------------------------------
+
+rule generate_zonation_project:
+    input:
+        expand("data/processed/features/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/processed/features/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS),
+        "data/processed/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2_subset.tif"
+    output:
+        "analyses/zonation/priocomp"
+    message:
+        "Generating Zonation project..."
+    script:
+        # NOTE: Currently there's a lot of things hardcoded here...
+        "src/zonation/01_create_zonation_project.R"
