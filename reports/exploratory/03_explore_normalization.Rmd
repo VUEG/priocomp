@@ -1,0 +1,118 @@
+---
+title: Testing normalization
+date: "May 18, 2016"
+output: html_notebook
+---
+
+```{r setup, echo=FALSE,message=FALSE,warning=FALSE}
+library(grid)
+library(gridExtra)
+library(protectr)
+library(raster)
+library(rasterVis)
+library(viridis)
+library(zonator)
+```
+
+## Methods for rescaling
+
+
+Partly based on this [source](http://www.dataminingblog.com/standardization-vs-normalization/).
+
+### Normalization
+
+Scales all numeric variables in the range [0,1]. One possible formula is given below:
+
+$$ x_{new} = \frac{x - x_{min}}{x_{max} - x_{min}} $$
+
+```{r normalize,echo=TRUE}
+normalize <- function(x) {
+  min <- raster::minValue(x)
+  max <- raster::maxValue(x)
+  return((x - min) / (max - min))
+}
+```
+
+### Occurrence level normalization
+
+Similar to *normalization*, but each cell values is divided by the sum of all other cell values. Values are not bound in ranve [0, 1].
+
+$$ x_{new} = \frac{x - x_{min}}{\sum_{}^{} (x - x_{min})} $$
+
+```{r ol_normalize,echo=TRUE}
+ol_normalize <- function(x) {
+  min <- raster::minValue(x)
+  return((x - min) / raster::cellStats(x - min, "sum"))
+}
+```
+
+### Standardization
+
+On the other hand, you can use *standardization* on your data set. It will then transform it to have zero mean and unit variance, for example using the equation below:
+
+$$ x_{new} = \frac{x - \mu}{\sigma} $$
+
+```{r standardize,echo=TRUE}
+standardize <- function(x) {
+  mean <- raster::cellStats(x, "mean")
+  sd <- raster::cellStats(x, "sd", asSample = FALSE)
+  return((x - mean) / sd)
+}
+```
+
+All of these techniques have their drawbacks. If you have outliers in your data set, normalizing your data will certainly scale the "normal" data to a very small interval. And generally, most of data sets have outliers. When using standardization, your new data aren't bounded (unlike normalization).
+
+Robust alternatives includ subtracting the median and divididing by the IQR: 
+
+$$ x_{new} = \frac{x - M_{x}}{IQR_{x}} $$
+
+```{r IQRize,echo=TRUE}
+IQRize <- function(x) {
+  x_values <- raster::getValues(x)
+  med <- median(x_values)
+  iqr <- IQR(x_values, na.rm = TRUE)
+  return((x - med) / iqr)
+}
+```
+
+or scale linearly so that the 5th and 95th percentiles meet some standard range.
+
+## Simulated features
+
+Use function `gaussian_field()` from package [`protectr`](https://github.com/mstrimas/protectr) to generat 9 simulated features.
+
+```{r generate-features}
+set.seed(42)
+e <- raster::extent(0, 100, 0, 100)
+r <- raster::raster(e, nrows = 100, ncols = 100, vals = 1)
+features <- gaussian_field(r, range = 20, n = 9, mean = 10, variance = 3)
+levelplot(features, margin = FALSE, col.regions = viridis, layout = c(3, 3))
+```
+
+```{r normalize-features, fig.width=16}
+gf_stack <- raster::stack(features[[1]], 
+                          normalize(features[[1]]),
+                          ol_normalize(features[[1]]),
+                          standardize(features[[1]]),
+                          IQRize(features[[1]]))
+names(gf_stack) <- c("Original", "Normalized", "Oc_normalized", "Standardized", "IQRized")
+grid.arrange(
+  levelplot(gf_stack[[1]], main = names(gf_stack[[1]]), margin = FALSE, col.regions = viridis),
+  levelplot(gf_stack[[2]], main = names(gf_stack[[2]]), margin = FALSE, col.regions = viridis),
+  levelplot(gf_stack[[3]], main = names(gf_stack[[3]]), margin = FALSE, col.regions = viridis),
+  rasterVis::histogram(gf_stack[[1]]),
+  rasterVis::histogram(gf_stack[[2]]),
+  rasterVis::histogram(gf_stack[[3]]),
+  ncol = 3, nrow = 2)
+```
+```{r normalize-features-2, fig.width=16}
+grid.arrange(
+  levelplot(gf_stack[[1]], main = names(gf_stack[[1]]), margin = FALSE, col.regions = viridis),
+  levelplot(gf_stack[[4]], main = names(gf_stack[[4]]), margin = FALSE, col.regions = viridis),
+  levelplot(gf_stack[[5]], main = names(gf_stack[[5]]), margin = FALSE, col.regions = viridis),
+  rasterVis::histogram(gf_stack[[1]]),
+  rasterVis::histogram(gf_stack[[4]]),
+  rasterVis::histogram(gf_stack[[5]]),
+  ncol = 3, nrow = 2)
+```
+
