@@ -27,6 +27,24 @@ def normalize(x):
     return x
 
 
+def normalize_ol(x):
+    """ Normalize layer based on occurrence levels in the array.
+
+        The value of each element is divided by the sum off all elements. Input
+        must be a numpy ndarray, no coercion is tried. All values must be
+        positive.
+
+        :param x: numpy ndarray to be rescaled.
+        :return: numpy ndarray with transformed values.
+        """
+    if type(x) is not np.ndarray and type(x) is not ma.core.MaskedArray:
+        raise TypeError("x must be a numpy.ndarray or numpy.ma.MaskedArray")
+
+    assert np.all(x >= 0), "All array values must be positive (>= 0)"
+
+    return x / (ma.sum(x))
+
+
 def standardize(x):
     pass
 
@@ -36,7 +54,8 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE', verb
 
     Currently two methods are implemented:
         1. 'normalize'
-        2. 'standardize'
+        2. 'normalize_ol'
+        3. 'standardize'
 
     :param input_raster: String path to raster file to be normalized.
     :param output_raster: String path to raster file to be created.
@@ -60,9 +79,11 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE', verb
             click.echo(click.style(' max before rescaling:     {}'.format(src_data.max()), fg='green'))
         if method == 'normalize':
             rescaled_data = normalize(src_data)
+        elif method == 'normalize_ol':
+            rescaled_data = normalize_ol(src_data)
         elif method == 'standardize':
-            rescaled_data = standardize(src_data)
         else:
+            rescaled_data = standardize(src_data)
             raise TypeError("Method {} not implemented".format(method))
 
         if verbose:
