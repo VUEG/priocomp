@@ -77,3 +77,6 @@ target/
 # Common
 *~
 .directory
+
+# Test data
+tests/data
