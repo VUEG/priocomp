@@ -10,6 +10,7 @@ library(gridExtra)
 library(protectr)
 library(raster)
 library(rasterVis)
+library(tidyr)
 library(viridis)
 library(zonator)
 ```
@@ -52,6 +53,9 @@ z_tutorial_data_dir <- file.path(z_tutorial_dir, "data")
 tutorial_files <- list.files(path = z_tutorial_data_dir, pattern = "species.+\\.tif", 
                              full.names = TRUE)
 sp_rasters <- raster::stack(tutorial_files)
+# For some mysterious reasen, minmax isn't set automatically for sp_rasters[[1]]
+# (species1)
+sp_rasters[[1]] <- setMinMax(sp_rasters[[1]])
 levelplot(sp_rasters, margin = FALSE, col.regions = viridis, layout = c(3, 3))
 ```
 
@@ -264,5 +268,74 @@ p6 <- levelplot(r_solution, main = "Gurobi 5% gap",
           colorkey = list(space = "bottom", height = 1))
 
 grid.arrange(p4, p5, p6, nrow = 1, ncol = 3)
+```
+### 3.2 Quantitative performance
+
+```{r performance}
+
+# Reclassify rasters
+reclass_raster <- function(x, rcl) {
+  
+   assert_that(inherits(x, "RasterLayer"),
+               inherits(rcl, "data.frame"),
+               all(names(rcl) == c("from", "to", "value")))
+  
+  raster_rcl <- raster::reclassify(x, rcl, include.lowest = TRUE)
+  raster_rcl <- ratify(raster_rcl)
+  rat_rcl <- levels(raster_rcl)[[1]]
+  rat_rcl$status <- rcl$value
+  levels(raster_rcl) <- rat_rcl
+  return(raster_rcl)
+}
+
+zonal_stats <- function(zonal_raster, values_stack, rcl, method) {
+  rcl_raster <- reclass_raster(zonal_raster, rcl)
+  rcl_zonal <- as.data.frame(raster::zonal(values_stack, rcl_raster, fun = 'sum'))
+  # Manually add zone 0, in which nothing has been gained yet
+  data_row <- rep(0, raster::nlayers(values_stack) + 1)
+  names(data_row) <- c("zone", names(values_stack))
+  rcl_zonal <- rbind(rcl_zonal, as.data.frame(t(data_row)))
+  rcl_zonal <- rcl_zonal %>% 
+    # Sort by zone, Zone 1 = 100-90% ... Zone 10 = 10-0% of the landscape
+    arrange(zone) %>% 
+    # Gather into long format keeping zone intact
+    gather(species, value, -zone) %>%
+    group_by(species) %>% 
+    # Count cumulative value for distribution sum, that is zone1 + zone2 + ... + zone10
+    # Then take the inverse of this, which is 1 -  dsum to show distribution remaining
+    mutate(dsum = cumsum(value),
+           drem = 1 - dsum) %>% 
+    ungroup() %>% 
+    # Finally, calculate mean distribution remaining per zone 
+    group_by(zone) %>% 
+    mutate(mean_drem = mean(drem), 
+           method = method)
+  return(rcl_zonal)
+}
+
+# Reclassification table
+rcl <- data.frame(from = seq(0, .9, 0.1), 
+                  to = seq(0.1, 1.0, 0.1), 
+                  value = 1:10)
+
+rwr_zonal <- zonal_stats(rank_sp_rasters, ol_sp_rasters, rcl, "RWR")
+abf_zonal <- zonal_stats(abf_rank, ol_sp_rasters, rcl, "ABF")
+caz_zonal <- zonal_stats(caz_rank, ol_sp_rasters, rcl, "CAZ")
+
+# Bind all zonal stats together
+all_zonal <- dplyr::bind_rows(rwr_zonal, abf_zonal, caz_zonal)
+
+(p7 <- ggplot(rwr_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + ggtitle("RWR") +
+  ylab("Distribution remaining\n") + xlab("\n Landscape selected") + 
+  scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%")))
+(p8 <- ggplot(abf_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + ggtitle("ABF") +
+  ylab("Distribution remaining\n") + xlab("\n Landscape selected") + 
+  scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%")))
+(p9 <- ggplot(caz_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + ggtitle("CAZ") +
+  ylab("Distribution remaining\n") + xlab("\n Landscape selected") + 
+  scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%")))
+(p10 <- ggplot(all_zonal, aes(x = zone, y = mean_drem, color = method)) + geom_line() +
+  ylab("Mean distribution remaining\n") + xlab("\n Landscape selected") + 
+  scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%")))
 ```
 
