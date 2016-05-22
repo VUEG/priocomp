@@ -16,7 +16,7 @@ library(viridis)
 library(zonator)
 ```
 
-```{r function-defintions,echo=TRUE}
+```{r function-defintions,echo=FALSE}
 
 normalize <- function(x) {
   min <- raster::minValue(x)
@@ -133,7 +133,7 @@ abf_rank <- raster(file.path(z_tutorial_dir, "basic", "basic_output",
 ### 2.3 Prioritization based on Gurobi MILP
 
 
-```{r optimize}
+```{r optimize,echo=FALSE,message=FALSE}
 
 set_targets <- function(x, features, type = c("percent", "absolute")) {
   type <- match.arg(type)
@@ -224,8 +224,13 @@ target = 0.1
 results_ms <- gurobi_solve(sp_rasters_filled, cost, targets = target, blm = blm)
 
 # Max coverage
-b <- 0.1 * raster::cellStats(cost, "sum")
-results_mc <- protectr::gurobi_maxcoverage(cost, sp_rasters_filled, budget = b)
+budgets <- seq(0.05, 1.00, 0.05)
+results_mc <- list()
+for (b in budgets) {
+  b_cells <- b * raster::cellStats(cost, "sum")
+  results <- protectr::gurobi_maxcoverage(cost, sp_rasters_filled, budget = b_cells)
+  results_mc[[as.character(b)]] <- results
+}
 
 ```
 ```{r check-results}
@@ -237,24 +242,40 @@ process_gurobi_results <- function(results, template_raster) {
   # make this a categorical raster
   result_raster <- ratify(result_raster)
   rat <- levels(result_raster)[[1]]
-  rat$status <- c("Not Selected", "Selected")
+  if (nrow(rat) == 2) {
+    rat$status <- c("Not Selected", "Selected")
+  } else {
+    rat$status <- c("Selected")
+  }
   levels(result_raster) <- rat
   return(result_raster)
 }
 
 milp_ms <- process_gurobi_results(results_ms, template)
-milp_mc <- process_gurobi_results(results_mc, template)
+
+milp_mc <- raster::stack(lapply(results_mc, process_gurobi_results, template))
+names(milp_mc) <- paste0("b", budgets)
 
 levelplot(milp_ms, main = "Minimum set solution\n(target = 10%, gap = 5%)",
           scales = list(draw = FALSE),
           col.regions = c("grey70", "#d7191c"),
           colorkey = list(space = "bottom", height = 1))
-levelplot(milp_mc, main = "Maximum coverage solution\n(budget = 10%, gap = 5%)",
+levelplot(milp_mc[[2]], main = "Maximum coverage solution\n(budget = 10%, gap = 5%)",
           scales = list(draw = FALSE),
           col.regions = c("grey70", "#d7191c"),
           colorkey = list(space = "bottom", height = 1))
 
 ```
+
+```{r mcp-hierarchy}
+milp_mc_hier <- sum(milp_mc, na.rm = TRUE)
+milp_mc_hier[milp_mc_hier == 0] <- NA
+milp_mc_hier <- normalize(milp_mc_hier)
+levelplot(milp_mc_hier, margin = FALSE, scales = list(draw = FALSE),
+          par.settings = rasterTheme(region = z_colors_RdYlBu$colors), 
+          at = z_colors_RdYlBu$values, main = "Gurobi MCP")
+```
+
 
 ## 3. Comparison of the prioritizations
 
@@ -285,7 +306,7 @@ p5 <- levelplot(abf_rank_top10, main = "Zonation ABF\ntop 10%",
           scales = list(draw = FALSE),
           col.regions = c("grey70", "#d7191c"),
           colorkey = list(space = "bottom", height = 1))
-p6 <- levelplot(milp_mc, main = "Gurobi MCP\n10% budget",
+p6 <- levelplot(milp_mc[[1]], main = "Gurobi MCP\n10% budget",
           scales = list(draw = FALSE),
           col.regions = c("grey70", "#d7191c"),
           colorkey = list(space = "bottom", height = 1))
@@ -294,7 +315,7 @@ grid.arrange(p4, p5, p6, nrow = 1, ncol = 3)
 ```
 
 ```{r table-results,results="asis"}
-cell_count <- lapply(c(rwr_top10, abf_rank_top10, milp_mc), function(x) table(raster::getValues(x))) 
+cell_count <- lapply(c(rwr_top10, abf_rank_top10, milp_mc[[2]]), function(x) table(raster::getValues(x))) 
 cell_count <- as.data.frame(do.call("rbind", cell_count))
 names(cell_count) <- c("Low", "Top")
 cell_count$Method <- c("RWR", "ABF", "MILP MCP")
@@ -342,7 +363,9 @@ zonal_stats <- function(zonal_raster, values_stack, rcl, method) {
     ungroup() %>% 
     # Finally, calculate mean distribution remaining per zone 
     group_by(zone) %>% 
-    mutate(mean_drem = mean(drem), 
+    mutate(min_drem = min(drem),
+           mean_drem = mean(drem),
+           max_drem = max(drem),
            method = method)
   return(rcl_zonal)
 }
@@ -351,17 +374,15 @@ zonal_stats <- function(zonal_raster, values_stack, rcl, method) {
 rcl <- data.frame(from = seq(0, .9, 0.1), 
                   to = seq(0.1, 1.0, 0.1), 
                   value = 1:10)
-rcl_bin <- data.frame(from = c(0.0, 0.9), 
-                  to = c(0.9, 1.0), 
-                  value = 1:2)
 
 rwr_zonal <- zonal_stats(rank_sp_rasters, ol_sp_rasters, rcl, "RWR")
 abf_zonal <- zonal_stats(abf_rank, ol_sp_rasters, rcl, "ABF")
 caz_zonal <- zonal_stats(caz_rank, ol_sp_rasters, rcl, "CAZ")
-milp_zonal <- zonal_stats(r_solution, ol_sp_rasters, rcl_bin, "MILP")
+milp_zonal <- zonal_stats(milp_mc_hier, ol_sp_rasters, rcl, "MILP")
 
 # Bind all zonal stats together
-all_zonal <- dplyr::bind_rows(rwr_zonal, abf_zonal, caz_zonal)
+all_zonal <- dplyr::bind_rows(rwr_zonal, abf_zonal, caz_zonal, milp_zonal) %>% 
+  dplyr::select(zone, mean_drem, method)
 
 (p7 <- ggplot(rwr_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + ggtitle("RWR") +
   ylab("Distribution remaining\n") + xlab("\n Landscape selected") + 
@@ -372,11 +393,12 @@ all_zonal <- dplyr::bind_rows(rwr_zonal, abf_zonal, caz_zonal)
 (p9 <- ggplot(caz_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + ggtitle("CAZ") +
   ylab("Distribution remaining\n") + xlab("\n Landscape selected") + 
   scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%")))
-(p10 <- ggplot(all_zonal, aes(x = zone, y = mean_drem, color = method)) + geom_line() +
+(p10 <- ggplot(milp_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + 
+  ggtitle("Gurobi MCP") + ylab("Distribution remaining\n") + xlab("\n Landscape selected") + 
+  scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%")))
+(p11 <- ggplot(all_zonal, aes(x = zone, y = mean_drem, color = method)) + geom_line() +
   ylab("Mean distribution remaining\n") + xlab("\n Landscape selected") + 
   scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%")))
-(p11 <- ggplot(milp_zonal, aes(x = zone, y = drem, color = species)) + geom_line() +
-  ylab("Distribution remaining\n") + xlab("\n Landscape selected") )#+ 
-  #scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%")))
+
 ```
 
