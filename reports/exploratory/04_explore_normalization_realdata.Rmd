@@ -228,3 +228,41 @@ levelplot(r_solution, main = "Gurobi Solution: 5% gap to optimality",
 ```
 
 ## 3. Comparison of the prioritizations
+
+### 3.1 Qualitative spatial
+
+```{r qualitative spatial}
+
+# Get the top 10% solutions for RWR and Zonation
+rwr_top10 <- rank_sp_rasters >= 0.9
+# make this a categorical raster
+rwr_top10 <- ratify(rwr_top10)
+rat <- levels(rwr_top10)[[1]]
+rat$status <- c("Not Selected", "Selected")
+levels(rwr_top10) <- rat
+
+abf_rank_top10 <- abf_rank >= 0.9
+# make this a categorical raster
+abf_rank_top10 <- ratify(abf_rank_top10)
+rat <- levels(abf_rank_top10)[[1]]
+rat$status <- c("Not Selected", "Selected")
+levels(abf_rank_top10) <- rat
+
+gurobi_top10 <- r_solution
+
+p4 <- levelplot(rwr_top10, main = "RWR top 10%",
+          scales = list(draw = FALSE),
+          col.regions = c("grey70", "#d7191c"),
+          colorkey = list(space = "bottom", height = 1))
+p5 <- levelplot(abf_rank_top10, main = "Zonation ABF top 10%",
+          scales = list(draw = FALSE),
+          col.regions = c("grey70", "#d7191c"),
+          colorkey = list(space = "bottom", height = 1))
+p6 <- levelplot(r_solution, main = "Gurobi 5% gap",
+          scales = list(draw = FALSE),
+          col.regions = c("grey70", "#d7191c"),
+          colorkey = list(space = "bottom", height = 1))
+
+grid.arrange(p4, p5, p6, nrow = 1, ncol = 3)
+```
+
