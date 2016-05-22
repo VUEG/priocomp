@@ -7,6 +7,7 @@ output: html_notebook
 ```{r setup, echo=FALSE,message=FALSE,warning=FALSE}
 library(grid)
 library(gridExtra)
+library(knitr)
 library(protectr)
 library(raster)
 library(rasterVis)
@@ -56,23 +57,31 @@ sp_rasters <- raster::stack(tutorial_files)
 # For some mysterious reasen, minmax isn't set automatically for sp_rasters[[1]]
 # (species1)
 sp_rasters[[1]] <- setMinMax(sp_rasters[[1]])
-levelplot(sp_rasters, margin = FALSE, col.regions = viridis, layout = c(3, 3))
-```
 
-### 1.2 Geneate cost data
-
-```{r generate-cost-data}
-
+# Generate template for other spatial data later on
 nrows <- nrow(sp_rasters)
 ncols <- ncol(sp_rasters)
 
-r <- extent(sp_rasters) %>% 
-    raster(nrows = nrows, ncols = ncols, vals = 1)
+template <- extent(sp_rasters) %>% 
+              raster(nrows = nrows, ncols = ncols, vals = 1)
+template[is.na(sp_rasters[[1]])] <- NA
+
+levelplot(sp_rasters, margin = FALSE, col.regions = viridis, layout = c(3, 3))
+```
+
+### 1.2 Generate cost data
+
+```{r generate-cost-data}
 
 cost <- extent(sp_rasters) %>% 
   raster(nrows = nrows, ncols = ncols, vals = 1)
-#cost <- gaussian_field(r, 20, mean = 1000, variance = 500) #%>% 
+# Alternatively, cost data can be simulated
+# cost <- gaussian_field(r, 20, mean = 1000, variance = 500) #%>% 
 #  setNames("cost")
+
+# Fill areas normalle NA (NoData) with cost of 0
+cost[is.na(sp_rasters[[1]])] <- 0
+
 levelplot(cost, main = "Cost", margin = FALSE, col.regions = viridis)
 ```
 
@@ -209,22 +218,38 @@ sp_rasters_filled <- sp_rasters
 sp_rasters_filled[is.na(sp_rasters_filled)] <- 0
 sp_rasters_filled <- raster::stack(sp_rasters_filled)
 
+# Minimum set
 blm = 0
 target = 0.1
-results <- gurobi_solve(sp_rasters_filled, cost, targets = target, blm = blm)
+results_ms <- gurobi_solve(sp_rasters_filled, cost, targets = target, blm = blm)
+
+# Max coverage
+b <- 0.1 * raster::cellStats(cost, "sum")
+results_mc <- protectr::gurobi_maxcoverage(cost, sp_rasters_filled, budget = b)
 
 ```
 ```{r check-results}
-r_solution <- r
-r_solution[] <- results$x
-# Fill in the nodata
-r_solution[is.na(sp_rasters[[1]])] <- NA
-# make this a categorical raster
-r_solution <- ratify(r_solution)
-rat <- levels(r_solution)[[1]]
-rat$status <- c("Not Selected", "Selected")
-levels(r_solution) <- rat
-levelplot(r_solution, main = "Gurobi Solution: 5% gap to optimality",
+process_gurobi_results <- function(results, template_raster) {
+  result_raster <- template_raster
+  result_raster[] <- results$x
+  # Fill in the nodata
+  result_raster[is.na(template_raster)] <- NA
+  # make this a categorical raster
+  result_raster <- ratify(result_raster)
+  rat <- levels(result_raster)[[1]]
+  rat$status <- c("Not Selected", "Selected")
+  levels(result_raster) <- rat
+  return(result_raster)
+}
+
+milp_ms <- process_gurobi_results(results_ms, template)
+milp_mc <- process_gurobi_results(results_mc, template)
+
+levelplot(milp_ms, main = "Minimum set solution\n(target = 10%, gap = 5%)",
+          scales = list(draw = FALSE),
+          col.regions = c("grey70", "#d7191c"),
+          colorkey = list(space = "bottom", height = 1))
+levelplot(milp_mc, main = "Maximum coverage solution\n(budget = 10%, gap = 5%)",
           scales = list(draw = FALSE),
           col.regions = c("grey70", "#d7191c"),
           colorkey = list(space = "bottom", height = 1))
@@ -252,23 +277,32 @@ rat <- levels(abf_rank_top10)[[1]]
 rat$status <- c("Not Selected", "Selected")
 levels(abf_rank_top10) <- rat
 
-gurobi_top10 <- r_solution
-
-p4 <- levelplot(rwr_top10, main = "RWR top 10%",
+p4 <- levelplot(rwr_top10, main = "RWR\ntop 10%",
           scales = list(draw = FALSE),
           col.regions = c("grey70", "#d7191c"),
           colorkey = list(space = "bottom", height = 1))
-p5 <- levelplot(abf_rank_top10, main = "Zonation ABF top 10%",
+p5 <- levelplot(abf_rank_top10, main = "Zonation ABF\ntop 10%",
           scales = list(draw = FALSE),
           col.regions = c("grey70", "#d7191c"),
           colorkey = list(space = "bottom", height = 1))
-p6 <- levelplot(r_solution, main = "Gurobi 5% gap",
+p6 <- levelplot(milp_mc, main = "Gurobi MCP\n10% budget",
           scales = list(draw = FALSE),
           col.regions = c("grey70", "#d7191c"),
           colorkey = list(space = "bottom", height = 1))
 
 grid.arrange(p4, p5, p6, nrow = 1, ncol = 3)
 ```
+
+```{r table-results,results="asis"}
+cell_count <- lapply(c(rwr_top10, abf_rank_top10, milp_mc), function(x) table(raster::getValues(x))) 
+cell_count <- as.data.frame(do.call("rbind", cell_count))
+names(cell_count) <- c("Low", "Top")
+cell_count$Method <- c("RWR", "ABF", "MILP MCP")
+cell_count <- dplyr::select(cell_count, Method, Low, Top)
+knitr::kable(cell_count, align = c('r', 'c', 'c'), row.names = FALSE)
+```
+
+
 ### 3.2 Quantitative performance
 
 ```{r performance}
@@ -317,10 +351,14 @@ zonal_stats <- function(zonal_raster, values_stack, rcl, method) {
 rcl <- data.frame(from = seq(0, .9, 0.1), 
                   to = seq(0.1, 1.0, 0.1), 
                   value = 1:10)
+rcl_bin <- data.frame(from = c(0.0, 0.9), 
+                  to = c(0.9, 1.0), 
+                  value = 1:2)
 
 rwr_zonal <- zonal_stats(rank_sp_rasters, ol_sp_rasters, rcl, "RWR")
 abf_zonal <- zonal_stats(abf_rank, ol_sp_rasters, rcl, "ABF")
 caz_zonal <- zonal_stats(caz_rank, ol_sp_rasters, rcl, "CAZ")
+milp_zonal <- zonal_stats(r_solution, ol_sp_rasters, rcl_bin, "MILP")
 
 # Bind all zonal stats together
 all_zonal <- dplyr::bind_rows(rwr_zonal, abf_zonal, caz_zonal)
@@ -337,5 +375,8 @@ all_zonal <- dplyr::bind_rows(rwr_zonal, abf_zonal, caz_zonal)
 (p10 <- ggplot(all_zonal, aes(x = zone, y = mean_drem, color = method)) + geom_line() +
   ylab("Mean distribution remaining\n") + xlab("\n Landscape selected") + 
   scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%")))
+(p11 <- ggplot(milp_zonal, aes(x = zone, y = drem, color = species)) + geom_line() +
+  ylab("Distribution remaining\n") + xlab("\n Landscape selected") )#+ 
+  #scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%")))
 ```
 
