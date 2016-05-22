@@ -176,91 +176,10 @@ For a thorogh description of using [the Gurobi solver](http://www.gurobi.com/) f
 
 ```{r optimize,echo=TRUE,message=FALSE}
 
-set_targets <- function(x, features, type = c("percent", "absolute")) {
-  type <- match.arg(type)
-  assert_that(inherits(features, "RasterStack"),
-              is.numeric(x),
-              length(x) == 1 || length(x) == nlayers(features))
-  
-  # total representation level
-  total <- unname(cellStats(features, "sum"))
-  if (type == "percent") {
-    assert_that(all(x >= 0), all(x <= 1))
-    return(x * total)
-  } else {
-    assert_that(length(x) == nlayers(x), all(x >= 0), all(x <= target))
-    return(x)
-  }
-}
-
-gurobi_solve <- function(features, cost, targets, blm, edge_factor = 1,
-                         target_type = c("percent", "absolute"),
-                         gap = 0.005, time_limit = Inf) {
-  # check inputs
-  assert_that(inherits(features, "RasterStack"),
-              inherits(cost, "RasterLayer"),
-              compareRaster(cost, features),
-              is.number(blm), blm >= 0,
-              is.number(edge_factor),
-              is.number(gap), gap >= 0)
-  
-  # set proportional targets or check absolute targets
-  target_type <- match.arg(target_type)
-  targets <- set_targets(targets, features, type = target_type)
-  # linear component of objective function
-  obj <- cost[]
-  if (blm > 0) {
-    # calculate boundaries
-    bound <- protectr::calculate_boundary(cost, sep_diagonal = TRUE)
-    obj <- obj + blm * row_sums(bound$off_diagonal)
-    # edge external, edge boundaries if edge_factor = 0
-    if (edge_factor != 0) {
-      obj <- obj + blm * edge_factor * bound$diagonal
-    } 
-  }
-  
-  # construct model
-  model <- list()
-  # goal is to minimize objective function
-  model$modelsense <- "min"
-  # binary decision variables
-  model$vtype <- "B"
-  # objective function
-  model$obj <- obj
-  if (blm > 0) {
-    model$Q <- -blm * bound$off_diagonal
-    rm(bound)
-  }
-  # structural constraints
-  model$A <- as.simple_triplet_matrix(t(features[]))
-  model$rhs <- targets
-  model$sense <- rep('>=', length(targets))
-
-  # set the parameters that control the algorithm
-  # MIPGap controls the how close the returned solution is to optimality
-  params <- list(Presolve = 2)
-  if (is.finite(time_limit)) {
-    params$TimeLimit = time_limit
-  } else {
-    params$MIPGap = gap
-  }
-  
-  # gurobi is very RAM hungry, remove any un-needed objects
-  rm(features, cost, targets, obj)
-  
-  # solve
-  gurobi(model, params)
-}
-
 # NAs (NoData) must be raplaced wiht 0s for GUROBI
 sp_rasters_filled <- sp_rasters
 sp_rasters_filled[is.na(sp_rasters_filled)] <- 0
 sp_rasters_filled <- raster::stack(sp_rasters_filled)
-
-# Minimum set
-blm = 0
-target = 0.1
-results_ms <- gurobi_solve(sp_rasters_filled, cost, targets = target, blm = blm)
 
 # Max coverage
 budgets <- seq(0.05, 1.00, 0.05)
@@ -272,6 +191,7 @@ for (b in budgets) {
 }
 
 ```
+
 ```{r check-results}
 process_gurobi_results <- function(results, template_raster) {
   result_raster <- template_raster
