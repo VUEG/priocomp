@@ -1,0 +1,63 @@
+---
+title: "Stats"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+---
+
+
+```{r setup}
+library(ggplot2)
+library(knitr)
+library(raster)
+library(rasterVis)
+options(scipen = 9999)
+# Search for datasets. HACK: dealing with path depedning on whether we're running
+# in the RStudio project root "priocomp" or Knitr folder "reports".
+if (basename(getwd()) == "priocomp") {
+  data_path <- "data/interim/"
+} else {
+  data_path <- "../../data/interim/"
+}
+  
+dataset_files <- list.files(data_path, pattern = ".\\.tif$", recursive = TRUE, 
+                            full.names = TRUE)
+# Create a rasterstack
+rasters <- raster::stack(dataset_files)
+```
+
+
+Wood production maps {data-navmenu="Datasets"}
+=====================================
+
+Row
+-----------------------------------------
+
+### Levelplot
+
+```{r leveplot-1, fig.width=10, fig.height=7}
+levelplot(rasters, layers = 1, margin = list(FUN = 'mean'), contour = FALSE,    
+          par.settings = BuRdTheme, xlim = c(2500000, 6000000), 
+          ylim = c(1500000, 5500000))
+```
+
+### QQplot
+
+Row
+-----------------------------------------
+
+### Summary
+
+```{r summary-1}
+kable(summary(rasters[[1]]), digits = 2)
+```
+
+### Value 
+
+```{r histogram-1}
+ggplot2::qplot(getValues(rasters[[3]]), geom = "histogram", bins = 50, 
+               xlab = "Value")
+```
+
+Agrobiodiversity species richness {data-navmenu="Datasets"}
+=====================================
