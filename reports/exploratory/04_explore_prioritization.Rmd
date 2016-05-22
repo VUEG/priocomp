@@ -174,14 +174,17 @@ levelplot(abf_rank, margin = FALSE,
 
 For a thorogh description of using [the Gurobi solver](http://www.gurobi.com/) for solving conservation planning problem, see [Beyer et al. (2016)](http://dx.doi.org/10.1016/j.ecolmodel.2016.02.005). Most of the approach and code below are based on the excellent tutorials [Integer Programming with Gurobi for Reserve Design](http://strimas.com/r/gurobi/) and [Field Guide to ILP Solvers in R for Conservation Prioritization](http://strimas.com/prioritization/ilp-field-guide/) by [Matt Strimas-Mackey](http://strimas.com/about/), and on the [protectr package](https://github.com/mstrimas/protectr) by the same person.
 
-```{r optimize,echo=TRUE,message=FALSE}
+Below, the prioritizaton is done by solving the conservation planning problem in a form a *maximum coverage problem*, or in other words, find the set of planning units that maximizes the overall level of representation (as measured by the normalized occurrence levels) across a suite of conservation features, while keeping cost within a fixed budget. Here, the cost - and hence the budget - is defined to to be constant (1.0) in all cells. Thus, the budget corresponds to a particular number of planning units (cells) and we can maximize, for example, feature representation for the top 10% of the landscape. By repeating the maximum coverage optimization for a range of budgets (5%, 10%, 15%, ..., 100% of the landscape), it is possible to create a nested hierarchy of solutions. This hierarchical solutions resembles the rankings resulting from the RWR and Zonation above.
 
+__DISCLAIMER:__ at this point, it is unclear to me whether the approach described above and implemented below ("hierarchical optimization") is legit. For one thing, strictly speaking the solutions probably are not guaranteed to be nested, especially for more complex problems. 
+
+```{r optimize,echo=TRUE,message=FALSE}
 # NAs (NoData) must be raplaced wiht 0s for GUROBI
 sp_rasters_filled <- sp_rasters
 sp_rasters_filled[is.na(sp_rasters_filled)] <- 0
 sp_rasters_filled <- raster::stack(sp_rasters_filled)
 
-# Max coverage
+# Solve the maximum coverage problem for a range of target budgets
 budgets <- seq(0.05, 1.00, 0.05)
 results_mc <- list()
 for (b in budgets) {
@@ -189,18 +192,21 @@ for (b in budgets) {
   results <- protectr::gurobi_maxcoverage(cost, sp_rasters_filled, budget = b_cells)
   results_mc[[as.character(b)]] <- results
 }
-
 ```
 
-```{r check-results}
+```{r process-mcp-results}
+# Function to translate Gurobi solutions to raster objects based on a template 
+# raster
 process_gurobi_results <- function(results, template_raster) {
   result_raster <- template_raster
   result_raster[] <- results$x
   # Fill in the nodata
   result_raster[is.na(template_raster)] <- NA
-  # make this a categorical raster
+  # Make this a categorical raster
   result_raster <- ratify(result_raster)
   rat <- levels(result_raster)[[1]]
+  # In some cases (most notably when budget is 100%) all cells might be 
+  # selected. Check for this.
   if (nrow(rat) == 2) {
     rat$status <- c("Not Selected", "Selected")
   } else {
@@ -210,35 +216,37 @@ process_gurobi_results <- function(results, template_raster) {
   return(result_raster)
 }
 
-milp_ms <- process_gurobi_results(results_ms, template)
-
+# Process the whole list of maximum coverage solutions
 milp_mc <- raster::stack(lapply(results_mc, process_gurobi_results, template))
-names(milp_mc) <- paste0("b", budgets)
-
-levelplot(milp_ms, main = "Minimum set solution\n(target = 10%, gap = 5%)",
+names(milp_mc) <- paste0("percent", budgets*100)
+```
+```{r plot-mcp-results}
+# Plot a selection of solutions (10%, 20%, 50%)
+levelplot(subset(milp_mc, c(2, 4, 10)), main = "Maximum coverage solution\n(gap = 5%)",
           scales = list(draw = FALSE),
           col.regions = c("grey70", "#d7191c"),
           colorkey = list(space = "bottom", height = 1))
-levelplot(milp_mc[[2]], main = "Maximum coverage solution\n(budget = 10%, gap = 5%)",
-          scales = list(draw = FALSE),
-          col.regions = c("grey70", "#d7191c"),
-          colorkey = list(space = "bottom", height = 1))
-
 ```
 
 ```{r mcp-hierarchy}
+# Sum up all the layers in the stack -> result is a selection frequency
 milp_mc_hier <- sum(milp_mc, na.rm = TRUE)
+# Replace 0s with NAs
 milp_mc_hier[milp_mc_hier == 0] <- NA
+# Normalize value into scale [0, 1]
 milp_mc_hier <- normalize(milp_mc_hier)
 levelplot(milp_mc_hier, margin = FALSE, scales = list(draw = FALSE),
           par.settings = rasterTheme(region = z_colors_RdYlBu$colors), 
           at = z_colors_RdYlBu$values, main = "Gurobi MCP")
 ```
+__NOTE__: the color scale above is not completely accurate, this needs to be fixed.
 
 
 ## 3. Comparison of the prioritizations
 
-### 3.1 Qualitative spatial
+### 3.1 Spatial patterns
+
+Let's visually compare the top 10% solution patterns in RWR, Zonation and Gurobi solutions.
 
 ```{r qualitative spatial}
 
@@ -272,6 +280,8 @@ p6 <- levelplot(milp_mc[[1]], main = "Gurobi MCP\n10% budget",
 
 grid.arrange(p4, p5, p6, nrow = 1, ncol = 3)
 ```
+
+Let's also check that the solutions above include the same amount of cells included in the top 10%.
 
 ```{r table-results,results="asis"}
 cell_count <- lapply(c(rwr_top10, abf_rank_top10, milp_mc[[2]]), function(x) table(raster::getValues(x))) 
@@ -343,21 +353,23 @@ milp_zonal <- zonal_stats(milp_mc_hier, ol_sp_rasters, rcl, "MILP")
 all_zonal <- dplyr::bind_rows(rwr_zonal, abf_zonal, caz_zonal, milp_zonal) %>% 
   dplyr::select(zone, mean_drem, method)
 
-(p7 <- ggplot(rwr_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + ggtitle("RWR") +
+ggplot(rwr_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + ggtitle("RWR") +
   ylab("Distribution remaining\n") + xlab("\n Landscape selected") + 
-  scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%")))
-(p8 <- ggplot(abf_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + ggtitle("ABF") +
+  scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%"))
+ggplot(abf_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + ggtitle("ABF") +
   ylab("Distribution remaining\n") + xlab("\n Landscape selected") + 
-  scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%")))
-(p9 <- ggplot(caz_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + ggtitle("CAZ") +
+  scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%"))
+ggplot(caz_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + ggtitle("CAZ") +
   ylab("Distribution remaining\n") + xlab("\n Landscape selected") + 
-  scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%")))
-(p10 <- ggplot(milp_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + 
+  scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%"))
+ggplot(milp_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + 
   ggtitle("Gurobi MCP") + ylab("Distribution remaining\n") + xlab("\n Landscape selected") + 
-  scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%")))
-(p11 <- ggplot(all_zonal, aes(x = zone, y = mean_drem, color = method)) + geom_line() +
+  scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%"))
+ggplot(all_zonal, aes(x = zone, y = mean_drem, color = method)) + geom_line() +
   ylab("Mean distribution remaining\n") + xlab("\n Landscape selected") + 
-  scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%")))
+  ggtitle("Mean performance among the methods") +
+  scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%"))
 
 ```
 
+What is striking here, is that there is very little difference between the methods. CAZ - as expected - has on average a little lower performance, others are very similar.
