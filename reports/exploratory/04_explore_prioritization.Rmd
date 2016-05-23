@@ -73,9 +73,9 @@ levelplot(cost, main = "Cost", margin = FALSE, scales = list(draw = FALSE),
           col.regions = viridis)
 ```
 
-## 2. Pririoritization methods
+## 2. Prioritization methods
 
-Here, we're testing three different prioritization methods against each other in increasing level of complexity:
+Here, we're testing three different prioritization methods against each other at increasing level of complexity:
 
 1. Rarity-wighted richness
 2. Zonation (two methods: core-area Zonation and additive benefit function)
