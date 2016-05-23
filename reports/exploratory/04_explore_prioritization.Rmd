@@ -5,6 +5,8 @@ output: html_notebook
 ---
 
 ```{r setup, echo=FALSE,message=FALSE,warning=FALSE}
+library(assertthat)
+library(dplyr)
 library(grid)
 library(gridExtra)
 library(knitr)
@@ -19,34 +21,6 @@ library(zonator)
 z_colors_spectral <- zonator::zlegend('spectral')
 z_colors_RdYlBu <- z_colors_spectral
 z_colors_RdYlBu$colors <- rev(brewer.pal(7, "RdYlBu"))  
-```
-
-```{r function-defintions,echo=FALSE}
-
-normalize <- function(x) {
-  min <- raster::minValue(x)
-  max <- raster::maxValue(x)
-  return((x - min) / (max - min))
-}
-
-ol_normalize <- function(x) {
-  min <- raster::minValue(x)
-  return((x - min) / raster::cellStats(x - min, "sum"))
-}
-
-standardize <- function(x) {
-  mean <- raster::cellStats(x, "mean")
-  sd <- raster::cellStats(x, "sd", asSample = FALSE)
-  return((x - mean) / sd)
-}
-
-IQRize <- function(x) {
-  x_values <- raster::getValues(x)
-  med <- median(x_values)
-  iqr <- IQR(x_values, na.rm = TRUE)
-  return((x - med) / iqr)
-}
-
 ```
 
 ## 1. Setup and background
@@ -64,7 +38,7 @@ z_tutorial_data_dir <- file.path(z_tutorial_dir, "data")
 tutorial_files <- list.files(path = z_tutorial_data_dir, pattern = "species.+\\.tif", 
                              full.names = TRUE)
 sp_rasters <- raster::stack(tutorial_files)
-# For some mysterious reasen, minmax isn't set automatically for sp_rasters[[1]]
+# For some mysterious reason, minmax isn't set automatically for sp_rasters[[1]]
 # (species1)
 sp_rasters[[1]] <- setMinMax(sp_rasters[[1]])
 
@@ -124,6 +98,13 @@ $$ \sum_{n=1}^{n} \frac{o_{ij}}{\sum_{i} o_{i}}  $$
 where $o_{ij}$ is the *occurence level* of feature $i$ in cell $j$ and  $\sum_{i} o_{i}$ is the sum of the occurrence levels of all cells of feature $i$. Below, after ranking the values are rescaled to range [0, 1]. Values close to 0 are the lowest priority locations, values close to 1 the highest.
 
 ```{r normalize-everything,echo=TRUE}
+# Define a function for occurrence level normalization
+ol_normalize <- function(x) {
+  min <- raster::minValue(x)
+  return((x - min) / raster::cellStats(x - min, "sum"))
+}
+
+
 # Occurrence level normalize all species rasters
 sp_rasters_normalized <- ol_normalize(sp_rasters)
 # Sum up all normalized occurence levels -> rarity-weighted richness
@@ -150,6 +131,8 @@ The RWR priority rank from the prevoius section is compared against two cell-rem
 
 We're not going to run the actual Zonation analysis, but assume that basic runs [01_core_area_zonation](https://github.com/cbig/zonation-tutorial/tree/master/basic/01_core_area_zonation) and [02_additive_benefit_function](https://github.com/cbig/zonation-tutorial/tree/master/basic/02_additive_benefit_function) have been executed locally. Then, we just do load the results.
 
+For additive benefit function, the $z$ parameter has been set to 0.25 for all species.
+
 ```{r read-in-caz-results, echo=TRUE}
 caz_rank <- raster(file.path(z_tutorial_dir, "basic", "basic_output", 
                              "01_core_area_zonation", "01_core_area_zonation.rank.asc"))
@@ -160,9 +143,10 @@ levelplot(caz_rank, margin = FALSE,
 ```
 
 ```{r read-in-abf-results, echo=TRUE}
-abf_rank <- raster(file.path(z_tutorial_dir, "basic", "basic_output", 
+result_dir <- "/home/jlehtoma/VirtualBox VMs/trusty64/zonation/zonation-tutorial"
+abf_rank <- raster(file.path(result_dir, "basic", "basic_output", 
                              "02_additive_benefit_function", 
-                             "output_02_additive_benefit_function.rank.asc"))
+                             "output_02_additive_benefit_function.rank.compressed.tif"))
 levelplot(abf_rank, margin = FALSE,
           par.settings = rasterTheme(region = z_colors_RdYlBu$colors), 
           scales = list(draw = FALSE),
@@ -229,6 +213,13 @@ levelplot(subset(milp_mc, c(2, 4, 10)), main = "Maximum coverage solution\n(gap 
 ```
 
 ```{r mcp-hierarchy}
+# Define a function for minmax-normalization
+normalize <- function(x) {
+  min <- raster::minValue(x)
+  max <- raster::maxValue(x)
+  return((x - min) / (max - min))
+}
+
 # Sum up all the layers in the stack -> result is a selection frequency
 milp_mc_hier <- sum(milp_mc, na.rm = TRUE)
 # Replace 0s with NAs
@@ -251,25 +242,25 @@ Let's visually compare the top 10% solution patterns in RWR, Zonation and Gurobi
 ```{r qualitative spatial}
 
 # Get the top 10% solutions for RWR and Zonation
-rwr_top10 <- rank_sp_rasters >= 0.9
+rwr_top10 <- rwr_rank >= 0.9
 # make this a categorical raster
 rwr_top10 <- ratify(rwr_top10)
 rat <- levels(rwr_top10)[[1]]
 rat$status <- c("Not Selected", "Selected")
 levels(rwr_top10) <- rat
 
-abf_rank_top10 <- abf_rank >= 0.9
+abf_top10 <- abf_rank >= 0.9
 # make this a categorical raster
-abf_rank_top10 <- ratify(abf_rank_top10)
-rat <- levels(abf_rank_top10)[[1]]
+abf_top10 <- ratify(abf_top10)
+rat <- levels(abf_top10)[[1]]
 rat$status <- c("Not Selected", "Selected")
-levels(abf_rank_top10) <- rat
+levels(abf_top10) <- rat
 
 p4 <- levelplot(rwr_top10, main = "RWR\ntop 10%",
           scales = list(draw = FALSE),
           col.regions = c("grey70", "#d7191c"),
           colorkey = list(space = "bottom", height = 1))
-p5 <- levelplot(abf_rank_top10, main = "Zonation ABF\ntop 10%",
+p5 <- levelplot(abf_top10, main = "Zonation ABF\ntop 10%",
           scales = list(draw = FALSE),
           col.regions = c("grey70", "#d7191c"),
           colorkey = list(space = "bottom", height = 1))
@@ -284,7 +275,7 @@ grid.arrange(p4, p5, p6, nrow = 1, ncol = 3)
 Let's also check that the solutions above include the same amount of cells included in the top 10%.
 
 ```{r table-results,results="asis"}
-cell_count <- lapply(c(rwr_top10, abf_rank_top10, milp_mc[[2]]), function(x) table(raster::getValues(x))) 
+cell_count <- lapply(c(rwr_top10, abf_top10, milp_mc[[2]]), function(x) table(raster::getValues(x))) 
 cell_count <- as.data.frame(do.call("rbind", cell_count))
 names(cell_count) <- c("Low", "Top")
 cell_count$Method <- c("RWR", "ABF", "MILP MCP")
@@ -344,10 +335,10 @@ rcl <- data.frame(from = seq(0, .9, 0.1),
                   to = seq(0.1, 1.0, 0.1), 
                   value = 1:10)
 
-rwr_zonal <- zonal_stats(rank_sp_rasters, ol_sp_rasters, rcl, "RWR")
-abf_zonal <- zonal_stats(abf_rank, ol_sp_rasters, rcl, "ABF")
-caz_zonal <- zonal_stats(caz_rank, ol_sp_rasters, rcl, "CAZ")
-milp_zonal <- zonal_stats(milp_mc_hier, ol_sp_rasters, rcl, "MILP")
+rwr_zonal <- zonal_stats(rwr_rank, sp_rasters_normalized, rcl, "RWR")
+abf_zonal <- zonal_stats(abf_rank, sp_rasters_normalized, rcl, "ABF")
+caz_zonal <- zonal_stats(caz_rank, sp_rasters_normalized, rcl, "CAZ")
+milp_zonal <- zonal_stats(milp_mc_hier, sp_rasters_normalized, rcl, "MILP")
 
 # Bind all zonal stats together
 all_zonal <- dplyr::bind_rows(rwr_zonal, abf_zonal, caz_zonal, milp_zonal) %>% 
