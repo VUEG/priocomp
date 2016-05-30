@@ -73,6 +73,7 @@ target/
 # R
 .Rproj.user
 .Rhistory
+rsconnect/
 
 # Common
 *~
