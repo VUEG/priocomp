@@ -27,12 +27,11 @@ def normalize(x):
     return x
 
 
-def normalize_ol(x):
+def ol_normalize(x):
     """ Normalize layer based on occurrence levels in the array.
 
         The value of each element is divided by the sum off all elements. Input
-        must be a numpy ndarray, no coercion is tried. All values must be
-        positive.
+        must be a numpy ndarray, no coercion is tried.
 
         :param x: numpy ndarray to be rescaled.
         :return: numpy ndarray with transformed values.
@@ -40,9 +39,9 @@ def normalize_ol(x):
     if type(x) is not np.ndarray and type(x) is not ma.core.MaskedArray:
         raise TypeError("x must be a numpy.ndarray or numpy.ma.MaskedArray")
 
-    assert np.all(x >= 0), "All array values must be positive (>= 0)"
+    min_val = ma.min(x)
 
-    return x / (ma.sum(x))
+    return (x - min_val) / (ma.sum(x - min_val))
 
 
 def standardize(x):
@@ -79,9 +78,10 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE', verb
             click.echo(click.style(' max before rescaling:     {}'.format(src_data.max()), fg='green'))
         if method == 'normalize':
             rescaled_data = normalize(src_data)
-        elif method == 'normalize_ol':
-            rescaled_data = normalize_ol(src_data)
+        elif method == 'ol_normalize':
+            rescaled_data = ol_normalize(src_data)
         elif method == 'standardize':
+            pass
         else:
             rescaled_data = standardize(src_data)
             raise TypeError("Method {} not implemented".format(method))
@@ -109,7 +109,7 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE', verb
 @click.argument('infile', nargs=1, type=click.Path(exists=True))
 @click.argument('outfile', nargs=1)
 def cli(infile, outfile, method, verbose):
-    click.echo(click.style('Rescaling file {}'.format(infile), fg='green'))
+    click.echo(click.style('Rescaling (method: {0}) file {1}'.format(method, infile), fg='green'))
     rescale_raster(infile, outfile, method=method, verbose=verbose)
     click.echo(click.style('Done!', fg='green'))
 
