@@ -225,6 +225,8 @@ rule preprocess_nuts_level0_data:
     output:
         reprojected=temp(expand("data/interim/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0.{ext}",
                                 ext=SHP_COMPONENTS)),
+        enhanced=temp(expand("data/interim/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0_enhanced.{ext}",
+                                                        ext=SHP_COMPONENTS)),
         processed=expand("data/processed/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0_subset.{ext}",
                          ext=SHP_COMPONENTS)
     message:
@@ -241,6 +243,26 @@ rule preprocess_nuts_level0_data:
         reprojected_shp = utils.pick_from_list(output.reprojected, ".shp")
         shell('ogr2ogr {reprojected_shp} -t_srs "EPSG:{PROJECT_CRS}" {input_shp}')
         logger.debug("Reprojected NUTS data from EPSG:4258 to EPSG:3035")
+
+        # NUTS 0 data has "NUTS_ID" field, but it's character. Convert to
+        # integer for raserization
+        enhanced_shp = utils.pick_from_list(output.enhanced, ".shp")
+        with fiona.drivers():
+            with fiona.open(reprojected_shp) as source:
+                meta = source.meta
+                meta['schema']['geometry'] = 'Polygon'
+                # Insert a new field
+                meta['schema']['properties']['ID'] = 'int'
+
+                ID = 1
+                with fiona.open(enhanced_shp, 'w', **meta) as sink:
+                    # Loop over features
+                    for f in source:
+                        f['properties']['ID'] = ID
+                        ID += 1
+                        # Write the record out.
+                        sink.write(f)
+
         # Clip shapefile using ogr2ogr, syntax:
         # ogr2ogr output.shp input.shp -clipsrc <left> <bottom> <right> <top>
         processed_shp = utils.pick_from_list(output.processed, ".shp")
@@ -249,7 +271,7 @@ rule preprocess_nuts_level0_data:
         #  2. Clip output to an extent (given by bounds)
         # Build the -where clause for ogr2ogr
         where_clause = "NUTS_ID IN ({})".format(", ".join(["'" + item + "'" for item in PROJECT_COUNTRIES]))
-        shell('ogr2ogr -where "{where_clause}" {processed_shp} {reprojected_shp} -clipsrc {bounds}')
+        shell('ogr2ogr -where "{where_clause}" {processed_shp} {enhanced_shp} -clipsrc {bounds}')
         logger.debug("Clipped NUTS data to analysis bounds: {}".format(bounds))
         logger.debug("Selected only a subset of eurostat countries")
 
@@ -314,6 +336,26 @@ rule preprocess_nuts_level2_data:
         shell('ogr2ogr {processed_shp} {enhanced_shp} -clipsrc {bounds}')
         logger.debug("Clipped NUTS level 2 data to analysis bounds: {}".format(bounds))
         logger.debug("Selected only a subset of eurostat countries")
+
+rule rasterize_nuts_level0_data:
+    input:
+        expand("data/processed/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0_subset.{ext}",
+                         ext=SHP_COMPONENTS)
+    output:
+        "data/processed/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0_subset.tif"
+    message:
+        "Rasterizing NUTS level 0 data..."
+    run:
+        input_shp = utils.pick_from_list(input, ".shp")
+        layer_shp = os.path.basename(input_shp).replace(".shp", "")
+
+        # Construct extent
+        bounds = "{0} {1} {2} {3}".format(PROJECT_EXTENT["left"],
+                                          PROJECT_EXTENT["bottom"],
+                                          PROJECT_EXTENT["right"],
+                                          PROJECT_EXTENT["top"])
+        # Rasterize
+        shell("gdal_rasterize -l {layer_shp} -a ID -tr 1000 1000 -te {bounds} -ot Int16 -a_nodata -32768 -co COMPRESS=DEFLATE {input_shp} {output[0]}")
 
 rule rasterize_nuts_level2_data:
     input:
