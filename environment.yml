@@ -4,8 +4,9 @@ channels:
   - bioconda
   - mutirri
   - r
+  - gurobi
 dependencies:
-  - python=3.*
+  - python=3.5
   - click
   - fiona
   - flake8
@@ -25,7 +26,6 @@ dependencies:
   - scipy
   - snakemake
   - Sphinx
-  - tox
   - yaml
   - pip:
       - easywebdav
