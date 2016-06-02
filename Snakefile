@@ -10,6 +10,7 @@ import sys
 import yaml
 from snakemake import logger
 from snakemake.remote.HTTP import RemoteProvider as HTTPRemoteProvider
+from string import ascii_uppercase
 from importlib.machinery import SourceFileLoader
 
 utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
@@ -411,6 +412,29 @@ rule normalize_data:
             # NOTE: looping over input and output only works if they have
             # exactly the same definition. Otherwise order may vary.
             rescale.rescale_raster(input[i], output[i], method="normalize", verbose=True)
+
+rule sum_rasters:
+    input:
+        rules.ol_normalize_data.output
+    output:
+        "data/processed/features/summation/ol_normalized_forest_production_sums.tif"
+    message:
+        "Summing rasters..."
+    run:
+        # NOTE: fails for more that 26 rasters
+        # Solution would involve summing first 26 and then adding in batches
+        # of 25 to the previous sum.
+        INPUT_RASTERS = ''
+        RASTER_ADDITION = ''
+
+        for i in range (len (input)):
+            if i == 0:
+                RASTER_ADDITION += ascii_uppercase[i]
+            else:
+                RASTER_ADDITION += ' + ' + ascii_uppercase[i]
+            INPUT_RASTERS += ' -' + ascii_uppercase[i] + ' ' + input[i]
+
+        run ('''gdal_calc.py {{input_rasters}} --outfile="{output}" --calc="{{map_algebra}}" --NoDataValue=-1''').format (map_algebra = RASTER_ADDITION, input_rasters = INPUT_RASTERS)
 
 ## Set up and run analyses -----------------------------------------------------
 
