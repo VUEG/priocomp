@@ -416,7 +416,17 @@ rule normalize_data:
 
 # RWR --------------------------------------------------------------------------
 
-
+rule calculate_rwr:
+    input:
+        expand("data/processed/features/ol_normalized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/processed/features/ol_normalized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
+    output:
+        "analyses/RWR/eu26_rwr.tif"
+    message:
+        "Calculating RWR..."
+    run:
+        for i, s_raster in enumerate(input):
+            # When rading in the first raster ,
 
 # Zonation ---------------------------------------------------------------------
 
