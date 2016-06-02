@@ -65,6 +65,7 @@ rule all:
     input:
         expand("data/processed/features/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
         expand("data/processed/features/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS),
+        "data/processed/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0_subset.tif",
         "data/processed/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2_subset.tif"
 
 ## Get data --------------------------------------------------------------------
@@ -377,15 +378,32 @@ rule rasterize_nuts_level2_data:
         # Rasterize
         shell("gdal_rasterize -l {layer_shp} -a ID -tr 1000 1000 -te {bounds} -ot Int16 -a_nodata -32768 -co COMPRESS=DEFLATE {input_shp} {output[0]}")
 
-rule rescale_data:
+rule ol_normalize_data:
     input:
         expand("data/interim/harmonized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
         expand("data/interim/harmonized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
     output:
-        expand("data/processed/features/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-        expand("data/processed/features/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
+        expand("data/processed/features/ol_normalized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/processed/features/ol_normalized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
     message:
-        "Rescaling data..."
+        "Normalizing data based on occurrence levels..."
+    run:
+        for i, s_raster in enumerate(input):
+            # No need to process the snap raster
+            logger.info(" [{0}/{1}] (OL) Normalizing dataset {2}".format(i+1, len(input), s_raster))
+            # NOTE: looping over input and output only works if they have
+            # exactly the same definition. Otherwise order may vary.
+            rescale.rescale_raster(input[i], output[i], method="ol_normalize", verbose=True)
+
+rule normalize_data:
+    input:
+        expand("data/interim/harmonized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/interim/harmonized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
+    output:
+        expand("data/processed/features/normalized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
+        expand("data/processed/features/normalized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
+    message:
+        "Normalizing data..."
     run:
         for i, s_raster in enumerate(input):
             # No need to process the snap raster
