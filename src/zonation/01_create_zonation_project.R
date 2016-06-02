@@ -1,5 +1,5 @@
 # NOTE: you will need the latest version for this to work
-# zonator > 0.5.0
+# zonator >= 0.5.3
 if (!require("zonator")) {
   devtools::install_github("cbig/zonator", dependencies = TRUE)
 }
@@ -21,11 +21,11 @@ ppa_config_file <- "ppa_config.txt"
 
 project_name <- "priocomp"
 
-create_zproject(name = project_name, dir = zsetup_root, variants = variants,
-                dat_template_file = "analyses/zonation/template.dat",
-                spp_template_dir = "data/processed/features",
-                override_path = "../../../data/processed/features",
-                recursive = TRUE, overwrite = TRUE, debug = TRUE)
+zonator::create_zproject(name = project_name, dir = zsetup_root, variants = variants,
+                         dat_template_file = "analyses/zonation/template.dat",
+                         spp_template_dir = "data/processed/features",
+                         override_path = "../../../data/processed/features",
+                         recursive = TRUE, overwrite = TRUE, debug = TRUE)
 priocomp_zproject <- load_zproject(zsetup_root)
 
 # Set run configuration parameters ----------------------------------------
