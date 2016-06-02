@@ -49,7 +49,7 @@ PROJECT_EXTENT = {"bottom": 1000000.0, "left": 2000000.0, "right": 6526000.0,
 PROJECT_CRS = 3035
 
 # Offset the bounds given in extent_yml. Values are in order
-# (left, bottom, right, top) and interpreted in the CRS units. values
+# (left, bottom, right, top) and interpreted in the CRS units. valuesq
 # are added to bounds given by extent.yml
 OFFSET = (100000, 100000, 0, 0)
 # Which eurostat countries are included in the processed output? The
@@ -395,6 +395,12 @@ rule rescale_data:
             rescale.rescale_raster(input[i], output[i], method="normalize", verbose=True)
 
 ## Set up and run analyses -----------------------------------------------------
+
+# RWR --------------------------------------------------------------------------
+
+
+
+# Zonation ---------------------------------------------------------------------
 
 rule generate_zonation_project:
     input:
