@@ -427,14 +427,11 @@ rule sum_rasters:
         INPUT_RASTERS = ''
         RASTER_ADDITION = ''
 
-        for i in range (len (input)):
-            if i == 0:
-                RASTER_ADDITION += ascii_uppercase[i]
-            else:
-                RASTER_ADDITION += ' + ' + ascii_uppercase[i]
-            INPUT_RASTERS += ' -' + ascii_uppercase[i] + ' ' + input[i]
+        for idx, letter in enumerate (ascii_uppercase[:len(input)]):
+            RASTER_ADDITION += letter if idx == 0 else ' + ' + letter
+            INPUT_RASTERS += ' -' + letter + ' "' + input[idx] + '"'
 
-        run ('''gdal_calc.py {{input_rasters}} --outfile="{output}" --calc="{{map_algebra}}" --NoDataValue=-1''').format (map_algebra = RASTER_ADDITION, input_rasters = INPUT_RASTERS)
+        run('''gdal_calc.py {{input_rasters}} --outfile="{output}" --calc="{{map_algebra}}" --NoDataValue=-1''').format(map_algebra = RASTER_ADDITION, input_rasters = INPUT_RASTERS)
 
 ## Set up and run analyses -----------------------------------------------------
 
