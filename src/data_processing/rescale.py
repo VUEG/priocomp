@@ -97,8 +97,10 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE', verb
 
         # Write the product.
         profile = in_src.profile
-        # Rescaled data is always float32, and we have only 1 band
-        profile.update(dtype=rasterio.float32, compress=compress)
+        # Rescaled data is always float32, and we have only 1 band. Remember
+        # to set NoData-value correctly.
+        profile.update(dtype=rasterio.float32, compress=compress,
+                       nodata=-3.4e+38)
 
         with rasterio.open(output_raster, 'w', **profile) as dst:
             dst.write(rescaled_data, 1)
