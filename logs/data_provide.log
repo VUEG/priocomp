@@ -212,3 +212,27 @@
 2016-05-15 18:50:35,087 -  [10/12] Rescaling dataset data/interim/harmonized/provide/species_richness_farmland_birds_original1/species_richness_farmland_birds_original1.tif
 2016-05-15 18:50:38,418 -  [11/12] Rescaling dataset data/interim/harmonized/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif
 2016-05-15 18:50:41,426 -  [12/12] Rescaling dataset data/interim/harmonized/datadryad/forest_production_europe/woodprod_average.tif
+2016-06-02 15:09:59,231 - Downloaded beehub.nl/environmental-geography-group/provide/agrobiodiversity_species_richness/datapackage.json to data/external/provide/agrobiodiversity_species_richness/datapackage.json
+2016-06-02 15:09:59,239 - Downloaded beehub.nl/environmental-geography-group/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif to data/external/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif
+2016-06-02 15:09:59,246 - Downloaded beehub.nl/environmental-geography-group/provide/carbon_sequestration/datapackage.json to data/external/provide/carbon_sequestration/datapackage.json
+2016-06-02 15:09:59,254 - Downloaded beehub.nl/environmental-geography-group/provide/carbon_sequestration/carbon_sequestration.tif to data/external/provide/carbon_sequestration/carbon_sequestration.tif
+2016-06-02 15:09:59,261 - Downloaded beehub.nl/environmental-geography-group/provide/cultural_landscape_index_agro/datapackage.json to data/external/provide/cultural_landscape_index_agro/datapackage.json
+2016-06-02 15:09:59,267 - Downloaded beehub.nl/environmental-geography-group/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif to data/external/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif
+2016-06-02 15:09:59,273 - Downloaded beehub.nl/environmental-geography-group/provide/cultural_landscape_index_forest/datapackage.json to data/external/provide/cultural_landscape_index_forest/datapackage.json
+2016-06-02 15:09:59,279 - Downloaded beehub.nl/environmental-geography-group/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif to data/external/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif
+2016-06-02 15:09:59,285 - Downloaded beehub.nl/environmental-geography-group/provide/erosion_prevention/datapackage.json to data/external/provide/erosion_prevention/datapackage.json
+2016-06-02 15:09:59,291 - Downloaded beehub.nl/environmental-geography-group/provide/erosion_prevention/erosion_prevention.tif to data/external/provide/erosion_prevention/erosion_prevention.tif
+2016-06-02 15:09:59,298 - Downloaded beehub.nl/environmental-geography-group/provide/floodregulation/datapackage.json to data/external/provide/floodregulation/datapackage.json
+2016-06-02 15:09:59,306 - Downloaded beehub.nl/environmental-geography-group/provide/floodregulation/floodregulation.tif to data/external/provide/floodregulation/floodregulation.tif
+2016-06-02 15:09:59,312 - Downloaded beehub.nl/environmental-geography-group/provide/megafauna/datapackage.json to data/external/provide/megafauna/datapackage.json
+2016-06-02 15:09:59,318 - Downloaded beehub.nl/environmental-geography-group/provide/megafauna/megafauna.tif to data/external/provide/megafauna/megafauna.tif
+2016-06-02 15:09:59,324 - Downloaded beehub.nl/environmental-geography-group/provide/nature_tourism/datapackage.json to data/external/provide/nature_tourism/datapackage.json
+2016-06-02 15:09:59,330 - Downloaded beehub.nl/environmental-geography-group/provide/nature_tourism/nature_tourism.tif to data/external/provide/nature_tourism/nature_tourism.tif
+2016-06-02 15:09:59,336 - Downloaded beehub.nl/environmental-geography-group/provide/pollination_flows/datapackage.json to data/external/provide/pollination_flows/datapackage.json
+2016-06-02 15:09:59,343 - Downloaded beehub.nl/environmental-geography-group/provide/pollination_flows/pollination_flows.tif to data/external/provide/pollination_flows/pollination_flows.tif
+2016-06-02 15:09:59,351 - Downloaded beehub.nl/environmental-geography-group/provide/species_richness_farmland_birds_original1/datapackage.json to data/external/provide/species_richness_farmland_birds_original1/datapackage.json
+2016-06-02 15:09:59,360 - Downloaded beehub.nl/environmental-geography-group/provide/species_richness_farmland_birds_original1/species_richness_farmland_birds_original1.tif to data/external/provide/species_richness_farmland_birds_original1/species_richness_farmland_birds_original1.tif
+2016-06-02 15:09:59,367 - Downloaded beehub.nl/environmental-geography-group/provide/species_richness_vascular_plants/datapackage.json to data/external/provide/species_richness_vascular_plants/datapackage.json
+2016-06-02 15:09:59,374 - Downloaded beehub.nl/environmental-geography-group/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif to data/external/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif
+2016-06-02 15:10:08,590 -  [1/12 step 1] Warping dataset data/external/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif
+2016-06-02 15:10:18,718 -  [1/12 step 2] Clipping dataset data/interim/warped/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif
