@@ -1,8 +1,9 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import click
 import numpy as np
 import numpy.ma as ma
+import pdb
 import os
 import rasterio
 
@@ -61,6 +62,9 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE', verb
     :param compress: String compression level used for the output raster.
     :param verbose Boolean indicating how much information is printed out.
     """
+
+    NODATA_VALUE = -3.4e+38
+
     if not os.path.exists(input_raster):
         raise OSError("Input raster {} not found".format(input_raster))
 
@@ -97,12 +101,17 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE', verb
 
         # Write the product.
         profile = in_src.profile
-        # Rescaled data is always float32, and we have only 1 band. Remember
-        # to set NoData-value correctly.
+        # Rescaled data is always float32, and we have only 1 band.
         profile.update(dtype=rasterio.float32, compress=compress,
-                       nodata=-3.4e+38)
-
+                       nodata=NODATA_VALUE)
+        # Also remember to replace the NoData values and set the fill value for
+        # NoData
+        rescaled_data = ma.filled(rescaled_data, NODATA_VALUE)
+        #ma.set_fill_value(rescaled_data, NODATA_VALUE)
+        #pdb.set_trace()
         with rasterio.open(output_raster, 'w', **profile) as dst:
+            # Set the NoData mask
+            dst.write_mask(in_src.read_masks(1))
             dst.write(rescaled_data, 1)
 
 @click.command()
