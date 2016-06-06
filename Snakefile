@@ -95,13 +95,13 @@ rule get_datadryad_data:
 
 rule get_nuts_data:
     input:
-        HTTP.remote(expand(["beehub.nl/environmental-geography-group/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0.{ext}",
-                            "beehub.nl/environmental-geography-group/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2.{ext}"],
+        HTTP.remote(expand(["beehub.nl/environmental-geography-group/eurostat/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0.{ext}",
+                            "beehub.nl/environmental-geography-group/eurostat/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2.{ext}"],
                             ext=SHP_COMPONENTS),
                     username=os.environ.get("BEEHUB_USERNAME"), password=os.environ.get("BEEHUB_PASSWORD"), keep_local=False)
     output:
-        expand(["data/external/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0.{ext}",
-                "data/external/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2.{ext}"],
+        expand(["data/external/eurostat/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0.{ext}",
+                "data/external/eurostat/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2.{ext}"],
                 ext=SHP_COMPONENTS)
     log:
         "logs/data_nuts.log"
