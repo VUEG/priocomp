@@ -320,36 +320,35 @@ rule rescale_data:
             # exactly the same definition. Otherwise order may vary.
             rescale.rescale_raster(input[i], output[i], method="normalize", verbose=True)
 
-# ## Set up and run analyses -----------------------------------------------------
-#
-# # RWR --------------------------------------------------------------------------
-#
-# rule calculate_rwr:
-#     input:
-#         expand("data/processed/features/ol_normalized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-#         expand("data/processed/features/ol_normalized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
-#     output:
-#         "analyses/RWR/eu26_rwr.tif"
-#     message:
-#         "Calculating RWR..."
-#     run:
-#         for i, s_raster in enumerate(input):
-#             # NOTE: fails for more that 26 rasters
-#             # Solution would involve summing first 26 and then adding in batches
-#             # of 25 to the previous sum.
-#             INPUT_RASTERS = ''
-#             RASTER_ADDITION = ''
-#             NODATA_VALUE = -3.4e+38
-#
-#             logger.info(" Summing {} rasters".format(len(input)))
-#
-#             for idx, letter in enumerate (ascii_uppercase[:len(input)]):
-#                 RASTER_ADDITION += letter if idx == 0 else ' + ' + letter
-#                 INPUT_RASTERS += ' -' + letter + ' "' + input[idx] + '"'
-#
-#             shell("gdal_calc.py {0} --outfile='{1}' --calc='{2}' --NoDataValue={3}".format(INPUT_RASTERS, output, RASTER_ADDITION, NODATA_VALUE))
-#
-#
+## Set up and run analyses -----------------------------------------------------
+
+# RWR --------------------------------------------------------------------------
+
+rule calculate_rwr:
+    input:
+        rules.ol_normalize_data.output
+    output:
+        "analyses/RWR/eu26_rwr.tif"
+    message:
+        "Calculating RWR..."
+    run:
+        for i, s_raster in enumerate(input):
+            # NOTE: fails for more that 26 rasters
+            # Solution would involve summing first 26 and then adding in batches
+            # of 25 to the previous sum.
+            INPUT_RASTERS = ''
+            RASTER_ADDITION = ''
+            NODATA_VALUE = -3.4e+38
+
+            logger.info(" Summing {} rasters".format(len(input)))
+
+            for idx, letter in enumerate (ascii_uppercase[:len(input)]):
+                RASTER_ADDITION += letter if idx == 0 else ' + ' + letter
+                INPUT_RASTERS += ' -' + letter + ' "' + input[idx] + '"'
+
+            shell("gdal_calc.py {0} --outfile='{1}' --calc='{2}' --NoDataValue={3}".format(INPUT_RASTERS, output, RASTER_ADDITION, NODATA_VALUE))
+
+
 # # Zonation ---------------------------------------------------------------------
 #
 # rule generate_zonation_project:
