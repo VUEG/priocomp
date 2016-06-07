@@ -7,6 +7,15 @@ import yaml
 def parse_data_manifest(infile):
     """ Parse datasets from a data manifest file.
 
+    Current implementation can work with the following hierarchy:
+        uri:
+            provider: str
+            collections: list | dict
+
+    If "collections" value is a list, then there are 3 hierarchy levels. If
+    it is a dict, then there are 4 hierarchy levels. The key of the dict is a
+    subcollection name and value is a list of datasets.
+
     :param infile String path to input YAML data manifest file.
     :return a dictionary of files with provider name as key and downloadable
             URIs as values
@@ -17,7 +26,7 @@ def parse_data_manifest(infile):
 
     data_manifest = yaml.safe_load(open(infile, 'r'))
     for item in data_manifest:
-        # Item should only have one key, which is the URI
+        # Item should only have one key, which is the URIq
         uri = list(item.keys())[0]
         # Loop over the collections
         for provider_collection in item[uri]:
@@ -26,10 +35,22 @@ def parse_data_manifest(infile):
             collection = provider_collection['collections']
             # Loop over collections and datasets
             for collection_name, datasets in collection.items():
-                for dataset in datasets:
-                    dataset_uri = "/".join([uri, provider, collection_name,
-                                           dataset])
-                    provider_datasets[provider].append(dataset_uri)
+                # 3 levels of hierarchy
+                if isinstance(datasets, list):
+                    for dataset in datasets:
+                        dataset_uri = "/".join([uri, provider, collection_name,
+                                               dataset])
+                        provider_datasets[provider].append(dataset_uri)
+                elif isinstance(datasets, dict):
+                    for subcollection_name, subdatasets in datasets.items():
+                        for subdataset in subdatasets:
+                            dataset_uri = "/".join([uri, provider,
+                                                    collection_name,
+                                                    subcollection_name,
+                                                    subdataset])
+                            provider_datasets[provider].append(dataset_uri)
+                else:
+                    raise TypeError("Unknown collections type")
 
     return provider_datasets
 
