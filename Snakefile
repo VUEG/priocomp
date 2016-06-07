@@ -197,68 +197,65 @@ rule preprocess_nuts_level0_data:
         logger.debug("Selected only a subset of eurostat countries")
         logger.debug("Resulting file: {}".format(processed_shp))
 
-# rule preprocess_nuts_level2_data:
-#     input:
-#         shp=expand("data/external/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2.{ext}",
-#                    ext=SHP_COMPONENTS)
-#     output:
-#         reprojected=temp(expand("data/interim/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2.{ext}",
-#                                 ext=SHP_COMPONENTS)),
-#         enhanced=temp(expand("data/interim/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2_enhanced.{ext}",
-#                                 ext=SHP_COMPONENTS)),
-#         processed=expand("data/processed/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2_subset.{ext}",
-#                          ext=SHP_COMPONENTS)
-#     message:
-#         "Pre-processing NUTS level 2 data..."
-#     run:
-#         # Read in the bounds as used in harmonize_data rule
-#         bleft = PROJECT_EXTENT["left"] + OFFSET[0]
-#         bbottom = PROJECT_EXTENT["bottom"] + OFFSET[1]
-#         bright = PROJECT_EXTENT["right"] + OFFSET[2]
-#         btop = PROJECT_EXTENT["top"] + OFFSET[3]
-#         bounds = "{0} {1} {2} {3}".format(bleft, bbottom, bright, btop)
-#         # Reproject to EPSG:3035 from EPSG:4258
-#         input_shp = utils.pick_from_list(input.shp, ".shp")
-#         reprojected_shp = utils.pick_from_list(output.reprojected, ".shp")
-#         shell('ogr2ogr {reprojected_shp} -t_srs "EPSG:{PROJECT_CRS}" {input_shp}')
-#         logger.debug("Reprojected NUTS level 2 data from EPSG:4258 to EPSG:3035")
-#
-#         # The Pre-processing steps need to be done:
-#         #  1. Tease apart country code from field NUTS_ID
-#         #  2. Create a running ID field that can be used as value in the
-#         #     rasterized version
-#         enhanced_shp = utils.pick_from_list(output.enhanced, ".shp")
-#         with fiona.drivers():
-#             with fiona.open(reprojected_shp) as source:
-#                 meta = source.meta
-#                 meta['schema']['geometry'] = 'Polygon'
-#                 # Insert new fields
-#                 meta['schema']['properties']['ID'] = 'int'
-#                 meta['schema']['properties']['country'] = 'str'
-#
-#                 ID = 1
-#                 with fiona.open(enhanced_shp, 'w', **meta) as sink:
-#                     # Loop over features
-#                     for f in source:
-#                         # Check the country code part of NUTS_ID (2 first
-#                         # charatcters). NOTE: we're effectively doing filtering
-#                         # here.
-#                         country_code = f['properties']['NUTS_ID'][0:2]
-#                         if country_code in PROJECT_COUNTRIES:
-#                             f['properties']['ID'] = ID
-#                             ID += 1
-#                             f['properties']['country'] = country_code
-#                             # Write the record out.
-#                             sink.write(f)
-#
-#         # Clip shapefile using ogr2ogr, syntax:
-#         # ogr2ogr output.shp input.shp -clipsrc <left> <bottom> <right> <top>
-#         processed_shp = utils.pick_from_list(output.processed, ".shp")
-#         # Clip output to an extent (given by bounds)
-#         shell('ogr2ogr {processed_shp} {enhanced_shp} -clipsrc {bounds}')
-#         logger.debug("Clipped NUTS level 2 data to analysis bounds: {}".format(bounds))
-#         logger.debug("Selected only a subset of eurostat countries")
-#
+rule preprocess_nuts_level2_data:
+    input:
+        shp=NUTS_LEVEL2_DATA
+    output:
+        reprojected=temp([path.replace("external", "interim/reprojected") for path in NUTS_LEVEL2_DATA]),
+        enhanced=temp([path.replace("external", "interim/enhanced") for path in NUTS_LEVEL2_DATA]),
+        processed=[path.replace("external", "processed") for path in NUTS_LEVEL2_DATA]
+    message:
+        "Pre-processing NUTS level 2 data..."
+    run:
+        # Read in the bounds as used in harmonize_data rule
+        bleft = PROJECT_EXTENT["left"] + OFFSET[0]
+        bbottom = PROJECT_EXTENT["bottom"] + OFFSET[1]
+        bright = PROJECT_EXTENT["right"] + OFFSET[2]
+        btop = PROJECT_EXTENT["top"] + OFFSET[3]
+        bounds = "{0} {1} {2} {3}".format(bleft, bbottom, bright, btop)
+        # Reproject to EPSG:3035 from EPSG:4258
+        input_shp = utils.pick_from_list(input.shp, ".shp")
+        reprojected_shp = utils.pick_from_list(output.reprojected, ".shp")
+        shell('ogr2ogr {reprojected_shp} -t_srs "EPSG:{PROJECT_CRS}" {input_shp}')
+        logger.debug("Reprojected NUTS level 2 data from EPSG:4258 to EPSG:3035")
+
+        # The Pre-processing steps need to be done:
+        #  1. Tease apart country code from field NUTS_ID
+        #  2. Create a running ID field that can be used as value in the
+        #     rasterized version
+        enhanced_shp = utils.pick_from_list(output.enhanced, ".shp")
+        with fiona.drivers():
+            with fiona.open(reprojected_shp) as source:
+                meta = source.meta
+                meta['schema']['geometry'] = 'Polygon'
+                # Insert new fields
+                meta['schema']['properties']['ID'] = 'int'
+                meta['schema']['properties']['country'] = 'str'
+
+                ID = 1
+                with fiona.open(enhanced_shp, 'w', **meta) as sink:
+                    # Loop over features
+                    for f in source:
+                        # Check the country code part of NUTS_ID (2 first
+                        # charatcters). NOTE: we're effectively doing filtering
+                        # here.
+                        country_code = f['properties']['NUTS_ID'][0:2]
+                        if country_code in PROJECT_COUNTRIES:
+                            f['properties']['ID'] = ID
+                            ID += 1
+                            f['properties']['country'] = country_code
+                            # Write the record out.
+                            sink.write(f)
+
+        # Clip shapefile using ogr2ogr, syntax:
+        # ogr2ogr output.shp input.shp -clipsrc <left> <bottom> <right> <top>
+        processed_shp = utils.pick_from_list(output.processed, ".shp")
+        # Clip output to an extent (given by bounds)
+        shell('ogr2ogr {processed_shp} {enhanced_shp} -clipsrc {bounds}')
+        logger.debug("Clipped NUTS level 2 data to analysis bounds: {}".format(bounds))
+        logger.debug("Selected only a subset of eurostat countries")
+        logger.debug("Resulting file: {}".format(processed_shp))
+
 # rule rasterize_nuts_level0_data:
 #     input:
 #         expand("data/processed/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0_subset.{ext}",
