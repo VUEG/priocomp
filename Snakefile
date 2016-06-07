@@ -39,18 +39,21 @@ beehub_url = "https://beehub.nl/environmental-geography-group"
 
 # Define source and desination datasets. NOTE: data/Snakefile must be run
 # before this Snakefile will work
-DATADRYAD_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in data_manifest['datadryad']]
+DATADRYAD_SRC_DATASETS = [path for path in data_manifest['datadryad'] if path.endswith(".tif")]
+DATADRYAD_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in DATADRYAD_SRC_DATASETS]
 DATADRYAD_DST_DATASETS = [url.replace(external_data, processed_features) for url in DATADRYAD_SRC_DATASETS]
 
 EUROSTAT_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in data_manifest['eurostat']]
 # Define NUTS data separately. Shapefile constitute of several actual files on
 # file system, so dealing with them properly is a bit tricky.
-NUTS_LEVEL0_DATA = matching = [path for path in EUROSTAT_SRC_DATASETS if "level0" in path and not path.endswith(".txt")]
-NUTS_LEVEL2_DATA = matching = [path for path in EUROSTAT_SRC_DATASETS if "level2" in path and not path.endswith(".txt")]
+NUTS_LEVEL0_DATA = [path for path in EUROSTAT_SRC_DATASETS if "level0" in path and not path.endswith(".txt")]
+NUTS_LEVEL2_DATA = [path for path in EUROSTAT_SRC_DATASETS if "level2" in path and not path.endswith(".txt")]
 
-PROVIDE_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in data_manifest['provide']]
+PROVIDE_SRC_DATASETS = [path for path in data_manifest['provide'] if path.endswith(".tif")]
+PROVIDE_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in PROVIDE_SRC_DATASETS]
 PROVIDE_DST_DATASETS = [url.replace(external_data, processed_features) for url in PROVIDE_SRC_DATASETS ]
 
+ALL_SRC_DATASETS = DATADRYAD_SRC_DATASETS + PROVIDE_SRC_DATASETS
 ALL_DST_DATASETS = DATADRYAD_DST_DATASETS + PROVIDE_DST_DATASETS
 
 # # PROJECT RULES ----------------------------------------------------------------
@@ -106,43 +109,6 @@ ALL_DST_DATASETS = DATADRYAD_DST_DATASETS + PROVIDE_DST_DATASETS
 #         with rasterio.open(output[0], 'w', **profile) as dst:
 #             dst.write(data_coverage.astype(rasterio.uint16), 1)
 #
-# rule harmonize_data:
-#     input:
-#         external=DATADRYAD_DST_DATASETS+PROVIDE_DST_DATASETS,
-#         like_raster="data/external/datadryad/forest_production_europe/woodprod_average.tif",
-#         clip_shp="data/processed/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0_subset.shp"
-#     output:
-#         warped=temp(expand("data/interim/warped/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-#                      expand("data/interim/warped/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)),
-#         harmonized=expand("data/interim/harmonized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-#                    expand("data/interim/harmonized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
-#     message:
-#         "Harmonizing datasets..."
-#     run:
-#         ndatasets = len(input.external)
-#         for i, s_raster in enumerate(input.external):
-#             ## WARP
-#             # Target raster
-#             warped_raster = s_raster.replace("external", "interim/warped")
-#             # No need to process the snap raster, just copy it
-#             if s_raster == input.like_raster:
-#                 logger.info(" [{0}/{1} step 1] Copying dataset {2}".format(i+1, ndatasets, s_raster))
-#                 logger.debug(" [{0}/{1} step 1] Target dataset {2}".format(i+1, ndatasets, warped_raster))
-#                 shell("cp {s_raster} {warped_raster}")
-#             else:
-#                 logger.info(" [{0}/{1} step 1] Warping dataset {2}".format(i+1, ndatasets, s_raster))
-#                 logger.debug(" [{0}/{1} step 1] Target dataset {2}".format(i+1, ndatasets, warped_raster))
-#                 shell("rio warp " + s_raster + " --like " + input.like_raster + \
-#                       " " + warped_raster + " --dst-crs " + str(PROJECT_CRS) + \
-#                       " --co 'COMPRESS=DEFLATE' --threads {threads}")
-#
-#             ## CLIP
-#             harmonized_raster = warped_raster.replace("interim/warped", "interim/harmonized")
-#             clip_shp = utils.pick_from_list(input.clip_shp, ".shp")
-#             logger.info(" [{0}/{1} step 2] Clipping dataset {2}".format(i+1, ndatasets, warped_raster))
-#             logger.debug(" [{0}/{1} step 2] Target dataset {2}".format(i+1, ndatasets, harmonized_raster))
-#            shell("gdalwarp -cutline {clip_shp} {warped_raster} {harmonized_raster} -co COMPRESS=DEFLATE")
-
 rule preprocess_nuts_level0_data:
     input:
         shp=NUTS_LEVEL0_DATA
@@ -293,6 +259,40 @@ rule rasterize_nuts_level2_data:
                                           PROJECT_EXTENT["top"])
         # Rasterize
         shell("gdal_rasterize -l {layer_shp} -a ID -tr 1000 1000 -te {bounds} -ot Int16 -a_nodata -32768 -co COMPRESS=DEFLATE {input_shp} {output[0]}")
+
+rule harmonize_data:
+    input:
+        external=DATADRYAD_SRC_DATASETS+PROVIDE_SRC_DATASETS,
+        like_raster=[path for path in DATADRYAD_SRC_DATASETS if "woodprod_average" in path][0],
+        clip_shp=utils.pick_from_list(rules.preprocess_nuts_level0_data.output.processed, ".shp")
+    output:
+        warped=temp([path.replace("external", "interim/warped") for path in ALL_SRC_DATASETS]),
+        harmonized=temp([path.replace("external", "interim/harmonized") for path in ALL_SRC_DATASETS])
+    message:
+        "Harmonizing datasets..."
+    run:
+        ndatasets = len(input.external)
+        for i, s_raster in enumerate(input.external):
+            ## WARP
+            # Target raster
+            warped_raster = s_raster.replace("external", "interim/warped")
+            # No need to process the snap raster, just copy it
+            if s_raster == input.like_raster:
+                logger.info(" [{0}/{1} step 1] Copying dataset {2}".format(i+1, ndatasets, s_raster))
+                logger.debug(" [{0}/{1} step 1] Target dataset {2}".format(i+1, ndatasets, warped_raster))
+                shell("cp {s_raster} {warped_raster}")
+            else:
+                logger.info(" [{0}/{1} step 1] Warping dataset {2}".format(i+1, ndatasets, s_raster))
+                logger.debug(" [{0}/{1} step 1] Target dataset {2}".format(i+1, ndatasets, warped_raster))
+                shell("rio warp " + s_raster + " --like " + input.like_raster + \
+                      " " + warped_raster + " --dst-crs " + str(PROJECT_CRS) + \
+                      " --co 'COMPRESS=DEFLATE' --threads {threads}")
+
+            ## CLIP
+            harmonized_raster = warped_raster.replace("interim/warped", "interim/harmonized")
+            logger.info(" [{0}/{1} step 2] Clipping dataset {2}".format(i+1, ndatasets, warped_raster))
+            logger.debug(" [{0}/{1} step 2] Target dataset {2}".format(i+1, ndatasets, harmonized_raster))
+            shell("gdalwarp -cutline {input.clip_shp} {warped_raster} {harmonized_raster} -co COMPRESS=DEFLATE")
 
 # rule ol_normalize_data:
 #     input:
