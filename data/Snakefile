@@ -32,8 +32,8 @@ rule get_datadryad_data:
                     keep_local=False)
     output:
         # Keep the path structure from provider level onwards
-        expand([url.replace("https://beehub.nl/environmental-geography-group",
-                            "external") for url in DATADRYAD_DATASETS])
+        [url.replace("https://beehub.nl/environmental-geography-group",
+                     "external") for url in DATADRYAD_DATASETS]
     log:
         "../logs/data_datadryad.log"
     run:
@@ -53,8 +53,8 @@ rule get_eurostat_data:
                     password=os.environ.get("BEEHUB_PASSWORD"),
                     keep_local=False)
     output:
-        expand([url.replace("https://beehub.nl/environmental-geography-group",
-                            "external") for url in EUROSTAT_DATASETS])
+        [url.replace("https://beehub.nl/environmental-geography-group",
+                     "external") for url in EUROSTAT_DATASETS]
     log:
         "../logs/data_eurostat.log"
     run:
@@ -66,22 +66,24 @@ rule get_eurostat_data:
         for i in range(0, len(input)):
             shell("mv {0} {1}".format(input[i], output[i]))
             logger.info("Downloaded {0} to {1}".format(input[i], output[i]))
-#
-# rule get_provide_data:
-#     input:
-#         HTTP.remote(expand(["beehub.nl/environmental-geography-group/provide/{dataset}/datapackage.json",
-#                             "beehub.nl/environmental-geography-group/provide/{dataset}/{dataset}.tif"], dataset=PROVIDE_DATASETS),
-#                     username=os.environ.get("BEEHUB_USERNAME"), password=os.environ.get("BEEHUB_PASSWORD"), keep_local=False)
-#     output:
-#         expand(["data/external/provide/{dataset}/datapackage.json", "data/external/provide/{dataset}/{dataset}.tif"], dataset=PROVIDE_DATASETS)
-#     log:
-#         "logs/data_provide.log"
-#     run:
-#         # Configure logger
-#         fileHandler = logging.FileHandler(log[0])
-#         fileHandler.setFormatter(logging.Formatter('%(asctime)s - %(message)s'))
-#         logger.logger.addHandler(fileHandler)
-#
-#         for i in range(0, len(input)):
-#             shell("mv {0} {1}".format(input[i], output[i]))
-#             logger.info("Downloaded {0} to {1}".format(input[i], output[i]))
+
+rule get_provide_data:
+    input:
+        HTTP.remote([url.replace("https://", "") for url in PROVIDE_DATASETS],
+                    username=os.environ.get("BEEHUB_USERNAME"),
+                    password=os.environ.get("BEEHUB_PASSWORD"),
+                    keep_local=False)
+    output:
+        [url.replace("https://beehub.nl/environmental-geography-group",
+                     "external") for url in PROVIDE_DATASETS]
+    log:
+        "../logs/data_provide.log"
+    run:
+        # Configure logger
+        fileHandler = logging.FileHandler(log[0])
+        fileHandler.setFormatter(logging.Formatter('%(asctime)s - %(message)s'))
+        logger.logger.addHandler(fileHandler)
+
+        for i in range(0, len(input)):
+            shell("mv {0} {1}".format(input[i], output[i]))
+            logger.info("Downloaded {0} to {1}".format(input[i], output[i]))
