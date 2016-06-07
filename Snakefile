@@ -34,14 +34,12 @@ PROJECT_COUNTRIES = ["AT", "BE", "BG", "CZ", "DE", "DK", "ES", "EL", "EE",
 data_manifest = utils.parse_data_manifest("data/data_manifest.yml")
 
 external_data = "data/external"
-processed_features = "data/processed/features"
 beehub_url = "https://beehub.nl/environmental-geography-group"
 
 # Define source and desination datasets. NOTE: data/Snakefile must be run
 # before this Snakefile will work
 DATADRYAD_SRC_DATASETS = [path for path in data_manifest['datadryad'] if path.endswith(".tif")]
 DATADRYAD_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in DATADRYAD_SRC_DATASETS]
-DATADRYAD_DST_DATASETS = [url.replace(external_data, processed_features) for url in DATADRYAD_SRC_DATASETS]
 
 EUROSTAT_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in data_manifest['eurostat']]
 # Define NUTS data separately. Shapefile constitute of several actual files on
@@ -51,10 +49,8 @@ NUTS_LEVEL2_DATA = [path for path in EUROSTAT_SRC_DATASETS if "level2" in path a
 
 PROVIDE_SRC_DATASETS = [path for path in data_manifest['provide'] if path.endswith(".tif")]
 PROVIDE_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in PROVIDE_SRC_DATASETS]
-PROVIDE_DST_DATASETS = [url.replace(external_data, processed_features) for url in PROVIDE_SRC_DATASETS ]
 
 ALL_SRC_DATASETS = DATADRYAD_SRC_DATASETS + PROVIDE_SRC_DATASETS
-ALL_DST_DATASETS = DATADRYAD_DST_DATASETS + PROVIDE_DST_DATASETS
 
 # # PROJECT RULES ----------------------------------------------------------------
 #
@@ -267,7 +263,7 @@ rule harmonize_data:
         clip_shp=utils.pick_from_list(rules.preprocess_nuts_level0_data.output.processed, ".shp")
     output:
         warped=temp([path.replace("external", "interim/warped") for path in ALL_SRC_DATASETS]),
-        harmonized=temp([path.replace("external", "interim/harmonized") for path in ALL_SRC_DATASETS])
+        harmonized=[path.replace("external", "processed/features") for path in ALL_SRC_DATASETS]
     message:
         "Harmonizing datasets..."
     run:
@@ -289,28 +285,26 @@ rule harmonize_data:
                       " --co 'COMPRESS=DEFLATE' --threads {threads}")
 
             ## CLIP
-            harmonized_raster = warped_raster.replace("interim/warped", "interim/harmonized")
+            harmonized_raster = warped_raster.replace("data/interim/warped", "data/processed/features")
             logger.info(" [{0}/{1} step 2] Clipping dataset {2}".format(i+1, ndatasets, warped_raster))
             logger.debug(" [{0}/{1} step 2] Target dataset {2}".format(i+1, ndatasets, harmonized_raster))
             shell("gdalwarp -cutline {input.clip_shp} {warped_raster} {harmonized_raster} -co COMPRESS=DEFLATE")
 
-# rule ol_normalize_data:
-#     input:
-#         expand("data/interim/harmonized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-#         expand("data/interim/harmonized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
-#     output:
-#         expand("data/processed/features/ol_normalized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-#         expand("data/processed/features/ol_normalized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
-#     message:
-#         "Normalizing data based on occurrence levels..."
-#     run:
-#         for i, s_raster in enumerate(input):
-#             # No need to process the snap raster
-#             logger.info(" [{0}/{1}] (OL) Normalizing dataset {2}".format(i+1, len(input), s_raster))
-#             # NOTE: looping over input and output only works if they have
-#             # exactly the same definition. Otherwise order may vary.
-#             rescale.rescale_raster(input[i], output[i], method="ol_normalize", verbose=True)
-#
+rule ol_normalize_data:
+    input:
+        rules.harmonize_data.output.harmonized
+    output:
+        [path.replace("processed/features", os.path.join("processed/features", "ol_normalized")) for path in rules.harmonize_data.output.harmonized]
+    message:
+        "Normalizing data based on occurrence levels..."
+    run:
+        for i, s_raster in enumerate(input):
+            # No need to process the snap raster
+            logger.info(" [{0}/{1}] (OL) Normalizing dataset {2}".format(i+1, len(input), s_raster))
+            # NOTE: looping over input and output only works if they have
+            # exactly the same definition. Otherwise order may vary.
+            rescale.rescale_raster(input[i], output[i], method="ol_normalize", verbose=True)
+
 # rule normalize_data:
 #     input:
 #         expand("data/interim/harmonized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
