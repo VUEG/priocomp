@@ -29,7 +29,13 @@ PROVIDE_DST_DATASETS = [url.replace("beehub.nl/environmental-geography-group", "
 EUROSTAT_SRC_DATASETS = [url.replace("https://", "") for url in data_manifest["eurostat"]]
 EUROSTAT_DST_DATASETS = [url.replace("beehub.nl/environmental-geography-group", "external") for url in EUROSTAT_SRC_DATASETS]
 
-ALL_DST_DATASET = DATADRYAD_DST_DATASETS + PROVIDE_DST_DATASETS + EUROSTAT_DST_DATASETS
+# UDR collection "european_tetrapods" is already correctly formatted, place
+# it directly to "processed/features"
+UDR_SRC_DATASETS = [url.replace("https://", "") for url in data_manifest["udr"]]
+UDR_DST_DATASETS = [url.replace("beehub.nl/environmental-geography-group", "processed/features") for url in UDR_SRC_DATASETS]
+
+ALL_DST_DATASET = DATADRYAD_DST_DATASETS + PROVIDE_DST_DATASETS + \
+                  EUROSTAT_DST_DATASETS + UDR_DST_DATASETS
 
 ## Get data --------------------------------------------------------------------
 
@@ -86,6 +92,26 @@ rule get_provide_data:
         PROVIDE_DST_DATASETS
     log:
         "../logs/data_provide.log"
+    run:
+        # Configure logger
+        fileHandler = logging.FileHandler(log[0])
+        fileHandler.setFormatter(logging.Formatter('%(asctime)s - %(message)s'))
+        logger.logger.addHandler(fileHandler)
+
+        for i in range(0, len(input)):
+            shell("mv {0} {1}".format(input[i], output[i]))
+            logger.info("Downloaded {0} to {1}".format(input[i], output[i]))
+
+rule get_udr_data:
+    input:
+        HTTP.remote(UDR_SRC_DATASETS,
+                    username=os.environ.get("BEEHUB_USERNAME"),
+                    password=os.environ.get("BEEHUB_PASSWORD"),
+                    keep_local=False)
+    output:
+        UDR_DST_DATASETS
+    log:
+        "../logs/data_udr.log"
     run:
         # Configure logger
         fileHandler = logging.FileHandler(log[0])
