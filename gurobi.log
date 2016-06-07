@@ -4,3 +4,16 @@ Gurobi 6.5.1 (linux64) logging started Thu Jun  2 11:23:30 2016
 
 Gurobi 6.5.1 (linux64) logging started Thu Jun  2 11:41:06 2016
 
+
+Gurobi 6.5.1 (linux64) logging started Mon Jun  6 22:22:24 2016
+
+Warning for adding variables: zero or small (< 1e-13) coefficients, ignored
+Optimize a model with 1 rows, 19959660 columns and 4291253 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-12, 6e-06]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+05, 2e+05]
+Found heuristic solution: objective 0.36041
+Presolve removed 0 rows and 19908965 columns (presolve time = 14s) ...
+Presolve removed 0 rows and 19908965 columns (presolve time = 16s) ...
