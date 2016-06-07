@@ -294,7 +294,7 @@ rule ol_normalize_data:
     input:
         rules.harmonize_data.output.harmonized
     output:
-        [path.replace("processed/features", os.path.join("processed/features", "ol_normalized")) for path in rules.harmonize_data.output.harmonized]
+        [path.replace("processed/features", "processed/features_ol_normalized") for path in rules.harmonize_data.output.harmonized]
     message:
         "Normalizing data based on occurrence levels..."
     run:
