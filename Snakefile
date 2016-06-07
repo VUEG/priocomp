@@ -305,23 +305,21 @@ rule ol_normalize_data:
             # exactly the same definition. Otherwise order may vary.
             rescale.rescale_raster(input[i], output[i], method="ol_normalize", verbose=True)
 
-# rule normalize_data:
-#     input:
-#         expand("data/interim/harmonized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-#         expand("data/interim/harmonized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
-#     output:
-#         expand("data/processed/features/normalized/provide/{dataset}/{dataset}.tif", dataset=PROVIDE_DATASETS) + \
-#         expand("data/processed/features/normalized/datadryad/forest_production_europe/{dataset}.tif", dataset=DATADRYAD_DATASETS)
-#     message:
-#         "Normalizing data..."
-#     run:
-#         for i, s_raster in enumerate(input):
-#             # No need to process the snap raster
-#             logger.info(" [{0}/{1}] Rescaling dataset {2}".format(i+1, len(input), s_raster))
-#             # NOTE: looping over input and output only works if they have
-#             # exactly the same definition. Otherwise order may vary.
-#             rescale.rescale_raster(input[i], output[i], method="normalize", verbose=True)
-#
+rule rescale_data:
+    input:
+        rules.ol_normalize_data.output
+    output:
+        [path.replace("features_ol_normalized", "features_ol_normalized_rescaled") for path in rules.ol_normalize_data.output]
+    message:
+        "Normalizing data..."
+    run:
+        for i, s_raster in enumerate(input):
+            # No need to process the snap raster
+            logger.info(" [{0}/{1}] Rescaling dataset {2}".format(i+1, len(input), s_raster))
+            # NOTE: looping over input and output only works if they have
+            # exactly the same definition. Otherwise order may vary.
+            rescale.rescale_raster(input[i], output[i], method="normalize", verbose=True)
+
 # ## Set up and run analyses -----------------------------------------------------
 #
 # # RWR --------------------------------------------------------------------------
