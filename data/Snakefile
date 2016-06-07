@@ -9,31 +9,41 @@ utils = SourceFileLoader("src.utils", "../src/utils.py").load_module()
 ## GLOBALS ---------------------------------------------------------------------
 
 # dotenv project variables
-dotenv_path = '../.env'
+dotenv_path = "../.env"
 dotenv.load_dotenv(dotenv_path)
 
 # Set up a remote provider
 HTTP = HTTPRemoteProvider()
 
-# Get datasets from the data manifest file
+# Get datasets from the data manifest file.
 data_manifest = utils.parse_data_manifest("data_manifest.yml")
-DATADRYAD_DATASETS = data_manifest["datadryad"]
-PROVIDE_DATASETS = data_manifest["provide"]
-EUROSTAT_DATASETS = data_manifest["eurostat"]
+
+# Get rid of "https://" in urls (Snakemake doesn't allow it) and construct
+# destination paths on the local file system
+DATADRYAD_SRC_DATASETS = [url.replace("https://", "") for url in data_manifest["datadryad"]]
+DATADRYAD_DST_DATASETS = [url.replace("beehub.nl/environmental-geography-group", "external") for url in DATADRYAD_SRC_DATASETS]
+
+PROVIDE_SRC_DATASETS = [url.replace("https://", "") for url in data_manifest["provide"]]
+PROVIDE_DST_DATASETS = [url.replace("beehub.nl/environmental-geography-group", "external") for url in PROVIDE_SRC_DATASETS]
+
+EUROSTAT_SRC_DATASETS = [url.replace("https://", "") for url in data_manifest["eurostat"]]
+EUROSTAT_DST_DATASETS = [url.replace("beehub.nl/environmental-geography-group", "external") for url in EUROSTAT_SRC_DATASETS]
+
+ALL_DST_DATASET = DATADRYAD_DST_DATASETS + PROVIDE_DST_DATASETS + EUROSTAT_DST_DATASETS
 
 ## Get data --------------------------------------------------------------------
 
+rule all:
+    input: ALL_DST_DATASET
+
 rule get_datadryad_data:
     input:
-        # Strip away https:// from the url
-        HTTP.remote([url.replace("https://", "") for url in DATADRYAD_DATASETS],
+        HTTP.remote(DATADRYAD_SRC_DATASETS,
                     username=os.environ.get("BEEHUB_USERNAME"),
                     password=os.environ.get("BEEHUB_PASSWORD"),
                     keep_local=False)
     output:
-        # Keep the path structure from provider level onwards
-        [url.replace("https://beehub.nl/environmental-geography-group",
-                     "external") for url in DATADRYAD_DATASETS]
+        DATADRYAD_DST_DATASETS
     log:
         "../logs/data_datadryad.log"
     run:
@@ -48,13 +58,12 @@ rule get_datadryad_data:
 
 rule get_eurostat_data:
     input:
-        HTTP.remote([url.replace("https://", "") for url in EUROSTAT_DATASETS],
+        HTTP.remote(EUROSTAT_SRC_DATASETS,
                     username=os.environ.get("BEEHUB_USERNAME"),
                     password=os.environ.get("BEEHUB_PASSWORD"),
                     keep_local=False)
     output:
-        [url.replace("https://beehub.nl/environmental-geography-group",
-                     "external") for url in EUROSTAT_DATASETS]
+        EUROSTAT_DST_DATASETS
     log:
         "../logs/data_eurostat.log"
     run:
@@ -69,13 +78,12 @@ rule get_eurostat_data:
 
 rule get_provide_data:
     input:
-        HTTP.remote([url.replace("https://", "") for url in PROVIDE_DATASETS],
+        HTTP.remote(PROVIDE_SRC_DATASETS,
                     username=os.environ.get("BEEHUB_USERNAME"),
                     password=os.environ.get("BEEHUB_PASSWORD"),
                     keep_local=False)
     output:
-        [url.replace("https://beehub.nl/environmental-geography-group",
-                     "external") for url in PROVIDE_DATASETS]
+        PROVIDE_DST_DATASETS
     log:
         "../logs/data_provide.log"
     run:
