@@ -256,26 +256,25 @@ rule preprocess_nuts_level2_data:
         logger.debug("Selected only a subset of eurostat countries")
         logger.debug("Resulting file: {}".format(processed_shp))
 
-# rule rasterize_nuts_level0_data:
-#     input:
-#         expand("data/processed/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0_subset.{ext}",
-#                          ext=SHP_COMPONENTS)
-#     output:
-#         "data/processed/nuts/NUTS_RG_01M_2013/level0/NUTS_RG_01M_2013_level0_subset.tif"
-#     message:
-#         "Rasterizing NUTS level 0 data..."
-#     run:
-#         input_shp = utils.pick_from_list(input, ".shp")
-#         layer_shp = os.path.basename(input_shp).replace(".shp", "")
-#
-#         # Construct extent
-#         bounds = "{0} {1} {2} {3}".format(PROJECT_EXTENT["left"],
-#                                           PROJECT_EXTENT["bottom"],
-#                                           PROJECT_EXTENT["right"],
-#                                           PROJECT_EXTENT["top"])
-#         # Rasterize
-#         shell("gdal_rasterize -l {layer_shp} -a ID -tr 1000 1000 -te {bounds} -ot Int16 -a_nodata -32768 -co COMPRESS=DEFLATE {input_shp} {output[0]}")
-#
+rule rasterize_nuts_level0_data:
+    input:
+        rules.preprocess_nuts_level0_data.output.processed
+    output:
+        utils.pick_from_list(rules.preprocess_nuts_level0_data.output.processed, ".shp").replace(".shp", ".tif")
+    message:
+        "Rasterizing NUTS level 0 data..."
+    run:
+        input_shp = utils.pick_from_list(input, ".shp")
+        layer_shp = os.path.basename(input_shp).replace(".shp", "")
+
+        # Construct extent
+        bounds = "{0} {1} {2} {3}".format(PROJECT_EXTENT["left"],
+                                          PROJECT_EXTENT["bottom"],
+                                          PROJECT_EXTENT["right"],
+                                          PROJECT_EXTENT["top"])
+        # Rasterize
+        shell("gdal_rasterize -l {layer_shp} -a ID -tr 1000 1000 -te {bounds} -ot Int16 -a_nodata -32768 -co COMPRESS=DEFLATE {input_shp} {output[0]}")
+
 # rule rasterize_nuts_level2_data:
 #     input:
 #         expand("data/processed/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2_subset.{ext}",
