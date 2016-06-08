@@ -49,7 +49,8 @@ def standardize(x):
     pass
 
 
-def rescale_raster(input_raster, output_raster, method, compress='DEFLATE', verbose=False):
+def rescale_raster(input_raster, output_raster, method, compress='DEFLATE',
+                   verbose=False):
     """ Rescale all numeric values of a raster according ot a given method.
 
     Currently two methods are implemented:
@@ -61,6 +62,7 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE', verb
     :param output_raster: String path to raster file to be created.
     :param compress: String compression level used for the output raster.
     :param verbose Boolean indicating how much information is printed out.
+    :return Boolean True if success, False otherwise
     """
 
     NODATA_VALUE = -3.4e+38
@@ -73,13 +75,19 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE', verb
         src_data = in_src.read(1, masked=True)
         # Cast data to float32 as that's what's used anyways
         src_data = src_data.astype(np.float32)
+        # Check min and max
+        src_min = src_data.min()
+        src_max = src_data.max()
+        if src_min == 0.0 and src_max == 0.0:
+            click.echo(click.style(' WARNING: {} has all zero values, skipping'.format(input_raster), fg='red'))
+            return False
         if verbose:
             q75, q25 = np.nanpercentile(ma.filled(src_data, np.nan), (75, 25))
-            click.echo(click.style(' min before rescaling:     {}'.format(src_data.min()), fg='green'))
+            click.echo(click.style(' min before rescaling:     {}'.format(src_min), fg='green'))
             click.echo(click.style(' lower Q before rescaling: {}'.format(q25), fg='green'))
             click.echo(click.style(' mean before rescaling:    {}'.format(src_data.mean()), fg='green'))
             click.echo(click.style(' upper Q before rescaling: {}'.format(q75), fg='green'))
-            click.echo(click.style(' max before rescaling:     {}'.format(src_data.max()), fg='green'))
+            click.echo(click.style(' max before rescaling:     {}'.format(src_max), fg='green'))
         if method == 'normalize':
             rescaled_data = normalize(src_data)
         elif method == 'ol_normalize':
@@ -107,22 +115,28 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE', verb
         # Also remember to replace the NoData values and set the fill value for
         # NoData
         rescaled_data = ma.filled(rescaled_data, NODATA_VALUE)
-        #ma.set_fill_value(rescaled_data, NODATA_VALUE)
-        #pdb.set_trace()
         with rasterio.open(output_raster, 'w', **profile) as dst:
             # Set the NoData mask
             dst.write_mask(in_src.read_masks(1))
             dst.write(rescaled_data, 1)
+        return True
+
 
 @click.command()
-@click.option('-m', '--method', default='normalize', help='Rescaling method used.')
+@click.option('-m', '--method', default='normalize',
+              help='Rescaling method used.')
 @click.option('-v', '--verbose', is_flag=True)
 @click.argument('infile', nargs=1, type=click.Path(exists=True))
 @click.argument('outfile', nargs=1)
 def cli(infile, outfile, method, verbose):
-    click.echo(click.style('Rescaling (method: {0}) file {1}'.format(method, infile), fg='green'))
-    rescale_raster(infile, outfile, method=method, verbose=verbose)
-    click.echo(click.style('Done!', fg='green'))
+    click.echo(click.style('Rescaling (method: {0}) file {1}'.format(method,
+                                                                     infile),
+                           fg='green'))
+    success = rescale_raster(infile, outfile, method=method, verbose=verbose)
+    if success:
+        click.echo(click.style('Done!', fg='green'))
+    else:
+        click.echo(click.style('Normalization failed', fg='red'))
 
 
 if __name__ == '__main__':
