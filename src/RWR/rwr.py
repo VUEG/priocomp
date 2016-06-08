@@ -54,8 +54,6 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
 
     assert len(input_rasters) > 0, "Input rasters list cannot be empty"
 
-    NODATA_VALUE = -3.4e+38
-
     # Initiate the data structure for holding the summed values.
     sum_array = None
     # Placeholder for raster metadata
@@ -74,6 +72,9 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
             if verbose:
                 click.echo(click.style(" [{0}/{1} step 1] Reading in data and OL normalizing".format(no_raster, n_rasters),
                            fg='green'))
+            # Get the NoData value
+            nodata_value = in_src.nodata
+
             # Read the first band, use zeros for NoData
             src_data = in_src.read(1, masked=True)
             src_data = ma.filled(src_data, 0)
@@ -105,11 +106,11 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
 
     rank_array = rankdata(sum_array)
     # rankdata() will mark all masked values with 0, make those NoData again.
-    np.place(rank_array, rank_array == 0, NODATA_VALUE)
+    np.place(rank_array, rank_array == 0, nodata_value)
     # Create a masked array. Convert remaining zeros to NoData and use that as
     # a mask
     # NOTE: use ma.masked_values() because we're replacing with a float value
-    rank_array = ma.masked_values(rank_array, NODATA_VALUE)
+    rank_array = ma.masked_values(rank_array, nodata_value)
 
     # 4. Recale data into range [0, 1] ----------------------------------------
     if verbose:
@@ -126,7 +127,7 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
     # Rescaled data is always float32, and we have only 1 band. Remember
     # to set NoData-value correctly.
     profile.update(dtype=rasterio.float32, compress=compress,
-                   nodata=NODATA_VALUE)
+                   nodata=nodata_value)
 
     with rasterio.open(output_raster, 'w', **profile) as dst:
         dst.write_mask(ma.getmask(rank_array))
