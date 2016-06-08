@@ -10,13 +10,11 @@ source("src/utils.R")
 
 # Generate variants for all taxa ------------------------------------------
 
-# Define names for variants. "[ID]" is a placeholder for running id, "[TX]" is
-# for taxon codes.
 variants <- c("01_caz", "02_abf", "03_caz_wgt")
 
 zsetup_root <- "analyses/zonation"
 
-ppa_raster_file <- "../../../data/processed/nuts/NUTS_RG_01M_2013/level2/NUTS_RG_01M_2013_level2_subset.tif"
+ppa_raster_file <- "../../../data/processed/eurostat/nuts/level2/NUTS_RG_01M_2013_level2.tif"
 ppa_config_file <- "ppa_config.txt"
 
 project_name <- "priocomp"
@@ -56,4 +54,22 @@ variant2 <- set_dat_param(variant2, "removal rule", 2)
 variant2 <- set_dat_param(variant2, "post-processing list file",
                           ppa_config_file)
 save_zvariant(variant2, dir = file.path(zsetup_root, project_name),
+              overwrite = TRUE, debug_msg = FALSE)
+
+## 03_abf_wgt
+variant3 <- get_variant(priocomp_zproject, 3)
+variant3 <- set_dat_param(variant3, "removal rule", 2)
+variant3 <- set_dat_param(variant3, "post-processing list file",
+                          ppa_config_file)
+# Define groups. Features 1-12 are ecosystem services, Features 13-771 are
+# species features.
+groups(variant3) <- c(rep(1, 12), rep(2, (nfeatures(variant3) - 12)))
+groupnames(variant3) <- c("1" = "ecosystem_services", "2" = "species")
+# Give weight of 759 / 12 to each. Altogether, there are 759 spcies
+# features. Give weight 1 to each.
+variant3@spp.data$weight <- c(rep(nfeatures(variant3) / 12, 12),
+                              rep(1, nfeatures(variant3) - 12))
+
+
+save_zvariant(variant3, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
