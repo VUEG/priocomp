@@ -52,12 +52,12 @@ PROVIDE_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in PROVID
 
 ALL_SRC_DATASETS = DATADRYAD_SRC_DATASETS + PROVIDE_SRC_DATASETS
 
-# # PROJECT RULES ----------------------------------------------------------------
-#
-# rule all:
-#     input:
-#         ALL_DST_DATASETS
-#
+# PROJECT RULES ----------------------------------------------------------------
+
+rule all:
+    input:
+        ALL_SRC_DATASETS
+
 # ## Data pre-processing ---------------------------------------------------------
 #
 # rule build_data_coverage:
