@@ -8,6 +8,7 @@ import numpy.ma as ma
 import os
 import pdb
 import rasterio
+import time
 
 from importlib.machinery import SourceFileLoader
 from scipy.stats.mstats import rankdata
@@ -18,6 +19,7 @@ spec = importlib.util.spec_from_file_location("data_processing.rescale",
                                               "src/data_processing/rescale.py")
 rescale = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(rescale)
+
 
 def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
                   verbose=False):
@@ -67,19 +69,27 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
             raise OSError("Input raster {} not found".format(src))
 
         with rasterio.open(input_raster) as in_src:
-            click.echo(click.style(" [{0}/{1}] Processing raster {2}".format(no_raster, n_rasters, input_raster), fg='green'))
+            click.echo(click.style(" [{0}/{1}] Processing" +
+                                   " raster {2}".format(no_raster, n_rasters,
+                                                        input_raster),
+                       fg='green'))
             if verbose:
-                click.echo(click.style(" [{0}/{1} step 1] Reading in data and OL normalizing".format(no_raster, n_rasters), fg='green'))
+                click.echo(click.style(" [{0}/{1} step 1] Reading in data" +
+                                       "and OL normalizing".format(no_raster,
+                                                                   n_rasters),
+                           fg='green'))
             # Read the first band, use zeros for NoData
             src_data = in_src.read(1, masked=True)
             src_data = ma.filled(src_data, 0)
 
-            # 1. Occurrence level normalize data -------------------------------
+            # 1. Occurrence level normalize data ------------------------------
             src_data = rescale.ol_normalize(src_data)
 
-            # 2. Sum OL normalized data ----------------------------------------
+            # 2. Sum OL normalized data ---------------------------------------
             if verbose:
-                click.echo(click.style(" [{0}/{1} step 2] Summing valuess".format(no_raster, n_rasters), fg='green'))
+                click.echo(click.style(" [{0}/{1} step 2] Summing " +
+                                       "valuess".format(no_raster, n_rasters),
+                           fg='green'))
             # If this is the first raster, use its dimensions to build an array
             # that holds the summed values.
             if i == 0:
@@ -90,15 +100,16 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
                 profile = in_src.profile
             sum_array += src_data
 
-    # 3. Rank RWR data ---------------------------------------------------------
+    # 3. Rank RWR data --------------------------------------------------------
     if verbose:
-        click.echo(click.style(" Ranking values (this can take a while...)".format(no_raster, n_rasters), fg='green'))
+        click.echo(click.style(" Ranking values (this can take" +
+                               "a while...)".format(no_raster, n_rasters),
+                   fg='green'))
 
     # Use 0s from summation as a mask
     sum_array = ma.masked_values(sum_array, 0.0)
 
     rank_array = rankdata(sum_array)
-    #pdb.set_trace()
     # rankdata() will mark all masked values with 0, make those NoData again.
     np.place(rank_array, rank_array == 0, NODATA_VALUE)
     # Create a masked array. Convert remaining zeros to NoData and use that as
@@ -106,25 +117,28 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
     # NOTE: use ma.masked_values() because we're replacing with a float value
     rank_array = ma.masked_values(rank_array, NODATA_VALUE)
 
-    # 4. Recale data into range [0, 1] -----------------------------------------
+    # 4. Recale data into range [0, 1] ----------------------------------------
     if verbose:
-        click.echo(click.style(" Rescaling ranks".format(no_raster, n_rasters), fg='green'))
+        click.echo(click.style(" Rescaling ranks".format(no_raster, n_rasters),
+                   fg='green'))
     rank_array = rescale.normalize(rank_array)
 
     rank_array = rank_array.astype(np.float32)
 
     # 5. Write out the data
     if verbose:
-        click.echo(click.style(" Writing output to {}".format(output_raster), fg='green'))
+        click.echo(click.style(" Writing output to {}".format(output_raster),
+                   fg='green'))
 
     # Rescaled data is always float32, and we have only 1 band. Remember
     # to set NoData-value correctly.
     profile.update(dtype=rasterio.float32, compress=compress,
-                   nodata = NODATA_VALUE)
+                   nodata=NODATA_VALUE)
 
     with rasterio.open(output_raster, 'w', **profile) as dst:
         dst.write_mask(ma.getmask(rank_array))
         dst.write(rank_array, 1)
+
 
 @click.command()
 @click.option('-v', '--verbose', is_flag=True)
@@ -133,14 +147,16 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
 @click.argument('indir', nargs=1, type=click.Path(exists=True))
 @click.argument('outfile', nargs=1)
 def cli(indir, outfile, extension, verbose):
-
-    # List files in input directory
-    input_rasters = [item for item in glob.iglob('{0}/**/*{1}'.format(indir, extension), recursive=True)]
+    start_time = time.time()
+    # List files in input directorys
+    input_rasters = [item for item in glob.iglob('{0}/**/*{1}'.format(indir, extension),
+                                                 recursive=True)]
     if verbose:
         click.echo(click.style(" Found {} rasters".format(len(input_rasters)),
                                fg='green'))
     calculate_rwr(input_rasters, outfile, verbose=verbose)
-    click.echo(click.style('Done!', fg='green'))
+    exc_time = time.time() - start_time
+    click.echo(click.style('Done in {} seconds!'.format(exc_time), fg='green'))
 
 if __name__ == '__main__':
     cli()

@@ -10,6 +10,7 @@ from importlib.machinery import SourceFileLoader
 
 utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 rescale = SourceFileLoader("data_processing.rescale", "src/data_processing/rescale.py").load_module()
+rwr = SourceFileLoader("rwr.calculate_rwr", "src/RWR/rwr.py").load_module()
 
 ## GLOBALS ---------------------------------------------------------------------
 
@@ -332,21 +333,7 @@ rule calculate_rwr:
     message:
         "Calculating RWR..."
     run:
-        for i, s_raster in enumerate(input):
-            # NOTE: fails for more that 26 rasters
-            # Solution would involve summing first 26 and then adding in batches
-            # of 25 to the previous sum.
-            INPUT_RASTERS = ''
-            RASTER_ADDITION = ''
-            NODATA_VALUE = -3.4e+38
-
-            logger.info(" Summing {} rasters".format(len(input)))
-
-            for idx, letter in enumerate (ascii_uppercase[:len(input)]):
-                RASTER_ADDITION += letter if idx == 0 else ' + ' + letter
-                INPUT_RASTERS += ' -' + letter + ' "' + input[idx] + '"'
-
-            shell("gdal_calc.py {0} --outfile='{1}' --calc='{2}' --NoDataValue={3}".format(INPUT_RASTERS, output, RASTER_ADDITION, NODATA_VALUE))
+        rwr.calculate_rwr(input, output[0], verbose=True)
 
 
 # # Zonation ---------------------------------------------------------------------
