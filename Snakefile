@@ -51,7 +51,11 @@ NUTS_LEVEL2_DATA = [path for path in EUROSTAT_SRC_DATASETS if "level2" in path a
 PROVIDE_SRC_DATASETS = [path for path in data_manifest['provide'] if path.endswith(".tif")]
 PROVIDE_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in PROVIDE_SRC_DATASETS]
 
-ALL_SRC_DATASETS = DATADRYAD_SRC_DATASETS + PROVIDE_SRC_DATASETS
+# UDR collection "european_tetrapods" is already correctly formatted, place
+# it directly to "processed/features"
+UDR_SRC_DATASETS = [url.replace(beehub_url, "data/processed/features") for url in data_manifest["udr"]]
+
+ALL_SRC_DATASETS = DATADRYAD_SRC_DATASETS + PROVIDE_SRC_DATASETS + UDR_SRC_DATASETS
 
 # PROJECT RULES ----------------------------------------------------------------
 
