@@ -69,14 +69,10 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
             raise OSError("Input raster {} not found".format(src))
 
         with rasterio.open(input_raster) as in_src:
-            click.echo(click.style(" [{0}/{1}] Processing" +
-                                   " raster {2}".format(no_raster, n_rasters,
-                                                        input_raster),
+            click.echo(click.style(" [{0}/{1}] Processing raster {2}".format(no_raster, n_rasters, input_raster),
                        fg='green'))
             if verbose:
-                click.echo(click.style(" [{0}/{1} step 1] Reading in data" +
-                                       "and OL normalizing".format(no_raster,
-                                                                   n_rasters),
+                click.echo(click.style(" [{0}/{1} step 1] Reading in data and OL normalizing".format(no_raster, n_rasters),
                            fg='green'))
             # Read the first band, use zeros for NoData
             src_data = in_src.read(1, masked=True)
@@ -87,8 +83,7 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
 
             # 2. Sum OL normalized data ---------------------------------------
             if verbose:
-                click.echo(click.style(" [{0}/{1} step 2] Summing " +
-                                       "valuess".format(no_raster, n_rasters),
+                click.echo(click.style(" [{0}/{1} step 2] Summing values".format(no_raster, n_rasters),
                            fg='green'))
             # If this is the first raster, use its dimensions to build an array
             # that holds the summed values.
@@ -102,8 +97,7 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
 
     # 3. Rank RWR data --------------------------------------------------------
     if verbose:
-        click.echo(click.style(" Ranking values (this can take" +
-                               "a while...)".format(no_raster, n_rasters),
+        click.echo(click.style(" Ranking values (this can take a while...)",
                    fg='green'))
 
     # Use 0s from summation as a mask
@@ -119,8 +113,7 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
 
     # 4. Recale data into range [0, 1] ----------------------------------------
     if verbose:
-        click.echo(click.style(" Rescaling ranks".format(no_raster, n_rasters),
-                   fg='green'))
+        click.echo(click.style(" Rescaling ranks", fg='green'))
     rank_array = rescale.normalize(rank_array)
 
     rank_array = rank_array.astype(np.float32)
