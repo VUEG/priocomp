@@ -323,7 +323,8 @@ rule rescale_data:
             logger.info(" [{0}/{1}] Rescaling dataset {2}".format(i+1, len(input), s_raster))
             # NOTE: looping over input and output only works if they have
             # exactly the same definition. Otherwise order may vary.
-            rescale.rescale_raster(input[i], output[i], method="normalize", verbose=True)
+            rescale.rescale_raster(input[i], output[i], method="normalize",
+                                   verbose=False)
 
 ## Set up and run analyses -----------------------------------------------------
 
