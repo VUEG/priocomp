@@ -129,7 +129,7 @@
           - triturus_macedonicus.tif
           - triturus_marmoratus.tif
           - triturus_pygmaeus.tif
-          birds:
+        birds:
           - accipiter_brevipes.tif
           - acrocephalus_agricola.tif
           - acrocephalus_arundinaceus.tif
@@ -533,7 +533,7 @@
           - uria_lomvia.tif
           - vanellus_vanellus.tif
           - xenus_cinereus.tif
-          mammals:
+        mammals:
           - acomys_minous.tif
           - alces_alces.tif
           - alopex_lagopus.tif
@@ -698,7 +698,7 @@
           - vespertilio_murinus.tif
           - vormela_peregusna.tif
           - vulpes_vulpes.tif
-          reptiles:
+        reptiles:
           - ablepharus_kitaibelii.tif
           - acanthodactylus_erythrurus.tif
           - algyroides_fitzingeri.tif
