@@ -334,7 +334,7 @@ rule rescale_data:
 
 rule calculate_rwr:
     input:
-        rules.ol_normalize_data.output
+        rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS
     output:
         "analyses/RWR/eu26_rwr.tif"
     message:
