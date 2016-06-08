@@ -57,7 +57,6 @@
           - bombina_pachypus.tif
           - bombina_variegata.tif
           - bufo_bufo.tif
-          - calotriton_arnoldi.tif
           - calotriton_asper.tif
           - chioglossa_lusitanica.tif
           - discoglossus_galganoi.tif
@@ -72,14 +71,12 @@
           - hyla_intermedia.tif
           - hyla_meridionalis.tif
           - hyla_sarda.tif
-          - hyla_savignyi.tif
           - lissotriton_boscai.tif
           - lissotriton_helveticus.tif
           - lissotriton_italicus.tif
           - lissotriton_montandoni.tif
           - lissotriton_vulgaris.tif
           - lyciasalamandra_helverseni.tif
-          - lyciasalamandra_luschani.tif
           - mesotriton_alpestris.tif
           - pelobates_cultripes.tif
           - pelobates_fuscus.tif
@@ -101,7 +98,6 @@
           - pleurodeles_waltl.tif
           - proteus_anguinus.tif
           - pseudepidalea_balearica.tif
-          - pseudepidalea_boulengeri.tif
           - pseudepidalea_sicula.tif
           - pseudepidalea_variabilis.tif
           - pseudepidalea_viridis.tif
@@ -133,7 +129,7 @@
           - triturus_macedonicus.tif
           - triturus_marmoratus.tif
           - triturus_pygmaeus.tif
-        birds:
+          birds:
           - accipiter_brevipes.tif
           - acrocephalus_agricola.tif
           - acrocephalus_arundinaceus.tif
@@ -165,7 +161,6 @@
           - anser_brachyrhynchus.tif
           - anser_erythropus.tif
           - anser_fabalis.tif
-          - anthus_berthelotii.tif
           - anthus_campestris.tif
           - anthus_cervinus.tif
           - anthus_petrosus.tif
@@ -176,7 +171,6 @@
           - apus_caffer.tif
           - apus_melba.tif
           - apus_pallidus.tif
-          - apus_unicolor.tif
           - aquila_adalberti.tif
           - aquila_chrysaetos.tif
           - aquila_clanga.tif
@@ -202,7 +196,6 @@
           - bubulcus_ibis.tif
           - bucanetes_githagineus.tif
           - bucephala_clangula.tif
-          - bulweria_bulwerii.tif
           - burhinus_oedicnemus.tif
           - buteo_buteo.tif
           - buteo_lagopus.tif
@@ -249,11 +242,8 @@
           - clamator_glandarius.tif
           - clangula_hyemalis.tif
           - coccothraustes_coccothraustes.tif
-          - columba_bollii.tif
-          - columba_junoniae.tif
           - columba_livia.tif
           - columba_oenas.tif
-          - columba_trocaz.tif
           - coracias_garrulus.tif
           - corvus_corax.tif
           - corvus_corone.tif
@@ -303,10 +293,8 @@
           - ficedula_hypoleuca.tif
           - ficedula_parva.tif
           - ficedula_semitorquata.tif
-          - francolinus_francolinus.tif
           - fratercula_arctica.tif
           - fringilla_montifringilla.tif
-          - fringilla_teydea.tif
           - fulica_atra.tif
           - fulica_cristata.tif
           - fulmarus_glacialis.tif
@@ -327,7 +315,6 @@
           - gypaetus_barbatus.tif
           - gyps_fulvus.tif
           - haematopus_ostralegus.tif
-          - halcyon_smyrnensis.tif
           - haliaeetus_albicilla.tif
           - hieraaetus_fasciatus.tif
           - hieraaetus_pennatus.tif
@@ -340,7 +327,6 @@
           - hirundo_rustica.tif
           - hoplopterus_spinosus.tif
           - hydrobates_pelagicus.tif
-          - irania_gutturalis.tif
           - ixobrychus_minutus.tif
           - jynx_torquilla.tif
           - lagopus_lagopus.tif
@@ -405,7 +391,6 @@
           - nycticorax_nycticorax.tif
           - oceanodroma_castro.tif
           - oceanodroma_leucorhoa.tif
-          - oenanthe_cypriaca.tif
           - oenanthe_hispanica.tif
           - oenanthe_isabellina.tif
           - oenanthe_leucura.tif
@@ -427,15 +412,12 @@
           - passer_domesticus.tif
           - passer_hispaniolensis.tif
           - passer_italiae.tif
-          - passer_moabiticus.tif
           - passer_montanus.tif
-          - pelagodroma_marina.tif
           - pelecanus_crispus.tif
           - pelecanus_onocrotalus.tif
           - perisoreus_infaustus.tif
           - pernis_apivorus.tif
           - petronia_petronia.tif
-          - phaethon_aethereus.tif
           - phalaropus_lobatus.tif
           - phalocrocorax_carbo.tif
           - phalocrocorax_pygmaeus.tif
@@ -471,16 +453,12 @@
           - prunella_modularis.tif
           - pterocles_alchata.tif
           - pterocles_orientalis.tif
-          - pterodroma_deserta.tif
-          - pterodroma_madeira.tif
           - ptyonoprogne_rupestris.tif
-          - puffinus_assimilis.tif
           - puffinus_mauretanicus.tif
           - puffinus_puffinus.tif
           - puffinus_yelkouan.tif
           - pyrrhocorax_graculus.tif
           - pyrrhocorax_pyrrhocorax.tif
-          - pyrrhula_murina.tif
           - pyrrhula_pyrrhula.tif
           - rallus_aquaticus.tif
           - recurvirostra_avosetta.tif
@@ -489,11 +467,9 @@
           - remiz_pendulinus.tif
           - riparia_riparia.tif
           - rissa_tridactyla.tif
-          - saxicola_dacotiae.tif
           - saxicola_rubetra.tif
           - saxicola_torquata.tif
           - scolopax_rusticola.tif
-          - serinus_canaria.tif
           - serinus_citrinella.tif
           - serinus_serinus.tif
           - sitta_europaea.tif
@@ -508,7 +484,6 @@
           - sterna_bengalensis.tif
           - sterna_caspia.tif
           - sterna_dougallii.tif
-          - sterna_fuscata.tif
           - sterna_hirundo.tif
           - sterna_paradisaea.tif
           - sterna_sandvicensis.tif
@@ -529,7 +504,6 @@
           - sylvia_curruca.tif
           - sylvia_hortensis.tif
           - sylvia_melanocephala.tif
-          - sylvia_melanothorax.tif
           - sylvia_nisoria.tif
           - sylvia_rueppelli.tif
           - sylvia_sarda.tif
@@ -559,9 +533,8 @@
           - uria_lomvia.tif
           - vanellus_vanellus.tif
           - xenus_cinereus.tif
-        mammals:
+          mammals:
           - acomys_minous.tif
-          - acomys_nesiotes.tif
           - alces_alces.tif
           - alopex_lagopus.tif
           - apodemus_agrarius.tif
@@ -585,7 +558,6 @@
           - chionomys_nivalis.tif
           - cricetulus_migratorius.tif
           - cricetus_cricetus.tif
-          - crocidura_canariensis.tif
           - crocidura_leucodon.tif
           - crocidura_pachyura.tif
           - crocidura_russula.tif
@@ -641,7 +613,6 @@
           - microtus_tatricus.tif
           - microtus_thomasi.tif
           - miniopterus_schreibersi.tif
-          - mus_cypriacus.tif
           - mus_macedonicus.tif
           - mus_musculus.tif
           - mus_spicilegus.tif
@@ -672,14 +643,12 @@
           - myotis_punicus.tif
           - neomys_anomalus.tif
           - neomys_fodiens.tif
-          - nyctalus_azoreum.tif
           - nyctalus_lasiopterus.tif
           - nyctalus_leisleri.tif
           - nyctalus_noctula.tif
           - oryctolagus_cuniculus.tif
           - ovis_aries.tif
           - pipistrellus_kuhlii.tif
-          - pipistrellus_maderensis.tif
           - pipistrellus_nathusii.tif
           - pipistrellus_pipistrellus.tif
           - pipistrellus_pygmaeus.tif
@@ -689,14 +658,12 @@
           - plecotus_kolombatovici.tif
           - plecotus_macrobullaris.tif
           - plecotus_sardus.tif
-          - plecotus_teneriffae.tif
           - pteromys_volans.tif
           - rhinolophus_blasii.tif
           - rhinolophus_euryale.tif
           - rhinolophus_ferrumequinum.tif
           - rhinolophus_hipposideros.tif
           - rhinolophus_mehelyi.tif
-          - rousettus_aegyptiacus.tif
           - rupicapra_rupicapra.tif
           - sciurus_anomalus.tif
           - sciurus_vulgaris.tif
@@ -731,11 +698,9 @@
           - vespertilio_murinus.tif
           - vormela_peregusna.tif
           - vulpes_vulpes.tif
-        reptiles:
-          - ablepharus_budaki.tif
+          reptiles:
           - ablepharus_kitaibelii.tif
           - acanthodactylus_erythrurus.tif
-          - acanthodactylus_schreiberi.tif
           - algyroides_fitzingeri.tif
           - algyroides_marchi.tif
           - algyroides_moreoticus.tif
@@ -748,12 +713,9 @@
           - blanus_cinereus.tif
           - blanus_strauchi.tif
           - chalcides_bedriagai.tif
-          - chalcides_bistriatus.tif
           - chalcides_chalcides.tif
           - chalcides_ocellatus.tif
-          - chalcides_sexlineatus.tif
           - chalcides_striatus.tif
-          - chalcides_viridanus.tif
           - chamaeleo_africanus.tif
           - chamaeleo_chamaeleon.tif
           - coronella_austriaca.tif
@@ -761,7 +723,6 @@
           - cyrtopodion_kotschyi.tif
           - darevskia_praticola.tif
           - dolichophis_caspius.tif
-          - dolichophis_cypriensis.tif
           - dolichophis_jugularis.tif
           - eirenis_modestus.tif
           - elaphe_quatuorlineata.tif
@@ -772,17 +733,8 @@
           - eryx_jaculus.tif
           - euleptes_europaea.tif
           - eumeces_schneideri.tif
-          - gallotia_atlantica.tif
-          - gallotia_auaritae.tif
-          - gallotia_bravoana.tif
-          - gallotia_caesaris.tif
-          - gallotia_galloti.tif
-          - gallotia_intermedia.tif
-          - gallotia_simonyi.tif
-          - gallotia_stehlini.tif
           - hellenolacerta_graeca.tif
           - hemidactylus_turcicus.tif
-          - hemorrhois_algirus.tif
           - hemorrhois_hippocrepis.tif
           - hemorrhois_nummifer.tif
           - hierophis_gemonensis.tif
@@ -805,7 +757,6 @@
           - macroprotodon_brevis.tif
           - macroprotodon_cucullatus.tif
           - macroprotodon_mauritanicus.tif
-          - macrovipera_lebetina.tif
           - macrovipera_schweizeri.tif
           - malpolon_monspessulanus.tif
           - mauremys_leprosa.tif
@@ -815,8 +766,6 @@
           - natrix_tesselleta.tif
           - ophiomorus_punctatissimus.tif
           - ophisops_elegans.tif
-          - parvilacerta_parva.tif
-          - phoenicolacerta_troodica.tif
           - platyceps_collaris.tif
           - platyceps_najadum.tif
           - podarcis_bocagei.tif
@@ -842,20 +791,13 @@
           - psammodromus_manuelae.tif
           - pseudopus_apodus.tif
           - rhinechis_scalaris.tif
-          - tarentola_angustimentalis.tif
-          - tarentola_bischoffi.tif
-          - tarentola_boettgeri.tif
-          - tarentola_delalandii.tif
-          - tarentola_gomerensis.tif
           - tarentola_mauritanica.tif
-          - teira_dugesii.tif
           - telescopus_fallax.tif
           - testudo_graeca.tif
           - testudo_hermanni.tif
           - testudo_marginata.tif
           - timon_lepidus.tif
           - trachylepis_aurata.tif
-          - trachylepis_vittata.tif
           - trionyx_triunguis.tif
           - typhlops_vermicularis.tif
           - vipera_ammodytes.tif
@@ -865,7 +807,6 @@
           - vipera_renardi.tif
           - vipera_seoanei.tif
           - vipera_ursinii.tif
-          - zamenis_hohenackeri.tif
           - zamenis_lineatus.tif
           - zamenis_longissimus.tif
           - zamenis_situla.tif
