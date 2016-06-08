@@ -267,8 +267,9 @@ rule harmonize_data:
         like_raster=[path for path in DATADRYAD_SRC_DATASETS if "woodprod_average" in path][0],
         clip_shp=utils.pick_from_list(rules.preprocess_nuts_level0_data.output.processed, ".shp")
     output:
-        warped=temp([path.replace("external", "interim/warped") for path in ALL_SRC_DATASETS]),
-        harmonized=[path.replace("external", "processed/features") for path in ALL_SRC_DATASETS]
+        # NOTE: UDR_SRC_DATASETS do not need to processed
+        warped=temp([path.replace("external", "interim/warped") for path in DATADRYAD_SRC_DATASETS+PROVIDE_SRC_DATASETS]),
+        harmonized=[path.replace("external", "processed/features") for path in DATADRYAD_SRC_DATASETS+PROVIDE_SRC_DATASETS]
     message:
         "Harmonizing datasets..."
     run:
@@ -297,9 +298,9 @@ rule harmonize_data:
 
 rule ol_normalize_data:
     input:
-        rules.harmonize_data.output.harmonized
+        rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS
     output:
-        [path.replace("processed/features", "processed/features_ol_normalized") for path in rules.harmonize_data.output.harmonized]
+        [path.replace("processed/features", "processed/features_ol_normalized") for path in rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS]
     message:
         "Normalizing data based on occurrence levels..."
     run:
@@ -308,7 +309,8 @@ rule ol_normalize_data:
             logger.info(" [{0}/{1}] (OL) Normalizing dataset {2}".format(i+1, len(input), s_raster))
             # NOTE: looping over input and output only works if they have
             # exactly the same definition. Otherwise order may vary.
-            rescale.rescale_raster(input[i], output[i], method="ol_normalize", verbose=True)
+            rescale.rescale_raster(input[i], output[i], method="ol_normalize",
+                                   verbose=False)
 
 rule rescale_data:
     input:
