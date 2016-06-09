@@ -1,30 +1,29 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+""" Functions and utilities for calculating the rarity-weighted richness score.
+
+Module can be used alone or as part of Snakemake workflow.
+"""
+
 import click
 import glob
-import importlib.util
 import numpy as np
 import numpy.ma as ma
 import os
-import pdb
 import rasterio
 import time
 
 from importlib.machinery import SourceFileLoader
 from scipy.stats.mstats import rankdata
 
-# This is incredibly convoluted, there must be an easier way to import another
-# module without having  a package in place
-spec = importlib.util.spec_from_file_location("data_processing.rescale",
-                                              "src/data_processing/rescale.py")
-rescale = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(rescale)
+rescale = SourceFileLoader("data_processing.rescale",
+                           "src/data_processing/rescale.py").load_module()
+utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 
 
 def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
-                  verbose=False):
-    """ Calculate rarity-weighted richness (RWR) based on a set of input
-    rasters.
+                  verbose=False, log_file=None):
+    """ Calculate rarity-weighted richness (RWR) based on input rasters.
 
     Function does the following steps:
     1. Read in data from a raster and occurrence level normalize the data
@@ -51,8 +50,11 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
     :param compress: String compression level used for the output raster.
     :param verbose Boolean indicating how much information is printed out.
     """
-
     assert len(input_rasters) > 0, "Input rasters list cannot be empty"
+
+    # Set up logging
+    llogger = utils.get_local_logger(calculate_rwr.__name__, log_file,
+                                     debug=verbose)
 
     # Initiate the data structure for holding the summed values.
     sum_array = None
@@ -64,16 +66,14 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
         n_rasters = len(input_rasters)
 
         if not os.path.exists(input_raster):
-            raise OSError("Input raster {} not found".format(src))
+            raise OSError("Input raster {} not found".format(input_raster))
 
         with rasterio.open(input_raster) as in_src:
-            click.echo(click.style(" [{0}/{1}] Processing raster {2}".format(no_raster, n_rasters, input_raster),
-                       fg='green'))
-            if verbose:
-                click.echo(click.style(" [{0}/{1} step 1] Reading in data and OL normalizing".format(no_raster, n_rasters),
-                           fg='green'))
-            # Get the NoData value
-            nodata_value = in_src.nodata
+            llogger.info(" [{0}/{1}] Processing".format(no_raster, n_rasters) +
+                         " raster {0}".format(input_raster))
+            llogger.debug(" [{0}/{1} step 1] Reading".format(no_raster,
+                                                             n_rasters) +
+                          " in data and OL normalizing")
 
             # Read the first band, use zeros for NoData
             src_data = in_src.read(1, masked=True)
@@ -83,9 +83,8 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
             src_data = rescale.ol_normalize(src_data)
 
             # 2. Sum OL normalized data ---------------------------------------
-            if verbose:
-                click.echo(click.style(" [{0}/{1} step 2] Summing values".format(no_raster, n_rasters),
-                           fg='green'))
+            llogger.debug(" [{0}/{1} step 2] Summing values".format(no_raster,
+                                                                    n_rasters))
             # If this is the first raster, use its dimensions to build an array
             # that holds the summed values.
             if i == 0:
@@ -97,9 +96,9 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
             sum_array += src_data
 
     # 3. Rank RWR data --------------------------------------------------------
-    if verbose:
-        click.echo(click.style(" Ranking values (this can take a while...)",
-                   fg='green'))
+    llogger.info(" Ranking values (this can take a while...)")
+
+    nodata_value = -3.4e+38
 
     # Use 0s from summation as a mask
     sum_array = ma.masked_values(sum_array, 0.0)
@@ -113,21 +112,18 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
     rank_array = ma.masked_values(rank_array, nodata_value)
 
     # 4. Recale data into range [0, 1] ----------------------------------------
-    if verbose:
-        click.echo(click.style(" Rescaling ranks", fg='green'))
+    llogger.debug(" Rescaling ranks")
     rank_array = rescale.normalize(rank_array)
 
     rank_array = rank_array.astype(np.float32)
 
     # 5. Write out the data
-    if verbose:
-        click.echo(click.style(" Writing output to {}".format(output_raster),
-                   fg='green'))
+    llogger.info(" Writing output to {}".format(output_raster))
 
     # Rescaled data is always float32, and we have only 1 band. Remember
     # to set NoData-value correctly.
     profile.update(dtype=rasterio.float32, compress=compress,
-                   nodata=nodata_value)
+                   nodata=-3.4e+38)
 
     with rasterio.open(output_raster, 'w', **profile) as dst:
         dst.write_mask(ma.getmask(rank_array))
@@ -141,10 +137,12 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
 @click.argument('indir', nargs=1, type=click.Path(exists=True))
 @click.argument('outfile', nargs=1)
 def cli(indir, outfile, extension, verbose):
+    """ Command-line interface."""
     start_time = time.time()
     # List files in input directorys
-    input_rasters = [item for item in glob.iglob('{0}/**/*{1}'.format(indir, extension),
-                                                 recursive=True)]
+    file_iterator = glob.iglob('{0}/**/*{1}'.format(indir, extension),
+                               recursive=True)
+    input_rasters = [item for item in file_iterator]
     if verbose:
         click.echo(click.style(" Found {} rasters".format(len(input_rasters)),
                                fg='green'))
