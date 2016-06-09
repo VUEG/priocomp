@@ -132,7 +132,7 @@ rule preprocess_nuts_level0_data:
         reprojected_shp = utils.pick_from_list(output.reprojected, ".shp")
         cmd_str = 'ogr2ogr {0} -t_srs "EPSG:{1}" {2}'.format(reprojected_shp, PROJECT_CRS, input_shp)
         shell(cmd_str)
-        llogger.info("Reprojected NUTS data from EPSG:4258 to EPSG:3035")
+        llogger.info("Reprojected NUTS level 0 data from EPSG:4258 to EPSG:3035")
         llogger.debug(cmd_str)
 
         # NUTS 0 data has "NUTS_ID" field, but it's character. Convert to
@@ -164,7 +164,8 @@ rule preprocess_nuts_level0_data:
         where_clause = "NUTS_ID IN ({})".format(", ".join(["'" + item + "'" for item in PROJECT_COUNTRIES]))
         shell('ogr2ogr -where "{where_clause}" {processed_shp} {enhanced_shp} -clipsrc {bounds}')
         llogger.debug("Clipped NUTS data to analysis bounds: {}".format(bounds))
-        llogger.debug("Selected only a subset of eurostat countries")
+        llogger.debug("Selected only a subset of eurostat countries:")
+        llogger.debug(" " + ", ".join(PROJECT_COUNTRIES))
         llogger.debug("Resulting file: {}".format(processed_shp))
 
 rule preprocess_nuts_level2_data:
@@ -175,10 +176,11 @@ rule preprocess_nuts_level2_data:
         enhanced=temp([path.replace("external", "interim/enhanced") for path in NUTS_LEVEL2_DATA]),
         processed=[path.replace("external", "processed") for path in NUTS_LEVEL2_DATA]
     log:
-        "logs/preprocess_nuts_level0_data.log"
+        "logs/preprocess_nuts_level2_data.log"
     message:
         "Pre-processing NUTS level 2 data..."
     run:
+        llogger = utils.get_local_logger("pprocess_nuts2", log[0])
         # Read in the bounds as used in harmonize_data rule
         bleft = PROJECT_EXTENT["left"] + OFFSET[0]
         bbottom = PROJECT_EXTENT["bottom"] + OFFSET[1]
@@ -188,8 +190,10 @@ rule preprocess_nuts_level2_data:
         # Reproject to EPSG:3035 from EPSG:4258
         input_shp = utils.pick_from_list(input.shp, ".shp")
         reprojected_shp = utils.pick_from_list(output.reprojected, ".shp")
-        shell('ogr2ogr {reprojected_shp} -t_srs "EPSG:{PROJECT_CRS}" {input_shp}')
+        cmd_str = 'ogr2ogr {0} -t_srs "EPSG:{1}" {2}'.format(reprojected_shp, PROJECT_CRS, input_shp)
+        shell(cmd_str)
         llogger.debug("Reprojected NUTS level 2 data from EPSG:4258 to EPSG:3035")
+        llogger.debug(cmd_str)
 
         # The Pre-processing steps need to be done:
         #  1. Tease apart country code from field NUTS_ID
@@ -225,7 +229,8 @@ rule preprocess_nuts_level2_data:
         # Clip output to an extent (given by bounds)
         shell('ogr2ogr {processed_shp} {enhanced_shp} -clipsrc {bounds}')
         llogger.debug("Clipped NUTS level 2 data to analysis bounds: {}".format(bounds))
-        llogger.debug("Selected only a subset of eurostat countries")
+        llogger.debug("Selected only a subset of eurostat countries:")
+        llogger.debug(" " + ", ".join(PROJECT_COUNTRIES))
         llogger.debug("Resulting file: {}".format(processed_shp))
 
 rule rasterize_nuts_level0_data:
