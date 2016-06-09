@@ -7,7 +7,7 @@ import yaml
 from colorlog import ColoredFormatter
 
 
-def get_local_logger(name, log_file, debug=False):
+def get_local_logger(name, log_file=None, debug=False):
     """ Return a local logger."""
     date_format = "%Y-%m-%d %H:%M:%S"
     colFormatter = ColoredFormatter("%(log_color)s %(message)s%(reset)s",
@@ -19,21 +19,24 @@ def get_local_logger(name, log_file, debug=False):
                                                 'ERROR':    'red',
                                                 'CRITICAL': 'red',
                                                 })
-    fileFormatter = logging.Formatter("%(asctime)s [%(name)-10s] " +
-                                      "[%(levelname)-5.5s] %(message)s",
-                                      datefmt=date_format)
-
-    fileHandler = logging.FileHandler(log_file, mode='w')
+    llogger = logging.getLogger(name)
+    llogger.setLevel(logging.DEBUG)
     consoleHandler = logging.StreamHandler()
     consoleHandler.setFormatter(colFormatter)
-    fileHandler.setFormatter(fileFormatter)
-    llogger = logging.getLogger(name)
-    llogger.addHandler(fileHandler)
+    if not debug:
+        consoleHandler.setLevel(logging.INFO)
     llogger.addHandler(consoleHandler)
-    if debug:
-        llogger.setLevel(logging.DEBUG)
-    else:
-        llogger.setLevel(logging.INFO)
+
+    if log_file is not None:
+        fileFormatter = logging.Formatter("%(asctime)s [%(name)-10s] " +
+                                          "[%(levelname)-5.5s] %(message)s",
+                                          datefmt=date_format)
+
+        fileHandler = logging.FileHandler(log_file, mode='w')
+
+        fileHandler.setFormatter(fileFormatter)
+        llogger.addHandler(fileHandler)
+
     return llogger
 
 
