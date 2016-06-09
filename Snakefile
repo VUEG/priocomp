@@ -333,19 +333,22 @@ rule harmonize_data:
 
 rule ol_normalize_data:
     input:
-        rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS
+        rules.harmonize_data.output.harmonized#+UDR_SRC_DATASETS
     output:
-        [path.replace("processed/features", "processed/features_ol_normalized") for path in rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS]
+        [path.replace("processed/features", "processed/features_ol_normalized") for path in rules.harmonize_data.output.harmonized]
+    log:
+        "logs/ol_normalize_data.log"
     message:
         "Normalizing data based on occurrence levels..."
     run:
+        llogger = utils.get_local_logger("ol_normalize_data", log[0])
         for i, s_raster in enumerate(input):
-            # No need to process the snap raster
-            llogger.info(" [{0}/{1}] (OL) Normalizing dataset {2}".format(i+1, len(input), s_raster))
+            prefix = utils.get_iteration_prexix(i+1, len(input))
+            llogger.info("{0} (OL) Normalizing dataset {1}".format(prefix, s_raster))
             # NOTE: looping over input and output only works if they have
             # exactly the same definition. Otherwise order may vary.
             rescale.rescale_raster(input[i], output[i], method="ol_normalize",
-                                   verbose=False)
+                                   logger=llogger)
 
 rule rescale_data:
     input:
