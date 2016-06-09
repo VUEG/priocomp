@@ -120,7 +120,7 @@ rule preprocess_nuts_level0_data:
     message:
         "Pre-processing NUTS level 0 data..."
     run:
-        llogger = utils.get_local_logger("pprocess nuts0", log[0])
+        llogger = utils.get_local_logger("pprocess_nuts0", log[0])
         # Read in the bounds as used in harmonize_data rule
         bleft = PROJECT_EXTENT["left"] + OFFSET[0]
         bbottom = PROJECT_EXTENT["bottom"] + OFFSET[1]
@@ -233,9 +233,12 @@ rule rasterize_nuts_level0_data:
         rules.preprocess_nuts_level0_data.output.processed
     output:
         utils.pick_from_list(rules.preprocess_nuts_level0_data.output.processed, ".shp").replace(".shp", ".tif")
+    log:
+        "logs/rasterize_nuts_level0_data.log"
     message:
         "Rasterizing NUTS level 0 data..."
     run:
+        llogger = utils.get_local_logger("rasterize_nuts0", log[0])
         input_shp = utils.pick_from_list(input, ".shp")
         layer_shp = os.path.basename(input_shp).replace(".shp", "")
 
@@ -245,7 +248,13 @@ rule rasterize_nuts_level0_data:
                                           PROJECT_EXTENT["right"],
                                           PROJECT_EXTENT["top"])
         # Rasterize
-        shell("gdal_rasterize -l {layer_shp} -a ID -tr 1000 1000 -te {bounds} -ot Int16 -a_nodata -32768 -co COMPRESS=DEFLATE {input_shp} {output[0]}")
+        cmd_str = "gdal_rasterize -l {} ".format(layer_shp) + \
+                  "-a ID -tr 1000 1000 -te {} ".format(bounds) + \
+                  "-ot Int16 -a_nodata -32768 -co COMPRESS=DEFLATE " + \
+                  "{0} {1}".format(input_shp, output[0])
+        llogger.debug(cmd_str)
+        for line in utils.process_stdout(shell(cmd_str, read=True)):
+            llogger.debug(line)
 
 rule rasterize_nuts_level2_data:
     input:
