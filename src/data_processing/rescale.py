@@ -1,28 +1,33 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+""" Rescaling and normalization functions."""
 import click
 import numpy as np
 import numpy.ma as ma
-import pdb
 import os
 import rasterio
+
+from importlib.machinery import SourceFileLoader
+
+utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 
 
 def normalize(x):
     """ Rescale all numeric values in range [0, 1].
 
-        Input must be a numpy ndarray, no coercion is tried.
+    Input must be a numpy ndarray, no coercion is tried.
 
-        :param x: numpy ndarray to be rescaled.
-        :return: numpy ndarray with rescaled values.
-        """
+    :param x: numpy ndarray to be rescaled.
+    :return: numpy ndarray with rescaled values.
+    """
     if type(x) is not np.ndarray and type(x) is not ma.core.MaskedArray:
         raise TypeError("x must be a numpy.ndarray or numpy.ma.MaskedArray")
 
-    # NOTE: the approach commented out below would be more memory efficient, but
-    # doesn't work as such with masked arrays
+    # NOTE: the approach commented out below would be more memory efficient,
+    # but doesn't work as such with masked arrays
     # np.true_divide(x, np.max(np.abs(x)), out=x, casting='unsafe')
-    # Data may have negative values, thus first add the abs(min(x)) to everything.
+    # Data may have negative values, thus first add the abs(min(x)) to
+    # everything.
     x = x + ma.abs(ma.min(x))
     x = x / (ma.max(ma.abs(x)))
     return x
@@ -31,12 +36,12 @@ def normalize(x):
 def ol_normalize(x):
     """ Normalize layer based on occurrence levels in the array.
 
-        The value of each element is divided by the sum off all elements. Input
-        must be a numpy ndarray, no coercion is tried.
+    The value of each element is divided by the sum off all elements. Input
+    must be a numpy ndarray, no coercion is tried.
 
-        :param x: numpy ndarray to be rescaled.
-        :return: numpy ndarray with transformed values.
-        """
+    :param x: numpy ndarray to be rescaled.
+    :return: numpy ndarray with transformed values.
+    """
     if type(x) is not np.ndarray and type(x) is not ma.core.MaskedArray:
         raise TypeError("x must be a numpy.ndarray or numpy.ma.MaskedArray")
 
@@ -45,12 +50,8 @@ def ol_normalize(x):
     return (x - min_val) / (ma.sum(x - min_val))
 
 
-def standardize(x):
-    pass
-
-
 def rescale_raster(input_raster, output_raster, method, compress='DEFLATE',
-                   verbose=False):
+                   verbose=False, log_file=None):
     """ Rescale all numeric values of a raster according ot a given method.
 
     Currently two methods are implemented:
@@ -62,10 +63,14 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE',
     :param output_raster: String path to raster file to be created.
     :param compress: String compression level used for the output raster.
     :param verbose Boolean indicating how much information is printed out.
+    :param log_file String path to log file used.
     :return Boolean True if success, False otherwise
     """
-
+    # Set up logging
+    llogger = utils.get_local_logger(rescale_raster.__name__, log_file,
+                                     debug=verbose)
     NODATA_VALUE = -3.4e+38
+    llogger.debug("Using internal NoData value {}".NODATA_VALUE)
 
     if not os.path.exists(input_raster):
         raise OSError("Input raster {} not found".format(input_raster))
@@ -79,15 +84,17 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE',
         src_min = src_data.min()
         src_max = src_data.max()
         if src_min == 0.0 and src_max == 0.0:
-            click.echo(click.style(' WARNING: {} has all zero values, skipping'.format(input_raster), fg='red'))
+            llogger.warning('{} has all zero values, '.format(input_raster +
+                            'skipping'))
             return False
         if verbose:
             q75, q25 = np.nanpercentile(ma.filled(src_data, np.nan), (75, 25))
-            click.echo(click.style(' min before rescaling:     {}'.format(src_min), fg='green'))
-            click.echo(click.style(' lower Q before rescaling: {}'.format(q25), fg='green'))
-            click.echo(click.style(' mean before rescaling:    {}'.format(src_data.mean()), fg='green'))
-            click.echo(click.style(' upper Q before rescaling: {}'.format(q75), fg='green'))
-            click.echo(click.style(' max before rescaling:     {}'.format(src_max), fg='green'))
+            mean = src_data.mean()
+            llogger.debug(' min before rescaling:     {}'.format(src_min))
+            llogger.debug(' lower Q before rescaling: {}'.format(q25))
+            llogger.debug(' mean before rescaling:    {}'.format(mean))
+            llogger.debug(' upper Q before rescaling: {}'.format(q75))
+            llogger.debug(' max before rescaling:     {}'.format(src_max))
         if method == 'normalize':
             rescaled_data = normalize(src_data)
         elif method == 'ol_normalize':
@@ -95,17 +102,20 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE',
         elif method == 'standardize':
             pass
         else:
-            rescaled_data = standardize(src_data)
             raise TypeError("Method {} not implemented".format(method))
 
         if verbose:
-            q75, q25 = np.nanpercentile(ma.filled(rescaled_data, np.nan), (75, 25))
-            click.echo(click.style('\n min after rescaling:     {}'.format(rescaled_data.min()), fg='green'))
-            click.echo(click.style(' lower Q after rescaling: {}'.format(q25), fg='green'))
-            click.echo(click.style(' mean after rescaling:    {}'.format(rescaled_data.mean()), fg='green'))
-            click.echo(click.style(' upper Q after rescaling: {}'.format(q75), fg='green'))
-            click.echo(click.style(' max after rescaling:     {}'.format(rescaled_data.max()), fg='green'))
-            click.echo(click.style('\n saving data to:          {}\n'.format(output_raster), fg='green'))
+            q75, q25 = np.nanpercentile(ma.filled(rescaled_data, np.nan),
+                                        (75, 25))
+            min = rescaled_data.min()
+            mean = rescaled_data.mean()
+            max = rescaled_data.max()
+            llogger.debug(' min after rescaling:     {}'.format(min))
+            llogger.debug(' lower Q after rescaling: {}'.format(q25))
+            llogger.debug(' mean after rescaling:    {}'.format(mean))
+            llogger.debug(' upper Q after rescaling: {}'.format(q75))
+            llogger.debug(' max after rescaling:     {}'.format(max))
+            llogger.debug(' saving data to:          {}'.format(output_raster))
 
         # Write the product.
         profile = in_src.profile
@@ -119,6 +129,7 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE',
             # Set the NoData mask
             dst.write_mask(in_src.read_masks(1))
             dst.write(rescaled_data, 1)
+            llogger.debug("Wrote raster {}".format(output_raster))
         return True
 
 
@@ -129,6 +140,7 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE',
 @click.argument('infile', nargs=1, type=click.Path(exists=True))
 @click.argument('outfile', nargs=1)
 def cli(infile, outfile, method, verbose):
+    """ Command-line interface."""
     click.echo(click.style('Rescaling (method: {0}) file {1}'.format(method,
                                                                      infile),
                            fg='green'))
