@@ -49,6 +49,7 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
     :param output_raster: String path to raster file to be created.
     :param compress: String compression level used for the output raster.
     :param verbose Boolean indicating how much information is printed out.
+    :param log_file String path to log file used.
     """
     assert len(input_rasters) > 0, "Input rasters list cannot be empty"
 
