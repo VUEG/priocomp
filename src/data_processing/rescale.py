@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """ Rescaling and normalization functions."""
 import click
+import logging
 import numpy as np
 import numpy.ma as ma
 import os
@@ -51,7 +52,7 @@ def ol_normalize(x):
 
 
 def rescale_raster(input_raster, output_raster, method, compress='DEFLATE',
-                   verbose=False, log_file=None):
+                   verbose=False, logger=None):
     """ Rescale all numeric values of a raster according ot a given method.
 
     Currently two methods are implemented:
@@ -67,10 +68,14 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE',
     :return Boolean True if success, False otherwise
     """
     # Set up logging
-    llogger = utils.get_local_logger(rescale_raster.__name__, log_file,
-                                     debug=verbose)
+    if not logger:
+        logging.basicConfig()
+        llogger = logging.getLogger('rescale_raster')
+        llogger.setLevel(logging.DEBUG if verbose else logging.INFO)
+    else:
+        llogger = logger
     NODATA_VALUE = -3.4e+38
-    llogger.debug("Using internal NoData value {}".NODATA_VALUE)
+    llogger.debug("Using internal NoData value {}".format(NODATA_VALUE))
 
     if not os.path.exists(input_raster):
         raise OSError("Input raster {} not found".format(input_raster))
@@ -81,20 +86,25 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE',
         # Cast data to float32 as that's what's used anyways
         src_data = src_data.astype(np.float32)
         # Check min and max
-        src_min = src_data.min()
-        src_max = src_data.max()
+        decimals = 12
+        src_min = np.round(src_data.min(), decimals)
+        src_max = np.round(src_data.max(), decimals)
         if src_min == 0.0 and src_max == 0.0:
             llogger.warning('{} has all zero values, '.format(input_raster +
                             'skipping'))
             return False
-        if verbose:
-            q75, q25 = np.nanpercentile(ma.filled(src_data, np.nan), (75, 25))
-            mean = src_data.mean()
-            llogger.debug(' min before rescaling:     {}'.format(src_min))
-            llogger.debug(' lower Q before rescaling: {}'.format(q25))
-            llogger.debug(' mean before rescaling:    {}'.format(mean))
-            llogger.debug(' upper Q before rescaling: {}'.format(q75))
-            llogger.debug(' max before rescaling:     {}'.format(src_max))
+
+        # Get information on the distribution of values before rescaling
+        src_q75, src_q25 = np.nanpercentile(ma.filled(src_data, np.nan),
+                                            (75, 25))
+        src_q25 = np.round(src_q25, decimals)
+        src_q75 = np.round(src_q75, decimals)
+        src_mean = np.round(src_data.mean(), decimals)
+        llogger.debug(" Before rescaling (min, q25, mean, q75, max): " +
+                      "{0}, {1}, {2}, {3}, {4}".format(src_min, src_q25,
+                                                       src_mean, src_q75,
+                                                       src_max))
+        # Do the actual rescaling
         if method == 'normalize':
             rescaled_data = normalize(src_data)
         elif method == 'ol_normalize':
@@ -104,18 +114,17 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE',
         else:
             raise TypeError("Method {} not implemented".format(method))
 
-        if verbose:
-            q75, q25 = np.nanpercentile(ma.filled(rescaled_data, np.nan),
-                                        (75, 25))
-            min = rescaled_data.min()
-            mean = rescaled_data.mean()
-            max = rescaled_data.max()
-            llogger.debug(' min after rescaling:     {}'.format(min))
-            llogger.debug(' lower Q after rescaling: {}'.format(q25))
-            llogger.debug(' mean after rescaling:    {}'.format(mean))
-            llogger.debug(' upper Q after rescaling: {}'.format(q75))
-            llogger.debug(' max after rescaling:     {}'.format(max))
-            llogger.debug(' saving data to:          {}'.format(output_raster))
+        dst_q75, dst_q25 = np.nanpercentile(ma.filled(rescaled_data, np.nan),
+                                            (75, 25))
+        dst_q25 = np.round(dst_q25, decimals)
+        dst_q75 = np.round(dst_q75, decimals)
+        dst_min = np.round(rescaled_data.min(), decimals)
+        dst_mean = np.round(rescaled_data.mean(), decimals)
+        dst_max = np.round(rescaled_data.max(), decimals)
+        llogger.debug("  After rescaling (min, q25, mean, q75, max): " +
+                      "{0}, {1}, {2}, {3}, {4}".format(dst_min, dst_q25,
+                                                       dst_mean, dst_q75,
+                                                       dst_max))
 
         # Write the product.
         profile = in_src.profile
