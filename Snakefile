@@ -174,6 +174,8 @@ rule preprocess_nuts_level2_data:
         reprojected=temp([path.replace("external", "interim/reprojected") for path in NUTS_LEVEL2_DATA]),
         enhanced=temp([path.replace("external", "interim/enhanced") for path in NUTS_LEVEL2_DATA]),
         processed=[path.replace("external", "processed") for path in NUTS_LEVEL2_DATA]
+    log:
+        "logs/preprocess_nuts_level0_data.log"
     message:
         "Pre-processing NUTS level 2 data..."
     run:
@@ -279,28 +281,32 @@ rule harmonize_data:
         "Harmonizing datasets..."
     run:
         llogger = utils.get_local_logger("harmonize_data", log[0])
-        ndatasets = len(input.external)
+        nsteps = len(input.external)
         for i, s_raster in enumerate(input.external):
             ## WARP
             # Target raster
             warped_raster = s_raster.replace("external", "interim/warped")
             # No need to process the snap raster, just copy it
+            prefix = utils.get_iteration_prexix(i+1, nsteps)
             if s_raster == input.like_raster:
-                llogger.info(" [{0}/{1} step 1] Copying dataset {2}".format(i+1, ndatasets, s_raster))
-                llogger.debug(" [{0}/{1} step 1] Target dataset {2}".format(i+1, ndatasets, warped_raster))
-                shell("cp {s_raster} {warped_raster}")
+                llogger.info("{0} Copying dataset {1}".format(prefix, s_raster))
+                llogger.debug("{0} Target dataset {1}".format(prefix, warped_raster))
+                ret = shell("cp {s_raster} {warped_raster}", read=True)
             else:
-                llogger.info(" [{0}/{1} step 1] Warping dataset {2}".format(i+1, ndatasets, s_raster))
-                llogger.debug(" [{0}/{1} step 1] Target dataset {2}".format(i+1, ndatasets, warped_raster))
-                shell("rio warp " + s_raster + " --like " + input.like_raster + \
-                      " " + warped_raster + " --dst-crs " + str(PROJECT_CRS) + \
-                      " --co 'COMPRESS=DEFLATE' --threads {threads}")
-
+                llogger.info("{0} Warping dataset {1}".format(prefix, s_raster))
+                llogger.debug("{0} Target dataset {1}".format(prefix, warped_raster))
+                ret = shell("rio warp " + s_raster + " --like " + input.like_raster + \
+                            " " + warped_raster + " --dst-crs " + str(PROJECT_CRS) + \
+                            " --co 'COMPRESS=DEFLATE' --threads {threads}")
+            for line in utils.process_stdout(ret, prefix=prefix):
+                llogger.debug(line)
             ## CLIP
             harmonized_raster = warped_raster.replace("data/interim/warped", "data/processed/features")
-            llogger.info(" [{0}/{1} step 2] Clipping dataset {2}".format(i+1, ndatasets, warped_raster))
-            llogger.debug(" [{0}/{1} step 2] Target dataset {2}".format(i+1, ndatasets, harmonized_raster))
-            shell("gdalwarp -cutline {input.clip_shp} {warped_raster} {harmonized_raster} -co COMPRESS=DEFLATE")
+            llogger.info("{0} Clipping dataset {1}".format(prefix, warped_raster))
+            llogger.debug("{0} Target dataset {1}".format(prefix, harmonized_raster))
+            cmd_str = "gdalwarp -cutline {0} {1} {2} -co COMPRESS=DEFLATE".format(input.clip_shp, warped_raster, harmonized_raster)
+            for line in utils.process_stdout(shell(cmd_str, read=True), prefix=prefix):
+                llogger.debug(line)
 
 rule ol_normalize_data:
     input:
