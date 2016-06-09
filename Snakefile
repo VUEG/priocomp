@@ -375,10 +375,13 @@ rule calculate_rwr:
         rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS
     output:
         "analyses/RWR/eu26_rwr.tif"
+    log:
+        "logs/calculate_rwr.log"
     message:
         "Calculating RWR..."
     run:
-        rwr.calculate_rwr(input, output[0], verbose=True)
+        llogger = utils.get_local_logger("ol_normalize_data", log[0])
+        rwr.calculate_rwr(input, output[0], logger=llogger)
 
 
 # # Zonation ---------------------------------------------------------------------
