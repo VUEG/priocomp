@@ -7,6 +7,15 @@ import yaml
 from colorlog import ColoredFormatter
 
 
+def get_iteration_prexix(i, total):
+    """ Return a String prefix for itarative task phases.
+
+    :param i int current step.
+    :param total int total steps.
+    """
+    return " [{0}/{1}]".format(i, total)
+
+
 def get_local_logger(name, log_file=None, debug=False):
     """ Return a local logger."""
     date_format = "%Y-%m-%d %H:%M:%S"
@@ -104,3 +113,14 @@ def pick_from_list(items, suffix):
         if item.endswith(suffix):
             match = item
     return match
+
+
+def process_stdout(x, prefix=""):
+    """Process stdout string returned by a shell command.
+
+    If x is None, return an empty list.
+    """
+    if x is None or x == "":
+        return []
+    x = x.decode('utf-8')
+    return [prefix + " " + item for item in x.split("\n")]
