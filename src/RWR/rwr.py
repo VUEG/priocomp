@@ -7,6 +7,7 @@ Module can be used alone or as part of Snakemake workflow.
 
 import click
 import glob
+import logging
 import numpy as np
 import numpy.ma as ma
 import os
@@ -22,7 +23,7 @@ utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 
 
 def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
-                  verbose=False, log_file=None):
+                  verbose=False, logger=None):
     """ Calculate rarity-weighted richness (RWR) based on input rasters.
 
     Function does the following steps:
@@ -54,27 +55,31 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
     assert len(input_rasters) > 0, "Input rasters list cannot be empty"
 
     # Set up logging
-    llogger = utils.get_local_logger(calculate_rwr.__name__, log_file,
-                                     debug=verbose)
+    if not logger:
+        logging.basicConfig()
+        llogger = logging.getLogger('calculate_rwr')
+        llogger.setLevel(logging.DEBUG if verbose else logging.INFO)
+    else:
+        llogger = logger
 
     # Initiate the data structure for holding the summed values.
     sum_array = None
     # Placeholder for raster metadata
     profile = None
+    n_rasters = len(input_rasters)
 
     for i, input_raster in enumerate(input_rasters):
         no_raster = i + 1
-        n_rasters = len(input_rasters)
 
         if not os.path.exists(input_raster):
             raise OSError("Input raster {} not found".format(input_raster))
 
         with rasterio.open(input_raster) as in_src:
-            llogger.info(" [{0}/{1}] Processing".format(no_raster, n_rasters) +
-                         " raster {0}".format(input_raster))
-            llogger.debug(" [{0}/{1} step 1] Reading".format(no_raster,
-                                                             n_rasters) +
-                          " in data and OL normalizing")
+            prefix = utils.get_iteration_prexix(no_raster, n_rasters)
+            llogger.info("{0} Processing raster {1}".format(prefix,
+                                                            input_raster))
+            llogger.debug("{0} Reading in data and OL ".format(prefix) +
+                          "normalizing")
 
             # Read the first band, use zeros for NoData
             src_data = in_src.read(1, masked=True)
@@ -84,8 +89,7 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
             src_data = rescale.ol_normalize(src_data)
 
             # 2. Sum OL normalized data ---------------------------------------
-            llogger.debug(" [{0}/{1} step 2] Summing values".format(no_raster,
-                                                                    n_rasters))
+            llogger.debug("{0} Summing values".format(prefix))
             # If this is the first raster, use its dimensions to build an array
             # that holds the summed values.
             if i == 0:
