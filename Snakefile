@@ -1,18 +1,16 @@
-
 import fiona
 import gdal
-import logging
 import numpy as np
 import os
 import rasterio
-from snakemake import logger
 from importlib.machinery import SourceFileLoader
 
-utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
+
 rescale = SourceFileLoader("data_processing.rescale", "src/data_processing/rescale.py").load_module()
 rwr = SourceFileLoader("rwr.calculate_rwr", "src/RWR/rwr.py").load_module()
+utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 
-## GLOBALS ---------------------------------------------------------------------
+## GLOBALS --------------------------------------------------------------------
 
 # Analysis extent
 PROJECT_EXTENT = {"bottom": 1000000.0, "left": 2000000.0, "right": 6526000.0,
@@ -91,18 +89,18 @@ rule all:
 #                     masks = np.zeros((len(input), dims[0], dims[1]), dtype=np.uint16)
 #                 else:
 #                     if in_src.shape != dims:
-#                         logger.warning(" WARNING: Dimensions for {} don't match, skipping".format(s_raster))
+#                         llogger.warning(" WARNING: Dimensions for {} don't match, skipping".format(s_raster))
 #                         continue
 #                 # Place a binary version of the current raster mask into the
 #                 # container
-#                 logger.info(" [{0}/{1}] Reading mask from {2}".format(i+1, len(input), s_raster))
+#                 llogger.info(" [{0}/{1}] Reading mask from {2}".format(i+1, len(input), s_raster))
 #                 mask = in_src.read_masks(1)
 #                 # We're using the GDAL type mask where any values above from
 #                 # 0 are actual data values. Convert (in-place) to binary.
 #                 np.place(mask, mask > 0, 1)
 #                 masks[i] = mask
 #
-#         logger.info(" Summing mask information and saving to {}".format(output))
+#         llogger.info(" Summing mask information and saving to {}".format(output))
 #         data_coverage = masks.sum(axis=0)
 #         # Write the product.
 #         profile.update(dtype=rasterio.uint16, compress="DEFLATE")
@@ -130,7 +128,7 @@ rule preprocess_nuts_level0_data:
         input_shp = utils.pick_from_list(input.shp, ".shp")
         reprojected_shp = utils.pick_from_list(output.reprojected, ".shp")
         shell('ogr2ogr {reprojected_shp} -t_srs "EPSG:{PROJECT_CRS}" {input_shp}')
-        logger.debug("Reprojected NUTS data from EPSG:4258 to EPSG:3035")
+        llogger.debug("Reprojected NUTS data from EPSG:4258 to EPSG:3035")
 
         # NUTS 0 data has "NUTS_ID" field, but it's character. Convert to
         # integer for raserization
@@ -160,9 +158,9 @@ rule preprocess_nuts_level0_data:
         # Build the -where clause for ogr2ogr
         where_clause = "NUTS_ID IN ({})".format(", ".join(["'" + item + "'" for item in PROJECT_COUNTRIES]))
         shell('ogr2ogr -where "{where_clause}" {processed_shp} {enhanced_shp} -clipsrc {bounds}')
-        logger.debug("Clipped NUTS data to analysis bounds: {}".format(bounds))
-        logger.debug("Selected only a subset of eurostat countries")
-        logger.debug("Resulting file: {}".format(processed_shp))
+        llogger.debug("Clipped NUTS data to analysis bounds: {}".format(bounds))
+        llogger.debug("Selected only a subset of eurostat countries")
+        llogger.debug("Resulting file: {}".format(processed_shp))
 
 rule preprocess_nuts_level2_data:
     input:
@@ -184,7 +182,7 @@ rule preprocess_nuts_level2_data:
         input_shp = utils.pick_from_list(input.shp, ".shp")
         reprojected_shp = utils.pick_from_list(output.reprojected, ".shp")
         shell('ogr2ogr {reprojected_shp} -t_srs "EPSG:{PROJECT_CRS}" {input_shp}')
-        logger.debug("Reprojected NUTS level 2 data from EPSG:4258 to EPSG:3035")
+        llogger.debug("Reprojected NUTS level 2 data from EPSG:4258 to EPSG:3035")
 
         # The Pre-processing steps need to be done:
         #  1. Tease apart country code from field NUTS_ID
@@ -219,9 +217,9 @@ rule preprocess_nuts_level2_data:
         processed_shp = utils.pick_from_list(output.processed, ".shp")
         # Clip output to an extent (given by bounds)
         shell('ogr2ogr {processed_shp} {enhanced_shp} -clipsrc {bounds}')
-        logger.debug("Clipped NUTS level 2 data to analysis bounds: {}".format(bounds))
-        logger.debug("Selected only a subset of eurostat countries")
-        logger.debug("Resulting file: {}".format(processed_shp))
+        llogger.debug("Clipped NUTS level 2 data to analysis bounds: {}".format(bounds))
+        llogger.debug("Selected only a subset of eurostat countries")
+        llogger.debug("Resulting file: {}".format(processed_shp))
 
 rule rasterize_nuts_level0_data:
     input:
@@ -270,9 +268,12 @@ rule harmonize_data:
         # NOTE: UDR_SRC_DATASETS do not need to processed
         warped=temp([path.replace("external", "interim/warped") for path in DATADRYAD_SRC_DATASETS+PROVIDE_SRC_DATASETS]),
         harmonized=[path.replace("external", "processed/features") for path in DATADRYAD_SRC_DATASETS+PROVIDE_SRC_DATASETS]
+    log:
+        "logs/harmonize_data.log"
     message:
         "Harmonizing datasets..."
     run:
+        llogger = utils.get_local_logger("harmonize_data", log[0])
         ndatasets = len(input.external)
         for i, s_raster in enumerate(input.external):
             ## WARP
@@ -280,20 +281,20 @@ rule harmonize_data:
             warped_raster = s_raster.replace("external", "interim/warped")
             # No need to process the snap raster, just copy it
             if s_raster == input.like_raster:
-                logger.info(" [{0}/{1} step 1] Copying dataset {2}".format(i+1, ndatasets, s_raster))
-                logger.debug(" [{0}/{1} step 1] Target dataset {2}".format(i+1, ndatasets, warped_raster))
+                llogger.info(" [{0}/{1} step 1] Copying dataset {2}".format(i+1, ndatasets, s_raster))
+                llogger.debug(" [{0}/{1} step 1] Target dataset {2}".format(i+1, ndatasets, warped_raster))
                 shell("cp {s_raster} {warped_raster}")
             else:
-                logger.info(" [{0}/{1} step 1] Warping dataset {2}".format(i+1, ndatasets, s_raster))
-                logger.debug(" [{0}/{1} step 1] Target dataset {2}".format(i+1, ndatasets, warped_raster))
+                llogger.info(" [{0}/{1} step 1] Warping dataset {2}".format(i+1, ndatasets, s_raster))
+                llogger.debug(" [{0}/{1} step 1] Target dataset {2}".format(i+1, ndatasets, warped_raster))
                 shell("rio warp " + s_raster + " --like " + input.like_raster + \
                       " " + warped_raster + " --dst-crs " + str(PROJECT_CRS) + \
                       " --co 'COMPRESS=DEFLATE' --threads {threads}")
 
             ## CLIP
             harmonized_raster = warped_raster.replace("data/interim/warped", "data/processed/features")
-            logger.info(" [{0}/{1} step 2] Clipping dataset {2}".format(i+1, ndatasets, warped_raster))
-            logger.debug(" [{0}/{1} step 2] Target dataset {2}".format(i+1, ndatasets, harmonized_raster))
+            llogger.info(" [{0}/{1} step 2] Clipping dataset {2}".format(i+1, ndatasets, warped_raster))
+            llogger.debug(" [{0}/{1} step 2] Target dataset {2}".format(i+1, ndatasets, harmonized_raster))
             shell("gdalwarp -cutline {input.clip_shp} {warped_raster} {harmonized_raster} -co COMPRESS=DEFLATE")
 
 rule ol_normalize_data:
@@ -306,7 +307,7 @@ rule ol_normalize_data:
     run:
         for i, s_raster in enumerate(input):
             # No need to process the snap raster
-            logger.info(" [{0}/{1}] (OL) Normalizing dataset {2}".format(i+1, len(input), s_raster))
+            llogger.info(" [{0}/{1}] (OL) Normalizing dataset {2}".format(i+1, len(input), s_raster))
             # NOTE: looping over input and output only works if they have
             # exactly the same definition. Otherwise order may vary.
             rescale.rescale_raster(input[i], output[i], method="ol_normalize",
@@ -322,7 +323,7 @@ rule rescale_data:
     run:
         for i, s_raster in enumerate(input):
             # No need to process the snap raster
-            logger.info(" [{0}/{1}] Rescaling dataset {2}".format(i+1, len(input), s_raster))
+            llogger.info(" [{0}/{1}] Rescaling dataset {2}".format(i+1, len(input), s_raster))
             # NOTE: looping over input and output only works if they have
             # exactly the same definition. Otherwise order may vary.
             rescale.rescale_raster(input[i], output[i], method="normalize",
