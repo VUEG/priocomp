@@ -1,7 +1,40 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
+""" Utility module for the workflow."""
+import logging
 import os
 import yaml
+from colorlog import ColoredFormatter
+
+
+def get_local_logger(name, log_file, debug=False):
+    """ Return a local logger."""
+    date_format = "%Y-%m-%d %H:%M:%S"
+    colFormatter = ColoredFormatter("%(log_color)s %(message)s%(reset)s",
+                                    datefmt=date_format,
+                                    reset=True,
+                                    log_colors={'DEBUG':    'cyan',
+                                                'INFO':     'green',
+                                                'WARNING':  'yellow',
+                                                'ERROR':    'red',
+                                                'CRITICAL': 'red',
+                                                })
+    fileFormatter = logging.Formatter("%(asctime)s [%(name)-10s] " +
+                                      "[%(levelname)-5.5s] %(message)s",
+                                      datefmt=date_format)
+
+    fileHandler = logging.FileHandler(log_file, mode='w')
+    consoleHandler = logging.StreamHandler()
+    consoleHandler.setFormatter(colFormatter)
+    fileHandler.setFormatter(fileFormatter)
+    llogger = logging.getLogger(name)
+    llogger.addHandler(fileHandler)
+    llogger.addHandler(consoleHandler)
+    if debug:
+        llogger.setLevel(logging.DEBUG)
+    else:
+        llogger.setLevel(logging.INFO)
+    return llogger
 
 
 def parse_data_manifest(infile):
