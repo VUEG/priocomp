@@ -28,5 +28,6 @@ dependencies:
   - Sphinx
   - yaml
   - pip:
+      - colorlog
       - easywebdav
       - python-dotenv
