@@ -123,4 +123,4 @@ def process_stdout(x, prefix=""):
     if x is None or x == "":
         return []
     x = x.decode('utf-8')
-    return [prefix + " " + item for item in x.split("\n")]
+    return [prefix + " " + item for item in x.split("\n") if item != ""]
