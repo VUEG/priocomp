@@ -3,8 +3,8 @@
 library(magrittr)
 library(protectr)
 library(raster)
-library(rasterVis)
-library(viridis)
+#library(rasterVis)
+#library(viridis)
 
 data_dir <- "../data/processed/features_ol_normalized/provide/"
 if (!file.exists(data_dir)) {
@@ -35,17 +35,19 @@ cost[is.na(es_rasters[[1]])] <- 0
 
 message("Converting NoData to zeros...")
 # NAs (NoData) must be raplaced wiht 0s for GUROBI
+#browser()
 es_rasters_filled <- es_rasters
 es_rasters_filled[is.na(es_rasters_filled)] <- 0
 es_rasters_filled <- raster::stack(es_rasters_filled)
 
 # Solve the maximum coverage problem for a range of target budgets
-budgets <- c(0.05)
+budgets <- c(0.05, 0.10)
 results_mc <- list()
 for (b in budgets) {
   message("Optimizing with target budget ", b)
   b_cells <- b * raster::cellStats(cost, "sum")
   results <- protectr::gurobi_maxcoverage(cost, es_rasters_filled, budget = b_cells)
   results_mc[[as.character(b)]] <- results
+  message("Saving results...")
+  save(results_mc, file="results_mc.RData")
 }
-save(results_mc, "results_mc.RData")
