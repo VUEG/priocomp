@@ -5,6 +5,7 @@ channels:
   - mutirri
   - r
   - gurobi
+  - osgeo
 dependencies:
   - python=3.5
   - click
@@ -17,11 +18,17 @@ dependencies:
   - pytest
   - rasterio
   - r
+  - r-assertthat
   - r-devtools
+  - r-dplyr
   - r-ggplot2
   - r-raster
   - r-recommended
+  - r-proj4
+  - r-slam
   - r-testthat
+  - r-tidyr
+  - rgdal
   - rpy2
   - scipy
   - snakemake
