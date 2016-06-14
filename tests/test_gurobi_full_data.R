@@ -13,6 +13,9 @@ if (!file.exists(data_dir)) {
 message("Reading in data...")
 raster_files <- list.files(path = data_dir, pattern = ".+\\.tif$",
                            full.names = TRUE, recursive = TRUE)
+if (length(raster_files) == 0) {
+  stop("No input files found in ", data_dir)
+}
 
 es_rasters <- raster::stack(raster_files[1:5])
 
