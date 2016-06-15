@@ -57,7 +57,7 @@ save_zvariant(variant2, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
 
 ## 03_caz_wgt
-variant3 <- get_variant(priocomp_zproject, 4)
+variant3 <- get_variant(priocomp_zproject, 3)
 variant3 <- set_dat_param(variant3, "removal rule", 1)
 variant3 <- set_dat_param(variant3, "post-processing list file",
                           ppa_config_file)
@@ -69,7 +69,6 @@ groupnames(variant3) <- c("1" = "ecosystem_services", "2" = "species")
 # features. Give weight 1 to each.
 variant3@spp.data$weight <- c(rep(nfeatures(variant3) / 12, 12),
                               rep(1, nfeatures(variant3) - 12))
-
 
 save_zvariant(variant3, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)

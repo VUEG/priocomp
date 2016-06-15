@@ -165,16 +165,16 @@ __DISCLAIMER:__ at this point, it is unclear to me whether the approach describe
 
 ```{r optimize,echo=TRUE,message=FALSE}
 # NAs (NoData) must be raplaced wiht 0s for GUROBI
-sp_rasters_filled <- sp_rasters
-sp_rasters_filled[is.na(sp_rasters_filled)] <- 0
-sp_rasters_filled <- raster::stack(sp_rasters_filled)
+#sp_rasters_filled <- sp_rasters
+#sp_rasters_filled[is.na(sp_rasters_filled)] <- 0
+#sp_rasters_filled <- raster::stack(sp_rasters_filled)
 
 # Solve the maximum coverage problem for a range of target budgets
 budgets <- seq(0.05, 1.00, 0.05)
 results_mc <- list()
 for (b in budgets) {
   b_cells <- b * raster::cellStats(cost, "sum")
-  results <- protectr::gurobi_maxcoverage(cost, sp_rasters_filled, budget = b_cells)
+  results <- protectr::gurobi_maxcoverage(cost, sp_rasters, budget = b_cells)
   results_mc[[as.character(b)]] <- results
 }
 ```
