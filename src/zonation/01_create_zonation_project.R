@@ -10,7 +10,7 @@ source("src/utils.R")
 
 # Generate variants for all taxa ------------------------------------------
 
-variants <- c("01_caz", "02_abf", "03_caz_wgt")
+variants <- c("01_caz", "02_abf", "03_caz_wgt", "04_abf_wgt")
 
 zsetup_root <- "analyses/zonation"
 
@@ -56,9 +56,9 @@ variant2 <- set_dat_param(variant2, "post-processing list file",
 save_zvariant(variant2, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
 
-## 03_abf_wgt
-variant3 <- get_variant(priocomp_zproject, 3)
-variant3 <- set_dat_param(variant3, "removal rule", 2)
+## 03_caz_wgt
+variant3 <- get_variant(priocomp_zproject, 4)
+variant3 <- set_dat_param(variant3, "removal rule", 1)
 variant3 <- set_dat_param(variant3, "post-processing list file",
                           ppa_config_file)
 # Define groups. Features 1-12 are ecosystem services, Features 13-771 are
@@ -72,4 +72,23 @@ variant3@spp.data$weight <- c(rep(nfeatures(variant3) / 12, 12),
 
 
 save_zvariant(variant3, dir = file.path(zsetup_root, project_name),
+              overwrite = TRUE, debug_msg = FALSE)
+
+
+## 04_abf_wgt
+variant4 <- get_variant(priocomp_zproject, 4)
+variant4 <- set_dat_param(variant4, "removal rule", 2)
+variant4 <- set_dat_param(variant4, "post-processing list file",
+                          ppa_config_file)
+# Define groups. Features 1-12 are ecosystem services, Features 13-771 are
+# species features.
+groups(variant4) <- c(rep(1, 12), rep(2, (nfeatures(variant4) - 12)))
+groupnames(variant4) <- c("1" = "ecosystem_services", "2" = "species")
+# Give weight of 759 / 12 to each. Altogether, there are 759 spcies
+# features. Give weight 1 to each.
+variant4@spp.data$weight <- c(rep(nfeatures(variant4) / 12, 12),
+                              rep(1, nfeatures(variant4) - 12))
+
+
+save_zvariant(variant4, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
