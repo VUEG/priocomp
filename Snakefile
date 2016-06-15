@@ -333,9 +333,9 @@ rule harmonize_data:
 
 rule ol_normalize_data:
     input:
-        rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS
+        rules.harmonize_data.output.harmonized#+UDR_SRC_DATASETS
     output:
-        [path.replace("processed/features", "processed/features_ol_normalized") for path in rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS]
+        [path.replace("processed/features", "processed/features_ol_normalized") for path in rules.harmonize_data.output.harmonized]
     log:
         "logs/ol_normalize_data.log"
     message:
