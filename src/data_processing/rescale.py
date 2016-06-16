@@ -51,8 +51,8 @@ def ol_normalize(x):
     return (x - min_val) / (ma.sum(x - min_val))
 
 
-def rescale_raster(input_raster, output_raster, method, compress='DEFLATE',
-                   verbose=False, logger=None):
+def rescale_raster(input_raster, output_raster, method, fill_w_zeros=False,
+                   compress='DEFLATE', verbose=False, logger=None):
     """ Rescale all numeric values of a raster according ot a given method.
 
     Currently two methods are implemented:
@@ -63,6 +63,9 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE',
     :param input_raster: String path to raster file to be normalized.
     :param output_raster: String path to raster file to be created.
     :param compress: String compression level used for the output raster.
+    :method String method to use.
+    :fill_w_zeros  Boolean indicating whether NoData is encoded as real NoData
+                   or filled with zeros.
     :param verbose Boolean indicating how much information is printed out.
     :param log_file String path to log file used.
     :return Boolean True if success, False otherwise
@@ -131,12 +134,18 @@ def rescale_raster(input_raster, output_raster, method, compress='DEFLATE',
         # Rescaled data is always float32, and we have only 1 band.
         profile.update(dtype=rasterio.float32, compress=compress,
                        nodata=NODATA_VALUE)
-        # Also remember to replace the NoData values and set the fill value for
-        # NoData
-        rescaled_data = ma.filled(rescaled_data, NODATA_VALUE)
+        # Replace the NoData values and set the fill value for NoData, unless
+        # the result is to be filled with zeros
+        if fill_w_zeros:
+            rescaled_data = ma.filled(rescaled_data, 0)
+            llogger.debug("Filling NoData with zeros")
+        else:
+            rescaled_data = ma.filled(rescaled_data, NODATA_VALUE)
+
         with rasterio.open(output_raster, 'w', **profile) as dst:
-            # Set the NoData mask
-            dst.write_mask(in_src.read_masks(1))
+            if not fill_w_zeros:
+                # Set the NoData mask
+                dst.write_mask(in_src.read_masks(1))
             dst.write(rescaled_data, 1)
             llogger.debug("Wrote raster {}".format(output_raster))
         return True

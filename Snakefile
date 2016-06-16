@@ -348,7 +348,7 @@ rule ol_normalize_data:
             # NOTE: looping over input and output only works if they have
             # exactly the same definition. Otherwise order may vary.
             rescale.rescale_raster(input[i], output[i], method="ol_normalize",
-                                   logger=llogger)
+                                   fill_w_zeros=True, logger=llogger)
 
 rule rescale_data:
     input:
