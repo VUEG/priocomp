@@ -10,7 +10,8 @@ source("src/utils.R")
 
 # Generate variants for all taxa ------------------------------------------
 
-variants <- c("01_caz", "02_abf", "03_caz_wgt", "04_abf_wgt")
+variants <- c("01_caz", "02_abf", "03_caz_wgt", "04_abf_wgt",
+              "05_caz_es", "06_abf_es")
 
 zsetup_root <- "analyses/zonation"
 
@@ -73,7 +74,6 @@ variant3@spp.data$weight <- c(rep(nfeatures(variant3) / 12, 12),
 save_zvariant(variant3, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
 
-
 ## 04_abf_wgt
 variant4 <- get_variant(priocomp_zproject, 4)
 variant4 <- set_dat_param(variant4, "removal rule", 2)
@@ -88,6 +88,43 @@ groupnames(variant4) <- c("1" = "ecosystem_services", "2" = "species")
 variant4@spp.data$weight <- c(rep(nfeatures(variant4) / 12, 12),
                               rep(1, nfeatures(variant4) - 12))
 
-
 save_zvariant(variant4, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
+
+
+# Just ecoystem services --------------------------------------------------
+
+## 05_caz_es
+
+variant5 <- get_variant(priocomp_zproject, 5)
+
+ppa_file_name <- file.path(zsetup_root, project_name, ppa_config_file)
+ppa_cmd_string <- paste(c("LSM", ppa_raster_file, 0, -1, 0), collapse = " ")
+write(ppa_cmd_string, ppa_file_name)
+variant5 <- set_dat_param(variant5, "post-processing list file",
+                          ppa_config_file)
+
+# Select ONLY ES features
+sppdata(variant5) <- sppdata(variant5)[1:12,]
+
+# Save variant
+save_zvariant(variant5, dir = file.path(zsetup_root, project_name),
+              overwrite = TRUE, debug_msg = FALSE)
+
+## 06_abf
+
+variant6 <- get_variant(priocomp_zproject, 6)
+
+ppa_file_name <- file.path(zsetup_root, project_name, ppa_config_file)
+ppa_cmd_string <- paste(c("LSM", ppa_raster_file, 0, -1, 0), collapse = " ")
+write(ppa_cmd_string, ppa_file_name)
+variant6 <- set_dat_param(variant6, "post-processing list file",
+                          ppa_config_file)
+
+# Select ONLY ES features
+sppdata(variant6) <- sppdata(variant6)[1:12,]
+
+# Save variant
+save_zvariant(variant6, dir = file.path(zsetup_root, project_name),
+              overwrite = TRUE, debug_msg = FALSE)
+
