@@ -1,6 +1,6 @@
 ---
 title: Comparing prioritization methods
-date: "May 22, 2016"
+date: "June 16, 2016"
 output: html_notebook
 ---
 
@@ -25,6 +25,10 @@ z_colors_RdYlBu$colors <- rev(brewer.pal(7, "RdYlBu"))
 ```
 
 ## 1. Setup and background
+
+Conservation planning problems have mostly been dividied into two categories. **The minimum-set** approach  aims to minimize the amount of resources needed to achieve all targets, regardless of how the targets are defined ([Underhill 1994](http://dx.doi.org/10.1016/0006-3207(94)90302-6)). The **maximum-coverage** approach on the other hand aims at maximizing protection for a given budget ([Camm et al. 1996](http://doi.org/10.1016/0006-3207(95)00132-8)). The quantity maximized can be anything from species richness, to productivity, to accessibility by the public, or any combination of factors i.e., whatever is deemed relevant by the analyst ([Arponen et al. 2009](http://doi.org/10.1111/j.1523-1739.2010.01539.x)). Both approaches are related and are useful for different planning circumstances. Furthermore, there are other types of related approaches, such as maximum utility approches (e.g. [Moilanen and Arponen 2011](http://doi.org/10.1016/j.biocon.2010.09.006) and [Laitila and Moilanen 2012](http://doi.org/10.1016/j.ecolmodel.2012.08.010)).
+
+Many different heuristic and optimization have been developed over the year to solve minimum-set, maximum-coverage, and maximum utility type of problems. While comparing different methods is usually like comparing apples to oranges, especially from practical conservation planning point of view such comparisons can have use. Here, I compare three methods that fall into maximum-coverage category.
 
 ### 1.1 Zonation tutorial data
 
@@ -57,7 +61,7 @@ levelplot(sp_rasters, margin = FALSE, scales = list(draw = FALSE),
 
 ### 1.2 Generate cost data
 
-While we will not be using cost data as in actually considering cost data, but we need for as a constraint data for the Gurobi MILP optimization. The cost is `1.0` in each cell, basically meaning that it translates into number of cells. This way it is possible to link an aerial target (such as the top 10% of the landscape) into a budgetary constraint. 
+While we will not be using cost data as in actually considering cost data, but we need for as a constraint data for the Gurobi ILP optimization. The cost is `1.0` in each cell, basically meaning that it translates into number of cells. This way it is possible to link an aerial target (such as the top 10% of the landscape) into a budgetary constraint. 
 
 ```{r generate-cost-data}
 
@@ -80,11 +84,11 @@ Here, we're testing three different prioritization methods against each other at
 
 1. Rarity-wighted richness
 2. Zonation (two methods: core-area Zonation and additive benefit function)
-3. Mixed integer programming (MILP) using Gurobi solver
+3. Integer programming (ILP) using Gurobi solver
 
 ### 2.1 Rarity-Weighted Richness (RWR)
 
-From [Albuquerque and Beier (2009)](http://dx.plos.org/10.1371/journal.pone.0119905):
+From [Albuquerque and Beier (2015)](http://dx.plos.org/10.1371/journal.pone.0119905):
 
 "Williams et al. (1996) proposed that the rarity value of a species can be characterized by the inverse of the number of sites or planning units in which it occurs. Thus if a species is found in only 1 site, the species would have the maximum rarity score of `1/1 = 1`, and a species that occurs in 20 sites would have a rarity score of `1/20 = 0.05`. Williams et al. also proposed that the rarity scores of all species in the site can be summed to yield a single RWR value for the site:
 
@@ -92,7 +96,7 @@ $$ \sum_{n}^{1} (1 / c) $$
 
 where $c_{i}$ is the number of sites occupied by species $i$, and the values are summed for the $n$ species that occur in that site."
 
-While the formulation by Albuquerque and Beier (2009) applies to binary presence/absence data, it can be extended to data where the values in each cell is a quantitative measure, e.g. the probability of occurrence. Hence, the formula becomes:
+While the formulation by Albuquerque and Beier (2015) applies to binary presence/absence data, it can be extended to data where the values in each cell is a quantitative measure, e.g. the probability of occurrence. Hence, the formula becomes:
 
 $$ \sum_{n=1}^{n} \frac{o_{ij}}{\sum_{i} o_{i}}  $$
 
@@ -128,7 +132,7 @@ levelplot(rwr_rank, margin = FALSE, main = "RWR", scales = list(draw = FALSE),
 
 ### 2.2 Zonation (CAZ + ABF)
 
-The RWR priority rank from the prevoius section is compared against two cell-removal rules found in [Zonation](http://cbig.it.helsinki.fi/software/zonation/) software: additive benefit function (ABF) and core-area Zonation (CAZ). Whereas ABF somewhat emphasizes the richness of features in any given cell, CAZ somewhat emphasizes rarity. Previously e.g. [Albuquerque and Beier (2009)](http://dx.plos.org/10.1371/journal.pone.0119905) have compared RWR against CAZ variant of Zonation. 
+The RWR priority rank from the prevoius section is compared against two cell-removal rules found in [Zonation](http://cbig.it.helsinki.fi/software/zonation/) software: additive benefit function (ABF) and core-area Zonation (CAZ). Whereas ABF somewhat emphasizes the richness of features in any given cell, CAZ somewhat emphasizes rarity. Previously e.g. [Albuquerque and Beier (2009)](http://dx.plos.org/10.1371/journal.pone.0119905) have compared RWR against CAZ variant of Zonation. If step-functions are used as the benefit function in ABF Zonation (which is typically not the case), it equals maximum coverage ([Moilanen and Arponen 2011](http://doi.org/10.1016/j.biocon.2010.09.006)).
 
 We're not going to run the actual Zonation analysis, but assume that basic runs [01_core_area_zonation](https://github.com/cbig/zonation-tutorial/tree/master/basic/01_core_area_zonation) and [02_additive_benefit_function](https://github.com/cbig/zonation-tutorial/tree/master/basic/02_additive_benefit_function) have been executed locally. Then, we just do load the results.
 
@@ -154,27 +158,29 @@ levelplot(abf_rank, margin = FALSE,
           at = z_colors_RdYlBu$values, main = "Additive benefit function")
 ```
 
-### 2.3 Prioritization based on Gurobi MILP
+### 2.3 Prioritization based on integer linear programming (ILP) and Gurobi
 
 
-For a thorogh description of using [the Gurobi solver](http://www.gurobi.com/) for solving conservation planning problem, see [Beyer et al. (2016)](http://dx.doi.org/10.1016/j.ecolmodel.2016.02.005). Most of the approach and code below are based on the excellent tutorials [Integer Programming with Gurobi for Reserve Design](http://strimas.com/r/gurobi/) and [Field Guide to ILP Solvers in R for Conservation Prioritization](http://strimas.com/prioritization/ilp-field-guide/) by [Matt Strimas-Mackey](http://strimas.com/about/), and on the [protectr package](https://github.com/mstrimas/protectr) by the same person.
+For a thorough description of using [the Gurobi solver](http://www.gurobi.com/) for solving conservation planning problem, see [Beyer et al. (2016)](http://dx.doi.org/10.1016/j.ecolmodel.2016.02.005). Most of the approach and code below are based on the excellent tutorials [Integer Programming with Gurobi for Reserve Design](http://strimas.com/r/gurobi/) and [Field Guide to ILP Solvers in R for Conservation Prioritization](http://strimas.com/prioritization/ilp-field-guide/) by [Matt Strimas-Mackey](http://strimas.com/about/), and on the [protectr package](https://github.com/mstrimas/protectr) by the same person.
 
-Below, the prioritizaton is done by solving the conservation planning problem in a form a *maximum coverage problem* __(MCP)__, or in other words, find the set of planning units that maximizes the overall level of representation (as measured by the normalized occurrence levels) across a suite of conservation features, while keeping cost within a fixed budget. Here, the cost - and hence the budget - is defined to to be constant (1.0) in all cells. Thus, the budget corresponds to a particular number of planning units (cells) and we can maximize, for example, feature representation for the top 10% of the landscape. By repeating the maximum coverage optimization for a range of budgets (5%, 10%, 15%, ..., 100% of the landscape), it is possible to create a nested hierarchy of solutions. This hierarchical solutions resembles the rankings resulting from the RWR and Zonation above.
+Below, the prioritizaton is done by solving the conservation planning problem in a form a *maximum coverage problem* __(MCP)__, or in other words, find the set of planning units that maximizes the overall level of representation (as measured by the normalized occurrence levels) across a suite of conservation features, while keeping cost within a fixed budget. It is worth mentioning that the Zonation algorithm is implicitly aiming at a maximum coverage type solution; by minimizing marginal loss one maximizes conservation value remaining at any specific level of cell removal ([Moilanen 2007](http://dx.doi.org/10.1016/j.biocon.2006.09.008)).
+
+Here, the cost - and hence the budget - is defined to to be constant (1.0) in all cells. Thus, the budget corresponds to a particular number of planning units (cells) and we can maximize, for example, feature representation for the top 10% of the landscape. By repeating the maximum coverage optimization for a range of budgets (5%, 10%, 15%, ..., 100% of the landscape), it is possible to create a nested hierarchy of solutions. This hierarchical solutions resembles the rankings resulting from the RWR and Zonation above.
 
 __DISCLAIMER:__ at this point, it is unclear to me whether the approach described above and implemented below ("hierarchical optimization") is legit. For one thing, strictly speaking the solutions probably are not guaranteed to be nested, especially for more complex problems. 
 
 ```{r optimize,echo=TRUE,message=FALSE}
 # NAs (NoData) must be raplaced wiht 0s for GUROBI
-#sp_rasters_filled <- sp_rasters
-#sp_rasters_filled[is.na(sp_rasters_filled)] <- 0
-#sp_rasters_filled <- raster::stack(sp_rasters_filled)
+sp_rasters_filled <- sp_rasters
+sp_rasters_filled[is.na(sp_rasters_filled)] <- 0
+sp_rasters_filled <- raster::stack(sp_rasters_filled)
 
 # Solve the maximum coverage problem for a range of target budgets
 budgets <- seq(0.05, 1.00, 0.05)
 results_mc <- list()
 for (b in budgets) {
   b_cells <- b * raster::cellStats(cost, "sum")
-  results <- protectr::gurobi_maxcoverage(cost, sp_rasters, budget = b_cells)
+  results <- protectr::gurobi_maxcoverage(cost, sp_rasters_filled, budget = b_cells)
   results_mc[[as.character(b)]] <- results
 }
 ```
@@ -202,12 +208,12 @@ process_gurobi_results <- function(results, template_raster) {
 }
 
 # Process the whole list of maximum coverage solutions
-milp_mc <- raster::stack(lapply(results_mc, process_gurobi_results, template))
-names(milp_mc) <- paste0("percent", budgets*100)
+mcp_ilp <- raster::stack(lapply(results_mc, process_gurobi_results, template))
+names(mcp_ilp) <- paste0("percent", budgets*100)
 ```
 ```{r plot-mcp-results}
 # Plot a selection of solutions (10%, 20%, 50%)
-levelplot(subset(milp_mc, c(2, 4, 10)), main = "Maximum coverage solution\n(gap = 5%)",
+levelplot(subset(mcp_ilp, c(2, 4, 10)), main = "Maximum coverage solution\n(gap = 5%)",
           scales = list(draw = FALSE),
           col.regions = c("grey70", "#d7191c"),
           colorkey = list(space = "bottom", height = 1))
@@ -222,12 +228,12 @@ normalize <- function(x) {
 }
 
 # Sum up all the layers in the stack -> result is a selection frequency
-milp_mc_hier <- sum(milp_mc, na.rm = TRUE)
+mcp_ilp_hier <- sum(mcp_ilp, na.rm = TRUE)
 # Replace 0s with NAs
-milp_mc_hier[milp_mc_hier == 0] <- NA
+mcp_ilp_hier[mcp_ilp_hier == 0] <- NA
 # Normalize value into scale [0, 1]
-milp_mc_hier <- normalize(milp_mc_hier)
-levelplot(milp_mc_hier, margin = FALSE, scales = list(draw = FALSE),
+mcp_ilp_hier <- normalize(mcp_ilp_hier)
+levelplot(mcp_ilp_hier, margin = FALSE, scales = list(draw = FALSE),
           par.settings = rasterTheme(region = z_colors_RdYlBu$colors), 
           at = z_colors_RdYlBu$values, main = "Gurobi MCP")
 ```
@@ -265,7 +271,7 @@ p5 <- levelplot(abf_top10, main = "Zonation ABF\ntop 10%",
           scales = list(draw = FALSE),
           col.regions = c("grey70", "#d7191c"),
           colorkey = list(space = "bottom", height = 1))
-p6 <- levelplot(milp_mc[[1]], main = "Gurobi MCP\n10% budget",
+p6 <- levelplot(mcp_ilp[[1]], main = "Gurobi MCP\n10% budget",
           scales = list(draw = FALSE),
           col.regions = c("grey70", "#d7191c"),
           colorkey = list(space = "bottom", height = 1))
@@ -276,7 +282,7 @@ grid.arrange(p4, p5, p6, nrow = 1, ncol = 3)
 Let's also check that the solutions above include the same amount of cells included in the top 10%.
 
 ```{r table-results,results="asis"}
-cell_count <- lapply(c(rwr_top10, abf_top10, milp_mc[[2]]), function(x) table(raster::getValues(x))) 
+cell_count <- lapply(c(rwr_top10, abf_top10, mcp_ilp[[2]]), function(x) table(raster::getValues(x))) 
 cell_count <- as.data.frame(do.call("rbind", cell_count))
 names(cell_count) <- c("Low", "Top")
 cell_count$Method <- c("RWR", "ABF", "MILP MCP")
@@ -339,10 +345,10 @@ rcl <- data.frame(from = seq(0, .9, 0.1),
 rwr_zonal <- zonal_stats(rwr_rank, sp_rasters_normalized, rcl, "RWR")
 abf_zonal <- zonal_stats(abf_rank, sp_rasters_normalized, rcl, "ABF")
 caz_zonal <- zonal_stats(caz_rank, sp_rasters_normalized, rcl, "CAZ")
-milp_zonal <- zonal_stats(milp_mc_hier, sp_rasters_normalized, rcl, "MILP")
+mcp_ilp_zonal <- zonal_stats(mcp_ilp_hier, sp_rasters_normalized, rcl, "ILP")
 
 # Bind all zonal stats together
-all_zonal <- dplyr::bind_rows(rwr_zonal, abf_zonal, caz_zonal, milp_zonal) %>% 
+all_zonal <- dplyr::bind_rows(rwr_zonal, abf_zonal, caz_zonal, mcp_ilp_zonal) %>% 
   dplyr::select(zone, mean_drem, method)
 
 ggplot(rwr_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + ggtitle("RWR") +
@@ -354,7 +360,7 @@ ggplot(abf_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + ggti
 ggplot(caz_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + ggtitle("CAZ") +
   ylab("Distribution remaining\n") + xlab("\n Landscape selected") + 
   scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%"))
-ggplot(milp_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + 
+ggplot(mcp_ilp_zonal, aes(x = zone, y = drem, color = species)) + geom_line() + 
   ggtitle("Gurobi MCP") + ylab("Distribution remaining\n") + xlab("\n Landscape selected") + 
   scale_x_continuous(breaks = 0:10, labels = paste0(seq(100, 0, -10), "%"))
 ggplot(all_zonal, aes(x = zone, y = mean_drem, color = method)) + geom_line() +
@@ -365,3 +371,15 @@ ggplot(all_zonal, aes(x = zone, y = mean_drem, color = method)) + geom_line() +
 ```
 
 What is striking here, is that there is very little difference between the methods. CAZ - as expected - has on average a little lower performance, others are very similar.
+
+## 4. Literature cited
+
++ Albuquerque, F. S., & Beier, P. (2015). Rarity-Weighted Richness: A Simple and Reliable Alternative to Integer Programming and Heuristic Algorithms for Minimum Set and Maximum Coverage Problems in Conservation Planning. Plos One, 10(3), e0119905. [http://doi.org/10.1371/journal.pone.0119905](http://doi.org/10.1371/journal.pone.0119905)
++ Arponen, A., Cabeza, M., Eklund, J., Kujala, H., & Lehtomäki, J. (2010). Costs of integrating economics and conservation planning. Conservation Biology, 24(5), 1198–204. [http://doi.org/10.1111/j.1523-1739.2010.01539.x](http://doi.org/10.1111/j.1523-1739.2010.01539.x)
++ Beyer, H. L., Dujardin, Y., Watts, M. E., & Possingham, H. P. (2016). Solving conservation planning problems with integer linear programming. Ecological Modelling, 328, 14–22. [http://dx.doi.org/10.1016/j.ecolmodel.2016.02.005](http://dx.doi.org/10.1016/j.ecolmodel.2016.02.005)
++ Camm, J. D., Polasky, S., Solow, A., & Csuti, B. (1996). A note on optimal algorithms for reserve site selection. Biological Conservation, 78(3), 353–355. [http://doi.org/10.1016/0006-3207(95)00132-8](http://doi.org/10.1016/0006-3207(95)00132-8)
++ Laitila, J., & Moilanen, A. (2012). Use of many low-level conservation targets reduces high-level conservation performance. Ecological Modelling, 247, 40–47. [http://doi.org/10.1016/j.ecolmodel.2012.08.010](http://doi.org/10.1016/j.ecolmodel.2012.08.010)
++ Moilanen, A. (2007). Landscape Zonation, benefit functions and target-based planning: unifying reserve selection strategies. Biological Conservation, 134, 571–579.
+[http://dx.doi.org/10.1016/j.biocon.2006.09.008](http://dx.doi.org/10.1016/j.biocon.2006.09.008)
++ Moilanen, A., & Arponen, A. (2011). Setting conservation targets under budgetary constraints. Biological Conservation, 144(1), 650–653. [http://doi.org/10.1016/j.biocon.2010.09.006](http://doi.org/10.1016/j.biocon.2010.09.006)
++ Underhill, L. G. 1994. Optimal and suboptimal reserve selection algorithms. Biological Conservation 70:85–87. [http://dx.doi.org/10.1016/0006-3207(94)90302-6](http://dx.doi.org/10.1016/0006-3207(94)90302-6)
