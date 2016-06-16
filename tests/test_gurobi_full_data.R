@@ -32,7 +32,7 @@ message("Creating cost layer...")
 cost <- extent(rasters) %>%
   raster(nrows = nrow(rasters), ncols = ncol(rasters), vals = 1)
 
-# Fill areas normalle NA (NoData) with cost of 0
+# Fill areas normally NA (NoData) with cost of 0
 cost[is.na(rasters[[1]])] <- 0
 
 message("Converting NoData to zeros...")
