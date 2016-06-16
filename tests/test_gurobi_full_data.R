@@ -9,10 +9,10 @@ library(raster)
 # Set raster options
 rasterOptions(tmpdir = "/data/tmp/raster",
               progress = "text",
-              chunksize = 10000000,
+              chunksize = 100000000,
               maxmemory = 200000000)
 
-data_dir <- "data/processed/features_ol_normalized"
+data_dir <- "../data/processed/features_ol_normalized"
 if (!file.exists(data_dir)) {
   stop("Dir ", data_dir, " does not exist")
 }
