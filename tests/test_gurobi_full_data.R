@@ -19,9 +19,11 @@ if (!file.exists(data_dir)) {
 
 message("Reading in data...")
 raster_files <- list.files(path = data_dir, pattern = ".+\\.tif$",
-                           full.names = TRUE, recursive = TRUE)
+                           full.names = TRUE, recursive = TRUE)[1:12]
 message("Found ", length(raster_files), " rasters")
-
+for (raster_file in raster_files) {
+  message(raster_file)
+}
 if (length(raster_files) == 0) {
   stop("No input files found in ", data_dir)
 }
@@ -43,7 +45,7 @@ cost[rasters[[1]] == 0] <- 0
 #rasters_filled <- raster::stack(rasters_filled)
 
 # Solve the maximum coverage problem for a range of target budgets
-budgets <- c(0.05, 0.10)
+budgets <- seq(0.05, 1, 0.05)
 results_mc <- list()
 for (b in budgets) {
   message("Optimizing with target budget ", b)
