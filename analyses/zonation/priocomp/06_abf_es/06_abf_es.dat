@@ -1,5 +1,5 @@
 [Settings]
-removal rule = 1
+removal rule = 2
 warp factor = 1000
 edge removal = 1
 add edge points = 0
