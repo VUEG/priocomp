@@ -3,9 +3,12 @@
   <title></title>
   <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="">
     <customproperties/>
-    <layer-tree-group expanded="1" checked="Qt::Unchecked" name="RWR">
+    <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="NUTS_RG_01M_2013_level020160620154312437" name="NUTS_RG_01M_2013_level0">
       <customproperties/>
-      <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="eu26_rwr_es20160610102949232" name="eu26_rwr_es">
+    </layer-tree-layer>
+    <layer-tree-group expanded="1" checked="Qt::Checked" name="RWR">
+      <customproperties/>
+      <layer-tree-layer expanded="1" checked="Qt::Checked" id="eu26_rwr_es20160610102949232" name="eu26_rwr_es">
         <customproperties/>
       </layer-tree-layer>
     </layer-tree-group>
@@ -71,7 +74,7 @@
     </layer-tree-group>
     <layer-tree-group expanded="1" checked="Qt::Checked" name="ILP">
       <customproperties/>
-      <layer-tree-layer expanded="0" checked="Qt::Checked" id="eu26_ilp_es20160617090708183" name="eu26_ilp_es">
+      <layer-tree-layer expanded="1" checked="Qt::Checked" id="eu26_ilp_es20160617090708183" name="eu26_ilp_es">
         <customproperties/>
       </layer-tree-layer>
     </layer-tree-group>
@@ -80,10 +83,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>2270152.5</xmin>
-      <ymin>982360</ymin>
-      <xmax>7022452.5</xmax>
-      <ymax>5612860.00000000186264515</ymax>
+      <xmin>2374388.994140625</xmin>
+      <ymin>1078698.11523437686264515</ymin>
+      <xmax>7126688.994140625</xmax>
+      <ymax>5709198.11523437686264515</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -113,9 +116,10 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="03_caz_wgt_rank_compressed20160610095226793"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="02_abf_nwout120160615121732207"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="05_caz_es_nwout120160617090137652"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="01_caz_rank_compressed20160620143503852"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="04_abf_wgt_nwout120160615125613505"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="06_abf_es_rank_compressed20160617090219527"/>
-      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="01_caz_rank_compressed20160620143503852"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="NUTS_RG_01M_2013_level020160620154312437"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="eu26_ilp_es20160617090708183"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="01_caz_nwout120160615121349868"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="02_abf_rank_compressed20160615121711404"/>
@@ -139,13 +143,19 @@
       <item>06_abf_es_rank_compressed20160617090219527</item>
       <item>eu26_ilp_es20160617090708183</item>
       <item>01_caz_rank_compressed20160620143503852</item>
+      <item>NUTS_RG_01M_2013_level020160620154312437</item>
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
-    <legendgroup open="true" checked="Qt::Unchecked" name="RWR">
-      <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="eu26_rwr_es" showFeatureCount="0">
+    <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="NUTS_RG_01M_2013_level0" showFeatureCount="0">
+      <filegroup open="true" hidden="false">
+        <legendlayerfile isInOverview="0" layerid="NUTS_RG_01M_2013_level020160620154312437" visible="0"/>
+      </filegroup>
+    </legendlayer>
+    <legendgroup open="true" checked="Qt::Checked" name="RWR">
+      <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="eu26_rwr_es" showFeatureCount="0">
         <filegroup open="true" hidden="false">
-          <legendlayerfile isInOverview="0" layerid="eu26_rwr_es20160610102949232" visible="0"/>
+          <legendlayerfile isInOverview="0" layerid="eu26_rwr_es20160610102949232" visible="1"/>
         </filegroup>
       </legendlayer>
     </legendgroup>
@@ -229,8 +239,8 @@
       </legendgroup>
     </legendgroup>
     <legendgroup open="true" checked="Qt::Checked" name="ILP">
-      <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="eu26_ilp_es" showFeatureCount="0">
-        <filegroup open="false" hidden="false">
+      <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="eu26_ilp_es" showFeatureCount="0">
+        <filegroup open="true" hidden="false">
           <legendlayerfile isInOverview="0" layerid="eu26_ilp_es20160617090708183" visible="1"/>
         </filegroup>
       </legendlayer>
@@ -844,8 +854,8 @@
         </layer>
       </symbol>
       <ComposerItemGroup>
-        <ComposerItemGroupElement uuid="{e584c162-1c0e-4ad8-9a59-db86fe6e9374}"/>
         <ComposerItemGroupElement uuid="{b7550c7e-de9e-480a-8d40-2eef703995a9}"/>
+        <ComposerItemGroupElement uuid="{e584c162-1c0e-4ad8-9a59-db86fe6e9374}"/>
         <ComposerItem pagey="86.2976" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="134.855" y="86.2976" visibility="1" zValue="7" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="61.747" outlineWidth="0.3" excludeFromExports="0" uuid="{a210f3d6-6650-40a1-bfdd-ccf229764690}" height="47.7" itemRotation="0" frame="false" pagex="134.855">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
@@ -3934,6 +3944,50 @@ def my_form_open(dialog, layer, feature):
               <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
             </colorrampshader>
           </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="0" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <id>NUTS_RG_01M_2013_level020160620154312437</id>
+      <datasource>../../data/processed/eurostat/nuts/level0/NUTS_RG_01M_2013_level0.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>NUTS_RG_01M_2013_level0</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
+          <srsid>100002</srsid>
+          <srid>0</srid>
+          <authid>USER:100002</authid>
+          <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer gradient="BlackToWhite" opacity="1" alphaBand="-1" type="singlebandgray" grayBand="1">
+          <rasterTransparency/>
+          <contrastEnhancement>
+            <minValue>1</minValue>
+            <maxValue>35</maxValue>
+            <algorithm>StretchToMinimumMaximum</algorithm>
+          </contrastEnhancement>
         </rasterrenderer>
         <brightnesscontrast brightness="0" contrast="0"/>
         <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
