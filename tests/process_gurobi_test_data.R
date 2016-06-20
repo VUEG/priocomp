@@ -1,5 +1,5 @@
 #!/usr/bin/env r
-
+library(magrittr)
 library(raster)
 
 normalize <- function(x) {
@@ -27,9 +27,10 @@ process_gurobi_results <- function(results, template_raster) {
   return(result_raster)
 }
 
+message("Loading results...")
 load("results_mc.RData")
 
-data_dir <- "data/processed/features_ol_normalized"
+data_dir <- "../data/processed/features_ol_normalized"
 if (!file.exists(data_dir)) {
   stop("Dir ", data_dir, " does not exist")
 }
@@ -49,6 +50,7 @@ template <- extent(rasters) %>%
   raster(nrows = nrow(rasters), ncols = ncol(rasters), vals = 1)
 template[rasters[[1]] == 0] <- NA
 
+message("Stacking results...")
 mcp_ilp <- raster::stack(lapply(results_mc, process_gurobi_results, template))
 
 # Sum up all the layers in the stack -> result is a selection frequency
@@ -58,4 +60,5 @@ mcp_ilp_hier[mcp_ilp_hier == 0] <- NA
 # Normalize value into scale [0, 1]
 mcp_ilp_hier <- normalize(mcp_ilp_hier)
 
+message("Saving results...")
 raster::writeRaster(mcp_ilp_hier, "mcp_ilp_hier.tif")
