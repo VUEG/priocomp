@@ -58,4 +58,4 @@ mcp_ilp_hier <- sum(mcp_ilp, na.rm = TRUE)
 # Normalize value into scale [0, 1]
 mcp_ilp_hier <- normalize(mcp_ilp_hier)
 
-raster::writeRaster(mcp_ilp_hier, "mcp_ilp_hier.tif")
+raster::writeRaster(mcp_ilp_hier, "eu26_ilp_es.tif")
