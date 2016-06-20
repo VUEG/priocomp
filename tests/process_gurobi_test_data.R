@@ -56,9 +56,9 @@ mcp_ilp <- raster::stack(lapply(results_mc, process_gurobi_results, template))
 # Sum up all the layers in the stack -> result is a selection frequency
 mcp_ilp_hier <- sum(mcp_ilp, na.rm = TRUE)
 # Replace 0s with NAs
-#mcp_ilp_hier[mcp_ilp_hier == 0] <- NA
+mcp_ilp_hier[rasters[[1]] == 0] <- NA
 # Normalize value into scale [0, 1]
 mcp_ilp_hier <- normalize(mcp_ilp_hier)
 
 message("Saving results...")
-raster::writeRaster(mcp_ilp_hier, "mcp_ilp_hier.tif")
+raster::writeRaster(mcp_ilp_hier, "eu26_ilp_es.tif")
