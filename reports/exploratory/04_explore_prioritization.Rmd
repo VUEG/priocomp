@@ -182,7 +182,6 @@ for (b in budgets) {
   b_cells <- b * raster::cellStats(cost, "sum")
   mc_model <- prioritizr::maxcover_model(x = cost, features = sp_rasters_filled, budget = b_cells)
   mc_results <- prioritize(mc_model, gap = 0.001)
-  ##results <- protectr::gurobi_maxcoverage(cost, sp_rasters_filled, budget = b_cells)
   results_mc[[as.character(b)]] <- mc_results
 }
 ```
