@@ -50,8 +50,10 @@ results_mc <- list()
 for (b in budgets) {
   message("Optimizing with target budget ", b)
   b_cells <- b * raster::cellStats(cost, "sum")
-  results <- protectr::gurobi_maxcoverage(cost, rasters, budget = b_cells)
-  results_mc[[as.character(b)]] <- results
+  mc_model <- prioritizr::maxcover_model(x = cost, features = sp_rasters_filled,
+                                         budget = b_cells)
+  mc_results <- prioritize(mc_model, gap = 0.001)
+  results_mc[[as.character(b)]] <- mc_results
   message("Saving results...")
   save(results_mc, file = "results_mc.RData")
 }
