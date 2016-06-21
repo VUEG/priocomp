@@ -559,8 +559,8 @@
         </layer>
       </symbol>
       <ComposerItemGroup>
-        <ComposerItemGroupElement uuid="{807ad5e4-e362-4a27-b54c-40607297a33d}"/>
         <ComposerItemGroupElement uuid="{d89a5df5-6446-4f25-801f-05f53c07c953}"/>
+        <ComposerItemGroupElement uuid="{807ad5e4-e362-4a27-b54c-40607297a33d}"/>
         <ComposerItem pagey="86.2976" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="134.855" y="86.2976" visibility="1" zValue="10" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="61.747" outlineWidth="0.3" excludeFromExports="0" uuid="{d3b940f5-583e-4f71-b47a-ae5aec796c52}" height="47.7" itemRotation="0" frame="false" pagex="134.855">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
@@ -854,8 +854,8 @@
         </layer>
       </symbol>
       <ComposerItemGroup>
-        <ComposerItemGroupElement uuid="{b7550c7e-de9e-480a-8d40-2eef703995a9}"/>
         <ComposerItemGroupElement uuid="{e584c162-1c0e-4ad8-9a59-db86fe6e9374}"/>
+        <ComposerItemGroupElement uuid="{b7550c7e-de9e-480a-8d40-2eef703995a9}"/>
         <ComposerItem pagey="86.2976" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="134.855" y="86.2976" visibility="1" zValue="7" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="61.747" outlineWidth="0.3" excludeFromExports="0" uuid="{a210f3d6-6650-40a1-bfdd-ccf229764690}" height="47.7" itemRotation="0" frame="false" pagex="134.855">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
