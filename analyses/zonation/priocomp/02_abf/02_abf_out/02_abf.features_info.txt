@@ -12,7 +12,6 @@ Weight  distribution-sum  IGRetained TviolationFractRem  Distr-mean-X   Distr-me
 1.000 	61563824.000	61563824.00	0.00000	1194.69	1265.31	../../../data/processed/features/provide/pollination_flows/pollination_flows.tif
 1.000 	32297560.000	32297560.00	0.00000	1176.33	1307.09	../../../data/processed/features/provide/species_richness_farmland_birds_original1/species_richness_farmland_birds_original1.tif
 1.000 	89145360.000	89145360.00	0.00000	1134.63	1228.04	../../../data/processed/features/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif
-<<<<<<< HEAD
 1.000 	22019.000	22019.00	0.00000	462.65	1745.06	../../../data/processed/features/udr/european_tetrapods/amphibians/alytes_cisternasii.tif
 1.000 	4133.000	4133.00	0.00000	589.91	1847.20	../../../data/processed/features/udr/european_tetrapods/amphibians/alytes_dickhilleni.tif
 1.000 	121.000	121.00	0.00000	851.57	1762.60	../../../data/processed/features/udr/european_tetrapods/amphibians/alytes_muletensis.tif
