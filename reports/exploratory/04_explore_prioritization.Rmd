@@ -1,6 +1,6 @@
 ---
 title: Comparing prioritization methods
-date: "June 16, 2016"
+date: "June 21, 2016"
 output: html_notebook
 ---
 
@@ -11,7 +11,7 @@ library(grid)
 library(gridExtra)
 library(gurobi)
 library(knitr)
-library(protectr)
+library(prioritizr)
 library(raster)
 library(rasterVis)
 library(tidyr)
@@ -161,7 +161,7 @@ levelplot(abf_rank, margin = FALSE,
 ### 2.3 Prioritization based on integer linear programming (ILP) and Gurobi
 
 
-For a thorough description of using [the Gurobi solver](http://www.gurobi.com/) for solving conservation planning problem, see [Beyer et al. (2016)](http://dx.doi.org/10.1016/j.ecolmodel.2016.02.005). Most of the approach and code below are based on the excellent tutorials [Integer Programming with Gurobi for Reserve Design](http://strimas.com/r/gurobi/) and [Field Guide to ILP Solvers in R for Conservation Prioritization](http://strimas.com/prioritization/ilp-field-guide/) by [Matt Strimas-Mackey](http://strimas.com/about/), and on the [protectr package](https://github.com/mstrimas/protectr) by the same person.
+For a thorough description of using [the Gurobi solver](http://www.gurobi.com/) for solving conservation planning problem, see [Beyer et al. (2016)](http://dx.doi.org/10.1016/j.ecolmodel.2016.02.005). Most of the approach and code below are based on the excellent tutorials [Integer Programming with Gurobi for Reserve Design](http://strimas.com/r/gurobi/) and [Field Guide to ILP Solvers in R for Conservation Prioritization](http://strimas.com/prioritization/ilp-field-guide/) by [Matt Strimas-Mackey](http://strimas.com/about/), and on the [prioritizr package](https://github.com/mstrimas/prioritizr) by the same person.
 
 Below, the prioritizaton is done by solving the conservation planning problem in a form a *maximum coverage problem* __(MCP)__, or in other words, find the set of planning units that maximizes the overall level of representation (as measured by the normalized occurrence levels) across a suite of conservation features, while keeping cost within a fixed budget. It is worth mentioning that the Zonation algorithm is implicitly aiming at a maximum coverage type solution; by minimizing marginal loss one maximizes conservation value remaining at any specific level of cell removal ([Moilanen 2007](http://dx.doi.org/10.1016/j.biocon.2006.09.008)).
 
@@ -180,8 +180,9 @@ budgets <- seq(0.05, 1.00, 0.05)
 results_mc <- list()
 for (b in budgets) {
   b_cells <- b * raster::cellStats(cost, "sum")
-  results <- protectr::gurobi_maxcoverage(cost, sp_rasters_filled, budget = b_cells)
-  results_mc[[as.character(b)]] <- results
+  mc_model <- prioritizr::maxcover_model(x = cost, features = sp_rasters_filled, budget = b_cells)
+  mc_results <- prioritize(mc_model, gap = 0.001)
+  results_mc[[as.character(b)]] <- mc_results
 }
 ```
 
@@ -213,7 +214,7 @@ names(mcp_ilp) <- paste0("percent", budgets*100)
 ```
 ```{r plot-mcp-results}
 # Plot a selection of solutions (10%, 20%, 50%)
-levelplot(subset(mcp_ilp, c(2, 4, 10)), main = "Maximum coverage solution\n(gap = 5%)",
+levelplot(subset(mcp_ilp, c(2, 4, 10)), main = "Maximum coverage solution\n(gap = 0.1%)",
           scales = list(draw = FALSE),
           col.regions = c("grey70", "#d7191c"),
           colorkey = list(space = "bottom", height = 1))

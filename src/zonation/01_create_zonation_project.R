@@ -11,9 +11,9 @@ source("src/utils.R")
 # Generate variants for all taxa ------------------------------------------
 
 variants <- c("01_caz", "02_abf", "03_caz_wgt", "04_abf_wgt",
-              "05_caz_es", "06_abf_es")
+              "05_caz_es", "06_abf_es", "07_caz_bd", "08_abf_bd")
 
-zsetup_root <- "analyses/zonation"
+zsetup_root <- "analyses/zonation_tmp"
 
 ppa_raster_file <- "../../../data/processed/eurostat/nuts/level2/NUTS_RG_01M_2013_level2.tif"
 ppa_config_file <- "ppa_config.txt"
@@ -114,6 +114,9 @@ save_zvariant(variant5, dir = file.path(zsetup_root, project_name),
 ## 06_abf
 
 variant6 <- get_variant(priocomp_zproject, 6)
+variant6 <- set_dat_param(variant6, "removal rule", 2)
+variant6 <- set_dat_param(variant6, "post-processing list file",
+                          ppa_config_file)
 
 ppa_file_name <- file.path(zsetup_root, project_name, ppa_config_file)
 ppa_cmd_string <- paste(c("LSM", ppa_raster_file, 0, -1, 0), collapse = " ")
@@ -128,3 +131,41 @@ sppdata(variant6) <- sppdata(variant6)[1:12,]
 save_zvariant(variant6, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
 
+# Just biodiversity features --------------------------------------------------
+
+## 07_caz_bd
+
+variant7 <- get_variant(priocomp_zproject, 7)
+
+ppa_file_name <- file.path(zsetup_root, project_name, ppa_config_file)
+ppa_cmd_string <- paste(c("LSM", ppa_raster_file, 0, -1, 0), collapse = " ")
+write(ppa_cmd_string, ppa_file_name)
+variant7 <- set_dat_param(variant7, "post-processing list file",
+                          ppa_config_file)
+
+# Select ONLY BD features
+sppdata(variant7) <- sppdata(variant7)[13:nfeatures(variant7),]
+
+# Save variant
+save_zvariant(variant7, dir = file.path(zsetup_root, project_name),
+              overwrite = TRUE, debug_msg = FALSE)
+
+## 08_abf_bd
+
+variant8 <- get_variant(priocomp_zproject, 8)
+variant8 <- set_dat_param(variant8, "removal rule", 2)
+variant8 <- set_dat_param(variant8, "post-processing list file",
+                          ppa_config_file)
+
+ppa_file_name <- file.path(zsetup_root, project_name, ppa_config_file)
+ppa_cmd_string <- paste(c("LSM", ppa_raster_file, 0, -1, 0), collapse = " ")
+write(ppa_cmd_string, ppa_file_name)
+variant8 <- set_dat_param(variant8, "post-processing list file",
+                          ppa_config_file)
+
+# Select ONLY BD features
+sppdata(variant8) <- sppdata(variant8)[13:nfeatures(variant8),]
+
+# Save variant
+save_zvariant(variant8, dir = file.path(zsetup_root, project_name),
+              overwrite = TRUE, debug_msg = FALSE)
