@@ -7,4 +7,4 @@ initial removal percent = 0.0
 annotate name = 0
 post-processing list file = ppa_config.txt
 use groups = 1
-groups file = 02_abf/02_abf_groups.txt
+groups file = 08_abf_bd/08_abf_bd_groups.txt

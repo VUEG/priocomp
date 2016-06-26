@@ -8,7 +8,17 @@ library(zonator)
 
 source("src/utils.R")
 
-# Generate variants for all taxa ------------------------------------------
+# Number of features in groups ------------------------------------------------
+
+NESFEATURES <- 12
+NBDFEATURES <- 759
+
+NAMPHIBIANS <- 81
+NBIRDS <- 403
+NMAMMALS <- 164
+NREPTILES <- 111
+
+# Generate variants for all taxa ----------------------------------------------
 
 variants <- c("01_caz", "02_abf", "03_caz_wgt", "04_abf_wgt",
               "05_caz_es", "06_abf_es", "07_caz_bd", "08_abf_bd")
@@ -44,6 +54,17 @@ write(ppa_cmd_string, ppa_file_name)
 variant1 <- set_dat_param(variant1, "post-processing list file",
                           ppa_config_file)
 
+# Define groups. Features 1-12 are ecosystem services, Features 13-771 are
+# species features.
+groups(variant1) <- c(rep(1, NESFEATURES),
+                      rep(2, NBDFEATURES))
+groupnames(variant1) <- c("1" = "ecosystem_services", "2" = "species")
+# Set groups use and groups file
+variant1 <- set_dat_param(variant1, "use groups", 1)
+# Note that groups file location is always relative to the bat file
+groups_file <- file.path(variant1@name, paste0(variant1@name, "_groups.txt"))
+variant1 <- set_dat_param(variant1, "groups file", groups_file)
+
 # Save variant
 save_zvariant(variant1, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
@@ -54,6 +75,18 @@ variant2 <- get_variant(priocomp_zproject, 2)
 variant2 <- set_dat_param(variant2, "removal rule", 2)
 variant2 <- set_dat_param(variant2, "post-processing list file",
                           ppa_config_file)
+
+# Define groups. Features 1-12 are ecosystem services, Features 13-771 are
+# species features.
+groups(variant2) <- c(rep(1, NESFEATURES),
+                      rep(2, NBDFEATURES))
+groupnames(variant2) <- c("1" = "ecosystem_services", "2" = "species")
+# Set groups use and groups file
+variant2 <- set_dat_param(variant2, "use groups", 1)
+# Note that groups file location is always relative to the bat file
+groups_file <- file.path(variant2@name, paste0(variant2@name, "_groups.txt"))
+variant2 <- set_dat_param(variant2, "groups file", groups_file)
+
 save_zvariant(variant2, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
 
@@ -62,10 +95,18 @@ variant3 <- get_variant(priocomp_zproject, 3)
 variant3 <- set_dat_param(variant3, "removal rule", 1)
 variant3 <- set_dat_param(variant3, "post-processing list file",
                           ppa_config_file)
+
 # Define groups. Features 1-12 are ecosystem services, Features 13-771 are
 # species features.
-groups(variant3) <- c(rep(1, 12), rep(2, (nfeatures(variant3) - 12)))
+groups(variant3) <- c(rep(1, NESFEATURES),
+                      rep(2, NBDFEATURES))
 groupnames(variant3) <- c("1" = "ecosystem_services", "2" = "species")
+# Set groups use and groups file
+variant3 <- set_dat_param(variant3, "use groups", 1)
+# Note that groups file location is always relative to the bat file
+groups_file <- file.path(variant3@name, paste0(variant3@name, "_groups.txt"))
+variant3 <- set_dat_param(variant3, "groups file", groups_file)
+
 # Give weight of 759 / 12 to each. Altogether, there are 759 spcies
 # features. Give weight 1 to each.
 variant3@spp.data$weight <- c(rep(nfeatures(variant3) / 12, 12),
@@ -79,10 +120,17 @@ variant4 <- get_variant(priocomp_zproject, 4)
 variant4 <- set_dat_param(variant4, "removal rule", 2)
 variant4 <- set_dat_param(variant4, "post-processing list file",
                           ppa_config_file)
+
 # Define groups. Features 1-12 are ecosystem services, Features 13-771 are
 # species features.
 groups(variant4) <- c(rep(1, 12), rep(2, (nfeatures(variant4) - 12)))
 groupnames(variant4) <- c("1" = "ecosystem_services", "2" = "species")
+# Set groups use and groups file
+variant4 <- set_dat_param(variant4, "use groups", 1)
+# Note that groups file location is always relative to the bat file
+groups_file <- file.path(variant4@name, paste0(variant4@name, "_groups.txt"))
+variant4 <- set_dat_param(variant4, "groups file", groups_file)
+
 # Give weight of 759 / 12 to each. Altogether, there are 759 spcies
 # features. Give weight 1 to each.
 variant4@spp.data$weight <- c(rep(nfeatures(variant4) / 12, 12),
@@ -146,6 +194,19 @@ variant7 <- set_dat_param(variant7, "post-processing list file",
 # Select ONLY BD features
 sppdata(variant7) <- sppdata(variant7)[13:nfeatures(variant7),]
 
+# Define groups based on taxon. NOTE: for now, groups hard coded
+groups(variant7) <- c(rep(1, NAMPHIBIANS),
+                      rep(2, NBIRDS),
+                      rep(3, NMAMMALS),
+                      rep(4, NREPTILES))
+groupnames(variant7) <- c("1" = "amphibians", "2" = "birds", "3" = "mammals",
+                          "4" = "reptiles")
+# Set groups use and groups file
+variant7 <- set_dat_param(variant7, "use groups", 1)
+# Note that groups file location is always relative to the bat file
+groups_file <- file.path(variant7@name, paste0(variant7@name, "_groups.txt"))
+variant7 <- set_dat_param(variant7, "groups file", groups_file)
+
 # Save variant
 save_zvariant(variant7, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
@@ -165,6 +226,19 @@ variant8 <- set_dat_param(variant8, "post-processing list file",
 
 # Select ONLY BD features
 sppdata(variant8) <- sppdata(variant8)[13:nfeatures(variant8),]
+
+# Define groups based on taxon. NOTE: for now, groups hard coded
+groups(variant8) <- c(rep(1, NAMPHIBIANS),
+                      rep(2, NBIRDS),
+                      rep(3, NMAMMALS),
+                      rep(4, NREPTILES))
+groupnames(variant8) <- c("1" = "amphibians", "2" = "birds", "3" = "mammals",
+                          "4" = "reptiles")
+# Set groups use and groups file
+variant8 <- set_dat_param(variant8, "use groups", 1)
+# Note that groups file location is always relative to the bat file
+groups_file <- file.path(variant8@name, paste0(variant8@name, "_groups.txt"))
+variant8 <- set_dat_param(variant8, "groups file", groups_file)
 
 # Save variant
 save_zvariant(variant8, dir = file.path(zsetup_root, project_name),
