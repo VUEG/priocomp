@@ -1,5 +1,5 @@
 [Settings]
-removal rule = 2
+removal rule = 1
 warp factor = 1000
 edge removal = 1
 add edge points = 0
@@ -7,4 +7,4 @@ initial removal percent = 0.0
 annotate name = 0
 post-processing list file = ppa_config.txt
 use groups = 1
-groups file = 02_abf/02_abf_groups.txt
+groups file = 07_caz_bd/07_caz_bd_groups.txt
