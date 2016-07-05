@@ -11,7 +11,9 @@ import logging
 import numpy as np
 import numpy.ma as ma
 import os
+import pdb
 import rasterio
+import sys
 import time
 
 from gurobipy import *
@@ -35,7 +37,6 @@ def optimize_gurobi(input_rasters, output_raster, budget,
     :param verbose Boolean indicating how much information is printed out.
     :param logger logger object to be used.
     """
-    assert len(input_rasters) > 0, "Input rasters list cannot be empty"
 
     # Set up logging
     if not logger:
@@ -44,6 +45,16 @@ def optimize_gurobi(input_rasters, output_raster, budget,
         llogger.setLevel(logging.DEBUG if verbose else logging.INFO)
     else:
         llogger = logger
+
+    if len(input_rasters) < 1:
+        llogger.error("Input rasters list cannot be empty")
+        sys.exit(1)
+    # Check inputs
+    try:
+        budget = float(budget)
+    except ValueError:
+        llogger.error("'budget' must be coercible to float")
+        sys.exit(1)
 
     # Initiate the data structure for holding the summed values.
     sum_array = None
@@ -85,6 +96,11 @@ def optimize_gurobi(input_rasters, output_raster, budget,
 
     # Flatten the sum array
     sum_array = sum_array.flatten()
+    # Get rid of zeros for now, but first get the mask
+    mask = ma.getmask(ma.masked_values(sum_array, 0.0))
+
+    mask = mask.reshape((profile["height"], profile["width"]))
+    sum_array = sum_array[sum_array > 0]
     # Create equal cost array
     cost = np.ones(sum_array.size)
     budget = budget * cost.size
@@ -107,50 +123,48 @@ def optimize_gurobi(input_rasters, output_raster, budget,
         # Set objective and constraint
         obj = LinExpr()
         expr = LinExpr()
+
         for i in range(sum_array.size):
             obj.addTerms(sum_array[i], vars[i])
             expr.addTerms(cost[i], vars[i])
 
         m.setObjective(obj, sense=GRB.MAXIMIZE)
-        print(type(expr))
         m.addConstr(lhs=expr, sense=GRB.LESS_EQUAL, rhs=budget)
-
         m.update()
 
-        #m.params.timeLimit = 100.0
-        #m.params.mipgap = 0.001
-        #m.params.solutionLimit = 1
-        #m.params.presolve = -1
+        m.params.timeLimit = 100.0
+        m.params.mipgap = 0.001
+        m.params.solutionLimit = 1
+        m.params.presolve = -1
 
         m.optimize()
 
-        print('Obj: %g' % m.objVal)
+        #pdb.set_trace()
 
     except GurobiError:
         raise
 
-    nodata_value = -3.4e+38
+    # Construct the result raster
+    x = np.asarray([var.x for var in m.getVars()], dtype=np.uint8)
 
-    # Use 0s from summation as a mask
-    #sum_array = ma.masked_values(sum_array, 0.0)
+    nodata_value = 255
 
-    #np.place(rank_array, rank_array == 0, nodata_value)
-    # Create a masked array. Convert remaining zeros to NoData and use that as
-    # a mask
-    # NOTE: use ma.masked_values() because we're replacing with a float value
-    #rank_array = ma.masked_values(rank_array, nodata_value)
+    output_x = np.full((profile["height"], profile["width"]), nodata_value)
+    #pdb.set_trace()
+    output_x[~mask] = x
+    output_x = ma.masked_values(output_x, nodata_value)
 
     # 4. Write out the data
-    #llogger.info(" Writing output to {}".format(output_raster))
+    llogger.info(" Writing output to {}".format(output_raster))
 
     # Rescaled data is always float32, and we have only 1 band. Remember
     # to set NoData-value correctly.
-    #profile.update(dtype=rasterio.float32, compress=compress,
-    #               nodata=-3.4e+38)
+    profile.update(dtype=rasterio.uint8, compress=compress,
+                   nodata=nodata_value)
 
-    #with rasterio.open(output_raster, 'w', **profile) as dst:
-    #    dst.write_mask(ma.getmask(rank_array))
-    #    dst.write(rank_array, 1)
+    with rasterio.open(output_raster, 'w', **profile) as dst:
+        dst.write_mask(mask)
+        dst.write(output_x.astype(np.uint8), 1)
 
 
 @click.command()
