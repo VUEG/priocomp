@@ -20,8 +20,8 @@ from gurobipy import *
 from importlib.machinery import SourceFileLoader
 
 rescale = SourceFileLoader("data_processing.rescale",
-                           "../data_processing/rescale.py").load_module()
-utils = SourceFileLoader("src.utils", "../utils.py").load_module()
+                           "src/data_processing/rescale.py").load_module()
+utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 
 
 def optimize_gurobi(input_rasters, output_raster, budget,

@@ -10,7 +10,7 @@ import rasterio
 
 from importlib.machinery import SourceFileLoader
 
-utils = SourceFileLoader("src.utils", "../utils.py").load_module()
+utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 
 
 def normalize(x):
