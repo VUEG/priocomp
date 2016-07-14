@@ -19,7 +19,8 @@ plot_features <- function(x) {
 }
 
 plot_groups <- function(x) {
-  plot(curves(results(x), groups = TRUE), main = x@name)
+  plot(curves(results(x), groups = TRUE), main = x@name, min = TRUE,
+       mean = TRUE, max = TRUE)
 }
 
 
