@@ -2,6 +2,7 @@ import fiona
 import gdal
 import numpy as np
 import os
+import pdb
 import rasterio
 from importlib.machinery import SourceFileLoader
 
@@ -55,6 +56,14 @@ PROVIDE_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in PROVID
 UDR_SRC_DATASETS = [url.replace(beehub_url, "data/processed/features") for url in data_manifest["udr"]]
 
 ALL_SRC_DATASETS = DATADRYAD_SRC_DATASETS + PROVIDE_SRC_DATASETS + UDR_SRC_DATASETS
+
+# Define a group of rasters that need to be rescaled (normalized) for the
+# following reasons:
+#
+# carbon_sequestration.tif = Values can have negative values (area is a carbon
+#                            source instead of sink)
+NORMALIZED_DATASETS = {"carbon_sequestration.tif":
+                       "carbon_sequestration_rescaled.tif"}
 
 # PROJECT RULES ----------------------------------------------------------------
 
@@ -331,6 +340,20 @@ rule harmonize_data:
             cmd_str = "gdalwarp -cutline {0} {1} {2} -co COMPRESS=DEFLATE".format(input.clip_shp, warped_raster, harmonized_raster)
             for line in utils.process_stdout(shell(cmd_str, read=True), prefix=prefix):
                 llogger.debug(line)
+
+            # Finally, rescale (normalize) dataset if needed
+            org_raster = os.path.basename(harmonized_raster)
+            if org_raster in NORMALIZED_DATASETS.keys():
+                rescaled_raster = harmonized_raster.replace(org_raster,
+                                                            NORMALIZED_DATASETS[org_raster])
+                llogger.info("{0} Rescaling dataset {1}".format(prefix, harmonized_raster))
+                llogger.debug("{0} Target dataset {1}".format(prefix, rescaled_raster))
+                rescale.rescale_raster(harmonized_raster, rescaled_raster,
+                                       method="normalize", verbose=False)
+                os.remove(harmonized_raster)
+                llogger.debug("{0} Renaming dataset {1} to {2}".format(prefix, rescaled_raster, harmonized_raster))
+                os.rename(rescaled_raster, harmonized_raster)
+
 
 rule ol_normalize_data:
     input:
