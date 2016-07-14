@@ -6,8 +6,9 @@ import rasterio
 from importlib.machinery import SourceFileLoader
 
 
+gurobi = SourceFileLoader("gurobi.optimize_gurobi", "src/analysis/gurobi.py").load_module()
 rescale = SourceFileLoader("data_processing.rescale", "src/data_processing/rescale.py").load_module()
-rwr = SourceFileLoader("rwr.calculate_rwr", "src/RWR/rwr.py").load_module()
+rwr = SourceFileLoader("rwr.calculate_rwr", "src/analysis/rwr.py").load_module()
 utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 
 ## GLOBALS --------------------------------------------------------------------
@@ -398,3 +399,18 @@ rule calculate_rwr:
 #     script:
 #         # NOTE: Currently there's a lot of things hardcoded here...
 #         "src/zonation/01_create_zonation_project.R"
+
+# Gurobi ----------------------------------------------------------------------
+
+rule optimize_gurobi:
+    input:
+        ["/home/jlehtoma/tmp/data/species" + str(i) + ".tif" for i in range(1, 9)]
+    output:
+        "/home/jlehtoma/tmp/data/ilp.tif"
+    log:
+        "logs/optimize_gurobi.log"
+    message:
+        "Opitmizing with Gurobi..."
+    run:
+        llogger = utils.get_local_logger("ol_normalize_data", log[0])
+        rwr.calculate_rwr(input, output[0], logger=llogger)
