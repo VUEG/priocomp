@@ -2,7 +2,7 @@ List of biodiversity features (e.g. species) and weights used in analysis in ord
 Weight  distribution-sum  IGRetained TviolationFractRem  Distr-mean-X   Distr-mean-Y  MapFileName
 1.000 	412210.531	412210.53	0.00000	1250.74	1051.45	../../../data/processed/features/datadryad/forest_production_europe/woodprod_average.tif
 1.000 	147189024.000	147189024.00	0.00000	1154.62	1260.55	../../../data/processed/features/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif
-1.000 	100640664.000	100640664.00	0.00000	1202.55	1214.12	../../../data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif
+1.000 	2147187.250	2147187.25	0.00000	1157.78	1148.76	../../../data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif
 1.000 	625983.000	625983.00	0.00000	1122.93	1325.32	../../../data/processed/features/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif
 1.000 	485391.156	485391.16	0.00000	1266.90	1091.37	../../../data/processed/features/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif
 1.000 	429864256.000	429864256.00	0.00000	1097.28	1313.05	../../../data/processed/features/provide/erosion_prevention/erosion_prevention.tif
