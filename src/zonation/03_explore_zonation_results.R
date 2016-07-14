@@ -21,15 +21,15 @@ feature_grp_curves1 <- curves(results1, groups = TRUE)
 plot(feature_grp_curves1)
 
 # Read in the PPA data
-variant1_ppa1 <- results@ppa.lsm
+variant1_ppa1 <- results1@ppa.lsm
 
 # Combine with NUTS2-data
-variant1_ppa1 <- variant1_ppa1 %>%
-  left_join(., nuts2_data, by = c("Unit" = "ID"))
+# variant1_ppa1 <- variant1_ppa1 %>%
+#   left_join(., nuts2_data, by = c("Unit" = "ID"))
 
-p <- ggplot(variant1_ppa1, aes(x = Spp_distribution_sum, y = Mean_rank,
-                               size = Area, color = country))
-p + geom_point() + ylab("Mean rank\n") + xlab("\nDistribution sum")
+# p <- ggplot(variant1_ppa1, aes(x = Spp_distribution_sum, y = Mean_rank,
+#                               size = Area, color = country))
+# p + geom_point() + ylab("Mean rank\n") + xlab("\nDistribution sum")
 
 # 02_abf_ --------------------------------------------------------------------
 
