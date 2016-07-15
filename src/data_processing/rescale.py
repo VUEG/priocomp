@@ -7,6 +7,7 @@ import numpy as np
 import numpy.ma as ma
 import os
 import rasterio
+import scipy.stats
 
 from importlib.machinery import SourceFileLoader
 
@@ -149,6 +150,35 @@ def rescale_raster(input_raster, output_raster, method, fill_w_zeros=False,
             dst.write(rescaled_data, 1)
             llogger.debug("Wrote raster {}".format(output_raster))
         return True
+
+
+def winsorize(x, limits=0.05):
+    """ Winsorize values in an array.
+
+    The distribution of many statistics can be heavily influenced by outliers.
+    A typical strategy is to set all outliers to a specified percentile of the
+    data; for example, a 90% winsorization would see all data below the 5th
+    percentile set to the 5th percentile, and data above the 95th percentile
+    set to the 95th percentile. Winsorized estimators are usually more robust
+    to outliers than their more standard forms.
+
+    See https://en.wikipedia.org/wiki/Winsorizing
+
+    :param x: numpy ndarray to be rescaled.
+    :param limits: Tuple of the percentages to cut on each side of the array,
+                   with respect to the number of unmasked data, as floats
+                   between 0. and 1. Noting n the number of unmasked data
+                   before trimming, the (n*limits[0])th smallest data and the
+                   (n*limits[1])th largest data are masked, and the total
+                   number of unmasked data after trimming is n*(1.-sum(limits))
+                   The value of one limit can be set to None to indicate an
+                   open interval.
+    :return: numpy ndarray with transformed values.
+    """
+    if type(x) is not np.ndarray and type(x) is not ma.core.MaskedArray:
+        raise TypeError("x must be a numpy.ndarray or numpy.ma.MaskedArray")
+
+    return scipy.stats.mstats.winsorize(x, limits=limits)
 
 
 @click.command()
