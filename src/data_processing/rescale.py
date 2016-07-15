@@ -53,7 +53,8 @@ def ol_normalize(x):
 
 
 def rescale_raster(input_raster, output_raster, method, fill_w_zeros=False,
-                   compress='DEFLATE', verbose=False, logger=None):
+                   only_positive=False, compress='DEFLATE', verbose=False,
+                   logger=None):
     """ Rescale all numeric values of a raster according ot a given method.
 
     Currently two methods are implemented:
@@ -63,12 +64,14 @@ def rescale_raster(input_raster, output_raster, method, fill_w_zeros=False,
 
     :param input_raster: String path to raster file to be normalized.
     :param output_raster: String path to raster file to be created.
+    :param method: String method to use.
+    :param fill_w_zeros:  Boolean indicating whether NoData is encoded as real
+                          NoData or filled with zeros.
+    :param only_positive: Boolean indicating if negative values (in the
+                          original raster) should be ignored.
     :param compress: String compression level used for the output raster.
-    :method String method to use.
-    :fill_w_zeros  Boolean indicating whether NoData is encoded as real NoData
-                   or filled with zeros.
-    :param verbose Boolean indicating how much information is printed out.
-    :param log_file String path to log file used.
+    :param verbose: Boolean indicating how much information is printed out.
+    :param log_file: String path to log file used.
     :return Boolean True if success, False otherwise
     """
     # Set up logging
@@ -108,6 +111,15 @@ def rescale_raster(input_raster, output_raster, method, fill_w_zeros=False,
                       "{0}, {1}, {2}, {3}, {4}".format(src_min, src_q25,
                                                        src_mean, src_q75,
                                                        src_max))
+        # Only positive values?
+        if only_positive:
+            if src_min < 0:
+                llogger.info("Ignoring negative values")
+                src_data = src_data.clip(min=0)
+            else:
+                llogger.warning("Ignore negative values requested but " +
+                                " there are none")
+
         # Do the actual rescaling
         if method == 'normalize':
             rescaled_data = normalize(src_data)

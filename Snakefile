@@ -349,7 +349,8 @@ rule harmonize_data:
                 llogger.info("{0} Rescaling dataset {1}".format(prefix, harmonized_raster))
                 llogger.debug("{0} Target dataset {1}".format(prefix, rescaled_raster))
                 rescale.rescale_raster(harmonized_raster, rescaled_raster,
-                                       method="normalize", verbose=False)
+                                       method="normalize",
+                                       only_positive=True, verbose=False)
                 os.remove(harmonized_raster)
                 llogger.debug("{0} Renaming dataset {1} to {2}".format(prefix, rescaled_raster, harmonized_raster))
                 os.rename(rescaled_raster, harmonized_raster)
