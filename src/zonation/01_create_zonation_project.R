@@ -10,7 +10,7 @@ source("src/utils.R")
 
 # Number of features in groups ------------------------------------------------
 
-NESFEATURES <- 12
+NESFEATURES <- 11
 NBDFEATURES <- 759
 
 NAMPHIBIANS <- 81
@@ -109,8 +109,8 @@ variant3 <- set_dat_param(variant3, "groups file", groups_file)
 
 # Give weight of 759 / 12 to each. Altogether, there are 759 spcies
 # features. Give weight 1 to each.
-variant3@spp.data$weight <- c(rep(nfeatures(variant3) / 12, 12),
-                              rep(1, nfeatures(variant3) - 12))
+variant3@spp.data$weight <- c(rep(nfeatures(variant3) / NESFEATURES, NESFEATURES),
+                              rep(1, nfeatures(variant3) - NESFEATURES))
 
 save_zvariant(variant3, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
@@ -133,8 +133,8 @@ variant4 <- set_dat_param(variant4, "groups file", groups_file)
 
 # Give weight of 759 / 12 to each. Altogether, there are 759 spcies
 # features. Give weight 1 to each.
-variant4@spp.data$weight <- c(rep(nfeatures(variant4) / 12, 12),
-                              rep(1, nfeatures(variant4) - 12))
+variant4@spp.data$weight <- c(rep(nfeatures(variant4) / NESFEATURES, NESFEATURES),
+                              rep(1, nfeatures(variant4) - NESFEATURES))
 
 save_zvariant(variant4, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
@@ -153,7 +153,7 @@ variant5 <- set_dat_param(variant5, "post-processing list file",
                           ppa_config_file)
 
 # Select ONLY ES features
-sppdata(variant5) <- sppdata(variant5)[1:12,]
+sppdata(variant5) <- sppdata(variant5)[1:NESFEATURES,]
 
 # Save variant
 save_zvariant(variant5, dir = file.path(zsetup_root, project_name),
@@ -173,7 +173,7 @@ variant6 <- set_dat_param(variant6, "post-processing list file",
                           ppa_config_file)
 
 # Select ONLY ES features
-sppdata(variant6) <- sppdata(variant6)[1:12,]
+sppdata(variant6) <- sppdata(variant6)[1:NESFEATURES,]
 
 # Save variant
 save_zvariant(variant6, dir = file.path(zsetup_root, project_name),
@@ -192,7 +192,7 @@ variant7 <- set_dat_param(variant7, "post-processing list file",
                           ppa_config_file)
 
 # Select ONLY BD features
-sppdata(variant7) <- sppdata(variant7)[13:nfeatures(variant7),]
+sppdata(variant7) <- sppdata(variant7)[(NESFEATURES + 1):nfeatures(variant7),]
 
 # Define groups based on taxon. NOTE: for now, groups hard coded
 groups(variant7) <- c(rep(1, NAMPHIBIANS),
@@ -225,7 +225,7 @@ variant8 <- set_dat_param(variant8, "post-processing list file",
                           ppa_config_file)
 
 # Select ONLY BD features
-sppdata(variant8) <- sppdata(variant8)[13:nfeatures(variant8),]
+sppdata(variant8) <- sppdata(variant8)[(NESFEATURES + 1):nfeatures(variant8),]
 
 # Define groups based on taxon. NOTE: for now, groups hard coded
 groups(variant8) <- c(rep(1, NAMPHIBIANS),
