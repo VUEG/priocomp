@@ -2,15 +2,14 @@ List of biodiversity features (e.g. species) and weights used in analysis in ord
 Weight  distribution-sum  IGRetained TviolationFractRem  Distr-mean-X   Distr-mean-Y  MapFileName
 1.000 	412210.531	412210.53	0.00000	1250.74	1051.45	../../../data/processed/features/datadryad/forest_production_europe/woodprod_average.tif
 1.000 	147189024.000	147189024.00	0.00000	1154.62	1260.55	../../../data/processed/features/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif
-1.000 	2147187.250	2147187.25	0.00000	1157.78	1148.76	../../../data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif
+1.000 	398752.125	398752.12	0.00000	1211.97	1214.08	../../../data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif
 1.000 	625983.000	625983.00	0.00000	1122.93	1325.32	../../../data/processed/features/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif
 1.000 	485391.156	485391.16	0.00000	1266.90	1091.37	../../../data/processed/features/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif
-1.000 	429864256.000	429864256.00	0.00000	1097.28	1313.05	../../../data/processed/features/provide/erosion_prevention/erosion_prevention.tif
+1.000 	1125924224.000	1125924224.00	0.00000	1093.99	1423.10	../../../data/processed/features/provide/erosion_prevention/erosion_prevention.tif
 1.000 	1470770.000	1470770.00	0.00000	1158.52	1233.53	../../../data/processed/features/provide/floodregulation/floodregulation.tif
 1.000 	7897622.000	7897622.00	0.00000	1282.17	1106.15	../../../data/processed/features/provide/megafauna/megafauna.tif
 1.000 	14701830144.000	14701830144.00	0.00000	1203.13	1151.33	../../../data/processed/features/provide/nature_tourism/nature_tourism.tif
 1.000 	61563824.000	61563824.00	0.00000	1194.69	1265.31	../../../data/processed/features/provide/pollination_flows/pollination_flows.tif
-1.000 	32297560.000	32297560.00	0.00000	1176.33	1307.09	../../../data/processed/features/provide/species_richness_farmland_birds_original1/species_richness_farmland_birds_original1.tif
 1.000 	89145360.000	89145360.00	0.00000	1134.63	1228.04	../../../data/processed/features/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif
 1.000 	22019.000	22019.00	0.00000	462.65	1745.06	../../../data/processed/features/udr/european_tetrapods/amphibians/alytes_cisternasii.tif
 1.000 	4133.000	4133.00	0.00000	589.91	1847.20	../../../data/processed/features/udr/european_tetrapods/amphibians/alytes_dickhilleni.tif
