@@ -5,19 +5,19 @@
   <evaluateDefaultValues active="0"/>
   <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="">
     <customproperties/>
-    <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="data">
+    <layer-tree-group expanded="1" checked="Qt::Unchecked" name="data">
       <customproperties/>
-      <layer-tree-layer expanded="1" checked="Qt::Checked" id="nature_tourism20160715102902464" name="nature_tourism">
-        <customproperties/>
-      </layer-tree-layer>
-      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="eurostat">
+      <layer-tree-group expanded="0" checked="Qt::Unchecked" name="eurostat">
         <customproperties/>
         <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="NUTS_RG_01M_2013_level220160714120910095" name="NUTS_RG_01M_2013_level2">
           <customproperties/>
         </layer-tree-layer>
       </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="provide">
+      <layer-tree-group expanded="0" checked="Qt::Unchecked" name="provide">
         <customproperties/>
+        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="nature_tourism20160715102902464" name="nature_tourism">
+          <customproperties/>
+        </layer-tree-layer>
         <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="cultural_landscape_index_forest20160714120655387" name="cultural_landscape_index_forest">
           <customproperties/>
         </layer-tree-layer>
@@ -26,7 +26,7 @@
         <customproperties/>
       </layer-tree-group>
     </layer-tree-group>
-    <layer-tree-group expanded="1" checked="Qt::Unchecked" name="analyses">
+    <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="analyses">
       <customproperties/>
       <layer-tree-group expanded="1" checked="Qt::Unchecked" name="ILP">
         <customproperties/>
@@ -34,7 +34,7 @@
           <customproperties/>
         </layer-tree-layer>
       </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="Zonation">
+      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="Zonation">
         <customproperties/>
         <layer-tree-group expanded="0" checked="Qt::Unchecked" name="01_caz">
           <customproperties/>
@@ -54,16 +54,16 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="0" checked="Qt::Unchecked" name="03_caz_wgt">
+        <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="03_caz_wgt">
           <customproperties/>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="03_caz_wgt_nwout120160617085900595" name="03_caz_wgt_nwout1">
             <customproperties/>
           </layer-tree-layer>
-          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="03_caz_wgt_rank_compressed20160615225544131" name="03_caz_wgt.rank.compressed">
+          <layer-tree-layer expanded="0" checked="Qt::Checked" id="03_caz_wgt_rank_compressed20160615225544131" name="03_caz_wgt.rank.compressed">
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="0" checked="Qt::Unchecked" name="04_abf_wgt">
+        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="04_abf_wgt">
           <customproperties/>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="04_abf_wgt_nwout120160615125613505" name="04_abf_wgt_nwout1">
             <customproperties/>
@@ -72,7 +72,7 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="05_caz_es">
+        <layer-tree-group expanded="0" checked="Qt::Unchecked" name="05_caz_es">
           <customproperties/>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="05_caz_es_nwout120160617090137652" name="05_caz_es_nwout1">
             <customproperties/>
@@ -127,10 +127,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>3963180.61125901155173779</xmin>
-      <ymin>2611112.71973864734172821</ymin>
-      <xmax>4308765.4377165287733078</xmax>
-      <ymax>3119772.91718919575214386</ymax>
+      <xmin>3113652.10285325720906258</xmin>
+      <ymin>1108869.6032680282369256</ymin>
+      <xmax>5878330.7145133949816227</xmax>
+      <ymax>5178151.1828724155202508</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -210,20 +210,20 @@
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
-    <legendgroup open="true" checked="Qt::PartiallyChecked" name="data">
-      <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="nature_tourism" showFeatureCount="0">
-        <filegroup open="true" hidden="false">
-          <legendlayerfile isInOverview="0" layerid="nature_tourism20160715102902464" visible="1"/>
-        </filegroup>
-      </legendlayer>
-      <legendgroup open="true" checked="Qt::Unchecked" name="eurostat">
+    <legendgroup open="true" checked="Qt::Unchecked" name="data">
+      <legendgroup open="false" checked="Qt::Unchecked" name="eurostat">
         <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="NUTS_RG_01M_2013_level2" showFeatureCount="0">
           <filegroup open="true" hidden="false">
             <legendlayerfile isInOverview="0" layerid="NUTS_RG_01M_2013_level220160714120910095" visible="0"/>
           </filegroup>
         </legendlayer>
       </legendgroup>
-      <legendgroup open="true" checked="Qt::Unchecked" name="provide">
+      <legendgroup open="false" checked="Qt::Unchecked" name="provide">
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="nature_tourism" showFeatureCount="0">
+          <filegroup open="false" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="nature_tourism20160715102902464" visible="0"/>
+          </filegroup>
+        </legendlayer>
         <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="cultural_landscape_index_forest" showFeatureCount="0">
           <filegroup open="false" hidden="false">
             <legendlayerfile isInOverview="0" layerid="cultural_landscape_index_forest20160714120655387" visible="0"/>
@@ -232,7 +232,7 @@
       </legendgroup>
       <legendgroup open="true" checked="Qt::Unchecked" name="udr"/>
     </legendgroup>
-    <legendgroup open="true" checked="Qt::Unchecked" name="analyses">
+    <legendgroup open="true" checked="Qt::PartiallyChecked" name="analyses">
       <legendgroup open="true" checked="Qt::Unchecked" name="ILP">
         <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="eu26_ilp_es" showFeatureCount="0">
           <filegroup open="false" hidden="false">
@@ -240,7 +240,7 @@
           </filegroup>
         </legendlayer>
       </legendgroup>
-      <legendgroup open="true" checked="Qt::Unchecked" name="Zonation">
+      <legendgroup open="true" checked="Qt::PartiallyChecked" name="Zonation">
         <legendgroup open="false" checked="Qt::Unchecked" name="01_caz">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="01_caz_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
@@ -265,19 +265,19 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="false" checked="Qt::Unchecked" name="03_caz_wgt">
+        <legendgroup open="true" checked="Qt::PartiallyChecked" name="03_caz_wgt">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="03_caz_wgt_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="03_caz_wgt_nwout120160617085900595" visible="0"/>
             </filegroup>
           </legendlayer>
-          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="03_caz_wgt.rank.compressed" showFeatureCount="0">
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="03_caz_wgt.rank.compressed" showFeatureCount="0">
             <filegroup open="false" hidden="false">
-              <legendlayerfile isInOverview="0" layerid="03_caz_wgt_rank_compressed20160615225544131" visible="0"/>
+              <legendlayerfile isInOverview="0" layerid="03_caz_wgt_rank_compressed20160615225544131" visible="1"/>
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="false" checked="Qt::Unchecked" name="04_abf_wgt">
+        <legendgroup open="true" checked="Qt::Unchecked" name="04_abf_wgt">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="04_abf_wgt_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="04_abf_wgt_nwout120160615125613505" visible="0"/>
@@ -289,7 +289,7 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="true" checked="Qt::Unchecked" name="05_caz_es">
+        <legendgroup open="false" checked="Qt::Unchecked" name="05_caz_es">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="05_caz_es_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="05_caz_es_nwout120160617090137652" visible="0"/>
@@ -888,8 +888,8 @@
         </layer>
       </symbol>
       <ComposerItemGroup>
-        <ComposerItemGroupElement uuid="{e584c162-1c0e-4ad8-9a59-db86fe6e9374}"/>
         <ComposerItemGroupElement uuid="{b7550c7e-de9e-480a-8d40-2eef703995a9}"/>
+        <ComposerItemGroupElement uuid="{e584c162-1c0e-4ad8-9a59-db86fe6e9374}"/>
         <ComposerItem pagey="86.2976" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="134.855" y="86.2976" visibility="1" zValue="7" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="61.747" outlineWidth="0.3" excludeFromExports="0" uuid="{a210f3d6-6650-40a1-bfdd-ccf229764690}" height="12.7" itemRotation="0" frame="false" pagex="134.855">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
@@ -3892,9 +3892,6 @@ def my_form_open(dialog, layer, feature):
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="F11">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="F12">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
       </edittypes>
