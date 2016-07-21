@@ -37,9 +37,9 @@ zonator::create_zproject(name = project_name, dir = zsetup_root, variants = vari
                          recursive = TRUE, overwrite = TRUE, debug = TRUE)
 priocomp_zproject <- load_zproject(zsetup_root)
 
-# Set run configuration parameters ----------------------------------------
+# Set run configuration parameters --------------------------------------------
 
-## 01_caz
+## 01_caz ---------------------------------------------------------------------
 
 variant1 <- get_variant(priocomp_zproject, 1)
 
@@ -69,7 +69,7 @@ variant1 <- set_dat_param(variant1, "groups file", groups_file)
 save_zvariant(variant1, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
 
-## 02_abf
+## 02_abf ---------------------------------------------------------------------
 
 variant2 <- get_variant(priocomp_zproject, 2)
 variant2 <- set_dat_param(variant2, "removal rule", 2)
@@ -90,7 +90,7 @@ variant2 <- set_dat_param(variant2, "groups file", groups_file)
 save_zvariant(variant2, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
 
-## 03_caz_wgt
+## 03_caz_wgt ----------------------------------------------------------------
 variant3 <- get_variant(priocomp_zproject, 3)
 variant3 <- set_dat_param(variant3, "removal rule", 1)
 variant3 <- set_dat_param(variant3, "post-processing list file",
@@ -107,15 +107,15 @@ variant3 <- set_dat_param(variant3, "use groups", 1)
 groups_file <- file.path(variant3@name, paste0(variant3@name, "_groups.txt"))
 variant3 <- set_dat_param(variant3, "groups file", groups_file)
 
-# Give weight of 759 / 12 to each. Altogether, there are 759 spcies
+# Give weight of 759 / 11 to each ES. Altogether, there are 759 species
 # features. Give weight 1 to each.
-variant3@spp.data$weight <- c(rep(nfeatures(variant3) / NESFEATURES, NESFEATURES),
-                              rep(1, nfeatures(variant3) - NESFEATURES))
+sppweights(variant3) <- c(rep(nfeatures(variant3) / NESFEATURES, NESFEATURES),
+                          rep(1, nfeatures(variant3) - NESFEATURES))
 
 save_zvariant(variant3, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
 
-## 04_abf_wgt
+## 04_abf_wgt ----------------------------------------------------------------
 variant4 <- get_variant(priocomp_zproject, 4)
 variant4 <- set_dat_param(variant4, "removal rule", 2)
 variant4 <- set_dat_param(variant4, "post-processing list file",
@@ -133,16 +133,16 @@ variant4 <- set_dat_param(variant4, "groups file", groups_file)
 
 # Give weight of 759 / 12 to each. Altogether, there are 759 spcies
 # features. Give weight 1 to each.
-variant4@spp.data$weight <- c(rep(nfeatures(variant4) / NESFEATURES, NESFEATURES),
-                              rep(1, nfeatures(variant4) - NESFEATURES))
+sppweights(variant4) <- c(rep(nfeatures(variant4) / NESFEATURES, NESFEATURES),
+                          rep(1, nfeatures(variant4) - NESFEATURES))
 
 save_zvariant(variant4, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
 
 
-# Just ecoystem services --------------------------------------------------
+# Just ecoystem services ----------------------------------------------------
 
-## 05_caz_es
+## 05_caz_es ----------------------------------------------------------------
 
 variant5 <- get_variant(priocomp_zproject, 5)
 
@@ -159,7 +159,7 @@ sppdata(variant5) <- sppdata(variant5)[1:NESFEATURES,]
 save_zvariant(variant5, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
 
-## 06_abf
+## 06_abf ----------------------------------------------------------------
 
 variant6 <- get_variant(priocomp_zproject, 6)
 variant6 <- set_dat_param(variant6, "removal rule", 2)
@@ -179,9 +179,9 @@ sppdata(variant6) <- sppdata(variant6)[1:NESFEATURES,]
 save_zvariant(variant6, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
 
-# Just biodiversity features --------------------------------------------------
+# Just biodiversity features ------------------------------------------------
 
-## 07_caz_bd
+## 07_caz_bd ----------------------------------------------------------------
 
 variant7 <- get_variant(priocomp_zproject, 7)
 
@@ -211,7 +211,7 @@ variant7 <- set_dat_param(variant7, "groups file", groups_file)
 save_zvariant(variant7, dir = file.path(zsetup_root, project_name),
               overwrite = TRUE, debug_msg = FALSE)
 
-## 08_abf_bd
+## 08_abf_bd ----------------------------------------------------------------
 
 variant8 <- get_variant(priocomp_zproject, 8)
 variant8 <- set_dat_param(variant8, "removal rule", 2)
