@@ -15,14 +15,15 @@ library(raster)
 # Start load timer
 load_start <- Sys.time()
 
-data_dir <- "/home/jlehtoma/dev/git-projects/priocomp/data/processed/features/"
+#data_dir <- "/home/jlehtoma/dev/git-projects/priocomp/data/processed/features/"
+data_dir <- "~/tmp/data"
 if (!file.exists(data_dir)) {
   stop("Dir ", data_dir, " does not exist")
 }
 
 message("Reading in data...")
 raster_files <- list.files(path = data_dir, pattern = ".+\\.tif$",
-                           full.names = TRUE, recursive = TRUE)[1:11]
+                           full.names = TRUE, recursive = TRUE)
 message("Found ", length(raster_files), " rasters")
 for (raster_file in raster_files) {
   message(raster_file)
@@ -38,7 +39,7 @@ cost <- extent(rasters) %>%
   raster(nrows = nrow(rasters), ncols = ncol(rasters), vals = 1)
 
 # Fill areas marked 0 with 0 in the cost data as well
-cost[rasters[[1]] == 0] <- 0
+cost[is.na(rasters[[1]])] <- NA
 
 #message("Converting NoData to zeros...")
 # NAs (NoData) must be raplaced wiht 0s for GUROBI
@@ -53,7 +54,7 @@ load_time <- Sys.time() - load_start
 solver_start <- Sys.time()
 
 # Solve the maximum coverage problem for a range of target budgets
-budgets <- seq(0.05, 1, 0.05)
+budgets <- seq(0.05, 0.95, 0.05)
 results_mc <- list()
 for (b in budgets) {
   message("Optimizing with target budget ", b)
