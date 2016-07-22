@@ -30,9 +30,9 @@ def normalize(x):
     # np.true_divide(x, np.max(np.abs(x)), out=x, casting='unsafe')
     # Data may have negative values, thus first add the abs(min(x)) to
     # everything.
-    x = x + ma.abs(ma.min(x))
-    x = x / (ma.max(ma.abs(x)))
-    return x
+    x_min = ma.min(x)
+    x_max = ma.max(x)
+    return (x - x_min) / (x_max - x_min)
 
 
 def ol_normalize(x):

@@ -176,10 +176,11 @@ sp_rasters_filled[is.na(sp_rasters_filled)] <- 0
 sp_rasters_filled <- raster::stack(sp_rasters_filled)
 
 # Solve the maximum coverage problem for a range of target budgets
-budgets <- seq(0.05, 1.00, 0.05)
+budgets <- c(0.10) #seq(0.05, 1.00, 0.05)
 results_mc <- list()
 for (b in budgets) {
   b_cells <- b * raster::cellStats(cost, "sum")
+  print(b_cells)
   mc_model <- prioritizr::maxcover_model(x = cost, features = sp_rasters_filled, budget = b_cells)
   mc_results <- prioritize(mc_model, gap = 0.001)
   results_mc[[as.character(b)]] <- mc_results
