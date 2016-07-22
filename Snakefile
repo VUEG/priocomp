@@ -428,8 +428,8 @@ rule calculate_rwr:
 
 rule prioritize_gurobi:
     input:
-        ["/home/jlehtoma/tmp/data/species" + str(i) + ".tif" for i in range(1, 8)]
-        #rules.harmonize_data.output.harmonized
+        #["/home/jlehtoma/tmp/data/species" + str(i) + ".tif" for i in range(1, 8)]
+        rules.harmonize_data.output.harmonized
     output:
         "/home/jlehtoma/tmp/ilp_results/ilp_prior.tif"
     log:

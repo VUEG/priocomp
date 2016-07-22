@@ -22,7 +22,7 @@ if (!file.exists(data_dir)) {
 
 message("Reading in data...")
 raster_files <- list.files(path = data_dir, pattern = ".+\\.tif$",
-                           full.names = TRUE, recursive = TRUE)
+                           full.names = TRUE, recursive = TRUE)[1:11]
 message("Found ", length(raster_files), " rasters")
 for (raster_file in raster_files) {
   message(raster_file)
