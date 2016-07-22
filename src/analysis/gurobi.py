@@ -141,8 +141,7 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
             prefix = utils.get_iteration_prexix(no_raster, n_rasters)
             llogger.info("{0} Processing raster {1}".format(prefix,
                                                             input_raster))
-            llogger.debug("{0} Reading in data and OL ".format(prefix) +
-                          "normalizing")
+            llogger.debug("{0} Reading in data".format(prefix))
 
             # Read the first band, use zeros for NoData
             src_data = in_src.read(1, masked=True)
