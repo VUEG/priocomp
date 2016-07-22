@@ -7,7 +7,7 @@ import rasterio
 from importlib.machinery import SourceFileLoader
 
 
-gurobi = SourceFileLoader("gurobi.optimize_gurobi", "src/analysis/gurobi.py").load_module()
+gurobi = SourceFileLoader("gurobi.prioritize_gurobi", "src/analysis/gurobi.py").load_module()
 rescale = SourceFileLoader("data_processing.rescale", "src/data_processing/rescale.py").load_module()
 rwr = SourceFileLoader("rwr.calculate_rwr", "src/analysis/rwr.py").load_module()
 utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
@@ -426,15 +426,17 @@ rule calculate_rwr:
 
 # Gurobi ----------------------------------------------------------------------
 
-rule optimize_gurobi:
+rule prioritize_gurobi:
     input:
-        ["/home/jlehtoma/tmp/data/species" + str(i) + ".tif" for i in range(1, 9)]
+        ["/home/jlehtoma/tmp/data/species" + str(i) + ".tif" for i in range(1, 8)]
+        #rules.harmonize_data.output.harmonized
     output:
-        "/home/jlehtoma/tmp/data/ilp.tif"
+        "/home/jlehtoma/tmp/ilp_results/ilp_prior.tif"
     log:
         "logs/optimize_gurobi.log"
     message:
         "Opitmizing with Gurobi..."
     run:
-        llogger = utils.get_local_logger("ol_normalize_data", log[0])
-        rwr.calculate_rwr(input, output[0], logger=llogger)
+        llogger = utils.get_local_logger("optimize_gurobi", log[0])
+        gurobi.prioritize_gurobi(input, output[0], logger=llogger,
+                                 ol_normalize=False, verbose=True)

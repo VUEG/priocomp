@@ -18,26 +18,90 @@ import time
 
 from gurobipy import *
 from importlib.machinery import SourceFileLoader
+from scipy.stats.mstats import rankdata
 
 rescale = SourceFileLoader("data_processing.rescale",
                            "src/data_processing/rescale.py").load_module()
 utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 
 
-def optimize_gurobi(input_rasters, output_raster, budget,
-                    compress='DEFLATE', verbose=False, logger=None):
-    """ Solve maximum coverage problem for a set of input rasters and
-    target budget using Gurobi solver.
+def optimize_maxcover(x, budget, rij, verbose=False, logger=None):
+    """ Solve maximum coverage problem using Gurobi.
 
-    :param input_rasters: List of String paths of input rasters.
-    :param output_raster: String path to raster file to be created.
+    :param x: Numpy ndarray of planning unit costs. In this case the spatial
+              representation of the planning units is not provided.
     :param budget: numeric indicating the budget for the maximum coverage
                    problem.
+    :param rij: Numpy ndarray; Column sums of the matrix of representation
+                levels of conservation features (rows) within planning units
+                (columns).
+    :param verbose: Boolean indicating how much information is printed out.
+    :param logger: logger object to be used.
+    :return
+    """
+    try:
+        # Create a new model
+        m = Model("mip1")
+
+        # Create variables
+        for element in np.nditer(rij):
+            m.addVar(vtype=GRB.BINARY)
+
+        # Integrate new variables
+        m.update()
+        vars = m.getVars()
+
+        # Set objective and constraint
+        obj = LinExpr()
+        expr = LinExpr()
+
+        for i in range(rij.size):
+            obj.addTerms(rij[i], vars[i])
+            expr.addTerms(x[i], vars[i])
+
+        m.setObjective(obj, sense=GRB.MAXIMIZE)
+        m.addConstr(lhs=expr, sense=GRB.LESS_EQUAL, rhs=budget)
+        m.update()
+
+        #m.params.timeLimit = 100.0
+        #m.params.mipgap = 0.001
+        #m.params.solutionLimit = 1
+        #m.params.presolve = -1
+
+        m.optimize()
+
+    except GurobiError:
+        raise
+
+    # Construct a result array and return that
+    res = np.asarray([var.x for var in m.getVars()], dtype=np.uint8)
+    return res
+
+
+def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
+                      save_intermediate=False, compress='DEFLATE',
+                      ol_normalize=False, verbose=False, logger=None):
+    """ Solve (multiple) maximum coverage problems for a set of input rasters.
+
+    Create a hierarchical spatial prioritization using Gurobi solver to solve
+    multiple optimization problems with different budget levels. Each budget
+    level must be in range [0.0, 1.0] and corresponds to the area of interest.
+    In other words, value of 0.1 would correspond to best 10% of the landscape.
+    Budget levels will be automatically created using step value defined by the
+    step arguments. Gurobi solver will then solve each problem using the
+    representation levels in input_rasters. All the (binary) results are then
+    summed together forming a selection frequency. Finally, the selection
+    frequency is rescaled into range [0, 1] forming a rank priority raster.
+
+    :param input_rasters: List of String paths of input rasters.
+    :param output_raster: String path to the rank raster file to be created.
+    :param step: numeric value in (0, 1) defining the step length for budget
+                 levels.
     :param compress: String compression level used for the output raster.
+    :param compress: Boolean setting OL (Occurrence Level) normalization.
     :param verbose Boolean indicating how much information is printed out.
     :param logger logger object to be used.
     """
-
     # Set up logging
     if not logger:
         logging.basicConfig()
@@ -49,12 +113,17 @@ def optimize_gurobi(input_rasters, output_raster, budget,
     if len(input_rasters) < 1:
         llogger.error("Input rasters list cannot be empty")
         sys.exit(1)
+
     # Check inputs
     try:
-        budget = float(budget)
+        step = float(step)
     except ValueError:
-        llogger.error("'budget' must be coercible to float")
+        llogger.error("'step' must be coercible to float")
         sys.exit(1)
+    assert step > 0.0 and step < 1.0, "Step argument must be in range (0, 1)"
+    # Construct budget levels based on the step provided. 0.0 (nothing) and
+    # 1.0 (everyhting) are not needed.
+    budget_levels = np.linspace(0.0+step, 1.0, 1/step)[:-1]
 
     # Initiate the data structure for holding the summed values.
     sum_array = None
@@ -79,8 +148,10 @@ def optimize_gurobi(input_rasters, output_raster, budget,
             src_data = in_src.read(1, masked=True)
             src_data = ma.filled(src_data, 0)
 
-            # 1. Occurrence level normalize data ------------------------------
-            src_data = rescale.ol_normalize(src_data)
+            if ol_normalize:
+                # 1. Occurrence level normalize data --------------------------
+                llogger.debug("{0} OL normalizing data".format(prefix))
+                src_data = rescale.ol_normalize(src_data)
 
             # 2. Sum OL normalized data ---------------------------------------
             llogger.debug("{0} Summing values".format(prefix))
@@ -103,68 +174,74 @@ def optimize_gurobi(input_rasters, output_raster, budget,
     sum_array = sum_array[sum_array > 0]
     # Create equal cost array
     cost = np.ones(sum_array.size)
-    budget = budget * cost.size
 
-    # 3. Optimize  --------------------------------------------------------
-    llogger.info(" Optimizing...")
+    # 3. Optimize  -----------------------------------------------------------
 
-    try:
-        # Create a new model
-        m = Model("mip1")
+    # Construct a ndarray (matrix) that will hold the selection frequency
+    sel_freq = np.zeros_like(src_data, dtype=np.float32)
 
-        # Create variables
-        for x in np.nditer(sum_array):
-            m.addVar(vtype=GRB.BINARY)
+    # Define budget and optimize_maxcover
+    for blevel in budget_levels:
+        budget = blevel * cost.size
+        llogger.info(" Optimizing with budget level {}...".format(blevel))
+        x = optimize_maxcover(cost, budget, sum_array, verbose=verbose,
+                              logger=llogger)
+        # Create a full (filled with 0s) raster template
+        x_selection = np.full((profile["height"], profile["width"]), 0.0)
+        # Place the values of result array (it's binary = {0, 1}) into template
+        # elements that are False in the original mask
+        x_selection[~mask] = x
+        # Add the selected elements (planning units) into the selection
+        # frequency matrix
+        sel_freq += x_selection
 
-        # Integrate new variables
-        m.update()
-        vars = m.getVars()
+        if save_intermediate:
+            # Replace the real nodata values with a proper NoData value
+            nodata_value = 255
+            x_selection[mask] = nodata_value
+            # Create a masked array
+            output_x = ma.masked_values(output_x, nodata_value)
+            # Construct the output raster name
+            blevel_token = str(blevel).replace('.', '_')
+            output_raster = os.path.join(os.path.dirname(output_rank_raster),
+                                         "budget_level_{}.tif".format(blevel_token))
+            # Write out the data
+            llogger.debug(" Writing intermediate output to {}".format(output_raster))
+            profile.update(dtype=rasterio.uint8, compress=compress,
+                           nodata=nodata_value)
 
-        # Set objective and constraint
-        obj = LinExpr()
-        expr = LinExpr()
+            with rasterio.open(output_raster, 'w', **profile) as dst:
+                dst.write_mask(mask)
+                dst.write(output_x.astype(np.uint8), 1)
 
-        for i in range(sum_array.size):
-            obj.addTerms(sum_array[i], vars[i])
-            expr.addTerms(cost[i], vars[i])
+    # 4. Rank values ---------------------------------------------------------
 
-        m.setObjective(obj, sense=GRB.MAXIMIZE)
-        m.addConstr(lhs=expr, sense=GRB.LESS_EQUAL, rhs=budget)
-        m.update()
+    llogger.info(" Ranking values (this can take a while...)")
+    # Use 0s from summation as a mask
+    rank_array = ma.masked_values(sel_freq, 0.0)
+    rank_array = rankdata(rank_array)
 
-        m.params.timeLimit = 100.0
-        m.params.mipgap = 0.001
-        m.params.solutionLimit = 1
-        m.params.presolve = -1
+    # 5. Recale data into range [0, 1] ---------------------------------------
 
-        m.optimize()
+    llogger.debug(" Rescaling ranks")
+    rank_array = rescale.normalize(rank_array)
+    # Force float32
+    rank_array = rank_array.astype(np.float32)
 
-        #pdb.set_trace()
+    # 6. Prepare and write output --------------------------------------------
 
-    except GurobiError:
-        raise
-
-    # Construct the result raster
-    x = np.asarray([var.x for var in m.getVars()], dtype=np.uint8)
-
-    nodata_value = 255
-
-    output_x = np.full((profile["height"], profile["width"]), nodata_value)
-    #pdb.set_trace()
-    output_x[~mask] = x
-    output_x = ma.masked_values(output_x, nodata_value)
-
-    # 4. Write out the data
-    llogger.info(" Writing output to {}".format(output_raster))
-
-    # Rescaled data is always float32, and we have only 1 band. Remember
-    # to set NoData-value correctly.
-    profile.update(dtype=rasterio.uint8, compress=compress,
+    llogger.info(" Writing output to {}".format(output_rank_raster))
+    # Replace the real nodata values with a proper NoData value
+    nodata_value = -3.4e+38
+    rank_array[mask] = nodata_value
+    # Create a masked array
+    rank_array = ma.masked_values(rank_array, nodata_value)
+    profile.update(dtype=rasterio.float32, compress=compress,
                    nodata=nodata_value)
 
-    with rasterio.open(output_raster, 'w', **profile) as dst:
+    with rasterio.open(output_rank_raster, 'w', **profile) as dst:
         dst.write_mask(mask)
-        dst.write(output_x.astype(np.uint8), 1)
+        dst.write(rank_array.astype(np.float32), 1)
 
 
 @click.command()
