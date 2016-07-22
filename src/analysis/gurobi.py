@@ -63,10 +63,10 @@ def optimize_maxcover(x, budget, rij, verbose=False, logger=None):
         m.addConstr(lhs=expr, sense=GRB.LESS_EQUAL, rhs=budget)
         m.update()
 
-        #m.params.timeLimit = 100.0
-        #m.params.mipgap = 0.001
-        #m.params.solutionLimit = 1
-        #m.params.presolve = -1
+        # m.params.timeLimit = 100.0
+        # m.params.mipgap = 0.001
+        # m.params.solutionLimit = 1
+        # m.params.presolve = -1
 
         m.optimize()
 
