@@ -431,7 +431,7 @@ rule prioritize_gurobi:
         #["/home/jlehtoma/tmp/data/species" + str(i) + ".tif" for i in range(1, 8)]
         rules.harmonize_data.output.harmonized
     output:
-        "/home/jlehtoma/tmp/ilp_results/ilp_prior.tif"
+        "analyses/ILP/eu26_ilp_es.tif"
     log:
         "logs/optimize_gurobi.log"
     message:

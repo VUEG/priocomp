@@ -7,15 +7,15 @@ library(raster)
 #library(viridis)
 
 # Set raster options
-rasterOptions(tmpdir = "/data/tmp/raster",
-              progress = "text",
-              chunksize = 100000000,
-              maxmemory = 200000000)
+#rasterOptions(tmpdir = "/data/tmp/raster",
+#              progress = "text",
+#              chunksize = 100000000,
+#              maxmemory = 200000000)
 
 # Start load timer
 load_start <- Sys.time()
 
-data_dir <- "~/tmp/data"
+data_dir <- "/home/jlehtoma/dev/git-projects/priocomp/data/processed/features/"
 if (!file.exists(data_dir)) {
   stop("Dir ", data_dir, " does not exist")
 }
@@ -69,7 +69,7 @@ solver_time <- Sys.time() - solver_start
 
 message("Results for ", length(raster_files), " rasters")
 message("Load time: ")
-load_time
+print(load_time)
 message("Solver time: ")
-solver_time
+print(solver_time)
 
