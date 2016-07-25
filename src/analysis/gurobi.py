@@ -11,7 +11,7 @@ import logging
 import numpy as np
 import numpy.ma as ma
 import os
-import ipdb
+import pdb
 import rasterio
 import sys
 
@@ -21,7 +21,7 @@ from scipy.stats.mstats import rankdata
 from timeit import default_timer as timer
 
 spatutils = SourceFileLoader("data_processing.spatutils",
-                           "src/data_processing/spatutils.py").load_module()
+                             "src/data_processing/spatutils.py").load_module()
 utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 
 
@@ -139,56 +139,17 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     # 1.0 (everyhting) are not needed.
     budget_levels = np.linspace(0.0+step, 1.0, 1/step)[:-1]
 
-    # Initiate the data structure for holding the summed values.
-    sum_array = None
-    # Placeholder for raster metadata
-    profile = None
-    n_rasters = len(input_rasters)
-
     llogger.info(" [** PRE-PROCESSING **]")
 
-    if ol_normalize:
-        llogger.info(" [NOTE] Using occurrence level normalization")
-
-    for i, input_raster in enumerate(input_rasters):
-        no_raster = i + 1
-
-        if not os.path.exists(input_raster):
-            raise OSError("Input raster {} not found".format(input_raster))
-
-        with rasterio.open(input_raster) as in_src:
-            prefix = utils.get_iteration_prexix(no_raster, n_rasters)
-            llogger.info("{0} Processing raster {1}".format(prefix,
-                                                            input_raster))
-            llogger.debug("{0} Reading in data".format(prefix))
-
-            # Read the first band, use zeros for NoData
-            src_data = in_src.read(1, masked=True)
-            src_data = ma.filled(src_data, 0)
-
-            if ol_normalize:
-                # 1. Occurrence level normalize data --------------------------
-                llogger.debug("{0} OL normalizing data".format(prefix))
-                src_data = spatutils.ol_normalize(src_data)
-
-            # 2. Sum OL normalized data ---------------------------------------
-            llogger.debug("{0} Summing values".format(prefix))
-            # If this is the first raster, use its dimensions to build an array
-            # that holds the summed values.
-            if i == 0:
-                # Set up an array of zeros that has the correct dimensions
-                sum_array = np.zeros_like(src_data, dtype=np.float32)
-                # Also store the necessarry information for the output raster
-                # Write the output product
-                profile = in_src.profile
-            sum_array += src_data
-
+    sum_array = spatutils.sum_raster(input_rasters, olnormalize=True,
+                                     logger=llogger)
+    (height, width) = sum_array.shape
     # Flatten the sum array
     sum_array = sum_array.flatten()
     # Get rid of zeros for now, but first get the mask
     mask = ma.getmask(ma.masked_values(sum_array, 0.0))
     sum_array = sum_array[~mask]
-    mask = mask.reshape((profile["height"], profile["width"]))
+    mask = mask.reshape((height, width))
     # Create equal cost array
     cost = np.ones(sum_array.size)
 
@@ -204,7 +165,7 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     llogger.info(" [NOTE] Target budget levels: {}".format(blevels_str))
 
     # Construct a ndarray (matrix) that will hold the selection frequency
-    sel_freq = np.zeros_like(src_data, dtype=np.float32)
+    sel_freq = np.full((height, width), 0.0)
 
     # Define budget and optimize_maxcover
     for i, blevel in enumerate(budget_levels):
@@ -217,13 +178,16 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
         x = optimize_maxcover(cost, budget, sum_array, verbose=verbose,
                               logger=llogger)
         # Create a full (filled with 0s) raster template
-        x_selection = np.full((profile["height"], profile["width"]), 0.0)
+        x_selection = np.full((height, width), 0.0)
         # Place the values of result array (it's binary = {0, 1}) into template
         # elements that are False in the original mask
         x_selection[~mask] = x
         # Add the selected elements (planning units) into the selection
         # frequency matrix
         sel_freq += x_selection
+
+        # Get the raster profile from the input raster files
+        profile = spatutils.get_profile(input_rasters, logger=llogger)
 
         if save_intermediate:
             # Replace the real nodata values with a proper NoData value

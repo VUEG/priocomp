@@ -8,7 +8,7 @@ from importlib.machinery import SourceFileLoader
 
 
 gurobi = SourceFileLoader("gurobi.prioritize_gurobi", "src/analysis/gurobi.py").load_module()
-rescale = SourceFileLoader("data_processing.rescale", "src/data_processing/rescale.py").load_module()
+spatutils = SourceFileLoader("data_processing.spatutils", "src/data_processing/spatutils.py").load_module()
 rwr = SourceFileLoader("rwr.calculate_rwr", "src/analysis/rwr.py").load_module()
 utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 
@@ -348,9 +348,9 @@ rule harmonize_data:
                                                             NORMALIZED_DATASETS[org_raster])
                 llogger.info("{0} Rescaling dataset {1}".format(prefix, harmonized_raster))
                 llogger.debug("{0} Target dataset {1}".format(prefix, rescaled_raster))
-                rescale.rescale_raster(harmonized_raster, rescaled_raster,
-                                       method="normalize",
-                                       only_positive=True, verbose=False)
+                spatutils.rescale_raster(harmonized_raster, rescaled_raster,
+                                         method="normalize",
+                                         only_positive=True, verbose=False)
                 os.remove(harmonized_raster)
                 llogger.debug("{0} Renaming dataset {1} to {2}".format(prefix, rescaled_raster, harmonized_raster))
                 os.rename(rescaled_raster, harmonized_raster)
@@ -372,8 +372,8 @@ rule ol_normalize_data:
             llogger.info("{0} (OL) Normalizing dataset {1}".format(prefix, s_raster))
             # NOTE: looping over input and output only works if they have
             # exactly the same definition. Otherwise order may vary.
-            rescale.rescale_raster(input[i], output[i], method="ol_normalize",
-                                   fill_w_zeros=True, logger=llogger)
+            spatutils.rescale_raster(input[i], output[i], method="ol_normalize",
+                                     fill_w_zeros=True, logger=llogger)
 
 rule rescale_data:
     input:
@@ -388,8 +388,8 @@ rule rescale_data:
             llogger.info(" [{0}/{1}] Rescaling dataset {2}".format(i+1, len(input), s_raster))
             # NOTE: looping over input and output only works if they have
             # exactly the same definition. Otherwise order may vary.
-            rescale.rescale_raster(input[i], output[i], method="normalize",
-                                   verbose=False)
+            spatutils.rescale_raster(input[i], output[i], method="normalize",
+                                     verbose=False)
 
 ## Set up and run analyses -----------------------------------------------------
 

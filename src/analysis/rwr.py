@@ -19,7 +19,7 @@ from scipy.stats.mstats import rankdata
 
 spatutils = SourceFileLoader("data_processing.spatutils",
                              "src/data_processing/spatutils.py").load_module()
-spatutils = SourceFileLoader("src.spatutils", "src/spatutils.py").load_module()
+utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 
 
 def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
