@@ -428,15 +428,17 @@ rule calculate_rwr:
 
 rule prioritize_gurobi:
     input:
-        #["/home/jlehtoma/tmp/data/species" + str(i) + ".tif" for i in range(1, 8)]
-        rules.harmonize_data.output.harmonized
+        rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS
     output:
-        "analyses/ILP/eu26_ilp_es.tif"
+        all="analyses/ILP/eu26_ilp.tif"
+        #es="analyses/ILP/eu26_ilp_es.tif",
+        #bd="analyses/ILP/eu26_ilp_bd.tif"
     log:
         "logs/optimize_gurobi.log"
     message:
         "Opitmizing with Gurobi..."
     run:
         llogger = utils.get_local_logger("optimize_gurobi", log[0])
-        gurobi.prioritize_gurobi(input, output[0], logger=llogger,
-                                 ol_normalize=False, verbose=True)
+        gurobi.prioritize_gurobi(input, output.all, logger=llogger,
+                                 ol_normalize=True,
+                                 save_intermediate=True, verbose=True)
