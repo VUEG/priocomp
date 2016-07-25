@@ -131,6 +131,9 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     profile = None
     n_rasters = len(input_rasters)
 
+    if ol_normalize:
+        llogger.info(" Using occurrence level normalization")
+
     for i, input_raster in enumerate(input_rasters):
         no_raster = i + 1
 
@@ -168,9 +171,8 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     sum_array = sum_array.flatten()
     # Get rid of zeros for now, but first get the mask
     mask = ma.getmask(ma.masked_values(sum_array, 0.0))
-
+    sum_array = sum_array[~mask]
     mask = mask.reshape((profile["height"], profile["width"]))
-    sum_array = sum_array[sum_array > 0]
     # Create equal cost array
     cost = np.ones(sum_array.size)
 
@@ -199,13 +201,20 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
             nodata_value = 255
             x_selection[mask] = nodata_value
             # Create a masked array
-            output_x = ma.masked_values(output_x, nodata_value)
+            output_x = ma.masked_values(x_selection, nodata_value)
             # Construct the output raster name
-            blevel_token = str(blevel).replace('.', '_')
-            output_raster = os.path.join(os.path.dirname(output_rank_raster),
-                                         "budget_level_{}.tif".format(blevel_token))
+            btoken = str(blevel).replace('.', '_')
+            # Construct a subdir name based on the basename
+            output_bname = os.path.basename(output_rank_raster).split('.')[0]
+            output_subir = os.path.join(os.path.dirname(output_rank_raster),
+                                        output_bname)
+            if not os.path.exists(output_subir):
+                os.makedirs(output_subir)
+            output_raster = os.path.join(output_subir,
+                                         "budget_level_{}.tif".format(btoken))
             # Write out the data
-            llogger.debug(" Writing intermediate output to {}".format(output_raster))
+            llogger.debug(" Writing intermediate output to " +
+                          "{}".format(output_raster))
             profile.update(dtype=rasterio.uint8, compress=compress,
                            nodata=nodata_value)
 
