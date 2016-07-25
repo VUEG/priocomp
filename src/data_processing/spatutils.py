@@ -14,6 +14,50 @@ from importlib.machinery import SourceFileLoader
 utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 
 
+def get_profile(input_rasters, warn_inconistent=True, pick="first",
+                logger=None):
+    """ Construct a raster profile base on a list of input raster files.
+
+    Function will loop over a list of input raster files, extract raster
+    profile (metadata), possibly check for inconsistencies and return
+    a profile. The profile returned is always that of the raster last in the
+    list.
+
+    :param input_rasters: String list of raster paths.
+    :param warn_inconistent: Boolean should inconsistent profiles cause a
+                             warning?
+    :param pick: String of either value "first" or "last". Former picks the
+                 profile from the first raster in the list, "last" the last.
+    :param logger: Logger object.
+    :return: Dict profile (raster metadata).
+    """
+    # Set up logging
+    if not logger:
+        logging.basicConfig()
+        llogger = logging.getLogger('get_profile')
+        llogger.setLevel(logging.INFO)
+    else:
+        llogger = logger
+
+    if pick not in ["first", "last"]:
+        raise ValueError("Value for 'pick' must be either 'first' or 'last'")
+
+    current_profile = None
+    for i, raster in enumerate(input_rasters):
+        with rasterio.open(raster) as src:
+            profile = src.profile
+            if i == 0:
+                current_profile = profile
+            else:
+                if warn_inconistent and profile != current_profile:
+                    llogger.warning(" [WARN] Inconsistent raster profiles " +
+                                    "detected")
+                    warn_inconistent = False
+                if pick == 'last':
+                    current_profile = profile
+    return current_profile
+
+
 def normalize(x):
     """ Rescale all numeric values in range [0, 1].
 
@@ -71,7 +115,7 @@ def rescale_raster(input_raster, output_raster, method, fill_w_zeros=False,
                           original raster) should be ignored.
     :param compress: String compression level used for the output raster.
     :param verbose: Boolean indicating how much information is printed out.
-    :param log_file: String path to log file used.
+    :param logger: Logger object.
     :return Boolean True if success, False otherwise
     """
     # Set up logging
@@ -162,6 +206,69 @@ def rescale_raster(input_raster, output_raster, method, fill_w_zeros=False,
             dst.write(rescaled_data, 1)
             llogger.debug("Wrote raster {}".format(output_raster))
         return True
+
+
+def sum_raster(input_rasters, olnormalize=False, verbose=False, logger=None):
+    """ Sum a group of input rasters.
+
+    Read in a group of input rasters and sum the values in each cell. All
+    rasters must have the same dimensions, no broadcasting allowed.
+
+    Optionally, values in all rasters can occurrence level (OL) normalized
+    before summation.
+
+    :param input_rasters: String list of input raster paths.
+    :param ol_normalize: Boolean indicating wether OL normalization is done.
+    :param verbose: Boolean indicating how much information is printed out.
+    :param logger: Logger object.
+    :return: numpy ndarray of summed values.
+    """
+    # Set up logging
+    if not logger:
+        logging.basicConfig()
+        llogger = logging.getLogger('sum_raster')
+        llogger.setLevel(logging.DEBUG if verbose else logging.INFO)
+    else:
+        llogger = logger
+
+    if ol_normalize:
+        llogger.info(" [NOTE] Using occurrence level normalization")
+
+    # Initiate the data structure for holding the summed values.
+    sum_array = None
+    n_rasters = len(input_rasters)
+
+    for i, input_raster in enumerate(input_rasters):
+        no_raster = i + 1
+
+        if not os.path.exists(input_raster):
+            raise OSError("Input raster {} not found".format(input_raster))
+
+        with rasterio.open(input_raster) as in_src:
+            prefix = utils.get_iteration_prexix(no_raster, n_rasters)
+            llogger.info("{0} Processing raster {1}".format(prefix,
+                                                            input_raster))
+            llogger.debug("{0} Reading in data".format(prefix))
+
+            # Read the first band, use zeros for NoData
+            src_data = in_src.read(1, masked=True)
+            src_data = ma.filled(src_data, 0)
+
+            if olnormalize:
+                # 1. Occurrence level normalize data --------------------------
+                llogger.debug("{0} OL normalizing data".format(prefix))
+                src_data = ol_normalize(src_data)
+
+            # Sum OL normalized data ---------------------------------------
+            llogger.debug("{0} Summing values".format(prefix))
+            # If this is the first raster, use its dimensions to build an array
+            # that holds the summed values.
+            if i == 0:
+                # Set up an array of zeros that has the correct dimensions
+                sum_array = np.zeros_like(src_data, dtype=np.float32)
+            sum_array += src_data
+
+    return sum_array
 
 
 def winsorize(x, limits=0.05):
