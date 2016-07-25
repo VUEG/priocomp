@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-""" Rescaling and normalization functions."""
+""" Utility functions for spatial processing."""
 import click
 import logging
 import numpy as np

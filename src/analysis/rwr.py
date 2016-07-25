@@ -17,9 +17,9 @@ import time
 from importlib.machinery import SourceFileLoader
 from scipy.stats.mstats import rankdata
 
-rescale = SourceFileLoader("data_processing.rescale",
-                           "src/data_processing/rescale.py").load_module()
-utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
+spatutils = SourceFileLoader("data_processing.spatutils",
+                             "src/data_processing/spatutils.py").load_module()
+spatutils = SourceFileLoader("src.spatutils", "src/spatutils.py").load_module()
 
 
 def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
@@ -75,7 +75,7 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
             raise OSError("Input raster {} not found".format(input_raster))
 
         with rasterio.open(input_raster) as in_src:
-            prefix = utils.get_iteration_prexix(no_raster, n_rasters)
+            prefix = spatutils.get_iteration_prexix(no_raster, n_rasters)
             llogger.info("{0} Processing raster {1}".format(prefix,
                                                             input_raster))
             llogger.debug("{0} Reading in data and OL ".format(prefix) +
@@ -86,7 +86,7 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
             src_data = ma.filled(src_data, 0)
 
             # 1. Occurrence level normalize data ------------------------------
-            src_data = rescale.ol_normalize(src_data)
+            src_data = spatutils.ol_normalize(src_data)
 
             # 2. Sum OL normalized data ---------------------------------------
             llogger.debug("{0} Summing values".format(prefix))
@@ -118,7 +118,7 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
 
     # 4. Recale data into range [0, 1] ----------------------------------------
     llogger.debug(" Rescaling ranks")
-    rank_array = rescale.normalize(rank_array)
+    rank_array = spatutils.normalize(rank_array)
 
     rank_array = rank_array.astype(np.float32)
 

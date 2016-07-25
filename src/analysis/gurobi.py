@@ -11,17 +11,17 @@ import logging
 import numpy as np
 import numpy.ma as ma
 import os
-import pdb
+import ipdb
 import rasterio
 import sys
-import time
 
 from gurobipy import *
 from importlib.machinery import SourceFileLoader
 from scipy.stats.mstats import rankdata
+from timeit import default_timer as timer
 
-rescale = SourceFileLoader("data_processing.rescale",
-                           "src/data_processing/rescale.py").load_module()
+spatutils = SourceFileLoader("data_processing.spatutils",
+                           "src/data_processing/spatutils.py").load_module()
 utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 
 
@@ -63,7 +63,17 @@ def optimize_maxcover(x, budget, rij, verbose=False, logger=None):
         m.addConstr(lhs=expr, sense=GRB.LESS_EQUAL, rhs=budget)
         m.update()
 
-        # m.params.timeLimit = 100.0
+        # The the log file directory from the logger, but log into a separate
+        # file. NOTE: handler location is hard coded.
+        log_dir = os.path.dirname(logger.handlers[1].baseFilename)
+        log_file = os.path.join(log_dir, "gurobi.log")
+        if os.path.exists(log_dir):
+            logger.debug("See {} for Gurobi log".format(log_file))
+            m.params.logToConsole = 0
+            m.params.logFile = log_file
+        else:
+            logger.debug("Log dir {} not found".format(log_dir))
+            m.params.logToConsole = 0
         # m.params.mipgap = 0.001
         # m.params.solutionLimit = 1
         # m.params.presolve = -1
@@ -103,6 +113,10 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     :param logger logger object to be used.
     """
     # Set up logging
+
+    all_start = timer()
+    load_start = timer()
+
     if not logger:
         logging.basicConfig()
         llogger = logging.getLogger('optimize_gurobi')
@@ -131,8 +145,10 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     profile = None
     n_rasters = len(input_rasters)
 
+    llogger.info(" [** PRE-PROCESSING **]")
+
     if ol_normalize:
-        llogger.info(" Using occurrence level normalization")
+        llogger.info(" [NOTE] Using occurrence level normalization")
 
     for i, input_raster in enumerate(input_rasters):
         no_raster = i + 1
@@ -153,7 +169,7 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
             if ol_normalize:
                 # 1. Occurrence level normalize data --------------------------
                 llogger.debug("{0} OL normalizing data".format(prefix))
-                src_data = rescale.ol_normalize(src_data)
+                src_data = spatutils.ol_normalize(src_data)
 
             # 2. Sum OL normalized data ---------------------------------------
             llogger.debug("{0} Summing values".format(prefix))
@@ -176,15 +192,28 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     # Create equal cost array
     cost = np.ones(sum_array.size)
 
+    load_end = timer()
+    load_elapsed = round(load_end - load_start, 2)
+    llogger.info(" [TIME] Pre-processing took {} sec".format(load_elapsed))
+
     # 3. Optimize  -----------------------------------------------------------
+
+    opt_start = timer()
+    llogger.info(" [** OPTIMIZING **]")
+    blevels_str = ", ".join([str(level) for level in budget_levels])
+    llogger.info(" [NOTE] Target budget levels: {}".format(blevels_str))
 
     # Construct a ndarray (matrix) that will hold the selection frequency
     sel_freq = np.zeros_like(src_data, dtype=np.float32)
 
     # Define budget and optimize_maxcover
-    for blevel in budget_levels:
+    for i, blevel in enumerate(budget_levels):
+        no_blevel = i + 1
+        prefix = utils.get_iteration_prexix(no_blevel, len(budget_levels))
+
         budget = blevel * cost.size
-        llogger.info(" Optimizing with budget level {}...".format(blevel))
+        llogger.info("{} Optimizing with ".format(prefix) +
+                     "budget level {}...".format(blevel))
         x = optimize_maxcover(cost, budget, sum_array, verbose=verbose,
                               logger=llogger)
         # Create a full (filled with 0s) raster template
@@ -222,23 +251,30 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
                 dst.write_mask(mask)
                 dst.write(output_x.astype(np.uint8), 1)
 
+    opt_end = timer()
+    opt_elapsed = round(opt_end - opt_start, 2)
+    llogger.info(" [TIME] Optimization took {} sec".format(opt_elapsed))
+
     # 4. Rank values ---------------------------------------------------------
 
-    llogger.info(" Ranking values (this can take a while...)")
+    post_start = timer()
+    llogger.info(" [** POST-PROCESSING **]")
+
+    llogger.info(" [1/3] Ranking values (this can take a while...)")
     # Use 0s from summation as a mask
     rank_array = ma.masked_values(sel_freq, 0.0)
     rank_array = rankdata(rank_array)
 
     # 5. Recale data into range [0, 1] ---------------------------------------
 
-    llogger.debug(" Rescaling ranks")
-    rank_array = rescale.normalize(rank_array)
+    llogger.info(" [2/3] Rescaling ranks")
+    rank_array = spatutils.normalize(rank_array)
     # Force float32
     rank_array = rank_array.astype(np.float32)
 
     # 6. Prepare and write output --------------------------------------------
 
-    llogger.info(" Writing output to {}".format(output_rank_raster))
+    llogger.info(" [3/3] Writing output to {}".format(output_rank_raster))
     # Replace the real nodata values with a proper NoData value
     nodata_value = -3.4e+38
     rank_array[mask] = nodata_value
@@ -251,6 +287,14 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
         dst.write_mask(mask)
         dst.write(rank_array.astype(np.float32), 1)
 
+    post_end = timer()
+    post_elapsed = round(post_end - post_start, 2)
+    llogger.info(" [TIME] Post-processing took {} sec".format(post_elapsed))
+
+    all_end = timer()
+    all_elapsed = round(all_end - all_start, 2)
+    llogger.info(" [TIME] All processing took {} sec".format(all_elapsed))
+
 
 @click.command()
 @click.option('-v', '--verbose', is_flag=True)
@@ -262,7 +306,6 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
 @click.argument('outfile', nargs=1)
 def cli(indir, outfile, budget, extension, verbose):
     """ Command-line interface."""
-    start_time = time.time()
     # List files in input directorys
     file_iterator = glob.iglob('{0}/**/*{1}'.format(indir, extension),
                                recursive=True)
@@ -271,8 +314,7 @@ def cli(indir, outfile, budget, extension, verbose):
         click.echo(click.style(" Found {} rasters".format(len(input_rasters)),
                                fg='green'))
     optimize_gurobi(input_rasters, outfile, budget, verbose=verbose)
-    exc_time = time.time() - start_time
-    click.echo(click.style('Done in {} seconds!'.format(exc_time), fg='green'))
+
 
 if __name__ == '__main__':
     cli()
