@@ -86,7 +86,7 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
 
     post_start = timer()
     llogger.info(" [** POST-PROCESSING **]")
-    llogger.info(" [1/3] Ranking selection frequencies")
+    llogger.info(" [1/3] Ranking values (this can take a while...)")
 
     nodata_value = -3.4e+38
 
