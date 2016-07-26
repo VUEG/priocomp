@@ -245,7 +245,7 @@ def sum_raster(input_rasters, olnormalize=False, verbose=False, logger=None):
             raise OSError("Input raster {} not found".format(input_raster))
 
         with rasterio.open(input_raster) as in_src:
-            prefix = utils.get_iteration_prexix(no_raster, n_rasters)
+            prefix = utils.get_iteration_prefix(no_raster, n_rasters)
             llogger.info("{0} Processing raster {1}".format(prefix,
                                                             input_raster))
             llogger.debug("{0} Reading in data".format(prefix))

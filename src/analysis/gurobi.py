@@ -176,7 +176,7 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     # Define budget and optimize_maxcover
     for i, blevel in enumerate(budget_levels):
         no_blevel = i + 1
-        prefix = utils.get_iteration_prexix(no_blevel, len(budget_levels))
+        prefix = utils.get_iteration_prefix(no_blevel, len(budget_levels))
 
         budget = blevel * cost.size
         llogger.info("{} Optimizing with ".format(prefix) +

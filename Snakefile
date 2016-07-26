@@ -320,7 +320,7 @@ rule harmonize_data:
             # Target raster
             warped_raster = s_raster.replace("external", "interim/warped")
             # No need to process the snap raster, just copy it
-            prefix = utils.get_iteration_prexix(i+1, nsteps)
+            prefix = utils.get_iteration_prefix(i+1, nsteps)
             if s_raster == input.like_raster:
                 llogger.info("{0} Copying dataset {1}".format(prefix, s_raster))
                 llogger.debug("{0} Target dataset {1}".format(prefix, warped_raster))
@@ -368,7 +368,7 @@ rule ol_normalize_data:
     run:
         llogger = utils.get_local_logger("ol_normalize_data", log[0])
         for i, s_raster in enumerate(input):
-            prefix = utils.get_iteration_prexix(i+1, len(input))
+            prefix = utils.get_iteration_prefix(i+1, len(input))
             llogger.info("{0} (OL) Normalizing dataset {1}".format(prefix, s_raster))
             # NOTE: looping over input and output only works if they have
             # exactly the same definition. Otherwise order may vary.

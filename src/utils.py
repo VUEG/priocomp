@@ -7,7 +7,7 @@ import yaml
 from colorlog import ColoredFormatter
 
 
-def get_iteration_prexix(i, total):
+def get_iteration_prefix(i, total):
     """ Return a String prefix for itarative task phases.
 
     :param i int current step.
