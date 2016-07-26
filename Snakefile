@@ -397,17 +397,28 @@ rule rescale_data:
 
 rule calculate_rwr:
     input:
-        rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS
+        # FIXME: The N of ES features (11) is hardcoded here. Should be defined
+        # dynamically.
+        all=rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS,
+        es=(rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS)[0:11],
+        bd=(rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS)[11:]
     output:
-        "analyses/RWR/eu26_rwr.tif"
+        all="analyses/RWR/eu26_rwr_all.tif",
+        es="analyses/RWR/eu26_rwr_es.tif",
+        bd="analyses/RWR/eu26_rwr_bd.tif"
     log:
-        "logs/calculate_rwr.log"
+        all="logs/calculate_rwr_eu26_rwr_all.log",
+        es="logs/calculate_rwr_eu26_rwr_all_es.log",
+        bd="logs/calculate_rwr_eu26_rwr_all_bd.log"
     message:
         "Calculating RWR..."
     run:
-        llogger = utils.get_local_logger("ol_normalize_data", log[0])
-        rwr.calculate_rwr(input, output[0], logger=llogger)
-
+        llogger = utils.get_local_logger("calculate_rwr_all", log.all)
+        rwr.calculate_rwr(input.all, output.all, logger=llogger)
+        llogger = utils.get_local_logger("calculate_rwr_es", log.es)
+        rwr.calculate_rwr(input.es, output.es, logger=llogger)
+        llogger = utils.get_local_logger("calculate_rwr_bd", log.bd)
+        rwr.calculate_rwr(input.bd, output.bd, logger=llogger)
 
 # # Zonation ---------------------------------------------------------------------
 #
@@ -429,7 +440,9 @@ rule calculate_rwr:
 rule prioritize_gurobi:
     input:
         rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS
+        #expand("/home/jlehtoma/tmp/data/species{ID}.tif", ID=range(1, 8))
     output:
+        #all="/home/jlehtoma/tmp/ilp_results/ilp_test.tif"
         all="analyses/ILP/eu26_ilp.tif"
         #es="analyses/ILP/eu26_ilp_es.tif",
         #bd="analyses/ILP/eu26_ilp_bd.tif"
