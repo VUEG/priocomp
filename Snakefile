@@ -439,19 +439,31 @@ rule calculate_rwr:
 
 rule prioritize_gurobi:
     input:
-        rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS
+        all=rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS,
+        es=(rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS)[0:11],
+        bd=(rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS)[11:]
         #expand("/home/jlehtoma/tmp/data/species{ID}.tif", ID=range(1, 8))
     output:
         #all="/home/jlehtoma/tmp/ilp_results/ilp_test.tif"
-        all="analyses/ILP/eu26_ilp.tif"
-        #es="analyses/ILP/eu26_ilp_es.tif",
-        #bd="analyses/ILP/eu26_ilp_bd.tif"
+        all="analyses/ILP/eu26_ilp_all.tif",
+        es="analyses/ILP/eu26_ilp_es.tif",
+        bd="analyses/ILP/eu26_ilp_bd.tif"
     log:
-        "logs/optimize_gurobi.log"
+        all="logs/prioritize_gurobi_eu26_rwr_all.log",
+        es="logs/prioritize_gurobi_eu26_rwr_es.log",
+        bd="logs/prioritize_gurobi_eu26_rwr_bd.log"
     message:
         "Opitmizing with Gurobi..."
     run:
-        llogger = utils.get_local_logger("optimize_gurobi", log[0])
-        gurobi.prioritize_gurobi(input, output.all, logger=llogger,
-                                 ol_normalize=True,
-                                 save_intermediate=True, verbose=True)
+        llogger = utils.get_local_logger("optimize_gurobi", log.all)
+        gurobi.prioritize_gurobi(input.all, output.all, logger=llogger,
+                                 ol_normalize=True, save_intermediate=False,
+                                 verbose=True)
+        llogger = utils.get_local_logger("optimize_gurobi", log.es)
+        gurobi.prioritize_gurobi(input.es, output.es, logger=llogger,
+                                 ol_normalize=True, save_intermediate=False,
+                                 verbose=True)
+        llogger = utils.get_local_logger("optimize_gurobi", log.bd)
+        gurobi.prioritize_gurobi(input.bd, output.bd, logger=llogger,
+                                 ol_normalize=True, save_intermediate=False,
+                                 verbose=True)
