@@ -129,6 +129,8 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
         sys.exit(1)
 
     # Check inputs
+    assert len(input_rasters) > 0, "Input rasters list cannot be empty"
+    assert len(output_raster) != "", "Output raster path cannot be empty"
     try:
         step = float(step)
     except ValueError:
@@ -143,6 +145,8 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
 
     llogger.info(" [** PRE-PROCESSING **]")
 
+    # Create a sum array, i.e. sum all (occurrence level normalized) raster
+    # values in input_rasters together.
     sum_array = spatutils.sum_raster(input_rasters, olnormalize=True,
                                      logger=llogger)
     (height, width) = sum_array.shape
