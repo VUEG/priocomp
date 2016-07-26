@@ -10,12 +10,13 @@ import glob
 import logging
 import numpy as np
 import numpy.ma as ma
-import os
+import pdb
 import rasterio
 import time
 
 from importlib.machinery import SourceFileLoader
 from scipy.stats.mstats import rankdata
+from timeit import default_timer as timer
 
 spatutils = SourceFileLoader("data_processing.spatutils",
                              "src/data_processing/spatutils.py").load_module()
@@ -52,9 +53,11 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
     :param verbose Boolean indicating how much information is printed out.
     :param log_file String path to log file used.
     """
-    assert len(input_rasters) > 0, "Input rasters list cannot be empty"
+    # 1. Setup  --------------------------------------------------------------
 
-    # Set up logging
+    all_start = timer()
+    load_start = timer()
+
     if not logger:
         logging.basicConfig()
         llogger = logging.getLogger('calculate_rwr')
@@ -62,52 +65,33 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
     else:
         llogger = logger
 
-    # Initiate the data structure for holding the summed values.
-    sum_array = None
-    # Placeholder for raster metadata
-    profile = None
-    n_rasters = len(input_rasters)
+    # Check inputs
+    assert len(input_rasters) > 0, "Input rasters list cannot be empty"
+    assert len(output_raster) != "", "Output raster path cannot be empty"
 
-    for i, input_raster in enumerate(input_rasters):
-        no_raster = i + 1
+    # 2. Sum value  -----------------------------------------------------
 
-        if not os.path.exists(input_raster):
-            raise OSError("Input raster {} not found".format(input_raster))
+    llogger.info(" [** SUMMING RASTERS **]")
 
-        with rasterio.open(input_raster) as in_src:
-            prefix = spatutils.get_iteration_prexix(no_raster, n_rasters)
-            llogger.info("{0} Processing raster {1}".format(prefix,
-                                                            input_raster))
-            llogger.debug("{0} Reading in data and OL ".format(prefix) +
-                          "normalizing")
+    # Create a sum array, i.e. sum all (occurrence level normalized) raster
+    # values in input_rasters together.
+    sum_array = spatutils.sum_raster(input_rasters, olnormalize=True,
+                                     logger=llogger)
 
-            # Read the first band, use zeros for NoData
-            src_data = in_src.read(1, masked=True)
-            src_data = ma.filled(src_data, 0)
-
-            # 1. Occurrence level normalize data ------------------------------
-            src_data = spatutils.ol_normalize(src_data)
-
-            # 2. Sum OL normalized data ---------------------------------------
-            llogger.debug("{0} Summing values".format(prefix))
-            # If this is the first raster, use its dimensions to build an array
-            # that holds the summed values.
-            if i == 0:
-                # Set up an array of zeros that has the correct dimensions
-                sum_array = np.zeros_like(src_data, dtype=np.float32)
-                # Also store the necessarry information for the output raster
-                # Write the output product
-                profile = in_src.profile
-            sum_array += src_data
+    load_end = timer()
+    load_elapsed = round(load_end - load_start, 2)
+    llogger.info(" [TIME] Pre-processing took {} sec".format(load_elapsed))
 
     # 3. Rank RWR data --------------------------------------------------------
-    llogger.info(" Ranking values (this can take a while...)")
+
+    post_start = timer()
+    llogger.info(" [** POST-PROCESSING **]")
+    llogger.info(" [1/3] Ranking selection frequencies")
 
     nodata_value = -3.4e+38
 
     # Use 0s from summation as a mask
     sum_array = ma.masked_values(sum_array, 0.0)
-
     rank_array = rankdata(sum_array)
     # rankdata() will mark all masked values with 0, make those NoData again.
     np.place(rank_array, rank_array == 0, nodata_value)
@@ -117,13 +101,15 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
     rank_array = ma.masked_values(rank_array, nodata_value)
 
     # 4. Recale data into range [0, 1] ----------------------------------------
-    llogger.debug(" Rescaling ranks")
+    llogger.info(" [2/3] Rescaling ranks")
     rank_array = spatutils.normalize(rank_array)
-
     rank_array = rank_array.astype(np.float32)
 
     # 5. Write out the data
-    llogger.info(" Writing output to {}".format(output_raster))
+    llogger.info(" [3/3] Writing output to {}".format(output_raster))
+
+    # Get the raster profile from the input raster files
+    profile = spatutils.get_profile(input_rasters, logger=llogger)
 
     # Rescaled data is always float32, and we have only 1 band. Remember
     # to set NoData-value correctly.
@@ -133,6 +119,14 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
     with rasterio.open(output_raster, 'w', **profile) as dst:
         dst.write_mask(ma.getmask(rank_array))
         dst.write(rank_array, 1)
+
+    post_end = timer()
+    post_elapsed = round(post_end - post_start, 2)
+    llogger.info(" [TIME] Post-processing took {} sec".format(post_elapsed))
+
+    all_end = timer()
+    all_elapsed = round(all_end - all_start, 2)
+    llogger.info(" [TIME] All processing took {} sec".format(all_elapsed))
 
 
 @click.command()
