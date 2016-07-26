@@ -408,8 +408,8 @@ rule calculate_rwr:
         bd="analyses/RWR/eu26_rwr_bd.tif"
     log:
         all="logs/calculate_rwr_eu26_rwr_all.log",
-        es="logs/calculate_rwr_eu26_rwr_all_es.log",
-        bd="logs/calculate_rwr_eu26_rwr_all_bd.log"
+        es="logs/calculate_rwr_eu26_rwr_es.log",
+        bd="logs/calculate_rwr_eu26_rwr_bd.log"
     message:
         "Calculating RWR..."
     run:
