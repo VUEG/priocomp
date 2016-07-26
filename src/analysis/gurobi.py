@@ -112,7 +112,7 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     :param verbose Boolean indicating how much information is printed out.
     :param logger logger object to be used.
     """
-    # Set up logging
+    # 1. Setup  --------------------------------------------------------------
 
     all_start = timer()
     load_start = timer()
@@ -136,8 +136,10 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
         sys.exit(1)
     assert step > 0.0 and step < 1.0, "Step argument must be in range (0, 1)"
     # Construct budget levels based on the step provided. 0.0 (nothing) and
-    # 1.0 (everyhting) are not needed.
+    # 1.0 (everything) are not needed.
     budget_levels = np.linspace(0.0+step, 1.0, 1/step)[:-1]
+
+    # 2. Pre-processing  -----------------------------------------------------
 
     llogger.info(" [** PRE-PROCESSING **]")
 
