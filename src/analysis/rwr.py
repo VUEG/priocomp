@@ -74,19 +74,17 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
     llogger.info(" [** SUMMING RASTERS **]")
 
     # Create a sum array, i.e. sum all (occurrence level normalized) raster
-    # values in input_rasters together.
-    sum_array = spatutils.sum_raster(input_rasters, olnormalize=True,
-                                     logger=llogger)
+    # values in input_rasters together. NOTE: sum_raster() returns a masked
+    # array.
+    sum_array_masked = spatutils.sum_raster(input_rasters, olnormalize=True,
+                                            logger=llogger)
 
     # To speed up things, do 2 things: 1) save mask (NoData) and get rid of
     # NoData cells for now, 2) flatten the array.
-    (height, width) = sum_array.shape
-    # Flatten the sum array
-    sum_array = sum_array.flatten()
-    # Get rid of zeros for now, but first get the mask
-    mask = ma.getmask(ma.masked_values(sum_array, 0.0))
-    sum_array = sum_array[~mask]
-    mask = mask.reshape((height, width))
+    (height, width) = sum_array_masked.shape
+    mask = ma.getmask(sum_array_masked)
+    # Get all the non-masked data as a 1-D array.
+    sum_array = ma.compressed(sum_array_masked)
 
     load_end = timer()
     load_elapsed = round(load_end - load_start, 2)
@@ -111,12 +109,12 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
     rank_data[~mask] = rank_array
     # Create a masked array.
     # NOTE: use ma.masked_values() because we're replacing with a float value
-    rank_data = ma.masked_values(rank_data, nodata_value)
+    rank_data_masked = ma.masked_values(rank_data, nodata_value)
 
     # 4. Recale data into range [0, 1] ----------------------------------------
     llogger.info(" [2/3] Rescaling ranks")
-    rank_data = spatutils.normalize(rank_data)
-    rank_data = rank_data.astype(np.float32)
+    rank_data_masked = spatutils.normalize(rank_data_masked)
+    rank_data_masked = rank_data_masked.astype(np.float32)
 
     # 5. Write out the data
     llogger.info(" [3/3] Writing output to {}".format(output_raster))
@@ -130,8 +128,8 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
                    nodata=-3.4e+38)
 
     with rasterio.open(output_raster, 'w', **profile) as dst:
-        dst.write_mask(ma.getmask(rank_data))
-        dst.write(rank_data, 1)
+        dst.write_mask(ma.getmask(rank_data_masked))
+        dst.write(rank_data_masked, 1)
 
     post_end = timer()
     post_elapsed = round(post_end - post_start, 2)

@@ -146,16 +146,16 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     llogger.info(" [** PRE-PROCESSING **]")
 
     # Create a sum array, i.e. sum all (occurrence level normalized) raster
-    # values in input_rasters together.
+    # values in input_rasters together.  NOTE: sum_raster() returns a masked
+    # array.
     sum_array = spatutils.sum_raster(input_rasters, olnormalize=True,
                                      logger=llogger)
-    (height, width) = sum_array.shape
-    # Flatten the sum array
-    sum_array = sum_array.flatten()
-    # Get rid of zeros for now, but first get the mask
-    mask = ma.getmask(ma.masked_values(sum_array, 0.0))
-    sum_array = sum_array[~mask]
-    mask = mask.reshape((height, width))
+    # To speed up things, do 2 things: 1) save mask (NoData) and get rid of
+    # NoData cells for now, 2) flatten the array.
+    (height, width) = sum_array_masked.shape
+    mask = ma.getmask(sum_array_masked)
+    # Get all the non-masked data as a 1-D array.
+    sum_array = ma.compressed(sum_array_masked)
     # Create equal cost array
     cost = np.ones(sum_array.size)
 

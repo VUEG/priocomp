@@ -221,7 +221,7 @@ def sum_raster(input_rasters, olnormalize=False, verbose=False, logger=None):
     :param ol_normalize: Boolean indicating wether OL normalization is done.
     :param verbose: Boolean indicating how much information is printed out.
     :param logger: Logger object.
-    :return: numpy ndarray of summed values.
+    :return: numpy masked array of summed values.
     """
     # Set up logging
     if not logger:
@@ -236,6 +236,10 @@ def sum_raster(input_rasters, olnormalize=False, verbose=False, logger=None):
 
     # Initiate the data structure for holding the summed values.
     sum_array = None
+    # The final analysis mask is constructed as the union of all masks. 0 is
+    # legitimate value, so converting NoData to 0s is not an option.
+    union_mask = None
+
     n_rasters = len(input_rasters)
 
     for i, input_raster in enumerate(input_rasters):
@@ -250,8 +254,20 @@ def sum_raster(input_rasters, olnormalize=False, verbose=False, logger=None):
                                                             input_raster))
             llogger.debug("{0} Reading in data".format(prefix))
 
-            # Read the first band, use zeros for NoData
+            # Read the first band as a masked arrat
             src_data = in_src.read(1, masked=True)
+            # If this is the first raster, use its dimensions to build an array
+            # that holds the summed values.
+            if i == 0:
+                # Set up an array of zeros that has the correct dimensions
+                sum_array = np.zeros_like(src_data, dtype=np.float32)
+                # Also start tracking the masked values
+                union_mask = ma.getmask(src_data)
+            else:
+                # Union the mask from the current raster with those from all
+                # of the previous
+                union_mask = ma.mask_or(union_mask, ma.getmask(src_data))
+            # Fill the actual data with 0s
             src_data = ma.filled(src_data, 0)
 
             if olnormalize:
@@ -261,13 +277,10 @@ def sum_raster(input_rasters, olnormalize=False, verbose=False, logger=None):
 
             # Sum OL normalized data ---------------------------------------
             llogger.debug("{0} Summing values".format(prefix))
-            # If this is the first raster, use its dimensions to build an array
-            # that holds the summed values.
-            if i == 0:
-                # Set up an array of zeros that has the correct dimensions
-                sum_array = np.zeros_like(src_data, dtype=np.float32)
             sum_array += src_data
 
+    # Re-mask the data based on the union mask constructed dynamically
+    sum_array = ma.masked_where(union_mask, sum_array)
     return sum_array
 
 
