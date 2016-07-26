@@ -15,7 +15,7 @@ import rasterio
 import time
 
 from importlib.machinery import SourceFileLoader
-from scipy.stats.mstats import rankdata
+from scipy.stats import rankdata
 from timeit import default_timer as timer
 
 spatutils = SourceFileLoader("data_processing.spatutils",
@@ -78,6 +78,16 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
     sum_array = spatutils.sum_raster(input_rasters, olnormalize=True,
                                      logger=llogger)
 
+    # To speed up things, do 2 things: 1) save mask (NoData) and get rid of
+    # NoData cells for now, 2) flatten the array.
+    (height, width) = sum_array.shape
+    # Flatten the sum array
+    sum_array = sum_array.flatten()
+    # Get rid of zeros for now, but first get the mask
+    mask = ma.getmask(ma.masked_values(sum_array, 0.0))
+    sum_array = sum_array[~mask]
+    mask = mask.reshape((height, width))
+
     load_end = timer()
     load_elapsed = round(load_end - load_start, 2)
     llogger.info(" [TIME] Pre-processing took {} sec".format(load_elapsed))
@@ -90,20 +100,23 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
 
     nodata_value = -3.4e+38
 
-    # Use 0s from summation as a mask
-    sum_array = ma.masked_values(sum_array, 0.0)
+    # Since we don't have NoData in sum_array (i.e. no need for mask), we can
+    # use scipy.stats.rankdata, which is slightly faster than
+    # scipy.stats.mstats.rankdata
     rank_array = rankdata(sum_array)
-    # rankdata() will mark all masked values with 0, make those NoData again.
-    np.place(rank_array, rank_array == 0, nodata_value)
-    # Create a masked array. Convert remaining zeros to NoData and use that as
-    # a mask
+
+    # Create a new full (filled with NoData values) array
+    rank_data = np.full((height, width), nodata_value)
+    # Then, populate the cells where mask == False with the rank array
+    rank_data[~mask] = rank_array
+    # Create a masked array.
     # NOTE: use ma.masked_values() because we're replacing with a float value
-    rank_array = ma.masked_values(rank_array, nodata_value)
+    rank_data = ma.masked_values(rank_data, nodata_value)
 
     # 4. Recale data into range [0, 1] ----------------------------------------
     llogger.info(" [2/3] Rescaling ranks")
-    rank_array = spatutils.normalize(rank_array)
-    rank_array = rank_array.astype(np.float32)
+    rank_data = spatutils.normalize(rank_data)
+    rank_data = rank_data.astype(np.float32)
 
     # 5. Write out the data
     llogger.info(" [3/3] Writing output to {}".format(output_raster))
@@ -117,8 +130,8 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
                    nodata=-3.4e+38)
 
     with rasterio.open(output_raster, 'w', **profile) as dst:
-        dst.write_mask(ma.getmask(rank_array))
-        dst.write(rank_array, 1)
+        dst.write_mask(ma.getmask(rank_data))
+        dst.write(rank_data, 1)
 
     post_end = timer()
     post_elapsed = round(post_end - post_start, 2)
