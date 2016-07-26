@@ -130,7 +130,7 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
 
     # Check inputs
     assert len(input_rasters) > 0, "Input rasters list cannot be empty"
-    assert len(output_raster) != "", "Output raster path cannot be empty"
+    assert len(output_rank_raster) != "", "Output raster path cannot be empty"
     try:
         step = float(step)
     except ValueError:
@@ -230,7 +230,7 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     post_start = timer()
     llogger.info(" [** POST-PROCESSING **]")
 
-    llogger.info(" [1/3] Ranking values (this can take a while...)")
+    llogger.info(" [1/3] Ranking selection frequencies")
     # Use 0s from summation as a mask
     rank_array = ma.masked_values(sel_freq, 0.0)
     rank_array = rankdata(rank_array)
