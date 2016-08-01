@@ -403,13 +403,13 @@ rule calculate_rwr:
         #es=(rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS)[0:11],
         bd=(rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS)[11:]
     output:
-        #all="analyses/RWR/eu26_rwr_all.tif",
-        #es="analyses/RWR/eu26_rwr_es.tif",
-        bd="analyses/RWR/eu26_rwr_bd.tif"
+        #all="analyses/RWR/rwr_eu26_all.tif",
+        #es="analyses/RWR/rwr_eu26_es.tif",
+        bd="analyses/RWR/rwr_eu26_bd.tif"
     log:
-        #all="logs/calculate_rwr_eu26_rwr_all.log",
-        #es="logs/calculate_rwr_eu26_rwr_es.log",
-        bd="logs/calculate_rwr_eu26_rwr_bd.log"
+        #all="logs/calculate_rwr_eu26_all.log",
+        #es="logs/calculate_rwr_eu26_es.log",
+        bd="logs/calculate_rwr_eu26_bd.log"
     message:
         "Calculating RWR..."
     run:
