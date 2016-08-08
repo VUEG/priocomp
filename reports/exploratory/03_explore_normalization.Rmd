@@ -1,6 +1,6 @@
 ---
 title: Testing normalization
-date: "May 18, 2016"
+date: "Aug 08, 2016"
 output: html_notebook
 ---
 
@@ -12,6 +12,32 @@ library(raster)
 library(rasterVis)
 library(viridis)
 library(zonator)
+
+options(scipen = 9999)
+# Search for datasets. HACK: dealing with path depedning on whether we're running
+# in the RStudio project root "priocomp" or Knitr folder "reports".
+if (basename(getwd()) == "priocomp") {
+  data_path <- "data"
+} else {
+  data_path <- "../../data"
+}
+
+# Read in the unmodified raw raster data
+  
+raw_data_files <- list.files(file.path(data_path, "external"), 
+                             pattern = ".\\.tif$", recursive = TRUE, 
+                             full.names = TRUE)
+# Create a raster list (NOTE! Extents may be different)
+raw_rasters <- lapply(raw_data_files, function(x) {return(raster::setMinMax(raster::raster(x)))})
+
+# Read in the harmonized raster data
+harmonized_data_files <- list.files(file.path(data_path, "processed/features"), 
+                                    pattern = ".\\.tif$", recursive = TRUE, 
+                                    full.names = TRUE)
+# Separate ES and BD features
+ES_rasters <- raster::stack(harmonized_data_files[grep("provide|datadryad", harmonized_data_files)])
+ES_rasters <- raster::setMinMax(ES_rasters)
+#BD_rasters <- raster::stack(harmonized_data_files[grep("udr", harmonized_data_files)])
 ```
 
 ## Methods for rescaling
@@ -44,6 +70,11 @@ ol_normalize <- function(x) {
   min <- raster::minValue(x)
   return((x - min) / raster::cellStats(x - min, "sum"))
 }
+
+ol_normalize_ns <- function(x) {
+  return((x - min(x)) / sum(x - min(x)))
+}
+
 ```
 
 ### Standardization
@@ -116,24 +147,23 @@ grid.arrange(
   ncol = 3, nrow = 2)
 ```
 
-## Prioritization based on normalized data sets (RWR)
+## Real features
 
-```{r normalize-everything}
-ol_features <- ol_normalize(features)
-sum_ol_features <- raster::calc(ol_features, sum)
-ranks <- rank(raster::getValues(sum_ol_features), ties.method = "random")
-# Scale in range [0, 1]
-ranks <- rev(ranks) / max(ranks)
-rank_ol_features <- raster(e, nrows = nrow(sum_ol_features), ncols = ncol(sum_ol_features),
-                           vals = ranks)
+### ES features
 
-z_colors_spectral <- zonator::zlegend('spectral')
-z_colors_RdYlBu <- z_colors_spectral
-z_colors_RdYlBu$colors <- rev(brewer.pal(7, "RdYlBu"))  
-
-levelplot(rank_ol_features, margin = FALSE,
-          par.settings = rasterTheme(region = z_colors_RdYlBu$colors), 
-          at = z_colors_RdYlBu$values)
-```
-
-
+```{r normalize-es-features, fig.width=16}
+es_stack <- raster::stack(raw_rasters[[2]], 
+                          normalize(raw_rasters[[2]]),
+                          ol_normalize(raw_rasters[[2]]),
+                          standardize(raw_rasters[[2]]),
+                          IQRize(raw_rasters[[2]]))
+names(es_stack) <- c("Original", "Normalized", "OL_normalized", "Standardized", "IQRized")
+grid.arrange(
+  levelplot(es_stack[[1]], main = names(es_stack[[1]]), margin = FALSE, col.regions = viridis),
+  levelplot(es_stack[[2]], main = names(es_stack[[2]]), margin = FALSE, col.regions = viridis),
+  levelplot(es_stack[[3]], main = names(es_stack[[3]]), margin = FALSE, col.regions = viridis),
+  rasterVis::histogram(es_stack[[1]]),
+  rasterVis::histogram(es_stack[[2]]),
+  rasterVis::histogram(es_stack[[3]]),
+  ncol = 3, nrow = 2)
+ ```
