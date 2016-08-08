@@ -445,13 +445,13 @@ rule prioritize_gurobi:
         #expand("/home/jlehtoma/tmp/data/species{ID}.tif", ID=range(1, 8))
     output:
         #all="/home/jlehtoma/tmp/ilp_results/ilp_test.tif"
-        all="analyses/ILP/eu26_ilp_all.tif",
-        es="analyses/ILP/eu26_ilp_es.tif",
-        bd="analyses/ILP/eu26_ilp_bd.tif"
+        all="analyses/ILP/ilp_eu26_all.tif",
+        es="analyses/ILP/ilp_eu26_es.tif",
+        bd="analyses/ILP/ilp_eu26_bd.tif"
     log:
-        all="logs/prioritize_gurobi_eu26_rwr_all.log",
-        es="logs/prioritize_gurobi_eu26_rwr_es.log",
-        bd="logs/prioritize_gurobi_eu26_rwr_bd.log"
+        all="logs/prioritize_ilp_eu26_all.log",
+        es="logs/prioritize_ilp_eu26_es.log",
+        bd="logs/prioritize_ilp_eu26_bd.log"
     message:
         "Opitmizing with Gurobi..."
     run:
