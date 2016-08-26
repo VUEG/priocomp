@@ -9,14 +9,15 @@ library(zonator)
 source("src/utils.R")
 
 # Number of features in groups ------------------------------------------------
+# NOTE: the numbers are hard coded and are not updated if the data change.
+
+NAMPHIBIANS <- 83
+NBIRDS <- 404
+NMAMMALS <- 164
+NREPTILES <- 112
 
 NESFEATURES <- 11
-NBDFEATURES <- 759
-
-NAMPHIBIANS <- 81
-NBIRDS <- 403
-NMAMMALS <- 164
-NREPTILES <- 111
+NBDFEATURES <- NAMPHIBIANS + NBIRDS + NMAMMALS + NREPTILES
 
 # Generate variants for all taxa ----------------------------------------------
 

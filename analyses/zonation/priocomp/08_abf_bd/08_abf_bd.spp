@@ -7,6 +7,7 @@
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/amphibians/bombina_pachypus.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/amphibians/bombina_variegata.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/amphibians/bufo_bufo.tif
+1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/amphibians/calotriton_arnoldi.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/amphibians/calotriton_asper.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/amphibians/chioglossa_lusitanica.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/amphibians/discoglossus_galganoi.tif
@@ -27,6 +28,7 @@
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/amphibians/lissotriton_montandoni.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/amphibians/lissotriton_vulgaris.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/amphibians/lyciasalamandra_helverseni.tif
+1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/amphibians/lyciasalamandra_luschani.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/amphibians/mesotriton_alpestris.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/amphibians/pelobates_cultripes.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/amphibians/pelobates_fuscus.tif
@@ -264,6 +266,7 @@
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/birds/gypaetus_barbatus.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/birds/gyps_fulvus.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/birds/haematopus_ostralegus.tif
+1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/birds/halcyon_smyrnensis.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/birds/haliaeetus_albicilla.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/birds/hieraaetus_fasciatus.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/birds/hieraaetus_pennatus.tif
@@ -713,6 +716,7 @@
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/reptiles/natrix_tesselleta.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/reptiles/ophiomorus_punctatissimus.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/reptiles/ophisops_elegans.tif
+1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/reptiles/parvilacerta_parva.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/reptiles/platyceps_collaris.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/reptiles/platyceps_najadum.tif
 1 1 1 1 0.25 ../../../data/processed/features/udr/european_tetrapods/reptiles/podarcis_bocagei.tif
