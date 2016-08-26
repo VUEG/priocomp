@@ -399,24 +399,24 @@ rule calculate_rwr:
     input:
         # FIXME: The N of ES features (11) is hardcoded here. Should be defined
         # dynamically.
-        #all=rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS,
-        #es=(rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS)[0:11],
+        all=rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS,
+        es=(rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS)[0:11],
         bd=(rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS)[11:]
     output:
-        #all="analyses/RWR/rwr_eu26_all.tif",
-        #es="analyses/RWR/rwr_eu26_es.tif",
+        all="analyses/RWR/rwr_eu26_all.tif",
+        es="analyses/RWR/rwr_eu26_es.tif",
         bd="analyses/RWR/rwr_eu26_bd.tif"
     log:
-        #all="logs/calculate_rwr_eu26_all.log",
-        #es="logs/calculate_rwr_eu26_es.log",
+        all="logs/calculate_rwr_eu26_all.log",
+        es="logs/calculate_rwr_eu26_es.log",
         bd="logs/calculate_rwr_eu26_bd.log"
     message:
         "Calculating RWR..."
     run:
-        #llogger = utils.get_local_logger("calculate_rwr_all", log.all)
-        #rwr.calculate_rwr(input.all, output.all, logger=llogger)
-        #llogger = utils.get_local_logger("calculate_rwr_es", log.es)
-        #rwr.calculate_rwr(input.es, output.es, logger=llogger)
+        llogger = utils.get_local_logger("calculate_rwr_all", log.all)
+        rwr.calculate_rwr(input.all, output.all, logger=llogger)
+        llogger = utils.get_local_logger("calculate_rwr_es", log.es)
+        rwr.calculate_rwr(input.es, output.es, logger=llogger)
         llogger = utils.get_local_logger("calculate_rwr_bd", log.bd)
         rwr.calculate_rwr(input.bd, output.bd, logger=llogger)
 
