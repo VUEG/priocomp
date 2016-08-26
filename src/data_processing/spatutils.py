@@ -6,6 +6,7 @@ import logging
 import numpy as np
 import numpy.ma as ma
 import os
+import pdb
 import rasterio
 import scipy.stats
 
@@ -239,6 +240,8 @@ def sum_raster(input_rasters, olnormalize=False, verbose=False, logger=None):
     # The final analysis mask is constructed as the union of all masks. 0 is
     # legitimate value, so converting NoData to 0s is not an option.
     union_mask = None
+    # Track that the shape of the rasters is consistent
+    template_shape = None
 
     n_rasters = len(input_rasters)
 
@@ -254,19 +257,28 @@ def sum_raster(input_rasters, olnormalize=False, verbose=False, logger=None):
                                                             input_raster))
             llogger.debug("{0} Reading in data".format(prefix))
 
-            # Read the first band as a masked arrat
+            # Read the first band as a masked array
             src_data = in_src.read(1, masked=True)
             # If this is the first raster, use its dimensions to build an array
             # that holds the summed values.
             if i == 0:
                 # Set up an array of zeros that has the correct dimensions
                 sum_array = np.zeros_like(src_data, dtype=np.float32)
-                # Also start tracking the masked values
-                union_mask = ma.getmask(src_data)
+                # Also start tracking the masked values. Convert the Boolean
+                # mask to an int mask. Get the complement of the mask so that
+                # mask = True becomes 0.
+                union_mask = (~ma.getmask(src_data)).astype(int)
+                # Get the template shape against which all the consecutive
+                # rasters are compared to
+                template_shape = src_data.shape
             else:
+                # Check the shape
+                if src_data.shape != template_shape:
+                    raise ValueError("Array (raster) shapes do not match")
                 # Union the mask from the current raster with those from all
                 # of the previous
-                union_mask = ma.mask_or(union_mask, ma.getmask(src_data))
+                union_mask += (~ma.getmask(src_data)).astype(int)
+
             # Fill the actual data with 0s
             src_data = ma.filled(src_data, 0)
 
@@ -279,8 +291,10 @@ def sum_raster(input_rasters, olnormalize=False, verbose=False, logger=None):
             llogger.debug("{0} Summing values".format(prefix))
             sum_array += src_data
 
-    # Re-mask the data based on the union mask constructed dynamically
-    sum_array = ma.masked_where(union_mask, sum_array)
+    # Re-mask the data based on the union mask constructed dynamically. At this
+    # point, union_mask = 0 means that the cell doesn't have a value in any of
+    # the inputs.
+    sum_array = ma.masked_where(union_mask == 0, sum_array)
     return sum_array
 
 
