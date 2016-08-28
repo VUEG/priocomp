@@ -9,9 +9,6 @@
       <customproperties/>
       <layer-tree-group expanded="0" checked="Qt::Unchecked" name="WDPA">
         <customproperties/>
-        <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="wdpa_poly_geom20160726141759732" name="wdpa_poly_geom">
-          <customproperties/>
-        </layer-tree-layer>
       </layer-tree-group>
       <layer-tree-group expanded="0" checked="Qt::Unchecked" name="eurostat">
         <customproperties/>
@@ -84,13 +81,13 @@
       <customproperties/>
       <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="RWR">
         <customproperties/>
-        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="eu26_rwr_es20160726131505005" name="eu26_rwr_es">
+        <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="rwr_eu26_es20160826164545086" name="rwr_eu26_es">
           <customproperties/>
         </layer-tree-layer>
-        <layer-tree-layer expanded="0" checked="Qt::Checked" id="eu26_rwr_bd20160726141335675" name="eu26_rwr_bd">
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="rwr_eu26_bd20160826164604136" name="rwr_eu26_bd">
           <customproperties/>
         </layer-tree-layer>
-        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="eu26_rwr_all20160726131504714" name="eu26_rwr_all">
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="rwr_eu26_all20160826164620183" name="rwr_eu26_all">
           <customproperties/>
         </layer-tree-layer>
       </layer-tree-group>
@@ -193,10 +190,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>3036435.9375</xmin>
-      <ymin>1026012.10937500093132257</ymin>
-      <xmax>7788735.9375</xmax>
-      <ymax>5656512.10937500093132257</ymax>
+      <xmin>1544385.9375</xmin>
+      <ymin>1056882.10937500093132257</ymin>
+      <xmax>6296685.9375</xmax>
+      <ymax>5687382.10937500093132257</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -224,7 +221,9 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="03_caz_wgt_rank_compressed20160610095226793"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="05_caz_es_nwout320160714120316507"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="eu26_ilp_es20160726132109523"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_bd20160826164604136"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="07_caz_bd_nwout120160627133412768"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_all20160826164620183"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="eu26_rwr_es20160726131505005"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="06_abf_es_nwout120160617090203238"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="01_caz_rank_compressed20160620143503852"/>
@@ -264,6 +263,7 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="01_caz_nwout120160615121349868"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="nature_tourism20160715102634836"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="02_abf_nwout120160518103800583"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_es20160826164545086"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="cultural_landscape_index_forest20160714120655387"/>
     </layer_coordinate_transform_info>
   </mapcanvas>
@@ -290,13 +290,9 @@
       <item>cultural_landscape_index_forest20160714120655387</item>
       <item>NUTS_RG_01M_2013_level220160714120910095</item>
       <item>nature_tourism20160715102902464</item>
-      <item>eu26_rwr_all20160726131504714</item>
-      <item>eu26_rwr_es20160726131505005</item>
       <item>eu26_ilp_all20160726132109062</item>
       <item>eu26_ilp_bd20160726132109346</item>
       <item>eu26_ilp_es20160726132109523</item>
-      <item>eu26_rwr_bd20160726141335675</item>
-      <item>wdpa_poly_geom20160726141759732</item>
       <item>acrocephalus_agricola20160802121436173</item>
       <item>alytes_muletensis20160802121713728</item>
       <item>alces_alces20160802121950586</item>
@@ -308,17 +304,14 @@
       <item>lagopus_lagopus20160802122959777</item>
       <item>rana_arvalis20160802123137238</item>
       <item>lacerta_viridis20160802123844905</item>
+      <item>rwr_eu26_es20160826164545086</item>
+      <item>rwr_eu26_bd20160826164604136</item>
+      <item>rwr_eu26_all20160826164620183</item>
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
     <legendgroup open="true" checked="Qt::Unchecked" name="data">
-      <legendgroup open="false" checked="Qt::Unchecked" name="WDPA">
-        <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="wdpa_poly_geom" showFeatureCount="0">
-          <filegroup open="true" hidden="false">
-            <legendlayerfile isInOverview="0" layerid="wdpa_poly_geom20160726141759732" visible="0"/>
-          </filegroup>
-        </legendlayer>
-      </legendgroup>
+      <legendgroup open="false" checked="Qt::Unchecked" name="WDPA"/>
       <legendgroup open="false" checked="Qt::Unchecked" name="eurostat">
         <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="NUTS_RG_01M_2013_level2" showFeatureCount="0">
           <filegroup open="true" hidden="false">
@@ -408,19 +401,19 @@
     </legendgroup>
     <legendgroup open="true" checked="Qt::PartiallyChecked" name="analyses">
       <legendgroup open="true" checked="Qt::PartiallyChecked" name="RWR">
-        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="eu26_rwr_es" showFeatureCount="0">
-          <filegroup open="false" hidden="false">
-            <legendlayerfile isInOverview="0" layerid="eu26_rwr_es20160726131505005" visible="0"/>
+        <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="rwr_eu26_es" showFeatureCount="0">
+          <filegroup open="true" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="rwr_eu26_es20160826164545086" visible="0"/>
           </filegroup>
         </legendlayer>
-        <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="eu26_rwr_bd" showFeatureCount="0">
-          <filegroup open="false" hidden="false">
-            <legendlayerfile isInOverview="0" layerid="eu26_rwr_bd20160726141335675" visible="1"/>
+        <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="rwr_eu26_bd" showFeatureCount="0">
+          <filegroup open="true" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="rwr_eu26_bd20160826164604136" visible="1"/>
           </filegroup>
         </legendlayer>
-        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="eu26_rwr_all" showFeatureCount="0">
-          <filegroup open="false" hidden="false">
-            <legendlayerfile isInOverview="0" layerid="eu26_rwr_all20160726131504714" visible="0"/>
+        <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="rwr_eu26_all" showFeatureCount="0">
+          <filegroup open="true" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="rwr_eu26_all20160826164620183" visible="1"/>
           </filegroup>
         </legendlayer>
       </legendgroup>
@@ -812,8 +805,8 @@
         </layer>
       </symbol>
       <ComposerItemGroup>
-        <ComposerItemGroupElement uuid="{d89a5df5-6446-4f25-801f-05f53c07c953}"/>
         <ComposerItemGroupElement uuid="{807ad5e4-e362-4a27-b54c-40607297a33d}"/>
+        <ComposerItemGroupElement uuid="{d89a5df5-6446-4f25-801f-05f53c07c953}"/>
         <ComposerItem pagey="86.2976" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="134.855" y="86.2976" visibility="1" zValue="10" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="61.747" outlineWidth="0.3" excludeFromExports="0" uuid="{d3b940f5-583e-4f71-b47a-ae5aec796c52}" height="12.7" itemRotation="0" frame="false" pagex="134.855">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
@@ -9372,175 +9365,6 @@ def my_form_open(dialog, layer, feature):
       </pipe>
       <blendMode>0</blendMode>
     </maplayer>
-    <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
-      <extent>
-        <xmin>2000000</xmin>
-        <ymin>999999.99999999906867743</ymin>
-        <xmax>6526000.00000000093132257</xmax>
-        <ymax>5410000</ymax>
-      </extent>
-      <id>eu26_rwr_all20160726131504714</id>
-      <datasource>../../../../../../../../dev/git-projects/priocomp/analyses/RWR/eu26_rwr_all.tif</datasource>
-      <keywordList>
-        <value></value>
-      </keywordList>
-      <layername>eu26_rwr_all</layername>
-      <srs>
-        <spatialrefsys>
-          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100002</srsid>
-          <srid>0</srid>
-          <authid>USER:100002</authid>
-          <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
-          <projectionacronym>laea</projectionacronym>
-          <ellipsoidacronym>GRS80</ellipsoidacronym>
-          <geographicflag>false</geographicflag>
-        </spatialrefsys>
-      </srs>
-      <customproperties>
-        <property key="identify/format" value="Value"/>
-      </customproperties>
-      <provider>gdal</provider>
-      <noData>
-        <noDataList bandNo="1" useSrcNoData="1"/>
-      </noData>
-      <map-layer-style-manager current="">
-        <map-layer-style name=""/>
-      </map-layer-style-manager>
-      <pipe>
-        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
-          <rasterTransparency/>
-          <rastershader>
-            <colorrampshader colorRampType="INTERPOLATED" clip="0">
-              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
-              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
-              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
-              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
-              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
-              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
-              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
-            </colorrampshader>
-          </rastershader>
-        </rasterrenderer>
-        <brightnesscontrast brightness="0" contrast="0"/>
-        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
-        <rasterresampler maxOversampling="2"/>
-      </pipe>
-      <blendMode>0</blendMode>
-    </maplayer>
-    <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
-      <extent>
-        <xmin>1999999.99999999906867743</xmin>
-        <ymin>1000000.00000000093132257</ymin>
-        <xmax>6525999.99999999906867743</xmax>
-        <ymax>5410000.00000000093132257</ymax>
-      </extent>
-      <id>eu26_rwr_bd20160726141335675</id>
-      <datasource>../../../../../../../../dev/git-projects/priocomp/analyses/RWR/eu26_rwr_bd.tif</datasource>
-      <keywordList>
-        <value></value>
-      </keywordList>
-      <layername>eu26_rwr_bd</layername>
-      <srs>
-        <spatialrefsys>
-          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
-          <srsid>1000</srsid>
-          <srid>3035</srid>
-          <authid>EPSG:3035</authid>
-          <description>ETRS89 / ETRS-LAEA</description>
-          <projectionacronym>laea</projectionacronym>
-          <ellipsoidacronym>GRS80</ellipsoidacronym>
-          <geographicflag>false</geographicflag>
-        </spatialrefsys>
-      </srs>
-      <customproperties>
-        <property key="embeddedWidgets/count" value="0"/>
-        <property key="identify/format" value="Value"/>
-      </customproperties>
-      <provider>gdal</provider>
-      <noData>
-        <noDataList bandNo="1" useSrcNoData="1"/>
-      </noData>
-      <map-layer-style-manager current="">
-        <map-layer-style name=""/>
-      </map-layer-style-manager>
-      <pipe>
-        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
-          <rasterTransparency/>
-          <rastershader>
-            <colorrampshader colorRampType="INTERPOLATED" clip="0">
-              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
-              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
-              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
-              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
-              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
-              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
-              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
-            </colorrampshader>
-          </rastershader>
-        </rasterrenderer>
-        <brightnesscontrast brightness="0" contrast="0"/>
-        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
-        <rasterresampler maxOversampling="2"/>
-      </pipe>
-      <blendMode>0</blendMode>
-    </maplayer>
-    <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
-      <extent>
-        <xmin>2000000</xmin>
-        <ymin>999999.99999999906867743</ymin>
-        <xmax>6526000.00000000093132257</xmax>
-        <ymax>5410000</ymax>
-      </extent>
-      <id>eu26_rwr_es20160726131505005</id>
-      <datasource>../../../../../../../../dev/git-projects/priocomp/analyses/RWR/eu26_rwr_es.tif</datasource>
-      <keywordList>
-        <value></value>
-      </keywordList>
-      <layername>eu26_rwr_es</layername>
-      <srs>
-        <spatialrefsys>
-          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100002</srsid>
-          <srid>0</srid>
-          <authid>USER:100002</authid>
-          <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
-          <projectionacronym>laea</projectionacronym>
-          <ellipsoidacronym>GRS80</ellipsoidacronym>
-          <geographicflag>false</geographicflag>
-        </spatialrefsys>
-      </srs>
-      <customproperties>
-        <property key="identify/format" value="Value"/>
-      </customproperties>
-      <provider>gdal</provider>
-      <noData>
-        <noDataList bandNo="1" useSrcNoData="1"/>
-      </noData>
-      <map-layer-style-manager current="">
-        <map-layer-style name=""/>
-      </map-layer-style-manager>
-      <pipe>
-        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
-          <rasterTransparency/>
-          <rastershader>
-            <colorrampshader colorRampType="INTERPOLATED" clip="0">
-              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
-              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
-              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
-              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
-              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
-              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
-              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
-            </colorrampshader>
-          </rastershader>
-        </rasterrenderer>
-        <brightnesscontrast brightness="0" contrast="0"/>
-        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
-        <rasterresampler maxOversampling="2"/>
-      </pipe>
-      <blendMode>0</blendMode>
-    </maplayer>
     <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
       <extent>
         <xmin>1999999.99999999906867743</xmin>
@@ -9960,405 +9784,174 @@ def my_form_open(dialog, layer, feature):
       </pipe>
       <blendMode>0</blendMode>
     </maplayer>
-    <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" readOnly="0" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
-      <id>wdpa_poly_geom20160726141759732</id>
-      <datasource>dbname='gis' host=localhost port=5432 user='gisuser' password='giswird' sslmode=disable key='gid' srid=4326 type=MultiPolygon table="wdpa"."wdpa_poly_geom" (geom) sql=</datasource>
+    <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>rwr_eu26_all20160826164620183</id>
+      <datasource>../../analyses/RWR/rwr_eu26_all.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
-      <layername>wdpa_poly_geom</layername>
+      <layername>rwr_eu26_all</layername>
       <srs>
         <spatialrefsys>
-          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
-          <srsid>3452</srsid>
-          <srid>4326</srid>
-          <authid>EPSG:4326</authid>
-          <description>WGS 84</description>
-          <projectionacronym>longlat</projectionacronym>
-          <ellipsoidacronym>WGS84</ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
+          <srsid>100002</srsid>
+          <srid>0</srid>
+          <authid>USER:100002</authid>
+          <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
-      <provider encoding="System">postgres</provider>
-      <previewExpression></previewExpression>
-      <vectorjoins/>
-      <layerDependencies/>
-      <expressionfields/>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
-      <edittypes>
-        <edittype widgetv2type="TextEdit" name="gid">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="wdpaid">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="wdpa_pid">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="pa_def">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="name">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="orig_name">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="desig">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="desig_eng">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="desig_type">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="iucn_cat">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="int_crit">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="marine">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="rep_m_area">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="gis_m_area">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="rep_area">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="gis_area">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="no_take">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="no_tk_area">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="status">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="status_yr">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="gov_type">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="own_type">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="mang_auth">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="mang_plan">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="verif">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="metadataid">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="sub_loc">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="parent_iso">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="iso3">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-      </edittypes>
-      <renderer-v2 forceraster="0" symbollevels="0" type="singleSymbol" enableorderby="0">
-        <symbols>
-          <symbol alpha="0.847059" clip_to_extent="1" type="fill" name="0">
-            <layer pass="0" class="SimpleFill" locked="0">
-              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="color" v="252,141,89,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="128,152,72,255"/>
-              <prop k="outline_style" v="no"/>
-              <prop k="outline_width" v="0.26"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
-            </layer>
-          </symbol>
-        </symbols>
-        <rotation/>
-        <sizescale scalemethod="diameter"/>
-      </renderer-v2>
-      <labeling type="simple"/>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>1999999.99999999906867743</xmin>
+        <ymin>1000000.00000000093132257</ymin>
+        <xmax>6525999.99999999906867743</xmax>
+        <ymax>5410000.00000000093132257</ymax>
+      </extent>
+      <id>rwr_eu26_bd20160826164604136</id>
+      <datasource>../../analyses/RWR/rwr_eu26_bd.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>rwr_eu26_bd</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
       <customproperties>
         <property key="embeddedWidgets/count" value="0"/>
-        <property key="labeling" value="pal"/>
-        <property key="labeling/addDirectionSymbol" value="false"/>
-        <property key="labeling/angleOffset" value="0"/>
-        <property key="labeling/blendMode" value="0"/>
-        <property key="labeling/bufferBlendMode" value="0"/>
-        <property key="labeling/bufferColorA" value="255"/>
-        <property key="labeling/bufferColorB" value="255"/>
-        <property key="labeling/bufferColorG" value="255"/>
-        <property key="labeling/bufferColorR" value="255"/>
-        <property key="labeling/bufferDraw" value="false"/>
-        <property key="labeling/bufferJoinStyle" value="64"/>
-        <property key="labeling/bufferNoFill" value="false"/>
-        <property key="labeling/bufferSize" value="1"/>
-        <property key="labeling/bufferSizeInMapUnits" value="false"/>
-        <property key="labeling/bufferSizeMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/bufferTransp" value="0"/>
-        <property key="labeling/centroidInside" value="false"/>
-        <property key="labeling/centroidWhole" value="false"/>
-        <property key="labeling/decimals" value="3"/>
-        <property key="labeling/displayAll" value="false"/>
-        <property key="labeling/dist" value="0"/>
-        <property key="labeling/distInMapUnits" value="false"/>
-        <property key="labeling/distMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/drawLabels" value="false"/>
-        <property key="labeling/enabled" value="false"/>
-        <property key="labeling/fieldName" value=""/>
-        <property key="labeling/fitInPolygonOnly" value="false"/>
-        <property key="labeling/fontCapitals" value="0"/>
-        <property key="labeling/fontFamily" value="Noto Sans"/>
-        <property key="labeling/fontItalic" value="true"/>
-        <property key="labeling/fontLetterSpacing" value="0"/>
-        <property key="labeling/fontLimitPixelSize" value="false"/>
-        <property key="labeling/fontMaxPixelSize" value="10000"/>
-        <property key="labeling/fontMinPixelSize" value="3"/>
-        <property key="labeling/fontSize" value="10"/>
-        <property key="labeling/fontSizeInMapUnits" value="false"/>
-        <property key="labeling/fontSizeMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/fontStrikeout" value="false"/>
-        <property key="labeling/fontUnderline" value="false"/>
-        <property key="labeling/fontWeight" value="50"/>
-        <property key="labeling/fontWordSpacing" value="0"/>
-        <property key="labeling/formatNumbers" value="false"/>
-        <property key="labeling/isExpression" value="true"/>
-        <property key="labeling/labelOffsetInMapUnits" value="true"/>
-        <property key="labeling/labelOffsetMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/labelPerPart" value="false"/>
-        <property key="labeling/leftDirectionSymbol" value="&lt;"/>
-        <property key="labeling/limitNumLabels" value="false"/>
-        <property key="labeling/maxCurvedCharAngleIn" value="20"/>
-        <property key="labeling/maxCurvedCharAngleOut" value="-20"/>
-        <property key="labeling/maxNumLabels" value="2000"/>
-        <property key="labeling/mergeLines" value="false"/>
-        <property key="labeling/minFeatureSize" value="0"/>
-        <property key="labeling/multilineAlign" value="0"/>
-        <property key="labeling/multilineHeight" value="1"/>
-        <property key="labeling/namedStyle" value="Italic"/>
-        <property key="labeling/obstacle" value="true"/>
-        <property key="labeling/obstacleFactor" value="1"/>
-        <property key="labeling/obstacleType" value="0"/>
-        <property key="labeling/offsetType" value="0"/>
-        <property key="labeling/placeDirectionSymbol" value="0"/>
-        <property key="labeling/placement" value="1"/>
-        <property key="labeling/placementFlags" value="10"/>
-        <property key="labeling/plussign" value="false"/>
-        <property key="labeling/predefinedPositionOrder" value="TR,TL,BR,BL,R,L,TSR,BSR"/>
-        <property key="labeling/preserveRotation" value="true"/>
-        <property key="labeling/previewBkgrdColor" value="#ffffff"/>
-        <property key="labeling/priority" value="5"/>
-        <property key="labeling/quadOffset" value="4"/>
-        <property key="labeling/repeatDistance" value="0"/>
-        <property key="labeling/repeatDistanceMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/repeatDistanceUnit" value="1"/>
-        <property key="labeling/reverseDirectionSymbol" value="false"/>
-        <property key="labeling/rightDirectionSymbol" value=">"/>
-        <property key="labeling/scaleMax" value="10000000"/>
-        <property key="labeling/scaleMin" value="1"/>
-        <property key="labeling/scaleVisibility" value="false"/>
-        <property key="labeling/shadowBlendMode" value="6"/>
-        <property key="labeling/shadowColorB" value="0"/>
-        <property key="labeling/shadowColorG" value="0"/>
-        <property key="labeling/shadowColorR" value="0"/>
-        <property key="labeling/shadowDraw" value="false"/>
-        <property key="labeling/shadowOffsetAngle" value="135"/>
-        <property key="labeling/shadowOffsetDist" value="1"/>
-        <property key="labeling/shadowOffsetGlobal" value="true"/>
-        <property key="labeling/shadowOffsetMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/shadowOffsetUnits" value="1"/>
-        <property key="labeling/shadowRadius" value="1.5"/>
-        <property key="labeling/shadowRadiusAlphaOnly" value="false"/>
-        <property key="labeling/shadowRadiusMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/shadowRadiusUnits" value="1"/>
-        <property key="labeling/shadowScale" value="100"/>
-        <property key="labeling/shadowTransparency" value="30"/>
-        <property key="labeling/shadowUnder" value="0"/>
-        <property key="labeling/shapeBlendMode" value="0"/>
-        <property key="labeling/shapeBorderColorA" value="255"/>
-        <property key="labeling/shapeBorderColorB" value="128"/>
-        <property key="labeling/shapeBorderColorG" value="128"/>
-        <property key="labeling/shapeBorderColorR" value="128"/>
-        <property key="labeling/shapeBorderWidth" value="0"/>
-        <property key="labeling/shapeBorderWidthMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/shapeBorderWidthUnits" value="1"/>
-        <property key="labeling/shapeDraw" value="false"/>
-        <property key="labeling/shapeFillColorA" value="255"/>
-        <property key="labeling/shapeFillColorB" value="255"/>
-        <property key="labeling/shapeFillColorG" value="255"/>
-        <property key="labeling/shapeFillColorR" value="255"/>
-        <property key="labeling/shapeJoinStyle" value="64"/>
-        <property key="labeling/shapeOffsetMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/shapeOffsetUnits" value="1"/>
-        <property key="labeling/shapeOffsetX" value="0"/>
-        <property key="labeling/shapeOffsetY" value="0"/>
-        <property key="labeling/shapeRadiiMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/shapeRadiiUnits" value="1"/>
-        <property key="labeling/shapeRadiiX" value="0"/>
-        <property key="labeling/shapeRadiiY" value="0"/>
-        <property key="labeling/shapeRotation" value="0"/>
-        <property key="labeling/shapeRotationType" value="0"/>
-        <property key="labeling/shapeSVGFile" value=""/>
-        <property key="labeling/shapeSizeMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/shapeSizeType" value="0"/>
-        <property key="labeling/shapeSizeUnits" value="1"/>
-        <property key="labeling/shapeSizeX" value="0"/>
-        <property key="labeling/shapeSizeY" value="0"/>
-        <property key="labeling/shapeTransparency" value="0"/>
-        <property key="labeling/shapeType" value="0"/>
-        <property key="labeling/textColorA" value="255"/>
-        <property key="labeling/textColorB" value="0"/>
-        <property key="labeling/textColorG" value="0"/>
-        <property key="labeling/textColorR" value="0"/>
-        <property key="labeling/textTransp" value="0"/>
-        <property key="labeling/upsidedownLabels" value="0"/>
-        <property key="labeling/wrapChar" value=""/>
-        <property key="labeling/xOffset" value="0"/>
-        <property key="labeling/yOffset" value="0"/>
-        <property key="labeling/zIndex" value="0"/>
-        <property key="variableNames" value="_fields_"/>
-        <property key="variableValues" value=""/>
+        <property key="identify/format" value="Value"/>
       </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
       <blendMode>0</blendMode>
-      <featureBlendMode>0</featureBlendMode>
-      <layerTransparency>0</layerTransparency>
-      <displayfield>name</displayfield>
-      <label>0</label>
-      <labelattributes>
-        <label fieldname="" text="Label"/>
-        <family fieldname="" name="Noto Sans"/>
-        <size fieldname="" units="pt" value="12"/>
-        <bold fieldname="" on="0"/>
-        <italic fieldname="" on="0"/>
-        <underline fieldname="" on="0"/>
-        <strikeout fieldname="" on="0"/>
-        <color fieldname="" red="0" blue="0" green="0"/>
-        <x fieldname=""/>
-        <y fieldname=""/>
-        <offset x="0" y="0" units="pt" yfieldname="" xfieldname=""/>
-        <angle fieldname="" value="0" auto="0"/>
-        <alignment fieldname="" value="center"/>
-        <buffercolor fieldname="" red="255" blue="255" green="255"/>
-        <buffersize fieldname="" units="pt" value="1"/>
-        <bufferenabled fieldname="" on=""/>
-        <multilineenabled fieldname="" on=""/>
-        <selectedonly on=""/>
-      </labelattributes>
-      <SingleCategoryDiagramRenderer diagramType="Histogram" sizeLegend="0" attributeLegend="1">
-        <DiagramCategory penColor="#000000" labelPlacementMethod="XHeight" penWidth="0" diagramOrientation="Up" sizeScale="0,0,0,0,0,0" minimumSize="0" barWidth="5" penAlpha="255" maxScaleDenominator="1e+08" backgroundColor="#ffffff" transparency="0" width="15" scaleDependency="Area" backgroundAlpha="255" angleOffset="1440" scaleBasedVisibility="0" enabled="0" height="15" lineSizeScale="0,0,0,0,0,0" sizeType="MM" lineSizeType="MM" minScaleDenominator="100000">
-          <fontProperties description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
-          <attribute field="" color="#000000" label=""/>
-        </DiagramCategory>
-        <symbol alpha="1" clip_to_extent="1" type="marker" name="sizeSymbol">
-          <layer pass="0" class="SimpleMarker" locked="0">
-            <prop k="angle" v="0"/>
-            <prop k="color" v="255,0,0,255"/>
-            <prop k="horizontal_anchor_point" v="1"/>
-            <prop k="joinstyle" v="bevel"/>
-            <prop k="name" v="circle"/>
-            <prop k="offset" v="0,0"/>
-            <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
-            <prop k="offset_unit" v="MM"/>
-            <prop k="outline_color" v="0,0,0,255"/>
-            <prop k="outline_style" v="solid"/>
-            <prop k="outline_width" v="0"/>
-            <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
-            <prop k="outline_width_unit" v="MM"/>
-            <prop k="scale_method" v="diameter"/>
-            <prop k="size" v="2"/>
-            <prop k="size_map_unit_scale" v="0,0,0,0,0,0"/>
-            <prop k="size_unit" v="MM"/>
-            <prop k="vertical_anchor_point" v="1"/>
-          </layer>
-        </symbol>
-      </SingleCategoryDiagramRenderer>
-      <DiagramLayerSettings yPosColumn="-1" showColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
-      <excludeAttributesWMS/>
-      <excludeAttributesWFS/>
-      <attributeactions default="-1"/>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="7209071">
-        <columns>
-          <column width="-1" hidden="0" type="field" name="gid"/>
-          <column width="-1" hidden="0" type="field" name="wdpaid"/>
-          <column width="-1" hidden="0" type="field" name="wdpa_pid"/>
-          <column width="-1" hidden="0" type="field" name="pa_def"/>
-          <column width="-1" hidden="0" type="field" name="name"/>
-          <column width="-1" hidden="0" type="field" name="orig_name"/>
-          <column width="-1" hidden="0" type="field" name="desig"/>
-          <column width="-1" hidden="0" type="field" name="desig_eng"/>
-          <column width="-1" hidden="0" type="field" name="desig_type"/>
-          <column width="-1" hidden="0" type="field" name="iucn_cat"/>
-          <column width="-1" hidden="0" type="field" name="int_crit"/>
-          <column width="-1" hidden="0" type="field" name="marine"/>
-          <column width="-1" hidden="0" type="field" name="rep_m_area"/>
-          <column width="-1" hidden="0" type="field" name="gis_m_area"/>
-          <column width="-1" hidden="0" type="field" name="rep_area"/>
-          <column width="-1" hidden="0" type="field" name="gis_area"/>
-          <column width="-1" hidden="0" type="field" name="no_take"/>
-          <column width="-1" hidden="0" type="field" name="no_tk_area"/>
-          <column width="-1" hidden="0" type="field" name="status"/>
-          <column width="-1" hidden="0" type="field" name="status_yr"/>
-          <column width="-1" hidden="0" type="field" name="gov_type"/>
-          <column width="-1" hidden="0" type="field" name="own_type"/>
-          <column width="-1" hidden="0" type="field" name="mang_auth"/>
-          <column width="-1" hidden="0" type="field" name="mang_plan"/>
-          <column width="-1" hidden="0" type="field" name="verif"/>
-          <column width="-1" hidden="0" type="field" name="metadataid"/>
-          <column width="-1" hidden="0" type="field" name="sub_loc"/>
-          <column width="-1" hidden="0" type="field" name="parent_iso"/>
-          <column width="-1" hidden="0" type="field" name="iso3"/>
-          <column width="-1" hidden="1" type="actions"/>
-        </columns>
-      </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
-      <editforminit/>
-      <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
-      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
-"""
-QGIS forms can have a Python function that is called when the form is
-opened.
-
-Use this function to add extra logic to your forms.
-
-Enter the name of the function in the "Python Init function"
-field.
-An example follows:
-"""
-from qgis.PyQt.QtWidgets import QWidget
-
-def my_form_open(dialog, layer, feature):
-	geom = feature.geometry()
-	control = dialog.findChild(QWidget, "MyLineEdit")
-]]></editforminitcode>
-      <featformsuppress>0</featformsuppress>
-      <editorlayout>generatedlayout</editorlayout>
-      <widgets/>
-      <conditionalstyles>
-        <rowstyles/>
-        <fieldstyles/>
-      </conditionalstyles>
+    </maplayer>
+    <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>rwr_eu26_es20160826164545086</id>
+      <datasource>../../analyses/RWR/rwr_eu26_es.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>rwr_eu26_es</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
+          <srsid>100002</srsid>
+          <srid>0</srid>
+          <authid>USER:100002</authid>
+          <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
     </maplayer>
   </projectlayers>
   <properties>
