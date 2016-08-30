@@ -1,7 +1,7 @@
 [Settings]
 removal rule = 2
 warp factor = 1000
-edge removal = 1
+edge removal = 0
 add edge points = 0
 initial removal percent = 0.0
 annotate name = 0
