@@ -455,15 +455,15 @@ rule prioritize_gurobi:
     message:
         "Opitmizing with Gurobi..."
     run:
-        llogger = utils.get_local_logger("optimize_gurobi", log.all)
+        llogger = utils.get_local_logger("optimize_gurobi_all", log.all)
         gurobi.prioritize_gurobi(input.all, output.all, logger=llogger,
                                  ol_normalize=True, save_intermediate=False,
                                  verbose=True)
-        llogger = utils.get_local_logger("optimize_gurobi", log.es)
+        llogger = utils.get_local_logger("optimize_gurobi_es", log.es)
         gurobi.prioritize_gurobi(input.es, output.es, logger=llogger,
                                  ol_normalize=True, save_intermediate=False,
                                  verbose=True)
-        llogger = utils.get_local_logger("optimize_gurobi", log.bd)
+        llogger = utils.get_local_logger("optimize_gurobi_bd", log.bd)
         gurobi.prioritize_gurobi(input.bd, output.bd, logger=llogger,
                                  ol_normalize=True, save_intermediate=False,
                                  verbose=True)
