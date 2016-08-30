@@ -12,7 +12,9 @@ dependencies:
   - fiona
   - flake8
   - flask
-  - GDAL>=2.0.0
+  # NOTE: using gdal>=2.1.0 will break things as gdalwarp does not accept
+  # cultine with invalid geometry (such as NUTS data)
+  - gdal=2.0.0
   - ipdb
   - netcdf4
   - numpy=1.10
