@@ -1,102 +1,102 @@
-2016-07-15 16:54:32 [harmonize_data] [INFO ]  [1/11] Copying dataset data/external/datadryad/forest_production_europe/woodprod_average.tif
-2016-07-15 16:54:32 [harmonize_data] [DEBUG]  [1/11] Target dataset data/interim/warped/datadryad/forest_production_europe/woodprod_average.tif
-2016-07-15 16:54:32 [harmonize_data] [INFO ]  [1/11] Clipping dataset data/interim/warped/datadryad/forest_production_europe/woodprod_average.tif
-2016-07-15 16:54:32 [harmonize_data] [DEBUG]  [1/11] Target dataset data/processed/features/datadryad/forest_production_europe/woodprod_average.tif
-2016-07-15 16:54:39 [harmonize_data] [DEBUG]  [1/11] Creating output file that is 4526P x 4410L.
-2016-07-15 16:54:39 [harmonize_data] [DEBUG]  [1/11] Processing input file data/interim/warped/datadryad/forest_production_europe/woodprod_average.tif.
-2016-07-15 16:54:39 [harmonize_data] [DEBUG]  [1/11] Using internal nodata values (e.g. -3.40282e+38) for image data/interim/warped/datadryad/forest_production_europe/woodprod_average.tif.
-2016-07-15 16:54:39 [harmonize_data] [DEBUG]  [1/11] Copying nodata values from source data/interim/warped/datadryad/forest_production_europe/woodprod_average.tif to destination data/processed/features/datadryad/forest_production_europe/woodprod_average.tif.
-2016-07-15 16:54:39 [harmonize_data] [DEBUG]  [1/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
-2016-07-15 16:54:39 [harmonize_data] [INFO ]  [2/11] Warping dataset data/external/provide/carbon_sequestration/carbon_sequestration.tif
-2016-07-15 16:54:39 [harmonize_data] [DEBUG]  [2/11] Target dataset data/interim/warped/provide/carbon_sequestration/carbon_sequestration.tif
-2016-07-15 16:54:49 [harmonize_data] [INFO ]  [2/11] Clipping dataset data/interim/warped/provide/carbon_sequestration/carbon_sequestration.tif
-2016-07-15 16:54:49 [harmonize_data] [DEBUG]  [2/11] Target dataset data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif
-2016-07-15 16:54:54 [harmonize_data] [DEBUG]  [2/11] Creating output file that is 4526P x 4410L.
-2016-07-15 16:54:54 [harmonize_data] [DEBUG]  [2/11] Processing input file data/interim/warped/provide/carbon_sequestration/carbon_sequestration.tif.
-2016-07-15 16:54:54 [harmonize_data] [DEBUG]  [2/11] Using internal nodata values (e.g. -32768) for image data/interim/warped/provide/carbon_sequestration/carbon_sequestration.tif.
-2016-07-15 16:54:54 [harmonize_data] [DEBUG]  [2/11] Copying nodata values from source data/interim/warped/provide/carbon_sequestration/carbon_sequestration.tif to destination data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif.
-2016-07-15 16:54:54 [harmonize_data] [DEBUG]  [2/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
-2016-07-15 16:54:54 [harmonize_data] [INFO ]  [2/11] Rescaling dataset data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif
-2016-07-15 16:54:54 [harmonize_data] [DEBUG]  [2/11] Target dataset data/processed/features/provide/carbon_sequestration/carbon_sequestration_rescaled.tif
-2016-07-15 16:54:58 [harmonize_data] [DEBUG]  [2/11] Renaming dataset data/processed/features/provide/carbon_sequestration/carbon_sequestration_rescaled.tif to data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif
-2016-07-15 16:54:58 [harmonize_data] [INFO ]  [3/11] Warping dataset data/external/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif
-2016-07-15 16:54:58 [harmonize_data] [DEBUG]  [3/11] Target dataset data/interim/warped/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif
-2016-07-15 16:55:06 [harmonize_data] [INFO ]  [3/11] Clipping dataset data/interim/warped/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif
-2016-07-15 16:55:06 [harmonize_data] [DEBUG]  [3/11] Target dataset data/processed/features/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif
-2016-07-15 16:55:13 [harmonize_data] [DEBUG]  [3/11] Creating output file that is 4526P x 4410L.
-2016-07-15 16:55:13 [harmonize_data] [DEBUG]  [3/11] Processing input file data/interim/warped/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif.
-2016-07-15 16:55:13 [harmonize_data] [DEBUG]  [3/11] Using internal nodata values (e.g. -3.40282e+38) for image data/interim/warped/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif.
-2016-07-15 16:55:13 [harmonize_data] [DEBUG]  [3/11] Copying nodata values from source data/interim/warped/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif to destination data/processed/features/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif.
-2016-07-15 16:55:13 [harmonize_data] [DEBUG]  [3/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
-2016-07-15 16:55:13 [harmonize_data] [INFO ]  [4/11] Warping dataset data/external/provide/megafauna/megafauna.tif
-2016-07-15 16:55:13 [harmonize_data] [DEBUG]  [4/11] Target dataset data/interim/warped/provide/megafauna/megafauna.tif
-2016-07-15 16:55:22 [harmonize_data] [INFO ]  [4/11] Clipping dataset data/interim/warped/provide/megafauna/megafauna.tif
-2016-07-15 16:55:22 [harmonize_data] [DEBUG]  [4/11] Target dataset data/processed/features/provide/megafauna/megafauna.tif
-2016-07-15 16:55:26 [harmonize_data] [DEBUG]  [4/11] Creating output file that is 4526P x 4410L.
-2016-07-15 16:55:26 [harmonize_data] [DEBUG]  [4/11] Processing input file data/interim/warped/provide/megafauna/megafauna.tif.
-2016-07-15 16:55:26 [harmonize_data] [DEBUG]  [4/11] Using internal nodata values (e.g. 255) for image data/interim/warped/provide/megafauna/megafauna.tif.
-2016-07-15 16:55:26 [harmonize_data] [DEBUG]  [4/11] Copying nodata values from source data/interim/warped/provide/megafauna/megafauna.tif to destination data/processed/features/provide/megafauna/megafauna.tif.
-2016-07-15 16:55:26 [harmonize_data] [DEBUG]  [4/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
-2016-07-15 16:55:26 [harmonize_data] [INFO ]  [5/11] Warping dataset data/external/provide/floodregulation/floodregulation.tif
-2016-07-15 16:55:26 [harmonize_data] [DEBUG]  [5/11] Target dataset data/interim/warped/provide/floodregulation/floodregulation.tif
-2016-07-15 16:55:35 [harmonize_data] [INFO ]  [5/11] Clipping dataset data/interim/warped/provide/floodregulation/floodregulation.tif
-2016-07-15 16:55:35 [harmonize_data] [DEBUG]  [5/11] Target dataset data/processed/features/provide/floodregulation/floodregulation.tif
-2016-07-15 16:55:41 [harmonize_data] [DEBUG]  [5/11] Creating output file that is 4526P x 4410L.
-2016-07-15 16:55:41 [harmonize_data] [DEBUG]  [5/11] Processing input file data/interim/warped/provide/floodregulation/floodregulation.tif.
-2016-07-15 16:55:41 [harmonize_data] [DEBUG]  [5/11] Using internal nodata values (e.g. -3.40282e+38) for image data/interim/warped/provide/floodregulation/floodregulation.tif.
-2016-07-15 16:55:41 [harmonize_data] [DEBUG]  [5/11] Copying nodata values from source data/interim/warped/provide/floodregulation/floodregulation.tif to destination data/processed/features/provide/floodregulation/floodregulation.tif.
-2016-07-15 16:55:41 [harmonize_data] [DEBUG]  [5/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
-2016-07-15 16:55:41 [harmonize_data] [INFO ]  [6/11] Warping dataset data/external/provide/pollination_flows/pollination_flows.tif
-2016-07-15 16:55:41 [harmonize_data] [DEBUG]  [6/11] Target dataset data/interim/warped/provide/pollination_flows/pollination_flows.tif
-2016-07-15 16:55:50 [harmonize_data] [INFO ]  [6/11] Clipping dataset data/interim/warped/provide/pollination_flows/pollination_flows.tif
-2016-07-15 16:55:50 [harmonize_data] [DEBUG]  [6/11] Target dataset data/processed/features/provide/pollination_flows/pollination_flows.tif
-2016-07-15 16:55:54 [harmonize_data] [DEBUG]  [6/11] Creating output file that is 4526P x 4410L.
-2016-07-15 16:55:54 [harmonize_data] [DEBUG]  [6/11] Processing input file data/interim/warped/provide/pollination_flows/pollination_flows.tif.
-2016-07-15 16:55:54 [harmonize_data] [DEBUG]  [6/11] Using internal nodata values (e.g. 255) for image data/interim/warped/provide/pollination_flows/pollination_flows.tif.
-2016-07-15 16:55:54 [harmonize_data] [DEBUG]  [6/11] Copying nodata values from source data/interim/warped/provide/pollination_flows/pollination_flows.tif to destination data/processed/features/provide/pollination_flows/pollination_flows.tif.
-2016-07-15 16:55:54 [harmonize_data] [DEBUG]  [6/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
-2016-07-15 16:55:54 [harmonize_data] [INFO ]  [7/11] Warping dataset data/external/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif
-2016-07-15 16:55:54 [harmonize_data] [DEBUG]  [7/11] Target dataset data/interim/warped/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif
-2016-07-15 16:56:03 [harmonize_data] [INFO ]  [7/11] Clipping dataset data/interim/warped/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif
-2016-07-15 16:56:03 [harmonize_data] [DEBUG]  [7/11] Target dataset data/processed/features/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif
-2016-07-15 16:56:08 [harmonize_data] [DEBUG]  [7/11] Creating output file that is 4526P x 4410L.
-2016-07-15 16:56:08 [harmonize_data] [DEBUG]  [7/11] Processing input file data/interim/warped/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif.
-2016-07-15 16:56:08 [harmonize_data] [DEBUG]  [7/11] Using internal nodata values (e.g. 255) for image data/interim/warped/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif.
-2016-07-15 16:56:08 [harmonize_data] [DEBUG]  [7/11] Copying nodata values from source data/interim/warped/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif to destination data/processed/features/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif.
-2016-07-15 16:56:08 [harmonize_data] [DEBUG]  [7/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
-2016-07-15 16:56:08 [harmonize_data] [INFO ]  [8/11] Warping dataset data/external/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif
-2016-07-15 16:56:08 [harmonize_data] [DEBUG]  [8/11] Target dataset data/interim/warped/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif
-2016-07-15 16:56:18 [harmonize_data] [INFO ]  [8/11] Clipping dataset data/interim/warped/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif
-2016-07-15 16:56:18 [harmonize_data] [DEBUG]  [8/11] Target dataset data/processed/features/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif
-2016-07-15 16:56:23 [harmonize_data] [DEBUG]  [8/11] Creating output file that is 4526P x 4410L.
-2016-07-15 16:56:23 [harmonize_data] [DEBUG]  [8/11] Processing input file data/interim/warped/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif.
-2016-07-15 16:56:23 [harmonize_data] [DEBUG]  [8/11] Using internal nodata values (e.g. 255) for image data/interim/warped/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif.
-2016-07-15 16:56:23 [harmonize_data] [DEBUG]  [8/11] Copying nodata values from source data/interim/warped/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif to destination data/processed/features/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif.
-2016-07-15 16:56:23 [harmonize_data] [DEBUG]  [8/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
-2016-07-15 16:56:23 [harmonize_data] [INFO ]  [9/11] Warping dataset data/external/provide/nature_tourism/nature_tourism.tif
-2016-07-15 16:56:23 [harmonize_data] [DEBUG]  [9/11] Target dataset data/interim/warped/provide/nature_tourism/nature_tourism.tif
-2016-07-15 16:56:32 [harmonize_data] [INFO ]  [9/11] Clipping dataset data/interim/warped/provide/nature_tourism/nature_tourism.tif
-2016-07-15 16:56:32 [harmonize_data] [DEBUG]  [9/11] Target dataset data/processed/features/provide/nature_tourism/nature_tourism.tif
-2016-07-15 16:56:38 [harmonize_data] [DEBUG]  [9/11] Creating output file that is 4526P x 4410L.
-2016-07-15 16:56:38 [harmonize_data] [DEBUG]  [9/11] Processing input file data/interim/warped/provide/nature_tourism/nature_tourism.tif.
-2016-07-15 16:56:38 [harmonize_data] [DEBUG]  [9/11] Using internal nodata values (e.g. -32768) for image data/interim/warped/provide/nature_tourism/nature_tourism.tif.
-2016-07-15 16:56:38 [harmonize_data] [DEBUG]  [9/11] Copying nodata values from source data/interim/warped/provide/nature_tourism/nature_tourism.tif to destination data/processed/features/provide/nature_tourism/nature_tourism.tif.
-2016-07-15 16:56:38 [harmonize_data] [DEBUG]  [9/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
-2016-07-15 16:56:38 [harmonize_data] [INFO ]  [10/11] Warping dataset data/external/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif
-2016-07-15 16:56:38 [harmonize_data] [DEBUG]  [10/11] Target dataset data/interim/warped/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif
-2016-07-15 16:56:47 [harmonize_data] [INFO ]  [10/11] Clipping dataset data/interim/warped/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif
-2016-07-15 16:56:47 [harmonize_data] [DEBUG]  [10/11] Target dataset data/processed/features/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif
-2016-07-15 16:56:54 [harmonize_data] [DEBUG]  [10/11] Creating output file that is 4526P x 4410L.
-2016-07-15 16:56:54 [harmonize_data] [DEBUG]  [10/11] Processing input file data/interim/warped/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif.
-2016-07-15 16:56:54 [harmonize_data] [DEBUG]  [10/11] Using internal nodata values (e.g. -3.40282e+38) for image data/interim/warped/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif.
-2016-07-15 16:56:54 [harmonize_data] [DEBUG]  [10/11] Copying nodata values from source data/interim/warped/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif to destination data/processed/features/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif.
-2016-07-15 16:56:54 [harmonize_data] [DEBUG]  [10/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
-2016-07-15 16:56:54 [harmonize_data] [INFO ]  [11/11] Warping dataset data/external/provide/erosion_prevention/erosion_prevention.tif
-2016-07-15 16:56:54 [harmonize_data] [DEBUG]  [11/11] Target dataset data/interim/warped/provide/erosion_prevention/erosion_prevention.tif
-2016-07-15 16:57:04 [harmonize_data] [INFO ]  [11/11] Clipping dataset data/interim/warped/provide/erosion_prevention/erosion_prevention.tif
-2016-07-15 16:57:04 [harmonize_data] [DEBUG]  [11/11] Target dataset data/processed/features/provide/erosion_prevention/erosion_prevention.tif
-2016-07-15 16:57:10 [harmonize_data] [DEBUG]  [11/11] Creating output file that is 4526P x 4410L.
-2016-07-15 16:57:10 [harmonize_data] [DEBUG]  [11/11] Processing input file data/interim/warped/provide/erosion_prevention/erosion_prevention.tif.
-2016-07-15 16:57:10 [harmonize_data] [DEBUG]  [11/11] Using internal nodata values (e.g. -32768) for image data/interim/warped/provide/erosion_prevention/erosion_prevention.tif.
-2016-07-15 16:57:10 [harmonize_data] [DEBUG]  [11/11] Copying nodata values from source data/interim/warped/provide/erosion_prevention/erosion_prevention.tif to destination data/processed/features/provide/erosion_prevention/erosion_prevention.tif.
-2016-07-15 16:57:10 [harmonize_data] [DEBUG]  [11/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
+2016-08-30 11:22:50 [harmonize_data] [INFO ]  [1/11] Copying dataset data/external/datadryad/forest_production_europe/woodprod_average.tif
+2016-08-30 11:22:50 [harmonize_data] [DEBUG]  [1/11] Target dataset data/interim/warped/datadryad/forest_production_europe/woodprod_average.tif
+2016-08-30 11:22:50 [harmonize_data] [INFO ]  [1/11] Clipping dataset data/interim/warped/datadryad/forest_production_europe/woodprod_average.tif
+2016-08-30 11:22:50 [harmonize_data] [DEBUG]  [1/11] Target dataset data/processed/features/datadryad/forest_production_europe/woodprod_average.tif
+2016-08-30 11:22:59 [harmonize_data] [DEBUG]  [1/11] Creating output file that is 4526P x 4410L.
+2016-08-30 11:22:59 [harmonize_data] [DEBUG]  [1/11] Processing input file data/interim/warped/datadryad/forest_production_europe/woodprod_average.tif.
+2016-08-30 11:22:59 [harmonize_data] [DEBUG]  [1/11] Using internal nodata values (e.g. -3.40282e+38) for image data/interim/warped/datadryad/forest_production_europe/woodprod_average.tif.
+2016-08-30 11:22:59 [harmonize_data] [DEBUG]  [1/11] Copying nodata values from source data/interim/warped/datadryad/forest_production_europe/woodprod_average.tif to destination data/processed/features/datadryad/forest_production_europe/woodprod_average.tif.
+2016-08-30 11:22:59 [harmonize_data] [DEBUG]  [1/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
+2016-08-30 11:22:59 [harmonize_data] [INFO ]  [2/11] Warping dataset data/external/provide/nature_tourism/nature_tourism.tif
+2016-08-30 11:22:59 [harmonize_data] [DEBUG]  [2/11] Target dataset data/interim/warped/provide/nature_tourism/nature_tourism.tif
+2016-08-30 11:23:10 [harmonize_data] [INFO ]  [2/11] Clipping dataset data/interim/warped/provide/nature_tourism/nature_tourism.tif
+2016-08-30 11:23:10 [harmonize_data] [DEBUG]  [2/11] Target dataset data/processed/features/provide/nature_tourism/nature_tourism.tif
+2016-08-30 11:23:16 [harmonize_data] [DEBUG]  [2/11] Creating output file that is 4526P x 4410L.
+2016-08-30 11:23:16 [harmonize_data] [DEBUG]  [2/11] Processing input file data/interim/warped/provide/nature_tourism/nature_tourism.tif.
+2016-08-30 11:23:16 [harmonize_data] [DEBUG]  [2/11] Using internal nodata values (e.g. -32768) for image data/interim/warped/provide/nature_tourism/nature_tourism.tif.
+2016-08-30 11:23:16 [harmonize_data] [DEBUG]  [2/11] Copying nodata values from source data/interim/warped/provide/nature_tourism/nature_tourism.tif to destination data/processed/features/provide/nature_tourism/nature_tourism.tif.
+2016-08-30 11:23:16 [harmonize_data] [DEBUG]  [2/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
+2016-08-30 11:23:16 [harmonize_data] [INFO ]  [3/11] Warping dataset data/external/provide/carbon_sequestration/carbon_sequestration.tif
+2016-08-30 11:23:16 [harmonize_data] [DEBUG]  [3/11] Target dataset data/interim/warped/provide/carbon_sequestration/carbon_sequestration.tif
+2016-08-30 11:23:28 [harmonize_data] [INFO ]  [3/11] Clipping dataset data/interim/warped/provide/carbon_sequestration/carbon_sequestration.tif
+2016-08-30 11:23:28 [harmonize_data] [DEBUG]  [3/11] Target dataset data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif
+2016-08-30 11:23:36 [harmonize_data] [DEBUG]  [3/11] Creating output file that is 4526P x 4410L.
+2016-08-30 11:23:36 [harmonize_data] [DEBUG]  [3/11] Processing input file data/interim/warped/provide/carbon_sequestration/carbon_sequestration.tif.
+2016-08-30 11:23:36 [harmonize_data] [DEBUG]  [3/11] Using internal nodata values (e.g. -32768) for image data/interim/warped/provide/carbon_sequestration/carbon_sequestration.tif.
+2016-08-30 11:23:36 [harmonize_data] [DEBUG]  [3/11] Copying nodata values from source data/interim/warped/provide/carbon_sequestration/carbon_sequestration.tif to destination data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif.
+2016-08-30 11:23:36 [harmonize_data] [DEBUG]  [3/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
+2016-08-30 11:23:36 [harmonize_data] [INFO ]  [3/11] Rescaling dataset data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif
+2016-08-30 11:23:36 [harmonize_data] [DEBUG]  [3/11] Target dataset data/processed/features/provide/carbon_sequestration/carbon_sequestration_rescaled.tif
+2016-08-30 11:23:41 [harmonize_data] [DEBUG]  [3/11] Renaming dataset data/processed/features/provide/carbon_sequestration/carbon_sequestration_rescaled.tif to data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif
+2016-08-30 11:23:41 [harmonize_data] [INFO ]  [4/11] Warping dataset data/external/provide/erosion_prevention/erosion_prevention.tif
+2016-08-30 11:23:41 [harmonize_data] [DEBUG]  [4/11] Target dataset data/interim/warped/provide/erosion_prevention/erosion_prevention.tif
+2016-08-30 11:23:54 [harmonize_data] [INFO ]  [4/11] Clipping dataset data/interim/warped/provide/erosion_prevention/erosion_prevention.tif
+2016-08-30 11:23:54 [harmonize_data] [DEBUG]  [4/11] Target dataset data/processed/features/provide/erosion_prevention/erosion_prevention.tif
+2016-08-30 11:24:02 [harmonize_data] [DEBUG]  [4/11] Creating output file that is 4526P x 4410L.
+2016-08-30 11:24:02 [harmonize_data] [DEBUG]  [4/11] Processing input file data/interim/warped/provide/erosion_prevention/erosion_prevention.tif.
+2016-08-30 11:24:02 [harmonize_data] [DEBUG]  [4/11] Using internal nodata values (e.g. -32768) for image data/interim/warped/provide/erosion_prevention/erosion_prevention.tif.
+2016-08-30 11:24:02 [harmonize_data] [DEBUG]  [4/11] Copying nodata values from source data/interim/warped/provide/erosion_prevention/erosion_prevention.tif to destination data/processed/features/provide/erosion_prevention/erosion_prevention.tif.
+2016-08-30 11:24:02 [harmonize_data] [DEBUG]  [4/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
+2016-08-30 11:24:02 [harmonize_data] [INFO ]  [5/11] Warping dataset data/external/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif
+2016-08-30 11:24:02 [harmonize_data] [DEBUG]  [5/11] Target dataset data/interim/warped/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif
+2016-08-30 11:24:13 [harmonize_data] [INFO ]  [5/11] Clipping dataset data/interim/warped/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif
+2016-08-30 11:24:13 [harmonize_data] [DEBUG]  [5/11] Target dataset data/processed/features/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif
+2016-08-30 11:24:19 [harmonize_data] [DEBUG]  [5/11] Creating output file that is 4526P x 4410L.
+2016-08-30 11:24:19 [harmonize_data] [DEBUG]  [5/11] Processing input file data/interim/warped/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif.
+2016-08-30 11:24:19 [harmonize_data] [DEBUG]  [5/11] Using internal nodata values (e.g. 255) for image data/interim/warped/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif.
+2016-08-30 11:24:19 [harmonize_data] [DEBUG]  [5/11] Copying nodata values from source data/interim/warped/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif to destination data/processed/features/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif.
+2016-08-30 11:24:19 [harmonize_data] [DEBUG]  [5/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
+2016-08-30 11:24:19 [harmonize_data] [INFO ]  [6/11] Warping dataset data/external/provide/megafauna/megafauna.tif
+2016-08-30 11:24:19 [harmonize_data] [DEBUG]  [6/11] Target dataset data/interim/warped/provide/megafauna/megafauna.tif
+2016-08-30 11:24:30 [harmonize_data] [INFO ]  [6/11] Clipping dataset data/interim/warped/provide/megafauna/megafauna.tif
+2016-08-30 11:24:30 [harmonize_data] [DEBUG]  [6/11] Target dataset data/processed/features/provide/megafauna/megafauna.tif
+2016-08-30 11:24:35 [harmonize_data] [DEBUG]  [6/11] Creating output file that is 4526P x 4410L.
+2016-08-30 11:24:35 [harmonize_data] [DEBUG]  [6/11] Processing input file data/interim/warped/provide/megafauna/megafauna.tif.
+2016-08-30 11:24:35 [harmonize_data] [DEBUG]  [6/11] Using internal nodata values (e.g. 255) for image data/interim/warped/provide/megafauna/megafauna.tif.
+2016-08-30 11:24:35 [harmonize_data] [DEBUG]  [6/11] Copying nodata values from source data/interim/warped/provide/megafauna/megafauna.tif to destination data/processed/features/provide/megafauna/megafauna.tif.
+2016-08-30 11:24:35 [harmonize_data] [DEBUG]  [6/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
+2016-08-30 11:24:35 [harmonize_data] [INFO ]  [7/11] Warping dataset data/external/provide/pollination_flows/pollination_flows.tif
+2016-08-30 11:24:35 [harmonize_data] [DEBUG]  [7/11] Target dataset data/interim/warped/provide/pollination_flows/pollination_flows.tif
+2016-08-30 11:24:46 [harmonize_data] [INFO ]  [7/11] Clipping dataset data/interim/warped/provide/pollination_flows/pollination_flows.tif
+2016-08-30 11:24:46 [harmonize_data] [DEBUG]  [7/11] Target dataset data/processed/features/provide/pollination_flows/pollination_flows.tif
+2016-08-30 11:24:51 [harmonize_data] [DEBUG]  [7/11] Creating output file that is 4526P x 4410L.
+2016-08-30 11:24:51 [harmonize_data] [DEBUG]  [7/11] Processing input file data/interim/warped/provide/pollination_flows/pollination_flows.tif.
+2016-08-30 11:24:51 [harmonize_data] [DEBUG]  [7/11] Using internal nodata values (e.g. 255) for image data/interim/warped/provide/pollination_flows/pollination_flows.tif.
+2016-08-30 11:24:51 [harmonize_data] [DEBUG]  [7/11] Copying nodata values from source data/interim/warped/provide/pollination_flows/pollination_flows.tif to destination data/processed/features/provide/pollination_flows/pollination_flows.tif.
+2016-08-30 11:24:51 [harmonize_data] [DEBUG]  [7/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
+2016-08-30 11:24:51 [harmonize_data] [INFO ]  [8/11] Warping dataset data/external/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif
+2016-08-30 11:24:51 [harmonize_data] [DEBUG]  [8/11] Target dataset data/interim/warped/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif
+2016-08-30 11:25:02 [harmonize_data] [INFO ]  [8/11] Clipping dataset data/interim/warped/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif
+2016-08-30 11:25:02 [harmonize_data] [DEBUG]  [8/11] Target dataset data/processed/features/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif
+2016-08-30 11:25:11 [harmonize_data] [DEBUG]  [8/11] Creating output file that is 4526P x 4410L.
+2016-08-30 11:25:11 [harmonize_data] [DEBUG]  [8/11] Processing input file data/interim/warped/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif.
+2016-08-30 11:25:11 [harmonize_data] [DEBUG]  [8/11] Using internal nodata values (e.g. -3.40282e+38) for image data/interim/warped/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif.
+2016-08-30 11:25:11 [harmonize_data] [DEBUG]  [8/11] Copying nodata values from source data/interim/warped/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif to destination data/processed/features/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif.
+2016-08-30 11:25:11 [harmonize_data] [DEBUG]  [8/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
+2016-08-30 11:25:11 [harmonize_data] [INFO ]  [9/11] Warping dataset data/external/provide/floodregulation/floodregulation.tif
+2016-08-30 11:25:11 [harmonize_data] [DEBUG]  [9/11] Target dataset data/interim/warped/provide/floodregulation/floodregulation.tif
+2016-08-30 11:25:23 [harmonize_data] [INFO ]  [9/11] Clipping dataset data/interim/warped/provide/floodregulation/floodregulation.tif
+2016-08-30 11:25:23 [harmonize_data] [DEBUG]  [9/11] Target dataset data/processed/features/provide/floodregulation/floodregulation.tif
+2016-08-30 11:25:31 [harmonize_data] [DEBUG]  [9/11] Creating output file that is 4526P x 4410L.
+2016-08-30 11:25:31 [harmonize_data] [DEBUG]  [9/11] Processing input file data/interim/warped/provide/floodregulation/floodregulation.tif.
+2016-08-30 11:25:31 [harmonize_data] [DEBUG]  [9/11] Using internal nodata values (e.g. -3.40282e+38) for image data/interim/warped/provide/floodregulation/floodregulation.tif.
+2016-08-30 11:25:31 [harmonize_data] [DEBUG]  [9/11] Copying nodata values from source data/interim/warped/provide/floodregulation/floodregulation.tif to destination data/processed/features/provide/floodregulation/floodregulation.tif.
+2016-08-30 11:25:31 [harmonize_data] [DEBUG]  [9/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
+2016-08-30 11:25:31 [harmonize_data] [INFO ]  [10/11] Warping dataset data/external/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif
+2016-08-30 11:25:31 [harmonize_data] [DEBUG]  [10/11] Target dataset data/interim/warped/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif
+2016-08-30 11:25:44 [harmonize_data] [INFO ]  [10/11] Clipping dataset data/interim/warped/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif
+2016-08-30 11:25:44 [harmonize_data] [DEBUG]  [10/11] Target dataset data/processed/features/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif
+2016-08-30 11:25:54 [harmonize_data] [DEBUG]  [10/11] Creating output file that is 4526P x 4410L.
+2016-08-30 11:25:54 [harmonize_data] [DEBUG]  [10/11] Processing input file data/interim/warped/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif.
+2016-08-30 11:25:54 [harmonize_data] [DEBUG]  [10/11] Using internal nodata values (e.g. -3.40282e+38) for image data/interim/warped/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif.
+2016-08-30 11:25:54 [harmonize_data] [DEBUG]  [10/11] Copying nodata values from source data/interim/warped/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif to destination data/processed/features/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif.
+2016-08-30 11:25:54 [harmonize_data] [DEBUG]  [10/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
+2016-08-30 11:25:54 [harmonize_data] [INFO ]  [11/11] Warping dataset data/external/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif
+2016-08-30 11:25:54 [harmonize_data] [DEBUG]  [11/11] Target dataset data/interim/warped/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif
+2016-08-30 11:26:05 [harmonize_data] [INFO ]  [11/11] Clipping dataset data/interim/warped/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif
+2016-08-30 11:26:05 [harmonize_data] [DEBUG]  [11/11] Target dataset data/processed/features/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif
+2016-08-30 11:26:11 [harmonize_data] [DEBUG]  [11/11] Creating output file that is 4526P x 4410L.
+2016-08-30 11:26:11 [harmonize_data] [DEBUG]  [11/11] Processing input file data/interim/warped/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif.
+2016-08-30 11:26:11 [harmonize_data] [DEBUG]  [11/11] Using internal nodata values (e.g. 255) for image data/interim/warped/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif.
+2016-08-30 11:26:11 [harmonize_data] [DEBUG]  [11/11] Copying nodata values from source data/interim/warped/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif to destination data/processed/features/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif.
+2016-08-30 11:26:11 [harmonize_data] [DEBUG]  [11/11] 0...10...20...30...40...50...60...70...80...90...100 - done.
