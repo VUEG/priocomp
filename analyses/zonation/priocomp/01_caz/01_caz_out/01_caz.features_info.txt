@@ -5,7 +5,7 @@ Weight  distribution-sum  IGRetained TviolationFractRem  Distr-mean-X   Distr-me
 1.000 	398752.125	398752.12	0.00000	1211.97	1214.08	../../../data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif
 1.000 	625983.000	625983.00	0.00000	1122.93	1325.32	../../../data/processed/features/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif
 1.000 	485391.156	485391.16	0.00000	1266.90	1091.37	../../../data/processed/features/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif
-1.000 	1125924224.000	1125924224.00	0.00000	1093.99	1423.10	../../../data/processed/features/provide/erosion_prevention/erosion_prevention.tif
+1.000 	1264307840.000	1264307840.00	0.00000	1076.30	1399.86	../../../data/processed/features/provide/erosion_prevention/erosion_prevention.tif
 1.000 	1470770.000	1470770.00	0.00000	1158.52	1233.53	../../../data/processed/features/provide/floodregulation/floodregulation.tif
 1.000 	7897622.000	7897622.00	0.00000	1282.17	1106.15	../../../data/processed/features/provide/megafauna/megafauna.tif
 1.000 	14701830144.000	14701830144.00	0.00000	1203.13	1151.33	../../../data/processed/features/provide/nature_tourism/nature_tourism.tif
