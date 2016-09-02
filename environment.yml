@@ -15,7 +15,7 @@ dependencies:
   # NOTE: using gdal>=2.1.0 will break things as gdalwarp does not accept
   # cultine with invalid geometry (such as NUTS data)
   - gdal=2.0.0
-  - ipdb
+  - libgdal=2.0.0
   - netcdf4
   - numpy=1.10
   - py
