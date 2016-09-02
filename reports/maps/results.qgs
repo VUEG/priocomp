@@ -3,7 +3,7 @@
   <title></title>
   <autotransaction active="0"/>
   <evaluateDefaultValues active="0"/>
-  <layer-tree-group expanded="1" checked="Qt::Unchecked" name="">
+  <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="">
     <customproperties/>
     <layer-tree-group expanded="1" checked="Qt::Unchecked" name="data">
       <customproperties/>
@@ -77,7 +77,7 @@
         </layer-tree-group>
       </layer-tree-group>
     </layer-tree-group>
-    <layer-tree-group expanded="1" checked="Qt::Unchecked" name="analyses">
+    <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="analyses">
       <customproperties/>
       <layer-tree-group expanded="1" checked="Qt::Unchecked" name="RWR">
         <customproperties/>
@@ -91,7 +91,7 @@
           <customproperties/>
         </layer-tree-layer>
       </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="Zonation">
+      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="Zonation">
         <customproperties/>
         <layer-tree-group expanded="1" checked="Qt::Unchecked" name="01_caz">
           <customproperties/>
@@ -138,12 +138,12 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="06_ab_es">
+        <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="06_ab_es">
           <customproperties/>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="06_abf_es_nwout120160714095149833" name="06_abf_es_nwout1">
             <customproperties/>
           </layer-tree-layer>
-          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="06_abf_es_rank_compressed20160617090219527" name="06_abf_es.rank.compressed">
+          <layer-tree-layer expanded="0" checked="Qt::Checked" id="06_abf_es_rank_compressed20160617090219527" name="06_abf_es.rank.compressed">
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
@@ -184,10 +184,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>2549681.63163630850613117</xmin>
-      <ymin>1287987.16499951481819153</ymin>
-      <xmax>6170824.14048007875680923</xmax>
-      <ymax>5405264.20618228800594807</ymax>
+      <xmin>585704.52108129160478711</xmin>
+      <ymin>2345686.48818977130576968</ymin>
+      <xmax>8186831.36634179577231407</xmax>
+      <ymax>4404325.00878115743398666</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -214,7 +214,7 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="lagopus_lagopus20160802122959777"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="03_caz_wgt_rank_compressed20160610095226793"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="05_caz_es_nwout320160714120316507"/>
-      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="eu26_ilp_es20160726132109523"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="eu26_ilp_es20160726132109523"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_bd20160826164604136"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_all20160826164620183"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="07_caz_bd_nwout120160627133412768"/>
@@ -246,7 +246,7 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="02_abf_rank_compressed20160615121711404"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="acrocephalus_agricola20160802121436173"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ablepharus_kitaibelii20160802122107779"/>
-      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="eu26_ilp_bd20160726132109346"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="eu26_ilp_bd20160726132109346"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="microtus_agrestis20160802122311635"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="pica_pica20160802122655629"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="05_caz_es_rank_compressed20160617090109009"/>
@@ -391,7 +391,7 @@
         </legendgroup>
       </legendgroup>
     </legendgroup>
-    <legendgroup open="true" checked="Qt::Unchecked" name="analyses">
+    <legendgroup open="true" checked="Qt::PartiallyChecked" name="analyses">
       <legendgroup open="true" checked="Qt::Unchecked" name="RWR">
         <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_eu26_es" showFeatureCount="0">
           <filegroup open="false" hidden="false">
@@ -409,7 +409,7 @@
           </filegroup>
         </legendlayer>
       </legendgroup>
-      <legendgroup open="true" checked="Qt::Unchecked" name="Zonation">
+      <legendgroup open="true" checked="Qt::PartiallyChecked" name="Zonation">
         <legendgroup open="true" checked="Qt::Unchecked" name="01_caz">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="01_caz_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
@@ -470,15 +470,15 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="true" checked="Qt::Unchecked" name="06_ab_es">
+        <legendgroup open="true" checked="Qt::PartiallyChecked" name="06_ab_es">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="06_abf_es_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="06_abf_es_nwout120160714095149833" visible="0"/>
             </filegroup>
           </legendlayer>
-          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="06_abf_es.rank.compressed" showFeatureCount="0">
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="06_abf_es.rank.compressed" showFeatureCount="0">
             <filegroup open="false" hidden="false">
-              <legendlayerfile isInOverview="0" layerid="06_abf_es_rank_compressed20160617090219527" visible="0"/>
+              <legendlayerfile isInOverview="0" layerid="06_abf_es_rank_compressed20160617090219527" visible="1"/>
             </filegroup>
           </legendlayer>
         </legendgroup>
@@ -6398,7 +6398,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>eu26_ilp_all20160726132109062</id>
-      <datasource>../../../../../../../../dev/git-projects/priocomp/analyses/ILP/eu26_ilp_all.tif</datasource>
+      <datasource>../../analyses/ILP/ilp_eu26_all.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -6454,7 +6454,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>eu26_ilp_bd20160726132109346</id>
-      <datasource>../../../../../../../../dev/git-projects/priocomp/analyses/ILP/eu26_ilp_bd.tif</datasource>
+      <datasource>../../analyses/ILP/ilp_eu26_bd.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -6511,7 +6511,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>eu26_ilp_es20160726132109523</id>
-      <datasource>../../../../../../../../dev/git-projects/priocomp/analyses/ILP/eu26_ilp_es.tif</datasource>
+      <datasource>../../analyses/ILP/ilp_eu26_es.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
