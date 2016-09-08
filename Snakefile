@@ -31,31 +31,32 @@ PROJECT_COUNTRIES = ["AT", "BE", "BG", "CZ", "DE", "DK", "ES", "EL", "EE",
                      "FR", "FI", "IT", "HU", "IE", "NL", "LU", "LI", "LT",
                      "LV", "PL", "SE", "RO", "PT", "SK", "SI", "UK"]
 
-# Get datasets from the data manifest file.
-data_manifest = utils.parse_data_manifest("data/data_manifest.yml")
+# Load the content of the data manifest file into a DataManager object.
+dm = utils.DataManager("data/data_manifest.yml")
 
 external_data = "data/external"
+# Final feature data
+feature_data = "data/processed/features"
 beehub_url = "https://beehub.nl/environmental-geography-group"
 
 # Define source and desination datasets. NOTE: data/Snakefile must be run
 # before this Snakefile will work
-DATADRYAD_SRC_DATASETS = [path for path in data_manifest['datadryad'] if path.endswith(".tif")]
-DATADRYAD_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in DATADRYAD_SRC_DATASETS]
+DATADRYAD_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in dm.get_resources(provider="datadryad", full_path=True)]
 
-EUROSTAT_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in data_manifest['eurostat']]
-# Define NUTS data separately. Shapefile constitute of several actual files on
-# file system, so dealing with them properly is a bit tricky.
-NUTS_LEVEL0_DATA = [path for path in EUROSTAT_SRC_DATASETS if "level0" in path and not path.endswith(".txt")]
-NUTS_LEVEL2_DATA = [path for path in EUROSTAT_SRC_DATASETS if "level2" in path and not path.endswith(".txt")]
+# Get specific NUTS collections from Eurostat
+NUTS_LEVEL0_DATA = dm.get_resources(collection="nuts_level0", full_path=True)
+NUTS_LEVEL2_DATA = dm.get_resources(collection="nuts_level2", full_path=True)
 
-PROVIDE_SRC_DATASETS = [path for path in data_manifest['provide'] if path.endswith(".tif")]
-PROVIDE_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in PROVIDE_SRC_DATASETS]
+PROVIDE_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in dm.get_resources(provider="provide", full_path=True)]
 
 # UDR collection "european_tetrapods" is already correctly formatted, place
 # it directly to "processed/features"
-UDR_SRC_DATASETS = [url.replace(beehub_url, "data/processed/features") for url in data_manifest["udr"]]
+UDR_SRC_DATASETS = [url.replace(beehub_url, feature_data) for url in dm.get_resources(provider="udr", full_path=True)]
 
 ALL_SRC_DATASETS = DATADRYAD_SRC_DATASETS + PROVIDE_SRC_DATASETS + UDR_SRC_DATASETS
+
+# Let's also calculate number of features in particular categories
+
 
 # Define a group of rasters that need to be rescaled (normalized) for the
 # following reasons:
@@ -397,11 +398,9 @@ rule rescale_data:
 
 rule calculate_rwr:
     input:
-        # FIXME: The N of ES features (11) is hardcoded here. Should be defined
-        # dynamically.
         all=rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS,
-        es=(rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS)[0:11],
-        bd=(rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS)[11:]
+        es=rules.harmonize_data.output.harmonized,
+        bd=UDR_SRC_DATASETS
     output:
         all="analyses/RWR/rwr_eu26_all.tif",
         es="analyses/RWR/rwr_eu26_es.tif",
@@ -440,11 +439,9 @@ rule calculate_rwr:
 rule prioritize_gurobi:
     input:
         all=rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS,
-        es=(rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS)[0:11],
-        bd=(rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS)[11:]
-        #expand("/home/jlehtoma/tmp/data/species{ID}.tif", ID=range(1, 8))
+        es=rules.harmonize_data.output.harmonized,
+        bd=UDR_SRC_DATASETS
     output:
-        #all="/home/jlehtoma/tmp/ilp_results/ilp_test.tif"
         all="analyses/ILP/ilp_eu26_all.tif",
         es="analyses/ILP/ilp_eu26_es.tif",
         bd="analyses/ILP/ilp_eu26_bd.tif"
