@@ -35,6 +35,13 @@ class DataManager(object):
         """ Data property accessor."""
         return self._data
 
+    def count(self, **kwargs):
+        """ Count the number of feaures in a given grouping.
+
+        For allowed query keys, see get_resources().
+        """
+        return len(self.get_resources(**kwargs))
+
     def get_category(self, **kwargs):
         """ Get the category associated with a hierarchy level.
 
