@@ -402,9 +402,9 @@ rule calculate_rwr:
         es=rules.harmonize_data.output.harmonized,
         bd=UDR_SRC_DATASETS
     output:
-        all="analyses/RWR/rwr_eu26_all.tif",
-        es="analyses/RWR/rwr_eu26_es.tif",
-        bd="analyses/RWR/rwr_eu26_bd.tif"
+        all="analyses/RWR/rwr_eu26_all_weights.tif",
+        es="analyses/RWR/rwr_eu26_es_weights.tif",
+        bd="analyses/RWR/rwr_eu26_bd_weights.tif"
     log:
         all="logs/calculate_rwr_eu26_all.log",
         es="logs/calculate_rwr_eu26_es.log",
@@ -412,12 +412,22 @@ rule calculate_rwr:
     message:
         "Calculating RWR..."
     run:
+        # Construct the weight vectors needed for the weighted RWR. For both
+        # categories "ecosystemservices" and "biodiversity" the weight for each
+        # individual feature is 1 / N where N is the number of features in that
+        # category. NOTE: the order matters here greatly: ecosystem services
+        # need to come first.
+        n_es = dm.count(category="ecosystemservices")
+        n_bd = dm.count(category="biodiversity")
+        weights = [1.0 / n_es] * n_es + [1.0 / n_bd] * n_bd
+
         llogger = utils.get_local_logger("calculate_rwr_all", log.all)
-        rwr.calculate_rwr(input.all, output.all, logger=llogger)
+        rwr.calculate_rwr(input.all, output.all, weights=weights,
+                          logger=llogger)
         llogger = utils.get_local_logger("calculate_rwr_es", log.es)
-        rwr.calculate_rwr(input.es, output.es, logger=llogger)
+        rwr.calculate_rwr(input.es, output.es, weights=weights, logger=llogger)
         llogger = utils.get_local_logger("calculate_rwr_bd", log.bd)
-        rwr.calculate_rwr(input.bd, output.bd, logger=llogger)
+        rwr.calculate_rwr(input.bd, output.bd, weights=weights, logger=llogger)
 
 # # Zonation ---------------------------------------------------------------------
 #
