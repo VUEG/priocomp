@@ -142,7 +142,7 @@ class DataManager(object):
                             url = "{0}/{1}/{2}".format(item['uri'],
                                                        item['provider_name'],
                                                        item['collection_name'])
-                            if query_key == "subcollection":
+                            if "subcollection_name" in list(item.keys()):
                                 url = "{0}/{1}".format(url,
                                                        item['subcollection_name'])
                             resources = []
