@@ -3,16 +3,16 @@
 """ Utility module for the workflow."""
 import logging
 import os
-import pdb
+import pprint
 import yaml
 from colorlog import ColoredFormatter
 
 # Classes ---------------------------------------------------------------------
 
 
-class DataManifest(object):
+class DataManager(object):
 
-    """ Class representing a data manifest file.
+    """ Class for a data manager read data manifests.
 
     Methods of this class can be used to access the content of the data
     manifest file in various ways.
@@ -26,6 +26,88 @@ class DataManifest(object):
 
         # Read and parse the data manifest file
         self._data = self.parse_data_manifest()
+
+    def __len__(self):
+        return len(self.data)
+
+    @property
+    def data(self):
+        """ Data property accessor."""
+        return self._data
+
+    def get_category(self, **kwargs):
+        """ Get the category associated with a hierarchy level.
+
+        Following hierarchy levels can be used:
+            - collection
+            - subcollection
+
+        :param **kwargs: key-value -pair, where key must be in ["collection",
+                         "subcollection"].
+        :return list of String name(s) of the category.
+        """
+        # List allowed query keys
+        allowed_keys = ["collection", "subcollection"]
+        # Get the key provided.
+        query_keys = list(kwargs.keys())
+        # Only one query key allowed.
+        if len(query_keys) > 1:
+            raise ValueError("Only one query key allowed at time")
+        query_key = query_keys[0]
+
+        # Multiple collections can have the same name. Store matches into a
+        # list.
+        collection_match = []
+
+        # Check that the quey key is allowed
+        if query_key in allowed_keys:
+            # Construct the actual query key
+            item_key = "{}_name".format(query_key)
+            for item in self.data:
+                # collection category is always present, subcollection category
+                # not necessarily.
+                if item_key in list(item.keys()):
+                    if item[item_key] == kwargs[query_key]:
+                        collection_match.append(item['collection_category'])
+        else:
+            raise ValueError("Allowed query args are: {}".format(", ".join(allowed_keys)))
+
+        if len(collection_match) > 1:
+            print("WARNING: multiple collection with the same name")
+        return collection_match
+
+
+    def get_collection(self, **kwargs):
+        """ Get the ceollection associated with a hierarchy level.
+
+        Following hierarchy levels can be used:
+            - uri
+            - provider
+            - collection
+
+        :param **kwargs: key-value -pair, where key must be in ["uri",
+                         "provider", "collection"].
+        :return list of collections.
+        """
+        pass
+
+    def get_metadata(self, **kwargs):
+        pass
+
+    def get_resources(self, **kwargs):
+        """ Get the resources associated with a hierarchy level.
+
+        Following hierarchy levels can be used:
+            - uri
+            - provider
+            - collection
+            - subcollection
+
+        :param **kwargs: key-value -pair, where key must be in ["uri",
+                         "provider", "collection", "subcollection".
+        :return list of String file names.
+        """
+        pass
 
     def parse_data_manifest(self):
         """ Parse datasets from a data manifest file.
@@ -53,7 +135,7 @@ class DataManifest(object):
                 collection_data['collection_metadata'] = collection_item['metadata']
             # Resources is required
             if 'resources' in collection_keys:
-                collection_data['collection_resorces'] = collection_item['resources']
+                collection_data['collection_resources'] = collection_item['resources']
             else:
                 raise ValueError("Collection {} contains no resources".format(collection_name))
 
@@ -97,6 +179,9 @@ class DataManifest(object):
                         raise ValueError("Invalid collection type")
 
         return items
+
+    def manifest(self):
+        pprint.pprint(self.data)
 
 # Functions -------------------------------------------------------------------
 
