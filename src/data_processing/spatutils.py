@@ -209,7 +209,8 @@ def rescale_raster(input_raster, output_raster, method, fill_w_zeros=False,
         return True
 
 
-def sum_raster(input_rasters, olnormalize=False, verbose=False, logger=None):
+def sum_raster(input_rasters, olnormalize=False, weights=None, verbose=False,
+               logger=None):
     """ Sum a group of input rasters.
 
     Read in a group of input rasters and sum the values in each cell. All
@@ -218,8 +219,15 @@ def sum_raster(input_rasters, olnormalize=False, verbose=False, logger=None):
     Optionally, values in all rasters can occurrence level (OL) normalized
     before summation.
 
+    It is possible to provide a list (vector) of weights for each features.
+    These values are used as simple multipliers for each feature when summing
+    the values over all features. If provided, the list must match the number
+    of input rasters exactly.
+
     :param input_rasters: String list of input raster paths.
     :param ol_normalize: Boolean indicating wether OL normalization is done.
+    :param weights: list of weights. Length must match the number of input
+                    rasters.
     :param verbose: Boolean indicating how much information is printed out.
     :param logger: Logger object.
     :return: numpy masked array of summed values.
@@ -234,6 +242,14 @@ def sum_raster(input_rasters, olnormalize=False, verbose=False, logger=None):
 
     if ol_normalize:
         llogger.info(" [NOTE] Using occurrence level normalization")
+    if weights is not None:
+        llogger.info(" [NOTE] Using weights")
+
+    # Check inputs
+    assert len(input_rasters) > 0, "Input rasters list cannot be empty"
+    if weights:
+        assert len(weights) == len(input_rasters), ("Length of weights must " +
+                                    "match the number of input rasters"
 
     # Initiate the data structure for holding the summed values.
     sum_array = None
@@ -288,7 +304,11 @@ def sum_raster(input_rasters, olnormalize=False, verbose=False, logger=None):
                 src_data = ol_normalize(src_data)
 
             # Sum OL normalized data ---------------------------------------
-            llogger.debug("{0} Summing values".format(prefix))
+            if weights:
+                llogger.debug("{0} Summing weighted values".format(prefix))
+                src_data *= weights[i]
+            else:
+                llogger.debug("{0} Summing values".format(prefix))
             sum_array += src_data
 
     # Re-mask the data based on the union mask constructed dynamically. At this

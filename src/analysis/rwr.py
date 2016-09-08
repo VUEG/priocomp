@@ -23,8 +23,8 @@ spatutils = SourceFileLoader("data_processing.spatutils",
 utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 
 
-def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
-                  verbose=False, logger=None):
+def calculate_rwr(input_rasters, output_raster, weights=None,
+                  compress='DEFLATE', verbose=False, logger=None):
     """ Calculate rarity-weighted richness (RWR) based on input rasters.
 
     Function does the following steps:
@@ -47,8 +47,15 @@ def calculate_rwr(input_rasters, output_raster, compress='DEFLATE',
     i.e. the average of the ranks that would have been assigned to all the tied
     values is assigned to each value.
 
+    It is possible to provide a list (vector) of weights for each features.
+    These values are used as simple multipliers for each feature when summing
+    the values over all features. If provided, the list must match the number
+    of input rasters exactly.
+
     :param input_rasters: List of String paths of input rasters.
     :param output_raster: String path to raster file to be created.
+    :param weights: list of weights. Length must match the number of input
+                    rasters.
     :param compress: String compression level used for the output raster.
     :param verbose Boolean indicating how much information is printed out.
     :param log_file String path to log file used.
