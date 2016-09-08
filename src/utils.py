@@ -91,10 +91,7 @@ class DataManager(object):
         """
         pass
 
-    def get_metadata(self, **kwargs):
-        pass
-
-    def get_resources(self, **kwargs):
+    def get_resources(self, full_path=False, **kwargs):
         """ Get the resources associated with a hierarchy level.
 
         Following hierarchy levels can be used:
@@ -102,12 +99,56 @@ class DataManager(object):
             - provider
             - collection
             - subcollection
+            - category
 
         :param **kwargs: key-value -pair, where key must be in ["uri",
                          "provider", "collection", "subcollection".
         :return list of String file names.
         """
-        pass
+        # List allowed query keys
+        allowed_keys = ["uri", "provider", "collection", "subcollection",
+                        "category"]
+        # Get the key provided.
+        query_keys = list(kwargs.keys())
+        # Only one query key allowed.
+        if len(query_keys) > 1:
+            raise ValueError("Only one query key allowed at time")
+        query_key = query_keys[0]
+
+        resource_match = []
+
+        # Check that the quey key is allowed
+        if query_key in allowed_keys:
+            # Construct the actual query key
+            if query_key == "uri":
+                item_key = query_key
+            elif query_key == "category":
+                item_key = "collection_category"
+            else:
+                item_key = "{}_name".format(query_key)
+            for item in self.data:
+                # uri, provider and collection category are always present,
+                # subcollection category not necessarily.
+                if item_key in list(item.keys()):
+                    if item[item_key] == kwargs[query_key]:
+                        if full_path:
+                            url = "{0}/{1}/{2}".format(item['uri'],
+                                                       item['provider_name'],
+                                                       item['collection_name'])
+                            if query_key == "subcollection":
+                                url = "{0}/{1}".format(url,
+                                                       item['subcollection_name'])
+                            resources = []
+                            for resource in item['collection_resources']:
+                                resources.append("{0}/{1}".format(url, resource)
+                                                         )
+                        else:
+                            resources = item['collection_resources']
+                        resource_match += resources
+        else:
+            raise ValueError("Allowed query args are: {}".format(", ".join(allowed_keys)))
+
+        return resource_match
 
     def parse_data_manifest(self):
         """ Parse datasets from a data manifest file.
@@ -121,7 +162,6 @@ class DataManager(object):
                         "metadata": list
                         "resources": list
         """
-
         def parse_collection(collection, collection_name):
             collection_data = {}
             collection_item = collection[collection_name]
