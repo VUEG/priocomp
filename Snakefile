@@ -44,8 +44,8 @@ beehub_url = "https://beehub.nl/environmental-geography-group"
 DATADRYAD_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in dm.get_resources(provider="datadryad", full_path=True)]
 
 # Get specific NUTS collections from Eurostat
-NUTS_LEVEL0_DATA = dm.get_resources(collection="nuts_level0", full_path=True)
-NUTS_LEVEL2_DATA = dm.get_resources(collection="nuts_level2", full_path=True)
+NUTS_LEVEL0_DATA = [url.replace(beehub_url, external_data) for url in dm.get_resources(collection="nuts_level0", full_path=True)]
+NUTS_LEVEL2_DATA = [url.replace(beehub_url, external_data) for url in dm.get_resources(collection="nuts_level2", full_path=True)]
 
 PROVIDE_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in dm.get_resources(provider="provide", full_path=True)]
 
