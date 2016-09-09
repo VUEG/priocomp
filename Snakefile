@@ -402,9 +402,10 @@ rule calculate_rwr:
         es=rules.harmonize_data.output.harmonized,
         bd=UDR_SRC_DATASETS
     output:
-        all="analyses/RWR/rwr_eu26_all_weights.tif",
-        es="analyses/RWR/rwr_eu26_es_weights.tif",
-        bd="analyses/RWR/rwr_eu26_bd_weights.tif"
+        all="analyses/RWR/rwr_eu26_all.tif",
+        all_w="analyses/RWR/rwr_eu26_all_weights.tif",
+        #es="analyses/RWR/rwr_eu26_es_weights.tif",
+        #bd="analyses/RWR/rwr_eu26_bd_weights.tif"
     log:
         all="logs/calculate_rwr_eu26_all.log",
         es="logs/calculate_rwr_eu26_es.log",
@@ -421,13 +422,18 @@ rule calculate_rwr:
         n_bd = dm.count(category="biodiversity")
         weights = [1.0 / n_es] * n_es + [1.0 / n_bd] * n_bd
 
+        # Without weights
         llogger = utils.get_local_logger("calculate_rwr_all", log.all)
-        rwr.calculate_rwr(input.all, output.all, weights=weights,
+        rwr.calculate_rwr(input.all, output.all, logger=llogger)
+        # With weights
+        llogger = utils.get_local_logger("calculate_rwr_all_weights", log.all)
+        rwr.calculate_rwr(input.all, output.all_w, weights=weights,
                           logger=llogger)
-        llogger = utils.get_local_logger("calculate_rwr_es", log.es)
-        rwr.calculate_rwr(input.es, output.es, weights=weights, logger=llogger)
-        llogger = utils.get_local_logger("calculate_rwr_bd", log.bd)
-        rwr.calculate_rwr(input.bd, output.bd, weights=weights, logger=llogger)
+
+        #llogger = utils.get_local_logger("calculate_rwr_es", log.es)
+        #rwr.calculate_rwr(input.es, output.es, logger=llogger)
+        #llogger = utils.get_local_logger("calculate_rwr_bd", log.bd)
+        #rwr.calculate_rwr(input.bd, output.bd, logger=llogger)
 
 # # Zonation ---------------------------------------------------------------------
 #
