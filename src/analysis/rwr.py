@@ -84,7 +84,7 @@ def calculate_rwr(input_rasters, output_raster, weights=None,
     # values in input_rasters together. NOTE: sum_raster() returns a masked
     # array.
     sum_array_masked = spatutils.sum_raster(input_rasters, olnormalize=True,
-                                            logger=llogger)
+                                            weights=weights, logger=llogger)
 
     # To speed up things, do 2 things: 1) save mask (NoData) and get rid of
     # NoData cells for now, 2) flatten the array.
