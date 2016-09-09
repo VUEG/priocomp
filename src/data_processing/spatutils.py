@@ -242,7 +242,7 @@ def sum_raster(input_rasters, olnormalize=False, weights=None, verbose=False,
 
     if ol_normalize:
         llogger.info(" [NOTE] Using occurrence level normalization")
-    if weights is not None:
+    if weights:
         llogger.info(" [NOTE] Using weights")
 
     # Check inputs
