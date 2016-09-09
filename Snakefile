@@ -6,11 +6,12 @@ import pdb
 import rasterio
 from importlib.machinery import SourceFileLoader
 
+## LOAD MODULES --------------------------------------------------------------
+utils = SourceFileLoader("lib.utils", "src/00_lib/utils.py").load_module()
+spatutils = SourceFileLoader("lib.spatutils", "src/00_lib/spatutils.py").load_module()
+gurobi = SourceFileLoader("analysis.gurobi", "src/02_analysis/gurobi.py").load_module()
+rwr = SourceFileLoader("analysis.rwr", "src/02_analysis/rwr.py").load_module()
 
-gurobi = SourceFileLoader("gurobi.prioritize_gurobi", "src/analysis/gurobi.py").load_module()
-spatutils = SourceFileLoader("data_processing.spatutils", "src/data_processing/spatutils.py").load_module()
-rwr = SourceFileLoader("rwr.calculate_rwr", "src/analysis/rwr.py").load_module()
-utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
 
 ## GLOBALS --------------------------------------------------------------------
 
@@ -408,6 +409,7 @@ rule calculate_rwr:
         #bd="analyses/RWR/rwr_eu26_bd_weights.tif"
     log:
         all="logs/calculate_rwr_eu26_all.log",
+        all_w="logs/calculate_rwr_eu26_all_weights.log",
         es="logs/calculate_rwr_eu26_es.log",
         bd="logs/calculate_rwr_eu26_bd.log"
     message:
@@ -426,7 +428,7 @@ rule calculate_rwr:
         llogger = utils.get_local_logger("calculate_rwr_all", log.all)
         rwr.calculate_rwr(input.all, output.all, logger=llogger)
         # With weights
-        llogger = utils.get_local_logger("calculate_rwr_all_weights", log.all)
+        llogger = utils.get_local_logger("calculate_rwr_all_weights", log.all_w)
         rwr.calculate_rwr(input.all, output.all_w, weights=weights,
                           logger=llogger)
 
@@ -458,25 +460,44 @@ rule prioritize_gurobi:
         es=rules.harmonize_data.output.harmonized,
         bd=UDR_SRC_DATASETS
     output:
-        all="analyses/ILP/ilp_eu26_all.tif",
-        es="analyses/ILP/ilp_eu26_es.tif",
-        bd="analyses/ILP/ilp_eu26_bd.tif"
+        #all="analyses/ILP/ilp_eu26_all.tif",
+        all_w="analyses/ILP/ilp_eu26_all_weights.tif"
+        #es="analyses/ILP/ilp_eu26_es.tif",
+        #bd="analyses/ILP/ilp_eu26_bd.tif"
     log:
         all="logs/prioritize_ilp_eu26_all.log",
+        all_w="logs/prioritize_ilp_eu26_all_weights.log",
         es="logs/prioritize_ilp_eu26_es.log",
         bd="logs/prioritize_ilp_eu26_bd.log"
     message:
         "Opitmizing with Gurobi..."
     run:
-        llogger = utils.get_local_logger("optimize_gurobi_all", log.all)
-        gurobi.prioritize_gurobi(input.all, output.all, logger=llogger,
-                                 ol_normalize=True, save_intermediate=False,
-                                 verbose=True)
-        llogger = utils.get_local_logger("optimize_gurobi_es", log.es)
-        gurobi.prioritize_gurobi(input.es, output.es, logger=llogger,
-                                 ol_normalize=True, save_intermediate=False,
-                                 verbose=True)
-        llogger = utils.get_local_logger("optimize_gurobi_bd", log.bd)
-        gurobi.prioritize_gurobi(input.bd, output.bd, logger=llogger,
-                                 ol_normalize=True, save_intermediate=False,
-                                 verbose=True)
+        # Construct the weight vectors needed for the weighted RWR. For both
+        # categories "ecosystemservices" and "biodiversity" the weight for each
+        # individual feature is 1 / N where N is the number of features in that
+        # category. NOTE: the order matters here greatly: ecosystem services
+        # need to come first.
+        n_es = dm.count(category="ecosystemservices")
+        n_bd = dm.count(category="biodiversity")
+        weights = [1000.0 / n_es] * n_es + [1000.0 / n_bd] * n_bd
+
+        # Without weights
+        #llogger = utils.get_local_logger("optimize_gurobi_all", log.all)
+        #gurobi.prioritize_gurobi(input.all, output.all, logger=llogger,
+        #                         ol_normalize=True, save_intermediate=True,
+        #                         verbose=True)
+        # With weights
+        llogger = utils.get_local_logger("optimize_gurobi_all_weights",
+                                         log.all_w)
+        gurobi.prioritize_gurobi(input.all, output.all_w, logger=llogger,
+                                 ol_normalize=True, weights=weights,
+                                 save_intermediate=True, verbose=True)
+
+        #llogger = utils.get_local_logger("optimize_gurobi_es", log.es)
+        #gurobi.prioritize_gurobi(input.es, output.es, logger=llogger,
+        #                         ol_normalize=True, save_intermediate=False,
+        #                         verbose=True)
+        #llogger = utils.get_local_logger("optimize_gurobi_bd", log.bd)
+        #gurobi.prioritize_gurobi(input.bd, output.bd, logger=llogger,
+        #                         ol_normalize=True, save_intermediate=False,
+        #                         verbose=True)
