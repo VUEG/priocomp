@@ -11,6 +11,81 @@ import numpy as np
 from scipy.spatial.distance import jaccard
 
 
+def jaccard(x, y, x_min=0.0, x_max=1.0, y_min=0.0, y_max=1.0,
+            warn_uneven=False, limit_tolerance=4, disable_checks=FALSE):
+    """Calculate the Jaccard coefficient.
+
+    The Jaccard coefficient measures similarity between sample sets, and is
+    defined as the size of the intersection divided by the size of the union of
+    the sample sets. The Jaccard coefficient can be calculated for a subset of
+    rasters provided by using the threshold argument.
+
+    Min and max values must be provided for both RasterLayer objects x
+    and y. Method can be used with RasterLayers of any value range, but
+    the defaults [0.0, 1.0] are geared towards comparing Zonation rank priority
+    rasters. Limits provided are inclusive.
+
+    :param x ndarray object.
+    :param y ndarray object.
+    :param x_min Numeric minimum threshold value for x to be used
+                 (default 0.0).
+    :param x_max Numeric maximum threshold value for x to be used
+                 (default 1.0).
+    :param y_min Numeric minimum threshold value for y to be used
+                 (default 0.0).
+    :param y_max Numeric maximum threshold value for y to be used
+                 (default 1.0).
+    :param warn_uneven Boolean indicating whether a warning is raised if the
+                       compared raster coverages are very (>20x) uneven.
+    :param limit_tolerance integer values that defines to which precision x and
+                           y limits are rounded to. This helps e.g. with values
+                           that close to 0 but not quite 0 (default: 4, i.e.
+                           round(x, 4)).
+    :param disable_checks boolean indicating if the input limit values are
+                          checked against the actual raster values in x and y.
+
+    :return numeric value in [0, 1].
+    """
+
+    if not disable_checks:
+        assert x_min < np.round(np.min(x), limit_tolerance), "Min threshold smaller than computed min of x"
+        assert x_max < np.round(np.max(x), limit_tolerance), "Max threshold smaller than computed max of x"
+        assert x_min >= x_max, "Min threshold for x larger or equal to max threshold"
+        assert y_min < np.round(np.min(y), limit_tolerance), "Min threshold smaller than computed min of y"
+        assert y_max < np.round(np.max(y), limit_tolerance), "Max threshold smaller than computed max of y"
+        assert y_min >= y_max, "Min threshold for y larger or equal to max threshold"
+
+  # [fixme] - using cellStats(X, "sum") should be safe as we're dealing with
+  # binary 0/1 rasters. count() would be preferable, but apparently raster
+  # (>= 2.2 at least) doesn't support it anymore.
+
+  # Get the values according to the limits provided
+  x_bin <- (x >= x.min & x <=x.max)
+  y_bin <- (y >= y.min & y <=y.max)
+
+  if (warn.uneven) {
+    x.size <- cellStats(x.bin, "sum")
+    y.size <- cellStats(y.bin, "sum")
+    # Sort from smaller to larger
+    sizes <- sort(c(x.size, y.size))
+    if (sizes[2] / sizes[1] > 20) {
+      warning("The extents of raster values above the threshhold differ more",
+              "than 20-fold: Jaccard coefficient may not be informative.")
+    }
+  }
+
+  # Calculate the intersection of the two rasters, this is given by adding
+  # the binary rasters together -> 2 indicates intersection
+  combination <- x.bin + y.bin
+  intersection <- combination == 2
+
+  # Union is all the area covered by the both rasters
+  union <- combination >= 1
+
+  return(cellStats(intersection, "sum") / cellStats(union, "sum"))
+}
+
+
 def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None,
                   *args, **kwargs):
     """ Calculate Jaccard coefficients bewteen all the inpur rasters.
