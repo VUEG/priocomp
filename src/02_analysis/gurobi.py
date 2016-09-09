@@ -20,9 +20,8 @@ from importlib.machinery import SourceFileLoader
 from scipy.stats.mstats import rankdata
 from timeit import default_timer as timer
 
-spatutils = SourceFileLoader("data_processing.spatutils",
-                             "src/data_processing/spatutils.py").load_module()
-utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
+utils = SourceFileLoader("lib.utils", "src/00_lib/utils.py").load_module()
+spatutils = SourceFileLoader("lib.spatutils", "src/00_lib/spatutils.py").load_module()
 
 
 def optimize_maxcover(x, budget, rij, verbose=False, logger=None):
@@ -90,7 +89,8 @@ def optimize_maxcover(x, budget, rij, verbose=False, logger=None):
 
 def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
                       save_intermediate=False, compress='DEFLATE',
-                      ol_normalize=False, verbose=False, logger=None):
+                      ol_normalize=False, weights=None, verbose=False,
+                      logger=None):
     """ Solve (multiple) maximum coverage problems for a set of input rasters.
 
     Create a hierarchical spatial prioritization using Gurobi solver to solve
@@ -103,12 +103,21 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     summed together forming a selection frequency. Finally, the selection
     frequency is rescaled into range [0, 1] forming a rank priority raster.
 
+    It is possible to provide a list (vector) of weights for each features.
+    These values are used as simple multipliers for each feature when summing
+    the values over all features. If provided, the list must match the number
+    of input rasters exactly.
+
     :param input_rasters: List of String paths of input rasters.
     :param output_raster: String path to the rank raster file to be created.
     :param step: numeric value in (0, 1) defining the step length for budget
                  levels.
+    :param save_intermediate: should intermediate optiomization results be
+                              saved?
     :param compress: String compression level used for the output raster.
-    :param compress: Boolean setting OL (Occurrence Level) normalization.
+    :param ol_normalize: Boolean setting OL (Occurrence Level) normalization.
+    :param weights: list of weights. Length must match the number of input
+                    rasters.
     :param verbose Boolean indicating how much information is printed out.
     :param logger logger object to be used.
     """
@@ -149,7 +158,7 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     # values in input_rasters together.  NOTE: sum_raster() returns a masked
     # array.
     sum_array_masked = spatutils.sum_raster(input_rasters, olnormalize=True,
-                                            logger=llogger)
+                                            weights=weights, logger=llogger)
     # To speed up things, do 2 things: 1) save mask (NoData) and get rid of
     # NoData cells for now, 2) flatten the array.
     (height, width) = sum_array_masked.shape

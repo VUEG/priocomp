@@ -18,9 +18,8 @@ from importlib.machinery import SourceFileLoader
 from scipy.stats import rankdata
 from timeit import default_timer as timer
 
-spatutils = SourceFileLoader("data_processing.spatutils",
-                             "src/data_processing/spatutils.py").load_module()
-utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
+utils = SourceFileLoader("lib.utils", "src/00_lib/utils.py").load_module()
+spatutils = SourceFileLoader("lib.spatutils", "src/00_lib/spatutils.py").load_module()
 
 
 def calculate_rwr(input_rasters, output_raster, weights=None,

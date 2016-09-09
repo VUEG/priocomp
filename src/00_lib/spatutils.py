@@ -12,7 +12,7 @@ import scipy.stats
 
 from importlib.machinery import SourceFileLoader
 
-utils = SourceFileLoader("src.utils", "src/utils.py").load_module()
+utils = SourceFileLoader("lib.utils", "src/00_lib/utils.py").load_module()
 
 
 def get_profile(input_rasters, warn_inconistent=True, pick="first",
