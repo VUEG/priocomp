@@ -90,6 +90,9 @@
         <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="rwr_eu26_all20160826164620183" name="rwr_eu26_all">
           <customproperties/>
         </layer-tree-layer>
+        <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="rwr_eu26_all_weights20160909092552438" name="rwr_eu26_all_weights">
+          <customproperties/>
+        </layer-tree-layer>
       </layer-tree-group>
       <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="Zonation">
         <customproperties/>
@@ -120,9 +123,9 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="1" checked="Qt::Checked" name="04_abf_wgt">
+        <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="04_abf_wgt">
           <customproperties/>
-          <layer-tree-layer expanded="0" checked="Qt::Checked" id="04_abf_wgt_nwout120160615125613505" name="04_abf_wgt_nwout1">
+          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="04_abf_wgt_nwout120160615125613505" name="04_abf_wgt_nwout1">
             <customproperties/>
           </layer-tree-layer>
           <layer-tree-layer expanded="0" checked="Qt::Checked" id="04_abf_wgt_rank_compressed20160615125553257" name="04_abf_wgt.rank.compressed">
@@ -184,10 +187,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>2489039.33098508976399899</xmin>
-      <ymin>2661365.70436302246525884</ymin>
-      <xmax>6289602.75361598841845989</xmax>
-      <ymax>3690684.96465889131650329</ymax>
+      <xmin>1886850</xmin>
+      <ymin>889749.99999999906867743</ymin>
+      <xmax>6639150</xmax>
+      <ymax>5520250</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -259,6 +262,7 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="02_abf_nwout120160518103800583"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_es20160826164545086"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="cultural_landscape_index_forest20160714120655387"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_all_weights20160909092552438"/>
     </layer_coordinate_transform_info>
   </mapcanvas>
   <layer-tree-canvas>
@@ -299,6 +303,7 @@
       <item>rwr_eu26_es20160826164545086</item>
       <item>rwr_eu26_bd20160826164604136</item>
       <item>rwr_eu26_all20160826164620183</item>
+      <item>rwr_eu26_all_weights20160909092552438</item>
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
@@ -408,6 +413,11 @@
             <legendlayerfile isInOverview="0" layerid="rwr_eu26_all20160826164620183" visible="0"/>
           </filegroup>
         </legendlayer>
+        <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="rwr_eu26_all_weights" showFeatureCount="0">
+          <filegroup open="true" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="rwr_eu26_all_weights20160909092552438" visible="0"/>
+          </filegroup>
+        </legendlayer>
       </legendgroup>
       <legendgroup open="true" checked="Qt::PartiallyChecked" name="Zonation">
         <legendgroup open="true" checked="Qt::Unchecked" name="01_caz">
@@ -446,10 +456,10 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="true" checked="Qt::Checked" name="04_abf_wgt">
-          <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="04_abf_wgt_nwout1" showFeatureCount="0">
+        <legendgroup open="true" checked="Qt::PartiallyChecked" name="04_abf_wgt">
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="04_abf_wgt_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
-              <legendlayerfile isInOverview="0" layerid="04_abf_wgt_nwout120160615125613505" visible="1"/>
+              <legendlayerfile isInOverview="0" layerid="04_abf_wgt_nwout120160615125613505" visible="0"/>
             </filegroup>
           </legendlayer>
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="04_abf_wgt.rank.compressed" showFeatureCount="0">
@@ -546,16 +556,7 @@
       <ComposerLabel valign="128" marginX="1" marginY="1" labelText="ILP" htmlState="0" halign="4">
         <LabelFont description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
         <FontColor red="0" blue="0" green="0"/>
-        <ComposerItem pagey="197.411" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="90.1444" y="197.411" visibility="1" zValue="19" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{64b5bade-173a-4191-bd5b-bca586e4fd02}" height="8.83701" itemRotation="0" frame="false" pagex="90.1444">
-          <FrameColor alpha="255" red="0" blue="0" green="0"/>
-          <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
-          <customproperties/>
-        </ComposerItem>
-      </ComposerLabel>
-      <ComposerLabel valign="128" marginX="1" marginY="1" labelText="ZON" htmlState="0" halign="4">
-        <LabelFont description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
-        <FontColor red="0" blue="0" green="0"/>
-        <ComposerItem pagey="103.022" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="90.1444" y="103.022" visibility="1" zValue="11" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{6f380733-6ddb-4435-8487-1a3f12ebf2ed}" height="8.83701" itemRotation="0" frame="false" pagex="90.1444">
+        <ComposerItem pagey="197.411" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="90.1444" y="197.411" visibility="1" zValue="6" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{64b5bade-173a-4191-bd5b-bca586e4fd02}" height="8.83701" itemRotation="0" frame="false" pagex="90.1444">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -642,16 +643,25 @@
           <annotationFontProperties description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
         </ComposerMapGrid>
         <AtlasMap scalingMode="2" atlasDriven="0" margin="0.10000000000000001"/>
-        <ComposerItem pagey="201.83" page="1" id="" lastValidViewScaleFactor="2.83851" positionMode="0" positionLock="false" x="60" y="201.83" visibility="1" zValue="11" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="90" outlineWidth="0.3" excludeFromExports="0" uuid="{695035b0-1b7c-4dc1-82b0-f0f81f52707a}" height="90" itemRotation="0" frame="false" pagex="60">
+        <ComposerItem pagey="201.83" page="1" id="" lastValidViewScaleFactor="2.83851" positionMode="0" positionLock="false" x="60" y="201.83" visibility="1" zValue="5" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="90" outlineWidth="0.3" excludeFromExports="0" uuid="{695035b0-1b7c-4dc1-82b0-f0f81f52707a}" height="90" itemRotation="0" frame="false" pagex="60">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
         </ComposerItem>
       </ComposerMap>
+      <ComposerLabel valign="128" marginX="1" marginY="1" labelText="ZON" htmlState="0" halign="4">
+        <LabelFont description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
+        <FontColor red="0" blue="0" green="0"/>
+        <ComposerItem pagey="103.022" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="90.1444" y="103.022" visibility="1" zValue="4" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{6f380733-6ddb-4435-8487-1a3f12ebf2ed}" height="8.83701" itemRotation="0" frame="false" pagex="90.1444">
+          <FrameColor alpha="255" red="0" blue="0" green="0"/>
+          <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+          <customproperties/>
+        </ComposerItem>
+      </ComposerLabel>
       <ComposerLabel valign="128" marginX="1" marginY="1" labelText="RWR" htmlState="0" halign="4">
         <LabelFont description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
         <FontColor red="0" blue="0" green="0"/>
-        <ComposerItem pagey="10.0224" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="93.2975" y="10.0224" visibility="1" zValue="5" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{f08dd227-2690-4123-bad9-72fefa4c97e9}" height="8.83701" itemRotation="0" frame="false" pagex="93.2975">
+        <ComposerItem pagey="10.0224" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="93.2975" y="10.0224" visibility="1" zValue="3" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{f08dd227-2690-4123-bad9-72fefa4c97e9}" height="8.83701" itemRotation="0" frame="false" pagex="93.2975">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -738,7 +748,7 @@
           <annotationFontProperties description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
         </ComposerMapGrid>
         <AtlasMap scalingMode="2" atlasDriven="0" margin="0.10000000000000001"/>
-        <ComposerItem pagey="107.441" page="1" id="" lastValidViewScaleFactor="2.83851" positionMode="0" positionLock="false" x="60" y="107.441" visibility="1" zValue="3" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="90" outlineWidth="0.3" excludeFromExports="0" uuid="{cac8867f-fe7f-4b35-9fdb-15447e6741d5}" height="90" itemRotation="0" frame="false" pagex="60">
+        <ComposerItem pagey="107.441" page="1" id="" lastValidViewScaleFactor="2.83851" positionMode="0" positionLock="false" x="60" y="107.441" visibility="1" zValue="2" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="90" outlineWidth="0.3" excludeFromExports="0" uuid="{cac8867f-fe7f-4b35-9fdb-15447e6741d5}" height="90" itemRotation="0" frame="false" pagex="60">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -854,7 +864,7 @@
       <ComposerLabel valign="128" marginX="1" marginY="1" labelText="04_ABF_WGT" htmlState="0" halign="4">
         <LabelFont description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
         <FontColor red="0" blue="0" green="0"/>
-        <ComposerItem pagey="154.081" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="138.297" y="154.081" visibility="1" zValue="18" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{15fec34b-b34c-47a9-81a7-6b74f394b0a5}" height="8.83701" itemRotation="0" frame="false" pagex="138.297">
+        <ComposerItem pagey="154.081" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="138.297" y="154.081" visibility="1" zValue="8" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{15fec34b-b34c-47a9-81a7-6b74f394b0a5}" height="8.83701" itemRotation="0" frame="false" pagex="138.297">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -863,7 +873,7 @@
       <ComposerLabel valign="128" marginX="1" marginY="1" labelText="03_CAZ_WGT" htmlState="0" halign="4">
         <LabelFont description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
         <FontColor red="0" blue="0" green="0"/>
-        <ComposerItem pagey="154.081" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="45.1444" y="154.081" visibility="1" zValue="11" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{2be42288-7d0a-42e2-81e3-6a220689d95c}" height="8.83701" itemRotation="0" frame="false" pagex="45.1444">
+        <ComposerItem pagey="154.081" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="45.1444" y="154.081" visibility="1" zValue="7" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{2be42288-7d0a-42e2-81e3-6a220689d95c}" height="8.83701" itemRotation="0" frame="false" pagex="45.1444">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -872,7 +882,7 @@
       <ComposerLabel valign="128" marginX="1" marginY="1" labelText="02_ABF" htmlState="0" halign="4">
         <LabelFont description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
         <FontColor red="0" blue="0" green="0"/>
-        <ComposerItem pagey="47.0815" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="138.297" y="47.0815" visibility="1" zValue="10" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{af911fb5-04d9-4585-a1d5-6dc9f22a7fda}" height="8.83701" itemRotation="0" frame="false" pagex="138.297">
+        <ComposerItem pagey="47.0815" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="138.297" y="47.0815" visibility="1" zValue="6" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{af911fb5-04d9-4585-a1d5-6dc9f22a7fda}" height="8.83701" itemRotation="0" frame="false" pagex="138.297">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -1426,7 +1436,7 @@ def my_form_open(dialog, layer, feature):
           <annotationFontProperties description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
         </ComposerMapGrid>
         <AtlasMap scalingMode="2" atlasDriven="0" margin="0.10000000000000001"/>
-        <ComposerItem pagey="158.5" page="1" id="" lastValidViewScaleFactor="3.59614" positionMode="0" positionLock="false" x="105" y="158.5" visibility="1" zValue="6" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="90" outlineWidth="0.3" excludeFromExports="0" uuid="{f339fb24-086a-460b-abf3-7da8254a4339}" height="90" itemRotation="0" frame="false" pagex="105">
+        <ComposerItem pagey="158.5" page="1" id="" lastValidViewScaleFactor="3.59614" positionMode="0" positionLock="false" x="105" y="158.5" visibility="1" zValue="5" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="90" outlineWidth="0.3" excludeFromExports="0" uuid="{f339fb24-086a-460b-abf3-7da8254a4339}" height="90" itemRotation="0" frame="false" pagex="105">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -1435,7 +1445,7 @@ def my_form_open(dialog, layer, feature):
       <ComposerLabel valign="128" marginX="1" marginY="1" labelText="01_CAZ" htmlState="0" halign="4">
         <LabelFont description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
         <FontColor red="0" blue="0" green="0"/>
-        <ComposerItem pagey="47.0815" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="48.2975" y="47.0815" visibility="1" zValue="5" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{70823c5c-f1c1-42b9-a64b-91d27b981791}" height="8.83701" itemRotation="0" frame="false" pagex="48.2975">
+        <ComposerItem pagey="47.0815" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="48.2975" y="47.0815" visibility="1" zValue="4" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{70823c5c-f1c1-42b9-a64b-91d27b981791}" height="8.83701" itemRotation="0" frame="false" pagex="48.2975">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -3129,7 +3139,7 @@ def my_form_open(dialog, layer, feature):
       <ComposerLabel valign="128" marginX="1" marginY="1" labelText="04_ABF_WGT" htmlState="0" halign="4">
         <LabelFont description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
         <FontColor red="0" blue="0" green="0"/>
-        <ComposerItem pagey="154.081" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="138.297" y="154.081" visibility="1" zValue="18" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{436521ba-e631-4d7c-875a-b693b56a271f}" height="8.83701" itemRotation="0" frame="false" pagex="138.297">
+        <ComposerItem pagey="154.081" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="138.297" y="154.081" visibility="1" zValue="8" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{436521ba-e631-4d7c-875a-b693b56a271f}" height="8.83701" itemRotation="0" frame="false" pagex="138.297">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -3138,7 +3148,7 @@ def my_form_open(dialog, layer, feature):
       <ComposerLabel valign="128" marginX="1" marginY="1" labelText="03_CAZ_WGT" htmlState="0" halign="4">
         <LabelFont description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
         <FontColor red="0" blue="0" green="0"/>
-        <ComposerItem pagey="154.081" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="45.1444" y="154.081" visibility="1" zValue="11" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{f9cee549-75e6-41d3-9757-54da703fe583}" height="8.83701" itemRotation="0" frame="false" pagex="45.1444">
+        <ComposerItem pagey="154.081" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="45.1444" y="154.081" visibility="1" zValue="7" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{f9cee549-75e6-41d3-9757-54da703fe583}" height="8.83701" itemRotation="0" frame="false" pagex="45.1444">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -3147,7 +3157,7 @@ def my_form_open(dialog, layer, feature):
       <ComposerLabel valign="128" marginX="1" marginY="1" labelText="06_ABF_ES" htmlState="0" halign="4">
         <LabelFont description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
         <FontColor red="0" blue="0" green="0"/>
-        <ComposerItem pagey="47.0815" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="138.297" y="47.0815" visibility="1" zValue="10" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{e0228d37-8418-43f8-8d43-b07d784f2472}" height="8.83701" itemRotation="0" frame="false" pagex="138.297">
+        <ComposerItem pagey="47.0815" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="138.297" y="47.0815" visibility="1" zValue="6" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{e0228d37-8418-43f8-8d43-b07d784f2472}" height="8.83701" itemRotation="0" frame="false" pagex="138.297">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -3234,7 +3244,7 @@ def my_form_open(dialog, layer, feature):
           <annotationFontProperties description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
         </ComposerMapGrid>
         <AtlasMap scalingMode="2" atlasDriven="0" margin="0.10000000000000001"/>
-        <ComposerItem pagey="158.5" page="1" id="" lastValidViewScaleFactor="2.83851" positionMode="0" positionLock="false" x="105" y="158.5" visibility="1" zValue="6" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="90" outlineWidth="0.3" excludeFromExports="0" uuid="{fbf2040b-4ee0-4e4d-ae3f-cf8fe1984521}" height="90" itemRotation="0" frame="false" pagex="105">
+        <ComposerItem pagey="158.5" page="1" id="" lastValidViewScaleFactor="2.83851" positionMode="0" positionLock="false" x="105" y="158.5" visibility="1" zValue="5" background="true" transparency="0" frameJoinStyle="miter" blendMode="0" width="90" outlineWidth="0.3" excludeFromExports="0" uuid="{fbf2040b-4ee0-4e4d-ae3f-cf8fe1984521}" height="90" itemRotation="0" frame="false" pagex="105">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -3243,7 +3253,7 @@ def my_form_open(dialog, layer, feature):
       <ComposerLabel valign="128" marginX="1" marginY="1" labelText="05_CAZ_ES" htmlState="0" halign="4">
         <LabelFont description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
         <FontColor red="0" blue="0" green="0"/>
-        <ComposerItem pagey="47.0815" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="48.2974" y="47.0815" visibility="1" zValue="5" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{3d129494-f763-47d9-90e1-9a2bb87dc6ca}" height="8.83701" itemRotation="0" frame="false" pagex="48.2974">
+        <ComposerItem pagey="47.0815" page="1" id="" lastValidViewScaleFactor="-1" positionMode="0" positionLock="false" x="48.2974" y="47.0815" visibility="1" zValue="4" background="false" transparency="0" frameJoinStyle="miter" blendMode="0" width="23.4051" outlineWidth="0.3" excludeFromExports="0" uuid="{3d129494-f763-47d9-90e1-9a2bb87dc6ca}" height="8.83701" itemRotation="0" frame="false" pagex="48.2974">
           <FrameColor alpha="255" red="0" blue="0" green="0"/>
           <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
           <customproperties/>
@@ -9280,6 +9290,62 @@ def my_form_open(dialog, layer, feature):
           <srid>0</srid>
           <authid>USER:100002</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>rwr_eu26_all_weights20160909092552438</id>
+      <datasource>../../analyses/RWR/rwr_eu26_all_weights.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>rwr_eu26_all_weights</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
           <geographicflag>false</geographicflag>
