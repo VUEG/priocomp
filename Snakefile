@@ -56,8 +56,19 @@ UDR_SRC_DATASETS = [url.replace(beehub_url, feature_data) for url in dm.get_reso
 
 ALL_SRC_DATASETS = DATADRYAD_SRC_DATASETS + PROVIDE_SRC_DATASETS + UDR_SRC_DATASETS
 
-# Let's also calculate number of features in particular categories
+# Let's build weight vectors needed for the weighted analysis variants
 
+# Set the weight of each feature in category "biodiversity" to 1.0 and the
+# weight of each feature in "ecosystemservices" to sum(bd_wights) / n_es.
+# NOTE: the above weighting scheme is needed to avoid small weights values that
+# e.g. 1.0 / n_bd would produce. For some reason the ILP implementation
+# doesn't like small weight values
+# (see: https://github.com/VUEG/priocomp/issues/8)
+# NOTE: the order matters here greatly: ecosystem services
+# need to come first.
+N_ES = dm.count(category="ecosystemservices")
+N_BD = dm.count(category="biodiversity")
+WEIGHTS = [N_BD / N_ES] * N_ES + [1.0] * N_BD
 
 # Define a group of rasters that need to be rescaled (normalized) for the
 # following reasons:
@@ -403,7 +414,7 @@ rule calculate_rwr:
         es=rules.harmonize_data.output.harmonized,
         bd=UDR_SRC_DATASETS
     output:
-        all="analyses/RWR/rwr_eu26_all.tif",
+        #all="analyses/RWR/rwr_eu26_all.tif",
         all_w="analyses/RWR/rwr_eu26_all_weights.tif",
         #es="analyses/RWR/rwr_eu26_es_weights.tif",
         #bd="analyses/RWR/rwr_eu26_bd_weights.tif"
@@ -415,21 +426,12 @@ rule calculate_rwr:
     message:
         "Calculating RWR..."
     run:
-        # Construct the weight vectors needed for the weighted RWR. For both
-        # categories "ecosystemservices" and "biodiversity" the weight for each
-        # individual feature is 1 / N where N is the number of features in that
-        # category. NOTE: the order matters here greatly: ecosystem services
-        # need to come first.
-        n_es = dm.count(category="ecosystemservices")
-        n_bd = dm.count(category="biodiversity")
-        weights = [1.0 / n_es] * n_es + [1.0 / n_bd] * n_bd
-
         # Without weights
-        llogger = utils.get_local_logger("calculate_rwr_all", log.all)
-        rwr.calculate_rwr(input.all, output.all, logger=llogger)
+        #llogger = utils.get_local_logger("calculate_rwr_all", log.all)
+        #rwr.calculate_rwr(input.all, output.all, logger=llogger)
         # With weights
         llogger = utils.get_local_logger("calculate_rwr_all_weights", log.all_w)
-        rwr.calculate_rwr(input.all, output.all_w, weights=weights,
+        rwr.calculate_rwr(input.all, output.all_w, weights=WEIGHTS,
                           logger=llogger)
 
         #llogger = utils.get_local_logger("calculate_rwr_es", log.es)
@@ -472,15 +474,6 @@ rule prioritize_gurobi:
     message:
         "Opitmizing with Gurobi..."
     run:
-        # Construct the weight vectors needed for the weighted RWR. For both
-        # categories "ecosystemservices" and "biodiversity" the weight for each
-        # individual feature is 1 / N where N is the number of features in that
-        # category. NOTE: the order matters here greatly: ecosystem services
-        # need to come first.
-        n_es = dm.count(category="ecosystemservices")
-        n_bd = dm.count(category="biodiversity")
-        weights = [1000.0 / n_es] * n_es + [1000.0 / n_bd] * n_bd
-
         # Without weights
         #llogger = utils.get_local_logger("optimize_gurobi_all", log.all)
         #gurobi.prioritize_gurobi(input.all, output.all, logger=llogger,
@@ -490,8 +483,8 @@ rule prioritize_gurobi:
         llogger = utils.get_local_logger("optimize_gurobi_all_weights",
                                          log.all_w)
         gurobi.prioritize_gurobi(input.all, output.all_w, logger=llogger,
-                                 ol_normalize=True, weights=weights,
-                                 save_intermediate=True, verbose=True)
+                                 ol_normalize=True, weights=WEIGHTS,
+                                 save_intermediate=False, verbose=True)
 
         #llogger = utils.get_local_logger("optimize_gurobi_es", log.es)
         #gurobi.prioritize_gurobi(input.es, output.es, logger=llogger,
