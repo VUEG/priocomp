@@ -9,13 +9,16 @@ import rasterio
 import os
 import pandas as pd
 import numpy as np
-import scipy
 
+from importlib.machinery import SourceFileLoader
+from scipy.spatial.distance import jaccard
 from timeit import default_timer as timer
 
+utils = SourceFileLoader("lib.utils", "src/00_lib/utils.py").load_module()
 
-def jaccard(x, y, x_min=0.0, x_max=1.0, y_min=0.0, y_max=1.0,
-            warn_uneven=True, limit_tolerance=4, disable_checks=False):
+
+def compute_jaccard(x, y, x_min=0.0, x_max=1.0, y_min=0.0, y_max=1.0,
+                    warn_uneven=True, limit_tolerance=4, disable_checks=False):
     """Calculate the Jaccard index (Jaccard similarity coefficient).
 
     The Jaccard coefficient measures similarity between sample sets, and is
@@ -73,7 +76,7 @@ def jaccard(x, y, x_min=0.0, x_max=1.0, y_min=0.0, y_max=1.0,
 
     # Compute the Jaccard-Needham dissimilarity between two boolean 1-D arrays
     # and subtract from 1 to get the Jaccard index
-    return 1 - scipy.spatial.distance.jaccard(x_bin.flatten(), y_bin.flatten())
+    return 1 - jaccard(x_bin.flatten(), y_bin.flatten())
 
 
 def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None):
@@ -89,8 +92,7 @@ def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None):
     :param logger: logger object to be used.
     :param ... additional arguments passed on to jaccard().
 
-    :return dict of Pandas Dataframes with Jaccard coefficients between all
-            rasters.
+    :return Pandas Dataframe with Jaccard coefficients between all rasters.
     """
     # 1. Setup  --------------------------------------------------------------
 
@@ -109,8 +111,15 @@ def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None):
 
     # 2. Calculations --------------------------------------------------------
 
-    all_jaccards = {}
+    llogger.info(" [** COMPUTING JACCARD INDICES **]")
+
+    all_jaccards = pd.DataFrame({"feature1": [], "feature2": [],
+                                 "threshold": [], "coef": []})
     n_rasters = len(input_rasters)
+    # Generate counter information for all the computations. The results
+    # matrix is always diagonally symmetrical.
+    n_computations = int((n_rasters * n_rasters - n_rasters) / 2 * len(thresholds))
+    no_computation = 1
 
     for threshold in thresholds:
         # Initialize a matrix to hold the jaccard coefficients and populate it
@@ -126,33 +135,29 @@ def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None):
             raster1_nodata = raster1.nodata
             raster1_src = raster1.read(1)
             np.place(raster1_src, np.isclose(raster1_src, raster1_nodata), 0.0)
-            for j in range(0, n_rasters):
-                # Jaccard coefficient is always 1.0 on the diagonal
-                if i == j:
-                    jaccards[i, j] = 1.0
-                else:
-                    raster2 = rasterio.open(input_rasters[j])
-                    raster2_nodata = raster2.nodata
-                    raster2_src = raster2.read(1)
-                    np.place(raster2_src, np.isclose(raster2_src, raster2_nodata), 0.0)
-                    # See the complement, if it's not -1.0 then the pair has
-                    # already been compared
-                    if jaccards[j, i] == -1.0:
-                        llogger.info(("Calculating Jaccard " +
-                                      "index for [{}".format(threshold) +
-                                      ", 1.0] between {} ".format(input_rasters[i]) +
-                                      "and {}".format(input_rasters[j])))
+            for j in range(i+1, n_rasters):
+                raster2 = rasterio.open(input_rasters[j])
+                raster2_nodata = raster2.nodata
+                raster2_src = raster2.read(1)
+                np.place(raster2_src, np.isclose(raster2_src, raster2_nodata), 0.0)
+                prefix = utils.get_iteration_prefix(no_computation,
+                                                    n_computations)
+                llogger.info(("{} Calculating Jaccard ".format(prefix) +
+                              "index for [{}".format(threshold) +
+                              ", 1.0] between {} ".format(input_rasters[i]) +
+                              "and {}".format(input_rasters[j])))
 
-                        jaccards[i, j] = jaccard(raster1_src, raster2_src,
-                                                 x_min=threshold, x_max=1.0,
-                                                 y_min=threshold, y_max=1.0)
-                    else:
-                        jaccards[i, j] = jaccards[j, i]
+                coef = compute_jaccard(raster1_src, raster2_src,
+                                       x_min=threshold, x_max=1.0,
+                                       y_min=threshold, y_max=1.0)
+                jaccards = pd.DataFrame({"feature1": [input_rasters[i]],
+                                         "feature2": [input_rasters[j]],
+                                         "threshold": [threshold],
+                                         "coef": [coef]})
+                all_jaccards = pd.concat([all_jaccards, jaccards])
+                no_computation += 1
 
-        jaccards = pd.DataFrame(jaccards)
-        jaccards.columns = [os.path.basename(x) for x in input_rasters]
-        jaccards.index = [os.path.basename(x) for x in input_rasters]
-        all_jaccards[threshold] = jaccards
+    all_jaccards.index = np.arange(0, len(all_jaccards.index), 1)
 
     all_end = timer()
     all_elapsed = round(all_end - all_start, 2)
