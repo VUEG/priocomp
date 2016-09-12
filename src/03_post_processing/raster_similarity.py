@@ -4,16 +4,19 @@
 
 Module can be used alone or as part of Snakemake workflow.
 """
+import logging
 import rasterio
+import os
 import pandas as pd
 import numpy as np
+import scipy
 
-from scipy.spatial.distance import jaccard
+from timeit import default_timer as timer
 
 
 def jaccard(x, y, x_min=0.0, x_max=1.0, y_min=0.0, y_max=1.0,
-            warn_uneven=False, limit_tolerance=4, disable_checks=FALSE):
-    """Calculate the Jaccard coefficient.
+            warn_uneven=True, limit_tolerance=4, disable_checks=False):
+    """Calculate the Jaccard index (Jaccard similarity coefficient).
 
     The Jaccard coefficient measures similarity between sample sets, and is
     defined as the size of the intersection divided by the size of the union of
@@ -46,48 +49,34 @@ def jaccard(x, y, x_min=0.0, x_max=1.0, y_min=0.0, y_max=1.0,
 
     :return numeric value in [0, 1].
     """
-
     if not disable_checks:
-        assert x_min < np.round(np.min(x), limit_tolerance), "Min threshold smaller than computed min of x"
-        assert x_max < np.round(np.max(x), limit_tolerance), "Max threshold smaller than computed max of x"
-        assert x_min >= x_max, "Min threshold for x larger or equal to max threshold"
-        assert y_min < np.round(np.min(y), limit_tolerance), "Min threshold smaller than computed min of y"
-        assert y_max < np.round(np.max(y), limit_tolerance), "Max threshold smaller than computed max of y"
-        assert y_min >= y_max, "Min threshold for y larger or equal to max threshold"
+        assert x_min >= np.round(np.min(x), limit_tolerance), "Min threshold smaller than computed min of x"
+        assert x_max >= np.round(np.max(x), limit_tolerance), "Max threshold smaller than computed max of x"
+        assert x_min < x_max, "Min threshold for x larger to max threshold"
+        assert y_min >= np.round(np.min(y), limit_tolerance), "Min threshold smaller than computed min of y"
+        assert y_max <= np.round(np.max(y), limit_tolerance), "Max threshold smaller than computed max of y"
+        assert y_min < y_max, "Min threshold for y larger to max threshold"
 
-  # [fixme] - using cellStats(X, "sum") should be safe as we're dealing with
-  # binary 0/1 rasters. count() would be preferable, but apparently raster
-  # (>= 2.2 at least) doesn't support it anymore.
+    # Get the values according to the limits provided
+    x_bin = (x >= x_min) & (x <= x_max)
+    y_bin = (y >= y_min) & (y <= y_max)
 
-  # Get the values according to the limits provided
-  x_bin <- (x >= x.min & x <=x.max)
-  y_bin <- (y >= y.min & y <=y.max)
+    if warn_uneven:
+        x_size = np.sum(x_bin)
+        y_size = np.sum(y_bin)
+        # Sort from smaller to larger
+        sizes = np.sort([x_size, y_size])
+        if sizes[1] / sizes[0] > 20:
+            print("WARNING: The extents of raster values above the "
+                  "threshhold differ more than 20-fold: Jaccard coefficient " +
+                  "may not be informative.")
 
-  if (warn.uneven) {
-    x.size <- cellStats(x.bin, "sum")
-    y.size <- cellStats(y.bin, "sum")
-    # Sort from smaller to larger
-    sizes <- sort(c(x.size, y.size))
-    if (sizes[2] / sizes[1] > 20) {
-      warning("The extents of raster values above the threshhold differ more",
-              "than 20-fold: Jaccard coefficient may not be informative.")
-    }
-  }
-
-  # Calculate the intersection of the two rasters, this is given by adding
-  # the binary rasters together -> 2 indicates intersection
-  combination <- x.bin + y.bin
-  intersection <- combination == 2
-
-  # Union is all the area covered by the both rasters
-  union <- combination >= 1
-
-  return(cellStats(intersection, "sum") / cellStats(union, "sum"))
-}
+    # Compute the Jaccard-Needham dissimilarity between two boolean 1-D arrays
+    # and subtract from 1 to get the Jaccard index
+    return 1 - scipy.spatial.distance.jaccard(x_bin.flatten(), y_bin.flatten())
 
 
-def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None,
-                  *args, **kwargs):
+def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None):
     """ Calculate Jaccard coefficients bewteen all the inpur rasters.
 
     This is a utility function that is intented to be used to compare
@@ -106,7 +95,6 @@ def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None,
     # 1. Setup  --------------------------------------------------------------
 
     all_start = timer()
-    load_start = timer()
 
     if not logger:
         logging.basicConfig()
@@ -117,6 +105,7 @@ def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None,
 
     # Check the inputs
     assert len(input_rasters) > 1, "More than one input rasters are needed"
+    assert len(thresholds) >= 1, "At least one threshold is needed"
 
     # 2. Calculations --------------------------------------------------------
 
@@ -130,32 +119,43 @@ def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None,
         jaccards[:] = -1.0
 
         for i in range(0, n_rasters):
-            raster1 = input_rasters[i]
-            raster1_src = rasterio.open(raster1).read(1)
+            raster1 = rasterio.open(input_rasters[i])
+            # To calculate the Jaccard index we are dealing with binary data
+            # only. Avoid using masked arrays and replace NoData values with
+            # zeros.
+            raster1_nodata = raster1.nodata
+            raster1_src = raster1.read(1)
+            np.place(raster1_src, np.isclose(raster1_src, raster1_nodata), 0.0)
             for j in range(0, n_rasters):
-                raster2 = input_rasters[j]
-                raster2_src = rasterio.open(raster2).read(1)
                 # Jaccard coefficient is always 1.0 on the diagonal
                 if i == j:
                     jaccards[i, j] = 1.0
                 else:
-                    # See the complement, if it's not NA then the pair has
+                    raster2 = rasterio.open(input_rasters[j])
+                    raster2_nodata = raster2.nodata
+                    raster2_src = raster2.read(1)
+                    np.place(raster2_src, np.isclose(raster2_src, raster2_nodata), 0.0)
+                    # See the complement, if it's not -1.0 then the pair has
                     # already been compared
-                    if jaccards[j, i] != -1.0:
-                        logger.info(("Calculating Jaccard index for [{}".format(threshold) +
-                                 ", 1.0, ] between {0} and {1}".format(raster1,
-                                                                       raster2)))
+                    if jaccards[j, i] == -1.0:
+                        llogger.info(("Calculating Jaccard " +
+                                      "index for [{}".format(threshold) +
+                                      ", 1.0] between {} ".format(input_rasters[i]) +
+                                      "and {}".format(input_rasters[j])))
 
                         jaccards[i, j] = jaccard(raster1_src, raster2_src,
                                                  x_min=threshold, x_max=1.0,
-                                                 y_min=threshold, y_max=1.0,
-                                                 args, kwargs)
+                                                 y_min=threshold, y_max=1.0)
                     else:
                         jaccards[i, j] = jaccards[j, i]
 
         jaccards = pd.DataFrame(jaccards)
-        jaccards.columns = input_rasters
-        jaccards.index = input_rasters
+        jaccards.columns = [os.path.basename(x) for x in input_rasters]
+        jaccards.index = [os.path.basename(x) for x in input_rasters]
         all_jaccards[threshold] = jaccards
+
+    all_end = timer()
+    all_elapsed = round(all_end - all_start, 2)
+    llogger.info(" [TIME] All processing took {} sec".format(all_elapsed))
 
     return all_jaccards
