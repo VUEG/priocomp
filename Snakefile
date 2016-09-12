@@ -498,6 +498,24 @@ rule prioritize_gurobi:
 
 ## Compare results ------------------------------------------------------------
 
+rule compare_correlation:
+    input:
+        rwr=rules.calculate_rwr.output.all_w,
+        zon="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
+        ilp=rules.prioritize_gurobi.output.all_w
+    output:
+        "analyses/comparison/cross_correlation.csv"
+    log:
+        all="logs/compare_results_correlation.log"
+    message:
+        "Comparing results correlation using Kendal tau..."
+    run:
+        llogger = utils.get_local_logger("compare_correlation", log[0])
+        correlations = similarity.cross_correlation(input, verbose=False,
+                                                    logger=llogger)
+        llogger.info("Saving results to {}".format(output[0]))
+        correlations.to_csv(output[0], index=False)
+
 rule compare_jaccard:
     input:
         rwr=rules.calculate_rwr.output.all_w,

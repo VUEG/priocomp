@@ -12,6 +12,7 @@ import numpy as np
 
 from importlib.machinery import SourceFileLoader
 from scipy.spatial.distance import jaccard
+from scipy.stats.mstats import kendalltau
 from timeit import default_timer as timer
 
 utils = SourceFileLoader("lib.utils", "src/00_lib/utils.py").load_module()
@@ -79,6 +80,76 @@ def compute_jaccard(x, y, x_min=0.0, x_max=1.0, y_min=0.0, y_max=1.0,
     return 1 - jaccard(x_bin.flatten(), y_bin.flatten())
 
 
+def cross_correlation(input_rasters, verbose=False, logger=None):
+    """ Calculate Kendall tau rank correlation bewteen all the inpur rasters.
+
+    NOTE: input rasters are read in as masked arrays.
+
+    :param input_rasters list of input raster paths.
+    :param verbose: Boolean indicating how much information is printed out.
+    :param logger: logger object to be used.
+
+    :return Pandas Dataframe with rank correlation information.
+    """
+    # 1. Setup  --------------------------------------------------------------
+
+    all_start = timer()
+
+    if not logger:
+        logging.basicConfig()
+        llogger = logging.getLogger('cross_correlation')
+        llogger.setLevel(logging.DEBUG if verbose else logging.INFO)
+    else:
+        llogger = logger
+
+    # Check the inputs
+    assert len(input_rasters) > 1, "More than one input rasters are needed"
+
+    # 2. Calculations --------------------------------------------------------
+
+    llogger.info(" [** COMPUTING KENDALL TAU RANK CORRELATIONS **]")
+
+    all_correlations = pd.DataFrame({"feature1": [], "feature2": [],
+                                     "tau": [], "pvalue": []})
+    n_rasters = len(input_rasters)
+    # Generate counter information for all the computations. The results
+    # matrix is always diagonally symmetrical.
+    n_computations = int((n_rasters * n_rasters - n_rasters) / 2)
+    no_computation = 1
+
+    for i in range(0, n_rasters):
+        raster1 = rasterio.open(input_rasters[i])
+        raster1_nodata = raster1.nodata
+        raster1_src = raster1.read(1, masked=True)
+        np.place(raster1_src, np.isclose(raster1_src, raster1_nodata), 0.0)
+        for j in range(i+1, n_rasters):
+            raster2 = rasterio.open(input_rasters[j])
+            raster2_nodata = raster2.nodata
+            raster2_src = raster2.read(1, masked=True)
+            np.place(raster2_src, np.isclose(raster2_src, raster2_nodata), 0.0)
+            prefix = utils.get_iteration_prefix(no_computation,
+                                                n_computations)
+            llogger.info(("{} Calculating correlation ".format(prefix) +
+                          "between {} ".format(input_rasters[i]) +
+                          "and {}".format(input_rasters[j])))
+
+            tau, pvalue = kendalltau(raster1_src, raster2_src)
+            correlations = pd.DataFrame({"feature1": [input_rasters[i]],
+                                         "feature2": [input_rasters[j]],
+                                         "tau": [tau],
+                                         "pvalue": [pvalue]})
+            all_correlations = pd.concat([all_correlations, correlations])
+            no_computation += 1
+
+    all_correlations.index = np.arange(0, len(all_correlations.index), 1)
+
+    all_end = timer()
+    all_elapsed = round(all_end - all_start, 2)
+    llogger.info(" [TIME] All processing took {} sec".format(all_elapsed))
+
+    return all_correlations
+
+
 def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None):
     """ Calculate Jaccard coefficients bewteen all the inpur rasters.
 
@@ -122,11 +193,6 @@ def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None):
     no_computation = 1
 
     for threshold in thresholds:
-        # Initialize a matrix to hold the jaccard coefficients and populate it
-        # with -1s.
-        jaccards = np.empty([n_rasters, n_rasters])
-        jaccards[:] = -1.0
-
         for i in range(0, n_rasters):
             raster1 = rasterio.open(input_rasters[i])
             # To calculate the Jaccard index we are dealing with binary data
