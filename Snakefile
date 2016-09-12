@@ -11,6 +11,7 @@ utils = SourceFileLoader("lib.utils", "src/00_lib/utils.py").load_module()
 spatutils = SourceFileLoader("lib.spatutils", "src/00_lib/spatutils.py").load_module()
 gurobi = SourceFileLoader("analysis.gurobi", "src/02_analysis/gurobi.py").load_module()
 rwr = SourceFileLoader("analysis.rwr", "src/02_analysis/rwr.py").load_module()
+similarity = SourceFileLoader("results.similarity", "src/03_post_processing/raster_similarity.py").load_module()
 
 
 ## GLOBALS --------------------------------------------------------------------
@@ -472,7 +473,7 @@ rule prioritize_gurobi:
         es="logs/prioritize_ilp_eu26_es.log",
         bd="logs/prioritize_ilp_eu26_bd.log"
     message:
-        "Opitmizing with Gurobi..."
+        "Optimizing with Gurobi..."
     run:
         # Without weights
         #llogger = utils.get_local_logger("optimize_gurobi_all", log.all)
@@ -494,3 +495,25 @@ rule prioritize_gurobi:
         #gurobi.prioritize_gurobi(input.bd, output.bd, logger=llogger,
         #                         ol_normalize=True, save_intermediate=False,
         #                         verbose=True)
+
+## Compare results ------------------------------------------------------------
+
+rule compare_jaccard:
+    input:
+        rwr=rules.calculate_rwr.output.all_w,
+        zon="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
+        ilp=rules.prioritize_gurobi.output.all_w
+    output:
+        "analyses/comparison/cross_jaccard.csv"
+    log:
+        all="logs/compare_results_jaccard.log"
+    message:
+        "Comparing results overlap with Jaccard's index..."
+    run:
+        llogger = utils.get_local_logger("compare_jaccard", log[0])
+        # Define thresholds every 10% of the rank priority map
+        thresholds = np.arange(0.05, 1.0, 0.05)
+        jaccard_coefs = similarity.cross_jaccard(input, thresholds,
+                                                 verbose=False, logger=llogger)
+        llogger.info("Saving results to {}".format(output[0]))
+        jaccard_coefs.to_csv(output[0], index=False)
