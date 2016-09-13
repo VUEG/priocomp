@@ -1,0 +1,4 @@
+feature1,feature2,pvalue,tau
+analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif,analyses/ILP/ilp_eu26_all_weights.tif,0.0,0.8676989796046531
+analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif,analyses/RWR/rwr_eu26_all_weights.tif,0.0,0.861613802747607
+analyses/ILP/ilp_eu26_all_weights.tif,analyses/RWR/rwr_eu26_all_weights.tif,0.0,0.9760009312325187
