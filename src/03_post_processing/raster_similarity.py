@@ -9,10 +9,11 @@ import rasterio
 import os
 import pandas as pd
 import numpy as np
+import numpy.ma as ma
 
 from importlib.machinery import SourceFileLoader
 from scipy.spatial.distance import jaccard
-from scipy.stats.mstats import kendalltau
+from scipy.stats import kendalltau
 from timeit import default_timer as timer
 
 utils = SourceFileLoader("lib.utils", "src/00_lib/utils.py").load_module()
@@ -80,12 +81,18 @@ def compute_jaccard(x, y, x_min=0.0, x_max=1.0, y_min=0.0, y_max=1.0,
     return 1 - jaccard(x_bin.flatten(), y_bin.flatten())
 
 
-def cross_correlation(input_rasters, verbose=False, logger=None):
+def cross_correlation(input_rasters, mask_index=0, verbose=False, logger=None):
     """ Calculate Kendall tau rank correlation bewteen all the inpur rasters.
 
-    NOTE: input rasters are read in as masked arrays.
+    Input rasters are read in as masked arrays and all cells that are NoData
+    are discarded. This way, only the values of informative cells are passed
+    on to scipy.stats.kendalltau() which makes things faster. The assumption is
+    that all rasters exactly match on which cells have values. The raster of
+    which mask is used,  is defined by argument mask_index.
 
     :param input_rasters list of input raster paths.
+    :param mask_index int index of input_rasters defining which mask will be
+                      used as a mask for informative cellls.
     :param verbose: Boolean indicating how much information is printed out.
     :param logger: logger object to be used.
 
@@ -104,6 +111,7 @@ def cross_correlation(input_rasters, verbose=False, logger=None):
 
     # Check the inputs
     assert len(input_rasters) > 1, "More than one input rasters are needed"
+    assert mask_index in range(0, len(input_rasters)), "Mask index out of bounds"
 
     # 2. Calculations --------------------------------------------------------
 
@@ -117,16 +125,27 @@ def cross_correlation(input_rasters, verbose=False, logger=None):
     n_computations = int((n_rasters * n_rasters - n_rasters) / 2)
     no_computation = 1
 
+    # Before the actual computations, extract the value mask from the input
+    # raster defined by mask_index
+    mask_raster_name = input_rasters[mask_index]
+    llogger.debug("Reading value mask from {}".format(mask_raster_name))
+    mask_raster = rasterio.open(mask_raster_name)
+    value_mask = ma.getmask(mask_raster.read(1, masked=True))
+
     for i in range(0, n_rasters):
         raster1 = rasterio.open(input_rasters[i])
         raster1_nodata = raster1.nodata
-        raster1_src = raster1.read(1, masked=True)
-        np.place(raster1_src, np.isclose(raster1_src, raster1_nodata), 0.0)
+        raster1_src = raster1.read(1)
+        # Inlude only cells with actual values
+        raster1_src = raster1_src[~value_mask]
         for j in range(i+1, n_rasters):
             raster2 = rasterio.open(input_rasters[j])
             raster2_nodata = raster2.nodata
-            raster2_src = raster2.read(1, masked=True)
-            np.place(raster2_src, np.isclose(raster2_src, raster2_nodata), 0.0)
+            raster2_src = raster2.read(1)
+            # Inlude only cells with actual values in the mask raster.
+            # NOTE: This doesn't mean that raster2 has values in exactly the
+            # same locations.
+            raster2_src = raster2_src[~value_mask]
             prefix = utils.get_iteration_prefix(no_computation,
                                                 n_computations)
             llogger.info(("{} Calculating correlation ".format(prefix) +
