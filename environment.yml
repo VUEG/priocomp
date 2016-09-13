@@ -3,37 +3,27 @@ channels:
   - defaults
   - bioconda
   - mutirri
-  - r
   - gurobi
   - osgeo
+  - conda-forge
 dependencies:
-  - python=3.5
+  - python=3.5*
   - click
   - fiona
   - flake8
   - flask
+  - geos=3.4.2
   # NOTE: using gdal>=2.1.0 will break things as gdalwarp does not accept
   # cultine with invalid geometry (such as NUTS data)
-  - gdal=2.0.0
-  - libgdal=2.0.0
+  - gdal=2.0.2
+  - gurobi
+  - libgdal
   - netcdf4
-  - numpy=1.10
+  - numpy
+  - pandas
   - py
   - pytest
   - rasterio
-  - r
-  - r-assertthat
-  - r-devtools
-  - r-dplyr
-  - r-ggplot2
-  - r-raster
-  - r-recommended
-  - r-proj4
-  - r-slam
-  - r-testthat
-  - r-tidyr
-  - rgdal
-  - rpy2
   - scipy
   - snakemake
   - Sphinx
@@ -42,3 +32,4 @@ dependencies:
       - colorlog
       - easywebdav
       - python-dotenv
+      - rasterstats
