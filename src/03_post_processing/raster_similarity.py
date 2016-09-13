@@ -153,6 +153,7 @@ def cross_correlation(input_rasters, mask_index=0, verbose=False, logger=None):
                           "and {}".format(input_rasters[j])))
 
             tau, pvalue = kendalltau(raster1_src, raster2_src)
+            llogger.debug("Tau: {0} (p-value: {1})".format(tau, pvalue))
             correlations = pd.DataFrame({"feature1": [input_rasters[i]],
                                          "feature2": [input_rasters[j]],
                                          "tau": [tau],
