@@ -23,8 +23,8 @@ PROJECT_EXTENT = {"bottom": 1000000.0, "left": 2000000.0, "right": 6526000.0,
 PROJECT_CRS = 3035
 
 # Offset the bounds given in extent_yml. Values are in order
-# (left, bottom, right, top) and interpreted in the CRS units. valuesq
-# are added to bounds given by extent.yml
+# (left, bottom, right, top) and interpreted in the CRS units. values
+# are added to bounds given by PROJECT_EXTENT
 OFFSET = (100000, 100000, 0, 0)
 # Which eurostat countries are included in the processed output? The
 # following countries have been removed:
