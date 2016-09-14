@@ -4,6 +4,7 @@ import numpy as np
 import os
 import pdb
 import rasterio
+import rasterstats
 from importlib.machinery import SourceFileLoader
 
 ## LOAD MODULES --------------------------------------------------------------
@@ -405,9 +406,9 @@ rule rescale_data:
             spatutils.rescale_raster(input[i], output[i], method="normalize",
                                      verbose=False)
 
-## Set up and run analyses -----------------------------------------------------
+## Set up, run and post-process analyses --------------------------------------
 
-# RWR --------------------------------------------------------------------------
+# RWR -------------------------------------------------------------------------
 
 rule calculate_rwr:
     input:
@@ -415,10 +416,10 @@ rule calculate_rwr:
         es=rules.harmonize_data.output.harmonized,
         bd=UDR_SRC_DATASETS
     output:
-        #all="analyses/RWR/rwr_eu26_all.tif",
+        all="analyses/RWR/rwr_eu26_all.tif",
         all_w="analyses/RWR/rwr_eu26_all_weights.tif",
-        #es="analyses/RWR/rwr_eu26_es_weights.tif",
-        #bd="analyses/RWR/rwr_eu26_bd_weights.tif"
+        es="analyses/RWR/rwr_eu26_es.tif",
+        bd="analyses/RWR/rwr_eu26_bd.tif"
     log:
         all="logs/calculate_rwr_eu26_all.log",
         all_w="logs/calculate_rwr_eu26_all_weights.log",
@@ -428,17 +429,43 @@ rule calculate_rwr:
         "Calculating RWR..."
     run:
         # Without weights
-        #llogger = utils.get_local_logger("calculate_rwr_all", log.all)
-        #rwr.calculate_rwr(input.all, output.all, logger=llogger)
+        llogger = utils.get_local_logger("calculate_rwr_all", log.all)
+        rwr.calculate_rwr(input.all, output.all, logger=llogger)
         # With weights
         llogger = utils.get_local_logger("calculate_rwr_all_weights", log.all_w)
         rwr.calculate_rwr(input.all, output.all_w, weights=WEIGHTS,
                           logger=llogger)
 
-        #llogger = utils.get_local_logger("calculate_rwr_es", log.es)
-        #rwr.calculate_rwr(input.es, output.es, logger=llogger)
-        #llogger = utils.get_local_logger("calculate_rwr_bd", log.bd)
-        #rwr.calculate_rwr(input.bd, output.bd, logger=llogger)
+        llogger = utils.get_local_logger("calculate_rwr_es", log.es)
+        rwr.calculate_rwr(input.es, output.es, logger=llogger)
+        llogger = utils.get_local_logger("calculate_rwr_bd", log.bd)
+        rwr.calculate_rwr(input.bd, output.bd, logger=llogger)
+
+rule postprocess_rwr:
+    input:
+        all="analyses/RWR/rwr_eu26_all_fixed.tif",
+        all_w=rules.calculate_rwr.output.all_w,
+        es=rules.calculate_rwr.output.es,
+        bd=rules.calculate_rwr.output.bd,
+        plu=utils.pick_from_list(rules.preprocess_nuts_level0_data.output.processed,
+                                 ".shp")
+    output:
+        all="analyses/RWR/rwr_eu26_all_stats.geojson",
+        #all_w="analyses/RWR/wr_eu26_all_weights_stats.geojson",
+        #es="analyses/RWR/wr_eu26_es_stats.geojson",
+        #bd="analyses/RWR/wr_eu26_bd_stats.geojson"
+    log:
+        all="logs/postprocess_rwr_eu26_all.log",
+        all_w="logs/postprocess_rwr_eu26_all_weights.log",
+        es="logs/postprocess_rwr_eu26_es.log",
+        bd="logs/postprocess_rwr_eu26_bd.log"
+    message:
+        "Post-processing RWR..."
+    run:
+        llogger = utils.get_local_logger("calculate_rwr_all", log.all)
+        llogger.info(" [1/4] Post-processing {}".format(input.all))
+        shell("fio cat {input.plu} | rio zonalstats -r {input.all} > {output.all}")
+
 
 # # Zonation ---------------------------------------------------------------------
 #
