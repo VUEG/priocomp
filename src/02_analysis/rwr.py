@@ -109,7 +109,8 @@ def calculate_rwr(input_rasters, output_raster, weights=None,
     # scipy.stats.mstats.rankdata
     rank_array = rankdata(sum_array)
 
-    # Create a new full (filled with NoData values) array
+    # Create a new full (filled with NoData values) array. NOTE: full will
+    # create np.float64 by default.
     rank_data = np.full((height, width), nodata_value)
     # Then, populate the cells where mask == False with the rank array
     rank_data[~mask] = rank_array
@@ -120,7 +121,6 @@ def calculate_rwr(input_rasters, output_raster, weights=None,
     # 4. Recale data into range [0, 1] ----------------------------------------
     llogger.info(" [2/3] Rescaling ranks")
     rank_data_masked = spatutils.normalize(rank_data_masked)
-    rank_data_masked = rank_data_masked.astype(np.float32)
 
     # 5. Write out the data
     llogger.info(" [3/3] Writing output to {}".format(output_raster))
@@ -128,9 +128,9 @@ def calculate_rwr(input_rasters, output_raster, weights=None,
     # Get the raster profile from the input raster files
     profile = spatutils.get_profile(input_rasters, logger=llogger)
 
-    # Rescaled data is always float32, and we have only 1 band. Remember
+    # Rescaled data is always float, and we have only 1 band. Remember
     # to set NoData-value correctly.
-    profile.update(dtype=rasterio.float32, compress=compress,
+    profile.update(dtype=rasterio.float64, compress=compress,
                    nodata=-3.4e+38)
 
     with rasterio.open(output_raster, 'w', **profile) as dst:
