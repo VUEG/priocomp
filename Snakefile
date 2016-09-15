@@ -494,18 +494,18 @@ rule postprocess_rwr:
 #         # NOTE: Currently there's a lot of things hardcoded here...
 #         "src/zonation/01_create_zonation_project.R"
 
-# Gurobi ----------------------------------------------------------------------
+# ILP ------------------------------------------------------------------------
 
-rule prioritize_gurobi:
+rule prioritize_ilp:
     input:
         all=rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS,
         es=rules.harmonize_data.output.harmonized,
         bd=UDR_SRC_DATASETS
     output:
-        #all="analyses/ILP/ilp_eu26_all.tif",
-        all_w="analyses/ILP/ilp_eu26_all_weights.tif"
-        #es="analyses/ILP/ilp_eu26_es.tif",
-        #bd="analyses/ILP/ilp_eu26_bd.tif"
+        all="analyses/ILP/ilp_eu26_all.tif",
+        all_w="analyses/ILP/ilp_eu26_all_weights.tif",
+        es="analyses/ILP/ilp_eu26_es.tif",
+        bd="analyses/ILP/ilp_eu26_bd.tif"
     log:
         all="logs/prioritize_ilp_eu26_all.log",
         all_w="logs/prioritize_ilp_eu26_all_weights.log",
@@ -515,10 +515,10 @@ rule prioritize_gurobi:
         "Optimizing with Gurobi..."
     run:
         # Without weights
-        #llogger = utils.get_local_logger("optimize_gurobi_all", log.all)
-        #gurobi.prioritize_gurobi(input.all, output.all, logger=llogger,
-        #                         ol_normalize=True, save_intermediate=True,
-        #                         verbose=True)
+        llogger = utils.get_local_logger("optimize_gurobi_all", log.all)
+        gurobi.prioritize_gurobi(input.all, output.all, logger=llogger,
+                                 ol_normalize=True, save_intermediate=True,
+                                 verbose=True)
         # With weights
         llogger = utils.get_local_logger("optimize_gurobi_all_weights",
                                          log.all_w)
@@ -526,14 +526,14 @@ rule prioritize_gurobi:
                                  ol_normalize=True, weights=WEIGHTS,
                                  save_intermediate=False, verbose=True)
 
-        #llogger = utils.get_local_logger("optimize_gurobi_es", log.es)
-        #gurobi.prioritize_gurobi(input.es, output.es, logger=llogger,
-        #                         ol_normalize=True, save_intermediate=False,
-        #                         verbose=True)
-        #llogger = utils.get_local_logger("optimize_gurobi_bd", log.bd)
-        #gurobi.prioritize_gurobi(input.bd, output.bd, logger=llogger,
-        #                         ol_normalize=True, save_intermediate=False,
-        #                         verbose=True)
+        llogger = utils.get_local_logger("optimize_gurobi_es", log.es)
+        gurobi.prioritize_gurobi(input.es, output.es, logger=llogger,
+                                 ol_normalize=True, save_intermediate=False,
+                                 verbose=True)
+        llogger = utils.get_local_logger("optimize_gurobi_bd", log.bd)
+        gurobi.prioritize_gurobi(input.bd, output.bd, logger=llogger,
+                                 ol_normalize=True, save_intermediate=False,
+                                 verbose=True)
 
 ## Compare results ------------------------------------------------------------
 
