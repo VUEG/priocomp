@@ -1,0 +1,6 @@
+2016-09-15 18:10:47 [compare_mcs] [INFO ]  [** COMPUTING MCS SCORES **]
+2016-09-15 18:10:49 [compare_mcs] [INFO ]  [1/3] Calculating MCS between analyses/RWR/rwr_eu26_all_stats.geojson and analyses/zonation/priocomp/02_abf/02_abf_out/02_abf_nwout1.shp
+2016-09-15 18:10:50 [compare_mcs] [INFO ]  [2/3] Calculating MCS between analyses/RWR/rwr_eu26_all_stats.geojson and analyses/ILP/ilp_eu26_all_stats.geojson
+2016-09-15 18:10:52 [compare_mcs] [INFO ]  [3/3] Calculating MCS between analyses/zonation/priocomp/02_abf/02_abf_out/02_abf_nwout1.shp and analyses/ILP/ilp_eu26_all_stats.geojson
+2016-09-15 18:10:53 [compare_mcs] [INFO ]  [TIME] All processing took 6.13 sec
+2016-09-15 18:10:53 [compare_mcs] [INFO ] Saving results to analyses/comparison/cross_mcs.csv

@@ -1,0 +1,4 @@
+feature1,feature2,mcs
+analyses/RWR/rwr_eu26_all_stats.geojson,analyses/zonation/priocomp/02_abf/02_abf_out/02_abf_nwout1.shp,0.03913222953910433
+analyses/RWR/rwr_eu26_all_stats.geojson,analyses/ILP/ilp_eu26_all_stats.geojson,0.08307141489728624
+analyses/zonation/priocomp/02_abf/02_abf_out/02_abf_nwout1.shp,analyses/ILP/ilp_eu26_all_stats.geojson,0.11404916066661347
