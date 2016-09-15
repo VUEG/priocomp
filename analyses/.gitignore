@@ -2,3 +2,4 @@
 *.tif
 *.tif.msk
 *.aux.xml
+*.geojson
