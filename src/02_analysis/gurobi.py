@@ -248,8 +248,6 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
 
     llogger.info(" [2/3] Rescaling ranks")
     rank_array = spatutils.normalize(rank_array)
-    # Force float32
-    rank_array = rank_array.astype(np.float32)
 
     # 6. Prepare and write output --------------------------------------------
 
@@ -259,12 +257,12 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     rank_array[mask] = nodata_value
     # Create a masked array
     rank_array = ma.masked_values(rank_array, nodata_value)
-    profile.update(dtype=rasterio.float32, compress=compress,
+    profile.update(dtype=rasterio.float64, compress=compress,
                    nodata=nodata_value)
 
     with rasterio.open(output_rank_raster, 'w', **profile) as dst:
         dst.write_mask(mask)
-        dst.write(rank_array.astype(np.float32), 1)
+        dst.write(rank_array.astype(np.float64), 1)
 
     post_end = timer()
     post_elapsed = round(post_end - post_start, 2)
