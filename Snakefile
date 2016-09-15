@@ -443,7 +443,7 @@ rule calculate_rwr:
 
 rule postprocess_rwr:
     input:
-        all="analyses/RWR/rwr_eu26_all_fixed.tif",
+        all=rules.calculate_rwr.output.all,
         all_w=rules.calculate_rwr.output.all_w,
         es=rules.calculate_rwr.output.es,
         bd=rules.calculate_rwr.output.bd,
@@ -451,9 +451,9 @@ rule postprocess_rwr:
                                  ".shp")
     output:
         all="analyses/RWR/rwr_eu26_all_stats.geojson",
-        #all_w="analyses/RWR/wr_eu26_all_weights_stats.geojson",
-        #es="analyses/RWR/wr_eu26_es_stats.geojson",
-        #bd="analyses/RWR/wr_eu26_bd_stats.geojson"
+        all_w="analyses/RWR/rwr_eu26_all_weights_stats.geojson",
+        es="analyses/RWR/rwr_eu26_es_stats.geojson",
+        bd="analyses/RWR/rwr_eu26_bd_stats.geojson"
     log:
         all="logs/postprocess_rwr_eu26_all.log",
         all_w="logs/postprocess_rwr_eu26_all_weights.log",
@@ -465,6 +465,18 @@ rule postprocess_rwr:
         llogger = utils.get_local_logger("calculate_rwr_all", log.all)
         llogger.info(" [1/4] Post-processing {}".format(input.all))
         shell("fio cat {input.plu} | rio zonalstats -r {input.all} > {output.all}")
+        llogger = utils.get_local_logger("calculate_rwr_all_weights", log.all_w)
+        llogger.info(" [2/4] Post-processing {}".format(input.all_w))
+        shell("fio cat {input.plu} | rio zonalstats -r {input.all_w} > {output.all_w}")
+        llogger = utils.get_local_logger("calculate_rwr_es", log.es)
+        llogger.info(" [3/4] Post-processing {}".format(input.es))
+        shell("fio cat {input.plu} | rio zonalstats -r {input.es} > {output.es}")
+        llogger = utils.get_local_logger("calculate_rwr_bd", log.bd)
+        llogger.info(" [4/4] Post-processing {}".format(input.bd))
+        shell("fio cat {input.plu} | rio zonalstats -r {input.bd} > {output.bd}")
+
+
+
 
 
 # # Zonation ---------------------------------------------------------------------
