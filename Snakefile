@@ -12,7 +12,7 @@ utils = SourceFileLoader("lib.utils", "src/00_lib/utils.py").load_module()
 spatutils = SourceFileLoader("lib.spatutils", "src/00_lib/spatutils.py").load_module()
 gurobi = SourceFileLoader("analysis.gurobi", "src/02_analysis/gurobi.py").load_module()
 rwr = SourceFileLoader("analysis.rwr", "src/02_analysis/rwr.py").load_module()
-similarity = SourceFileLoader("results.similarity", "src/03_post_processing/raster_similarity.py").load_module()
+similarity = SourceFileLoader("results.similarity", "src/03_post_processing/similarity.py").load_module()
 
 
 ## GLOBALS --------------------------------------------------------------------
@@ -576,7 +576,7 @@ rule compare_correlation:
     output:
         "analyses/comparison/cross_correlation.csv"
     log:
-        all="logs/compare_results_correlation.log"
+        "logs/compare_results_correlation.log"
     message:
         "Comparing results correlation using Kendal tau..."
     run:
@@ -594,7 +594,7 @@ rule compare_jaccard:
     output:
         "analyses/comparison/cross_jaccard.csv"
     log:
-        all="logs/compare_results_jaccard.log"
+        "logs/compare_results_jaccard.log"
     message:
         "Comparing results overlap with Jaccard's index..."
     run:
@@ -605,3 +605,23 @@ rule compare_jaccard:
                                                  verbose=False, logger=llogger)
         llogger.info("Saving results to {}".format(output[0]))
         jaccard_coefs.to_csv(output[0], index=False)
+
+
+rule compare_mcs:
+    input:
+        all=[rules.postprocess_rwr.output.all,
+             "analyses/zonation/priocomp/02_abf/02_abf_out/02_abf_nwout1.shp",
+             rules.postprocess_ilp.output.all]
+    output:
+        "analyses/comparison/cross_mcs.csv"
+    log:
+        "logs/compare_results_mcs.log"
+    message:
+        "Comparing NUTS2 mean ranks with MCS..."
+    run:
+        llogger = utils.get_local_logger("compare_mcs", log[0])
+        value_fields = ['_mean', 'Men_rnk', '_mean']
+        mcs_scores_all = similarity.cross_mcs(input.all, value_fields,
+                                              verbose=False, logger=llogger)
+        llogger.info("Saving results to {}".format(output[0]))
+        mcs_scores_all.to_csv(output[0], index=False)
