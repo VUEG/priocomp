@@ -410,7 +410,7 @@ rule rescale_data:
 
 # RWR -------------------------------------------------------------------------
 
-rule calculate_rwr:
+rule prioritize_rwr:
     input:
         all=rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS,
         es=rules.harmonize_data.output.harmonized,
@@ -443,10 +443,10 @@ rule calculate_rwr:
 
 rule postprocess_rwr:
     input:
-        all=rules.calculate_rwr.output.all,
-        all_w=rules.calculate_rwr.output.all_w,
-        es=rules.calculate_rwr.output.es,
-        bd=rules.calculate_rwr.output.bd,
+        all=rules.prioritize_rwr.output.all,
+        all_w=rules.prioritize_rwr.output.all_w,
+        es=rules.prioritize_rwr.output.es,
+        bd=rules.prioritize_rwr.output.bd,
         plu=utils.pick_from_list(rules.preprocess_nuts_level0_data.output.processed,
                                  ".shp")
     output:
@@ -539,9 +539,9 @@ rule prioritize_ilp:
 
 rule compare_correlation:
     input:
-        rwr=rules.calculate_rwr.output.all_w,
+        rwr=rules.prioritize_rwr.output.all_w,
         zon="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
-        ilp=rules.prioritize_gurobi.output.all_w
+        ilp=rules.prioritize_ilp.output.all_w
     output:
         "analyses/comparison/cross_correlation.csv"
     log:
@@ -557,9 +557,9 @@ rule compare_correlation:
 
 rule compare_jaccard:
     input:
-        rwr=rules.calculate_rwr.output.all_w,
+        rwr=rules.prioritize_rwr.output.all_w,
         zon="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
-        ilp=rules.prioritize_gurobi.output.all_w
+        ilp=rules.prioritize_ilp.output.all_w
     output:
         "analyses/comparison/cross_jaccard.csv"
     log:
