@@ -460,7 +460,7 @@ rule postprocess_rwr:
         es="logs/postprocess_rwr_eu26_es.log",
         bd="logs/postprocess_rwr_eu26_bd.log"
     message:
-        "Post-processing RWR..."
+        "Post-processing RWR results..."
     run:
         llogger = utils.get_local_logger("calculate_rwr_all", log.all)
         llogger.info(" [1/4] Post-processing {}".format(input.all))
@@ -474,10 +474,6 @@ rule postprocess_rwr:
         llogger = utils.get_local_logger("calculate_rwr_bd", log.bd)
         llogger.info(" [4/4] Post-processing {}".format(input.bd))
         shell("fio cat {input.plu} | rio zonalstats -r {input.bd} > {output.bd}")
-
-
-
-
 
 # # Zonation ---------------------------------------------------------------------
 #
@@ -517,7 +513,7 @@ rule prioritize_ilp:
         # Without weights
         llogger = utils.get_local_logger("optimize_gurobi_all", log.all)
         gurobi.prioritize_gurobi(input.all, output.all, logger=llogger,
-                                 ol_normalize=True, save_intermediate=True,
+                                 ol_normalize=True, save_intermediate=False,
                                  verbose=True)
         # With weights
         llogger = utils.get_local_logger("optimize_gurobi_all_weights",
@@ -534,6 +530,41 @@ rule prioritize_ilp:
         gurobi.prioritize_gurobi(input.bd, output.bd, logger=llogger,
                                  ol_normalize=True, save_intermediate=False,
                                  verbose=True)
+
+rule postprocess_ilp:
+    input:
+        all=rules.prioritize_ilp.output.all,
+        all_w=rules.prioritize_ilp.output.all_w,
+        es=rules.prioritize_ilp.output.es,
+        bd=rules.prioritize_ilp.output.bd,
+        plu=utils.pick_from_list(rules.preprocess_nuts_level0_data.output.processed,
+                                 ".shp")
+    output:
+        all="analyses/ILP/ilp_eu26_all_stats.geojson",
+        all_w="analyses/ILP/ilp_eu26_all_weights_stats.geojson",
+        es="analyses/ILP/ilp_eu26_es_stats.geojson",
+        bd="analyses/ILP/ilp_eu26_bd_stats.geojson"
+    log:
+        all="logs/postprocess_ilp_eu26_all.log",
+        all_w="logs/postprocess_ilp_eu26_all_weights.log",
+        es="logs/postprocess_ilp_eu26_es.log",
+        bd="logs/postprocess_ilp_eu26_bd.log"
+    message:
+        "Post-processing ILP results..."
+    run:
+        llogger = utils.get_local_logger("calculate_ilp_all", log.all)
+        llogger.info(" [1/4] Post-processing {}".format(input.all))
+        shell("fio cat {input.plu} | rio zonalstats -r {input.all} > {output.all}")
+        llogger = utils.get_local_logger("calculate_ilp_all_weights", log.all_w)
+        llogger.info(" [2/4] Post-processing {}".format(input.all_w))
+        shell("fio cat {input.plu} | rio zonalstats -r {input.all_w} > {output.all_w}")
+        llogger = utils.get_local_logger("calculate_ilp_es", log.es)
+        llogger.info(" [3/4] Post-processing {}".format(input.es))
+        shell("fio cat {input.plu} | rio zonalstats -r {input.es} > {output.es}")
+        llogger = utils.get_local_logger("calculate_ilp_bd", log.bd)
+        llogger.info(" [4/4] Post-processing {}".format(input.bd))
+        shell("fio cat {input.plu} | rio zonalstats -r {input.bd} > {output.bd}")
+
 
 ## Compare results ------------------------------------------------------------
 
