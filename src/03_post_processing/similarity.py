@@ -7,6 +7,7 @@ Module can be used alone or as part of Snakemake workflow.
 import logging
 import rasterio
 import os
+import geopandas as gpd
 import pandas as pd
 import numpy as np
 import numpy.ma as ma
@@ -82,7 +83,7 @@ def compute_jaccard(x, y, x_min=0.0, x_max=1.0, y_min=0.0, y_max=1.0,
 
 
 def cross_correlation(input_rasters, mask_index=0, verbose=False, logger=None):
-    """ Calculate Kendall tau rank correlation bewteen all the inpur rasters.
+    """ Calculate Kendall tau rank correlation between all the inpur rasters.
 
     Input rasters are read in as masked arrays and all cells that are NoData
     are discarded. This way, only the values of informative cells are passed
@@ -171,7 +172,7 @@ def cross_correlation(input_rasters, mask_index=0, verbose=False, logger=None):
 
 
 def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None):
-    """ Calculate Jaccard coefficients bewteen all the inpur rasters.
+    """ Calculate Jaccard coefficients between all the inpur rasters.
 
     This is a utility function that is intented to be used to compare
     top-fractions of the landscape. Thus, x_max and y_max for
@@ -250,3 +251,108 @@ def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None):
     llogger.info(" [TIME] All processing took {} sec".format(all_elapsed))
 
     return all_jaccards
+
+
+def compute_mcs(a, b):
+    """ Compute MCS between vectors a and b.
+
+    :param a numeric vector.
+    :param b numeric vector.
+    :return ndarray of computed MCS scores.
+    """
+    assert len(a) == len(b), "Vectors a and b must be of same length"
+    N = len(a)
+    # Create an array filled with -1s to store the MCS.
+    mcs = 0
+    nans = False
+    for i in range(0, N):
+        if np.isnan(a[i]) or np.isnan(b[i]):
+            nans = True
+        else:
+            mcs += np.abs(a[i] - b[i]) / np.max([a[i], b[i]])
+    if nans:
+        print("WARNING: a and/or b contain NaNs")
+
+    return mcs / N
+
+
+def cross_mcs(input_vectors, value_fields, verbose=False, logger=None):
+    """ Compute map comparison statistics between input vector features.
+
+    MCS (Map Comparison Statistic) indicates the average difference between any
+    pair of feature polygon values, expressed as a fraction of the highest
+    value. MCS is calculated between each polygon in the input vector features
+    and it is required (and checked) that all the inputs are based on the
+    same vector feature.
+
+    For another application of MCS, see:
+
+    Schulp, C. J. E., Burkhard, B., Maes, J., Van Vliet, J., & Verburg, P. H.
+    (2014). Uncertainties in Ecosystem Service Maps: A Comparison on the
+    European Scale. PLoS ONE, 9(10), e109643.
+    http://doi.org/10.1371/journal.pone.0109643
+
+    :param input_vectors list of input vector paths.
+    :param value_field list of String names indicating which fields contains
+                       the values to be compared.
+    :param verbose: Boolean indicating how much information is printed out.
+    :param logger: logger object to be used.
+
+    :return list of GeoPandas Dataframe with MCS between all rasters in field
+            "mcs".
+    """
+    # 1. Setup  --------------------------------------------------------------
+
+    all_start = timer()
+
+    if not logger:
+        logging.basicConfig()
+        llogger = logging.getLogger('cross_mcs')
+        llogger.setLevel(logging.DEBUG if verbose else logging.INFO)
+    else:
+        llogger = logger
+
+    # Check the inputs
+    assert len(input_vectors) > 1, "More than one input vector needed"
+    assert len(value_fields) == len(input_vectors), "One value field per vector feature needed"
+
+    # 2. Calculations --------------------------------------------------------
+
+    llogger.info(" [** COMPUTING MCS SCORES **]")
+
+    all_mcs = pd.DataFrame({"feature1": [], "feature2": [],
+                            "mcs": []})
+    n_vectors = len(input_vectors)
+    # Generate counter information for all the computations. The results
+    # matrix is always diagonally symmetrical.
+    n_computations = int((n_vectors * n_vectors - n_vectors) / 2)
+    no_computation = 1
+
+    for i in range(0, n_vectors):
+        # Read in the data as a GeoPandas dataframe
+        vector1_path = input_vectors[i]
+        vector1 = gpd.read_file(vector1_path)
+        for j in range(i+1, n_vectors):
+            vector2_path = input_vectors[j]
+            vector2 = gpd.read_file(vector2_path)
+            prefix = utils.get_iteration_prefix(no_computation,
+                                                n_computations)
+            llogger.info(("{} Calculating MCS ".format(prefix) +
+                          "between {} ".format(vector1_path) +
+                          "and {}".format(vector2_path)))
+
+            mcs_value = compute_mcs(vector1[value_fields[i]],
+                                    vector2[value_fields[j]])
+            mcs = pd.DataFrame({"feature1": [vector1_path],
+                                "feature2": [vector2_path],
+                                "mcs": [mcs_value]})
+            all_mcs = pd.concat([all_mcs, mcs])
+            no_computation += 1
+
+    all_mcs.index = np.arange(0, len(all_mcs.index), 1)
+
+    all_end = timer()
+    all_elapsed = round(all_end - all_start, 2)
+    llogger.info(" [TIME] All processing took {} sec".format(all_elapsed))
+
+    return all_mcs
