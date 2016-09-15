@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-""" Functions and utilities comparing raster similarities.
+""" Functions and utilities comparing raster and vector similarities.
 
 Module can be used alone or as part of Snakemake workflow.
 """
