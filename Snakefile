@@ -447,7 +447,7 @@ rule postprocess_rwr:
         all_w=rules.prioritize_rwr.output.all_w,
         es=rules.prioritize_rwr.output.es,
         bd=rules.prioritize_rwr.output.bd,
-        plu=utils.pick_from_list(rules.preprocess_nuts_level0_data.output.processed,
+        plu=utils.pick_from_list(rules.preprocess_nuts_level2_data.output.processed,
                                  ".shp")
     output:
         all="analyses/RWR/rwr_eu26_all_stats.geojson",
@@ -537,7 +537,7 @@ rule postprocess_ilp:
         all_w=rules.prioritize_ilp.output.all_w,
         es=rules.prioritize_ilp.output.es,
         bd=rules.prioritize_ilp.output.bd,
-        plu=utils.pick_from_list(rules.preprocess_nuts_level0_data.output.processed,
+        plu=utils.pick_from_list(rules.preprocess_nuts_level2_data.output.processed,
                                  ".shp")
     output:
         all="analyses/ILP/ilp_eu26_all_stats.geojson",
