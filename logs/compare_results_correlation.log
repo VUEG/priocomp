@@ -1,10 +1,136 @@
-2016-09-13 10:12:03 [compare_correlation] [INFO ]  [** COMPUTING KENDALL TAU RANK CORRELATIONS **]
-2016-09-13 10:12:03 [compare_correlation] [DEBUG] Reading value mask from analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif
-2016-09-13 10:12:04 [compare_correlation] [INFO ]  [1/3] Calculating correlation between analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif and analyses/ILP/ilp_eu26_all_weights.tif
-2016-09-13 10:15:46 [compare_correlation] [DEBUG] Tau: 0.8676989796046531 (p-value: 0.0)
-2016-09-13 10:15:46 [compare_correlation] [INFO ]  [2/3] Calculating correlation between analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif and analyses/RWR/rwr_eu26_all_weights.tif
-2016-09-13 10:19:36 [compare_correlation] [DEBUG] Tau: 0.861613802747607 (p-value: 0.0)
-2016-09-13 10:19:37 [compare_correlation] [INFO ]  [3/3] Calculating correlation between analyses/ILP/ilp_eu26_all_weights.tif and analyses/RWR/rwr_eu26_all_weights.tif
-2016-09-13 10:20:19 [compare_correlation] [DEBUG] Tau: 0.9760009312325187 (p-value: 0.0)
-2016-09-13 10:20:20 [compare_correlation] [INFO ]  [TIME] All processing took 496.68 sec
-2016-09-13 10:20:20 [compare_correlation] [INFO ] Saving results to analyses/comparison/cross_correlation.csv
+2016-09-16 11:48:02 [compare_correlation] [INFO ]  [** COMPUTING KENDALL TAU RANK CORRELATIONS **]
+2016-09-16 11:48:02 [compare_correlation] [DEBUG] Reading value mask from analyses/RWR/rwr_eu26_all.tif
+2016-09-16 11:48:04 [compare_correlation] [INFO ]  [1/66] Calculating correlation between analyses/RWR/rwr_eu26_all.tif and analyses/zonation/priocomp/02_abf/02_abf_out/02_abf.rank.compressed.tif
+2016-09-16 11:48:06 [compare_correlation] [DEBUG] Tau: 0.9170779544208211 (p-value: 0.0)
+2016-09-16 11:48:07 [compare_correlation] [INFO ]  [2/66] Calculating correlation between analyses/RWR/rwr_eu26_all.tif and analyses/ILP/ilp_eu26_all.tif
+2016-09-16 11:48:08 [compare_correlation] [DEBUG] Tau: 0.9746795683624103 (p-value: 0.0)
+2016-09-16 11:48:09 [compare_correlation] [INFO ]  [3/66] Calculating correlation between analyses/RWR/rwr_eu26_all.tif and analyses/RWR/rwr_eu26_all_weights.tif
+2016-09-16 11:48:12 [compare_correlation] [DEBUG] Tau: 0.5835403628977597 (p-value: 0.0)
+2016-09-16 11:48:13 [compare_correlation] [INFO ]  [4/66] Calculating correlation between analyses/RWR/rwr_eu26_all.tif and analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif
+2016-09-16 11:48:16 [compare_correlation] [DEBUG] Tau: 0.5283092186391722 (p-value: 0.0)
+2016-09-16 11:48:16 [compare_correlation] [INFO ]  [5/66] Calculating correlation between analyses/RWR/rwr_eu26_all.tif and analyses/ILP/ilp_eu26_all_weights.tif
+2016-09-16 11:48:18 [compare_correlation] [DEBUG] Tau: 0.594401292014116 (p-value: 0.0)
+2016-09-16 11:48:19 [compare_correlation] [INFO ]  [6/66] Calculating correlation between analyses/RWR/rwr_eu26_all.tif and analyses/RWR/rwr_eu26_es.tif
+2016-09-16 11:48:23 [compare_correlation] [DEBUG] Tau: -0.020009827582777685 (p-value: 0.0)
+2016-09-16 11:48:23 [compare_correlation] [INFO ]  [7/66] Calculating correlation between analyses/RWR/rwr_eu26_all.tif and analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif
+2016-09-16 11:48:27 [compare_correlation] [DEBUG] Tau: -0.030022021037368885 (p-value: 0.0)
+2016-09-16 11:48:28 [compare_correlation] [INFO ]  [8/66] Calculating correlation between analyses/RWR/rwr_eu26_all.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:48:29 [compare_correlation] [DEBUG] Tau: 0.9733616066868086 (p-value: 0.0)
+2016-09-16 11:48:30 [compare_correlation] [INFO ]  [9/66] Calculating correlation between analyses/RWR/rwr_eu26_all.tif and analyses/RWR/rwr_eu26_bd.tif
+2016-09-16 11:48:33 [compare_correlation] [DEBUG] Tau: 0.9902431064640529 (p-value: 0.0)
+2016-09-16 11:48:33 [compare_correlation] [INFO ]  [10/66] Calculating correlation between analyses/RWR/rwr_eu26_all.tif and analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif
+2016-09-16 11:48:36 [compare_correlation] [DEBUG] Tau: 0.9165268679103805 (p-value: 0.0)
+2016-09-16 11:48:37 [compare_correlation] [INFO ]  [11/66] Calculating correlation between analyses/RWR/rwr_eu26_all.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:48:39 [compare_correlation] [DEBUG] Tau: 0.9733616066868086 (p-value: 0.0)
+2016-09-16 11:48:39 [compare_correlation] [INFO ]  [12/66] Calculating correlation between analyses/zonation/priocomp/02_abf/02_abf_out/02_abf.rank.compressed.tif and analyses/ILP/ilp_eu26_all.tif
+2016-09-16 11:48:41 [compare_correlation] [DEBUG] Tau: 0.9223248018477961 (p-value: 0.0)
+2016-09-16 11:48:41 [compare_correlation] [INFO ]  [13/66] Calculating correlation between analyses/zonation/priocomp/02_abf/02_abf_out/02_abf.rank.compressed.tif and analyses/RWR/rwr_eu26_all_weights.tif
+2016-09-16 11:48:45 [compare_correlation] [DEBUG] Tau: 0.5853258144920235 (p-value: 0.0)
+2016-09-16 11:48:45 [compare_correlation] [INFO ]  [14/66] Calculating correlation between analyses/zonation/priocomp/02_abf/02_abf_out/02_abf.rank.compressed.tif and analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif
+2016-09-16 11:48:49 [compare_correlation] [DEBUG] Tau: 0.5512061727825699 (p-value: 0.0)
+2016-09-16 11:48:49 [compare_correlation] [INFO ]  [15/66] Calculating correlation between analyses/zonation/priocomp/02_abf/02_abf_out/02_abf.rank.compressed.tif and analyses/ILP/ilp_eu26_all_weights.tif
+2016-09-16 11:48:51 [compare_correlation] [DEBUG] Tau: 0.5969674532547529 (p-value: 0.0)
+2016-09-16 11:48:51 [compare_correlation] [INFO ]  [16/66] Calculating correlation between analyses/zonation/priocomp/02_abf/02_abf_out/02_abf.rank.compressed.tif and analyses/RWR/rwr_eu26_es.tif
+2016-09-16 11:48:55 [compare_correlation] [DEBUG] Tau: -0.0009561937756781874 (p-value: 0.003330492280008135)
+2016-09-16 11:48:55 [compare_correlation] [INFO ]  [17/66] Calculating correlation between analyses/zonation/priocomp/02_abf/02_abf_out/02_abf.rank.compressed.tif and analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif
+2016-09-16 11:48:59 [compare_correlation] [DEBUG] Tau: -0.01066336878760948 (p-value: 4.807960321051157e-235)
+2016-09-16 11:48:59 [compare_correlation] [INFO ]  [18/66] Calculating correlation between analyses/zonation/priocomp/02_abf/02_abf_out/02_abf.rank.compressed.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:49:01 [compare_correlation] [DEBUG] Tau: 0.9202327271006667 (p-value: 0.0)
+2016-09-16 11:49:01 [compare_correlation] [INFO ]  [19/66] Calculating correlation between analyses/zonation/priocomp/02_abf/02_abf_out/02_abf.rank.compressed.tif and analyses/RWR/rwr_eu26_bd.tif
+2016-09-16 11:49:04 [compare_correlation] [DEBUG] Tau: 0.9142688984115993 (p-value: 0.0)
+2016-09-16 11:49:04 [compare_correlation] [INFO ]  [20/66] Calculating correlation between analyses/zonation/priocomp/02_abf/02_abf_out/02_abf.rank.compressed.tif and analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif
+2016-09-16 11:49:07 [compare_correlation] [DEBUG] Tau: 0.9863857385476293 (p-value: 0.0)
+2016-09-16 11:49:08 [compare_correlation] [INFO ]  [21/66] Calculating correlation between analyses/zonation/priocomp/02_abf/02_abf_out/02_abf.rank.compressed.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:49:09 [compare_correlation] [DEBUG] Tau: 0.9202327271006667 (p-value: 0.0)
+2016-09-16 11:49:10 [compare_correlation] [INFO ]  [22/66] Calculating correlation between analyses/ILP/ilp_eu26_all.tif and analyses/RWR/rwr_eu26_all_weights.tif
+2016-09-16 11:49:12 [compare_correlation] [DEBUG] Tau: 0.5937798554230326 (p-value: 0.0)
+2016-09-16 11:49:13 [compare_correlation] [INFO ]  [23/66] Calculating correlation between analyses/ILP/ilp_eu26_all.tif and analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif
+2016-09-16 11:49:15 [compare_correlation] [DEBUG] Tau: 0.5388301976834099 (p-value: 0.0)
+2016-09-16 11:49:15 [compare_correlation] [INFO ]  [24/66] Calculating correlation between analyses/ILP/ilp_eu26_all.tif and analyses/ILP/ilp_eu26_all_weights.tif
+2016-09-16 11:49:16 [compare_correlation] [DEBUG] Tau: 0.6060341214695923 (p-value: 0.0)
+2016-09-16 11:49:17 [compare_correlation] [INFO ]  [25/66] Calculating correlation between analyses/ILP/ilp_eu26_all.tif and analyses/RWR/rwr_eu26_es.tif
+2016-09-16 11:49:19 [compare_correlation] [DEBUG] Tau: -0.02081248090318833 (p-value: 0.0)
+2016-09-16 11:49:19 [compare_correlation] [INFO ]  [26/66] Calculating correlation between analyses/ILP/ilp_eu26_all.tif and analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif
+2016-09-16 11:49:21 [compare_correlation] [DEBUG] Tau: -0.031017090708617263 (p-value: 0.0)
+2016-09-16 11:49:22 [compare_correlation] [INFO ]  [27/66] Calculating correlation between analyses/ILP/ilp_eu26_all.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:49:23 [compare_correlation] [DEBUG] Tau: 0.9914174330360114 (p-value: 0.0)
+2016-09-16 11:49:23 [compare_correlation] [INFO ]  [28/66] Calculating correlation between analyses/ILP/ilp_eu26_all.tif and analyses/RWR/rwr_eu26_bd.tif
+2016-09-16 11:49:25 [compare_correlation] [DEBUG] Tau: 0.9733187854174169 (p-value: 0.0)
+2016-09-16 11:49:25 [compare_correlation] [INFO ]  [29/66] Calculating correlation between analyses/ILP/ilp_eu26_all.tif and analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif
+2016-09-16 11:49:27 [compare_correlation] [DEBUG] Tau: 0.922736015434661 (p-value: 0.0)
+2016-09-16 11:49:27 [compare_correlation] [INFO ]  [30/66] Calculating correlation between analyses/ILP/ilp_eu26_all.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:49:28 [compare_correlation] [DEBUG] Tau: 0.9914174330360114 (p-value: 0.0)
+2016-09-16 11:49:29 [compare_correlation] [INFO ]  [31/66] Calculating correlation between analyses/RWR/rwr_eu26_all_weights.tif and analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif
+2016-09-16 11:49:32 [compare_correlation] [DEBUG] Tau: 0.8907002383960789 (p-value: 0.0)
+2016-09-16 11:49:32 [compare_correlation] [INFO ]  [32/66] Calculating correlation between analyses/RWR/rwr_eu26_all_weights.tif and analyses/ILP/ilp_eu26_all_weights.tif
+2016-09-16 11:49:34 [compare_correlation] [DEBUG] Tau: 0.9746795810014564 (p-value: 0.0)
+2016-09-16 11:49:34 [compare_correlation] [INFO ]  [33/66] Calculating correlation between analyses/RWR/rwr_eu26_all_weights.tif and analyses/RWR/rwr_eu26_es.tif
+2016-09-16 11:49:38 [compare_correlation] [DEBUG] Tau: 0.3964498692225947 (p-value: 0.0)
+2016-09-16 11:49:38 [compare_correlation] [INFO ]  [34/66] Calculating correlation between analyses/RWR/rwr_eu26_all_weights.tif and analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif
+2016-09-16 11:49:42 [compare_correlation] [DEBUG] Tau: 0.37547574056406086 (p-value: 0.0)
+2016-09-16 11:49:42 [compare_correlation] [INFO ]  [35/66] Calculating correlation between analyses/RWR/rwr_eu26_all_weights.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:49:44 [compare_correlation] [DEBUG] Tau: 0.5840277133874506 (p-value: 0.0)
+2016-09-16 11:49:45 [compare_correlation] [INFO ]  [36/66] Calculating correlation between analyses/RWR/rwr_eu26_all_weights.tif and analyses/RWR/rwr_eu26_bd.tif
+2016-09-16 11:49:48 [compare_correlation] [DEBUG] Tau: 0.5737832361185792 (p-value: 0.0)
+2016-09-16 11:49:48 [compare_correlation] [INFO ]  [37/66] Calculating correlation between analyses/RWR/rwr_eu26_all_weights.tif and analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif
+2016-09-16 11:49:52 [compare_correlation] [DEBUG] Tau: 0.5726471221864352 (p-value: 0.0)
+2016-09-16 11:49:52 [compare_correlation] [INFO ]  [38/66] Calculating correlation between analyses/RWR/rwr_eu26_all_weights.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:49:54 [compare_correlation] [DEBUG] Tau: 0.5840277133874506 (p-value: 0.0)
+2016-09-16 11:49:55 [compare_correlation] [INFO ]  [39/66] Calculating correlation between analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif and analyses/ILP/ilp_eu26_all_weights.tif
+2016-09-16 11:49:57 [compare_correlation] [DEBUG] Tau: 0.8978898577731506 (p-value: 0.0)
+2016-09-16 11:49:57 [compare_correlation] [INFO ]  [40/66] Calculating correlation between analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif and analyses/RWR/rwr_eu26_es.tif
+2016-09-16 11:50:01 [compare_correlation] [DEBUG] Tau: 0.4314275208207684 (p-value: 0.0)
+2016-09-16 11:50:01 [compare_correlation] [INFO ]  [41/66] Calculating correlation between analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif and analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif
+2016-09-16 11:50:05 [compare_correlation] [DEBUG] Tau: 0.4292633332250287 (p-value: 0.0)
+2016-09-16 11:50:05 [compare_correlation] [INFO ]  [42/66] Calculating correlation between analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:50:08 [compare_correlation] [DEBUG] Tau: 0.5292661121902915 (p-value: 0.0)
+2016-09-16 11:50:09 [compare_correlation] [INFO ]  [43/66] Calculating correlation between analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif and analyses/RWR/rwr_eu26_bd.tif
+2016-09-16 11:50:14 [compare_correlation] [DEBUG] Tau: 0.5188024057480246 (p-value: 0.0)
+2016-09-16 11:50:14 [compare_correlation] [INFO ]  [44/66] Calculating correlation between analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif and analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif
+2016-09-16 11:50:18 [compare_correlation] [DEBUG] Tau: 0.5377677931028689 (p-value: 0.0)
+2016-09-16 11:50:19 [compare_correlation] [INFO ]  [45/66] Calculating correlation between analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:50:21 [compare_correlation] [DEBUG] Tau: 0.5292661121902915 (p-value: 0.0)
+2016-09-16 11:50:21 [compare_correlation] [INFO ]  [46/66] Calculating correlation between analyses/ILP/ilp_eu26_all_weights.tif and analyses/RWR/rwr_eu26_es.tif
+2016-09-16 11:50:24 [compare_correlation] [DEBUG] Tau: 0.40393946423616256 (p-value: 0.0)
+2016-09-16 11:50:24 [compare_correlation] [INFO ]  [47/66] Calculating correlation between analyses/ILP/ilp_eu26_all_weights.tif and analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif
+2016-09-16 11:50:26 [compare_correlation] [DEBUG] Tau: 0.3827645855026131 (p-value: 0.0)
+2016-09-16 11:50:27 [compare_correlation] [INFO ]  [48/66] Calculating correlation between analyses/ILP/ilp_eu26_all_weights.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:50:28 [compare_correlation] [DEBUG] Tau: 0.5960665359826853 (p-value: 0.0)
+2016-09-16 11:50:28 [compare_correlation] [INFO ]  [49/66] Calculating correlation between analyses/ILP/ilp_eu26_all_weights.tif and analyses/RWR/rwr_eu26_bd.tif
+2016-09-16 11:50:31 [compare_correlation] [DEBUG] Tau: 0.5844891288826648 (p-value: 0.0)
+2016-09-16 11:50:31 [compare_correlation] [INFO ]  [50/66] Calculating correlation between analyses/ILP/ilp_eu26_all_weights.tif and analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif
+2016-09-16 11:50:33 [compare_correlation] [DEBUG] Tau: 0.5840830677705061 (p-value: 0.0)
+2016-09-16 11:50:33 [compare_correlation] [INFO ]  [51/66] Calculating correlation between analyses/ILP/ilp_eu26_all_weights.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:50:35 [compare_correlation] [DEBUG] Tau: 0.5960665359826853 (p-value: 0.0)
+2016-09-16 11:50:35 [compare_correlation] [INFO ]  [52/66] Calculating correlation between analyses/RWR/rwr_eu26_es.tif and analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif
+2016-09-16 11:50:39 [compare_correlation] [DEBUG] Tau: 0.9078096099637709 (p-value: 0.0)
+2016-09-16 11:50:39 [compare_correlation] [INFO ]  [53/66] Calculating correlation between analyses/RWR/rwr_eu26_es.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:50:41 [compare_correlation] [DEBUG] Tau: -0.030671318472628835 (p-value: 0.0)
+2016-09-16 11:50:41 [compare_correlation] [INFO ]  [54/66] Calculating correlation between analyses/RWR/rwr_eu26_es.tif and analyses/RWR/rwr_eu26_bd.tif
+2016-09-16 11:50:45 [compare_correlation] [DEBUG] Tau: -0.02976724498263381 (p-value: 0.0)
+2016-09-16 11:50:46 [compare_correlation] [INFO ]  [55/66] Calculating correlation between analyses/RWR/rwr_eu26_es.tif and analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif
+2016-09-16 11:50:50 [compare_correlation] [DEBUG] Tau: -0.014066781132925517 (p-value: 0.0)
+2016-09-16 11:50:50 [compare_correlation] [INFO ]  [56/66] Calculating correlation between analyses/RWR/rwr_eu26_es.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:50:52 [compare_correlation] [DEBUG] Tau: -0.030671318472628835 (p-value: 0.0)
+2016-09-16 11:50:53 [compare_correlation] [INFO ]  [57/66] Calculating correlation between analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:50:55 [compare_correlation] [DEBUG] Tau: -0.04066402184568437 (p-value: 0.0)
+2016-09-16 11:50:55 [compare_correlation] [INFO ]  [58/66] Calculating correlation between analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif and analyses/RWR/rwr_eu26_bd.tif
+2016-09-16 11:50:59 [compare_correlation] [DEBUG] Tau: -0.03957362367042655 (p-value: 0.0)
+2016-09-16 11:50:59 [compare_correlation] [INFO ]  [59/66] Calculating correlation between analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif and analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif
+2016-09-16 11:51:03 [compare_correlation] [DEBUG] Tau: -0.023770449979905746 (p-value: 0.0)
+2016-09-16 11:51:03 [compare_correlation] [INFO ]  [60/66] Calculating correlation between analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:51:05 [compare_correlation] [DEBUG] Tau: -0.04066402184568437 (p-value: 0.0)
+2016-09-16 11:51:06 [compare_correlation] [INFO ]  [61/66] Calculating correlation between analyses/ILP/ilp_eu26_bd.tif and analyses/RWR/rwr_eu26_bd.tif
+2016-09-16 11:51:07 [compare_correlation] [DEBUG] Tau: 0.9747187377568283 (p-value: 0.0)
+2016-09-16 11:51:08 [compare_correlation] [INFO ]  [62/66] Calculating correlation between analyses/ILP/ilp_eu26_bd.tif and analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif
+2016-09-16 11:51:10 [compare_correlation] [DEBUG] Tau: 0.9230949707415236 (p-value: 0.0)
+2016-09-16 11:51:10 [compare_correlation] [INFO ]  [63/66] Calculating correlation between analyses/ILP/ilp_eu26_bd.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:51:11 [compare_correlation] [DEBUG] Tau: 1.0 (p-value: 0.0)
+2016-09-16 11:51:11 [compare_correlation] [INFO ]  [64/66] Calculating correlation between analyses/RWR/rwr_eu26_bd.tif and analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif
+2016-09-16 11:51:14 [compare_correlation] [DEBUG] Tau: 0.9181425279315717 (p-value: 0.0)
+2016-09-16 11:51:15 [compare_correlation] [INFO ]  [65/66] Calculating correlation between analyses/RWR/rwr_eu26_bd.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:51:16 [compare_correlation] [DEBUG] Tau: 0.9747187377568282 (p-value: 0.0)
+2016-09-16 11:51:17 [compare_correlation] [INFO ]  [66/66] Calculating correlation between analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif and analyses/ILP/ilp_eu26_bd.tif
+2016-09-16 11:51:19 [compare_correlation] [DEBUG] Tau: 0.9230949707415236 (p-value: 0.0)
+2016-09-16 11:51:19 [compare_correlation] [INFO ]  [TIME] All processing took 196.98 sec
+2016-09-16 11:51:19 [compare_correlation] [INFO ] Saving results to analyses/comparison/cross_correlation.csv
