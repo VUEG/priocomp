@@ -138,7 +138,7 @@ def cross_correlation(input_rasters, mask_index=0, verbose=False, logger=None):
         raster1_nodata = raster1.nodata
         raster1_src = raster1.read(1)
         # Inlude only cells with actual values
-        raster1_src = raster1_src[~value_mask]
+        raster1_src = raster1_src[value_mask]
         for j in range(i+1, n_rasters):
             raster2 = rasterio.open(input_rasters[j])
             raster2_nodata = raster2.nodata
@@ -146,13 +146,12 @@ def cross_correlation(input_rasters, mask_index=0, verbose=False, logger=None):
             # Inlude only cells with actual values in the mask raster.
             # NOTE: This doesn't mean that raster2 has values in exactly the
             # same locations.
-            raster2_src = raster2_src[~value_mask]
+            raster2_src = raster2_src[value_mask]
             prefix = utils.get_iteration_prefix(no_computation,
                                                 n_computations)
             llogger.info(("{} Calculating correlation ".format(prefix) +
                           "between {} ".format(input_rasters[i]) +
                           "and {}".format(input_rasters[j])))
-
             tau, pvalue = kendalltau(raster1_src, raster2_src)
             llogger.debug("Tau: {0} (p-value: {1})".format(tau, pvalue))
             correlations = pd.DataFrame({"feature1": [input_rasters[i]],
