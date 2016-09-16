@@ -1,7 +1,7 @@
 
 ## Comparing spatial prioritization methods for biodiversity conservation and ecosystem service supply in Europe
 
-__Version:__ 0.0.1  
+__Version:__ 0.1.0  
 
 ### Introduction
 
@@ -13,7 +13,7 @@ __Version:__ 0.0.1
 ------------
 
     ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
+    ├── environment.yml    <- Conda environment file
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
     │   ├── external       <- Data from third party sources.
