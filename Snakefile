@@ -570,9 +570,18 @@ rule postprocess_ilp:
 
 rule compare_correlation:
     input:
-        rwr=rules.prioritize_rwr.output.all_w,
-        zon="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
-        ilp=rules.prioritize_ilp.output.all_w
+        rules.prioritize_rwr.output.all,
+        "analyses/zonation/priocomp/02_abf/02_abf_out/02_abf.rank.compressed.tif",
+        rules.prioritize_ilp.output.all,
+        rules.prioritize_rwr.output.all_w,
+        "analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
+        rules.prioritize_ilp.output.all_w,
+        rules.prioritize_rwr.output.es,
+        "analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif",
+        rules.prioritize_ilp.output.bd,
+        rules.prioritize_rwr.output.bd,
+        "analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif",
+        rules.prioritize_ilp.output.bd
     output:
         "analyses/comparison/cross_correlation.csv"
     log:
