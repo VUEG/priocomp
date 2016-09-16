@@ -1,0 +1,79 @@
+```{r setup, echo=FALSE}
+library(dplyr)
+library(DT)
+library(gridExtra) 
+library(ggplot2) 
+library(ggthemes) 
+library(knitr)  
+library(readr)
+library(scales)  
+library(tidyr)
+library(viridis)
+
+# Helper functions -------------------------------------------------------
+
+match_method <- Vectorize(
+  function(x) {
+    if (grepl(".+\\/zonation\\/.+", x)) {
+      method <- "ZON"
+    } else if (grepl(".+\\/RWR\\/.+", x)) {
+      method <- "RWR"
+    } else if (grepl(".+\\/ILP\\/.+", x)) {
+      method <- "ILP"
+    } else {
+      stop("Method", x, " not matched")
+    }
+    return(method)
+  }, c("x"), USE.NAMES = FALSE, SIMPLIFY = TRUE)
+
+match_type <- Vectorize(
+  function(x) {
+    if (grepl("_all.tif", x) | grepl("_all_stats", x) | grepl("02_abf", x)) {
+      mtype <- "ALL"
+    } else if (grepl("_all_weights.tif", x) | grepl("_all_weights_stats", x) | grepl("wgt", x)) {
+      mtype <- "ALL_WGT"
+    } else if (grepl("_es", x)) {
+      mtype <- "ES"
+    } else if (grepl("_bd", x)) {
+      mtype <- "BD"
+    } else {
+      stop("Type ", x, " not matched")
+    }
+    return(mtype)
+  }, c("x"), USE.NAMES = FALSE, SIMPLIFY = TRUE)
+
+
+# Read in the data -------------------------------------------------------
+# Parse groups for feature1 and feature2 and rearrange data.
+cors <- readr::read_csv("../../analyses/comparison/cross_correlation.csv") %>% 
+  mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
+         f2_method = match_method(feature2), f2_type = match_type(feature2),
+         key = paste(f1_method, f1_type, f2_method, f2_type, 
+                     sep = "_")) %>% 
+  select(key, f1_method, f1_type, f2_method, f2_type, tau)
+mcss <- readr::read_csv("../../analyses/comparison/cross_mcs.csv") %>% 
+  mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
+         f2_method = match_method(feature2), f2_type = match_type(feature2),
+         key = paste(f1_method, f1_type, f2_method, f2_type, 
+                     sep = "_")) %>% 
+  select(key, f1_method, f1_type, f2_method, f2_type, mcs)
+all <- left_join(cors, mcss, by = c("key" = "key")) %>% 
+  select(method = f1_method.x, type = f1_type.x, tau, mcs)
+
+```
+
+##  Results' interpretation
+
+### Correlation
+
+```{r correlation-1}
+# Sort the data along correlation (tau).
+all %>% 
+  arrange(desc(tau)) %>% 
+  filter() %>% 
+  datatable() %>% 
+  formatRound(columns = c('tau', 'mcs'), digits = 3)
+```
+
+
+
