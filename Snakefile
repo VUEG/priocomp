@@ -618,9 +618,18 @@ rule compare_jaccard:
 
 rule compare_mcs:
     input:
-        all=[rules.postprocess_rwr.output.all,
-             "analyses/zonation/priocomp/02_abf/02_abf_out/02_abf_nwout1.shp",
-             rules.postprocess_ilp.output.all]
+        rules.postprocess_rwr.output.all,
+        "analyses/zonation/priocomp/02_abf/02_abf_out/02_abf_nwout1.shp",
+        rules.postprocess_ilp.output.all,
+        rules.postprocess_rwr.output.all_w,
+        "analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt_nwout1.shp",
+        rules.postprocess_ilp.output.all_w,
+        rules.postprocess_rwr.output.es,
+        "analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es_nwout1.shp",
+        rules.postprocess_ilp.output.es,
+        rules.postprocess_rwr.output.bd,
+        "analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd_nwout1.shp",
+        rules.postprocess_ilp.output.bd
     output:
         "analyses/comparison/cross_mcs.csv"
     log:
@@ -629,8 +638,11 @@ rule compare_mcs:
         "Comparing NUTS2 mean ranks with MCS..."
     run:
         llogger = utils.get_local_logger("compare_mcs", log[0])
-        value_fields = ['_mean', 'Men_rnk', '_mean']
-        mcs_scores_all = similarity.cross_mcs(input.all, value_fields,
+        value_fields = ['_mean', 'Men_rnk', '_mean',
+                        '_mean', 'Men_rnk', '_mean',
+                        '_mean', 'Men_rnk', '_mean',
+                        '_mean', 'Men_rnk', '_mean']
+        mcs_scores_all = similarity.cross_mcs(input, value_fields,
                                               verbose=False, logger=llogger)
         llogger.info("Saving results to {}".format(output[0]))
         mcs_scores_all.to_csv(output[0], index=False)
