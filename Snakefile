@@ -578,7 +578,7 @@ rule compare_correlation:
         rules.prioritize_ilp.output.all_w,
         rules.prioritize_rwr.output.es,
         "analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif",
-        rules.prioritize_ilp.output.bd,
+        rules.prioritize_ilp.output.es,
         rules.prioritize_rwr.output.bd,
         "analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif",
         rules.prioritize_ilp.output.bd
