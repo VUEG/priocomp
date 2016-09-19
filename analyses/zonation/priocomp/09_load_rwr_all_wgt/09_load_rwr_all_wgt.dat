@@ -7,4 +7,4 @@ initial removal percent = 0.0
 annotate name = 0
 post-processing list file = ppa_config.txt
 use groups = 1
-groups file = 04_abf_wgt/04_abf_wgt_groups.txt
+groups file = 09_load_rwr_all_wgt/09_load_rwr_all_wgt_groups.txt
