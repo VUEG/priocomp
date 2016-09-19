@@ -108,7 +108,7 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="0" checked="Qt::Unchecked" name="04_bd">
+        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="04_bd">
           <customproperties/>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="rwr_eu26_bd_stats20160915132316486" name="rwr_eu26_bd_stats">
             <customproperties/>
@@ -118,7 +118,7 @@
           </layer-tree-layer>
         </layer-tree-group>
       </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="Zonation">
+      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="Zonation">
         <customproperties/>
         <layer-tree-group expanded="0" checked="Qt::Unchecked" name="01_caz">
           <customproperties/>
@@ -183,9 +183,9 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="0" checked="Qt::Unchecked" name="08_abf_bd">
+        <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="08_abf_bd">
           <customproperties/>
-          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="08_abf_bd_nwout120160627133515561" name="08_abf_bd_nwout1">
+          <layer-tree-layer expanded="0" checked="Qt::Checked" id="08_abf_bd_nwout120160627133515561" name="08_abf_bd_nwout1">
             <customproperties/>
           </layer-tree-layer>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="08_abf_bd_rank_compressed20160627133452199" name="08_abf_bd.rank.compressed">
@@ -238,10 +238,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>2549681.63163630850613117</xmin>
-      <ymin>1287987.16499951481819153</ymin>
-      <xmax>6170824.14048007875680923</xmax>
-      <ymax>5405264.20618228800594807</ymax>
+      <xmin>2549681.63186849560588598</xmin>
+      <ymin>1287987.16611130721867085</ymin>
+      <xmax>6170824.14023653883486986</xmax>
+      <ymax>5405264.2062569335103035</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -271,15 +271,15 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="budget_level_0_0520160909123324281"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="lutra_lutra20160802122200372"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="08_abf_bd_rank_compressed20160627133452199"/>
-      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="pica_pica20160802122655629"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_eu26_bd_stats20160915133420520"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="pica_pica20160802122655629"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="wdpa_poly_geom20160726141759732"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="eu26_rwr_all20160726131504714"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="01_caz_rank_compressed20160518102320763"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="06_abf_es_nwout120160617090203238"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="eu26_ilp_es20160617090708183"/>
-      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_es20160826164545086"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_bd_stats20160915132316486"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_es20160826164545086"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="acrocephalus_agricola20160802121436173"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="02_abf_rank_compressed20160518103833006"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="07_caz_bd_rank_compressed20160627133346369"/>
@@ -295,8 +295,8 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="alytes_muletensis20160802121713728"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="08_abf_bd_nwout120160627133515561"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_eu26_all20160909122900968"/>
-      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="lacerta_viridis20160802123844905"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_eu26_all_stats20160915133305272"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="lacerta_viridis20160802123844905"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="03_caz_wgt_rank_compressed20160610095226793"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="05_caz_es_rank_compressed20160617090109009"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="04_abf_wgt_nwout120160615125613505"/>
@@ -314,8 +314,8 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="eu26_rwr_es20160726131505005"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_eu26_all_weights20160909104742389"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="budget_level_0_520160909123218731"/>
-      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="02_abf_nwout120160518103800583"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_eu26_all_weights_stats20160915133329236"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="02_abf_nwout120160518103800583"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="06_abf_es_nwout120160714095149833"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="NUTS_RG_01M_2013_level220160714120910095"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="03_caz_wgt_rank_compressed20160615225544131"/>
@@ -512,7 +512,7 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="false" checked="Qt::Unchecked" name="04_bd">
+        <legendgroup open="true" checked="Qt::Unchecked" name="04_bd">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_eu26_bd_stats" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="rwr_eu26_bd_stats20160915132316486" visible="0"/>
@@ -525,7 +525,7 @@
           </legendlayer>
         </legendgroup>
       </legendgroup>
-      <legendgroup open="true" checked="Qt::Unchecked" name="Zonation">
+      <legendgroup open="true" checked="Qt::PartiallyChecked" name="Zonation">
         <legendgroup open="false" checked="Qt::Unchecked" name="01_caz">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="01_caz_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
@@ -610,10 +610,10 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="false" checked="Qt::Unchecked" name="08_abf_bd">
-          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="08_abf_bd_nwout1" showFeatureCount="0">
+        <legendgroup open="true" checked="Qt::PartiallyChecked" name="08_abf_bd">
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="08_abf_bd_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
-              <legendlayerfile isInOverview="0" layerid="08_abf_bd_nwout120160627133515561" visible="0"/>
+              <legendlayerfile isInOverview="0" layerid="08_abf_bd_nwout120160627133515561" visible="1"/>
             </filegroup>
           </legendlayer>
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="08_abf_bd.rank.compressed" showFeatureCount="0">
@@ -5389,6 +5389,12 @@ def my_form_open(dialog, layer, feature):
       <blendMode>0</blendMode>
     </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" readOnly="0" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+      <extent>
+        <xmin>2635899.31063916347920895</xmin>
+        <ymin>1386017.57182906032539904</ymin>
+        <xmax>6084606.4614658709615469</xmax>
+        <ymax>5307233.80053918063640594</ymax>
+      </extent>
       <id>04_abf_wgt_nwout120160615125613505</id>
       <datasource>../../analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt_nwout1.shp</datasource>
       <keywordList>
@@ -5408,7 +5414,7 @@ def my_form_open(dialog, layer, feature):
         </spatialrefsys>
       </srs>
       <provider encoding="System">ogr</provider>
-      <previewExpression></previewExpression>
+      <previewExpression>COALESCE( "ID", '&lt;NULL>' )</previewExpression>
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
@@ -12636,6 +12642,12 @@ def my_form_open(dialog, layer, feature):
       <blendMode>0</blendMode>
     </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" readOnly="0" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+      <extent>
+        <xmin>2635899.31063916347920895</xmin>
+        <ymin>1386017.57182906032539904</ymin>
+        <xmax>6084606.4614658709615469</xmax>
+        <ymax>5307233.80053918063640594</ymax>
+      </extent>
       <id>rwr_eu26_bd_stats20160915132316486</id>
       <datasource>../../analyses/RWR/rwr_eu26_bd_stats.geojson</datasource>
       <keywordList>
@@ -12655,7 +12667,7 @@ def my_form_open(dialog, layer, feature):
         </spatialrefsys>
       </srs>
       <provider encoding="UTF-8">ogr</provider>
-      <previewExpression></previewExpression>
+      <previewExpression>COALESCE( "id", '&lt;NULL>' )</previewExpression>
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
@@ -13088,7 +13100,7 @@ def my_form_open(dialog, layer, feature):
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="&quot;NUTS_ID&quot;" sortOrder="0">
         <columns>
           <column width="-1" hidden="0" type="field" name="ID"/>
           <column width="-1" hidden="0" type="field" name="NUTS_ID"/>
