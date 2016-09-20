@@ -8,5 +8,3 @@ annotate name = 0
 post-processing list file = ppa_config.txt
 use groups = 1
 groups file = 09_load_es/09_load_es_groups.txt
-mask missing areas = 1
-area mask file = 06_abf_es/06_abf_es_out/06_abf_es_data_coverage.tif
