@@ -16,7 +16,7 @@ spatutils = SourceFileLoader("lib.spatutils", "src/00_lib/spatutils.py").load_mo
 gurobi = SourceFileLoader("analysis.gurobi", "src/02_analysis/gurobi.py").load_module()
 rwr = SourceFileLoader("analysis.rwr", "src/02_analysis/rwr.py").load_module()
 similarity = SourceFileLoader("results.similarity", "src/03_post_processing/similarity.py").load_module()
-
+coverage = SourceFileLoader("results.coverage", "src/03_post_processing/data_coverage.py").load_module()
 
 ## GLOBALS --------------------------------------------------------------------
 
@@ -492,6 +492,30 @@ rule postprocess_rwr:
 #     script:
 #         # NOTE: Currently there's a lot of things hardcoded here...
 #         "src/zonation/01_create_zonation_project.R"
+
+rule postprocess_zon:
+    input:
+        all_w="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
+        es="analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif",
+        bd="analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif",
+    output:
+        all_w="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt_data_coverage.tif",
+        es="analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es_data_coverage.tif",
+        bd="analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd_data_coverage.tif"
+    log:
+        all_w="logs/postprocess_zon_04_abf_wgt.log",
+        es="logs/postprocess_zon_06_es.log",
+        bd="logs/postprocess_zon_08_bd.log"
+    message:
+        "Post-processing ZON results..."
+    run:
+        llogger = utils.get_local_logger("coverage_all_w", log.all_w)
+        coverage.create_value_coverage(input.all_w, output.all_w,
+                                       logger=llogger)
+        llogger = utils.get_local_logger("coverage_es", log.es)
+        coverage.create_value_coverage(input.es, output.es, logger=llogger)
+        llogger = utils.get_local_logger("coverage_bd", log.bd)
+        coverage.create_value_coverage(input.es, output.bd, logger=llogger)
 
 # ILP ------------------------------------------------------------------------
 
