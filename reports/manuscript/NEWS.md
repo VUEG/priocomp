@@ -1,3 +1,7 @@
+## 0.3.0 (2016-08-19)
+
+- Add in figs and tables
+
 ## 0.2.0 (2016-08-02)
 
 - Outline moved from Google Docs to docx
