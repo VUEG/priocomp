@@ -1,10 +1,13 @@
 import fiona
+import geopandas as gpd
 import gdal
 import numpy as np
 import os
+import pandas as pd
 import pdb
 import rasterio
 import rasterstats
+import sys
 from importlib.machinery import SourceFileLoader
 
 ## LOAD MODULES --------------------------------------------------------------
@@ -597,9 +600,18 @@ rule compare_correlation:
 
 rule compare_jaccard:
     input:
-        rwr=rules.prioritize_rwr.output.all_w,
-        zon="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
-        ilp=rules.prioritize_ilp.output.all_w
+        rules.prioritize_rwr.output.all,
+        "analyses/zonation/priocomp/02_abf/02_abf_out/02_abf.rank.compressed.tif",
+        rules.prioritize_ilp.output.all,
+        rules.prioritize_rwr.output.all_w,
+        "analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
+        rules.prioritize_ilp.output.all_w,
+        rules.prioritize_rwr.output.es,
+        "analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif",
+        rules.prioritize_ilp.output.es,
+        rules.prioritize_rwr.output.bd,
+        "analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif",
+        rules.prioritize_ilp.output.bd
     output:
         "analyses/comparison/cross_jaccard.csv"
     log:
@@ -646,3 +658,75 @@ rule compare_mcs:
                                               verbose=False, logger=llogger)
         llogger.info("Saving results to {}".format(output[0]))
         mcs_scores_all.to_csv(output[0], index=False)
+
+rule compute_variation:
+    input:
+        rules.postprocess_rwr.output.all_w,
+        "analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt_nwout1.shp",
+        rules.postprocess_ilp.output.all_w,
+        rules.postprocess_rwr.output.es,
+        "analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es_nwout1.shp",
+        rules.postprocess_ilp.output.es,
+        rules.postprocess_rwr.output.bd,
+        "analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd_nwout1.shp",
+        rules.postprocess_ilp.output.bd
+    output:
+        "analyses/comparison/nuts2_rank_variation.shp"
+    log:
+        "logs/compute_variation.log"
+    message:
+        "Computing mean and variation stats of rank priorities for NUTS2 units..."
+    run:
+        llogger = utils.get_local_logger("compute_variation", log[0])
+
+        # FIXME: Codes are now hardcoded
+        input_codes = ["rwr_all", "zon_all", "ilp_all",
+                       "rwr_es", "zon_es", "ilp_es",
+                       "rwr_bd", "zon_bd", "ilp_bd"]
+
+        n_features = len(input)
+        # Create an empty DataFrame to store the rank priority cols
+        rank_values = pd.DataFrame({'NUTS_ID': []})
+
+        llogger.info("[1/3] Reading in {} features...".format(n_features))
+
+        for i, feature_file in enumerate(input):
+            feature_code = input_codes[i]
+            prefix = utils.get_iteration_prefix(i+1, n_features)
+            llogger.debug("{0} Processing feature {1}".format(prefix,
+                                                              feature_file))
+            # Read in the feature as GeoPandas dataframe
+            feat_data = gpd.read_file(feature_file)
+            # Two different field names are used to store the mean rank
+            # information: "_mean" for geojson-files and 'Men_rnk' for
+            # shapefiles. Figure out which is currently used.
+            if '_mean' in feat_data.columns:
+                mean_field = '_mean'
+            elif 'Men_rnk' in feat_data.columns:
+                mean_field = 'Men_rnk'
+            else:
+                llogger.error("Field '_mean' or 'Men_rnk' not found")
+                sys.exit(-1)
+            # On first iteration, also get the NUTS_ID column
+            if i == 1:
+                rank_values['NUTS_ID'] = feat_data['NUTS_ID']
+            # Get the rank priority column and place if the store DataFrame
+            rank_values[feature_code] = feat_data[mean_field]
+
+        llogger.info("[2/3] Calculating mean and STD...")
+        # Read in the first input feature to act as a template. Remember,
+        # output[0] is a tuple
+        output_feature = gpd.read_file(input[0])
+        # Only take one field: NUTS_ID
+        output_feature = output_feature[['geometry', 'NUTS_ID']]
+        # Merge with the collected data
+        output_feature = output_feature.merge(rank_values, on='NUTS_ID')
+        # Calculate mean
+        agg_means = output_feature.mean(1)
+        # Calculate STD
+        agg_stds = output_feature.std(1)
+        output_feature['agg_mean'] = agg_means
+        output_feature['agg_std'] = agg_stds
+
+        llogger.info("[3/3] Saving results to {}".format(output[0]))
+        output_feature.to_file(output[0])
