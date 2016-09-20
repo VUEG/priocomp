@@ -1,0 +1,4 @@
+2016-09-20 15:57:13 [coverage_bd] [INFO ] Reading and processing raster analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif
+2016-09-20 15:57:14 [coverage_bd] [DEBUG] Number of informative cells: 4301517
+2016-09-20 15:57:15 [coverage_bd] [INFO ] Writing output raster analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd_data_coverage.tif
+2016-09-20 15:57:16 [coverage_bd] [INFO ]  [TIME] Binarizing took 2.26 sec

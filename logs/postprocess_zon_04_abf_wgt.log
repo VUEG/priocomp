@@ -1,0 +1,4 @@
+2016-09-20 15:57:08 [coverage_all_w] [INFO ] Reading and processing raster analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif
+2016-09-20 15:57:09 [coverage_all_w] [DEBUG] Number of informative cells: 4302537
+2016-09-20 15:57:10 [coverage_all_w] [INFO ] Writing output raster analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt_data_coverage.tif
+2016-09-20 15:57:11 [coverage_all_w] [INFO ]  [TIME] Binarizing took 2.5 sec
