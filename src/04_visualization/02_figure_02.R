@@ -19,7 +19,7 @@ read_data <- function(x, value_field, group) {
     names(sp_obj)[1] <- "ID"
   }
   # Filter out polygons that have NA for value_field
-  sp_obj <- subset(sp_obj, !is.na(value_field))
+  sp_obj <- subset(sp_obj, !is.na(eval(parse(text = value_field))))
   # Rename value field
   new_value_field <- paste0(group, "_mean_rank")
   names(sp_obj)[names(sp_obj) == value_field] <- new_value_field
@@ -62,6 +62,8 @@ ilp_combo <- sp::merge(ilp_combo, ilp_bd, by.x = "id", by.y = "id")
 
 breaks <- 7
 
+# FIXME: make panel titles bigger
+
 rwr_maps <- tm_shape(rwr_combo) +
   tm_polygons(c("rwr_es_mean_rank", "rwr_all_mean_rank", "rwr_bd_mean_rank"),
               palette = viridis::viridis(breaks),
@@ -70,6 +72,14 @@ rwr_maps <- tm_shape(rwr_combo) +
   tm_format_Europe(title = c("RWR ES", "RWR ALL", "RWR BD"),
                    inner.margins = c(0.02, 0.02, 0.02, 0),
                    legend.show = FALSE) +
+  tm_style_grey()
+
+rwr_legend <- tm_shape(rwr_combo) +
+  tm_polygons("rwr_all_mean_rank",
+              palette = viridis::viridis(breaks),
+              style = "fixed", breaks = seq(0, 1, 0.1),
+              title = "Priority rank") +
+  tm_format_Europe(legend.only = TRUE, legend.position = c("left", "center")) +
   tm_style_grey()
 
 zon_maps <- tm_shape(zon_combo) +
@@ -92,6 +102,8 @@ ilp_maps <- tm_shape(ilp_combo) +
                    legend.show = FALSE) +
   tm_style_grey()
 
+# FIXME: get the legend into the same image
+
 png("reports/figures/02_figure_02.png", width = 1800, height = 1800)
 grid.newpage()
 pushViewport(viewport(layout = grid.layout(3,1)))
@@ -99,3 +111,26 @@ print(rwr_maps, vp = viewport(layout.pos.row = 1))
 print(zon_maps, vp = viewport(layout.pos.row = 2))
 print(ilp_maps, vp = viewport(layout.pos.row = 3))
 dev.off()
+
+save_tmap(rwr_legend,"reports/figures/02_figure_02_legend.png", width = 400,
+          height = 600)
+
+
+# Variation ---------------------------------------------------------------
+
+all_combo <- sp::merge(rwr_all, zon_all, by.x = "id", by.y = "id")
+all_combo <- sp::merge(all_combo, ilp_all, by.x = "id", by.y = "id")
+
+es_combo <- sp::merge(rwr_es, zon_es, by.x = "id", by.y = "id")
+es_combo <- sp::merge(es_combo, ilp_es, by.x = "id", by.y = "id")
+
+bd_combo <- sp::merge(rwr_bd, zon_bd, by.x = "id", by.y = "id")
+bd_combo <- sp::merge(bd_combo, ilp_bd, by.x = "id", by.y = "id")
+
+combo <- sp::merge(all_combo, es_combo, by.x = "id", by.y = "id")
+combo <- sp::merge(combo, bd_combo, by.x = "id", by.y = "id")
+
+combo$agg_mean <- apply(combo@data[, 4:12], 1, mean)
+combo$agg_median <- apply(combo@data[, 4:12], 1, median))
+combo$agg_sd <- apply(combo@data[, 4:12], 1, sd)
+maptools::writePolyShape(combo, "analyses/comparison/variation.shp")

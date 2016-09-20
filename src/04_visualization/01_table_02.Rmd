@@ -4,6 +4,7 @@ library(DT)
 library(gridExtra) 
 library(ggplot2) 
 library(ggthemes) 
+library(htm)
 library(knitr)  
 library(readr)
 library(scales)  
@@ -44,21 +45,48 @@ match_type <- Vectorize(
 
 
 # Read in the data -------------------------------------------------------
-# Parse groups for feature1 and feature2 and rearrange data.
+
+## Kendall tau rank correlation 
+
 cors <- readr::read_csv("../../analyses/comparison/cross_correlation.csv") %>% 
   mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
          f2_method = match_method(feature2), f2_type = match_type(feature2),
          key = paste(f1_method, f1_type, f2_method, f2_type, 
                      sep = "_")) %>% 
   select(key, f1_method, f1_type, f2_method, f2_type, tau)
+
+## Map comparison statistic
+
+# NOTE: use the complement of MCS: CMCS = 1 - MCS
 mcss <- readr::read_csv("../../analyses/comparison/cross_mcs.csv") %>% 
   mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
          f2_method = match_method(feature2), f2_type = match_type(feature2),
          key = paste(f1_method, f1_type, f2_method, f2_type, 
-                     sep = "_")) %>% 
-  select(key, f1_method, f1_type, f2_method, f2_type, mcs)
+                     sep = "_"), cmcs = 1 - mcs) %>% 
+  select(key, f1_method, f1_type, f2_method, f2_type, cmcs)
+
+## Jaccard coefficients for different thresholds
+
+jac <- readr::read_csv("../../analyses/comparison/cross_jaccard.csv") %>% 
+  mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
+         f2_method = match_method(feature2), f2_type = match_type(feature2),
+         key = paste(f1_method, f1_type, f2_method, f2_type, 
+                     sep = "_")) %>%
+  # Floating point precision issues (e.g. 0.9000000001) caused by NumPy
+  mutate(threshold = round(threshold, 2)) %>% 
+  filter(threshold == 0.10 | threshold == 0.90) %>%
+  select(key, f1_method, f1_type, f2_method, f2_type, threshold, coef) %>% 
+  mutate(threshold = paste0("jac_", gsub("\\.", "", threshold))) %>% 
+  spread(threshold, coef)
+
+## Join all stats
+
 all <- left_join(cors, mcss, by = c("key" = "key")) %>% 
-  select(method = f1_method.x, type = f1_type.x, tau, mcs)
+  select(key, f1_method = f1_method.x, f2_method = f2_method.x, 
+         f1_type = f1_type.x, f2_type = f2_type.x, tau, cmcs)
+all <- left_join(all, jac, by = c("key" = "key")) %>% 
+  select(f1_method = f1_method.x, f1_type = f1_type.x,
+         f2_method = f2_method.x, f2_type = f2_type.x, tau, cmcs, jac_01, jac_09)
 
 ```
 
@@ -72,8 +100,25 @@ all %>%
   arrange(desc(tau)) %>% 
   filter() %>% 
   datatable() %>% 
-  formatRound(columns = c('tau', 'mcs'), digits = 3)
+  formatRound(columns = c('tau', 'cmcs', 'jac_01', 'jac_09'), digits = 3)
 ```
 
 
+## Table 2
+
+```{r table-2}
+output <- matrix(paste("Content", LETTERS[1:16]), ncol = 4, byrow = TRUE)
+
+htmlTable(output,
+          header = c("ALL", "ALL_WGT", "ES", "BD"),
+          rnames = c("ALL", "ALL_WGT", "ES", "BD"),
+          rgroup = c("RWR", "ZON", "ILP"),
+          
+          n.rgroup = c(3, 4),
+          cgroup = c("RWR", "ZON", "ILP"),
+          n.cgroup = c(3, 4), 
+          
+          caption = "Basic table with both column spanners (groups) and row groups")
+
+```
 
