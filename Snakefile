@@ -493,7 +493,7 @@ rule postprocess_rwr:
 #         # NOTE: Currently there's a lot of things hardcoded here...
 #         "src/zonation/01_create_zonation_project.R"
 
-rule postprocess_zon:
+rule create_zon_coverage:
     input:
         all_w="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
         es="analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif",
@@ -516,6 +516,27 @@ rule postprocess_zon:
         coverage.create_value_coverage(input.es, output.es, logger=llogger)
         llogger = utils.get_local_logger("coverage_bd", log.bd)
         coverage.create_value_coverage(input.es, output.bd, logger=llogger)
+
+rule expand_zon_coverage:
+    input:
+        all_w="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
+        es="analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif",
+        bd="analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif",
+    output:
+        es_expanded="analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank_expanded.compressed.tif",
+        bd_expanded="analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank_expanded.compressed.tif"
+    log:
+        es="logs/expand_zon_06_es.log",
+        bd="logs/expand_zon_08_bd.log"
+    message:
+        "Post-processing (expanding) ZON results..."
+    run:
+        llogger = utils.get_local_logger("expand_es", log.es)
+        coverage.expand_value_coverage(input.es, input.all_w, output.es_expanded,
+                                       logger=llogger)
+        llogger = utils.get_local_logger("expand_bd", log.bd)
+        coverage.expand_value_coverage(input.bd, input.all_w, output.bd_expanded,
+                                       logger=llogger)
 
 # ILP ------------------------------------------------------------------------
 
