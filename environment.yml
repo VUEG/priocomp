@@ -31,5 +31,6 @@ dependencies:
   - pip:
       - colorlog
       - easywebdav
+      - geopandas
       - python-dotenv
       - rasterstats
