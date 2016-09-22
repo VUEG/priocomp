@@ -15,23 +15,23 @@ dotenv.load_dotenv(dotenv_path)
 # Set up a remote provider
 HTTP = HTTPRemoteProvider()
 
-# Get datasets from the data manifest file.
-data_manifest = utils.parse_data_manifest("data_manifest.yml")
+# Load the content of the data manifest file into a DataManager object.
+dm = utils.DataManager("data/data_manifest.yml")
 
 # Get rid of "https://" in urls (Snakemake doesn't allow it) and construct
 # destination paths on the local file system
-DATADRYAD_SRC_DATASETS = [url.replace("https://", "") for url in data_manifest["datadryad"]]
+DATADRYAD_SRC_DATASETS = [url.replace("https://", "") for url in dm.get_resources(provider="datadryad", full_path=True)]
 DATADRYAD_DST_DATASETS = [url.replace("beehub.nl/environmental-geography-group", "external") for url in DATADRYAD_SRC_DATASETS]
 
-PROVIDE_SRC_DATASETS = [url.replace("https://", "") for url in data_manifest["provide"]]
+PROVIDE_SRC_DATASETS = [url.replace("https://", "") for url in dm.get_resources(provider="provide", full_path=True)]
 PROVIDE_DST_DATASETS = [url.replace("beehub.nl/environmental-geography-group", "external") for url in PROVIDE_SRC_DATASETS]
 
-EUROSTAT_SRC_DATASETS = [url.replace("https://", "") for url in data_manifest["eurostat"]]
+EUROSTAT_SRC_DATASETS = [url.replace("https://", "") for url in dm.get_resources(provider="eurostat", full_path=True)]
 EUROSTAT_DST_DATASETS = [url.replace("beehub.nl/environmental-geography-group", "external") for url in EUROSTAT_SRC_DATASETS]
 
 # UDR collection "european_tetrapods" is already correctly formatted, place
 # it directly to "processed/features"
-UDR_SRC_DATASETS = [url.replace("https://", "") for url in data_manifest["udr"]]
+UDR_SRC_DATASETS = [url.replace("https://", "") for url in dm.get_resources(provider="udr", full_path=True)]
 UDR_DST_DATASETS = [url.replace("beehub.nl/environmental-geography-group", "processed/features") for url in UDR_SRC_DATASETS]
 
 ALL_DST_DATASET = DATADRYAD_DST_DATASETS + PROVIDE_DST_DATASETS + \
