@@ -1,0 +1,5 @@
+2016-09-22 11:12:26 [expand_bd ] [INFO ] Reading and processing raster analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif
+2016-09-22 11:12:27 [expand_bd ] [DEBUG] Number of informative cells in the data: 4289093
+2016-09-22 11:12:27 [expand_bd ] [DEBUG] Number of informative cells in the expand mask: 4302537
+2016-09-22 11:12:28 [expand_bd ] [INFO ] Writing output raster analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank_expanded.compressed.tif
+2016-09-22 11:12:30 [expand_bd ] [INFO ]  [TIME] Masking took 4.17 sec
