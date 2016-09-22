@@ -27,15 +27,15 @@ v08_crvs <- zonator::curves(v08_abf_bd, groups = FALSE)
 
 # Get the average proportion remaining over all features in respective variants
 v04_mean <- v04_crvs %>%
-  dplyr::select(pr_lost, ave_pr) %>%
+  dplyr::select(pr_lost, ave_pr, w_pr) %>%
   dplyr::mutate(variant = "ALL")
 
 v06_mean <- v06_crvs %>%
-  dplyr::select(pr_lost, ave_pr) %>%
+  dplyr::select(pr_lost, ave_pr, w_pr) %>%
   dplyr::mutate(variant = "ES")
 
 v08_mean <- v08_crvs %>%
-  dplyr::select(pr_lost, ave_pr) %>%
+  dplyr::select(pr_lost, ave_pr, w_pr) %>%
   dplyr::mutate(variant = "BD")
 
 # Combine all the average data
@@ -45,12 +45,12 @@ mean_perf <- dplyr::bind_rows(list(v04_mean, v06_mean, v08_mean))
 
 v09_crvs <- zonator::read_curves("analyses/zonation/priocomp/09_load_es/09_load_es_out/09_load_es.curves.txt")
 v09_mean <- v09_crvs %>%
-  dplyr::select(pr_lost, ave_pr) %>%
+  dplyr::select(pr_lost, ave_pr, w_pr) %>%
   dplyr::mutate(variant = "PES")
 
 v10_crvs <- zonator::read_curves("analyses/zonation/priocomp/10_load_bd/10_load_bd_out/10_load_bd.curves.txt")
 v10_mean <- v10_crvs %>%
-  dplyr::select(pr_lost, ave_pr) %>%
+  dplyr::select(pr_lost, ave_pr, w_pr) %>%
   dplyr::mutate(variant = "PBD")
 
 mean_pl_perf <- dplyr::bind_rows(list(v04_mean, v09_mean, v10_mean))
@@ -64,11 +64,16 @@ p1 <- ggplot2::ggplot(mean_perf, aes(x = pr_lost, y = ave_pr,
   scale_color_viridis("", discrete = TRUE) +
   theme_minimal()
 
-
 p2 <- ggplot2::ggplot(mean_pl_perf, aes(x = pr_lost, y = ave_pr,
                                         color = variant)) +
   geom_line(size = 1) + xlab("\nLandscape lost") +
   ylab("Average feature remaining\n") + ggtitle("B") +
   scale_color_viridis("", discrete = TRUE) + theme_minimal()
 
-fig3 <- gridExtra::grid.arrange(p1, p2, ncol = 1, nrow = 2)
+p3 <- ggplot2::ggplot(mean_pl_perf, aes(x = pr_lost, y = w_pr,
+                                        color = variant)) +
+  geom_line(size = 1) + xlab("\nLandscape lost") +
+  ylab("Average feature remaining\n") + ggtitle("C") +
+  scale_color_viridis("", discrete = TRUE) + theme_minimal()
+
+fig3 <- gridExtra::grid.arrange(p1, p2, p3, ncol = 1, nrow = 3)
