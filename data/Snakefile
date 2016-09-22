@@ -4,7 +4,7 @@ import logging
 from snakemake.remote.HTTP import RemoteProvider as HTTPRemoteProvider
 from importlib.machinery import SourceFileLoader
 
-utils = SourceFileLoader("src.utils", "../src/utils.py").load_module()
+utils = SourceFileLoader("src.utils", "../src/00_lib/utils.py").load_module()
 
 ## GLOBALS ---------------------------------------------------------------------
 
