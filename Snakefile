@@ -478,6 +478,21 @@ rule postprocess_rwr:
         llogger.info(" [4/4] Post-processing {}".format(input.bd))
         shell("fio cat {input.plu} | rio zonalstats -r {input.bd} > {output.bd}")
 
+rule expand_rwr_coverage:
+    input:
+        template="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
+        target=rules.prioritize_rwr.output.all_w
+    output:
+        "analyses/RWR/rwr_eu26_all_weights_expanded.tif"
+    log:
+        "logs/expand_rwr_all_wlog"
+    message:
+        "Post-processing (expanding) RWR results..."
+    run:
+        llogger = utils.get_local_logger("expand_rwr_w", log[0])
+        coverage.expand_value_coverage(input.target, input.template,
+                                       output[0], logger=llogger)
+
 # # Zonation ---------------------------------------------------------------------
 #
 # rule generate_zonation_project:
