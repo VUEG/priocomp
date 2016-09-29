@@ -485,7 +485,7 @@ rule expand_rwr_coverage:
     output:
         "analyses/RWR/rwr_eu26_all_weights_expanded.tif"
     log:
-        "logs/expand_rwr_all_wlog"
+        "logs/expand_rwr_all_w.log"
     message:
         "Post-processing (expanding) RWR results..."
     run:
