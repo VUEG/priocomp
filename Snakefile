@@ -553,6 +553,26 @@ rule expand_zon_coverage:
         coverage.expand_value_coverage(input.bd, input.all_w, output.bd_expanded,
                                        logger=llogger)
 
+rule match_zon_esbd_coverages:
+    input:
+        es="analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif",
+        bd="analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif",
+    output:
+        es_matched="analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank_bd_matched.compressed.tif",
+        bd_matched="analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank_es_matched.compressed.tif"
+    log:
+        es="logs/match_zon_06_es_bd.log",
+        bd="logs/match_zon_08_bd_es.log"
+    message:
+        "Post-processing (matching) ZON results..."
+    run:
+        llogger = utils.get_local_logger("match_es_bd", log.es)
+        coverage.expand_value_coverage(input.es, input.bd, output.es_matched,
+                                       logger=llogger)
+        llogger = utils.get_local_logger("match_bd_es", log.bd)
+        coverage.expand_value_coverage(input.bd, input.es, output.bd_matched,
+                                       logger=llogger)
+
 # ILP ------------------------------------------------------------------------
 
 rule prioritize_ilp:
