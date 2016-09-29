@@ -91,34 +91,40 @@ def expand_value_coverage(input_raster, expand_raster, output_raster,
 
     # 2. Read and process raster  ---------------------------------------------
 
-    # First, get the mask from the mask raster
-    expand_mask = rasterio.open(expand_raster).read(1, masked=True).mask
+    # First, get the mask and dtype from the mask raster
+    expand_raster = rasterio.open(expand_raster)
+    expand_raster_src = expand_raster.read(1, masked=True)
+    expand_mask = expand_raster_src.mask
 
     # Read raster bands directly to Numpy arrays.
     with rasterio.open(input_raster) as raster:
         llogger.info("Reading and processing raster {}".format(input_raster))
         input_nodata = raster.nodata
+
         # Read in the data
         src = raster.read(1, masked=True)
+        src_dtype = src.dtype
         src_mask = src.mask
         llogger.debug("Number of informative cells in the data: {}".format(np.sum(~src_mask)))
         llogger.debug("Number of informative cells in the expand mask: {}".format(np.sum(~expand_mask)))
 
         # Change the mask
         src = src.filled(input_nodata)
+
         src = ma.masked_where(expand_mask, src)
+
         # There might be some NoData values lurking around, replace them with
         # zero.
         np.place(src, src == input_nodata, 0.0)
-
+        #import pdb; pdb.set_trace()
         profile = raster.profile
-        profile.update(dtype=rasterio.float32, count=1, compress=compress,
+        profile.update(dtype=src_dtype, count=1, compress=compress,
                        nodata=input_nodata)
 
         with rasterio.open(output_raster, 'w', **profile) as dst:
             llogger.info("Writing output raster {}".format(output_raster))
             dst.write_mask(~expand_mask)
-            dst.write(src.astype(rasterio.float32), 1)
+            dst.write(src.astype(src_dtype), 1)
 
     all_end = timer()
     all_elapsed = round(all_end - all_start, 2)
