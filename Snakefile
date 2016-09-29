@@ -628,6 +628,20 @@ rule postprocess_ilp:
         llogger.info(" [4/4] Post-processing {}".format(input.bd))
         shell("fio cat {input.plu} | rio zonalstats -r {input.bd} > {output.bd}")
 
+rule expand_ilp_coverage:
+    input:
+        template="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
+        target=rules.prioritize_ilp.output.all_w
+    output:
+        "analyses/ILP/ilp_eu26_all_weights_expanded.tif"
+    log:
+        "logs/expand_ilp_all_w.log"
+    message:
+        "Post-processing (expanding) ILP results..."
+    run:
+        llogger = utils.get_local_logger("expand_ilp_w", log[0])
+        coverage.expand_value_coverage(input.target, input.template,
+                                       output[0], logger=llogger)
 
 ## Compare results ------------------------------------------------------------
 
