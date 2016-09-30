@@ -67,12 +67,19 @@ def create_value_coverage(input_raster, output_raster, compress='DEFLATE',
 
 
 def expand_value_coverage(input_raster, expand_raster, output_raster,
-                          compress='DEFLATE', verbose=False, logger=None):
+                          union=False, compress='DEFLATE', verbose=False,
+                          logger=None):
     """ Expand a raster based on occurrence of informative cells in another.
+
+    Argument "intersect" can be used to define if only the mask of the
+    expand raster should be used, or an union between masks of input and
+    expand raster.
 
     :param input_raster: String path to input raster.
     :param expand_raster: String path to mask raster.
     :param output_raster: String path to output raster.
+    :param union: Boolean should masks of input_raster and expand_raster
+                  be unioned.
     :param compress: String compression level used for the output raster.
     :param verbose: Boolean indicating how much information is printed out.
     :param logger: logger object to be used.
@@ -105,25 +112,29 @@ def expand_value_coverage(input_raster, expand_raster, output_raster,
         src = raster.read(1, masked=True)
         src_dtype = src.dtype
         src_mask = src.mask
+
+        # Perform a union on the masks if needed
+        if union:
+            llogger.info("[NOTE] Using union of masks")
+            expand_mask = ma.mask_or(expand_mask, src_mask)
+
         llogger.debug("Number of informative cells in the data: {}".format(np.sum(~src_mask)))
         llogger.debug("Number of informative cells in the expand mask: {}".format(np.sum(~expand_mask)))
 
-        # Change the mask
-        src = src.filled(input_nodata)
-
-        src = ma.masked_where(expand_mask, src)
-
+        # Change the mask and the underlying values
+        src.mask = expand_mask
+        src.data[src.mask] = input_nodata
         # There might be some NoData values lurking around, replace them with
         # zero.
-        np.place(src, src == input_nodata, 0.0)
-        #import pdb; pdb.set_trace()
+        src.data[src == input_nodata] = 0.0
+        
         profile = raster.profile
         profile.update(dtype=src_dtype, count=1, compress=compress,
                        nodata=input_nodata)
 
         with rasterio.open(output_raster, 'w', **profile) as dst:
             llogger.info("Writing output raster {}".format(output_raster))
-            dst.write_mask(~expand_mask)
+            #import pdb; pdb.set_trace()
             dst.write(src.astype(src_dtype), 1)
 
     all_end = timer()
