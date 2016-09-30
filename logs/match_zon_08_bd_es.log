@@ -1,5 +1,5 @@
-2016-09-29 13:13:41 [match_bd_es] [INFO ] Reading and processing raster analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif
-2016-09-29 13:13:42 [match_bd_es] [DEBUG] Number of informative cells in the data: 4289093
-2016-09-29 13:13:42 [match_bd_es] [DEBUG] Number of informative cells in the expand mask: 4301517
-2016-09-29 13:13:43 [match_bd_es] [INFO ] Writing output raster analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank_es_matched.compressed.tif
-2016-09-29 13:13:45 [match_bd_es] [INFO ]  [TIME] Masking took 4.12 sec
+2016-09-30 10:39:31 [match_bd_es] [INFO ] Reading and processing raster analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif
+2016-09-30 10:39:31 [match_bd_es] [DEBUG] Number of informative cells in the data: 4289093
+2016-09-30 10:39:31 [match_bd_es] [DEBUG] Number of informative cells in the expand mask: 4301517
+2016-09-30 10:39:31 [match_bd_es] [INFO ] Writing output raster analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank_es_matched.compressed.tif
+2016-09-30 10:39:33 [match_bd_es] [INFO ]  [TIME] Masking took 2.99 sec
