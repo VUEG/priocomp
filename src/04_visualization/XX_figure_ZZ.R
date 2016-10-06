@@ -1,0 +1,230 @@
+library(cowplot)
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+library(grid)
+library(gridExtra)
+library(readr)
+library(scales)
+library(tidyr)
+library(viridis)
+
+# Utility functions -------------------------------------------------------
+
+# Extract given statistic. NOTE: no reality checking is done, use with care.
+extract_stat <- function(x, stat) {
+  requested_stat <- x %>%
+    select(f1_type, f1_method, f2_type, f2_method, tau, cmcs, jac_01, jac_09) %>%
+    gather(statistic, value, -f1_type, -f1_method, -f2_type, -f2_method) %>%
+    filter(statistic == stat) %>%
+    select(-statistic)
+  return(requested_stat)
+}
+
+# Generate self-crossing comparison stats (i.e. 1.0).
+generate_self_cross <- function(stat_name, stat_value = 1.0) {
+  method_codes <- c("RWR", "ZON", "ILP")
+  type_codes <- c("ALL", "ALL_WGT", "ES", "BD")
+
+  keys <- c()
+  f_methods <- c()
+  f_types <- c()
+
+  for (i in method_codes) {
+    for (j in type_codes) {
+      keys <- c(keys, paste(i, j, i, j, sep = "_"))
+      f_methods <- c(f_methods, i)
+      f_types <- c(f_types, j)
+    }
+  }
+  df <- data_frame(key = keys, f1_method = f_methods, f1_type = f_types,
+                   f2_method = f_methods, f2_type = f_types)
+  for (name in stat_name) {
+    df[,stat_name] <- stat_value
+  }
+  return(df)
+}
+
+# Custom grid arrangement with only one legend
+grid_arrange_shared_legend <- function(..., ncol = length(list(...)),
+                                       nrow = 1, position = c("bottom", "right")) {
+
+  plots <- list(...)
+  position <- match.arg(position)
+  g <- ggplotGrob(plots[[1]] + theme(legend.position = position))$grobs
+  legend <- g[[which(sapply(g, function(x) x$name) == "guide-box")]]
+  lheight <- sum(legend$height)
+  lwidth <- sum(legend$width)
+  gl <- lapply(plots, function(x) x + theme(legend.position = "none"))
+  gl <- c(gl, ncol = ncol, nrow = nrow)
+
+  combined <- switch(position,
+                     "bottom" = arrangeGrob(do.call(arrangeGrob, gl),
+                                            legend,
+                                            ncol = 1,
+                                            heights = unit.c(unit(1, "npc") - lheight, lheight)),
+                     "right" = arrangeGrob(do.call(arrangeGrob, gl),
+                                           legend,
+                                           ncol = 2,
+                                           widths = unit.c(unit(1, "npc") - lwidth, lwidth)))
+  grid.newpage()
+  grid.draw(combined)
+
+}
+
+
+# Simplify a character string name of a method used so that a 3-character
+# code is returned.
+match_method <- Vectorize(
+  function(x) {
+    if (grepl(".+\\/zonation\\/.+", x)) {
+      method <- "ZON"
+    } else if (grepl(".+\\/RWR\\/.+", x)) {
+      method <- "RWR"
+    } else if (grepl(".+\\/ILP\\/.+", x)) {
+      method <- "ILP"
+    } else {
+      stop("Method", x, " not matched")
+    }
+    return(method)
+  }, c("x"), USE.NAMES = FALSE, SIMPLIFY = TRUE)
+
+# Simplify a character string name of a data collection type used so that
+# a 3-character code is returned.
+match_type <- Vectorize(
+  function(x) {
+    if (grepl("_all.tif", x) | grepl("_all_stats", x) | grepl("02_abf", x)) {
+      mtype <- "ALL"
+    } else if (grepl("_all_weights.tif", x) | grepl("_all_weights_stats", x) | grepl("wgt", x)) {
+      mtype <- "ALL_WGT"
+    } else if (grepl("_es", x)) {
+      mtype <- "ES"
+    } else if (grepl("_bd", x)) {
+      mtype <- "BD"
+    } else {
+      stop("Type ", x, " not matched")
+    }
+    return(mtype)
+  }, c("x"), USE.NAMES = FALSE, SIMPLIFY = TRUE)
+
+
+# Plot a cross-comparison stat heatmap
+plot_stat <- function(x, title) {
+
+  rwr_rwr_stat <- x %>%
+    filter(f1_method == "RWR" & f2_method == "RWR")
+  rwr_zon_stat <- x %>%
+    filter(f1_method == "RWR" & f2_method == "ZON")
+  rwr_ilp_stat <- x %>%
+    filter(f1_method == "RWR" & f2_method == "ILP")
+  zon_zon_stat <- x %>%
+    filter(f1_method == "ZON" & f2_method == "ZON")
+  zon_ilp_stat <- x %>%
+    filter(f1_method == "ZON" & f2_method == "ILP")
+  ilp_ilp_stat <- x %>%
+    filter(f1_method == "ILP" & f2_method == "ILP")
+
+  create_subplot <- function(xx) {
+    sub_p <- ggplot(xx , aes(x = f1_type, y = f2_type, fill = value)) +
+      geom_tile(color = "white", size = 0.1) +
+      scale_fill_viridis(name = title, label = comma,
+                         limits = c(-0.25, 1), breaks = seq(-0.25, 1, by = 0.25)) +
+      coord_equal() +
+      labs(x = unique(xx$f1_method), y = unique(xx$f2_method), title = "") +
+      theme_tufte(base_family = "Helvetica") +
+      theme(plot.title = element_text(hjust = 0),
+            axis.ticks = element_blank(),
+            axis.text = element_text(size = 7))
+    return(sub_p)
+  }
+
+  rwr_rwr_p <- create_subplot(rwr_rwr_stat)
+  rwr_zon_p <- create_subplot(rwr_zon_stat)
+  rwr_ilp_p <- create_subplot(rwr_ilp_stat)
+  zon_zon_p <- create_subplot(zon_zon_stat)
+  zon_ilp_p <- create_subplot(zon_ilp_stat)
+  ilp_ilp_p <- create_subplot(ilp_ilp_stat)
+  p <- grid_arrange_shared_legend(rwr_rwr_p, rwr_zon_p, rwr_ilp_p,
+                                  zon_zon_p, zon_ilp_p,
+                                  ilp_ilp_p,
+                                  ncol = 3, nrow = 3)
+  return(p)
+}
+
+# Read in and arrange the data ---------------------------------------------
+
+## Kendall tau rank correlation
+
+cors <- readr::read_csv("analyses/comparison/cross_correlation.csv") %>%
+  mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
+         f2_method = match_method(feature2), f2_type = match_type(feature2),
+         key = paste(f1_method, f1_type, f2_method, f2_type,
+                     sep = "_")) %>%
+  select(key, f1_method, f1_type, f2_method, f2_type, tau) %>%
+  # Manully fill in the diagonal values (i.e. self-cross, 1.0) since they
+  # have not been included in the data
+  bind_rows(., generate_self_cross("tau", 1.0)) %>%
+  arrange(key)
+
+## Map comparison statistic
+
+# NOTE: use the complement of MCS: CMCS = 1 - MCS
+mcss <- readr::read_csv("analyses/comparison/cross_mcs.csv") %>%
+  mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
+         f2_method = match_method(feature2), f2_type = match_type(feature2),
+         key = paste(f1_method, f1_type, f2_method, f2_type,
+                     sep = "_"), cmcs = 1 - mcs) %>%
+  select(key, f1_method, f1_type, f2_method, f2_type, cmcs) %>%
+  bind_rows(., generate_self_cross("cmcs", 1.0)) %>%
+  arrange(key)
+
+## Jaccard coefficients for different thresholds
+
+jac <- readr::read_csv("analyses/comparison/cross_jaccard.csv") %>%
+  mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
+         f2_method = match_method(feature2), f2_type = match_type(feature2),
+         key = paste(f1_method, f1_type, f2_method, f2_type,
+                     sep = "_")) %>%
+  # Floating point precision issues (e.g. 0.9000000001) caused by NumPy
+  mutate(threshold = round(threshold, 2)) %>%
+  filter(threshold == 0.10 | threshold == 0.90) %>%
+  select(key, f1_method, f1_type, f2_method, f2_type, threshold, coef) %>%
+  mutate(threshold = paste0("jac_", gsub("\\.", "", threshold))) %>%
+  spread(threshold, coef) %>%
+  bind_rows(., generate_self_cross(c("jac_01", "jac_09"), 1.0)) %>%
+  arrange(key)
+
+## Join all stats and do additional filtering
+
+# Join correlation and map comparison statistics
+all_stats <- left_join(cors, mcss, by = c("key" = "key")) %>%
+  select(key, f1_method = f1_method.x, f2_method = f2_method.x,
+         f1_type = f1_type.x, f2_type = f2_type.x, tau, cmcs)
+# Join in also the jaccard coefficients
+all_stats <- left_join(all_stats, jac, by = c("key" = "key")) %>%
+  select(f1_method = f1_method.x, f1_type = f1_type.x,
+         f2_method = f2_method.x, f2_type = f2_type.x, tau, cmcs, jac_01, jac_09)
+# Remove ALL and rename ALL_WGT to ALL. From this point on, "ALL" means all
+# features with weights. In same go, make f1_type and f2_type ordered
+# factors
+all_stats <- all_stats %>%
+  # Remove original "ALL" types
+  filter(f1_type != "ALL") %>%
+  filter(f2_type != "ALL") %>%
+  # Rename original "ALL_WGT" to "ALL"
+  mutate(f1_type = gsub("ALL_WGT", "ALL", f1_type),
+         f2_type = gsub("ALL_WGT", "ALL", f2_type)) %>%
+  # Convert f1_type and f2_type to factors
+  mutate(f1_type = factor(f1_type, levels = c("ALL", "ES", "BD"), ordered = TRUE),
+         f2_type = factor(f2_type, levels = c("ALL", "ES", "BD"), ordered = TRUE)) %>%
+  arrange(f1_method, f1_type, f2_method, f2_type)
+
+# Create the plot ---------------------------------------------------------
+
+tau <- extract_stat(all_stats, "tau")
+jac <- extract_stat(all_stats, "jac_01")
+cmcs <- extract_stat(all_stats, "cmcs")
+
+p1 <- plot_stat(tau, title = "Tau")
+p2 <- plot_stat(jac, title = "Jaccard")
+p3 <- plot_stat(cmcs, title = "CMCS")
