@@ -112,7 +112,7 @@ match_type <- Vectorize(
 
 
 # Plot a cross-comparison stat heatmap
-plot_stat <- function(x, title) {
+plot_stat <- function(x, title, ...) {
 
   rwr_rwr_stat <- x %>%
     filter(f1_method == "RWR" & f2_method == "RWR")
@@ -139,13 +139,15 @@ plot_stat <- function(x, title) {
     return(sub_p)
   }
 
-  create_subplot <- function(xx, axis_titles = TRUE) {
+  create_subplot <- function(xx, min_lim = 0.0, max_lim = 1.0, step = 0.25,
+                             axis_titles = TRUE) {
     sub_p <- ggplot(xx , aes(x = f1_type, y = f2_type, fill = value)) +
       geom_tile(color = "white", size = 0.1) +
       geom_text(aes(label = sprintf("%0.2f", round(value, digits = 2))),
                 color = "black", size = 3) +
       scale_fill_viridis(name = title, label = comma,
-                         limits = c(-0.25, 1), breaks = seq(-0.25, 1, by = 0.25)) +
+                         limits = c(min_lim, max_lim),
+                         breaks = seq(min_lim, max_lim, by = step)) +
       coord_equal() + coord_flip() +
       labs(x = unique(xx$f1_method), y = unique(xx$f2_method), title = "") +
       theme_tufte(base_family = "Helvetica") +
@@ -160,16 +162,17 @@ plot_stat <- function(x, title) {
     return(sub_p)
   }
 
-  rwr_rwr_p <- create_subplot(rwr_rwr_stat)
-  rwr_zon_p <- create_subplot(rwr_zon_stat, axis_titles = FALSE)
-  rwr_ilp_p <- create_subplot(rwr_ilp_stat, axis_titles = FALSE)
+  rwr_rwr_p <- create_subplot(rwr_rwr_stat, ...)
+  browser()
+  rwr_zon_p <- create_subplot(rwr_zon_stat, axis_titles = FALSE, ...)
+  rwr_ilp_p <- create_subplot(rwr_ilp_stat, axis_titles = FALSE, ...)
   # Make a blank panel to set the layout correctly
   zon_rwr_p <- create_empty_subplot(zon_zon_stat)
-  zon_zon_p <- create_subplot(zon_zon_stat)
-  zon_ilp_p <- create_subplot(zon_ilp_stat, axis_titles = FALSE)
+  zon_zon_p <- create_subplot(zon_zon_stat, ...)
+  zon_ilp_p <- create_subplot(zon_ilp_stat, axis_titles = FALSE, ...)
   ilp_rwr_p <- create_empty_subplot(ilp_ilp_stat)
   ilp_zon_p <- create_empty_subplot(ilp_ilp_stat)
-  ilp_ilp_p <- create_subplot(ilp_ilp_stat)
+  ilp_ilp_p <- create_subplot(ilp_ilp_stat, ...)
 
   p <- grid_arrange_shared_legend(rwr_rwr_p, rwr_zon_p, rwr_ilp_p,
                                   zon_rwr_p, zon_zon_p, zon_ilp_p,
@@ -253,7 +256,7 @@ jac_01 <- extract_stat(all_stats, "jac_01")
 jac_09 <- extract_stat(all_stats, "jac_09")
 cmcs <- extract_stat(all_stats, "cmcs")
 
-p1 <- plot_stat(tau, title = "COR")
+p1 <- plot_stat(tau, title = "COR", min_lim = -0.25, max_lim = 1.0, step = 0.25)
 p2 <- plot_stat(jac_01, title = "J10")
 p3 <- plot_stat(jac_09, title = "J90")
 p4 <- plot_stat(cmcs, title = "MCS")
