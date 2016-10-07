@@ -72,8 +72,7 @@ grid_arrange_shared_legend <- function(..., ncol = length(list(...)),
                                           ncol = 2,
                                           widths = unit.c(unit(1, "npc") - lwidth, lwidth))
                      )
-  grid.newpage()
-  grid.draw(combined)
+  return(ggdraw(combined))
 }
 
 
@@ -261,5 +260,11 @@ p4 <- plot_stat(cmcs, title = "MCS")
 
 # Save plots --------------------------------------------------------------
 
+img_width <- 7
+img_width <- 6.6
 
+ggsave("reports/figures/04_figure_03_A.png", p1, width = img_width, height = img_width)
+ggsave("reports/figures/04_figure_03_B.png", p2, width = img_width, height = img_width)
+ggsave("reports/figures/04_figure_03_C.png", p3, width = img_width, height = img_width)
+ggsave("reports/figures/04_figure_03_D.png", p4, width = img_width, height = img_width)
 
