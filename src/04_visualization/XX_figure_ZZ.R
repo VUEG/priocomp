@@ -47,7 +47,7 @@ generate_self_cross <- function(stat_name, stat_value = 1.0) {
 
 # Custom grid arrangement with only one legend
 grid_arrange_shared_legend <- function(..., ncol = length(list(...)),
-                                       nrow = 1, position = c("bottom", "right")) {
+                                       nrow = 1, position = c("bottom", "right", "left")) {
 
   plots <- list(...)
   position <- match.arg(position)
@@ -66,10 +66,14 @@ grid_arrange_shared_legend <- function(..., ncol = length(list(...)),
                      "right" = arrangeGrob(do.call(arrangeGrob, gl),
                                            legend,
                                            ncol = 2,
-                                           widths = unit.c(unit(1, "npc") - lwidth, lwidth)))
+                                           widths = unit.c(unit(1, "npc") - lwidth, lwidth)),
+                     "left" = arrangeGrob(do.call(arrangeGrob, gl),
+                                          legend,
+                                          ncol = 2,
+                                          widths = unit.c(unit(1, "npc") - lwidth, lwidth))
+                     )
   grid.newpage()
   grid.draw(combined)
-
 }
 
 
@@ -124,30 +128,54 @@ plot_stat <- function(x, title) {
   ilp_ilp_stat <- x %>%
     filter(f1_method == "ILP" & f2_method == "ILP")
 
-  create_subplot <- function(xx) {
+  create_empty_subplot <- function(xx) {
+    sub_p <- ggplot(xx , aes(x = f1_type, y = f2_type, fill = value)) +
+      geom_blank() +
+      coord_equal() + coord_flip() +
+      labs(x = NULL, y = NULL, title = "") +
+      theme(axis.title = element_blank(),
+            axis.text = element_blank(),
+            axis.ticks = element_blank(),
+            axis.line = element_blank())
+    return(sub_p)
+  }
+
+  create_subplot <- function(xx, axis_titles = TRUE) {
     sub_p <- ggplot(xx , aes(x = f1_type, y = f2_type, fill = value)) +
       geom_tile(color = "white", size = 0.1) +
+      geom_text(aes(label = sprintf("%0.2f", round(value, digits = 2))),
+                color = "black", size = 3) +
       scale_fill_viridis(name = title, label = comma,
                          limits = c(-0.25, 1), breaks = seq(-0.25, 1, by = 0.25)) +
-      coord_equal() +
+      coord_equal() + coord_flip() +
       labs(x = unique(xx$f1_method), y = unique(xx$f2_method), title = "") +
       theme_tufte(base_family = "Helvetica") +
       theme(plot.title = element_text(hjust = 0),
             axis.ticks = element_blank(),
             axis.text = element_text(size = 7))
+
+    if (!axis_titles) {
+      sub_p <- sub_p + theme(axis.title = element_text(color = "white"))
+    }
+
     return(sub_p)
   }
 
   rwr_rwr_p <- create_subplot(rwr_rwr_stat)
-  rwr_zon_p <- create_subplot(rwr_zon_stat)
-  rwr_ilp_p <- create_subplot(rwr_ilp_stat)
+  rwr_zon_p <- create_subplot(rwr_zon_stat, axis_titles = FALSE)
+  rwr_ilp_p <- create_subplot(rwr_ilp_stat, axis_titles = FALSE)
+  # Make a blank panel to set the layout correctly
+  zon_rwr_p <- create_empty_subplot(zon_zon_stat)
   zon_zon_p <- create_subplot(zon_zon_stat)
-  zon_ilp_p <- create_subplot(zon_ilp_stat)
+  zon_ilp_p <- create_subplot(zon_ilp_stat, axis_titles = FALSE)
+  ilp_rwr_p <- create_empty_subplot(ilp_ilp_stat)
+  ilp_zon_p <- create_empty_subplot(ilp_ilp_stat)
   ilp_ilp_p <- create_subplot(ilp_ilp_stat)
+
   p <- grid_arrange_shared_legend(rwr_rwr_p, rwr_zon_p, rwr_ilp_p,
-                                  zon_zon_p, zon_ilp_p,
-                                  ilp_ilp_p,
-                                  ncol = 3, nrow = 3)
+                                  zon_rwr_p, zon_zon_p, zon_ilp_p,
+                                  ilp_rwr_p, ilp_zon_p, ilp_ilp_p,
+                                  ncol = 3, nrow = 3, position = "left")
   return(p)
 }
 
@@ -215,16 +243,23 @@ all_stats <- all_stats %>%
   mutate(f1_type = gsub("ALL_WGT", "ALL", f1_type),
          f2_type = gsub("ALL_WGT", "ALL", f2_type)) %>%
   # Convert f1_type and f2_type to factors
-  mutate(f1_type = factor(f1_type, levels = c("ALL", "ES", "BD"), ordered = TRUE),
+  mutate(f1_type = factor(f1_type, levels = c("BD", "ES", "ALL"), ordered = TRUE),
          f2_type = factor(f2_type, levels = c("ALL", "ES", "BD"), ordered = TRUE)) %>%
   arrange(f1_method, f1_type, f2_method, f2_type)
 
 # Create the plot ---------------------------------------------------------
 
 tau <- extract_stat(all_stats, "tau")
-jac <- extract_stat(all_stats, "jac_01")
+jac_01 <- extract_stat(all_stats, "jac_01")
+jac_09 <- extract_stat(all_stats, "jac_09")
 cmcs <- extract_stat(all_stats, "cmcs")
 
-p1 <- plot_stat(tau, title = "Tau")
-p2 <- plot_stat(jac, title = "Jaccard")
-p3 <- plot_stat(cmcs, title = "CMCS")
+p1 <- plot_stat(tau, title = "COR")
+p2 <- plot_stat(jac_01, title = "J10")
+p3 <- plot_stat(jac_09, title = "J90")
+p4 <- plot_stat(cmcs, title = "MCS")
+
+# Save plots --------------------------------------------------------------
+
+
+
