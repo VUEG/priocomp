@@ -1,122 +1,265 @@
+library(cowplot)
 library(dplyr)
 library(ggplot2)
 library(ggthemes)
+library(grid)
 library(gridExtra)
+library(readr)
+library(scales)
 library(tidyr)
-library(zonator)
 library(viridis)
 
-# Load variants and get curves data ---------------------------------------
+# Utility functions -------------------------------------------------------
 
-zproject <- zonator::load_zproject('analyses/zonation/priocomp/')
+# Extract given statistic. NOTE: no reality checking is done, use with care.
+extract_stat <- function(x, stat) {
+  requested_stat <- x %>%
+    select(f1_type, f1_method, f2_type, f2_method, tau, cmcs, jac_01, jac_09) %>%
+    gather(statistic, value, -f1_type, -f1_method, -f2_type, -f2_method) %>%
+    filter(statistic == stat) %>%
+    select(-statistic)
+  return(requested_stat)
+}
 
-v04_abf_all_wgt <- zonator::get_variant(zproject, 4)
-v06_abf_es <- zonator::get_variant(zproject, 6)
-v08_abf_bd <- zonator::get_variant(zproject, 8)
+# Generate self-crossing comparison stats (i.e. 1.0).
+generate_self_cross <- function(stat_name, stat_value = 1.0) {
+  method_codes <- c("RWR", "ZON", "ILP")
+  type_codes <- c("ALL", "ALL_WGT", "ES", "BD")
 
-groupnames(v04_abf_all_wgt) <- c("1" = "ES", "2" = "BD")
-v04_crvs <- zonator::curves(v04_abf_all_wgt, groups = FALSE)
-v04_grp_crvs <- zonator::curves(v04_abf_all_wgt, groups = TRUE)
+  keys <- c()
+  f_methods <- c()
+  f_types <- c()
 
-v06_crvs <- zonator::curves(v06_abf_es, groups = FALSE)
+  for (i in method_codes) {
+    for (j in type_codes) {
+      keys <- c(keys, paste(i, j, i, j, sep = "_"))
+      f_methods <- c(f_methods, i)
+      f_types <- c(f_types, j)
+    }
+  }
+  df <- data_frame(key = keys, f1_method = f_methods, f1_type = f_types,
+                   f2_method = f_methods, f2_type = f_types)
+  for (name in stat_name) {
+    df[,stat_name] <- stat_value
+  }
+  return(df)
+}
 
-v08_crvs <- zonator::curves(v08_abf_bd, groups = FALSE)
+# Custom grid arrangement with only one legend
+grid_arrange_shared_legend <- function(..., ncol = length(list(...)),
+                                       nrow = 1, position = c("bottom", "right", "left")) {
 
-# Re-arrange data ---------------------------------------------------------
+  plots <- list(...)
+  position <- match.arg(position)
+  g <- ggplotGrob(plots[[1]] + theme(legend.position = position))$grobs
+  legend <- g[[which(sapply(g, function(x) x$name) == "guide-box")]]
+  lheight <- sum(legend$height)
+  lwidth <- sum(legend$width)
+  gl <- lapply(plots, function(x) x + theme(legend.position = "none"))
+  gl <- c(gl, ncol = ncol, nrow = nrow)
 
-v04_mean <- v04_crvs %>%
-  dplyr::select(pr_lost, ave_pr, w_pr) %>%
-  dplyr::mutate(variant = "ZON")
-
-# Construct a version where groups {"ES", "BD"} are separated
-v04_grp_mean <- v04_grp_crvs %>%
-  dplyr::select(pr_lost, mean.ES, mean.BD) %>%
-  tidyr::gather(variant, ave_pr, -pr_lost) %>%
-  dplyr::mutate(variant = gsub("mean\\.", "Full ", variant))
-
-# Get the average proportion remaining over all features in respective
-# variants
-v06_mean <- v06_crvs %>%
-  dplyr::select(pr_lost, ave_pr) %>%
-  dplyr::mutate(variant = "ES only")
-
-v08_mean <- v08_crvs %>%
-  dplyr::select(pr_lost, ave_pr) %>%
-  dplyr::mutate(variant = "BD only")
-
-# Pre-load ----------------------------------------------------------------
-
-# zonator can't deal with pre-loaded variants, so manually load up the
-# curves data
-
-v11_crvs <- zonator::read_curves("analyses/zonation/priocomp/11_load_abf_es_bd/11_load_abf_es_bd_out/11_load_abf_es_bd.curves.txt")
-v11_mean <- v11_crvs %>%
-  dplyr::select(pr_lost, ave_pr) %>%
-  dplyr::mutate(variant = "BD only (rank ES only)")
-
-v12_crvs <- zonator::read_curves("analyses/zonation/priocomp/12_load_abf_bd_es/12_load_abf_bd_es_out/12_load_abf_bd_es.curves.txt")
-v12_mean <- v12_crvs %>%
-  dplyr::select(pr_lost, ave_pr) %>%
-  dplyr::mutate(variant = "ES only (rank BD only)")
-
-v13_crvs <- zonator::read_curves("analyses/zonation/priocomp/13_load_abf_wgt_rwr_all/13_load_abf_wgt_rwr_all_out/13_load_abf_wgt_rwr_all.curves.txt")
-v13_mean <- v13_crvs %>%
-  dplyr::select(pr_lost, ave_pr, w_pr) %>%
-  dplyr::mutate(variant = "RWR")
-
-v14_crvs <- zonator::read_curves("analyses/zonation/priocomp/14_load_abf_wgt_ilp_all/14_load_abf_wgt_ilp_all_out/14_load_abf_wgt_ilp_all.curves.txt")
-v14_mean <- v14_crvs %>%
-  dplyr::select(pr_lost, ave_pr, w_pr) %>%
-  dplyr::mutate(variant = "ILP")
+  combined <- switch(position,
+                     "bottom" = arrangeGrob(do.call(arrangeGrob, gl),
+                                            legend,
+                                            ncol = 1,
+                                            heights = unit.c(unit(1, "npc") - lheight, lheight)),
+                     "right" = arrangeGrob(do.call(arrangeGrob, gl),
+                                           legend,
+                                           ncol = 2,
+                                           widths = unit.c(unit(1, "npc") - lwidth, lwidth)),
+                     "left" = arrangeGrob(do.call(arrangeGrob, gl),
+                                          legend,
+                                          ncol = 2,
+                                          widths = unit.c(unit(1, "npc") - lwidth, lwidth))
+                     )
+  grid.newpage()
+  grid.draw(combined)
+}
 
 
-# Combine data ------------------------------------------------------------
+# Simplify a character string name of a method used so that a 3-character
+# code is returned.
+match_method <- Vectorize(
+  function(x) {
+    if (grepl(".+\\/zonation\\/.+", x)) {
+      method <- "ZON"
+    } else if (grepl(".+\\/RWR\\/.+", x)) {
+      method <- "RWR"
+    } else if (grepl(".+\\/ILP\\/.+", x)) {
+      method <- "ILP"
+    } else {
+      stop("Method", x, " not matched")
+    }
+    return(method)
+  }, c("x"), USE.NAMES = FALSE, SIMPLIFY = TRUE)
 
-# Between data groups
+# Simplify a character string name of a data collection type used so that
+# a 3-character code is returned.
+match_type <- Vectorize(
+  function(x) {
+    if (grepl("_all.tif", x) | grepl("_all_stats", x) | grepl("02_abf", x)) {
+      mtype <- "ALL"
+    } else if (grepl("_all_weights.tif", x) | grepl("_all_weights_stats", x) | grepl("wgt", x)) {
+      mtype <- "ALL_WGT"
+    } else if (grepl("_es", x)) {
+      mtype <- "ES"
+    } else if (grepl("_bd", x)) {
+      mtype <- "BD"
+    } else {
+      stop("Type ", x, " not matched")
+    }
+    return(mtype)
+  }, c("x"), USE.NAMES = FALSE, SIMPLIFY = TRUE)
 
-v04_grp_mean$variant <- gsub("Full BD", "BD (rank ES+BD)",
-                             v04_grp_mean$variant)
-v04_grp_mean$variant <- gsub("Full ES", "ES (rank BD+ES)",
-                             v04_grp_mean$variant)
-datag_perf <- dplyr::bind_rows(list(v04_grp_mean, v06_mean, v08_mean,
-                                        v11_mean, v12_mean))
 
-# Between methods
-metho_perf <- dplyr::bind_rows(list(dplyr::filter(v04_mean,
-                                                      variant == "ZON"),
-                                        v13_mean, v14_mean))
+# Plot a cross-comparison stat heatmap
+plot_stat <- function(x, title) {
 
-# Plot mean curves --------------------------------------------------------
+  rwr_rwr_stat <- x %>%
+    filter(f1_method == "RWR" & f2_method == "RWR")
+  rwr_zon_stat <- x %>%
+    filter(f1_method == "RWR" & f2_method == "ZON")
+  rwr_ilp_stat <- x %>%
+    filter(f1_method == "RWR" & f2_method == "ILP")
+  zon_zon_stat <- x %>%
+    filter(f1_method == "ZON" & f2_method == "ZON")
+  zon_ilp_stat <- x %>%
+    filter(f1_method == "ZON" & f2_method == "ILP")
+  ilp_ilp_stat <- x %>%
+    filter(f1_method == "ILP" & f2_method == "ILP")
 
-x_lab <- "\nFraction of landscape"
-x_scale <- scale_x_continuous(breaks = seq(0, 1, 0.2),
-                              labels = paste(100 * seq(1, 0, -0.2), "%"))
-y_scale <- scale_y_continuous(breaks = seq(0, 1, 0.2),
-                              labels = paste(100 * seq(0, 1, 0.2), "%"))
+  create_empty_subplot <- function(xx) {
+    sub_p <- ggplot(xx , aes(x = f1_type, y = f2_type, fill = value)) +
+      geom_blank() +
+      coord_equal() + coord_flip() +
+      labs(x = NULL, y = NULL, title = "") +
+      theme(axis.title = element_blank(),
+            axis.text = element_blank(),
+            axis.ticks = element_blank(),
+            axis.line = element_blank())
+    return(sub_p)
+  }
 
-p1 <- ggplot2::ggplot(datag_perf, aes(x = pr_lost, y = ave_pr,
-                                          color = variant,
-                                          linetype = variant)) +
-  geom_line(size = 0.9) + xlab(x_lab) +
-  scale_linetype_manual("", values = rep(1:3, 2)) +
-  scale_color_manual("", values =  rev(rep(viridis(2, end = 0.7), 3, each = 3))) +
-  x_scale + y_scale + ylab("Average proportion of features covered\n") +
-  ggtitle("A") + theme_minimal() +
-  theme(legend.position = c(0.25, 0.075),
-        legend.justification = c(0.5, 0),
-        legend.key.width = unit(1,"cm"))
+  create_subplot <- function(xx, axis_titles = TRUE) {
+    sub_p <- ggplot(xx , aes(x = f1_type, y = f2_type, fill = value)) +
+      geom_tile(color = "white", size = 0.1) +
+      geom_text(aes(label = sprintf("%0.2f", round(value, digits = 2))),
+                color = "black", size = 3) +
+      scale_fill_viridis(name = title, label = comma,
+                         limits = c(-0.25, 1), breaks = seq(-0.25, 1, by = 0.25)) +
+      coord_equal() + coord_flip() +
+      labs(x = unique(xx$f1_method), y = unique(xx$f2_method), title = "") +
+      theme_tufte(base_family = "Helvetica") +
+      theme(plot.title = element_text(hjust = 0),
+            axis.ticks = element_blank(),
+            axis.text = element_text(size = 7))
 
-p2 <- ggplot2::ggplot(metho_perf, aes(x = pr_lost, y = w_pr,
-                                        color = variant)) +
-  geom_line(size = 1) + x_scale + y_scale + xlab(x_lab) + ylab("") +
-  ggtitle("B") +  scale_color_viridis("", discrete = TRUE) +
-  theme_minimal() +
-  theme(legend.position = c(0.25, 0.21),
-        legend.justification = c(0.5, 0),
-        legend.key.width = unit(1,"cm"))
+    if (!axis_titles) {
+      sub_p <- sub_p + theme(axis.title = element_text(color = "white"))
+    }
 
-fig3 <- gridExtra::grid.arrange(p1, p2, ncol = 2, nrow = 1)
+    return(sub_p)
+  }
 
-# Save Figure -------------------------------------------------------------
+  rwr_rwr_p <- create_subplot(rwr_rwr_stat)
+  rwr_zon_p <- create_subplot(rwr_zon_stat, axis_titles = FALSE)
+  rwr_ilp_p <- create_subplot(rwr_ilp_stat, axis_titles = FALSE)
+  # Make a blank panel to set the layout correctly
+  zon_rwr_p <- create_empty_subplot(zon_zon_stat)
+  zon_zon_p <- create_subplot(zon_zon_stat)
+  zon_ilp_p <- create_subplot(zon_ilp_stat, axis_titles = FALSE)
+  ilp_rwr_p <- create_empty_subplot(ilp_ilp_stat)
+  ilp_zon_p <- create_empty_subplot(ilp_ilp_stat)
+  ilp_ilp_p <- create_subplot(ilp_ilp_stat)
 
-ggsave("reports/figures/04_figure_03.png", fig3)
+  p <- grid_arrange_shared_legend(rwr_rwr_p, rwr_zon_p, rwr_ilp_p,
+                                  zon_rwr_p, zon_zon_p, zon_ilp_p,
+                                  ilp_rwr_p, ilp_zon_p, ilp_ilp_p,
+                                  ncol = 3, nrow = 3, position = "left")
+  return(p)
+}
+
+# Read in and arrange the data ---------------------------------------------
+
+## Kendall tau rank correlation
+
+cors <- readr::read_csv("analyses/comparison/cross_correlation.csv") %>%
+  mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
+         f2_method = match_method(feature2), f2_type = match_type(feature2),
+         key = paste(f1_method, f1_type, f2_method, f2_type,
+                     sep = "_")) %>%
+  select(key, f1_method, f1_type, f2_method, f2_type, tau) %>%
+  # Manully fill in the diagonal values (i.e. self-cross, 1.0) since they
+  # have not been included in the data
+  bind_rows(., generate_self_cross("tau", 1.0)) %>%
+  arrange(key)
+
+## Map comparison statistic
+
+# NOTE: use the complement of MCS: CMCS = 1 - MCS
+mcss <- readr::read_csv("analyses/comparison/cross_mcs.csv") %>%
+  mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
+         f2_method = match_method(feature2), f2_type = match_type(feature2),
+         key = paste(f1_method, f1_type, f2_method, f2_type,
+                     sep = "_"), cmcs = 1 - mcs) %>%
+  select(key, f1_method, f1_type, f2_method, f2_type, cmcs) %>%
+  bind_rows(., generate_self_cross("cmcs", 1.0)) %>%
+  arrange(key)
+
+## Jaccard coefficients for different thresholds
+
+jac <- readr::read_csv("analyses/comparison/cross_jaccard.csv") %>%
+  mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
+         f2_method = match_method(feature2), f2_type = match_type(feature2),
+         key = paste(f1_method, f1_type, f2_method, f2_type,
+                     sep = "_")) %>%
+  # Floating point precision issues (e.g. 0.9000000001) caused by NumPy
+  mutate(threshold = round(threshold, 2)) %>%
+  filter(threshold == 0.10 | threshold == 0.90) %>%
+  select(key, f1_method, f1_type, f2_method, f2_type, threshold, coef) %>%
+  mutate(threshold = paste0("jac_", gsub("\\.", "", threshold))) %>%
+  spread(threshold, coef) %>%
+  bind_rows(., generate_self_cross(c("jac_01", "jac_09"), 1.0)) %>%
+  arrange(key)
+
+## Join all stats and do additional filtering
+
+# Join correlation and map comparison statistics
+all_stats <- left_join(cors, mcss, by = c("key" = "key")) %>%
+  select(key, f1_method = f1_method.x, f2_method = f2_method.x,
+         f1_type = f1_type.x, f2_type = f2_type.x, tau, cmcs)
+# Join in also the jaccard coefficients
+all_stats <- left_join(all_stats, jac, by = c("key" = "key")) %>%
+  select(f1_method = f1_method.x, f1_type = f1_type.x,
+         f2_method = f2_method.x, f2_type = f2_type.x, tau, cmcs, jac_01, jac_09)
+# Remove ALL and rename ALL_WGT to ALL. From this point on, "ALL" means all
+# features with weights. In same go, make f1_type and f2_type ordered
+# factors
+all_stats <- all_stats %>%
+  # Remove original "ALL" types
+  filter(f1_type != "ALL") %>%
+  filter(f2_type != "ALL") %>%
+  # Rename original "ALL_WGT" to "ALL"
+  mutate(f1_type = gsub("ALL_WGT", "ALL", f1_type),
+         f2_type = gsub("ALL_WGT", "ALL", f2_type)) %>%
+  # Convert f1_type and f2_type to factors
+  mutate(f1_type = factor(f1_type, levels = c("BD", "ES", "ALL"), ordered = TRUE),
+         f2_type = factor(f2_type, levels = c("ALL", "ES", "BD"), ordered = TRUE)) %>%
+  arrange(f1_method, f1_type, f2_method, f2_type)
+
+# Create the plot ---------------------------------------------------------
+
+tau <- extract_stat(all_stats, "tau")
+jac_01 <- extract_stat(all_stats, "jac_01")
+jac_09 <- extract_stat(all_stats, "jac_09")
+cmcs <- extract_stat(all_stats, "cmcs")
+
+p1 <- plot_stat(tau, title = "COR")
+p2 <- plot_stat(jac_01, title = "J10")
+p3 <- plot_stat(jac_09, title = "J90")
+p4 <- plot_stat(cmcs, title = "MCS")
+
+# Save plots --------------------------------------------------------------
+
+
+
