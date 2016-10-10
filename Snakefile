@@ -5,6 +5,7 @@ import numpy as np
 import os
 import pandas as pd
 import pdb
+import pypandoc
 import rasterio
 import rasterstats
 import sys
@@ -824,3 +825,25 @@ rule compute_variation:
 
         llogger.info("[3/3] Saving results to {}".format(output[0]))
         output_feature.to_file(output[0])
+
+## Auxiliary operations -----------------------------------------------------
+
+rule generate_table_S1:
+    input:
+        "data/data_manifest.yml"
+    output:
+        md="reports/tables/02_table_S1.md",
+        docx="reports/tables/02_table_S1.docx"
+    log:
+        "logs/generate_table_S1.log"
+    message:
+        "Generating table S1..."
+    run:
+        llogger = utils.get_local_logger("generate_table_S1", log[0])
+
+        spp_table = dm.get_tabular(collection="european_tetrapods")
+        with open(output.md, 'w') as outfile:
+            outfile.write(spp_table)
+        # You need to have pandox around for this to work
+        output = pypandoc.convert_file(output.md, "docx",
+                                       outputfile=output.docx)
