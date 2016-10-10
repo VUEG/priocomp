@@ -34,3 +34,4 @@ dependencies:
       - geopandas
       - python-dotenv
       - rasterstats
+      - tabulate
