@@ -6,6 +6,7 @@ import os
 import pprint
 import yaml
 from colorlog import ColoredFormatter
+from tabulate import tabulate
 
 # Classes ---------------------------------------------------------------------
 
@@ -83,7 +84,6 @@ class DataManager(object):
             print("WARNING: multiple collection with the same name")
         return collection_match
 
-
     def get_collection(self, **kwargs):
         """ Get the ceollection associated with a hierarchy level.
 
@@ -147,8 +147,7 @@ class DataManager(object):
                                                        item['subcollection_name'])
                             resources = []
                             for resource in item['collection_resources']:
-                                resources.append("{0}/{1}".format(url, resource)
-                                                         )
+                                resources.append("{0}/{1}".format(url, resource))
                         else:
                             resources = item['collection_resources']
                         resource_match += resources
@@ -156,6 +155,57 @@ class DataManager(object):
             raise ValueError("Allowed query args are: {}".format(", ".join(allowed_keys)))
 
         return resource_match
+
+    def get_tabular(self, **kwargs):
+        """ Get a hierarchy level as a tabular table.
+
+        Following hierarchy levels can be used:
+            - collection
+            - subcollection
+
+        :param **kwargs: key-value -pair, where key must be in ["collection",
+                         "subcollection"]
+        :return list of String file names.
+        """
+        # List allowed query keys
+        allowed_keys = ["collection", "subcollection"]
+        # Get the key provided.
+        query_keys = list(kwargs.keys())
+        # Only one query key allowed.
+        if len(query_keys) > 1:
+            raise ValueError("Only one query key allowed at time")
+        query_key = query_keys[0]
+
+        tablerows = []
+
+        # Check that the quey key is allowed
+        if query_key in allowed_keys:
+            # Construct the actual query key
+            item_key = "{}_name".format(query_key)
+            for item in self.data:
+                # collection category is always present,
+                # subcollection category not necessarily.
+                if item_key in list(item.keys()):
+                    if item[item_key] == kwargs[query_key]:
+                        for resource in item['collection_resources']:
+                            spp_name = self.resource_to_name(resource)
+                            if query_key == "collection":
+                                if "subcollection_name" in list(item.keys()):
+                                    tablerows.append([item['subcollection_name'],
+                                                     spp_name])
+                                else:
+                                    tablerows.append([spp_name])
+                            elif query_key == "subcollection":
+                                tablerows.append([spp_name])
+        else:
+            raise ValueError("Allowed query args are: {}".format(", ".join(allowed_keys)))
+
+        if len(tablerows[0]) == 1:
+            table = tabulate(tablerows, headers=["species"])
+        elif len(tablerows[0]) == 2:
+            table = tabulate(tablerows, headers=["group", "species"])
+        return(table)
+
 
     def parse_data_manifest(self):
         """ Parse datasets from a data manifest file.
@@ -226,6 +276,11 @@ class DataManager(object):
                         raise ValueError("Invalid collection type")
 
         return items
+
+    def resource_to_name(self, resource):
+        """ Convert raster file name to a species name."""
+        spp_name = resource.replace(".tif", "").replace("_", " ").capitalize()
+        return(spp_name)
 
     def manifest(self):
         pprint.pprint(self.data)
