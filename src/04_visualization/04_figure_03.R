@@ -163,7 +163,6 @@ plot_stat <- function(x, title, ...) {
   }
 
   rwr_rwr_p <- create_subplot(rwr_rwr_stat, ...)
-  browser()
   rwr_zon_p <- create_subplot(rwr_zon_stat, axis_titles = FALSE, ...)
   rwr_ilp_p <- create_subplot(rwr_ilp_stat, axis_titles = FALSE, ...)
   # Make a blank panel to set the layout correctly
