@@ -55,23 +55,30 @@ grid_arrange_shared_legend <- function(..., ncol = length(list(...)),
   legend <- g[[which(sapply(g, function(x) x$name) == "guide-box")]]
   lheight <- sum(legend$height)
   lwidth <- sum(legend$width)
-  gl <- lapply(plots, function(x) x + theme(legend.position = "none"))
-  gl <- c(gl, ncol = ncol, nrow = nrow)
 
-  combined <- switch(position,
-                     "bottom" = arrangeGrob(do.call(arrangeGrob, gl),
-                                            legend,
-                                            ncol = 1,
-                                            heights = unit.c(unit(1, "npc") - lheight, lheight)),
-                     "right" = arrangeGrob(do.call(arrangeGrob, gl),
-                                           legend,
-                                           ncol = 2,
-                                           widths = unit.c(unit(1, "npc") - lwidth, lwidth)),
-                     "left" = arrangeGrob(do.call(arrangeGrob, gl),
-                                          legend,
-                                          ncol = 2,
-                                          widths = unit.c(unit(1, "npc") - lwidth, lwidth))
-                     )
+  gl <- lapply(plots, function(x) x + theme(legend.position = "none"))
+  # Insert legend into the list of grobs
+  gll <- gl[1:3]
+  gll[[4]] <- legend
+  gll[5:9] <- gl[5:9]
+  gl <- c(gl, ncol = ncol, nrow = nrow)
+  #gl[['heights']] <- rep(unit.c(unit(1 / ncol, "npc")), ncol)
+  #gl[['widths']] <- rep(unit.c(unit(1 / nrow, "npc")), nrow)
+  combined <- do.call(arrangeGrob, gll)
+  # combined <- switch(position,
+  #                    "bottom" = arrangeGrob(do.call(arrangeGrob, gl),
+  #                                           legend,
+  #                                           ncol = 1,
+  #                                           heights = unit.c(unit(1, "npc") - lheight, lheight)),
+  #                    "right" = arrangeGrob(do.call(arrangeGrob, gl),
+  #                                          legend,
+  #                                          ncol = 2,
+  #                                          widths = unit.c(unit(1, "npc") - lwidth, lwidth)),
+  #                    "left" = arrangeGrob(do.call(arrangeGrob, gl),
+  #                                         legend,
+  #                                         ncol = 2,
+  #                                         widths = unit.c(unit(1, "npc") - lwidth, lwidth))
+  #                    )
   return(ggdraw(combined))
 }
 
@@ -140,7 +147,9 @@ plot_stat <- function(x, title, ...) {
   }
 
   create_subplot <- function(xx, min_lim = 0.0, max_lim = 1.0, step = 0.25,
-                             axis_titles = TRUE) {
+                             axis_titles = TRUE, axis_text = TRUE,
+                             margins = unit(c(1, 1, 1, 1), "mm")) {
+
     sub_p <- ggplot(xx , aes(x = f1_type, y = f2_type, fill = value)) +
       geom_tile(color = "white", size = 0.1) +
       geom_text(aes(label = sprintf("%0.2f", round(value, digits = 2))),
@@ -149,29 +158,39 @@ plot_stat <- function(x, title, ...) {
                          limits = c(min_lim, max_lim),
                          breaks = seq(min_lim, max_lim, by = step)) +
       coord_equal() + coord_flip() +
-      labs(x = unique(xx$f1_method), y = unique(xx$f2_method), title = "") +
+      labs(x = unique(xx$f1_method), y = unique(xx$f2_method)) +
       theme_tufte(base_family = "Helvetica") +
-      theme(plot.title = element_text(hjust = 0),
+      theme(title = element_blank(),
             axis.ticks = element_blank(),
-            axis.text = element_text(size = 7))
+            axis.text = element_text(size = 7),
+            plot.margin = margins)
 
     if (!axis_titles) {
-      sub_p <- sub_p + theme(axis.title = element_text(color = "white"))
+      sub_p <- sub_p + theme(axis.title = element_blank())
+    }
+    if (!axis_text) {
+      sub_p <- sub_p + theme(axis.text = element_blank())
     }
 
     return(sub_p)
   }
 
-  rwr_rwr_p <- create_subplot(rwr_rwr_stat, ...)
-  rwr_zon_p <- create_subplot(rwr_zon_stat, axis_titles = FALSE, ...)
-  rwr_ilp_p <- create_subplot(rwr_ilp_stat, axis_titles = FALSE, ...)
+  rwr_rwr_p <- create_subplot(rwr_rwr_stat, axis_titles = FALSE,
+                              axis_text = FALSE, ...)
+  rwr_zon_p <- create_subplot(rwr_zon_stat, axis_titles = FALSE,
+                              axis_text = FALSE, ...)
+  rwr_ilp_p <- create_subplot(rwr_ilp_stat, axis_titles = FALSE,
+                              axis_text = FALSE, ...)
   # Make a blank panel to set the layout correctly
   zon_rwr_p <- create_empty_subplot(zon_zon_stat)
-  zon_zon_p <- create_subplot(zon_zon_stat, ...)
-  zon_ilp_p <- create_subplot(zon_ilp_stat, axis_titles = FALSE, ...)
+  zon_zon_p <- create_subplot(zon_zon_stat, axis_titles = FALSE,
+                              axis_text = FALSE, ...)
+  zon_ilp_p <- create_subplot(zon_ilp_stat, axis_titles = FALSE,
+                              axis_text = FALSE, ...)
   ilp_rwr_p <- create_empty_subplot(ilp_ilp_stat)
   ilp_zon_p <- create_empty_subplot(ilp_ilp_stat)
-  ilp_ilp_p <- create_subplot(ilp_ilp_stat, ...)
+  ilp_ilp_p <- create_subplot(ilp_ilp_stat, axis_titles = FALSE,
+                              axis_text = FALSE, ...)
 
   p <- grid_arrange_shared_legend(rwr_rwr_p, rwr_zon_p, rwr_ilp_p,
                                   zon_rwr_p, zon_zon_p, zon_ilp_p,
@@ -256,9 +275,11 @@ jac_09 <- extract_stat(all_stats, "jac_09")
 cmcs <- extract_stat(all_stats, "cmcs")
 
 p1 <- plot_stat(tau, title = "COR", min_lim = -0.25, max_lim = 1.0, step = 0.25)
-p2 <- plot_stat(jac_01, title = "J10")
-p3 <- plot_stat(jac_09, title = "J90")
-p4 <- plot_stat(cmcs, title = "MCS")
+p2 <- plot_stat(cmcs, title = "MCS")
+p3 <- plot_stat(jac_01, title = "J10")
+p4 <- plot_stat(jac_09, title = "J90")
+
+p_combined <- grid.arrange(p1, p2, p3, p4, nrow = 2, ncol = 2)
 
 # Save plots --------------------------------------------------------------
 
@@ -269,4 +290,5 @@ ggsave("reports/figures/04_figure_03_A.png", p1, width = img_width, height = img
 ggsave("reports/figures/04_figure_03_B.png", p2, width = img_width, height = img_width)
 ggsave("reports/figures/04_figure_03_C.png", p3, width = img_width, height = img_width)
 ggsave("reports/figures/04_figure_03_D.png", p4, width = img_width, height = img_width)
+ggsave("reports/figures/04_figure_03_combined.png", p_combined, width = 10, height = 10)
 
