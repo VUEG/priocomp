@@ -1,3 +1,7 @@
+## 0.4.0 (2016-10-14)
+
+- Move everything to LibreOffice
+
 ## 0.3.0 (2016-08-19)
 
 - Add in figs and tables
