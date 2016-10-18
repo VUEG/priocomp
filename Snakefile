@@ -33,9 +33,9 @@ PROJECT_CRS = 3035
 OFFSET = (100000, 100000, 0, 0)
 # Which eurostat countries are included in the processed output? The
 # following countries have been removed:
-# "CY", "CH", "IS", "HR", "NO", "ME", "MT", "MK", "TR"
+# "CY", "CH", "IS", "HR", "NO", "ME", "MT", "MK", "TR", "LI"
 PROJECT_COUNTRIES = ["AT", "BE", "BG", "CZ", "DE", "DK", "ES", "EL", "EE",
-                     "FR", "FI", "IT", "HU", "IE", "NL", "LU", "LI", "LT",
+                     "FR", "FI", "IT", "HU", "IE", "NL", "LU", "LT",
                      "LV", "PL", "SE", "RO", "PT", "SK", "SI", "UK"]
 
 # Load the content of the data manifest file into a DataManager object.
