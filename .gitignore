@@ -78,6 +78,7 @@ rsconnect/
 # Common
 *~
 .directory
+*~lock*
 
 # Test data
 tests/data
