@@ -1,7 +1,8 @@
+[![Snakemake](https://img.shields.io/badge/snakemake-≥3.5.2-brightgreen.svg?style=flat-square)](http://snakemake.bitbucket.org)
 
 ## Comparing spatial prioritization methods for biodiversity conservation and ecosystem service supply in Europe
 
-__Version:__ 0.1.0  
+__Version:__ 0.2.0  
 
 ### Introduction
 
