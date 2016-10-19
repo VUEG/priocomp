@@ -88,7 +88,10 @@ NORMALIZED_DATASETS = {"carbon_sequestration.tif":
 
 rule all:
     input:
-        "analyses/RWR/eu26_rwr.tif"
+        "analyses/comparison/cross_correlation.csv",
+        "analyses/comparison/cross_jaccard.csv",
+        "analyses/comparison/cross_mcs.csv",
+        "analyses/comparison/nuts2_rank_variation.shp"
 
 # ## Data pre-processing ---------------------------------------------------------
 #
