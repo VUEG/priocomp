@@ -248,8 +248,8 @@ def sum_raster(input_rasters, olnormalize=False, weights=None, verbose=False,
     # Check inputs
     assert len(input_rasters) > 0, "Input rasters list cannot be empty"
     if weights:
-        assert len(weights) == len(input_rasters), ("Length of weights must " +
-                                    "match the number of input rasters")
+        assert_msg = "Length of weights must match the number of input rasters"
+        assert len(weights) == len(input_rasters), assert_msg
 
     # Initiate the data structure for holding the summed values.
     sum_array = None
