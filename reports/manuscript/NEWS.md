@@ -1,6 +1,13 @@
+## 0.5.0 (2016-10-21)
+
+- Change target journal to Diversity and Distributions
+- 
+
 ## 0.4.0 (2016-10-14)
 
 - Move everything to LibreOffice
+- Add 2.3.1
+- Reorganize 2
 
 ## 0.3.0 (2016-08-19)
 
