@@ -1,54 +1,46 @@
-2016-09-14 17:37:45 [calculate_rwr_es] [INFO ]  [** SUMMING RASTERS **]
-2016-09-14 17:37:45 [calculate_rwr_es] [INFO ]  [NOTE] Using occurrence level normalization
-2016-09-14 17:37:45 [calculate_rwr_es] [INFO ]  [1/11] Processing raster data/processed/features/datadryad/forest_production_europe/woodprod_average.tif
-2016-09-14 17:37:45 [calculate_rwr_es] [DEBUG]  [1/11] Reading in data
-2016-09-14 17:37:46 [calculate_rwr_es] [DEBUG]  [1/11] OL normalizing data
-2016-09-14 17:37:46 [calculate_rwr_es] [DEBUG]  [1/11] Summing values
-2016-09-14 17:37:46 [calculate_rwr_es] [INFO ]  [2/11] Processing raster data/processed/features/provide/agrobiodiversity_species_richness/agrobiodiversity_species_richness.tif
-2016-09-14 17:37:46 [calculate_rwr_es] [DEBUG]  [2/11] Reading in data
-2016-09-14 17:37:46 [calculate_rwr_es] [DEBUG]  [2/11] OL normalizing data
-2016-09-14 17:37:46 [calculate_rwr_es] [DEBUG]  [2/11] Summing values
-2016-09-14 17:37:46 [calculate_rwr_es] [INFO ]  [3/11] Processing raster data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif
-2016-09-14 17:37:46 [calculate_rwr_es] [DEBUG]  [3/11] Reading in data
-2016-09-14 17:37:47 [calculate_rwr_es] [DEBUG]  [3/11] OL normalizing data
-2016-09-14 17:37:47 [calculate_rwr_es] [DEBUG]  [3/11] Summing values
-2016-09-14 17:37:47 [calculate_rwr_es] [INFO ]  [4/11] Processing raster data/processed/features/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif
-2016-09-14 17:37:47 [calculate_rwr_es] [DEBUG]  [4/11] Reading in data
-2016-09-14 17:37:48 [calculate_rwr_es] [DEBUG]  [4/11] OL normalizing data
-2016-09-14 17:37:48 [calculate_rwr_es] [DEBUG]  [4/11] Summing values
-2016-09-14 17:37:48 [calculate_rwr_es] [INFO ]  [5/11] Processing raster data/processed/features/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif
-2016-09-14 17:37:48 [calculate_rwr_es] [DEBUG]  [5/11] Reading in data
-2016-09-14 17:37:49 [calculate_rwr_es] [DEBUG]  [5/11] OL normalizing data
-2016-09-14 17:37:49 [calculate_rwr_es] [DEBUG]  [5/11] Summing values
-2016-09-14 17:37:49 [calculate_rwr_es] [INFO ]  [6/11] Processing raster data/processed/features/provide/erosion_prevention/erosion_prevention.tif
-2016-09-14 17:37:49 [calculate_rwr_es] [DEBUG]  [6/11] Reading in data
-2016-09-14 17:37:50 [calculate_rwr_es] [DEBUG]  [6/11] OL normalizing data
-2016-09-14 17:37:50 [calculate_rwr_es] [DEBUG]  [6/11] Summing values
-2016-09-14 17:37:50 [calculate_rwr_es] [INFO ]  [7/11] Processing raster data/processed/features/provide/floodregulation/floodregulation.tif
-2016-09-14 17:37:50 [calculate_rwr_es] [DEBUG]  [7/11] Reading in data
-2016-09-14 17:37:51 [calculate_rwr_es] [DEBUG]  [7/11] OL normalizing data
-2016-09-14 17:37:51 [calculate_rwr_es] [DEBUG]  [7/11] Summing values
-2016-09-14 17:37:51 [calculate_rwr_es] [INFO ]  [8/11] Processing raster data/processed/features/provide/megafauna/megafauna.tif
-2016-09-14 17:37:51 [calculate_rwr_es] [DEBUG]  [8/11] Reading in data
-2016-09-14 17:37:51 [calculate_rwr_es] [DEBUG]  [8/11] OL normalizing data
-2016-09-14 17:37:51 [calculate_rwr_es] [DEBUG]  [8/11] Summing values
-2016-09-14 17:37:52 [calculate_rwr_es] [INFO ]  [9/11] Processing raster data/processed/features/provide/nature_tourism/nature_tourism.tif
-2016-09-14 17:37:52 [calculate_rwr_es] [DEBUG]  [9/11] Reading in data
-2016-09-14 17:37:52 [calculate_rwr_es] [DEBUG]  [9/11] OL normalizing data
-2016-09-14 17:37:52 [calculate_rwr_es] [DEBUG]  [9/11] Summing values
-2016-09-14 17:37:52 [calculate_rwr_es] [INFO ]  [10/11] Processing raster data/processed/features/provide/pollination_flows/pollination_flows.tif
-2016-09-14 17:37:52 [calculate_rwr_es] [DEBUG]  [10/11] Reading in data
-2016-09-14 17:37:53 [calculate_rwr_es] [DEBUG]  [10/11] OL normalizing data
-2016-09-14 17:37:53 [calculate_rwr_es] [DEBUG]  [10/11] Summing values
-2016-09-14 17:37:53 [calculate_rwr_es] [INFO ]  [11/11] Processing raster data/processed/features/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif
-2016-09-14 17:37:53 [calculate_rwr_es] [DEBUG]  [11/11] Reading in data
-2016-09-14 17:37:53 [calculate_rwr_es] [DEBUG]  [11/11] OL normalizing data
-2016-09-14 17:37:54 [calculate_rwr_es] [DEBUG]  [11/11] Summing values
-2016-09-14 17:37:54 [calculate_rwr_es] [INFO ]  [TIME] Pre-processing took 9.35 sec
-2016-09-14 17:37:54 [calculate_rwr_es] [INFO ]  [** POST-PROCESSING **]
-2016-09-14 17:37:54 [calculate_rwr_es] [INFO ]  [1/3] Ranking values (this can take a while...)
-2016-09-14 17:37:55 [calculate_rwr_es] [INFO ]  [2/3] Rescaling ranks
-2016-09-14 17:37:56 [calculate_rwr_es] [INFO ]  [3/3] Writing output to analyses/RWR/rwr_eu26_es.tif
-2016-09-14 17:37:56 [calculate_rwr_es] [WARNI]  [WARN] Inconsistent raster profiles detected
-2016-09-14 17:37:59 [calculate_rwr_es] [INFO ]  [TIME] Post-processing took 4.9 sec
-2016-09-14 17:37:59 [calculate_rwr_es] [INFO ]  [TIME] All processing took 14.25 sec
+2016-10-26 15:59:15 [calculate_rwr_es] [INFO ]  [** SUMMING RASTERS **]
+2016-10-26 15:59:15 [calculate_rwr_es] [INFO ]  [NOTE] Using occurrence level normalization
+2016-10-26 15:59:15 [calculate_rwr_es] [INFO ]  [1/9] Processing raster data/processed/features/datadryad/forest_production_europe/woodprod_average.tif
+2016-10-26 15:59:15 [calculate_rwr_es] [DEBUG]  [1/9] Reading in data
+2016-10-26 15:59:16 [calculate_rwr_es] [DEBUG]  [1/9] OL normalizing data
+2016-10-26 15:59:16 [calculate_rwr_es] [DEBUG]  [1/9] Summing values
+2016-10-26 15:59:16 [calculate_rwr_es] [INFO ]  [2/9] Processing raster data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif
+2016-10-26 15:59:16 [calculate_rwr_es] [DEBUG]  [2/9] Reading in data
+2016-10-26 15:59:17 [calculate_rwr_es] [DEBUG]  [2/9] OL normalizing data
+2016-10-26 15:59:17 [calculate_rwr_es] [DEBUG]  [2/9] Summing values
+2016-10-26 15:59:17 [calculate_rwr_es] [INFO ]  [3/9] Processing raster data/processed/features/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif
+2016-10-26 15:59:17 [calculate_rwr_es] [DEBUG]  [3/9] Reading in data
+2016-10-26 15:59:18 [calculate_rwr_es] [DEBUG]  [3/9] OL normalizing data
+2016-10-26 15:59:18 [calculate_rwr_es] [DEBUG]  [3/9] Summing values
+2016-10-26 15:59:18 [calculate_rwr_es] [INFO ]  [4/9] Processing raster data/processed/features/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif
+2016-10-26 15:59:18 [calculate_rwr_es] [DEBUG]  [4/9] Reading in data
+2016-10-26 15:59:19 [calculate_rwr_es] [DEBUG]  [4/9] OL normalizing data
+2016-10-26 15:59:19 [calculate_rwr_es] [DEBUG]  [4/9] Summing values
+2016-10-26 15:59:19 [calculate_rwr_es] [INFO ]  [5/9] Processing raster data/processed/features/provide/erosion_prevention/erosion_prevention.tif
+2016-10-26 15:59:19 [calculate_rwr_es] [DEBUG]  [5/9] Reading in data
+2016-10-26 15:59:20 [calculate_rwr_es] [DEBUG]  [5/9] OL normalizing data
+2016-10-26 15:59:20 [calculate_rwr_es] [DEBUG]  [5/9] Summing values
+2016-10-26 15:59:20 [calculate_rwr_es] [INFO ]  [6/9] Processing raster data/processed/features/provide/floodregulation/floodregulation.tif
+2016-10-26 15:59:20 [calculate_rwr_es] [DEBUG]  [6/9] Reading in data
+2016-10-26 15:59:21 [calculate_rwr_es] [DEBUG]  [6/9] OL normalizing data
+2016-10-26 15:59:21 [calculate_rwr_es] [DEBUG]  [6/9] Summing values
+2016-10-26 15:59:21 [calculate_rwr_es] [INFO ]  [7/9] Processing raster data/processed/features/provide/nature_tourism/nature_tourism.tif
+2016-10-26 15:59:21 [calculate_rwr_es] [DEBUG]  [7/9] Reading in data
+2016-10-26 15:59:22 [calculate_rwr_es] [DEBUG]  [7/9] OL normalizing data
+2016-10-26 15:59:22 [calculate_rwr_es] [DEBUG]  [7/9] Summing values
+2016-10-26 15:59:22 [calculate_rwr_es] [INFO ]  [8/9] Processing raster data/processed/features/provide/pollination_flows/pollination_flows.tif
+2016-10-26 15:59:22 [calculate_rwr_es] [DEBUG]  [8/9] Reading in data
+2016-10-26 15:59:22 [calculate_rwr_es] [DEBUG]  [8/9] OL normalizing data
+2016-10-26 15:59:22 [calculate_rwr_es] [DEBUG]  [8/9] Summing values
+2016-10-26 15:59:23 [calculate_rwr_es] [INFO ]  [9/9] Processing raster data/processed/features/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif
+2016-10-26 15:59:23 [calculate_rwr_es] [DEBUG]  [9/9] Reading in data
+2016-10-26 15:59:23 [calculate_rwr_es] [DEBUG]  [9/9] OL normalizing data
+2016-10-26 15:59:23 [calculate_rwr_es] [DEBUG]  [9/9] Summing values
+2016-10-26 15:59:23 [calculate_rwr_es] [INFO ]  [TIME] Pre-processing took 8.44 sec
+2016-10-26 15:59:23 [calculate_rwr_es] [INFO ]  [** POST-PROCESSING **]
+2016-10-26 15:59:23 [calculate_rwr_es] [INFO ]  [1/3] Ranking values (this can take a while...)
+2016-10-26 15:59:25 [calculate_rwr_es] [INFO ]  [2/3] Rescaling ranks
+2016-10-26 15:59:26 [calculate_rwr_es] [INFO ]  [3/3] Writing output to analyses/RWR/rwr_eu26_es.tif
+2016-10-26 15:59:26 [calculate_rwr_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2016-10-26 15:59:28 [calculate_rwr_es] [INFO ]  [TIME] Post-processing took 4.85 sec
+2016-10-26 15:59:28 [calculate_rwr_es] [INFO ]  [TIME] All processing took 13.3 sec
