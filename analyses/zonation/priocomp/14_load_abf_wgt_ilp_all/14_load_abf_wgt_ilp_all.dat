@@ -1,6 +1,6 @@
 [Settings]
 removal rule = 2
-warp factor = 1000
+warp factor = 100
 edge removal = 0
 add edge points = 0
 initial removal percent = 0.0
