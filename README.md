@@ -2,7 +2,7 @@
 
 ## Comparing spatial prioritization methods for biodiversity conservation and ecosystem service supply in Europe
 
-__Version:__ 0.2.0  
+__Version:__ 0.3.0  
 
 ### Introduction
 
