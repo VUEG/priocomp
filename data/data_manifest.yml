@@ -10,10 +10,6 @@
             - woodprod_average.tif
   - provider: provide
     collections:
-      - agrobiodiversity_species_richness:
-          category: ecosystemservices
-          resources:
-            - agrobiodiversity_species_richness.tif
       - carbon_sequestration:
           category: ecosystemservices
           resources:
@@ -34,10 +30,6 @@
           category: ecosystemservices
           resources:
           - floodregulation.tif
-      - megafauna:
-          category: ecosystemservices
-          resources:
-          - megafauna.tif
       - nature_tourism:
           category: ecosystemservices
           resources:
