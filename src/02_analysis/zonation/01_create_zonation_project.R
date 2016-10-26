@@ -6,7 +6,7 @@ if (!require("zonator")) {
 library(raster)
 library(zonator)
 
-source("src/utils.R")
+source("src/00_lib/utils.R")
 
 # Number of features in groups ------------------------------------------------
 # NOTE: the numbers are hard coded and are not updated if the data change.
@@ -16,7 +16,7 @@ NBIRDS <- 404
 NMAMMALS <- 164
 NREPTILES <- 112
 
-NESFEATURES <- 11
+NESFEATURES <- 9
 NBDFEATURES <- NAMPHIBIANS + NBIRDS + NMAMMALS + NREPTILES
 
 # Generate variants for all taxa ----------------------------------------------
@@ -24,9 +24,9 @@ NBDFEATURES <- NAMPHIBIANS + NBIRDS + NMAMMALS + NREPTILES
 variants <- c("01_caz", "02_abf", "03_caz_wgt", "04_abf_wgt",
               "05_caz_es", "06_abf_es", "07_caz_bd", "08_abf_bd")
 
-zsetup_root <- "analyses/zonation_tmp"
+zsetup_root <- "analyses/zonation"
 
-ppa_raster_file <- "../../../data/processed/eurostat/nuts/level2/NUTS_RG_01M_2013_level2.tif"
+ppa_raster_file <- "../../../data/processed/eurostat/nuts_level2/NUTS_RG_01M_2013_level2.tif"
 ppa_config_file <- "ppa_config.txt"
 
 project_name <- "priocomp"
