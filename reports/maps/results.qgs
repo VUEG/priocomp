@@ -1,11 +1,11 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis projectname="" version="2.16.3">
+<qgis projectname="" version="2.18.0">
   <title></title>
   <autotransaction active="0"/>
   <evaluateDefaultValues active="0"/>
   <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="">
     <customproperties/>
-    <layer-tree-group expanded="1" checked="Qt::Unchecked" name="data">
+    <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="data">
       <customproperties/>
       <layer-tree-group expanded="0" checked="Qt::Unchecked" name="WDPA">
         <customproperties/>
@@ -16,8 +16,11 @@
           <customproperties/>
         </layer-tree-layer>
       </layer-tree-group>
-      <layer-tree-group expanded="0" checked="Qt::Unchecked" name="provide">
+      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="provide">
         <customproperties/>
+        <layer-tree-layer expanded="0" checked="Qt::Checked" id="carbon_sequestration20161026153021690" name="carbon_sequestration">
+          <customproperties/>
+        </layer-tree-layer>
         <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="nature_tourism20160715102902464" name="nature_tourism">
           <customproperties/>
         </layer-tree-layer>
@@ -77,14 +80,14 @@
         </layer-tree-group>
       </layer-tree-group>
     </layer-tree-group>
-    <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="analyses">
+    <layer-tree-group expanded="1" checked="Qt::Unchecked" name="analyses">
       <customproperties/>
-      <layer-tree-group expanded="1" checked="Qt::Checked" name="comparison">
+      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="comparison">
         <customproperties/>
-        <layer-tree-layer expanded="1" checked="Qt::Checked" id="nuts2_rank_variation20160920135233196" name="nuts2_rank_variation_std">
+        <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="nuts2_rank_variation20160920135233196" name="nuts2_rank_variation_std">
           <customproperties/>
         </layer-tree-layer>
-        <layer-tree-layer expanded="1" checked="Qt::Checked" id="nuts2_rank_variation20160920133849421" name="nuts2_rank_variation_mean">
+        <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="nuts2_rank_variation20160920133849421" name="nuts2_rank_variation_mean">
           <customproperties/>
         </layer-tree-layer>
       </layer-tree-group>
@@ -127,7 +130,7 @@
           </layer-tree-layer>
         </layer-tree-group>
       </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="Zonation">
+      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="Zonation">
         <customproperties/>
         <layer-tree-group expanded="0" checked="Qt::Unchecked" name="01_caz">
           <customproperties/>
@@ -192,9 +195,9 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="08_abf_bd">
+        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="08_abf_bd">
           <customproperties/>
-          <layer-tree-layer expanded="0" checked="Qt::Checked" id="08_abf_bd_nwout120160627133515561" name="08_abf_bd_nwout1">
+          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="08_abf_bd_nwout120160627133515561" name="08_abf_bd_nwout1">
             <customproperties/>
           </layer-tree-layer>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="08_abf_bd_rank_compressed20160627133452199" name="08_abf_bd.rank.compressed">
@@ -202,7 +205,7 @@
           </layer-tree-layer>
         </layer-tree-group>
       </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="ILP">
+      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="ILP">
         <customproperties/>
         <layer-tree-group expanded="0" checked="Qt::Unchecked" name="01_all">
           <customproperties/>
@@ -231,9 +234,9 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="0" checked="Qt::PartiallyChecked" name="04_bd">
+        <layer-tree-group expanded="0" checked="Qt::Unchecked" name="04_bd">
           <customproperties/>
-          <layer-tree-layer expanded="0" checked="Qt::Checked" id="ilp_eu26_bd_stats20160915133420520" name="ilp_eu26_bd_stats">
+          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_eu26_bd_stats20160915133420520" name="ilp_eu26_bd_stats">
             <customproperties/>
           </layer-tree-layer>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="eu26_ilp_bd20160726132109346" name="eu26_ilp_bd">
@@ -247,10 +250,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>2457900.66451526153832674</xmin>
-      <ymin>1149600.9100397415459156</ymin>
-      <xmax>6079043.17288327682763338</xmax>
-      <ymax>5266877.950185377150774</ymax>
+      <xmin>3965380.45044855307787657</xmin>
+      <ymin>2400509.7330006561242044</ymin>
+      <xmax>4418023.2639945549890399</xmax>
+      <ymax>2915169.3630188605748117</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -297,6 +300,7 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="07_caz_bd_rank_compressed20160627133346369"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="cultural_landscape_index_forest20160714120655387"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="03_caz_wgt_nwout120160617085900595"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="carbon_sequestration20161026153021690"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="lagopus_lagopus20160802122959777"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="budget_level_0_0520160909123307262"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_eu26_es_stats20160915133349888"/>
@@ -334,6 +338,7 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="03_caz_wgt_rank_compressed20160615225544131"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="eu26_ilp_bd20160726132109346"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="budget_level_0_120160909122943539"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="carbon_sequestration20161026153106123"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="budget_level_0_120160909122915109"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="04_abf_wgt_rank_compressed20160615125553257"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="eu26_ilp_all20160726132109062"/>
@@ -398,10 +403,11 @@
       <item>ilp_eu26_bd_stats20160915133420520</item>
       <item>nuts2_rank_variation20160920133849421</item>
       <item>nuts2_rank_variation20160920135233196</item>
+      <item>carbon_sequestration20161026153021690</item>
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
-    <legendgroup open="true" checked="Qt::Unchecked" name="data">
+    <legendgroup open="true" checked="Qt::PartiallyChecked" name="data">
       <legendgroup open="false" checked="Qt::Unchecked" name="WDPA"/>
       <legendgroup open="false" checked="Qt::Unchecked" name="eurostat">
         <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="NUTS_RG_01M_2013_level2" showFeatureCount="0">
@@ -410,7 +416,12 @@
           </filegroup>
         </legendlayer>
       </legendgroup>
-      <legendgroup open="false" checked="Qt::Unchecked" name="provide">
+      <legendgroup open="true" checked="Qt::PartiallyChecked" name="provide">
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="carbon_sequestration" showFeatureCount="0">
+          <filegroup open="false" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="carbon_sequestration20161026153021690" visible="1"/>
+          </filegroup>
+        </legendlayer>
         <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="nature_tourism" showFeatureCount="0">
           <filegroup open="false" hidden="false">
             <legendlayerfile isInOverview="0" layerid="nature_tourism20160715102902464" visible="0"/>
@@ -490,16 +501,16 @@
         </legendgroup>
       </legendgroup>
     </legendgroup>
-    <legendgroup open="true" checked="Qt::PartiallyChecked" name="analyses">
-      <legendgroup open="true" checked="Qt::Checked" name="comparison">
-        <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="nuts2_rank_variation_std" showFeatureCount="0">
+    <legendgroup open="true" checked="Qt::Unchecked" name="analyses">
+      <legendgroup open="true" checked="Qt::Unchecked" name="comparison">
+        <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="nuts2_rank_variation_std" showFeatureCount="0">
           <filegroup open="true" hidden="false">
-            <legendlayerfile isInOverview="0" layerid="nuts2_rank_variation20160920135233196" visible="1"/>
+            <legendlayerfile isInOverview="0" layerid="nuts2_rank_variation20160920135233196" visible="0"/>
           </filegroup>
         </legendlayer>
-        <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="nuts2_rank_variation_mean" showFeatureCount="0">
+        <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="nuts2_rank_variation_mean" showFeatureCount="0">
           <filegroup open="true" hidden="false">
-            <legendlayerfile isInOverview="0" layerid="nuts2_rank_variation20160920133849421" visible="1"/>
+            <legendlayerfile isInOverview="0" layerid="nuts2_rank_variation20160920133849421" visible="0"/>
           </filegroup>
         </legendlayer>
       </legendgroup>
@@ -553,7 +564,7 @@
           </legendlayer>
         </legendgroup>
       </legendgroup>
-      <legendgroup open="true" checked="Qt::PartiallyChecked" name="Zonation">
+      <legendgroup open="true" checked="Qt::Unchecked" name="Zonation">
         <legendgroup open="false" checked="Qt::Unchecked" name="01_caz">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="01_caz_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
@@ -638,10 +649,10 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="true" checked="Qt::PartiallyChecked" name="08_abf_bd">
-          <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="08_abf_bd_nwout1" showFeatureCount="0">
+        <legendgroup open="true" checked="Qt::Unchecked" name="08_abf_bd">
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="08_abf_bd_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
-              <legendlayerfile isInOverview="0" layerid="08_abf_bd_nwout120160627133515561" visible="1"/>
+              <legendlayerfile isInOverview="0" layerid="08_abf_bd_nwout120160627133515561" visible="0"/>
             </filegroup>
           </legendlayer>
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="08_abf_bd.rank.compressed" showFeatureCount="0">
@@ -651,7 +662,7 @@
           </legendlayer>
         </legendgroup>
       </legendgroup>
-      <legendgroup open="true" checked="Qt::PartiallyChecked" name="ILP">
+      <legendgroup open="true" checked="Qt::Unchecked" name="ILP">
         <legendgroup open="false" checked="Qt::Unchecked" name="01_all">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_eu26_all_stats" showFeatureCount="0">
             <filegroup open="false" hidden="false">
@@ -688,10 +699,10 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="false" checked="Qt::PartiallyChecked" name="04_bd">
-          <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="ilp_eu26_bd_stats" showFeatureCount="0">
+        <legendgroup open="false" checked="Qt::Unchecked" name="04_bd">
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_eu26_bd_stats" showFeatureCount="0">
             <filegroup open="false" hidden="false">
-              <legendlayerfile isInOverview="0" layerid="ilp_eu26_bd_stats20160915133420520" visible="1"/>
+              <legendlayerfile isInOverview="0" layerid="ilp_eu26_bd_stats20160915133420520" visible="0"/>
             </filegroup>
           </legendlayer>
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="eu26_ilp_bd" showFeatureCount="0">
@@ -3707,10 +3718,10 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100002</srsid>
+          <srsid>100001</srsid>
           <srid>0</srid>
-          <authid>USER:100002</authid>
-          <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
+          <authid></authid>
+          <description></description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
           <geographicflag>false</geographicflag>
@@ -3721,6 +3732,23 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="ID" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="STAT_LE" expression=""/>
+        <default field="SHAPE_A" expression=""/>
+        <default field="SHAPE_L" expression=""/>
+        <default field="country" expression=""/>
+        <default field="Area" expression=""/>
+        <default field="Men_rnk" expression=""/>
+        <default field="X" expression=""/>
+        <default field="Y" expression=""/>
+        <default field="Spp_ds_" expression=""/>
+        <default field="Plus_10" expression=""/>
+        <default field="Plus_1" expression=""/>
+        <default field="Plus_01" expression=""/>
+        <default field="Pl_0001" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -4162,6 +4190,23 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="ID" index="0" name=""/>
+        <alias field="NUTS_ID" index="1" name=""/>
+        <alias field="STAT_LE" index="2" name=""/>
+        <alias field="SHAPE_A" index="3" name=""/>
+        <alias field="SHAPE_L" index="4" name=""/>
+        <alias field="country" index="5" name=""/>
+        <alias field="Area" index="6" name=""/>
+        <alias field="Men_rnk" index="7" name=""/>
+        <alias field="X" index="8" name=""/>
+        <alias field="Y" index="9" name=""/>
+        <alias field="Spp_ds_" index="10" name=""/>
+        <alias field="Plus_10" index="11" name=""/>
+        <alias field="Plus_1" index="12" name=""/>
+        <alias field="Plus_01" index="13" name=""/>
+        <alias field="Pl_0001" index="14" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -4280,9 +4325,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100002</srsid>
+          <srsid>100001</srsid>
           <srid>0</srid>
-          <authid>USER:100002</authid>
+          <authid>USER:100001</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -4294,6 +4339,23 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="ID" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="STAT_LE" expression=""/>
+        <default field="SHAPE_A" expression=""/>
+        <default field="SHAPE_L" expression=""/>
+        <default field="country" expression=""/>
+        <default field="Area" expression=""/>
+        <default field="Men_rnk" expression=""/>
+        <default field="X" expression=""/>
+        <default field="Y" expression=""/>
+        <default field="Spp_ds_" expression=""/>
+        <default field="Plus_10" expression=""/>
+        <default field="Plus_1" expression=""/>
+        <default field="Plus_01" expression=""/>
+        <default field="Pl_0001" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -4732,6 +4794,23 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="ID" index="0" name=""/>
+        <alias field="NUTS_ID" index="1" name=""/>
+        <alias field="STAT_LE" index="2" name=""/>
+        <alias field="SHAPE_A" index="3" name=""/>
+        <alias field="SHAPE_L" index="4" name=""/>
+        <alias field="country" index="5" name=""/>
+        <alias field="Area" index="6" name=""/>
+        <alias field="Men_rnk" index="7" name=""/>
+        <alias field="X" index="8" name=""/>
+        <alias field="Y" index="9" name=""/>
+        <alias field="Spp_ds_" index="10" name=""/>
+        <alias field="Plus_10" index="11" name=""/>
+        <alias field="Plus_1" index="12" name=""/>
+        <alias field="Plus_01" index="13" name=""/>
+        <alias field="Pl_0001" index="14" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -4856,9 +4935,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100002</srsid>
+          <srsid>100001</srsid>
           <srid>0</srid>
-          <authid>USER:100002</authid>
+          <authid>USER:100001</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -4870,6 +4949,23 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="ID" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="STAT_LE" expression=""/>
+        <default field="SHAPE_A" expression=""/>
+        <default field="SHAPE_L" expression=""/>
+        <default field="country" expression=""/>
+        <default field="Area" expression=""/>
+        <default field="Men_rnk" expression=""/>
+        <default field="X" expression=""/>
+        <default field="Y" expression=""/>
+        <default field="Spp_ds_" expression=""/>
+        <default field="Plus_10" expression=""/>
+        <default field="Plus_1" expression=""/>
+        <default field="Plus_01" expression=""/>
+        <default field="Pl_0001" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -5308,6 +5404,23 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="ID" index="0" name=""/>
+        <alias field="NUTS_ID" index="1" name=""/>
+        <alias field="STAT_LE" index="2" name=""/>
+        <alias field="SHAPE_A" index="3" name=""/>
+        <alias field="SHAPE_L" index="4" name=""/>
+        <alias field="country" index="5" name=""/>
+        <alias field="Area" index="6" name=""/>
+        <alias field="Men_rnk" index="7" name=""/>
+        <alias field="X" index="8" name=""/>
+        <alias field="Y" index="9" name=""/>
+        <alias field="Spp_ds_" index="10" name=""/>
+        <alias field="Plus_10" index="11" name=""/>
+        <alias field="Plus_1" index="12" name=""/>
+        <alias field="Plus_01" index="13" name=""/>
+        <alias field="Pl_0001" index="14" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -5432,9 +5545,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100002</srsid>
+          <srsid>100001</srsid>
           <srid>0</srid>
-          <authid>USER:100002</authid>
+          <authid>USER:100001</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -5446,6 +5559,23 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="ID" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="STAT_LE" expression=""/>
+        <default field="SHAPE_A" expression=""/>
+        <default field="SHAPE_L" expression=""/>
+        <default field="country" expression=""/>
+        <default field="Area" expression=""/>
+        <default field="Men_rnk" expression=""/>
+        <default field="X" expression=""/>
+        <default field="Y" expression=""/>
+        <default field="Spp_ds_" expression=""/>
+        <default field="Plus_10" expression=""/>
+        <default field="Plus_1" expression=""/>
+        <default field="Plus_01" expression=""/>
+        <default field="Pl_0001" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -5884,6 +6014,23 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="ID" index="0" name=""/>
+        <alias field="NUTS_ID" index="1" name=""/>
+        <alias field="STAT_LE" index="2" name=""/>
+        <alias field="SHAPE_A" index="3" name=""/>
+        <alias field="SHAPE_L" index="4" name=""/>
+        <alias field="country" index="5" name=""/>
+        <alias field="Area" index="6" name=""/>
+        <alias field="Men_rnk" index="7" name=""/>
+        <alias field="X" index="8" name=""/>
+        <alias field="Y" index="9" name=""/>
+        <alias field="Spp_ds_" index="10" name=""/>
+        <alias field="Plus_10" index="11" name=""/>
+        <alias field="Plus_1" index="12" name=""/>
+        <alias field="Plus_01" index="13" name=""/>
+        <alias field="Pl_0001" index="14" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -6002,9 +6149,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100002</srsid>
+          <srsid>100001</srsid>
           <srid>0</srid>
-          <authid>USER:100002</authid>
+          <authid>USER:100001</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -6016,6 +6163,23 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="ID" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="STAT_LE" expression=""/>
+        <default field="SHAPE_A" expression=""/>
+        <default field="SHAPE_L" expression=""/>
+        <default field="country" expression=""/>
+        <default field="Area" expression=""/>
+        <default field="Men_rnk" expression=""/>
+        <default field="X" expression=""/>
+        <default field="Y" expression=""/>
+        <default field="Spp_ds_" expression=""/>
+        <default field="Plus_10" expression=""/>
+        <default field="Plus_1" expression=""/>
+        <default field="Plus_01" expression=""/>
+        <default field="Pl_0001" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -6454,6 +6618,23 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="ID" index="0" name=""/>
+        <alias field="NUTS_ID" index="1" name=""/>
+        <alias field="STAT_LE" index="2" name=""/>
+        <alias field="SHAPE_A" index="3" name=""/>
+        <alias field="SHAPE_L" index="4" name=""/>
+        <alias field="country" index="5" name=""/>
+        <alias field="Area" index="6" name=""/>
+        <alias field="Men_rnk" index="7" name=""/>
+        <alias field="X" index="8" name=""/>
+        <alias field="Y" index="9" name=""/>
+        <alias field="Spp_ds_" index="10" name=""/>
+        <alias field="Plus_10" index="11" name=""/>
+        <alias field="Plus_1" index="12" name=""/>
+        <alias field="Plus_01" index="13" name=""/>
+        <alias field="Pl_0001" index="14" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -6578,9 +6759,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100002</srsid>
+          <srsid>100001</srsid>
           <srid>0</srid>
-          <authid>USER:100002</authid>
+          <authid>USER:100001</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -6592,6 +6773,23 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="ID" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="STAT_LE" expression=""/>
+        <default field="SHAPE_A" expression=""/>
+        <default field="SHAPE_L" expression=""/>
+        <default field="country" expression=""/>
+        <default field="Area" expression=""/>
+        <default field="Men_rnk" expression=""/>
+        <default field="X" expression=""/>
+        <default field="Y" expression=""/>
+        <default field="Spp_ds_" expression=""/>
+        <default field="Plus_10" expression=""/>
+        <default field="Plus_1" expression=""/>
+        <default field="Plus_01" expression=""/>
+        <default field="Pl_0001" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -7030,6 +7228,23 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="ID" index="0" name=""/>
+        <alias field="NUTS_ID" index="1" name=""/>
+        <alias field="STAT_LE" index="2" name=""/>
+        <alias field="SHAPE_A" index="3" name=""/>
+        <alias field="SHAPE_L" index="4" name=""/>
+        <alias field="country" index="5" name=""/>
+        <alias field="Area" index="6" name=""/>
+        <alias field="Men_rnk" index="7" name=""/>
+        <alias field="X" index="8" name=""/>
+        <alias field="Y" index="9" name=""/>
+        <alias field="Spp_ds_" index="10" name=""/>
+        <alias field="Plus_10" index="11" name=""/>
+        <alias field="Plus_1" index="12" name=""/>
+        <alias field="Plus_01" index="13" name=""/>
+        <alias field="Pl_0001" index="14" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -7148,9 +7363,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100002</srsid>
+          <srsid>100001</srsid>
           <srid>0</srid>
-          <authid>USER:100002</authid>
+          <authid>USER:100001</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -7162,6 +7377,23 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="ID" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="STAT_LE" expression=""/>
+        <default field="SHAPE_A" expression=""/>
+        <default field="SHAPE_L" expression=""/>
+        <default field="country" expression=""/>
+        <default field="Area" expression=""/>
+        <default field="Men_rnk" expression=""/>
+        <default field="X" expression=""/>
+        <default field="Y" expression=""/>
+        <default field="Spp_ds_" expression=""/>
+        <default field="Plus_10" expression=""/>
+        <default field="Plus_1" expression=""/>
+        <default field="Plus_01" expression=""/>
+        <default field="Pl_0001" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -7600,6 +7832,23 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="ID" index="0" name=""/>
+        <alias field="NUTS_ID" index="1" name=""/>
+        <alias field="STAT_LE" index="2" name=""/>
+        <alias field="SHAPE_A" index="3" name=""/>
+        <alias field="SHAPE_L" index="4" name=""/>
+        <alias field="country" index="5" name=""/>
+        <alias field="Area" index="6" name=""/>
+        <alias field="Men_rnk" index="7" name=""/>
+        <alias field="X" index="8" name=""/>
+        <alias field="Y" index="9" name=""/>
+        <alias field="Spp_ds_" index="10" name=""/>
+        <alias field="Plus_10" index="11" name=""/>
+        <alias field="Plus_1" index="12" name=""/>
+        <alias field="Plus_01" index="13" name=""/>
+        <alias field="Pl_0001" index="14" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -7724,9 +7973,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100002</srsid>
+          <srsid>100001</srsid>
           <srid>0</srid>
-          <authid>USER:100002</authid>
+          <authid>USER:100001</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -7738,6 +7987,23 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="ID" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="STAT_LE" expression=""/>
+        <default field="SHAPE_A" expression=""/>
+        <default field="SHAPE_L" expression=""/>
+        <default field="country" expression=""/>
+        <default field="Area" expression=""/>
+        <default field="Men_rnk" expression=""/>
+        <default field="X" expression=""/>
+        <default field="Y" expression=""/>
+        <default field="Spp_ds_" expression=""/>
+        <default field="Plus_10" expression=""/>
+        <default field="Plus_1" expression=""/>
+        <default field="Plus_01" expression=""/>
+        <default field="Pl_0001" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -8176,6 +8442,23 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="ID" index="0" name=""/>
+        <alias field="NUTS_ID" index="1" name=""/>
+        <alias field="STAT_LE" index="2" name=""/>
+        <alias field="SHAPE_A" index="3" name=""/>
+        <alias field="SHAPE_L" index="4" name=""/>
+        <alias field="country" index="5" name=""/>
+        <alias field="Area" index="6" name=""/>
+        <alias field="Men_rnk" index="7" name=""/>
+        <alias field="X" index="8" name=""/>
+        <alias field="Y" index="9" name=""/>
+        <alias field="Spp_ds_" index="10" name=""/>
+        <alias field="Plus_10" index="11" name=""/>
+        <alias field="Plus_1" index="12" name=""/>
+        <alias field="Plus_01" index="13" name=""/>
+        <alias field="Pl_0001" index="14" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -8294,9 +8577,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100002</srsid>
+          <srsid>100001</srsid>
           <srid>0</srid>
-          <authid>USER:100002</authid>
+          <authid>USER:100001</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -8308,6 +8591,14 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="NUTS_ID" expression=""/>
+        <default field="STAT_LEVL_" expression=""/>
+        <default field="SHAPE_AREA" expression=""/>
+        <default field="SHAPE_LEN" expression=""/>
+        <default field="ID" expression=""/>
+        <default field="country" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -8549,6 +8840,14 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="NUTS_ID" index="0" name=""/>
+        <alias field="STAT_LEVL_" index="1" name=""/>
+        <alias field="SHAPE_AREA" index="2" name=""/>
+        <alias field="SHAPE_LEN" index="3" name=""/>
+        <alias field="ID" index="4" name=""/>
+        <alias field="country" index="5" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -8800,6 +9099,108 @@ def my_form_open(dialog, layer, feature):
       </pipe>
       <blendMode>0</blendMode>
     </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>carbon_sequestration20161026153021690</id>
+      <datasource>../../data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>carbon_sequestration</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0" color="#000004"/>
+              <item alpha="255" value="0.0196" label="0.0196" color="#02020b"/>
+              <item alpha="255" value="0.0392" label="0.0392" color="#050416"/>
+              <item alpha="255" value="0.0588" label="0.0588" color="#090720"/>
+              <item alpha="255" value="0.0784" label="0.0784" color="#0e0b2b"/>
+              <item alpha="255" value="0.098" label="0.098" color="#140e36"/>
+              <item alpha="255" value="0.118" label="0.118" color="#1a1042"/>
+              <item alpha="255" value="0.137" label="0.137" color="#21114e"/>
+              <item alpha="255" value="0.157" label="0.157" color="#29115a"/>
+              <item alpha="255" value="0.176" label="0.176" color="#311165"/>
+              <item alpha="255" value="0.196" label="0.196" color="#390f6e"/>
+              <item alpha="255" value="0.216" label="0.216" color="#420f75"/>
+              <item alpha="255" value="0.235" label="0.235" color="#4a1079"/>
+              <item alpha="255" value="0.255" label="0.255" color="#52137c"/>
+              <item alpha="255" value="0.275" label="0.275" color="#5a167e"/>
+              <item alpha="255" value="0.294" label="0.294" color="#621980"/>
+              <item alpha="255" value="0.314" label="0.314" color="#6a1c81"/>
+              <item alpha="255" value="0.333" label="0.333" color="#721f81"/>
+              <item alpha="255" value="0.353" label="0.353" color="#792282"/>
+              <item alpha="255" value="0.373" label="0.373" color="#812581"/>
+              <item alpha="255" value="0.392" label="0.392" color="#892881"/>
+              <item alpha="255" value="0.412" label="0.412" color="#912b81"/>
+              <item alpha="255" value="0.431" label="0.431" color="#992d80"/>
+              <item alpha="255" value="0.451" label="0.451" color="#a1307e"/>
+              <item alpha="255" value="0.471" label="0.471" color="#aa337d"/>
+              <item alpha="255" value="0.49" label="0.49" color="#b2357b"/>
+              <item alpha="255" value="0.51" label="0.51" color="#ba3878"/>
+              <item alpha="255" value="0.529" label="0.529" color="#c23b75"/>
+              <item alpha="255" value="0.549" label="0.549" color="#ca3e72"/>
+              <item alpha="255" value="0.569" label="0.569" color="#d2426f"/>
+              <item alpha="255" value="0.588" label="0.588" color="#d9466b"/>
+              <item alpha="255" value="0.608" label="0.608" color="#e04c67"/>
+              <item alpha="255" value="0.627" label="0.627" color="#e75263"/>
+              <item alpha="255" value="0.647" label="0.647" color="#ec5860"/>
+              <item alpha="255" value="0.667" label="0.667" color="#f1605d"/>
+              <item alpha="255" value="0.686" label="0.686" color="#f4695c"/>
+              <item alpha="255" value="0.706" label="0.706" color="#f7725c"/>
+              <item alpha="255" value="0.725" label="0.725" color="#f97b5d"/>
+              <item alpha="255" value="0.745" label="0.745" color="#fb8560"/>
+              <item alpha="255" value="0.765" label="0.765" color="#fc8e64"/>
+              <item alpha="255" value="0.784" label="0.784" color="#fd9869"/>
+              <item alpha="255" value="0.804" label="0.804" color="#fea16e"/>
+              <item alpha="255" value="0.824" label="0.824" color="#feaa74"/>
+              <item alpha="255" value="0.843" label="0.843" color="#feb47b"/>
+              <item alpha="255" value="0.863" label="0.863" color="#febd82"/>
+              <item alpha="255" value="0.882" label="0.882" color="#fec68a"/>
+              <item alpha="255" value="0.902" label="0.902" color="#fecf92"/>
+              <item alpha="255" value="0.922" label="0.922" color="#fed89a"/>
+              <item alpha="255" value="0.941" label="0.941" color="#fde2a3"/>
+              <item alpha="255" value="0.961" label="0.961" color="#fdebac"/>
+              <item alpha="255" value="0.98" label="0.98" color="#fcf4b6"/>
+              <item alpha="255" value="1" label="1" color="#fcfdbf"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
     <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
       <extent>
         <xmin>2000000</xmin>
@@ -8877,9 +9278,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100002</srsid>
+          <srsid>100001</srsid>
           <srid>0</srid>
-          <authid>USER:100002</authid>
+          <authid>USER:100001</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -8990,9 +9391,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100002</srsid>
+          <srsid>100001</srsid>
           <srid>0</srid>
-          <authid>USER:100002</authid>
+          <authid>USER:100001</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -9054,6 +9455,18 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="id" expression=""/>
+        <default field="SHAPE_AREA" expression=""/>
+        <default field="SHAPE_LEN" expression=""/>
+        <default field="_min" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="country" expression=""/>
+        <default field="_max" expression=""/>
+        <default field="_mean" expression=""/>
+        <default field="STAT_LEVL_" expression=""/>
+        <default field="_count" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -9480,6 +9893,18 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="id" index="0" name=""/>
+        <alias field="SHAPE_AREA" index="1" name=""/>
+        <alias field="SHAPE_LEN" index="2" name=""/>
+        <alias field="_min" index="3" name=""/>
+        <alias field="NUTS_ID" index="4" name=""/>
+        <alias field="country" index="5" name=""/>
+        <alias field="_max" index="6" name=""/>
+        <alias field="_mean" index="7" name=""/>
+        <alias field="STAT_LEVL_" index="8" name=""/>
+        <alias field="_count" index="9" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -9609,6 +10034,18 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="id" expression=""/>
+        <default field="_min" expression=""/>
+        <default field="_max" expression=""/>
+        <default field="SHAPE_AREA" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="country" expression=""/>
+        <default field="_mean" expression=""/>
+        <default field="SHAPE_LEN" expression=""/>
+        <default field="_count" expression=""/>
+        <default field="STAT_LEVL_" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -10035,6 +10472,18 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="id" index="0" name=""/>
+        <alias field="_min" index="1" name=""/>
+        <alias field="_max" index="2" name=""/>
+        <alias field="SHAPE_AREA" index="3" name=""/>
+        <alias field="NUTS_ID" index="4" name=""/>
+        <alias field="country" index="5" name=""/>
+        <alias field="_mean" index="6" name=""/>
+        <alias field="SHAPE_LEN" index="7" name=""/>
+        <alias field="_count" index="8" name=""/>
+        <alias field="STAT_LEVL_" index="9" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -10113,6 +10562,18 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="id" expression=""/>
+        <default field="_mean" expression=""/>
+        <default field="SHAPE_LEN" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="country" expression=""/>
+        <default field="_min" expression=""/>
+        <default field="STAT_LEVL_" expression=""/>
+        <default field="SHAPE_AREA" expression=""/>
+        <default field="_max" expression=""/>
+        <default field="_count" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -10539,6 +11000,18 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="id" index="0" name=""/>
+        <alias field="_mean" index="1" name=""/>
+        <alias field="SHAPE_LEN" index="2" name=""/>
+        <alias field="NUTS_ID" index="3" name=""/>
+        <alias field="country" index="4" name=""/>
+        <alias field="_min" index="5" name=""/>
+        <alias field="STAT_LEVL_" index="6" name=""/>
+        <alias field="SHAPE_AREA" index="7" name=""/>
+        <alias field="_max" index="8" name=""/>
+        <alias field="_count" index="9" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -10611,6 +11084,18 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="id" expression=""/>
+        <default field="SHAPE_LEN" expression=""/>
+        <default field="_count" expression=""/>
+        <default field="SHAPE_AREA" expression=""/>
+        <default field="_max" expression=""/>
+        <default field="STAT_LEVL_" expression=""/>
+        <default field="_min" expression=""/>
+        <default field="_mean" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="country" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -11037,6 +11522,18 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="id" index="0" name=""/>
+        <alias field="SHAPE_LEN" index="1" name=""/>
+        <alias field="_count" index="2" name=""/>
+        <alias field="SHAPE_AREA" index="3" name=""/>
+        <alias field="_max" index="4" name=""/>
+        <alias field="STAT_LEVL_" index="5" name=""/>
+        <alias field="_min" index="6" name=""/>
+        <alias field="_mean" index="7" name=""/>
+        <alias field="NUTS_ID" index="8" name=""/>
+        <alias field="country" index="9" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -11424,6 +11921,20 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="NUTS_ID" expression=""/>
+        <default field="rwr_all" expression=""/>
+        <default field="zon_all" expression=""/>
+        <default field="ilp_all" expression=""/>
+        <default field="rwr_es" expression=""/>
+        <default field="zon_es" expression=""/>
+        <default field="ilp_es" expression=""/>
+        <default field="rwr_bd" expression=""/>
+        <default field="zon_bd" expression=""/>
+        <default field="ilp_bd" expression=""/>
+        <default field="agg_mean" expression=""/>
+        <default field="agg_std" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -11776,6 +12287,20 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>.</annotationform>
+      <aliases>
+        <alias field="NUTS_ID" index="0" name=""/>
+        <alias field="rwr_all" index="1" name=""/>
+        <alias field="zon_all" index="2" name=""/>
+        <alias field="ilp_all" index="3" name=""/>
+        <alias field="rwr_es" index="4" name=""/>
+        <alias field="zon_es" index="5" name=""/>
+        <alias field="ilp_es" index="6" name=""/>
+        <alias field="rwr_bd" index="7" name=""/>
+        <alias field="zon_bd" index="8" name=""/>
+        <alias field="ilp_bd" index="9" name=""/>
+        <alias field="agg_mean" index="10" name=""/>
+        <alias field="agg_std" index="11" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -11849,6 +12374,20 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="NUTS_ID" expression=""/>
+        <default field="rwr_all" expression=""/>
+        <default field="zon_all" expression=""/>
+        <default field="ilp_all" expression=""/>
+        <default field="rwr_es" expression=""/>
+        <default field="zon_es" expression=""/>
+        <default field="ilp_es" expression=""/>
+        <default field="rwr_bd" expression=""/>
+        <default field="zon_bd" expression=""/>
+        <default field="ilp_bd" expression=""/>
+        <default field="agg_mean" expression=""/>
+        <default field="agg_std" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -12201,6 +12740,20 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>.</annotationform>
+      <aliases>
+        <alias field="NUTS_ID" index="0" name=""/>
+        <alias field="rwr_all" index="1" name=""/>
+        <alias field="zon_all" index="2" name=""/>
+        <alias field="ilp_all" index="3" name=""/>
+        <alias field="rwr_es" index="4" name=""/>
+        <alias field="zon_es" index="5" name=""/>
+        <alias field="ilp_es" index="6" name=""/>
+        <alias field="rwr_bd" index="7" name=""/>
+        <alias field="zon_bd" index="8" name=""/>
+        <alias field="ilp_bd" index="9" name=""/>
+        <alias field="agg_mean" index="10" name=""/>
+        <alias field="agg_std" index="11" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -12370,9 +12923,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100002</srsid>
+          <srsid>100001</srsid>
           <srid>0</srid>
-          <authid>USER:100002</authid>
+          <authid>USER:100001</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -12440,6 +12993,18 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="id" expression=""/>
+        <default field="_min" expression=""/>
+        <default field="STAT_LEVL_" expression=""/>
+        <default field="_mean" expression=""/>
+        <default field="_count" expression=""/>
+        <default field="SHAPE_LEN" expression=""/>
+        <default field="country" expression=""/>
+        <default field="SHAPE_AREA" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="_max" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -12866,6 +13431,18 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="id" index="0" name=""/>
+        <alias field="_min" index="1" name=""/>
+        <alias field="STAT_LEVL_" index="2" name=""/>
+        <alias field="_mean" index="3" name=""/>
+        <alias field="_count" index="4" name=""/>
+        <alias field="SHAPE_LEN" index="5" name=""/>
+        <alias field="country" index="6" name=""/>
+        <alias field="SHAPE_AREA" index="7" name=""/>
+        <alias field="NUTS_ID" index="8" name=""/>
+        <alias field="_max" index="9" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -12994,6 +13571,18 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="id" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="STAT_LEVL_" expression=""/>
+        <default field="_count" expression=""/>
+        <default field="SHAPE_LEN" expression=""/>
+        <default field="_mean" expression=""/>
+        <default field="_max" expression=""/>
+        <default field="_min" expression=""/>
+        <default field="SHAPE_AREA" expression=""/>
+        <default field="country" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -13420,6 +14009,18 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="id" index="0" name=""/>
+        <alias field="NUTS_ID" index="1" name=""/>
+        <alias field="STAT_LEVL_" index="2" name=""/>
+        <alias field="_count" index="3" name=""/>
+        <alias field="SHAPE_LEN" index="4" name=""/>
+        <alias field="_mean" index="5" name=""/>
+        <alias field="_max" index="6" name=""/>
+        <alias field="_min" index="7" name=""/>
+        <alias field="SHAPE_AREA" index="8" name=""/>
+        <alias field="country" index="9" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -13555,6 +14156,18 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="id" expression=""/>
+        <default field="country" expression=""/>
+        <default field="SHAPE_AREA" expression=""/>
+        <default field="SHAPE_LEN" expression=""/>
+        <default field="_max" expression=""/>
+        <default field="_min" expression=""/>
+        <default field="_mean" expression=""/>
+        <default field="_count" expression=""/>
+        <default field="STAT_LEVL_" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -13981,6 +14594,18 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="id" index="0" name=""/>
+        <alias field="country" index="1" name=""/>
+        <alias field="SHAPE_AREA" index="2" name=""/>
+        <alias field="SHAPE_LEN" index="3" name=""/>
+        <alias field="_max" index="4" name=""/>
+        <alias field="_min" index="5" name=""/>
+        <alias field="_mean" index="6" name=""/>
+        <alias field="_count" index="7" name=""/>
+        <alias field="STAT_LEVL_" index="8" name=""/>
+        <alias field="NUTS_ID" index="9" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -14045,9 +14670,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100002</srsid>
+          <srsid>100001</srsid>
           <srid>0</srid>
-          <authid>USER:100002</authid>
+          <authid>USER:100001</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -14109,6 +14734,18 @@ def my_form_open(dialog, layer, feature):
       <vectorjoins/>
       <layerDependencies/>
       <expressionfields/>
+      <defaults>
+        <default field="id" expression=""/>
+        <default field="country" expression=""/>
+        <default field="_max" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="_min" expression=""/>
+        <default field="_count" expression=""/>
+        <default field="SHAPE_LEN" expression=""/>
+        <default field="STAT_LEVL_" expression=""/>
+        <default field="SHAPE_AREA" expression=""/>
+        <default field="_mean" expression=""/>
+      </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
       </map-layer-style-manager>
@@ -14535,6 +15172,18 @@ def my_form_open(dialog, layer, feature):
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="id" index="0" name=""/>
+        <alias field="country" index="1" name=""/>
+        <alias field="_max" index="2" name=""/>
+        <alias field="NUTS_ID" index="3" name=""/>
+        <alias field="_min" index="4" name=""/>
+        <alias field="_count" index="5" name=""/>
+        <alias field="SHAPE_LEN" index="6" name=""/>
+        <alias field="STAT_LEVL_" index="7" name=""/>
+        <alias field="SHAPE_AREA" index="8" name=""/>
+        <alias field="_mean" index="9" name=""/>
+      </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <attributeactions default="-1"/>
@@ -14623,6 +15272,8 @@ def my_form_open(dialog, layer, feature):
         <value>ilp_eu26_all_weights_stats20160915133329236</value>
         <value>ilp_eu26_bd_stats20160915133420520</value>
         <value>ilp_eu26_es_stats20160915133349888</value>
+        <value>nuts2_rank_variation20160920133849421</value>
+        <value>nuts2_rank_variation20160920135233196</value>
         <value>rwr_eu26_all_stats20160915131954903</value>
         <value>rwr_eu26_all_weights_stats20160915132200722</value>
         <value>rwr_eu26_bd_stats20160915132316486</value>
@@ -14646,10 +15297,14 @@ def my_form_open(dialog, layer, feature):
         <value>disabled</value>
         <value>disabled</value>
         <value>disabled</value>
+        <value>disabled</value>
+        <value>disabled</value>
       </LayerSnappingEnabledList>
       <SnappingMode type="QString">current_layer</SnappingMode>
       <AvoidIntersectionsList type="QStringList"/>
       <LayerSnappingToleranceUnitList type="QStringList">
+        <value>2</value>
+        <value>2</value>
         <value>2</value>
         <value>2</value>
         <value>2</value>
@@ -14686,10 +15341,14 @@ def my_form_open(dialog, layer, feature):
         <value>to_vertex_and_segment</value>
         <value>to_vertex_and_segment</value>
         <value>to_vertex_and_segment</value>
+        <value>to_vertex_and_segment</value>
+        <value>to_vertex_and_segment</value>
       </LayerSnapToList>
       <DefaultSnapType type="QString">off</DefaultSnapType>
       <DefaultSnapTolerance type="double">0</DefaultSnapTolerance>
       <LayerSnappingToleranceList type="QStringList">
+        <value>0.000000</value>
+        <value>0.000000</value>
         <value>0.000000</value>
         <value>0.000000</value>
         <value>0.000000</value>
