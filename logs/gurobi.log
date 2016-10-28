@@ -17536,3 +17536,2894 @@ Thread count was 4 (of 4 available processors)
 
 Optimal solution found (tolerance 1.00e-04)
 Best objective 7.565725461731e+02, best bound 7.565725461731e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 14:49:40 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+05, 2e+05]
+Found heuristic solution: objective 43.9697
+Presolve removed 0 rows and 2285755 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 16s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 18.82s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 44.1396372
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   3.976083e+06   0.000000e+00     21s
+       1    1.8545218e+02   0.000000e+00   0.000000e+00     21s
+
+Root relaxation: objective 1.854522e+02, 1 iterations, 0.24 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     185.4521763  185.45218  0.00%     -   23s
+
+Explored 0 nodes (1 simplex iterations) in 23.41 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.854521765831e+02, best bound 1.854521765831e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 14:50:41 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e+05, 4e+05]
+Found heuristic solution: objective 75.8344
+Presolve removed 0 rows and 2285755 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 17s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 18.58s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 76.0177595
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   3.766648e+06   0.000000e+00     21s
+       1    2.6385377e+02   0.000000e+00   0.000000e+00     21s
+
+Root relaxation: objective 2.638538e+02, 1 iterations, 0.28 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     263.8537695  263.85377  0.00%     -   22s
+
+Explored 0 nodes (1 simplex iterations) in 23.02 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.638537714532e+02, best bound 2.638537714532e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 14:51:44 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [6e+05, 6e+05]
+Found heuristic solution: objective 105.195
+Presolve removed 0 rows and 2285755 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 16s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 17.86s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 105.3924383
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   3.557213e+06   0.000000e+00     20s
+       1    3.2464617e+02   0.000000e+00   0.000000e+00     20s
+
+Root relaxation: objective 3.246462e+02, 1 iterations, 0.26 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     324.6461666  324.64617  0.00%     -   22s
+
+Explored 0 nodes (1 simplex iterations) in 22.44 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.246461713613e+02, best bound 3.246461713613e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 14:52:44 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [8e+05, 8e+05]
+Found heuristic solution: objective 130.587
+Presolve removed 0 rows and 2285755 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 16s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 17.88s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 130.7949723
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   3.347778e+06   0.000000e+00     20s
+       1    3.7547182e+02   0.000000e+00   0.000000e+00     20s
+
+Root relaxation: objective 3.754718e+02, 1 iterations, 0.26 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     375.4718194  375.47182  0.00%     -   22s
+
+Explored 0 nodes (1 simplex iterations) in 22.51 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.754718277068e+02, best bound 3.754718277068e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 14:53:44 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+06, 1e+06]
+Found heuristic solution: objective 149.356
+Presolve removed 0 rows and 2285755 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 16s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 17.86s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 149.5691996
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   3.138343e+06   0.000000e+00     20s
+       1    4.1969909e+02   0.000000e+00   0.000000e+00     21s
+
+Root relaxation: objective 4.196991e+02, 1 iterations, 0.31 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     419.6990879  419.69909  0.00%     -   22s
+
+Explored 0 nodes (1 simplex iterations) in 22.73 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.196991003682e+02, best bound 4.196991003682e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 14:54:44 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+06, 1e+06]
+Found heuristic solution: objective 167.641
+Presolve removed 0 rows and 2285755 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 16s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 18.34s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 167.8598647
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   2.928908e+06   0.000000e+00     21s
+       1    4.5890222e+02   0.000000e+00   0.000000e+00     21s
+
+Root relaxation: objective 4.589022e+02, 1 iterations, 0.31 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     458.9022179  458.90222  0.00%     -   23s
+
+Explored 0 nodes (1 simplex iterations) in 23.39 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.589022351448e+02, best bound 4.589022351448e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 14:55:55 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+06, 1e+06]
+Found heuristic solution: objective 184.189
+Presolve removed 0 rows and 2285755 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 22.15s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 184.4119925
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   2.719472e+06   0.000000e+00     25s
+       1    4.9386111e+02   0.000000e+00   0.000000e+00     25s
+
+Root relaxation: objective 4.938611e+02, 1 iterations, 0.29 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     493.8611139  493.86111  0.00%     -   27s
+
+Explored 0 nodes (1 simplex iterations) in 27.47 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.938611360709e+02, best bound 4.938611360709e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 14:57:00 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 202.454
+Presolve removed 0 rows and 2285755 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 17s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 19.05s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 202.6861456
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   2.510037e+06   0.000000e+00     21s
+       1    5.2521867e+02   0.000000e+00   0.000000e+00     22s
+
+Root relaxation: objective 5.252187e+02, 1 iterations, 0.29 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     525.2186716  525.21867  0.00%     -   23s
+
+Explored 0 nodes (1 simplex iterations) in 23.79 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.252186992548e+02, best bound 5.252186992548e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 14:58:02 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 220.651
+Presolve removed 0 rows and 2285755 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 16s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 18.11s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 220.8989264
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   2.300602e+06   0.000000e+00     20s
+       1    5.5357603e+02   0.000000e+00   0.000000e+00     21s
+
+Root relaxation: objective 5.535760e+02, 1 iterations, 0.30 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     553.5760345  553.57603  0.00%     -   22s
+
+Explored 0 nodes (1 simplex iterations) in 22.80 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.535760681276e+02, best bound 5.535760681276e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 14:59:02 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 241.764
+Presolve removed 0 rows and 2285755 columns (presolve time = 10s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 15s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 17.16s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 242.0302726
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   2.091167e+06   0.000000e+00     20s
+       1    5.7933335e+02   0.000000e+00   0.000000e+00     20s
+
+Root relaxation: objective 5.793333e+02, 1 iterations, 0.32 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     579.3333475  579.33335  0.00%     -   21s
+
+Explored 0 nodes (1 simplex iterations) in 21.79 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.793333874481e+02, best bound 5.793333874481e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:00:01 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 262.995
+Presolve removed 0 rows and 2285755 columns (presolve time = 10s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 16s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 17.52s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 263.2814583
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   1.881732e+06   0.000000e+00     20s
+       1    6.0270601e+02   0.000000e+00   0.000000e+00     20s
+
+Root relaxation: objective 6.027060e+02, 1 iterations, 0.27 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     602.7060149  602.70601  0.00%     -   21s
+
+Explored 0 nodes (1 simplex iterations) in 22.04 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.027060615344e+02, best bound 6.027060615344e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:01:00 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 289.297
+Presolve removed 0 rows and 2285755 columns (presolve time = 10s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 15s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 17.20s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 289.6133526
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   1.672297e+06   0.000000e+00     19s
+       1    6.2387491e+02   0.000000e+00   0.000000e+00     20s
+
+Root relaxation: objective 6.238749e+02, 1 iterations, 0.27 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     623.8749114  623.87491  0.00%     -   21s
+
+Explored 0 nodes (1 simplex iterations) in 21.77 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.238749649610e+02, best bound 6.238749649610e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:01:59 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 323.282
+Presolve removed 0 rows and 2285755 columns (presolve time = 10s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 16s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 17.55s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 323.6335885
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   1.462862e+06   0.000000e+00     20s
+       1    6.4317194e+02   0.000000e+00   0.000000e+00     20s
+
+Root relaxation: objective 6.431719e+02, 1 iterations, 0.26 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     643.1719372  643.17194  0.00%     -   21s
+
+Explored 0 nodes (1 simplex iterations) in 21.99 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.431719981751e+02, best bound 6.431719981751e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:02:58 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 358.624
+Presolve removed 0 rows and 2285755 columns (presolve time = 10s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 16s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 17.94s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 358.9943884
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   1.253426e+06   0.000000e+00     20s
+       1    6.6075306e+02   0.000000e+00   0.000000e+00     21s
+
+Root relaxation: objective 6.607531e+02, 1 iterations, 0.35 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     660.7530564  660.75306  0.00%     -   22s
+
+Explored 0 nodes (1 simplex iterations) in 22.95 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.607531246426e+02, best bound 6.607531246426e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:03:59 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 395.552
+Presolve removed 0 rows and 2285755 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 17s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 19.20s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 395.9366214
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   1.043991e+06   0.000000e+00     22s
+       1    6.7654432e+02   0.000000e+00   0.000000e+00     22s
+
+Root relaxation: objective 6.765443e+02, 1 iterations, 0.30 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     676.5443238  676.54432  0.00%     -   23s
+
+Explored 0 nodes (1 simplex iterations) in 23.89 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.765443993173e+02, best bound 6.765443993173e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:05:01 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 444.256
+Presolve removed 0 rows and 2285755 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 16s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 18.25s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 444.6236960
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   8.345560e+05   0.000000e+00     21s
+       1    6.9062887e+02   0.000000e+00   0.000000e+00     21s
+
+Root relaxation: objective 6.906289e+02, 1 iterations, 0.29 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     690.6288688  690.62887  0.00%     -   22s
+
+Explored 0 nodes (1 simplex iterations) in 22.95 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.906289516579e+02, best bound 6.906289516579e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:06:04 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e+06, 4e+06]
+Found heuristic solution: objective 496.612
+Presolve removed 0 rows and 2285755 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 18s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 20.36s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 497.0307472
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   6.251210e+05   0.000000e+00     23s
+       1    7.0308443e+02   0.000000e+00   0.000000e+00     24s
+
+Root relaxation: objective 7.030844e+02, 1 iterations, 0.41 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     703.0844276  703.08443  0.00%     -   25s
+
+Explored 0 nodes (1 simplex iterations) in 25.78 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.030845181570e+02, best bound 7.030845181570e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:07:17 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e+06, 4e+06]
+Found heuristic solution: objective 557.364
+Presolve removed 0 rows and 2285755 columns (presolve time = 13s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 22.02s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 557.7525367
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   4.156860e+05   0.000000e+00     25s
+       1    7.1394962e+02   0.000000e+00   0.000000e+00     25s
+
+Root relaxation: objective 7.139496e+02, 1 iterations, 0.31 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     713.9496192  713.94962  0.00%     -   26s
+
+Explored 0 nodes (1 simplex iterations) in 27.09 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.139497173254e+02, best bound 7.139497173254e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:08:22 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [2e-10, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e+06, 4e+06]
+Found heuristic solution: objective 630.255
+Presolve removed 0 rows and 2285755 columns (presolve time = 10s) ...
+Presolve removed 0 rows and 2285755 columns (presolve time = 16s) ...
+Presolve removed 0 rows and 2285755 columns
+Presolve time: 17.95s
+Presolved: 1 rows, 1902948 columns, 1902948 nonzeros
+Found heuristic solution: objective 630.5631618
+Variable types: 0 continuous, 1902948 integer (808343 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.2953481e+02   2.062510e+05   0.000000e+00     20s
+       1    7.2304959e+02   0.000000e+00   0.000000e+00     21s
+
+Root relaxation: objective 7.230496e+02, 1 iterations, 0.25 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     723.0495863  723.04959  0.00%     -   22s
+
+Explored 0 nodes (1 simplex iterations) in 22.33 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.230496917493e+02, best bound 7.230496917493e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:15:36 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+05, 2e+05]
+Found heuristic solution: objective 64.3219
+Presolve removed 0 rows and 1869042 columns (presolve time = 10s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 16s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 18.39s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 64.4951167
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   3.979133e+06   0.000000e+00     21s
+       1    2.4864056e+02   0.000000e+00   0.000000e+00     21s
+
+Root relaxation: objective 2.486406e+02, 1 iterations, 0.37 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     248.6405637  248.64056  0.00%     -   23s
+
+Explored 0 nodes (1 simplex iterations) in 23.29 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.486405639570e+02, best bound 2.486405639570e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:16:37 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e+05, 4e+05]
+Found heuristic solution: objective 125.632
+Presolve removed 0 rows and 1869042 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 17s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 19.73s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 125.8082336
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   3.769698e+06   0.000000e+00     22s
+       1    3.7138373e+02   0.000000e+00   0.000000e+00     23s
+
+Root relaxation: objective 3.713837e+02, 1 iterations, 0.38 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     371.3837273  371.38373  0.00%     -   24s
+
+Explored 0 nodes (1 simplex iterations) in 24.87 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.713837286027e+02, best bound 3.713837286027e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:17:39 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [6e+05, 6e+05]
+Found heuristic solution: objective 189.627
+Presolve removed 0 rows and 1869042 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 19s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 21.68s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 189.8067971
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   3.560263e+06   0.000000e+00     25s
+       1    4.7563458e+02   0.000000e+00   0.000000e+00     25s
+
+Root relaxation: objective 4.756346e+02, 1 iterations, 0.50 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     475.6345795  475.63458  0.00%     -   28s
+
+Explored 0 nodes (1 simplex iterations) in 28.24 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.756345830357e+02, best bound 4.756345830357e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:18:49 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [8e+05, 8e+05]
+Found heuristic solution: objective 254.218
+Presolve removed 0 rows and 1869042 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 17s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 20.21s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 254.4031241
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   3.350828e+06   0.000000e+00     23s
+       1    5.6975191e+02   0.000000e+00   0.000000e+00     23s
+
+Root relaxation: objective 5.697519e+02, 1 iterations, 0.37 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     569.7519133  569.75191  0.00%     -   25s
+
+Explored 0 nodes (1 simplex iterations) in 26.02 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.697519205307e+02, best bound 5.697519205307e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:19:58 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+06, 1e+06]
+Found heuristic solution: objective 305.676
+Presolve removed 0 rows and 1869042 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 18s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 20.36s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 305.8693316
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   3.141393e+06   0.000000e+00     23s
+       1    6.5676125e+02   0.000000e+00   0.000000e+00     24s
+
+Root relaxation: objective 6.567612e+02, 1 iterations, 0.49 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     656.7612473  656.76125  0.00%     -   25s
+
+Explored 0 nodes (1 simplex iterations) in 26.14 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.567612589184e+02, best bound 6.567612589184e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:21:02 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+06, 1e+06]
+Found heuristic solution: objective 355.37
+Presolve removed 0 rows and 1869042 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 18s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 21s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 20.65s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 355.5720275
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   2.931958e+06   0.000000e+00     24s
+       1    7.3812748e+02   0.000000e+00   0.000000e+00     24s
+
+Root relaxation: objective 7.381275e+02, 1 iterations, 0.45 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     738.1274800  738.12748  0.00%     -   26s
+
+Explored 0 nodes (1 simplex iterations) in 26.95 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.381274963854e+02, best bound 7.381274963854e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:22:08 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+06, 1e+06]
+Found heuristic solution: objective 404.056
+Presolve removed 0 rows and 1869042 columns (presolve time = 16s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 27s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 30.00s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 404.2714599
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   2.722522e+06   0.000000e+00     34s
+       1    8.1468561e+02   0.000000e+00   0.000000e+00     34s
+
+Root relaxation: objective 8.146856e+02, 1 iterations, 0.60 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     814.6856146  814.68561  0.00%     -   38s
+
+Explored 0 nodes (1 simplex iterations) in 38.40 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.146856361720e+02, best bound 8.146856361720e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:23:30 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 457.498
+Presolve removed 0 rows and 1869042 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 17s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 19.52s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 457.7249619
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   2.513087e+06   0.000000e+00     22s
+       1    8.8694906e+02   0.000000e+00   0.000000e+00     22s
+
+Root relaxation: objective 8.869491e+02, 1 iterations, 0.35 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     886.9490610  886.94906  0.00%     -   24s
+
+Explored 0 nodes (1 simplex iterations) in 25.19 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.869490879945e+02, best bound 8.869490879945e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:24:36 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 517.08
+Presolve removed 0 rows and 1869042 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 19s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 21.50s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 517.3160898
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   2.303652e+06   0.000000e+00     25s
+       1    9.5531552e+02   0.000000e+00   0.000000e+00     26s
+
+Root relaxation: objective 9.553155e+02, 1 iterations, 0.45 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     955.3155179  955.31552  0.00%     -   29s
+
+Explored 0 nodes (1 simplex iterations) in 29.53 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.553155505971e+02, best bound 9.553155505971e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:25:48 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 585.148
+Presolve removed 0 rows and 1869042 columns (presolve time = 13s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 22.20s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 585.3772468
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   2.094217e+06   0.000000e+00     25s
+       1    1.0200940e+03   0.000000e+00   0.000000e+00     25s
+
+Root relaxation: objective 1.020094e+03, 1 iterations, 0.42 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    1020.0940008 1020.09400  0.00%     -   27s
+
+Explored 0 nodes (1 simplex iterations) in 28.20 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.020094039312e+03, best bound 1.020094039312e+03, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:26:53 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 648.491
+Presolve removed 0 rows and 1869042 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 17s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 19.76s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 648.7198936
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   1.884782e+06   0.000000e+00     23s
+       1    1.0814784e+03   0.000000e+00   0.000000e+00     23s
+
+Root relaxation: objective 1.081478e+03, 1 iterations, 0.32 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    1081.4783827 1081.47838  0.00%     -   25s
+
+Explored 0 nodes (1 simplex iterations) in 25.60 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.081478427229e+03, best bound 1.081478427229e+03, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:27:59 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 721.748
+Presolve removed 0 rows and 1869042 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 18s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 20.84s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 721.9649010
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   1.675347e+06   0.000000e+00     24s
+       1    1.1395776e+03   0.000000e+00   0.000000e+00     24s
+
+Root relaxation: objective 1.139578e+03, 1 iterations, 0.39 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    1139.5776181 1139.57762  0.00%     -   27s
+
+Explored 0 nodes (1 simplex iterations) in 27.35 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.139577668568e+03, best bound 1.139577668568e+03, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:29:06 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 802.249
+Presolve removed 0 rows and 1869042 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 22s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 26s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 25.71s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 802.4589821
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   1.465912e+06   0.000000e+00     29s
+       1    1.1944612e+03   0.000000e+00   0.000000e+00     29s
+
+Root relaxation: objective 1.194461e+03, 1 iterations, 0.58 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    1194.4612177 1194.46122  0.00%     -   32s
+
+Explored 0 nodes (1 simplex iterations) in 32.91 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.194461274230e+03, best bound 1.194461274230e+03, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:30:25 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 892.217
+Presolve removed 0 rows and 1869042 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 21.96s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 892.4247068
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   1.256476e+06   0.000000e+00     25s
+       1    1.2461371e+03   0.000000e+00   0.000000e+00     26s
+
+Root relaxation: objective 1.246137e+03, 1 iterations, 0.38 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    1246.1370678 1246.13707  0.00%     -   27s
+
+Explored 0 nodes (1 simplex iterations) in 28.20 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.246137130238e+03, best bound 1.246137130238e+03, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:31:34 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 969.413
+Presolve removed 0 rows and 1869042 columns (presolve time = 14s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 23.20s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 969.6259322
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   1.047041e+06   0.000000e+00     26s
+       1    1.2945457e+03   0.000000e+00   0.000000e+00     26s
+
+Root relaxation: objective 1.294546e+03, 1 iterations, 0.35 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    1294.5457458 1294.54575  0.00%     -   29s
+
+Explored 0 nodes (1 simplex iterations) in 29.28 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.294545813664e+03, best bound 1.294545813664e+03, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:32:42 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 1058.9
+Presolve removed 0 rows and 1869042 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 19s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 21s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 22.25s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 1059.1153817
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   8.376060e+05   0.000000e+00     26s
+       1    1.3394618e+03   0.000000e+00   0.000000e+00     26s
+
+Root relaxation: objective 1.339462e+03, 1 iterations, 0.54 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    1339.4618499 1339.46185  0.00%     -   28s
+
+Explored 0 nodes (1 simplex iterations) in 28.97 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.339461923018e+03, best bound 1.339461923018e+03, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:33:53 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e+06, 4e+06]
+Found heuristic solution: objective 1149.09
+Presolve removed 0 rows and 1869042 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 19s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 22.65s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 1149.2977645
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   6.281710e+05   0.000000e+00     26s
+       1    1.3806182e+03   0.000000e+00   0.000000e+00     26s
+
+Root relaxation: objective 1.380618e+03, 1 iterations, 0.36 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    1380.6182368 1380.61824  0.00%     -   28s
+
+Explored 0 nodes (1 simplex iterations) in 28.68 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.380618314950e+03, best bound 1.380618314950e+03, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:35:07 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e+06, 4e+06]
+Found heuristic solution: objective 1241.22
+Presolve removed 0 rows and 1869042 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 18s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 20.04s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 1241.4363251
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   4.187360e+05   0.000000e+00     23s
+       1    1.4177680e+03   0.000000e+00   0.000000e+00     23s
+
+Root relaxation: objective 1.417768e+03, 1 iterations, 0.32 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    1417.7680382 1417.76804  0.00%     -   25s
+
+Explored 0 nodes (1 simplex iterations) in 25.57 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.417768121238e+03, best bound 1.417768121238e+03, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:36:16 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [1e-08, 2e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e+06, 4e+06]
+Found heuristic solution: objective 1345.72
+Presolve removed 0 rows and 1869042 columns (presolve time = 14s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 15s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 23s) ...
+Presolve removed 0 rows and 1869042 columns (presolve time = 25s) ...
+Presolve removed 0 rows and 1869042 columns
+Presolve time: 25.05s
+Presolved: 1 rows, 2319661 columns, 2319661 nonzeros
+Found heuristic solution: objective 1345.9081122
+Variable types: 0 continuous, 2319661 integer (1158495 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.4749543e+03   2.093010e+05   0.000000e+00     28s
+       1    1.4503457e+03   0.000000e+00   0.000000e+00     28s
+
+Root relaxation: objective 1.450346e+03, 1 iterations, 0.33 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    1450.3456755 1450.34568  0.00%     -   31s
+
+Explored 0 nodes (1 simplex iterations) in 31.54 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.450345762971e+03, best bound 1.450345762971e+03, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:37:49 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+05, 2e+05]
+Found heuristic solution: objective 0.242931
+Presolve removed 0 rows and 4105598 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 13.65s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 0.2460162
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   3.361327e+06   0.000000e+00     14s
+       1    1.3275630e+00   0.000000e+00   0.000000e+00     14s
+
+Root relaxation: objective 1.327563e+00, 1 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       1.3275630    1.32756  0.00%     -   14s
+
+Explored 0 nodes (1 simplex iterations) in 14.65 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.327571238485e+00, best bound 1.327571238485e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:38:43 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e+05, 4e+05]
+Found heuristic solution: objective 0.594407
+Presolve removed 0 rows and 4105598 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 12.20s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 0.5976949
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   3.151892e+06   0.000000e+00     13s
+       1    2.1010386e+00   0.000000e+00   0.000000e+00     13s
+
+Root relaxation: objective 2.101039e+00, 1 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       2.1010386    2.10104  0.00%     -   12s
+
+Explored 0 nodes (1 simplex iterations) in 13.17 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.101057060496e+00, best bound 2.101057060496e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:39:37 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [6e+05, 6e+05]
+Found heuristic solution: objective 1.00789
+Presolve removed 0 rows and 4105598 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 13.33s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 1.0121681
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   2.942457e+06   0.000000e+00     14s
+       1    2.7828956e+00   0.000000e+00   0.000000e+00     14s
+
+Root relaxation: objective 2.782896e+00, 1 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       2.7828956    2.78290  0.00%     -   14s
+
+Explored 0 nodes (1 simplex iterations) in 14.58 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.782924376310e+00, best bound 2.782924376310e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:40:34 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [8e+05, 8e+05]
+Found heuristic solution: objective 1.4758
+Presolve removed 0 rows and 4105598 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 12.60s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 1.4863050
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   2.733022e+06   0.000000e+00     14s
+       1    3.4062852e+00   0.000000e+00   0.000000e+00     14s
+
+Root relaxation: objective 3.406285e+00, 1 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       3.4062852    3.40629  0.00%     -   13s
+
+Explored 0 nodes (1 simplex iterations) in 13.82 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.406324271495e+00, best bound 3.406324271495e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:41:29 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+06, 1e+06]
+Found heuristic solution: objective 1.86597
+Presolve removed 0 rows and 4105598 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 12.34s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 1.8784593
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   2.523587e+06   0.000000e+00     13s
+       1    3.9851662e+00   0.000000e+00   0.000000e+00     13s
+
+Root relaxation: objective 3.985166e+00, 1 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       3.9851662    3.98517  0.00%     -   13s
+
+Explored 0 nodes (1 simplex iterations) in 13.44 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.985215613983e+00, best bound 3.985215613983e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:42:23 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+06, 1e+06]
+Found heuristic solution: objective 2.24094
+Presolve removed 0 rows and 4105598 columns (presolve time = 13s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 14.45s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 2.2543237
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   2.314152e+06   0.000000e+00     15s
+       1    4.5247030e+00   0.000000e+00   0.000000e+00     15s
+
+Root relaxation: objective 4.524703e+00, 1 iterations, 0.02 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       4.5247030    4.52470  0.00%     -   15s
+
+Explored 0 nodes (1 simplex iterations) in 15.97 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.524762862364e+00, best bound 4.524762862364e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:43:34 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+06, 1e+06]
+Found heuristic solution: objective 2.6245
+Presolve removed 0 rows and 4105598 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 13.05s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 2.6381877
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   2.104716e+06   0.000000e+00     14s
+       1    5.0278210e+00   0.000000e+00   0.000000e+00     14s
+
+Root relaxation: objective 5.027821e+00, 1 iterations, 0.02 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       5.0278210    5.02782  0.00%     -   14s
+
+Explored 0 nodes (1 simplex iterations) in 14.40 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.027891218658e+00, best bound 5.027891218658e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:44:29 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 3.04444
+Presolve removed 0 rows and 4105598 columns (presolve time = 13s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 14.09s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 3.0585940
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   1.895281e+06   0.000000e+00     15s
+       1    5.4970579e+00   0.000000e+00   0.000000e+00     15s
+
+Root relaxation: objective 5.497058e+00, 1 iterations, 0.02 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       5.4970579    5.49706  0.00%     -   14s
+
+Explored 0 nodes (1 simplex iterations) in 15.28 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.497138485156e+00, best bound 5.497138485156e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:45:22 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 3.53855
+Presolve removed 0 rows and 4105598 columns (presolve time = 10s) ...
+Presolve removed 0 rows and 4105598 columns (presolve time = 10s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 10.99s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 3.5530216
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   1.685846e+06   0.000000e+00     12s
+       1    5.9340912e+00   0.000000e+00   0.000000e+00     12s
+
+Root relaxation: objective 5.934091e+00, 1 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       5.9340912    5.93409  0.00%     -   11s
+
+Explored 0 nodes (1 simplex iterations) in 11.91 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.934182146250e+00, best bound 5.934182146250e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:46:11 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 4.09896
+Presolve removed 0 rows and 4105598 columns (presolve time = 10s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 11.69s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 4.1134961
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   1.476411e+06   0.000000e+00     12s
+       1    6.3400835e+00   0.000000e+00   0.000000e+00     12s
+
+Root relaxation: objective 6.340083e+00, 1 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       6.3400835    6.34008  0.00%     -   12s
+
+Explored 0 nodes (1 simplex iterations) in 12.64 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.340184858412e+00, best bound 6.340184858412e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:47:01 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 4.60161
+Presolve removed 0 rows and 4105598 columns (presolve time = 10s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 11.57s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 4.6162453
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   1.266976e+06   0.000000e+00     12s
+       1    6.7168985e+00   0.000000e+00   0.000000e+00     12s
+
+Root relaxation: objective 6.716898e+00, 1 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       6.7168985    6.71690  0.00%     -   12s
+
+Explored 0 nodes (1 simplex iterations) in 12.52 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.717010251368e+00, best bound 6.717010251368e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:47:50 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 5.16219
+Presolve removed 0 rows and 4105598 columns (presolve time = 10s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 11.49s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 5.1765963
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   1.057541e+06   0.000000e+00     12s
+       1    7.0674219e+00   0.000000e+00   0.000000e+00     12s
+
+Root relaxation: objective 7.067422e+00, 1 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       7.0674219    7.06742  0.00%     -   12s
+
+Explored 0 nodes (1 simplex iterations) in 12.50 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.067544088491e+00, best bound 7.067544088491e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:48:39 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 5.7173
+Presolve removed 0 rows and 4105598 columns (presolve time = 10s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 11.92s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 5.7317805
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   8.481060e+05   0.000000e+00     13s
+       1    7.3933461e+00   0.000000e+00   0.000000e+00     13s
+
+Root relaxation: objective 7.393346e+00, 1 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       7.3933461    7.39335  0.00%     -   12s
+
+Explored 0 nodes (1 simplex iterations) in 12.92 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.393478693832e+00, best bound 7.393478693832e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:49:30 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 6.36946
+Presolve removed 0 rows and 4105598 columns (presolve time = 10s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 11.55s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 6.3836932
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   6.386700e+05   0.000000e+00     12s
+       1    7.6952472e+00   0.000000e+00   0.000000e+00     12s
+
+Root relaxation: objective 7.695247e+00, 1 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       7.6952472    7.69525  0.00%     -   12s
+
+Explored 0 nodes (1 simplex iterations) in 12.48 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.695390222993e+00, best bound 7.695390222993e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:50:20 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 6.85007
+Presolve removed 0 rows and 4105598 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 12.84s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 6.8639314
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   4.292350e+05   0.000000e+00     14s
+       1    7.9727933e+00   0.000000e+00   0.000000e+00     14s
+
+Root relaxation: objective 7.972793e+00, 1 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       7.9727933    7.97279  0.00%     -   13s
+
+Explored 0 nodes (1 simplex iterations) in 13.85 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.972946718387e+00, best bound 7.972946718387e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:51:14 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 7.3369
+Presolve removed 0 rows and 4105598 columns (presolve time = 10s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 11.72s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 7.3504198
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   2.198000e+05   0.000000e+00     12s
+       1    8.2250081e+00   0.000000e+00   0.000000e+00     12s
+
+Root relaxation: objective 8.225008e+00, 1 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       8.2250081    8.22501  0.00%     -   12s
+
+Explored 0 nodes (1 simplex iterations) in 12.64 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.225171932879e+00, best bound 8.225171932879e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:52:07 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e+06, 4e+06]
+Found heuristic solution: objective 7.78833
+Presolve removed 0 rows and 4105598 columns (presolve time = 10s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 11.51s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 7.8016254
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   1.036500e+04   0.000000e+00     12s
+       1    8.4502972e+00   0.000000e+00   0.000000e+00     12s
+
+Root relaxation: objective 8.450297e+00, 1 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       8.4502972    8.45030  0.00%     -   12s
+
+Explored 0 nodes (1 simplex iterations) in 12.46 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.450471370649e+00, best bound 8.450471370649e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:52:56 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e+06, 4e+06]
+Found heuristic solution: objective 8.16305
+Presolve removed 0 rows and 4105598 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 13.29s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 8.1763340
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   0.000000e+00   0.000000e+00     14s
+
+Root relaxation: objective 8.460699e+00, 0 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+H    0     0                       8.5853800    8.89736  3.63%     -   13s
+*    0     0               0       8.5853800    8.58538  0.00%     -   13s
+
+Explored 0 nodes (0 simplex iterations) in 14.18 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.585564511595e+00, best bound 8.585564511595e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 15:53:49 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4188703 columns and 4188703 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [4e-11, 5e-04]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e+06, 4e+06]
+Found heuristic solution: objective 8.54028
+Presolve removed 0 rows and 4105598 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 4105598 columns
+Presolve time: 12.42s
+Presolved: 1 rows, 83105 columns, 83105 nonzeros
+Found heuristic solution: objective 8.5529094
+Variable types: 0 continuous, 83105 integer (18986 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    8.4606995e+00   0.000000e+00   0.000000e+00     13s
+
+Root relaxation: cutoff, 0 iterations, 0.01 seconds
+
+Explored 0 nodes (0 simplex iterations) in 13.34 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.553094962613e+00, best bound 8.553094962613e+00, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:00:45 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+05, 2e+05]
+Found heuristic solution: objective 44.8875
+Presolve removed 0 rows and 2425086 columns (presolve time = 18s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 27s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 28.95s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 45.0271960
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   4.074173e+06   0.000000e+00     32s
+       1    2.0958493e+02   0.000000e+00   0.000000e+00     32s
+
+Root relaxation: objective 2.095849e+02, 1 iterations, 0.28 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     209.5849298  209.58493  0.00%     -   33s
+
+Explored 0 nodes (1 simplex iterations) in 33.48 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.095849300643e+02, best bound 2.095849300643e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:01:58 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e+05, 4e+05]
+Found heuristic solution: objective 77.8702
+Presolve removed 0 rows and 2425086 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 18s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 19.96s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 78.0221279
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   3.859718e+06   0.000000e+00     24s
+       1    2.9034933e+02   0.000000e+00   0.000000e+00     24s
+
+Root relaxation: objective 2.903493e+02, 1 iterations, 0.51 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     290.3493267  290.34933  0.00%     -   27s
+
+Explored 0 nodes (1 simplex iterations) in 27.55 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.903493286571e+02, best bound 2.903493286571e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:03:09 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [6e+05, 6e+05]
+Found heuristic solution: objective 111.433
+Presolve removed 0 rows and 2425086 columns (presolve time = 15s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 22s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 24.14s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 111.5939497
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   3.645264e+06   0.000000e+00     27s
+       1    3.5258467e+02   0.000000e+00   0.000000e+00     27s
+
+Root relaxation: objective 3.525847e+02, 1 iterations, 0.30 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     352.5846674  352.58467  0.00%     -   28s
+
+Explored 0 nodes (1 simplex iterations) in 29.14 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.525846720855e+02, best bound 3.525846720855e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:04:17 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [9e+05, 9e+05]
+Found heuristic solution: objective 140.033
+Presolve removed 0 rows and 2425086 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 18s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 20.15s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 140.1998621
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   3.430809e+06   0.000000e+00     24s
+       1    4.0449099e+02   0.000000e+00   0.000000e+00     24s
+
+Root relaxation: objective 4.044910e+02, 1 iterations, 0.43 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     404.4909882  404.49099  0.00%     -   26s
+
+Explored 0 nodes (1 simplex iterations) in 26.96 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.044909965839e+02, best bound 4.044909965839e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:05:25 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+06, 1e+06]
+Found heuristic solution: objective 161.09
+Presolve removed 0 rows and 2425086 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 17s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 19.42s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 161.2606390
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   3.216354e+06   0.000000e+00     22s
+       1    4.4960727e+02   0.000000e+00   0.000000e+00     22s
+
+Root relaxation: objective 4.496073e+02, 1 iterations, 0.28 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     449.6072655  449.60727  0.00%     -   24s
+
+Explored 0 nodes (1 simplex iterations) in 24.37 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.496072780527e+02, best bound 4.496072780527e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:06:31 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [1e+06, 1e+06]
+Found heuristic solution: objective 180.208
+Presolve removed 0 rows and 2425086 columns (presolve time = 13s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 19s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 21.72s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 180.3815132
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   3.001900e+06   0.000000e+00     25s
+       1    4.8957486e+02   0.000000e+00   0.000000e+00     25s
+
+Root relaxation: objective 4.895749e+02, 1 iterations, 0.33 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     489.5748645  489.57486  0.00%     -   27s
+
+Explored 0 nodes (1 simplex iterations) in 28.02 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.895748818141e+02, best bound 4.895748818141e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:07:41 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 197.69
+Presolve removed 0 rows and 2425086 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 17s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 19.17s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 197.8652935
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   2.787445e+06   0.000000e+00     22s
+       1    5.2520347e+02   0.000000e+00   0.000000e+00     22s
+
+Root relaxation: objective 5.252035e+02, 1 iterations, 0.26 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     525.2034741  525.20347  0.00%     -   23s
+
+Explored 0 nodes (1 simplex iterations) in 24.16 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.252034965571e+02, best bound 5.252034965571e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:08:47 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 214.648
+Presolve removed 0 rows and 2425086 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 18s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 20.18s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 214.8267477
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   2.572990e+06   0.000000e+00     23s
+       1    5.5712591e+02   0.000000e+00   0.000000e+00     23s
+
+Root relaxation: objective 5.571259e+02, 1 iterations, 0.30 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     557.1259103  557.12591  0.00%     -   24s
+
+Explored 0 nodes (1 simplex iterations) in 25.16 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.571259382580e+02, best bound 5.571259382580e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:09:51 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 233.735
+Presolve removed 0 rows and 2425086 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 17s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 19.51s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 233.9230295
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   2.358536e+06   0.000000e+00     22s
+       1    5.8595431e+02   0.000000e+00   0.000000e+00     22s
+
+Root relaxation: objective 5.859543e+02, 1 iterations, 0.27 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     585.9543090  585.95431  0.00%     -   24s
+
+Explored 0 nodes (1 simplex iterations) in 24.37 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.859543429152e+02, best bound 5.859543429152e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:10:53 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 254.822
+Presolve removed 0 rows and 2425086 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 18s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 20.13s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 255.0213744
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   2.144081e+06   0.000000e+00     23s
+       1    6.1212615e+02   0.000000e+00   0.000000e+00     23s
+
+Root relaxation: objective 6.121262e+02, 1 iterations, 0.29 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     612.1261533  612.12615  0.00%     -   25s
+
+Explored 0 nodes (1 simplex iterations) in 25.44 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.121261935943e+02, best bound 6.121261935943e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:11:58 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [2e+06, 2e+06]
+Found heuristic solution: objective 276.017
+Presolve removed 0 rows and 2425086 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 18s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 20.05s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 276.2279228
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   1.929626e+06   0.000000e+00     23s
+       1    6.3585581e+02   0.000000e+00   0.000000e+00     23s
+
+Root relaxation: objective 6.358558e+02, 1 iterations, 0.29 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     635.8558128  635.85581  0.00%     -   24s
+
+Explored 0 nodes (1 simplex iterations) in 25.08 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.358558598739e+02, best bound 6.358558598739e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:13:02 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 301.875
+Presolve removed 0 rows and 2425086 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 17s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 19.56s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 302.1069203
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   1.715172e+06   0.000000e+00     22s
+       1    6.5731232e+02   0.000000e+00   0.000000e+00     22s
+
+Root relaxation: objective 6.573123e+02, 1 iterations, 0.29 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     657.3123230  657.31232  0.00%     -   24s
+
+Explored 0 nodes (1 simplex iterations) in 24.42 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.573123770429e+02, best bound 6.573123770429e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:14:08 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 335.827
+Presolve removed 0 rows and 2425086 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 18s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 19.84s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 336.0786167
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   1.500717e+06   0.000000e+00     22s
+       1    6.7681007e+02   0.000000e+00   0.000000e+00     23s
+
+Root relaxation: objective 6.768101e+02, 1 iterations, 0.34 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     676.8100675  676.81007  0.00%     -   24s
+
+Explored 0 nodes (1 simplex iterations) in 24.81 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.768101288636e+02, best bound 6.768101288636e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:15:16 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 371.44
+Presolve removed 0 rows and 2425086 columns (presolve time = 13s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 19s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 21s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 21.74s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 371.7113450
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   1.286262e+06   0.000000e+00     24s
+       1    6.9451837e+02   0.000000e+00   0.000000e+00     24s
+
+Root relaxation: objective 6.945184e+02, 1 iterations, 0.29 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     694.5183665  694.51837  0.00%     -   26s
+
+Explored 0 nodes (1 simplex iterations) in 26.55 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.945184351541e+02, best bound 6.945184351541e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:16:22 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 408.538
+Presolve removed 0 rows and 2425086 columns (presolve time = 11s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 17s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 19.23s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 408.8384662
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   1.071808e+06   0.000000e+00     22s
+       1    7.1036025e+02   0.000000e+00   0.000000e+00     22s
+
+Root relaxation: objective 7.103603e+02, 1 iterations, 0.29 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     710.3602533  710.36025  0.00%     -   23s
+
+Explored 0 nodes (1 simplex iterations) in 23.92 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.103603292419e+02, best bound 7.103603292419e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:17:24 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [3e+06, 3e+06]
+Found heuristic solution: objective 458.273
+Presolve removed 0 rows and 2425086 columns (presolve time = 13s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 22s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 25s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 25.49s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 458.5845948
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   8.573530e+05   0.000000e+00     28s
+       1    7.2443292e+02   0.000000e+00   0.000000e+00     28s
+
+Root relaxation: objective 7.244329e+02, 1 iterations, 0.28 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     724.4329223  724.43292  0.00%     -   30s
+
+Explored 0 nodes (1 simplex iterations) in 30.35 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.244330056198e+02, best bound 7.244330056198e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:18:34 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e+06, 4e+06]
+Found heuristic solution: objective 511.558
+Presolve removed 0 rows and 2425086 columns (presolve time = 13s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 18s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 21s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 20.55s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 511.9160502
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   6.428980e+05   0.000000e+00     23s
+       1    7.3681997e+02   0.000000e+00   0.000000e+00     23s
+
+Root relaxation: objective 7.368200e+02, 1 iterations, 0.29 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     736.8199653  736.81997  0.00%     -   24s
+
+Explored 0 nodes (1 simplex iterations) in 25.19 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.368200563847e+02, best bound 7.368200563847e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:19:39 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e+06, 4e+06]
+Found heuristic solution: objective 574.117
+Presolve removed 0 rows and 2425086 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 18s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 20.88s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 574.4646814
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   4.284440e+05   0.000000e+00     24s
+       1    7.4758729e+02   0.000000e+00   0.000000e+00     24s
+
+Root relaxation: objective 7.475873e+02, 1 iterations, 0.36 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     747.5872853  747.58729  0.00%     -   25s
+
+Explored 0 nodes (1 simplex iterations) in 25.97 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.475873838717e+02, best bound 7.475873838717e+02, gap 0.0%
+
+Gurobi 6.5.2 (linux64) logging started Fri Oct 28 16:20:47 2016
+
+Changed value of parameter LogFile to /home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/logs/gurobi.log
+   Prev: gurobi.log  Default: 
+Optimize a model with 1 rows, 4289093 columns and 4289093 nonzeros
+Coefficient statistics:
+  Matrix range    [1e+00, 1e+00]
+  Objective range [3e-07, 8e-01]
+  Bounds range    [1e+00, 1e+00]
+  RHS range       [4e+06, 4e+06]
+Found heuristic solution: objective 650.372
+Presolve removed 0 rows and 2425086 columns (presolve time = 12s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 19s) ...
+Presolve removed 0 rows and 2425086 columns (presolve time = 20s) ...
+Presolve removed 0 rows and 2425086 columns
+Presolve time: 21.29s
+Presolved: 1 rows, 1864007 columns, 1864007 nonzeros
+Found heuristic solution: objective 650.6499192
+Variable types: 0 continuous, 1864007 integer (795264 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6299989e+02   2.139890e+05   0.000000e+00     25s
+       1    7.5657244e+02   0.000000e+00   0.000000e+00     25s
+
+Root relaxation: objective 7.565724e+02, 1 iterations, 0.45 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     756.5724405  756.57244  0.00%     -   27s
+
+Explored 0 nodes (1 simplex iterations) in 27.24 seconds
+Thread count was 4 (of 4 available processors)
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.565725461731e+02, best bound 7.565725461731e+02, gap 0.0%
