@@ -1,7 +1,15 @@
+## 0.5.1 (2016-10-31)
+
++ Work on Windows (LibreOffice)
++ Add sections
+
+
+
 ## 0.5.0 (2016-10-21)
 
 - Change target journal to Diversity and Distributions
-- 
+- Add sections:
+  - 2.3 Prioritization methods
 
 ## 0.4.0 (2016-10-14)
 
@@ -25,5 +33,4 @@
 ## 0.1.0 (2016-07-19)
 
 - docx-file created
-	- Basic structure with main sections
-	
+  - Basic structure with main sections
