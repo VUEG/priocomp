@@ -174,8 +174,9 @@ rule preprocess_nuts_level0_data:
             with fiona.open(reprojected_shp) as source:
                 meta = source.meta
                 meta['schema']['geometry'] = 'Polygon'
-                # Insert a new field
+                # Insert new fields
                 meta['schema']['properties']['ID'] = 'int'
+                meta['schema']['properties']['mask'] = 'int'
 
                 ID = 1
                 with fiona.open(enhanced_shp, 'w', **meta) as sink:
@@ -183,6 +184,9 @@ rule preprocess_nuts_level0_data:
                     for f in source:
                         f['properties']['ID'] = ID
                         ID += 1
+                        # Create a mask ID (same for each feature) that can
+                        # later be used in creating a mask.
+                        f['properties']['mask'] = 1
                         # Write the record out.
                         sink.write(f)
 
@@ -266,10 +270,12 @@ rule preprocess_nuts_level2_data:
         llogger.debug("Resulting file: {}".format(processed_shp))
 
 rule rasterize_nuts_level0_data:
+    # Effectively, create a 1) land mask and 2) common data mask
     input:
         rules.preprocess_nuts_level0_data.output.processed
     output:
-        utils.pick_from_list(rules.preprocess_nuts_level0_data.output.processed, ".shp").replace(".shp", ".tif")
+        land_mask=utils.pick_from_list(rules.preprocess_nuts_level0_data.output.processed, ".shp").replace(".shp", ".tif"),
+        data_mask=utils.pick_from_list(rules.preprocess_nuts_level0_data.output.processed, ".shp").replace(".shp", "_data_mask.tif"),
     log:
         "logs/rasterize_nuts_level0_data.log"
     message:
@@ -284,11 +290,19 @@ rule rasterize_nuts_level0_data:
                                           PROJECT_EXTENT["bottom"],
                                           PROJECT_EXTENT["right"],
                                           PROJECT_EXTENT["top"])
-        # Rasterize
+        # 1) Rasterize land mask
         cmd_str = "gdal_rasterize -l {} ".format(layer_shp) + \
                   "-a ID -tr 1000 1000 -te {} ".format(bounds) + \
                   "-ot Int16 -a_nodata -32768 -co COMPRESS=DEFLATE " + \
-                  "{0} {1}".format(input_shp, output[0])
+                  "{0} {1}".format(input_shp, output.land_mask)
+        llogger.debug(cmd_str)
+        for line in utils.process_stdout(shell(cmd_str, read=True)):
+            llogger.debug(line)
+        # 2) Rasterize common data mask
+        cmd_str = "gdal_rasterize -l {} ".format(layer_shp) + \
+                  "-a mask -tr 1000 1000 -te {} ".format(bounds) + \
+                  "-ot Int8 -a_nodata -128 -co COMPRESS=DEFLATE " + \
+                  "{0} {1}".format(input_shp, output.data_mask)
         llogger.debug(cmd_str)
         for line in utils.process_stdout(shell(cmd_str, read=True)):
             llogger.debug(line)
