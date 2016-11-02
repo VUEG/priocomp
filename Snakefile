@@ -631,25 +631,26 @@ rule prioritize_ilp:
         "Optimizing with Gurobi..."
     run:
         # Without weights
-        llogger = utils.get_local_logger("optimize_gurobi_all", log.all)
-        gurobi.prioritize_gurobi(input.all, output.all, logger=llogger,
-                                 ol_normalize=True, save_intermediate=False,
-                                 verbose=True)
+        #llogger = utils.get_local_logger("optimize_gurobi_all", log.all)
+        #gurobi.prioritize_gurobi(input.all, output.all, logger=llogger,
+        #                         ol_normalize=True, save_intermediate=False,
+        #                         verbose=True)
         # With weights
         llogger = utils.get_local_logger("optimize_gurobi_all_weights",
                                          log.all_w)
         gurobi.prioritize_gurobi(input.all, output.all_w, logger=llogger,
                                  ol_normalize=True, weights=WEIGHTS,
-                                 save_intermediate=False, verbose=True)
+                                 step=0.02, save_intermediate=False,
+                                 verbose=True)
 
         llogger = utils.get_local_logger("optimize_gurobi_es", log.es)
         gurobi.prioritize_gurobi(input.es, output.es, logger=llogger,
-                                 ol_normalize=True, save_intermediate=False,
-                                 verbose=True)
+                                 ol_normalize=True, step=0.02,
+                                 save_intermediate=False, verbose=True)
         llogger = utils.get_local_logger("optimize_gurobi_bd", log.bd)
         gurobi.prioritize_gurobi(input.bd, output.bd, logger=llogger,
-                                 ol_normalize=True, save_intermediate=False,
-                                 verbose=True)
+                                 ol_normalize=True, step=0.02,
+                                 save_intermediate=False, verbose=True)
 
 rule postprocess_ilp:
     input:
