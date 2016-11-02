@@ -612,23 +612,15 @@ rule test_ilp:
                                  ol_normalize=True, save_intermediate=True,
                                  verbose=True)
 
-rule prioritize_ilp:
+rule prioritize_ilp_all:
     input:
         all=rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS,
-        es=rules.harmonize_data.output.harmonized,
-        bd=UDR_SRC_DATASETS
     output:
-        #all="analyses/ILP/ilp_eu26_all.tif",
         all_w="analyses/ILP/ilp_eu26_all_weights.tif",
-        es="analyses/ILP/ilp_eu26_es.tif",
-        bd="analyses/ILP/ilp_eu26_bd.tif"
     log:
-        all="logs/prioritize_ilp_eu26_all.log",
         all_w="logs/prioritize_ilp_eu26_all_weights.log",
-        es="logs/prioritize_ilp_eu26_es.log",
-        bd="logs/prioritize_ilp_eu26_bd.log"
     message:
-        "Optimizing with Gurobi..."
+        "Optimizing ALL with Gurobi..."
     run:
         # Without weights
         #llogger = utils.get_local_logger("optimize_gurobi_all", log.all)
@@ -643,21 +635,50 @@ rule prioritize_ilp:
                                  step=0.02, save_intermediate=False,
                                  verbose=True)
 
+rule prioritize_ilp_es:
+    input:
+        es=rules.harmonize_data.output.harmonized
+    output:
+        es="analyses/ILP/ilp_eu26_es.tif"
+    log:
+        es="logs/prioritize_ilp_eu26_es.log"
+    message:
+        "Optimizing ES with Gurobi..."
+    run:
         llogger = utils.get_local_logger("optimize_gurobi_es", log.es)
         gurobi.prioritize_gurobi(input.es, output.es, logger=llogger,
                                  ol_normalize=True, step=0.02,
                                  save_intermediate=False, verbose=True)
+
+rule prioritize_ilp_bd:
+    input:
+        bd=UDR_SRC_DATASETS
+    output:
+        bd="analyses/ILP/ilp_eu26_bd.tif"
+    log:
+        bd="logs/prioritize_ilp_eu26_bd.log"
+    message:
+        "Optimizing BD with Gurobi..."
+    run:
         llogger = utils.get_local_logger("optimize_gurobi_bd", log.bd)
         gurobi.prioritize_gurobi(input.bd, output.bd, logger=llogger,
                                  ol_normalize=True, step=0.02,
                                  save_intermediate=False, verbose=True)
 
+rule prioritize_ilp:
+    input:
+        rules.prioritize_ilp_all.output.all_w,
+        rules.prioritize_ilp_es.output.es,
+        rules.prioritize_ilp_bd.output.bd
+    output:
+        "analyses/ILP/ilp_done.txt"
+
 rule postprocess_ilp:
     input:
-        all=rules.prioritize_ilp.output.all,
-        all_w=rules.prioritize_ilp.output.all_w,
-        es=rules.prioritize_ilp.output.es,
-        bd=rules.prioritize_ilp.output.bd,
+        #all=rules.prioritize_ilp_all.output.all,
+        all_w=rules.prioritize_ilp_all.output.all_w,
+        es=rules.prioritize_ilp_es.output.es,
+        bd=rules.prioritize_ilp_bd.output.bd,
         plu=utils.pick_from_list(rules.preprocess_nuts_level2_data.output.processed,
                                  ".shp")
     output:
@@ -689,7 +710,7 @@ rule postprocess_ilp:
 rule expand_ilp_coverage:
     input:
         template="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
-        target=rules.prioritize_ilp.output.all_w
+        target=rules.prioritize_ilp_all.output.all_w
     output:
         "analyses/ILP/ilp_eu26_all_weights_expanded.tif"
     log:
@@ -705,18 +726,15 @@ rule expand_ilp_coverage:
 
 rule compare_correlation:
     input:
-        rules.prioritize_rwr.output.all,
-        "analyses/zonation/priocomp/02_abf/02_abf_out/02_abf.rank.compressed.tif",
-        rules.prioritize_ilp.output.all,
         rules.prioritize_rwr.output.all_w,
         "analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
-        rules.prioritize_ilp.output.all_w,
+        rules.prioritize_ilp_all.output.all_w,
         rules.prioritize_rwr.output.es,
         "analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif",
-        rules.prioritize_ilp.output.es,
+        rules.prioritize_ilp_es.output.es,
         rules.prioritize_rwr.output.bd,
         "analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif",
-        rules.prioritize_ilp.output.bd
+        rules.prioritize_ilp_bd.output.bd
     output:
         "analyses/comparison/cross_correlation.csv"
     log:
@@ -732,18 +750,15 @@ rule compare_correlation:
 
 rule compare_jaccard:
     input:
-        rules.prioritize_rwr.output.all,
-        "analyses/zonation/priocomp/02_abf/02_abf_out/02_abf.rank.compressed.tif",
-        rules.prioritize_ilp.output.all,
         rules.prioritize_rwr.output.all_w,
         "analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
-        rules.prioritize_ilp.output.all_w,
+        rules.prioritize_ilp_all.output.all_w,
         rules.prioritize_rwr.output.es,
         "analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif",
-        rules.prioritize_ilp.output.es,
+        rules.prioritize_ilp_es.output.es,
         rules.prioritize_rwr.output.bd,
         "analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif",
-        rules.prioritize_ilp.output.bd
+        rules.prioritize_ilp_bd.output.bd
     output:
         "analyses/comparison/cross_jaccard.csv"
     log:
@@ -762,9 +777,6 @@ rule compare_jaccard:
 
 rule compare_mcs:
     input:
-        rules.postprocess_rwr.output.all,
-        "analyses/zonation/priocomp/02_abf/02_abf_out/02_abf_nwout1.shp",
-        rules.postprocess_ilp.output.all,
         rules.postprocess_rwr.output.all_w,
         "analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt_nwout1.shp",
         rules.postprocess_ilp.output.all_w,
