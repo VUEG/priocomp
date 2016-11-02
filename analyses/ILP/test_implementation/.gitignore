@@ -1,0 +1,5 @@
+# Ignore everything
+*.tif
+*.tif.msk
+*.aux.xml
+*.geojson

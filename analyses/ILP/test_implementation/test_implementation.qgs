@@ -1,0 +1,1188 @@
+<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
+<qgis projectname="" version="2.18.0">
+  <title></title>
+  <autotransaction active="0"/>
+  <evaluateDefaultValues active="0"/>
+  <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="">
+    <customproperties/>
+    <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="test_R_gurobi65120161102101621234" name="test_R_gurobi651">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer expanded="1" checked="Qt::Checked" id="test_R_gurobi651_include20161102113309159" name="test_R_gurobi651_include">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="test_R20161102093413362" name="test_R_gurobi700">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="output_02_additive_benefit_function_rank20161102102602775" name="output_02_additive_benefit_function.rank">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer expanded="0" checked="Qt::Checked" id="test_python20161102102420857" name="test_python">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-group expanded="0" checked="Qt::Unchecked" name="Data">
+      <customproperties/>
+      <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="species120161102093706288" name="species1">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="species220161102093706325" name="species2">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="species320161102093706352" name="species3">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="species420161102093706378" name="species4">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="species520161102093706403" name="species5">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="species620161102093706430" name="species6">
+        <customproperties/>
+      </layer-tree-layer>
+      <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="species720161102093706458" name="species7">
+        <customproperties/>
+      </layer-tree-layer>
+    </layer-tree-group>
+  </layer-tree-group>
+  <relations/>
+  <mapcanvas>
+    <units>degrees</units>
+    <extent>
+      <xmin>294201.75500000000465661</xmin>
+      <ymin>6283601.82499999925494194</ymin>
+      <xmax>294338.04500000004190952</xmax>
+      <ymax>6283718.375</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <projections>0</projections>
+    <destinationsrs>
+      <spatialrefsys>
+        <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+        <srsid>3452</srsid>
+        <srid>4326</srid>
+        <authid>EPSG:4326</authid>
+        <description>WGS 84</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>WGS84</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+    <layer_coordinate_transform_info/>
+  </mapcanvas>
+  <layer-tree-canvas>
+    <custom-order enabled="0">
+      <item>test_R20161102093413362</item>
+      <item>species120161102093706288</item>
+      <item>species220161102093706325</item>
+      <item>species320161102093706352</item>
+      <item>species420161102093706378</item>
+      <item>species520161102093706403</item>
+      <item>species620161102093706430</item>
+      <item>species720161102093706458</item>
+      <item>test_R_gurobi65120161102101621234</item>
+      <item>test_python20161102102420857</item>
+      <item>output_02_additive_benefit_function_rank20161102102602775</item>
+      <item>test_R_gurobi651_include20161102113309159</item>
+    </custom-order>
+  </layer-tree-canvas>
+  <legend updateDrawingOrder="true">
+    <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="test_R_gurobi651" showFeatureCount="0">
+      <filegroup open="false" hidden="false">
+        <legendlayerfile isInOverview="0" layerid="test_R_gurobi65120161102101621234" visible="0"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="test_R_gurobi651_include" showFeatureCount="0">
+      <filegroup open="true" hidden="false">
+        <legendlayerfile isInOverview="0" layerid="test_R_gurobi651_include20161102113309159" visible="1"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="test_R_gurobi700" showFeatureCount="0">
+      <filegroup open="false" hidden="false">
+        <legendlayerfile isInOverview="0" layerid="test_R20161102093413362" visible="0"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="output_02_additive_benefit_function.rank" showFeatureCount="0">
+      <filegroup open="false" hidden="false">
+        <legendlayerfile isInOverview="0" layerid="output_02_additive_benefit_function_rank20161102102602775" visible="0"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="test_python" showFeatureCount="0">
+      <filegroup open="false" hidden="false">
+        <legendlayerfile isInOverview="0" layerid="test_python20161102102420857" visible="1"/>
+      </filegroup>
+    </legendlayer>
+    <legendgroup open="false" checked="Qt::Unchecked" name="Data">
+      <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="species1" showFeatureCount="0">
+        <filegroup open="false" hidden="false">
+          <legendlayerfile isInOverview="0" layerid="species120161102093706288" visible="0"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="species2" showFeatureCount="0">
+        <filegroup open="false" hidden="false">
+          <legendlayerfile isInOverview="0" layerid="species220161102093706325" visible="0"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="species3" showFeatureCount="0">
+        <filegroup open="false" hidden="false">
+          <legendlayerfile isInOverview="0" layerid="species320161102093706352" visible="0"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="species4" showFeatureCount="0">
+        <filegroup open="false" hidden="false">
+          <legendlayerfile isInOverview="0" layerid="species420161102093706378" visible="0"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="species5" showFeatureCount="0">
+        <filegroup open="false" hidden="false">
+          <legendlayerfile isInOverview="0" layerid="species520161102093706403" visible="0"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="species6" showFeatureCount="0">
+        <filegroup open="false" hidden="false">
+          <legendlayerfile isInOverview="0" layerid="species620161102093706430" visible="0"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="species7" showFeatureCount="0">
+        <filegroup open="false" hidden="false">
+          <legendlayerfile isInOverview="0" layerid="species720161102093706458" visible="0"/>
+        </filegroup>
+      </legendlayer>
+    </legendgroup>
+  </legend>
+  <projectlayers>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>294205</xmin>
+        <ymin>6283604.59999999962747097</ymin>
+        <xmax>294334.79999999998835847</xmax>
+        <ymax>6283715.59999999962747097</ymax>
+      </extent>
+      <id>output_02_additive_benefit_function_rank20161102102602775</id>
+      <datasource>../../../../../../../../../dev/git-data/zonation-tutorial/basic/basic_output/02_additive_benefit_function/output_02_additive_benefit_function.rank.asc</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>output_02_additive_benefit_function.rank</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>294205</xmin>
+        <ymin>6283604.59999999962747097</ymin>
+        <xmax>294334.79999999998835847</xmax>
+        <ymax>6283715.59999999962747097</ymax>
+      </extent>
+      <id>species120161102093706288</id>
+      <datasource>../../../../../../../../../dev/git-data/zonation-tutorial/data/species1.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>species1</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0" color="#440154"/>
+              <item alpha="255" value="0.0196" label="0.0196" color="#46085c"/>
+              <item alpha="255" value="0.0392" label="0.0392" color="#471063"/>
+              <item alpha="255" value="0.0588" label="0.0588" color="#481769"/>
+              <item alpha="255" value="0.0784" label="0.0784" color="#481d6f"/>
+              <item alpha="255" value="0.098" label="0.098" color="#482475"/>
+              <item alpha="255" value="0.118" label="0.118" color="#472a7a"/>
+              <item alpha="255" value="0.137" label="0.137" color="#46307e"/>
+              <item alpha="255" value="0.157" label="0.157" color="#453781"/>
+              <item alpha="255" value="0.176" label="0.176" color="#433d84"/>
+              <item alpha="255" value="0.196" label="0.196" color="#414287"/>
+              <item alpha="255" value="0.216" label="0.216" color="#3f4889"/>
+              <item alpha="255" value="0.235" label="0.235" color="#3d4e8a"/>
+              <item alpha="255" value="0.255" label="0.255" color="#3a538b"/>
+              <item alpha="255" value="0.275" label="0.275" color="#38598c"/>
+              <item alpha="255" value="0.294" label="0.294" color="#355e8d"/>
+              <item alpha="255" value="0.314" label="0.314" color="#33638d"/>
+              <item alpha="255" value="0.333" label="0.333" color="#31688e"/>
+              <item alpha="255" value="0.353" label="0.353" color="#2e6d8e"/>
+              <item alpha="255" value="0.373" label="0.373" color="#2c718e"/>
+              <item alpha="255" value="0.392" label="0.392" color="#2a768e"/>
+              <item alpha="255" value="0.412" label="0.412" color="#297b8e"/>
+              <item alpha="255" value="0.431" label="0.431" color="#27808e"/>
+              <item alpha="255" value="0.451" label="0.451" color="#25848e"/>
+              <item alpha="255" value="0.471" label="0.471" color="#23898e"/>
+              <item alpha="255" value="0.49" label="0.49" color="#218e8d"/>
+              <item alpha="255" value="0.51" label="0.51" color="#20928c"/>
+              <item alpha="255" value="0.529" label="0.529" color="#1f978b"/>
+              <item alpha="255" value="0.549" label="0.549" color="#1e9c89"/>
+              <item alpha="255" value="0.569" label="0.569" color="#1fa188"/>
+              <item alpha="255" value="0.588" label="0.588" color="#21a585"/>
+              <item alpha="255" value="0.608" label="0.608" color="#24aa83"/>
+              <item alpha="255" value="0.627" label="0.627" color="#28ae80"/>
+              <item alpha="255" value="0.647" label="0.647" color="#2eb37c"/>
+              <item alpha="255" value="0.667" label="0.667" color="#35b779"/>
+              <item alpha="255" value="0.686" label="0.686" color="#3dbc74"/>
+              <item alpha="255" value="0.706" label="0.706" color="#46c06f"/>
+              <item alpha="255" value="0.725" label="0.725" color="#50c46a"/>
+              <item alpha="255" value="0.745" label="0.745" color="#5ac864"/>
+              <item alpha="255" value="0.765" label="0.765" color="#65cb5e"/>
+              <item alpha="255" value="0.784" label="0.784" color="#70cf57"/>
+              <item alpha="255" value="0.804" label="0.804" color="#7cd250"/>
+              <item alpha="255" value="0.824" label="0.824" color="#89d548"/>
+              <item alpha="255" value="0.843" label="0.843" color="#95d840"/>
+              <item alpha="255" value="0.863" label="0.863" color="#a2da37"/>
+              <item alpha="255" value="0.882" label="0.882" color="#b0dd2f"/>
+              <item alpha="255" value="0.902" label="0.902" color="#bddf26"/>
+              <item alpha="255" value="0.922" label="0.922" color="#cae11f"/>
+              <item alpha="255" value="0.941" label="0.941" color="#d8e219"/>
+              <item alpha="255" value="0.961" label="0.961" color="#e5e419"/>
+              <item alpha="255" value="0.98" label="0.98" color="#f1e51d"/>
+              <item alpha="255" value="1" label="1" color="#fde725"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>294205</xmin>
+        <ymin>6283604.59999999962747097</ymin>
+        <xmax>294334.79999999998835847</xmax>
+        <ymax>6283715.59999999962747097</ymax>
+      </extent>
+      <id>species220161102093706325</id>
+      <datasource>../../../../../../../../../dev/git-data/zonation-tutorial/data/species2.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>species2</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0" color="#440154"/>
+              <item alpha="255" value="0.0196" label="0.0196" color="#46085c"/>
+              <item alpha="255" value="0.0392" label="0.0392" color="#471063"/>
+              <item alpha="255" value="0.0588" label="0.0588" color="#481769"/>
+              <item alpha="255" value="0.0784" label="0.0784" color="#481d6f"/>
+              <item alpha="255" value="0.098" label="0.098" color="#482475"/>
+              <item alpha="255" value="0.118" label="0.118" color="#472a7a"/>
+              <item alpha="255" value="0.137" label="0.137" color="#46307e"/>
+              <item alpha="255" value="0.157" label="0.157" color="#453781"/>
+              <item alpha="255" value="0.176" label="0.176" color="#433d84"/>
+              <item alpha="255" value="0.196" label="0.196" color="#414287"/>
+              <item alpha="255" value="0.216" label="0.216" color="#3f4889"/>
+              <item alpha="255" value="0.235" label="0.235" color="#3d4e8a"/>
+              <item alpha="255" value="0.255" label="0.255" color="#3a538b"/>
+              <item alpha="255" value="0.275" label="0.275" color="#38598c"/>
+              <item alpha="255" value="0.294" label="0.294" color="#355e8d"/>
+              <item alpha="255" value="0.314" label="0.314" color="#33638d"/>
+              <item alpha="255" value="0.333" label="0.333" color="#31688e"/>
+              <item alpha="255" value="0.353" label="0.353" color="#2e6d8e"/>
+              <item alpha="255" value="0.373" label="0.373" color="#2c718e"/>
+              <item alpha="255" value="0.392" label="0.392" color="#2a768e"/>
+              <item alpha="255" value="0.412" label="0.412" color="#297b8e"/>
+              <item alpha="255" value="0.431" label="0.431" color="#27808e"/>
+              <item alpha="255" value="0.451" label="0.451" color="#25848e"/>
+              <item alpha="255" value="0.471" label="0.471" color="#23898e"/>
+              <item alpha="255" value="0.49" label="0.49" color="#218e8d"/>
+              <item alpha="255" value="0.51" label="0.51" color="#20928c"/>
+              <item alpha="255" value="0.529" label="0.529" color="#1f978b"/>
+              <item alpha="255" value="0.549" label="0.549" color="#1e9c89"/>
+              <item alpha="255" value="0.569" label="0.569" color="#1fa188"/>
+              <item alpha="255" value="0.588" label="0.588" color="#21a585"/>
+              <item alpha="255" value="0.608" label="0.608" color="#24aa83"/>
+              <item alpha="255" value="0.627" label="0.627" color="#28ae80"/>
+              <item alpha="255" value="0.647" label="0.647" color="#2eb37c"/>
+              <item alpha="255" value="0.667" label="0.667" color="#35b779"/>
+              <item alpha="255" value="0.686" label="0.686" color="#3dbc74"/>
+              <item alpha="255" value="0.706" label="0.706" color="#46c06f"/>
+              <item alpha="255" value="0.725" label="0.725" color="#50c46a"/>
+              <item alpha="255" value="0.745" label="0.745" color="#5ac864"/>
+              <item alpha="255" value="0.765" label="0.765" color="#65cb5e"/>
+              <item alpha="255" value="0.784" label="0.784" color="#70cf57"/>
+              <item alpha="255" value="0.804" label="0.804" color="#7cd250"/>
+              <item alpha="255" value="0.824" label="0.824" color="#89d548"/>
+              <item alpha="255" value="0.843" label="0.843" color="#95d840"/>
+              <item alpha="255" value="0.863" label="0.863" color="#a2da37"/>
+              <item alpha="255" value="0.882" label="0.882" color="#b0dd2f"/>
+              <item alpha="255" value="0.902" label="0.902" color="#bddf26"/>
+              <item alpha="255" value="0.922" label="0.922" color="#cae11f"/>
+              <item alpha="255" value="0.941" label="0.941" color="#d8e219"/>
+              <item alpha="255" value="0.961" label="0.961" color="#e5e419"/>
+              <item alpha="255" value="0.98" label="0.98" color="#f1e51d"/>
+              <item alpha="255" value="1" label="1" color="#fde725"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>294205</xmin>
+        <ymin>6283604.59999999962747097</ymin>
+        <xmax>294334.79999999998835847</xmax>
+        <ymax>6283715.59999999962747097</ymax>
+      </extent>
+      <id>species320161102093706352</id>
+      <datasource>../../../../../../../../../dev/git-data/zonation-tutorial/data/species3.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>species3</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0" color="#440154"/>
+              <item alpha="255" value="0.0196" label="0.0196" color="#46085c"/>
+              <item alpha="255" value="0.0392" label="0.0392" color="#471063"/>
+              <item alpha="255" value="0.0588" label="0.0588" color="#481769"/>
+              <item alpha="255" value="0.0784" label="0.0784" color="#481d6f"/>
+              <item alpha="255" value="0.098" label="0.098" color="#482475"/>
+              <item alpha="255" value="0.118" label="0.118" color="#472a7a"/>
+              <item alpha="255" value="0.137" label="0.137" color="#46307e"/>
+              <item alpha="255" value="0.157" label="0.157" color="#453781"/>
+              <item alpha="255" value="0.176" label="0.176" color="#433d84"/>
+              <item alpha="255" value="0.196" label="0.196" color="#414287"/>
+              <item alpha="255" value="0.216" label="0.216" color="#3f4889"/>
+              <item alpha="255" value="0.235" label="0.235" color="#3d4e8a"/>
+              <item alpha="255" value="0.255" label="0.255" color="#3a538b"/>
+              <item alpha="255" value="0.275" label="0.275" color="#38598c"/>
+              <item alpha="255" value="0.294" label="0.294" color="#355e8d"/>
+              <item alpha="255" value="0.314" label="0.314" color="#33638d"/>
+              <item alpha="255" value="0.333" label="0.333" color="#31688e"/>
+              <item alpha="255" value="0.353" label="0.353" color="#2e6d8e"/>
+              <item alpha="255" value="0.373" label="0.373" color="#2c718e"/>
+              <item alpha="255" value="0.392" label="0.392" color="#2a768e"/>
+              <item alpha="255" value="0.412" label="0.412" color="#297b8e"/>
+              <item alpha="255" value="0.431" label="0.431" color="#27808e"/>
+              <item alpha="255" value="0.451" label="0.451" color="#25848e"/>
+              <item alpha="255" value="0.471" label="0.471" color="#23898e"/>
+              <item alpha="255" value="0.49" label="0.49" color="#218e8d"/>
+              <item alpha="255" value="0.51" label="0.51" color="#20928c"/>
+              <item alpha="255" value="0.529" label="0.529" color="#1f978b"/>
+              <item alpha="255" value="0.549" label="0.549" color="#1e9c89"/>
+              <item alpha="255" value="0.569" label="0.569" color="#1fa188"/>
+              <item alpha="255" value="0.588" label="0.588" color="#21a585"/>
+              <item alpha="255" value="0.608" label="0.608" color="#24aa83"/>
+              <item alpha="255" value="0.627" label="0.627" color="#28ae80"/>
+              <item alpha="255" value="0.647" label="0.647" color="#2eb37c"/>
+              <item alpha="255" value="0.667" label="0.667" color="#35b779"/>
+              <item alpha="255" value="0.686" label="0.686" color="#3dbc74"/>
+              <item alpha="255" value="0.706" label="0.706" color="#46c06f"/>
+              <item alpha="255" value="0.725" label="0.725" color="#50c46a"/>
+              <item alpha="255" value="0.745" label="0.745" color="#5ac864"/>
+              <item alpha="255" value="0.765" label="0.765" color="#65cb5e"/>
+              <item alpha="255" value="0.784" label="0.784" color="#70cf57"/>
+              <item alpha="255" value="0.804" label="0.804" color="#7cd250"/>
+              <item alpha="255" value="0.824" label="0.824" color="#89d548"/>
+              <item alpha="255" value="0.843" label="0.843" color="#95d840"/>
+              <item alpha="255" value="0.863" label="0.863" color="#a2da37"/>
+              <item alpha="255" value="0.882" label="0.882" color="#b0dd2f"/>
+              <item alpha="255" value="0.902" label="0.902" color="#bddf26"/>
+              <item alpha="255" value="0.922" label="0.922" color="#cae11f"/>
+              <item alpha="255" value="0.941" label="0.941" color="#d8e219"/>
+              <item alpha="255" value="0.961" label="0.961" color="#e5e419"/>
+              <item alpha="255" value="0.98" label="0.98" color="#f1e51d"/>
+              <item alpha="255" value="1" label="1" color="#fde725"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>294205</xmin>
+        <ymin>6283604.59999999962747097</ymin>
+        <xmax>294334.79999999998835847</xmax>
+        <ymax>6283715.59999999962747097</ymax>
+      </extent>
+      <id>species420161102093706378</id>
+      <datasource>../../../../../../../../../dev/git-data/zonation-tutorial/data/species4.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>species4</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0" color="#440154"/>
+              <item alpha="255" value="0.0196" label="0.0196" color="#46085c"/>
+              <item alpha="255" value="0.0392" label="0.0392" color="#471063"/>
+              <item alpha="255" value="0.0588" label="0.0588" color="#481769"/>
+              <item alpha="255" value="0.0784" label="0.0784" color="#481d6f"/>
+              <item alpha="255" value="0.098" label="0.098" color="#482475"/>
+              <item alpha="255" value="0.118" label="0.118" color="#472a7a"/>
+              <item alpha="255" value="0.137" label="0.137" color="#46307e"/>
+              <item alpha="255" value="0.157" label="0.157" color="#453781"/>
+              <item alpha="255" value="0.176" label="0.176" color="#433d84"/>
+              <item alpha="255" value="0.196" label="0.196" color="#414287"/>
+              <item alpha="255" value="0.216" label="0.216" color="#3f4889"/>
+              <item alpha="255" value="0.235" label="0.235" color="#3d4e8a"/>
+              <item alpha="255" value="0.255" label="0.255" color="#3a538b"/>
+              <item alpha="255" value="0.275" label="0.275" color="#38598c"/>
+              <item alpha="255" value="0.294" label="0.294" color="#355e8d"/>
+              <item alpha="255" value="0.314" label="0.314" color="#33638d"/>
+              <item alpha="255" value="0.333" label="0.333" color="#31688e"/>
+              <item alpha="255" value="0.353" label="0.353" color="#2e6d8e"/>
+              <item alpha="255" value="0.373" label="0.373" color="#2c718e"/>
+              <item alpha="255" value="0.392" label="0.392" color="#2a768e"/>
+              <item alpha="255" value="0.412" label="0.412" color="#297b8e"/>
+              <item alpha="255" value="0.431" label="0.431" color="#27808e"/>
+              <item alpha="255" value="0.451" label="0.451" color="#25848e"/>
+              <item alpha="255" value="0.471" label="0.471" color="#23898e"/>
+              <item alpha="255" value="0.49" label="0.49" color="#218e8d"/>
+              <item alpha="255" value="0.51" label="0.51" color="#20928c"/>
+              <item alpha="255" value="0.529" label="0.529" color="#1f978b"/>
+              <item alpha="255" value="0.549" label="0.549" color="#1e9c89"/>
+              <item alpha="255" value="0.569" label="0.569" color="#1fa188"/>
+              <item alpha="255" value="0.588" label="0.588" color="#21a585"/>
+              <item alpha="255" value="0.608" label="0.608" color="#24aa83"/>
+              <item alpha="255" value="0.627" label="0.627" color="#28ae80"/>
+              <item alpha="255" value="0.647" label="0.647" color="#2eb37c"/>
+              <item alpha="255" value="0.667" label="0.667" color="#35b779"/>
+              <item alpha="255" value="0.686" label="0.686" color="#3dbc74"/>
+              <item alpha="255" value="0.706" label="0.706" color="#46c06f"/>
+              <item alpha="255" value="0.725" label="0.725" color="#50c46a"/>
+              <item alpha="255" value="0.745" label="0.745" color="#5ac864"/>
+              <item alpha="255" value="0.765" label="0.765" color="#65cb5e"/>
+              <item alpha="255" value="0.784" label="0.784" color="#70cf57"/>
+              <item alpha="255" value="0.804" label="0.804" color="#7cd250"/>
+              <item alpha="255" value="0.824" label="0.824" color="#89d548"/>
+              <item alpha="255" value="0.843" label="0.843" color="#95d840"/>
+              <item alpha="255" value="0.863" label="0.863" color="#a2da37"/>
+              <item alpha="255" value="0.882" label="0.882" color="#b0dd2f"/>
+              <item alpha="255" value="0.902" label="0.902" color="#bddf26"/>
+              <item alpha="255" value="0.922" label="0.922" color="#cae11f"/>
+              <item alpha="255" value="0.941" label="0.941" color="#d8e219"/>
+              <item alpha="255" value="0.961" label="0.961" color="#e5e419"/>
+              <item alpha="255" value="0.98" label="0.98" color="#f1e51d"/>
+              <item alpha="255" value="1" label="1" color="#fde725"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>294205</xmin>
+        <ymin>6283604.59999999962747097</ymin>
+        <xmax>294334.79999999998835847</xmax>
+        <ymax>6283715.59999999962747097</ymax>
+      </extent>
+      <id>species520161102093706403</id>
+      <datasource>../../../../../../../../../dev/git-data/zonation-tutorial/data/species5.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>species5</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0" color="#440154"/>
+              <item alpha="255" value="0.0196" label="0.0196" color="#46085c"/>
+              <item alpha="255" value="0.0392" label="0.0392" color="#471063"/>
+              <item alpha="255" value="0.0588" label="0.0588" color="#481769"/>
+              <item alpha="255" value="0.0784" label="0.0784" color="#481d6f"/>
+              <item alpha="255" value="0.098" label="0.098" color="#482475"/>
+              <item alpha="255" value="0.118" label="0.118" color="#472a7a"/>
+              <item alpha="255" value="0.137" label="0.137" color="#46307e"/>
+              <item alpha="255" value="0.157" label="0.157" color="#453781"/>
+              <item alpha="255" value="0.176" label="0.176" color="#433d84"/>
+              <item alpha="255" value="0.196" label="0.196" color="#414287"/>
+              <item alpha="255" value="0.216" label="0.216" color="#3f4889"/>
+              <item alpha="255" value="0.235" label="0.235" color="#3d4e8a"/>
+              <item alpha="255" value="0.255" label="0.255" color="#3a538b"/>
+              <item alpha="255" value="0.275" label="0.275" color="#38598c"/>
+              <item alpha="255" value="0.294" label="0.294" color="#355e8d"/>
+              <item alpha="255" value="0.314" label="0.314" color="#33638d"/>
+              <item alpha="255" value="0.333" label="0.333" color="#31688e"/>
+              <item alpha="255" value="0.353" label="0.353" color="#2e6d8e"/>
+              <item alpha="255" value="0.373" label="0.373" color="#2c718e"/>
+              <item alpha="255" value="0.392" label="0.392" color="#2a768e"/>
+              <item alpha="255" value="0.412" label="0.412" color="#297b8e"/>
+              <item alpha="255" value="0.431" label="0.431" color="#27808e"/>
+              <item alpha="255" value="0.451" label="0.451" color="#25848e"/>
+              <item alpha="255" value="0.471" label="0.471" color="#23898e"/>
+              <item alpha="255" value="0.49" label="0.49" color="#218e8d"/>
+              <item alpha="255" value="0.51" label="0.51" color="#20928c"/>
+              <item alpha="255" value="0.529" label="0.529" color="#1f978b"/>
+              <item alpha="255" value="0.549" label="0.549" color="#1e9c89"/>
+              <item alpha="255" value="0.569" label="0.569" color="#1fa188"/>
+              <item alpha="255" value="0.588" label="0.588" color="#21a585"/>
+              <item alpha="255" value="0.608" label="0.608" color="#24aa83"/>
+              <item alpha="255" value="0.627" label="0.627" color="#28ae80"/>
+              <item alpha="255" value="0.647" label="0.647" color="#2eb37c"/>
+              <item alpha="255" value="0.667" label="0.667" color="#35b779"/>
+              <item alpha="255" value="0.686" label="0.686" color="#3dbc74"/>
+              <item alpha="255" value="0.706" label="0.706" color="#46c06f"/>
+              <item alpha="255" value="0.725" label="0.725" color="#50c46a"/>
+              <item alpha="255" value="0.745" label="0.745" color="#5ac864"/>
+              <item alpha="255" value="0.765" label="0.765" color="#65cb5e"/>
+              <item alpha="255" value="0.784" label="0.784" color="#70cf57"/>
+              <item alpha="255" value="0.804" label="0.804" color="#7cd250"/>
+              <item alpha="255" value="0.824" label="0.824" color="#89d548"/>
+              <item alpha="255" value="0.843" label="0.843" color="#95d840"/>
+              <item alpha="255" value="0.863" label="0.863" color="#a2da37"/>
+              <item alpha="255" value="0.882" label="0.882" color="#b0dd2f"/>
+              <item alpha="255" value="0.902" label="0.902" color="#bddf26"/>
+              <item alpha="255" value="0.922" label="0.922" color="#cae11f"/>
+              <item alpha="255" value="0.941" label="0.941" color="#d8e219"/>
+              <item alpha="255" value="0.961" label="0.961" color="#e5e419"/>
+              <item alpha="255" value="0.98" label="0.98" color="#f1e51d"/>
+              <item alpha="255" value="1" label="1" color="#fde725"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>294205</xmin>
+        <ymin>6283604.59999999962747097</ymin>
+        <xmax>294334.79999999998835847</xmax>
+        <ymax>6283715.59999999962747097</ymax>
+      </extent>
+      <id>species620161102093706430</id>
+      <datasource>../../../../../../../../../dev/git-data/zonation-tutorial/data/species6.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>species6</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0" color="#440154"/>
+              <item alpha="255" value="0.0196" label="0.0196" color="#46085c"/>
+              <item alpha="255" value="0.0392" label="0.0392" color="#471063"/>
+              <item alpha="255" value="0.0588" label="0.0588" color="#481769"/>
+              <item alpha="255" value="0.0784" label="0.0784" color="#481d6f"/>
+              <item alpha="255" value="0.098" label="0.098" color="#482475"/>
+              <item alpha="255" value="0.118" label="0.118" color="#472a7a"/>
+              <item alpha="255" value="0.137" label="0.137" color="#46307e"/>
+              <item alpha="255" value="0.157" label="0.157" color="#453781"/>
+              <item alpha="255" value="0.176" label="0.176" color="#433d84"/>
+              <item alpha="255" value="0.196" label="0.196" color="#414287"/>
+              <item alpha="255" value="0.216" label="0.216" color="#3f4889"/>
+              <item alpha="255" value="0.235" label="0.235" color="#3d4e8a"/>
+              <item alpha="255" value="0.255" label="0.255" color="#3a538b"/>
+              <item alpha="255" value="0.275" label="0.275" color="#38598c"/>
+              <item alpha="255" value="0.294" label="0.294" color="#355e8d"/>
+              <item alpha="255" value="0.314" label="0.314" color="#33638d"/>
+              <item alpha="255" value="0.333" label="0.333" color="#31688e"/>
+              <item alpha="255" value="0.353" label="0.353" color="#2e6d8e"/>
+              <item alpha="255" value="0.373" label="0.373" color="#2c718e"/>
+              <item alpha="255" value="0.392" label="0.392" color="#2a768e"/>
+              <item alpha="255" value="0.412" label="0.412" color="#297b8e"/>
+              <item alpha="255" value="0.431" label="0.431" color="#27808e"/>
+              <item alpha="255" value="0.451" label="0.451" color="#25848e"/>
+              <item alpha="255" value="0.471" label="0.471" color="#23898e"/>
+              <item alpha="255" value="0.49" label="0.49" color="#218e8d"/>
+              <item alpha="255" value="0.51" label="0.51" color="#20928c"/>
+              <item alpha="255" value="0.529" label="0.529" color="#1f978b"/>
+              <item alpha="255" value="0.549" label="0.549" color="#1e9c89"/>
+              <item alpha="255" value="0.569" label="0.569" color="#1fa188"/>
+              <item alpha="255" value="0.588" label="0.588" color="#21a585"/>
+              <item alpha="255" value="0.608" label="0.608" color="#24aa83"/>
+              <item alpha="255" value="0.627" label="0.627" color="#28ae80"/>
+              <item alpha="255" value="0.647" label="0.647" color="#2eb37c"/>
+              <item alpha="255" value="0.667" label="0.667" color="#35b779"/>
+              <item alpha="255" value="0.686" label="0.686" color="#3dbc74"/>
+              <item alpha="255" value="0.706" label="0.706" color="#46c06f"/>
+              <item alpha="255" value="0.725" label="0.725" color="#50c46a"/>
+              <item alpha="255" value="0.745" label="0.745" color="#5ac864"/>
+              <item alpha="255" value="0.765" label="0.765" color="#65cb5e"/>
+              <item alpha="255" value="0.784" label="0.784" color="#70cf57"/>
+              <item alpha="255" value="0.804" label="0.804" color="#7cd250"/>
+              <item alpha="255" value="0.824" label="0.824" color="#89d548"/>
+              <item alpha="255" value="0.843" label="0.843" color="#95d840"/>
+              <item alpha="255" value="0.863" label="0.863" color="#a2da37"/>
+              <item alpha="255" value="0.882" label="0.882" color="#b0dd2f"/>
+              <item alpha="255" value="0.902" label="0.902" color="#bddf26"/>
+              <item alpha="255" value="0.922" label="0.922" color="#cae11f"/>
+              <item alpha="255" value="0.941" label="0.941" color="#d8e219"/>
+              <item alpha="255" value="0.961" label="0.961" color="#e5e419"/>
+              <item alpha="255" value="0.98" label="0.98" color="#f1e51d"/>
+              <item alpha="255" value="1" label="1" color="#fde725"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>294205</xmin>
+        <ymin>6283604.59999999962747097</ymin>
+        <xmax>294334.79999999998835847</xmax>
+        <ymax>6283715.59999999962747097</ymax>
+      </extent>
+      <id>species720161102093706458</id>
+      <datasource>../../../../../../../../../dev/git-data/zonation-tutorial/data/species7.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>species7</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0" color="#440154"/>
+              <item alpha="255" value="0.0196" label="0.0196" color="#46085c"/>
+              <item alpha="255" value="0.0392" label="0.0392" color="#471063"/>
+              <item alpha="255" value="0.0588" label="0.0588" color="#481769"/>
+              <item alpha="255" value="0.0784" label="0.0784" color="#481d6f"/>
+              <item alpha="255" value="0.098" label="0.098" color="#482475"/>
+              <item alpha="255" value="0.118" label="0.118" color="#472a7a"/>
+              <item alpha="255" value="0.137" label="0.137" color="#46307e"/>
+              <item alpha="255" value="0.157" label="0.157" color="#453781"/>
+              <item alpha="255" value="0.176" label="0.176" color="#433d84"/>
+              <item alpha="255" value="0.196" label="0.196" color="#414287"/>
+              <item alpha="255" value="0.216" label="0.216" color="#3f4889"/>
+              <item alpha="255" value="0.235" label="0.235" color="#3d4e8a"/>
+              <item alpha="255" value="0.255" label="0.255" color="#3a538b"/>
+              <item alpha="255" value="0.275" label="0.275" color="#38598c"/>
+              <item alpha="255" value="0.294" label="0.294" color="#355e8d"/>
+              <item alpha="255" value="0.314" label="0.314" color="#33638d"/>
+              <item alpha="255" value="0.333" label="0.333" color="#31688e"/>
+              <item alpha="255" value="0.353" label="0.353" color="#2e6d8e"/>
+              <item alpha="255" value="0.373" label="0.373" color="#2c718e"/>
+              <item alpha="255" value="0.392" label="0.392" color="#2a768e"/>
+              <item alpha="255" value="0.412" label="0.412" color="#297b8e"/>
+              <item alpha="255" value="0.431" label="0.431" color="#27808e"/>
+              <item alpha="255" value="0.451" label="0.451" color="#25848e"/>
+              <item alpha="255" value="0.471" label="0.471" color="#23898e"/>
+              <item alpha="255" value="0.49" label="0.49" color="#218e8d"/>
+              <item alpha="255" value="0.51" label="0.51" color="#20928c"/>
+              <item alpha="255" value="0.529" label="0.529" color="#1f978b"/>
+              <item alpha="255" value="0.549" label="0.549" color="#1e9c89"/>
+              <item alpha="255" value="0.569" label="0.569" color="#1fa188"/>
+              <item alpha="255" value="0.588" label="0.588" color="#21a585"/>
+              <item alpha="255" value="0.608" label="0.608" color="#24aa83"/>
+              <item alpha="255" value="0.627" label="0.627" color="#28ae80"/>
+              <item alpha="255" value="0.647" label="0.647" color="#2eb37c"/>
+              <item alpha="255" value="0.667" label="0.667" color="#35b779"/>
+              <item alpha="255" value="0.686" label="0.686" color="#3dbc74"/>
+              <item alpha="255" value="0.706" label="0.706" color="#46c06f"/>
+              <item alpha="255" value="0.725" label="0.725" color="#50c46a"/>
+              <item alpha="255" value="0.745" label="0.745" color="#5ac864"/>
+              <item alpha="255" value="0.765" label="0.765" color="#65cb5e"/>
+              <item alpha="255" value="0.784" label="0.784" color="#70cf57"/>
+              <item alpha="255" value="0.804" label="0.804" color="#7cd250"/>
+              <item alpha="255" value="0.824" label="0.824" color="#89d548"/>
+              <item alpha="255" value="0.843" label="0.843" color="#95d840"/>
+              <item alpha="255" value="0.863" label="0.863" color="#a2da37"/>
+              <item alpha="255" value="0.882" label="0.882" color="#b0dd2f"/>
+              <item alpha="255" value="0.902" label="0.902" color="#bddf26"/>
+              <item alpha="255" value="0.922" label="0.922" color="#cae11f"/>
+              <item alpha="255" value="0.941" label="0.941" color="#d8e219"/>
+              <item alpha="255" value="0.961" label="0.961" color="#e5e419"/>
+              <item alpha="255" value="0.98" label="0.98" color="#f1e51d"/>
+              <item alpha="255" value="1" label="1" color="#fde725"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>294205</xmin>
+        <ymin>6283604.59999999962747097</ymin>
+        <xmax>294334.79999999998835847</xmax>
+        <ymax>6283715.59999999962747097</ymax>
+      </extent>
+      <id>test_R20161102093413362</id>
+      <datasource>./test_R_gurobi700.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>test_R_gurobi700</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>294205</xmin>
+        <ymin>6283604.59999999962747097</ymin>
+        <xmax>294334.79999999998835847</xmax>
+        <ymax>6283715.59999999962747097</ymax>
+      </extent>
+      <id>test_R_gurobi65120161102101621234</id>
+      <datasource>./test_R_gurobi651.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>test_R_gurobi651</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>294205</xmin>
+        <ymin>6283604.59999999962747097</ymin>
+        <xmax>294334.79999999998835847</xmax>
+        <ymax>6283715.59999999962747097</ymax>
+      </extent>
+      <id>test_R_gurobi651_include20161102113309159</id>
+      <datasource>./test_R_gurobi651_include.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>test_R_gurobi651_include</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>294205</xmin>
+        <ymin>6283604.59999999962747097</ymin>
+        <xmax>294334.79999999998835847</xmax>
+        <ymax>6283715.59999999962747097</ymax>
+      </extent>
+      <id>test_python20161102102420857</id>
+      <datasource>./test_python.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>test_python</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+  </projectlayers>
+  <properties>
+    <Measurement>
+      <DistanceUnits type="QString">meters</DistanceUnits>
+      <AreaUnits type="QString">m2</AreaUnits>
+    </Measurement>
+    <SpatialRefSys>
+      <ProjectCRSProj4String type="QString">+proj=longlat +datum=WGS84 +no_defs</ProjectCRSProj4String>
+      <ProjectCrs type="QString">EPSG:4326</ProjectCrs>
+      <ProjectCRSID type="int">3452</ProjectCRSID>
+    </SpatialRefSys>
+    <Paths>
+      <Absolute type="bool">false</Absolute>
+    </Paths>
+    <Gui>
+      <SelectionColorBluePart type="int">251</SelectionColorBluePart>
+      <CanvasColorGreenPart type="int">255</CanvasColorGreenPart>
+      <CanvasColorRedPart type="int">255</CanvasColorRedPart>
+      <SelectionColorRedPart type="int">0</SelectionColorRedPart>
+      <SelectionColorAlphaPart type="int">255</SelectionColorAlphaPart>
+      <SelectionColorGreenPart type="int">255</SelectionColorGreenPart>
+      <CanvasColorBluePart type="int">255</CanvasColorBluePart>
+    </Gui>
+    <Digitizing>
+      <DefaultSnapToleranceUnit type="int">2</DefaultSnapToleranceUnit>
+      <LayerSnappingList type="QStringList"/>
+      <LayerSnappingEnabledList type="QStringList"/>
+      <SnappingMode type="QString">current_layer</SnappingMode>
+      <AvoidIntersectionsList type="QStringList"/>
+      <LayerSnappingToleranceUnitList type="QStringList"/>
+      <LayerSnapToList type="QStringList"/>
+      <DefaultSnapType type="QString">off</DefaultSnapType>
+      <DefaultSnapTolerance type="double">0</DefaultSnapTolerance>
+      <LayerSnappingToleranceList type="QStringList"/>
+    </Digitizing>
+    <PositionPrecision>
+      <DecimalPlaces type="int">2</DecimalPlaces>
+      <Automatic type="bool">true</Automatic>
+    </PositionPrecision>
+    <Legend>
+      <filterByMap type="bool">false</filterByMap>
+    </Legend>
+  </properties>
+  <visibility-presets/>
+</qgis>
