@@ -40,7 +40,7 @@ Let's start by reading in the data and inspecting the individual species feature
 # Set up directory path for the tutorial data
 z_tutorial_dir <- "~/dev/git-data/zonation-tutorial"
 z_tutorial_data_dir <- file.path(z_tutorial_dir, "data")
-tutorial_files <- list.files(path = z_tutorial_data_dir, pattern = "species.+\\.tif", 
+tutorial_files <- list.files(path = z_tutorial_data_dir, pattern = "species.+\\.tif$", 
                              full.names = TRUE)
 sp_rasters <- raster::stack(tutorial_files)
 # For some mysterious reason, minmax isn't set automatically for sp_rasters[[1]]
@@ -171,17 +171,19 @@ __DISCLAIMER:__ at this point, it is unclear to me whether the approach describe
 
 ```{r optimize,echo=TRUE,message=FALSE}
 # NAs (NoData) must be raplaced wiht 0s for GUROBI
-sp_rasters_filled <- sp_rasters
-sp_rasters_filled[is.na(sp_rasters_filled)] <- 0
-sp_rasters_filled <- raster::stack(sp_rasters_filled)
+#sp_rasters_filled <- sp_rasters
+#sp_rasters_filled[is.na(sp_rasters_filled)] <- 0
+sp_rasters_features <- raster::stack(sp_rasters_normalized)
 
 # Solve the maximum coverage problem for a range of target budgets. NOTE: budgets levels 0.0 and
 # 1.0 are not needed as the former has nothing and the latter everything selected.
 budgets <- seq(0.05, 0.95, 0.05)
 results_mc <- list()
+cost[cost == 0] <- NA
 for (b in budgets) {
   b_cells <- b * raster::cellStats(cost, "sum")
-  mc_model <- prioritizr::maxcover_model(x = cost, features = sp_rasters_filled, budget = b_cells)
+  mc_model <- prioritizr::maxcover_model(x = cost, features = sp_rasters_features, 
+                                         budget = b_cells, included = !is.na(cost))
   mc_results <- prioritize(mc_model, gap = 0.001)
   results_mc[[as.character(b)]] <- mc_results
 }
@@ -224,17 +226,28 @@ levelplot(subset(mcp_ilp, c(2, 4, 10)), main = "Maximum coverage solution\n(gap 
 ```{r mcp-hierarchy}
 # Define a function for minmax-normalization
 normalize <- function(x) {
-  min <- raster::minValue(x)
-  max <- raster::maxValue(x)
+  if (class(x) == "RasterLayer") {
+    min <- raster::minValue(x)
+    max <- raster::maxValue(x)  
+  } else {
+    min <- min(x)
+    max <- max(x)
+  }
   return((x - min) / (max - min))
 }
 
 # Sum up all the layers in the stack -> result is a selection frequency
 mcp_ilp_hier <- sum(mcp_ilp, na.rm = TRUE)
-# Replace 0s with NAs
-mcp_ilp_hier[mcp_ilp_hier == 0] <- NA
+# Replace true 0s with NAs (assuming cost mask is an acutal data mask)
+mcp_ilp_hier[is.na(cost)] <- NA
+# Rank the results
+mcp_ilp_hier_values <- na.omit(getValues(mcp_ilp_hier))
+mcp_ilp_ranks <- rank(mcp_ilp_hier_values, ties.method = "average")
+mcp_ilp_ranks <- normalize(mcp_ilp_ranks)
+mcp_ilp_hier[!is.na(cost)] <- mcp_ilp_ranks
+
 # Normalize value into scale [0, 1]
-mcp_ilp_hier <- normalize(mcp_ilp_hier)
+
 levelplot(mcp_ilp_hier, margin = FALSE, scales = list(draw = FALSE),
           par.settings = rasterTheme(region = z_colors_RdYlBu$colors), 
           at = z_colors_RdYlBu$values, main = "Gurobi MCP")
@@ -377,7 +390,7 @@ What is striking here, is that there is very little difference between the metho
 ## 4. Literature cited
 
 + Albuquerque, F. S., & Beier, P. (2015). Rarity-Weighted Richness: A Simple and Reliable Alternative to Integer Programming and Heuristic Algorithms for Minimum Set and Maximum Coverage Problems in Conservation Planning. Plos One, 10(3), e0119905. [http://doi.org/10.1371/journal.pone.0119905](http://doi.org/10.1371/journal.pone.0119905)
-+ Arponen, A., Cabeza, M., Eklund, J., Kujala, H., & Lehtomäki, J. (2010). Costs of integrating economics and conservation planning. Conservation Biology, 24(5), 1198–204. [http://doi.org/10.1111/j.1523-1739.2010.01539.x](http://doi.org/10.1111/j.1523-1739.2010.01539.x)
++ Arponen, A., Cabeza, M., Eklund, J., Kujala, H., & Lehtomaki, J. (2010). Costs of integrating economics and conservation planning. Conservation Biology, 24(5), 1198–204. [http://doi.org/10.1111/j.1523-1739.2010.01539.x](http://doi.org/10.1111/j.1523-1739.2010.01539.x)
 + Beyer, H. L., Dujardin, Y., Watts, M. E., & Possingham, H. P. (2016). Solving conservation planning problems with integer linear programming. Ecological Modelling, 328, 14–22. [http://dx.doi.org/10.1016/j.ecolmodel.2016.02.005](http://dx.doi.org/10.1016/j.ecolmodel.2016.02.005)
 + Camm, J. D., Polasky, S., Solow, A., & Csuti, B. (1996). A note on optimal algorithms for reserve site selection. Biological Conservation, 78(3), 353–355. [http://doi.org/10.1016/0006-3207(95)00132-8](http://doi.org/10.1016/0006-3207(95)00132-8)
 + Laitila, J., & Moilanen, A. (2012). Use of many low-level conservation targets reduces high-level conservation performance. Ecological Modelling, 247, 40–47. [http://doi.org/10.1016/j.ecolmodel.2012.08.010](http://doi.org/10.1016/j.ecolmodel.2012.08.010)
