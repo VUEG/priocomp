@@ -618,7 +618,7 @@ rule prioritize_ilp:
         es=rules.harmonize_data.output.harmonized,
         bd=UDR_SRC_DATASETS
     output:
-        all="analyses/ILP/ilp_eu26_all.tif",
+        #all="analyses/ILP/ilp_eu26_all.tif",
         all_w="analyses/ILP/ilp_eu26_all_weights.tif",
         es="analyses/ILP/ilp_eu26_es.tif",
         bd="analyses/ILP/ilp_eu26_bd.tif"
