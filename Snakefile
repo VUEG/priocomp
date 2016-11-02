@@ -594,6 +594,24 @@ rule match_zon_esbd_coverages:
 
 # ILP ------------------------------------------------------------------------
 
+rule test_ilp:
+    # Rule to test the result against the R implementation of Gurobi
+    # maximum coverage problem
+    input:
+        spp_files=expand("/home/jlehtoma/dev/git-data/zonation-tutorial/data/species{ID}.tif",
+                         ID=list(range(1, 8)))
+    output:
+        "analyses/ILP/test_implementation/test_python.tif"
+    log:
+        "logs/test_ILP.log"
+    message:
+        "Runnning ILP tests..."
+    run:
+        llogger = utils.get_local_logger("test_optimize_gurobi", log[0])
+        gurobi.prioritize_gurobi(input.spp_files, output[0], logger=llogger,
+                                 ol_normalize=True, save_intermediate=True,
+                                 verbose=True)
+
 rule prioritize_ilp:
     input:
         all=rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS,
