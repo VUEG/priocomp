@@ -682,29 +682,29 @@ rule postprocess_ilp:
         plu=utils.pick_from_list(rules.preprocess_nuts_level2_data.output.processed,
                                  ".shp")
     output:
-        all="analyses/ILP/ilp_eu26_all_stats.geojson",
+        #all="analyses/ILP/ilp_eu26_all_stats.geojson",
         all_w="analyses/ILP/ilp_eu26_all_weights_stats.geojson",
         es="analyses/ILP/ilp_eu26_es_stats.geojson",
         bd="analyses/ILP/ilp_eu26_bd_stats.geojson"
     log:
-        all="logs/postprocess_ilp_eu26_all.log",
+        #all="logs/postprocess_ilp_eu26_all.log",
         all_w="logs/postprocess_ilp_eu26_all_weights.log",
         es="logs/postprocess_ilp_eu26_es.log",
         bd="logs/postprocess_ilp_eu26_bd.log"
     message:
         "Post-processing ILP results..."
     run:
-        llogger = utils.get_local_logger("calculate_ilp_all", log.all)
-        llogger.info(" [1/4] Post-processing {}".format(input.all))
-        shell("fio cat {input.plu} | rio zonalstats -r {input.all} > {output.all}")
+        #llogger = utils.get_local_logger("calculate_ilp_all", log.all)
+        #llogger.info(" [1/4] Post-processing {}".format(input.all))
+        #shell("fio cat {input.plu} | rio zonalstats -r {input.all} > {output.all}")
         llogger = utils.get_local_logger("calculate_ilp_all_weights", log.all_w)
-        llogger.info(" [2/4] Post-processing {}".format(input.all_w))
+        llogger.info(" [1/3] Post-processing {}".format(input.all_w))
         shell("fio cat {input.plu} | rio zonalstats -r {input.all_w} > {output.all_w}")
         llogger = utils.get_local_logger("calculate_ilp_es", log.es)
-        llogger.info(" [3/4] Post-processing {}".format(input.es))
+        llogger.info(" [2/3] Post-processing {}".format(input.es))
         shell("fio cat {input.plu} | rio zonalstats -r {input.es} > {output.es}")
         llogger = utils.get_local_logger("calculate_ilp_bd", log.bd)
-        llogger.info(" [4/4] Post-processing {}".format(input.bd))
+        llogger.info(" [3/3] Post-processing {}".format(input.bd))
         shell("fio cat {input.plu} | rio zonalstats -r {input.bd} > {output.bd}")
 
 rule expand_ilp_coverage:
