@@ -5,13 +5,14 @@ library(dplyr)
 library(grid)
 library(lazyeval)
 library(maptools)
-library(sp)
-library(tmap)
+library(raster)
 library(RColorBrewer)
 library(rgdal)
+library(sp)
+library(tmap)
 library(viridis)
 
-data(Europe)
+data(Europe, land)
 
 read_data <- function(x, value_field, group) {
   # Define CRS (ETRS89 / ETRS-LAEA), http://spatialreference.org/ref/epsg/3035/
@@ -142,6 +143,142 @@ combo <- sp::merge(all_combo, es_combo, by.x = "id", by.y = "id")
 combo <- sp::merge(combo, bd_combo, by.x = "id", by.y = "id")
 
 combo$agg_mean <- apply(combo@data[, 4:12], 1, mean)
-combo$agg_median <- apply(combo@data[, 4:12], 1, median))
+combo$agg_median <- apply(combo@data[, 4:12], 1, median)
 combo$agg_sd <- apply(combo@data[, 4:12], 1, sd)
 maptools::writePolyShape(combo, "analyses/comparison/variation.shp")
+
+
+# Pixel-based rank maps ---------------------------------------------------
+
+## RWR rank rasters
+rwr_raster_all <- raster::raster("analyses/RWR/rwr_eu26_all_weights.tif")
+rwr_raster_es <- raster::raster("analyses/RWR/rwr_eu26_es.tif")
+rwr_raster_bd <- raster::raster("analyses/RWR/rwr_eu26_bd.tif")
+
+## ZON rank rasters
+zon_raster_all <- raster::raster("analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif")
+zon_raster_es <- raster::raster("analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif")
+zon_raster_bd <- raster::raster("analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif")
+
+## ILP rank rasters
+ilp_raster_all <- raster::raster(x = "analyses/ILP/ilp_eu26_all_weights.tif")
+ilp_raster_es <- raster::raster(x = "analyses/ILP/ilp_eu26_es.tif")
+ilp_raster_bd <- raster::raster(x = "analyses/ILP/ilp_eu26_bd.tif")
+
+breaks <- c(0, 0.2, 0.5, 0.75, 0.9, 0.95, 0.98, 1)
+colors <- rev(RColorBrewer::brewer.pal(length(breaks) - 1, "RdYlBu"))
+labels <- (100 - breaks * 100)
+labels <- cbind(labels[1:(length(labels) - 1)], labels[2:length(labels)])
+labels[,2] <- paste(labels[,2], "%")
+labels[7,2] <- ""
+labels <- apply(labels, 1, paste, collapse = " - ")
+labels[7] <- gsub(" - ", " %", labels[7])
+
+# Get proper bbox from rwr_all, otherwise too wide
+project_bbox <- bbox(rwr_all)
+
+rwr_rastermap_all <- tm_eur +
+  tm_shape(rwr_raster_all, bbox = project_bbox, is.master = TRUE) +
+    tm_raster(palette = colors, labels = labels,
+              breaks = breaks, auto.palette.mapping = FALSE,
+              legend.show = FALSE) +
+  tm_shape(Europe) +
+    tm_borders(col = "black", lwd = 0.3) +
+  tm_format_Europe(title = "A", title.size = title_size)
+
+rwr_rastermap_legend <- tm_eur +
+  tm_shape(rwr_raster_all, bbox = project_bbox, is.master = TRUE) +
+  tm_raster(title = "Top fraction", palette = colors,
+            labels = labels, breaks = breaks,
+            auto.palette.mapping = FALSE,
+            legend.show = TRUE) +
+  tm_format_Europe(legend.only = TRUE, legend.position = c("left", "center"))
+
+rwr_rastermap_es <- tm_eur +
+  tm_shape(rwr_raster_es, bbox = project_bbox, is.master = TRUE) +
+    tm_raster(palette = colors, labels = labels,
+              breaks = breaks, auto.palette.mapping = FALSE,
+              legend.show = FALSE) +
+  tm_shape(Europe) +
+    tm_borders(col = "black", lwd = 0.3) +
+  tm_format_Europe(title = "B", title.size = title_size)
+
+rwr_rastermap_bd <- tm_eur +
+  tm_shape(rwr_raster_bd, bbox = project_bbox, is.master = TRUE) +
+  tm_raster(palette = z_legend$colors, labels = z_legend$labels,
+            breaks = z_legend$values, auto.palette.mapping = FALSE,
+            legend.show = FALSE) +
+  tm_shape(Europe) +
+  tm_borders(col = "black", lwd = 0.3) +
+  tm_format_Europe(title = "C", title.size = title_size)
+
+zon_rastermap_all <- tm_eur +
+  tm_shape(zon_raster_all, bbox = project_bbox, is.master = TRUE) +
+  tm_raster(palette = z_legend$colors, labels = z_legend$labels,
+            breaks = z_legend$values, auto.palette.mapping = FALSE,
+            legend.show = FALSE) +
+  tm_shape(Europe) +
+  tm_borders(col = "black", lwd = 0.3) +
+  tm_format_Europe(title = "D", title.size = title_size)
+
+zon_rastermap_es <- tm_eur +
+  tm_shape(zon_raster_es, bbox = project_bbox, is.master = TRUE) +
+  tm_raster(palette = z_legend$colors, labels = z_legend$labels,
+            breaks = z_legend$values, auto.palette.mapping = FALSE,
+            legend.show = FALSE) +
+  tm_shape(Europe) +
+  tm_borders(col = "black", lwd = 0.3) +
+  tm_format_Europe(title = "E", title.size = title_size)
+
+zon_rastermap_bd <- tm_eur +
+  tm_shape(zon_raster_bd, bbox = project_bbox, is.master = TRUE) +
+  tm_raster(palette = z_legend$colors, labels = z_legend$labels,
+            breaks = z_legend$values, auto.palette.mapping = FALSE,
+            legend.show = FALSE) +
+  tm_shape(Europe) +
+  tm_borders(col = "black", lwd = 0.3) +
+  tm_format_Europe(title = "F", title.size = title_size)
+
+ilp_rastermap_all <- tm_eur +
+  tm_shape(ilp_raster_all, bbox = project_bbox, is.master = TRUE) +
+  tm_raster(palette = z_legend$colors, labels = z_legend$labels,
+            breaks = z_legend$values, auto.palette.mapping = FALSE,
+            legend.show = FALSE) +
+  tm_shape(Europe) +
+  tm_borders(col = "black", lwd = 0.3) +
+  tm_format_Europe(title = "G", title.size = title_size)
+
+ilp_rastermap_es <- tm_eur +
+  tm_shape(ilp_raster_es, bbox = project_bbox, is.master = TRUE) +
+  tm_raster(palette = z_legend$colors, labels = z_legend$labels,
+            breaks = z_legend$values, auto.palette.mapping = FALSE,
+            legend.show = FALSE) +
+  tm_shape(Europe) +
+  tm_borders(col = "black", lwd = 0.3) +
+  tm_format_Europe(title = "H", title.size = title_size)
+
+ilp_rastermap_bd <- tm_eur +
+  tm_shape(ilp_raster_bd, bbox = project_bbox, is.master = TRUE) +
+  tm_raster(palette = z_legend$colors, labels = z_legend$labels,
+            breaks = z_legend$values, auto.palette.mapping = FALSE,
+            legend.show = FALSE) +
+  tm_shape(Europe) +
+  tm_borders(col = "black", lwd = 0.3) +
+  tm_format_Europe(title = "I", title.size = title_size)
+
+png("reports/figures/09_figure_02_rank_raster.png", width = 1800, height = 1800)
+grid.newpage()
+pushViewport(viewport(layout = grid.layout(3,3)))
+print(rwr_rastermap_all, vp = viewport(layout.pos.row = 1, layout.pos.col = 1))
+print(rwr_rastermap_es, vp = viewport(layout.pos.row = 1, layout.pos.col = 2))
+print(rwr_rastermap_bd, vp = viewport(layout.pos.row = 1, layout.pos.col = 3))
+print(zon_rastermap_all, vp = viewport(layout.pos.row = 2, layout.pos.col = 1))
+print(zon_rastermap_es, vp = viewport(layout.pos.row = 2, layout.pos.col = 2))
+print(zon_rastermap_bd, vp = viewport(layout.pos.row = 2, layout.pos.col = 3))
+print(ilp_rastermap_all, vp = viewport(layout.pos.row = 3, layout.pos.col = 1))
+print(ilp_rastermap_es, vp = viewport(layout.pos.row = 3, layout.pos.col = 2))
+print(ilp_rastermap_bd, vp = viewport(layout.pos.row = 3, layout.pos.col = 3))
+dev.off()
+
+save_tmap(rwr_rastermap_legend,"reports/figures/09_figure_02_rank_raster_legend.png", width = 400,
+          height = 600)
