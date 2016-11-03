@@ -7,8 +7,11 @@ library(lazyeval)
 library(maptools)
 library(sp)
 library(tmap)
+library(RColorBrewer)
 library(rgdal)
 library(viridis)
+
+data(Europe)
 
 read_data <- function(x, value_field, group) {
   # Define CRS (ETRS89 / ETRS-LAEA), http://spatialreference.org/ref/epsg/3035/
@@ -60,47 +63,55 @@ ilp_bd <- read_data(x = "analyses/ILP/ilp_eu26_bd_stats.geojson",
 ilp_combo <- sp::merge(ilp_all, ilp_es, by.x = "id", by.y = "id")
 ilp_combo <- sp::merge(ilp_combo, ilp_bd, by.x = "id", by.y = "id")
 
-breaks <- 7
+inner_margins <- c(0.02, 0.02, 0.02, 0)
+title_size <- 4.0
+colors <- rev(RColorBrewer::brewer.pal(10, "RdYlBu"))
+breaks <- seq(0, 1, 1 / length(colors))
+labels <- format(round((100 - breaks * 100), 1), nsmall = 1)
+labels <- cbind(labels[1:(length(labels) - 1)], labels[2:length(labels)])
+labels <- apply(labels, 1, paste, collapse = " -")
 
-# FIXME: make panel titles bigger
+# Make a background map for all panels
+tm_eur <- tm_shape(Europe) +
+  tm_fill("lightgrey") +
+  tm_format_Europe(inner.margins = inner_margins)
 
-rwr_maps <- tm_shape(rwr_combo) +
+rwr_maps <- tm_eur + tm_shape(rwr_combo, is.master = TRUE) +
   tm_polygons(c("rwr_es_mean_rank", "rwr_all_mean_rank", "rwr_bd_mean_rank"),
-              palette = viridis::viridis(breaks),
-              style = "fixed", breaks = seq(0, 1, 0.1),
-              legend.is.portrait = TRUE) +
-  tm_format_Europe(title = c("RWR ES", "RWR ALL", "RWR BD"),
-                   inner.margins = c(0.02, 0.02, 0.02, 0),
-                   legend.show = FALSE) +
-  tm_style_grey()
+              style = "fixed", palette = colors, labels = labels,
+              breaks = breaks, border.col = "lightgrey", lwd = 0.3,
+              auto.palette.mapping = FALSE) +
+  tm_layout(title.size = title_size) +
+  tm_format_Europe(title = c("A", "B", "C"),
+                   inner.margins = inner_margins,
+                   legend.show = FALSE)
 
 rwr_legend <- tm_shape(rwr_combo) +
   tm_polygons("rwr_all_mean_rank",
-              palette = viridis::viridis(breaks),
-              style = "fixed", breaks = seq(0, 1, 0.1),
-              title = "Priority rank") +
-  tm_format_Europe(legend.only = TRUE, legend.position = c("left", "center")) +
-  tm_style_grey()
+              style = "fixed", palette = colors, labels = labels,
+              breaks = breaks, title = "Top fraction (%)",
+              auto.palette.mapping = FALSE) +
+  tm_format_Europe(legend.only = TRUE, legend.position = c("left", "center"))
 
-zon_maps <- tm_shape(zon_combo) +
+zon_maps <- tm_eur + tm_shape(zon_combo, is.master = TRUE) +
   tm_polygons(c("zon_es_mean_rank", "zon_all_mean_rank", "zon_bd_mean_rank"),
-              palette = viridis::viridis(breaks),
-              style = "fixed", breaks = seq(0, 1, 0.1),
-              legend.is.portrait = TRUE) +
-  tm_format_Europe(title = c("ZON ES", "ZON ALL", "ZON BD"),
-                   inner.margins = c(0.02, 0.02, 0.02, 0),
-                   legend.show = FALSE) +
-  tm_style_grey()
+              style = "fixed", palette = colors, labels = labels,
+              breaks = breaks, border.col = "lightgrey", lwd = 0.3,
+              auto.palette.mapping = FALSE) +
+  tm_layout(title.size = title_size) +
+  tm_format_Europe(title = c("D", "E", "F"),
+                   inner.margins = inner_margins,
+                   legend.show = FALSE)
 
-ilp_maps <- tm_shape(ilp_combo) +
+ilp_maps <- tm_eur + tm_shape(ilp_combo, is.master = TRUE) +
   tm_polygons(c("ilp_es_mean_rank", "ilp_all_mean_rank", "ilp_bd_mean_rank"),
-              palette = viridis::viridis(breaks),
-              style = "fixed", breaks = seq(0, 1, 0.1),
-              legend.is.portrait = TRUE) +
-  tm_format_Europe(title = c("ILP ES", "ILP ALL", "ILP BD"),
-                   inner.margins = c(0.02, 0.02, 0.02, 0),
-                   legend.show = FALSE) +
-  tm_style_grey()
+              style = "fixed", palette = colors, labels = labels,
+              breaks = breaks, border.col = "lightgrey", lwd = 0.3,
+              auto.palette.mapping = FALSE) +
+  tm_layout(title.size = title_size) +
+  tm_format_Europe(title = c("G", "H", "I"),
+                   inner.margins = inner_margins,
+                   legend.show = FALSE)
 
 # FIXME: get the legend into the same image
 
