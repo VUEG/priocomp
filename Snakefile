@@ -341,7 +341,7 @@ rule clip_udr_data:
         external=UDR_SRC_DATASETS,
         clip_shp=utils.pick_from_list(rules.preprocess_nuts_level0_data.output.processed, ".shp")
     output:
-        clipped=[path.replace("external", "processed/features") for path in UDR_SRC_DATASETS
+        clipped=[path.replace("external", "processed/features") for path in UDR_SRC_DATASETS]
     log:
         "logs/clip_udr_data.log"
     message:
