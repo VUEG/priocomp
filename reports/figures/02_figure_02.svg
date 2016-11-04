@@ -24864,7 +24864,9 @@ RK5CYII=
 "
        preserveAspectRatio="none"
        height="600"
-       width="600" />
+       width="600"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:1000%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -25178,6 +25180,8 @@ gg==
 "
        preserveAspectRatio="none"
        height="127.99844"
-       width="85.805046" />
+       width="85.805046"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
   </g>
 </svg>
