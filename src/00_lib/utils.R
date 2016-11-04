@@ -267,13 +267,13 @@ postprocess_ppa <- function(root_path, variants, ppa_shp) {
           # Check that all PLUs are found in the PPA results
           if (nrow(dat[[1]]) != nrow(PPA_units_sp)) {
             missing <- which(!PPA_units_sp$ID %in% dat[[1]]$Unit)
-            warning("Following ", length(missing),
+            warning("<", nwout_file, ">\n", "Following ", length(missing),
                     " PLUs not found in PPA data item 1:\n",
                     paste(missing, collapse = " "))
           }
           if (nrow(dat[[3]]) != nrow(PPA_units_sp)) {
             missing <- which(!PPA_units_sp$ID %in% dat[[1]]$Unit)
-            warning("Following ", length(missing),
+            warning("<", nwout_file, ">\n", "Following ", length(missing),
                     " PLUs not found in PPA data item 3:\n",
                     paste(missing, collapse = " "))
           }
