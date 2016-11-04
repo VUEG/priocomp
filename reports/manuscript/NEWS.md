@@ -1,7 +1,11 @@
 ## 0.5.1 (2016-10-31)
 
 + Work on Windows (LibreOffice)
-+ Add sections
++ Add sections:
+  + 2.4 
+  + 2.5
++ Fig 1 updated
++ ​
 
 
 
