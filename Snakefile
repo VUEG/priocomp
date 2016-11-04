@@ -58,7 +58,7 @@ PROVIDE_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in dm.get
 
 # UDR collection "european_tetrapods" is already correctly formatted, place
 # it directly to "processed/features"
-UDR_SRC_DATASETS = [url.replace(beehub_url, feature_data) for url in dm.get_resources(provider="udr", full_path=True)]
+UDR_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in dm.get_resources(provider="udr", full_path=True)]
 
 ALL_SRC_DATASETS = DATADRYAD_SRC_DATASETS + PROVIDE_SRC_DATASETS + UDR_SRC_DATASETS
 
@@ -335,6 +335,32 @@ rule rasterize_nuts_level2_data:
         llogger.debug(cmd_str)
         for line in utils.process_stdout(shell(cmd_str, read=True)):
             llogger.debug(line)
+
+rule clip_udr_data:
+    input:
+        external=UDR_SRC_DATASETS,
+        clip_shp=utils.pick_from_list(rules.preprocess_nuts_level0_data.output.processed, ".shp")
+    output:
+        clipped=[path.replace("external", "processed/features") for path in UDR_SRC_DATASETS
+    log:
+        "logs/clip_udr_data.log"
+    message:
+        "Clipping UDR data..."
+    run:
+        llogger = utils.get_local_logger("clip_udr_data", log[0])
+        nsteps = len(input.external)
+        for i, s_raster in enumerate(input.external):
+            # Target raster
+            clipped_raster = s_raster.replace("external", "processed/features")
+            prefix = utils.get_iteration_prefix(i+1, nsteps)
+
+            llogger.info("{0} Clipping dataset {1}".format(prefix, s_raster))
+            llogger.debug("{0} Target dataset {1}".format(prefix, clipped_raster))
+            # Clip data. NOTE: UDR species rasters do not have a SRS defined,
+            # but they are in EPSG:3035
+            cmd_str = 'gdalwarp -s_srs EPSG:3035 -t_srs EPSG:3035 -cutline {0} {1} {2} -co COMPRESS=DEFLATE'.format(input.clip_shp, s_raster, clipped_raster)
+            for line in utils.process_stdout(shell(cmd_str, read=True), prefix=prefix):
+                llogger.debug(line)
 
 rule harmonize_data:
     input:
