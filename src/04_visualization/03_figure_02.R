@@ -4,6 +4,7 @@
 library(dplyr)
 library(grid)
 library(lazyeval)
+library(magick)
 library(maptools)
 library(raster)
 library(RColorBrewer)
@@ -205,8 +206,8 @@ rwr_rastermap_es <- tm_eur +
 
 rwr_rastermap_bd <- tm_eur +
   tm_shape(rwr_raster_bd, bbox = project_bbox, is.master = TRUE) +
-  tm_raster(palette = z_legend$colors, labels = z_legend$labels,
-            breaks = z_legend$values, auto.palette.mapping = FALSE,
+  tm_raster(palette = colors, labels = labels,
+            breaks = breaks, auto.palette.mapping = FALSE,
             legend.show = FALSE) +
   tm_shape(Europe) +
   tm_borders(col = "black", lwd = 0.3) +
@@ -214,8 +215,8 @@ rwr_rastermap_bd <- tm_eur +
 
 zon_rastermap_all <- tm_eur +
   tm_shape(zon_raster_all, bbox = project_bbox, is.master = TRUE) +
-  tm_raster(palette = z_legend$colors, labels = z_legend$labels,
-            breaks = z_legend$values, auto.palette.mapping = FALSE,
+  tm_raster(palette = colors, labels = labels,
+            breaks = breaks, auto.palette.mapping = FALSE,
             legend.show = FALSE) +
   tm_shape(Europe) +
   tm_borders(col = "black", lwd = 0.3) +
@@ -223,8 +224,8 @@ zon_rastermap_all <- tm_eur +
 
 zon_rastermap_es <- tm_eur +
   tm_shape(zon_raster_es, bbox = project_bbox, is.master = TRUE) +
-  tm_raster(palette = z_legend$colors, labels = z_legend$labels,
-            breaks = z_legend$values, auto.palette.mapping = FALSE,
+  tm_raster(palette = colors, labels = labels,
+            breaks = breaks, auto.palette.mapping = FALSE,
             legend.show = FALSE) +
   tm_shape(Europe) +
   tm_borders(col = "black", lwd = 0.3) +
@@ -232,8 +233,8 @@ zon_rastermap_es <- tm_eur +
 
 zon_rastermap_bd <- tm_eur +
   tm_shape(zon_raster_bd, bbox = project_bbox, is.master = TRUE) +
-  tm_raster(palette = z_legend$colors, labels = z_legend$labels,
-            breaks = z_legend$values, auto.palette.mapping = FALSE,
+  tm_raster(palette = colors, labels = labels,
+            breaks = breaks, auto.palette.mapping = FALSE,
             legend.show = FALSE) +
   tm_shape(Europe) +
   tm_borders(col = "black", lwd = 0.3) +
@@ -241,8 +242,8 @@ zon_rastermap_bd <- tm_eur +
 
 ilp_rastermap_all <- tm_eur +
   tm_shape(ilp_raster_all, bbox = project_bbox, is.master = TRUE) +
-  tm_raster(palette = z_legend$colors, labels = z_legend$labels,
-            breaks = z_legend$values, auto.palette.mapping = FALSE,
+  tm_raster(palette = colors, labels = labels,
+            breaks = breaks, auto.palette.mapping = FALSE,
             legend.show = FALSE) +
   tm_shape(Europe) +
   tm_borders(col = "black", lwd = 0.3) +
@@ -250,8 +251,8 @@ ilp_rastermap_all <- tm_eur +
 
 ilp_rastermap_es <- tm_eur +
   tm_shape(ilp_raster_es, bbox = project_bbox, is.master = TRUE) +
-  tm_raster(palette = z_legend$colors, labels = z_legend$labels,
-            breaks = z_legend$values, auto.palette.mapping = FALSE,
+  tm_raster(palette = colors, labels = labels,
+            breaks = breaks, auto.palette.mapping = FALSE,
             legend.show = FALSE) +
   tm_shape(Europe) +
   tm_borders(col = "black", lwd = 0.3) +
@@ -259,14 +260,18 @@ ilp_rastermap_es <- tm_eur +
 
 ilp_rastermap_bd <- tm_eur +
   tm_shape(ilp_raster_bd, bbox = project_bbox, is.master = TRUE) +
-  tm_raster(palette = z_legend$colors, labels = z_legend$labels,
-            breaks = z_legend$values, auto.palette.mapping = FALSE,
+  tm_raster(palette = colors, labels = labels,
+            breaks = breaks, auto.palette.mapping = FALSE,
             legend.show = FALSE) +
   tm_shape(Europe) +
   tm_borders(col = "black", lwd = 0.3) +
   tm_format_Europe(title = "I", title.size = title_size)
 
-png("reports/figures/09_figure_02_rank_raster.png", width = 1800, height = 1800)
+file_main <- "reports/figures/09_figure_02_rank_raster_main.png"
+file_legend <- "reports/figures/09_figure_02_rank_raster_legend.png"
+file_composite <- "reports/figures/09_figure_02_rank_raster.png"
+
+png(file_main, width = 1800, height = 1800)
 grid.newpage()
 pushViewport(viewport(layout = grid.layout(3,3)))
 print(rwr_rastermap_all, vp = viewport(layout.pos.row = 1, layout.pos.col = 1))
@@ -280,5 +285,14 @@ print(ilp_rastermap_es, vp = viewport(layout.pos.row = 3, layout.pos.col = 2))
 print(ilp_rastermap_bd, vp = viewport(layout.pos.row = 3, layout.pos.col = 3))
 dev.off()
 
-save_tmap(rwr_rastermap_legend,"reports/figures/09_figure_02_rank_raster_legend.png", width = 400,
-          height = 600)
+save_tmap(rwr_rastermap_legend, file_legend, width = 400, height = 600)
+
+# Combine images
+
+# Combine images using magick (couldn't figure a better way...)
+img_main <- magick::image_read(file_main)
+img_legend <- magick::image_read(file_legend)
+img_legend <- magick::image_crop(img_legend, geometry = "400x600+0+100")
+img_composite <- magick::image_append(c(img_main, img_legend), stack = TRUE)
+magick::image_write(img_composite, path = file_composite)
+
