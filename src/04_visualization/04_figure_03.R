@@ -14,10 +14,10 @@ library(viridis)
 # Extract given statistic. NOTE: no reality checking is done, use with care.
 extract_stat <- function(x, stat) {
   requested_stat <- x %>%
-    select(f1_type, f1_method, f2_type, f2_method, tau, cmcs, jac_01, jac_09) %>%
-    gather(statistic, value, -f1_type, -f1_method, -f2_type, -f2_method) %>%
-    filter(statistic == stat) %>%
-    select(-statistic)
+    dplyr::select(f1_type, f1_method, f2_type, f2_method, tau, cmcs, jac_01, jac_09) %>%
+    tidyr::gather(statistic, value, -f1_type, -f1_method, -f2_type, -f2_method) %>%
+    dplyr::filter(statistic == stat) %>%
+    dplyr::select(-statistic)
   return(requested_stat)
 }
 
@@ -204,68 +204,68 @@ plot_stat <- function(x, title, ...) {
 ## Kendall tau rank correlation
 
 cors <- readr::read_csv("analyses/comparison/cross_correlation.csv") %>%
-  mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
-         f2_method = match_method(feature2), f2_type = match_type(feature2),
-         key = paste(f1_method, f1_type, f2_method, f2_type,
-                     sep = "_")) %>%
-  select(key, f1_method, f1_type, f2_method, f2_type, tau) %>%
+  dplyr::mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
+                f2_method = match_method(feature2), f2_type = match_type(feature2),
+                key = paste(f1_method, f1_type, f2_method, f2_type,
+                            sep = "_")) %>%
+  dplyr::select(key, f1_method, f1_type, f2_method, f2_type, tau) %>%
   # Manully fill in the diagonal values (i.e. self-cross, 1.0) since they
   # have not been included in the data
-  bind_rows(., generate_self_cross("tau", 1.0)) %>%
-  arrange(key)
+  dplyr::bind_rows(., generate_self_cross("tau", 1.0)) %>%
+  dplyr::arrange(key)
 
 ## Map comparison statistic
 
 # NOTE: use the complement of MCS: CMCS = 1 - MCS
 mcss <- readr::read_csv("analyses/comparison/cross_mcs.csv") %>%
-  mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
-         f2_method = match_method(feature2), f2_type = match_type(feature2),
-         key = paste(f1_method, f1_type, f2_method, f2_type,
-                     sep = "_"), cmcs = 1 - mcs) %>%
-  select(key, f1_method, f1_type, f2_method, f2_type, cmcs) %>%
-  bind_rows(., generate_self_cross("cmcs", 1.0)) %>%
-  arrange(key)
+  dplyr::mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
+                f2_method = match_method(feature2), f2_type = match_type(feature2),
+                key = paste(f1_method, f1_type, f2_method, f2_type,
+                            sep = "_"), cmcs = 1 - mcs) %>%
+  dplyr::select(key, f1_method, f1_type, f2_method, f2_type, cmcs) %>%
+  dplyr::bind_rows(., generate_self_cross("cmcs", 1.0)) %>%
+  dplyr::arrange(key)
 
 ## Jaccard coefficients for different thresholds
 
 jac <- readr::read_csv("analyses/comparison/cross_jaccard.csv") %>%
-  mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
-         f2_method = match_method(feature2), f2_type = match_type(feature2),
-         key = paste(f1_method, f1_type, f2_method, f2_type,
-                     sep = "_")) %>%
+  dplyr::mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
+                f2_method = match_method(feature2), f2_type = match_type(feature2),
+                key = paste(f1_method, f1_type, f2_method, f2_type,
+                            sep = "_")) %>%
   # Floating point precision issues (e.g. 0.9000000001) caused by NumPy
-  mutate(threshold = round(threshold, 2)) %>%
-  filter(threshold == 0.10 | threshold == 0.90) %>%
-  select(key, f1_method, f1_type, f2_method, f2_type, threshold, coef) %>%
-  mutate(threshold = paste0("jac_", gsub("\\.", "", threshold))) %>%
-  spread(threshold, coef) %>%
-  bind_rows(., generate_self_cross(c("jac_01", "jac_09"), 1.0)) %>%
-  arrange(key)
+  dplyr::mutate(threshold = round(threshold, 2)) %>%
+  dplyr::filter(threshold == 0.10 | threshold == 0.90) %>%
+  dplyr::select(key, f1_method, f1_type, f2_method, f2_type, threshold, coef) %>%
+  dplyr::mutate(threshold = paste0("jac_", gsub("\\.", "", threshold))) %>%
+  tidyr::spread(threshold, coef) %>%
+  dplyr::bind_rows(., generate_self_cross(c("jac_01", "jac_09"), 1.0)) %>%
+  dplyr::arrange(key)
 
 ## Join all stats and do additional filtering
 
 # Join correlation and map comparison statistics
-all_stats <- left_join(cors, mcss, by = c("key" = "key")) %>%
-  select(key, f1_method = f1_method.x, f2_method = f2_method.x,
-         f1_type = f1_type.x, f2_type = f2_type.x, tau, cmcs)
+all_stats <- dplyr::left_join(cors, mcss, by = c("key" = "key")) %>%
+  dplyr::select(key, f1_method = f1_method.x, f2_method = f2_method.x,
+                f1_type = f1_type.x, f2_type = f2_type.x, tau, cmcs)
 # Join in also the jaccard coefficients
-all_stats <- left_join(all_stats, jac, by = c("key" = "key")) %>%
-  select(f1_method = f1_method.x, f1_type = f1_type.x,
-         f2_method = f2_method.x, f2_type = f2_type.x, tau, cmcs, jac_01, jac_09)
+all_stats <- dplyr::left_join(all_stats, jac, by = c("key" = "key")) %>%
+  dplyr::select(f1_method = f1_method.x, f1_type = f1_type.x,
+                f2_method = f2_method.x, f2_type = f2_type.x, tau, cmcs, jac_01, jac_09)
 # Remove ALL and rename ALL_WGT to ALL. From this point on, "ALL" means all
 # features with weights. In same go, make f1_type and f2_type ordered
 # factors
 all_stats <- all_stats %>%
   # Remove original "ALL" types
-  filter(f1_type != "ALL") %>%
-  filter(f2_type != "ALL") %>%
+  dplyr::filter(f1_type != "ALL") %>%
+  dplyr::filter(f2_type != "ALL") %>%
   # Rename original "ALL_WGT" to "ALL"
-  mutate(f1_type = gsub("ALL_WGT", "ALL", f1_type),
-         f2_type = gsub("ALL_WGT", "ALL", f2_type)) %>%
+  dplyr::mutate(f1_type = gsub("ALL_WGT", "ALL", f1_type),
+                f2_type = gsub("ALL_WGT", "ALL", f2_type)) %>%
   # Convert f1_type and f2_type to factors
-  mutate(f1_type = factor(f1_type, levels = c("BD", "ES", "ALL"), ordered = TRUE),
-         f2_type = factor(f2_type, levels = c("ALL", "ES", "BD"), ordered = TRUE)) %>%
-  arrange(f1_method, f1_type, f2_method, f2_type)
+  dplyr::mutate(f1_type = factor(f1_type, levels = c("BD", "ES", "ALL"), ordered = TRUE),
+                f2_type = factor(f2_type, levels = c("ALL", "ES", "BD"), ordered = TRUE)) %>%
+  dplyr::arrange(f1_method, f1_type, f2_method, f2_type)
 
 # Create the plot ---------------------------------------------------------
 
@@ -290,5 +290,4 @@ ggsave("reports/figures/04_figure_03_A.png", p1, width = img_width, height = img
 ggsave("reports/figures/04_figure_03_B.png", p2, width = img_width, height = img_width)
 ggsave("reports/figures/04_figure_03_C.png", p3, width = img_width, height = img_width)
 ggsave("reports/figures/04_figure_03_D.png", p4, width = img_width, height = img_width)
-ggsave("reports/figures/04_figure_03_combined.png", p_combined, width = 10, height = 10)
 
