@@ -128,27 +128,6 @@ dev.off()
 save_tmap(rwr_legend,"reports/figures/02_figure_02_legend.png", width = 400,
           height = 600)
 
-
-# Variation ---------------------------------------------------------------
-
-all_combo <- sp::merge(rwr_all, zon_all, by.x = "id", by.y = "id")
-all_combo <- sp::merge(all_combo, ilp_all, by.x = "id", by.y = "id")
-
-es_combo <- sp::merge(rwr_es, zon_es, by.x = "id", by.y = "id")
-es_combo <- sp::merge(es_combo, ilp_es, by.x = "id", by.y = "id")
-
-bd_combo <- sp::merge(rwr_bd, zon_bd, by.x = "id", by.y = "id")
-bd_combo <- sp::merge(bd_combo, ilp_bd, by.x = "id", by.y = "id")
-
-combo <- sp::merge(all_combo, es_combo, by.x = "id", by.y = "id")
-combo <- sp::merge(combo, bd_combo, by.x = "id", by.y = "id")
-
-combo$agg_mean <- apply(combo@data[, 4:12], 1, mean)
-combo$agg_median <- apply(combo@data[, 4:12], 1, median)
-combo$agg_sd <- apply(combo@data[, 4:12], 1, sd)
-maptools::writePolyShape(combo, "analyses/comparison/variation.shp")
-
-
 # Pixel-based rank maps ---------------------------------------------------
 
 ## RWR rank rasters
