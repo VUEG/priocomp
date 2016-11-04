@@ -796,7 +796,6 @@ rule compare_mcs:
         llogger = utils.get_local_logger("compare_mcs", log[0])
         value_fields = ['_mean', 'Men_rnk', '_mean',
                         '_mean', 'Men_rnk', '_mean',
-                        '_mean', 'Men_rnk', '_mean',
                         '_mean', 'Men_rnk', '_mean']
         mcs_scores_all = similarity.cross_mcs(input, value_fields,
                                               verbose=False, logger=llogger)
