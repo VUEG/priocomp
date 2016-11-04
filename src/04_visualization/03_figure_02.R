@@ -269,9 +269,9 @@ save_tmap(rwr_rastermap_legend, file_legend, width = 400, height = 600)
 # Combine images
 
 # Combine images using magick (couldn't figure a better way...)
-img_main <- magick::image_read(file_main)
-img_legend <- magick::image_read(file_legend)
-img_legend <- magick::image_crop(img_legend, geometry = "400x600+0+100")
-img_composite <- magick::image_append(c(img_main, img_legend), stack = TRUE)
-magick::image_write(img_composite, path = file_composite)
+#img_main <- magick::image_read(file_main)
+#img_legend <- magick::image_read(file_legend)
+#img_legend <- magick::image_crop(img_legend, geometry = "400x600+0+100")
+#img_composite <- magick::image_append(c(img_main, img_legend), stack = TRUE)
+#magick::image_write(img_composite, path = file_composite)
 
