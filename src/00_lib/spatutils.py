@@ -278,15 +278,15 @@ def sum_raster(input_rasters, olnormalize=False, weights=None, verbose=False,
             # If this is the first raster, use its dimensions to build an array
             # that holds the summed values.
             if i == 0:
-                # Set up an array of zeros that has the correct dimensions
-                sum_array = np.zeros_like(src_data, dtype=np.float32)
-                # Also start tracking the masked values. Convert the Boolean
+                # Start tracking the masked values. Convert the Boolean
                 # mask to an int mask. Get the complement of the mask so that
                 # mask = True becomes 0.
                 union_mask = (~ma.getmask(src_data)).astype(int)
                 # Get the template shape against which all the consecutive
                 # rasters are compared to
                 template_shape = src_data.shape
+                # Set up an array of zeros that has the correct dimensions
+                sum_array = np.zeros(template_shape, dtype=np.float32)
             else:
                 # Check the shape
                 if src_data.shape != template_shape:
@@ -294,9 +294,6 @@ def sum_raster(input_rasters, olnormalize=False, weights=None, verbose=False,
                 # Union the mask from the current raster with those from all
                 # of the previous
                 union_mask += (~ma.getmask(src_data)).astype(int)
-
-            # Fill the actual data with 0s
-            src_data = ma.filled(src_data, 0)
 
             if olnormalize:
                 # 1. Occurrence level normalize data --------------------------
@@ -309,12 +306,42 @@ def sum_raster(input_rasters, olnormalize=False, weights=None, verbose=False,
                 src_data *= weights[i]
             else:
                 llogger.debug("{0} Summing values".format(prefix))
+
+            # Fill the actual data with 0s
+            src_data = ma.filled(src_data, 0)
+
             sum_array += src_data
+            #import pdb; pdb.set_trace()
+
+    # -8<----------------------------------------------------------------------
+    # FOR TESTING PURPOSES!
+
+    # Get the raster profile from the input raster files
+    #profile = get_profile(input_rasters, logger=llogger)
+
+    # Rescaled data is always float, and we have only 1 band. Remember
+    # to set NoData-value correctly.
+    #profile.update(dtype=rasterio.int16, compress=True, nodata=-1)
+
+    #with rasterio.open("tests/scratch/union_mask.tif", 'w', **profile) as dst:
+    #    dst.write(union_mask.astype(rasterio.int16), 1)
+
+    # -8<----------------------------------------------------------------------
 
     # Re-mask the data based on the union mask constructed dynamically. At this
     # point, union_mask = 0 means that the cell doesn't have a value in any of
     # the inputs.
     sum_array = ma.masked_where(union_mask == 0, sum_array)
+
+    # -8<----------------------------------------------------------------------
+    # FOR TESTING PURPOSES!
+    #profile.update(dtype=rasterio.float32, compress=True, nodata=-1)
+
+    #with rasterio.open("tests/scratch/sum_array.tif", 'w', **profile) as dst:
+    #    dst.write_mask(ma.getmask(sum_array))
+    #    dst.write(sum_array.astype(rasterio.float32), 1)
+    # -8<----------------------------------------------------------------------
+
     return sum_array
 
 
