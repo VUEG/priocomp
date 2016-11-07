@@ -53,8 +53,6 @@ grid_arrange_shared_legend <- function(..., ncol = length(list(...)),
   position <- match.arg(position)
   g <- ggplotGrob(plots[[1]] + theme(legend.position = position))$grobs
   legend <- g[[which(sapply(g, function(x) x$name) == "guide-box")]]
-  lheight <- sum(legend$height)
-  lwidth <- sum(legend$width)
 
   gl <- lapply(plots, function(x) x + theme(legend.position = "none"))
   # Insert legend into the list of grobs
@@ -62,23 +60,7 @@ grid_arrange_shared_legend <- function(..., ncol = length(list(...)),
   gll[[4]] <- legend
   gll[5:9] <- gl[5:9]
   gl <- c(gl, ncol = ncol, nrow = nrow)
-  #gl[['heights']] <- rep(unit.c(unit(1 / ncol, "npc")), ncol)
-  #gl[['widths']] <- rep(unit.c(unit(1 / nrow, "npc")), nrow)
   combined <- do.call(arrangeGrob, gll)
-  # combined <- switch(position,
-  #                    "bottom" = arrangeGrob(do.call(arrangeGrob, gl),
-  #                                           legend,
-  #                                           ncol = 1,
-  #                                           heights = unit.c(unit(1, "npc") - lheight, lheight)),
-  #                    "right" = arrangeGrob(do.call(arrangeGrob, gl),
-  #                                          legend,
-  #                                          ncol = 2,
-  #                                          widths = unit.c(unit(1, "npc") - lwidth, lwidth)),
-  #                    "left" = arrangeGrob(do.call(arrangeGrob, gl),
-  #                                         legend,
-  #                                         ncol = 2,
-  #                                         widths = unit.c(unit(1, "npc") - lwidth, lwidth))
-  #                    )
   return(ggdraw(combined))
 }
 
@@ -286,8 +268,8 @@ p_combined <- grid.arrange(p1, p2, p3, p4, nrow = 2, ncol = 2)
 img_width <- 7
 img_width <- 6.6
 
-ggsave("reports/figures/04_figure_03_A.png", p1, width = img_width, height = img_width)
-ggsave("reports/figures/04_figure_03_B.png", p2, width = img_width, height = img_width)
-ggsave("reports/figures/04_figure_03_C.png", p3, width = img_width, height = img_width)
-ggsave("reports/figures/04_figure_03_D.png", p4, width = img_width, height = img_width)
+ggsave("reports/figures/06_figure_03_A.png", p1, width = img_width, height = img_width)
+ggsave("reports/figures/07_figure_03_B.png", p2, width = img_width, height = img_width)
+ggsave("reports/figures/08_figure_03_C.png", p3, width = img_width, height = img_width)
+ggsave("reports/figures/09_figure_03_D.png", p4, width = img_width, height = img_width)
 
