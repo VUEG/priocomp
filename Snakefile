@@ -464,15 +464,15 @@ rule prioritize_rwr:
         es=rules.harmonize_data.output.harmonized,
         bd=UDR_SRC_DATASETS
     output:
-        all="analyses/RWR/rwr_eu26_all.tif",
-        all_w="analyses/RWR/rwr_eu26_all_weights.tif",
-        es="analyses/RWR/rwr_eu26_es.tif",
-        bd="analyses/RWR/rwr_eu26_bd.tif"
+        all="analyses/RWR/rwr_all.tif",
+        all_w="analyses/RWR/rwr_all_weights.tif",
+        es="analyses/RWR/rwr_es.tif",
+        bd="analyses/RWR/rwr_bd.tif"
     log:
-        all="logs/calculate_rwr_eu26_all.log",
-        all_w="logs/calculate_rwr_eu26_all_weights.log",
-        es="logs/calculate_rwr_eu26_es.log",
-        bd="logs/calculate_rwr_eu26_bd.log"
+        all="logs/calculate_rwr_all.log",
+        all_w="logs/calculate_rwr_all_weights.log",
+        es="logs/calculate_rwr_es.log",
+        bd="logs/calculate_rwr_bd.log"
     message:
         "Calculating RWR..."
     run:
@@ -498,15 +498,15 @@ rule postprocess_rwr:
         plu=utils.pick_from_list(rules.preprocess_nuts_level2_data.output.processed,
                                  ".shp")
     output:
-        all="analyses/RWR/rwr_eu26_all_stats.geojson",
-        all_w="analyses/RWR/rwr_eu26_all_weights_stats.geojson",
-        es="analyses/RWR/rwr_eu26_es_stats.geojson",
-        bd="analyses/RWR/rwr_eu26_bd_stats.geojson"
+        all="analyses/RWR/rwr_all_stats.geojson",
+        all_w="analyses/RWR/rwr_all_weights_stats.geojson",
+        es="analyses/RWR/rwr_es_stats.geojson",
+        bd="analyses/RWR/rwr_bd_stats.geojson"
     log:
-        all="logs/postprocess_rwr_eu26_all.log",
-        all_w="logs/postprocess_rwr_eu26_all_weights.log",
-        es="logs/postprocess_rwr_eu26_es.log",
-        bd="logs/postprocess_rwr_eu26_bd.log"
+        all="logs/postprocess_rwr_all.log",
+        all_w="logs/postprocess_rwr_all_weights.log",
+        es="logs/postprocess_rwr_es.log",
+        bd="logs/postprocess_rwr_bd.log"
     message:
         "Post-processing RWR results..."
     run:
@@ -528,7 +528,7 @@ rule expand_rwr_coverage:
         template="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
         target=rules.prioritize_rwr.output.all_w
     output:
-        "analyses/RWR/rwr_eu26_all_weights_expanded.tif"
+        "analyses/RWR/rwr_all_weights_expanded.tif"
     log:
         "logs/expand_rwr_all_w.log"
     message:
@@ -624,9 +624,9 @@ rule prioritize_ilp_all:
     input:
         all=rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS,
     output:
-        all_w="analyses/ILP/ilp_eu26_all_weights.tif",
+        all_w="analyses/ILP/ilp_all_weights.tif",
     log:
-        all_w="logs/prioritize_ilp_eu26_all_weights.log",
+        all_w="logs/prioritize_ilp_all_weights.log",
     message:
         "Optimizing ALL with Gurobi..."
     run:
@@ -647,9 +647,9 @@ rule prioritize_ilp_es:
     input:
         es=rules.harmonize_data.output.harmonized
     output:
-        es="analyses/ILP/ilp_eu26_es.tif"
+        es="analyses/ILP/ilp_es.tif"
     log:
-        es="logs/prioritize_ilp_eu26_es.log"
+        es="logs/prioritize_ilp_es.log"
     message:
         "Optimizing ES with Gurobi..."
     run:
@@ -662,9 +662,9 @@ rule prioritize_ilp_bd:
     input:
         bd=UDR_SRC_DATASETS
     output:
-        bd="analyses/ILP/ilp_eu26_bd.tif"
+        bd="analyses/ILP/ilp_bd.tif"
     log:
-        bd="logs/prioritize_ilp_eu26_bd.log"
+        bd="logs/prioritize_ilp_bd.log"
     message:
         "Optimizing BD with Gurobi..."
     run:
@@ -690,15 +690,15 @@ rule postprocess_ilp:
         plu=utils.pick_from_list(rules.preprocess_nuts_level2_data.output.processed,
                                  ".shp")
     output:
-        #all="analyses/ILP/ilp_eu26_all_stats.geojson",
-        all_w="analyses/ILP/ilp_eu26_all_weights_stats.geojson",
-        es="analyses/ILP/ilp_eu26_es_stats.geojson",
-        bd="analyses/ILP/ilp_eu26_bd_stats.geojson"
+        #all="analyses/ILP/ilp_all_stats.geojson",
+        all_w="analyses/ILP/ilp_all_weights_stats.geojson",
+        es="analyses/ILP/ilp_es_stats.geojson",
+        bd="analyses/ILP/ilp_bd_stats.geojson"
     log:
-        #all="logs/postprocess_ilp_eu26_all.log",
-        all_w="logs/postprocess_ilp_eu26_all_weights.log",
-        es="logs/postprocess_ilp_eu26_es.log",
-        bd="logs/postprocess_ilp_eu26_bd.log"
+        #all="logs/postprocess_ilp_all.log",
+        all_w="logs/postprocess_ilp_all_weights.log",
+        es="logs/postprocess_ilp_es.log",
+        bd="logs/postprocess_ilp_bd.log"
     message:
         "Post-processing ILP results..."
     run:
@@ -720,7 +720,7 @@ rule expand_ilp_coverage:
         template="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
         target=rules.prioritize_ilp_all.output.all_w
     output:
-        "analyses/ILP/ilp_eu26_all_weights_expanded.tif"
+        "analyses/ILP/ilp_all_weights_expanded.tif"
     log:
         "logs/expand_ilp_all_w.log"
     message:
