@@ -1,3 +1,9 @@
+## 0.5.2 (2016-11-07)
+
++ Fix several bugs in RWR, ILP and in the comparison code
++ Re-make all figures
++ ​
+
 ## 0.5.1 (2016-10-31)
 
 + Work on Windows (LibreOffice)
@@ -5,7 +11,6 @@
   + 2.4 
   + 2.5
 + Fig 1 updated
-+ ​
 
 
 
