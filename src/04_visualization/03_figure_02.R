@@ -14,6 +14,26 @@ library(tmap)
 
 data(Europe, land)
 
+# Read in pixel-based rank data -------------------------------------------
+
+## RWR rank rasters
+rwr_raster_all <- raster::raster("analyses/RWR/rwr_all_weights.tif")
+rwr_raster_es <- raster::raster("analyses/RWR/rwr_es.tif")
+rwr_raster_bd <- raster::raster("analyses/RWR/rwr_bd.tif")
+
+## ZON rank rasters
+zon_raster_all <- raster::raster("analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif")
+zon_raster_es <- raster::raster("analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif")
+zon_raster_bd <- raster::raster("analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif")
+
+## ILP rank rasters
+ilp_raster_all <- raster::raster(x = "analyses/ILP/ilp_all_weights.tif")
+ilp_raster_es <- raster::raster(x = "analyses/ILP/ilp_es.tif")
+ilp_raster_bd <- raster::raster(x = "analyses/ILP/ilp_bd.tif")
+
+
+# Set parameters ----------------------------------------------------------
+
 inner_margins <- c(0.02, 0.02, 0.02, 0)
 title_size <- 4.0
 
@@ -27,23 +47,6 @@ project_bbox <- matrix(c(2635899, 1386018, 6084606, 5307234),
                        nrow = 2, ncol = 2, dimnames = list(c("x", "y"),
                                                            c("min", "max")))
 
-# Pixel-based rank maps ---------------------------------------------------
-
-## RWR rank rasters
-rwr_raster_all <- raster::raster("analyses/RWR/rwr_eu26_all_weights.tif")
-rwr_raster_es <- raster::raster("analyses/RWR/rwr_eu26_es.tif")
-rwr_raster_bd <- raster::raster("analyses/RWR/rwr_eu26_bd.tif")
-
-## ZON rank rasters
-zon_raster_all <- raster::raster("analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif")
-zon_raster_es <- raster::raster("analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif")
-zon_raster_bd <- raster::raster("analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif")
-
-## ILP rank rasters
-ilp_raster_all <- raster::raster(x = "analyses/ILP/ilp_eu26_all_weights.tif")
-ilp_raster_es <- raster::raster(x = "analyses/ILP/ilp_eu26_es.tif")
-ilp_raster_bd <- raster::raster(x = "analyses/ILP/ilp_eu26_bd.tif")
-
 breaks <- c(0, 0.2, 0.5, 0.75, 0.9, 0.95, 0.98, 1)
 colors <- rev(RColorBrewer::brewer.pal(length(breaks) - 1, "RdYlBu"))
 labels <- (100 - breaks * 100)
@@ -52,6 +55,8 @@ labels[,2] <- paste(labels[,2], "%")
 labels[7,2] <- ""
 labels <- apply(labels, 1, paste, collapse = " - ")
 labels[7] <- gsub(" - ", " %", labels[7])
+
+# Make plots --------------------------------------------------------------
 
 rwr_rastermap_all <- tm_eur +
   tm_shape(rwr_raster_all, bbox = project_bbox, is.master = TRUE) +
@@ -142,9 +147,12 @@ ilp_rastermap_bd <- tm_eur +
   tm_borders(col = "black", lwd = 0.3) +
   tm_format_Europe(title = "I", title.size = title_size)
 
-file_main <- "reports/figures/09_figure_02_rank_raster_main.png"
-file_legend <- "reports/figures/09_figure_02_rank_raster_legend.png"
-file_composite <- "reports/figures/09_figure_02_rank_raster.png"
+
+# Save plots --------------------------------------------------------------
+
+file_legend <- "reports/figures/02_figure_02_legend.png"
+file_main <- "reports/figures/04_figure_02_main.png"
+#file_composite <- "reports/figures/05_figure_02.png"
 
 png(file_main, width = 1800, height = 1800)
 grid.newpage()
