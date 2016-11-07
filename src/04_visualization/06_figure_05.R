@@ -66,9 +66,9 @@ tm_sd_top <- tm_eur + tm_shape(nuts2_var, is.master = TRUE) +
 
 # Save map ----------------------------------------------------------------
 
-file_mean_top <- "reports/figures/06_figure_05A.png"
-file_mean_sd <- "reports/figures/06_figure_05B.png"
-file_composite <- "reports/figures/06_figure_05.png"
+file_mean_top <- "reports/figures/12_figure_05_A.png"
+file_mean_sd <- "reports/figures/13_figure_05_B.png"
+file_composite <- "reports/figures/14_figure_05.png"
 
 save_tmap(tm_mean_top, file_mean_top, width = 1500, height = 1800)
 save_tmap(tm_sd_top, file_mean_sd, width = 1500, height = 1800)
