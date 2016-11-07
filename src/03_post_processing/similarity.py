@@ -82,18 +82,16 @@ def compute_jaccard(x, y, x_min=0.0, x_max=1.0, y_min=0.0, y_max=1.0,
     return 1 - jaccard(x_bin.flatten(), y_bin.flatten())
 
 
-def cross_correlation(input_rasters, mask_index=0, verbose=False, logger=None):
+def cross_correlation(input_rasters, verbose=False, logger=None):
     """ Calculate Kendall tau rank correlation between all the inpur rasters.
 
     Input rasters are read in as masked arrays and all cells that are NoData
     are discarded. This way, only the values of informative cells are passed
     on to scipy.stats.kendalltau() which makes things faster. The assumption is
-    that all rasters exactly match on which cells have values. The raster of
-    which mask is used,  is defined by argument mask_index.
+    that all rasters exactly match on which cells have values. An intersection
+    of both rasters' masks is used to define informative cells.
 
     :param input_rasters list of input raster paths.
-    :param mask_index int index of input_rasters defining which mask will be
-                      used as a mask for informative cellls.
     :param verbose: Boolean indicating how much information is printed out.
     :param logger: logger object to be used.
 
@@ -112,7 +110,6 @@ def cross_correlation(input_rasters, mask_index=0, verbose=False, logger=None):
 
     # Check the inputs
     assert len(input_rasters) > 1, "More than one input rasters are needed"
-    assert mask_index in range(0, len(input_rasters)), "Mask index out of bounds"
 
     # 2. Calculations --------------------------------------------------------
 
@@ -126,33 +123,30 @@ def cross_correlation(input_rasters, mask_index=0, verbose=False, logger=None):
     n_computations = int((n_rasters * n_rasters - n_rasters) / 2)
     no_computation = 1
 
-    # Before the actual computations, extract the value mask from the input
-    # raster defined by mask_index
-    mask_raster_name = input_rasters[mask_index]
-    llogger.debug("Reading value mask from {}".format(mask_raster_name))
-    mask_raster = rasterio.open(mask_raster_name)
-    value_mask = ma.getmask(mask_raster.read(1, masked=True))
-
     for i in range(0, n_rasters):
         raster1 = rasterio.open(input_rasters[i])
-        raster1_nodata = raster1.nodata
-        raster1_src = raster1.read(1)
-        # Inlude only cells with actual values
-        raster1_src = raster1_src[value_mask]
+        raster1_src = raster1.read(1, masked=True)
         for j in range(i+1, n_rasters):
             raster2 = rasterio.open(input_rasters[j])
-            raster2_nodata = raster2.nodata
-            raster2_src = raster2.read(1)
-            # Inlude only cells with actual values in the mask raster.
-            # NOTE: This doesn't mean that raster2 has values in exactly the
-            # same locations.
-            raster2_src = raster2_src[value_mask]
+            raster2_src = raster2.read(1, masked=True)
+
+            # Compute the intersection of the masks of both rasters and use
+            # that as a value mask.
+            value_mask = raster1_src.mask & raster2_src.mask
+            # Then set the mask of both raster to the intersection mask
+            raster1_src.mask = value_mask
+            raster2_src.mask = value_mask
+
+            # Inlude only cells with actual values
+            raster1_values = ma.compressed(raster1_src)
+            raster2_values = ma.compressed(raster2_src)
             prefix = utils.get_iteration_prefix(no_computation,
                                                 n_computations)
             llogger.info(("{} Calculating correlation ".format(prefix) +
                           "between {} ".format(input_rasters[i]) +
                           "and {}".format(input_rasters[j])))
-            tau, pvalue = kendalltau(raster1_src, raster2_src)
+            # Compute Kendall's tau rank correlation
+            tau, pvalue = kendalltau(raster1_values, raster2_values)
             llogger.debug("Tau: {0} (p-value: {1})".format(tau, pvalue))
             correlations = pd.DataFrame({"feature1": [input_rasters[i]],
                                          "feature2": [input_rasters[j]],
