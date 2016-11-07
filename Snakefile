@@ -620,24 +620,6 @@ rule match_zon_esbd_coverages:
 
 # ILP ------------------------------------------------------------------------
 
-rule test_ilp:
-    # Rule to test the result against the R implementation of Gurobi
-    # maximum coverage problem
-    input:
-        spp_files=expand("/home/jlehtoma/dev/git-data/zonation-tutorial/data/species{ID}.tif",
-                         ID=list(range(1, 8)))
-    output:
-        "analyses/ILP/test_implementation/test_python.tif"
-    log:
-        "logs/test_ILP.log"
-    message:
-        "Runnning ILP tests..."
-    run:
-        llogger = utils.get_local_logger("test_optimize_gurobi", log[0])
-        gurobi.prioritize_gurobi(input.spp_files, output[0], logger=llogger,
-                                 ol_normalize=True, save_intermediate=True,
-                                 verbose=True)
-
 rule prioritize_ilp_all:
     input:
         all=rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS,
@@ -921,3 +903,62 @@ rule generate_table_S1:
         # You need to have pandox around for this to work
         output = pypandoc.convert_file(output.md, "docx",
                                        outputfile=output.docx)
+
+## Tests -----------------------------------------------------
+
+rule generate_test_data:
+    input:
+        features=rules.harmonize_data.output.harmonized,
+        clip_shp="tests/scratch/data/nl_clipper.shp"
+    output:
+        [os.path.join("tests/scratch/data", os.path.basename(file_path)) for file_path in rules.harmonize_data.output.harmonized]
+    run:
+        llogger = utils.get_local_logger("clip_test_data")
+        nsteps = len(input.features)
+        bleft = 3944600
+        bbottom = 3226043
+        bright = 4076370
+        btop = 3379897
+        bounds = "{0} {1} {2} {3}".format(bleft, bbottom, bright, btop)
+        for i, s_raster in enumerate(input.features):
+            # Target raster
+            clipped_raster = output[i]
+            prefix = utils.get_iteration_prefix(i+1, nsteps)
+
+            llogger.info("{0} Clipping dataset {1}".format(prefix, s_raster))
+            llogger.debug("{0} Target dataset {1}".format(prefix, clipped_raster))
+            # Clip data. NOTE: UDR species rasters do not have a SRS defined,
+            # but they are in EPSG:3035
+            cmd_str = ('gdalwarp -s_srs EPSG:3035 -t_srs EPSG:3035 -te {bounds} ' +
+                      '-cutline {0} {1} {2} -co COMPRESS=DEFLATE'.format(input.clip_shp, s_raster, clipped_raster))
+            for line in utils.process_stdout(shell(cmd_str, read=True), prefix=prefix):
+                llogger.debug(line)
+
+rule test_rwr:
+    input:
+        es=rules.generate_test_data.output
+    output:
+        es="tests/scratch/test_rwr_es.tif"
+    message:
+        "Testing RWR..."
+    run:
+        llogger = utils.get_local_logger("test_rwr_es")
+        rwr.calculate_rwr(input.es, output.es, logger=llogger)
+
+rule test_ilp:
+    # Rule to test the result against the R implementation of Gurobi
+    # maximum coverage problem
+    input:
+        spp_files=expand("/home/jlehtoma/dev/git-data/zonation-tutorial/data/species{ID}.tif",
+                         ID=list(range(1, 8)))
+    output:
+        "analyses/ILP/test_implementation/test_python.tif"
+    log:
+        "logs/test_ILP.log"
+    message:
+        "Runnning ILP tests..."
+    run:
+        llogger = utils.get_local_logger("test_optimize_gurobi", log[0])
+        gurobi.prioritize_gurobi(input.spp_files, output[0], logger=llogger,
+                                 ol_normalize=True, save_intermediate=True,
+                                 verbose=True)
