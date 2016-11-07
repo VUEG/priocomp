@@ -1,5 +1,5 @@
-2016-11-07 09:29:27 [expand_rwr_w] [INFO ] Reading and processing raster analyses/RWR/rwr_eu26_all_weights.tif
-2016-11-07 09:29:28 [expand_rwr_w] [DEBUG] Number of informative cells in the data: 4188703
-2016-11-07 09:29:28 [expand_rwr_w] [DEBUG] Number of informative cells in the expand mask: 4301923
-2016-11-07 09:29:28 [expand_rwr_w] [INFO ] Writing output raster analyses/RWR/rwr_eu26_all_weights_expanded.tif
-2016-11-07 09:29:30 [expand_rwr_w] [INFO ]  [TIME] Masking took 4.03 sec
+2016-11-07 13:34:11 [expand_rwr_w] [INFO ] Reading and processing raster analyses/RWR/rwr_all_weights.tif
+2016-11-07 13:34:12 [expand_rwr_w] [DEBUG] Number of informative cells in the data: 4302082
+2016-11-07 13:34:12 [expand_rwr_w] [DEBUG] Number of informative cells in the expand mask: 4301923
+2016-11-07 13:34:12 [expand_rwr_w] [INFO ] Writing output raster analyses/RWR/rwr_all_weights_expanded.tif
+2016-11-07 13:34:14 [expand_rwr_w] [INFO ]  [TIME] Masking took 3.96 sec
