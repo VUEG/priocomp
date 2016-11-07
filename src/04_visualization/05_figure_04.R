@@ -119,4 +119,4 @@ fig3 <- gridExtra::grid.arrange(p1, p2, ncol = 2, nrow = 1)
 
 # Save Figure -------------------------------------------------------------
 
-ggsave("reports/figures/05_figure_04.png", fig3)
+ggsave("reports/figures/11_figure_04.png", fig3)
