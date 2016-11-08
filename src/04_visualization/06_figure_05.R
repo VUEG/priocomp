@@ -1,80 +1,81 @@
-library(gridExtra)
-library(magick)
-library(maptools)
-library(RColorBrewer)
-library(sp)
-library(tmap)
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+library(tidyr)
+library(zonator)
+library(viridis)
 
-data(Europe)
 
-# Load data ---------------------------------------------------------------
+# Helper functions --------------------------------------------------------
 
-nuts2_var_ds <- "analyses/comparison/nuts2_rank_variation.shp"
-nuts2_var <- maptools::readShapePoly(nuts2_var_ds,
-                                   proj4string = CRS("+init=epsg:3035"))
+get_perf_level <- function(data, x) {
+  perf_data <- data %>%
+    dplyr::group_by(method, group, feature) %>%
+    dplyr::filter(pr_lost >= x) %>%
+    dplyr::arrange(pr_lost) %>%
+    dplyr::slice(1) %>%
+    dplyr::mutate(level = x)
+  return(perf_data)
+}
 
-# Plot data ---------------------------------------------------------------
+# Load variants and get curves data ---------------------------------------
 
-img_width <- 3000
-img_height <- 1800
-inner_margins <- c(0.02, 0.02, 0.02, -0.05)
+zproject <- zonator::load_zproject('analyses/zonation/priocomp/')
+v04_abf_all_wgt <- zonator::get_variant(zproject, 4)
 
-# Make a background map for all panels
-tm_eur <- tm_shape(Europe) +
-  tm_fill("lightgrey") +
-  tm_format_Europe(inner.margins = inner_margins)
+v04_crvs <- zonator::curves(v04_abf_all_wgt, groups = FALSE)
+v13_crvs <- zonator::read_curves("analyses/zonation/priocomp/13_load_abf_wgt_rwr_all/13_load_abf_wgt_rwr_all_out/13_load_abf_wgt_rwr_all.curves.txt")
+v14_crvs <- zonator::read_curves("analyses/zonation/priocomp/14_load_abf_wgt_ilp_all/14_load_abf_wgt_ilp_all_out/14_load_abf_wgt_ilp_all.curves.txt")
 
-title_size <- 1.5
+# Re-arrange data ---------------------------------------------------------
 
-mean_colors <- rev(RColorBrewer::brewer.pal(10, "RdYlBu"))
-mean_breaks <- seq(0, 1, 1 / length(mean_colors))
-mean_labels <- format((100 - mean_breaks * 100), nsmall = 0)
-mean_labels <- cbind(mean_labels[1:(length(mean_labels) - 1)],
-                     gsub(" ", "", mean_labels[2:length(mean_labels)]))
-mean_labels[,2] <- paste(mean_labels[,2], "%")
-mean_labels <- apply(mean_labels, 1, paste, collapse = " - ")
+v04_crvs$method <- "ZON"
+v13_crvs$method <- "RWR"
+v14_crvs$method <- "ILP"
 
-tm_mean_top <- tm_eur + tm_shape(nuts2_var, is.master = TRUE) +
-  tm_polygons("agg_mean", title = "Mean top fraction", style = "fixed",
-              palette = mean_colors, labels = mean_labels, breaks = mean_breaks,
-              border.col = "lightgrey", lwd = 0.3,
-              auto.palette.mapping = FALSE) +
-  tm_layout(title.size = title_size) +
-  tm_format_Europe(title = "A", inner.margins = inner_margins,
-                   legend.position = c("left", "top"),
-                   legend.bg.color = "white",
-                   title.position = c("right", "top"))
+# zonator::read_curves() doesn't produce feature names, but they are the same
+# as in 04.
+names(v13_crvs) <- names(v04_crvs)
+names(v14_crvs) <- names(v04_crvs)
 
-sd_colors <- rev(RColorBrewer::brewer.pal(7, "RdYlBu"))
-sd_breaks <- seq(0, 0.35, 0.05)
-sd_labels <- format(sd_breaks * 100, nsmall = 0)
-sd_labels <- cbind(sd_labels[1:(length(sd_labels) - 1)],
-                     gsub(" ", "", sd_labels[2:length(sd_labels)]))
-sd_labels[,2] <- paste(sd_labels[,2], "%")
-sd_labels <- apply(sd_labels, 1, paste, collapse = " - ")
+# ES features
+all_crvs_es <- dplyr::bind_rows(v04_crvs, v13_crvs, v14_crvs) %>%
+  dplyr::select(-(cost:ext2)) %>%
+  dplyr::select(pr_lost:species_richness_vascular_plants, method) %>%
+  tidyr::gather(feature, pr_rem, -pr_lost, -method) %>%
+  dplyr::mutate(group = "ES") %>%
+  dplyr::select(pr_lost, method, group, feature, pr_rem)
 
-tm_sd_top <- tm_eur + tm_shape(nuts2_var, is.master = TRUE) +
-  tm_polygons("agg_std", title = "SD top fraction",
-              palette = sd_colors, labels = sd_labels, breaks = sd_breaks,
-              border.col = "lightgrey", lwd = 0.3,
-              auto.palette.mapping = FALSE) +
-  tm_layout(title.size = title_size) +
-  tm_format_Europe(title = "B", inner.margins = inner_margins,
-                   legend.show = TRUE, legend.position = c("left", "top"),
-                   legend.bg.color = "white",
-                   title.position = c("right", "top"))
+# BD features
+all_crvs_bd <- dplyr::bind_rows(v04_crvs, v13_crvs, v14_crvs) %>%
+  dplyr::select(-(cost:species_richness_vascular_plants)) %>%
+  tidyr::gather(feature, pr_rem, -pr_lost, -method) %>%
+  dplyr::mutate(group = "BD") %>%
+  dplyr::select(pr_lost, method, group, feature, pr_rem)
 
-# Save map ----------------------------------------------------------------
+# ALL is effectively ES + BD
 
-file_mean_top <- "reports/figures/12_figure_05_A.png"
-file_mean_sd <- "reports/figures/13_figure_05_B.png"
-file_composite <- "reports/figures/14_figure_05.png"
+all_crvs <- dplyr::bind_rows(all_crvs_es, all_crvs_bd)
+all_crvs_all <- all_crvs
+all_crvs_all$group <- "ALL"
+all_crvs <- dplyr::bind_rows(all_crvs, all_crvs_all)
 
-save_tmap(tm_mean_top, file_mean_top, width = 1500, height = 1800)
-save_tmap(tm_sd_top, file_mean_sd, width = 1500, height = 1800)
+perf_levels <- c(0.75, 0.9, 0.98)
+perf_details <- dplyr::bind_rows(lapply(perf_levels,
+                                        function(y) {get_perf_level(all_crvs, y)}))
 
-# Combine images using magick (couldn't figure a better way...)
-img_mean_top <- magick::image_read(file_mean_top)
-img_mean_sd <- magick::image_read(file_mean_sd)
-img_composite <- magick::image_append(c(img_mean_top, img_mean_sd))
-magick::image_write(img_composite, path = file_composite)
+perf_details$level <- factor(perf_details$level,
+                             levels = perf_levels,
+                             labels = paste0("Top ", 100 - perf_levels * 100, "%"))
+
+p1 <- ggplot(perf_details, aes(x = factor(group), y = pr_rem,
+                                 fill = factor(method))) +
+  scale_fill_manual("Method", values =  rev(rep(viridis(3, end = 0.9), 3, each = 1))) +
+  geom_boxplot(outlier.colour = "darkgrey", outlier.size = 0.2) + facet_wrap(~level) +
+  ylab("Average feature distribution covered\n") + xlab("\nData group") +
+  scale_y_continuous(breaks = seq(0, 1, 0.25), labels = paste0(seq(0, 100, 25), "%")) +
+  theme_minimal()
+
+# Save Figure -------------------------------------------------------------
+
+ggsave("reports/figures/12_figure_05.png", p1, width = 12, height = 6)
