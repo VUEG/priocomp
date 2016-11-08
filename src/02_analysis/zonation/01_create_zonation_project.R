@@ -29,7 +29,7 @@ zsetup_root <- "analyses/zonation"
 ppa_raster_file <- "../../../data/processed/eurostat/nuts_level2/NUTS_RG_01M_2013_level2.tif"
 ppa_config_file <- "ppa_config.txt"
 
-project_name <- "priocomp"
+project_name <- "_priocomp"
 
 zonator::create_zproject(name = project_name, dir = zsetup_root, variants = variants,
                          dat_template_file = "analyses/zonation/template.dat",
@@ -108,8 +108,8 @@ variant3 <- set_dat_param(variant3, "use groups", 1)
 groups_file <- file.path(variant3@name, paste0(variant3@name, "_groups.txt"))
 variant3 <- set_dat_param(variant3, "groups file", groups_file)
 
-# Give weight of 759 / 11 to each ES. Altogether, there are 759 species
-# features. Give weight 1 to each.
+# Give weight of NESFEATURES + NBDFEATURES / NESFEATURES to each ES. Altogether,
+# there are NBDFEATURES species features. Give weight 1 to each.
 sppweights(variant3) <- c(rep(nfeatures(variant3) / NESFEATURES, NESFEATURES),
                           rep(1, nfeatures(variant3) - NESFEATURES))
 
@@ -122,9 +122,9 @@ variant4 <- set_dat_param(variant4, "removal rule", 2)
 variant4 <- set_dat_param(variant4, "post-processing list file",
                           ppa_config_file)
 
-# Define groups. Features 1-12 are ecosystem services, Features 13-771 are
-# species features.
-groups(variant4) <- c(rep(1, 12), rep(2, (nfeatures(variant4) - 12)))
+# Define groups.
+groups(variant4) <-  c(rep(1, NESFEATURES),
+                       rep(2, NBDFEATURES))
 groupnames(variant4) <- c("1" = "ecosystem_services", "2" = "species")
 # Set groups use and groups file
 variant4 <- set_dat_param(variant4, "use groups", 1)
