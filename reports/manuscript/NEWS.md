@@ -2,6 +2,7 @@
 
 + Fix several bugs in RWR, ILP and in the comparison code
 + Re-make all figures
++ Add new Figure 5
 + ​
 
 ## 0.5.1 (2016-10-31)
