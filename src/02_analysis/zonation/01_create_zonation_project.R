@@ -36,7 +36,7 @@ zonator::create_zproject(name = project_name, dir = zsetup_root, variants = vari
                          spp_template_dir = "data/processed/features",
                          override_path = "../../../data/processed/features",
                          recursive = TRUE, overwrite = TRUE, debug = TRUE)
-priocomp_zproject <- load_zproject(zsetup_root)
+priocomp_zproject <- load_zproject(file.path(zsetup_root, project_name))
 
 # Set run configuration parameters --------------------------------------------
 
