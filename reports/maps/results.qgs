@@ -3,22 +3,28 @@
   <title></title>
   <autotransaction active="0"/>
   <evaluateDefaultValues active="0"/>
-  <layer-tree-group expanded="1" checked="Qt::Unchecked" name="">
+  <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="">
     <customproperties/>
-    <layer-tree-group expanded="1" checked="Qt::Unchecked" name="data">
+    <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="data">
       <customproperties/>
       <layer-tree-group expanded="0" checked="Qt::Unchecked" name="WDPA">
         <customproperties/>
       </layer-tree-group>
-      <layer-tree-group expanded="0" checked="Qt::Unchecked" name="eurostat">
+      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="eurostat">
         <customproperties/>
         <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="NUTS_RG_01M_2013_level220160714120910095" name="NUTS_RG_01M_2013_level2">
           <customproperties/>
         </layer-tree-layer>
       </layer-tree-group>
-      <layer-tree-group expanded="0" checked="Qt::Unchecked" name="provide">
+      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="datadryad">
         <customproperties/>
-        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="carbon_sequestration20161026153021690" name="carbon_sequestration">
+        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="woodprod_average20161109104208734" name="woodprod_average">
+          <customproperties/>
+        </layer-tree-layer>
+      </layer-tree-group>
+      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="provide">
+        <customproperties/>
+        <layer-tree-layer expanded="0" checked="Qt::Checked" id="carbon_sequestration20161026153021690" name="carbon_sequestration">
           <customproperties/>
         </layer-tree-layer>
         <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="cultural_landscape_index_agro20161107094747173" name="cultural_landscape_index_agro">
@@ -95,7 +101,7 @@
         </layer-tree-group>
       </layer-tree-group>
     </layer-tree-group>
-    <layer-tree-group expanded="1" checked="Qt::Unchecked" name="analyses">
+    <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="analyses">
       <customproperties/>
       <layer-tree-group expanded="0" checked="Qt::Unchecked" name="comparison">
         <customproperties/>
@@ -117,7 +123,7 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="0" checked="Qt::Unchecked" name="02_all_wgt">
+        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="02_all_wgt">
           <customproperties/>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="rwr_eu26_all_weights_stats20160915132200722" name="rwr_all_weights_stats">
             <customproperties/>
@@ -126,7 +132,7 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="0" checked="Qt::Unchecked" name="03_es">
+        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="03_es">
           <customproperties/>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="rwr_eu26_es_stats20160915132251273" name="rwr_es_stats">
             <customproperties/>
@@ -145,7 +151,7 @@
           </layer-tree-layer>
         </layer-tree-group>
       </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="Zonation">
+      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="Zonation">
         <customproperties/>
         <layer-tree-group expanded="0" checked="Qt::Unchecked" name="01_caz">
           <customproperties/>
@@ -168,8 +174,11 @@
         <layer-tree-group expanded="0" checked="Qt::Unchecked" name="05_caz_es">
           <customproperties/>
         </layer-tree-group>
-        <layer-tree-group expanded="0" checked="Qt::Unchecked" name="06_abf_es">
+        <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="06_abf_es">
           <customproperties/>
+          <layer-tree-layer expanded="1" checked="Qt::Checked" id="06_abf_es_nwout320161109103644520" name="06_abf_es_nwout3">
+            <customproperties/>
+          </layer-tree-layer>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="06_abf_es_nwout120160714095149833" name="06_abf_es_nwout1">
             <customproperties/>
           </layer-tree-layer>
@@ -232,10 +241,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>900278.4890326727181673</xmin>
-      <ymin>746329.01951572066172957</ymin>
-      <xmax>9869626.36492629535496235</xmax>
-      <ymax>5520034.30270839855074883</ymax>
+      <xmin>3226229.64544821251183748</xmin>
+      <ymin>2400795.65418585669249296</ymin>
+      <xmax>5036800.89987009391188622</xmax>
+      <ymax>4459434.17477724421769381</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -259,15 +268,16 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_all_stats20160915131419942"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_all_stats20160915131954903"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="eu26_rwr_bd20160726141335675"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_es20161107150230521"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ablepharus_kitaibelii20160802122107779"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="nature_tourism20160715102902464"/>
-      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_es20161107150230521"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_all_weights_stats20160915132200722"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="budget_level_0_0520160909123324281"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="lutra_lutra20160802122200372"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="08_abf_bd_rank_compressed20160627133452199"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_eu26_bd_stats20160915133420520"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="pica_pica20160802122655629"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="woodprod_average20161109104208734"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="wdpa_poly_geom20160726141759732"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="pollination_flows20161107095027666"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="eu26_rwr_all20160726131504714"/>
@@ -275,8 +285,8 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_all_weights_expanded20161104170822075"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="06_abf_es_nwout120160617090203238"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="eu26_ilp_es20160617090708183"/>
-      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="variation20160919145246709"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_all_weights_stats20161107145937848"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="variation20160919145246709"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_bd_stats20160915132316486"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_es20160826164545086"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="floodregulation20161107094937234"/>
@@ -288,6 +298,7 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="07_caz_bd_rank_compressed20160627133346369"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="cultural_landscape_index_forest20160714120655387"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="03_caz_wgt_nwout120160617085900595"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100001" srcDatumTransform="-1" destDatumTransform="-1" layerid="06_abf_es_nwout320161109103644520"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="carbon_sequestration20161026153021690"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="lagopus_lagopus20160802122959777"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="budget_level_0_0520160909123307262"/>
@@ -395,22 +406,31 @@
       <item>ilp_es_stats20161107150126111</item>
       <item>ilp_bd_stats20161107150200771</item>
       <item>ilp_es20161107150230521</item>
+      <item>06_abf_es_nwout320161109103644520</item>
+      <item>woodprod_average20161109104208734</item>
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
-    <legendgroup open="true" checked="Qt::Unchecked" name="data">
+    <legendgroup open="true" checked="Qt::PartiallyChecked" name="data">
       <legendgroup open="false" checked="Qt::Unchecked" name="WDPA"/>
-      <legendgroup open="false" checked="Qt::Unchecked" name="eurostat">
+      <legendgroup open="true" checked="Qt::Unchecked" name="eurostat">
         <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="NUTS_RG_01M_2013_level2" showFeatureCount="0">
           <filegroup open="true" hidden="false">
             <legendlayerfile isInOverview="0" layerid="NUTS_RG_01M_2013_level220160714120910095" visible="0"/>
           </filegroup>
         </legendlayer>
       </legendgroup>
-      <legendgroup open="false" checked="Qt::Unchecked" name="provide">
-        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="carbon_sequestration" showFeatureCount="0">
+      <legendgroup open="true" checked="Qt::Unchecked" name="datadryad">
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="woodprod_average" showFeatureCount="0">
           <filegroup open="false" hidden="false">
-            <legendlayerfile isInOverview="0" layerid="carbon_sequestration20161026153021690" visible="0"/>
+            <legendlayerfile isInOverview="0" layerid="woodprod_average20161109104208734" visible="0"/>
+          </filegroup>
+        </legendlayer>
+      </legendgroup>
+      <legendgroup open="true" checked="Qt::PartiallyChecked" name="provide">
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="carbon_sequestration" showFeatureCount="0">
+          <filegroup open="false" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="carbon_sequestration20161026153021690" visible="1"/>
           </filegroup>
         </legendlayer>
         <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="cultural_landscape_index_agro" showFeatureCount="0">
@@ -517,7 +537,7 @@
         </legendgroup>
       </legendgroup>
     </legendgroup>
-    <legendgroup open="true" checked="Qt::Unchecked" name="analyses">
+    <legendgroup open="true" checked="Qt::PartiallyChecked" name="analyses">
       <legendgroup open="false" checked="Qt::Unchecked" name="comparison">
         <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="nuts2_rank_variation_std" showFeatureCount="0">
           <filegroup open="false" hidden="false">
@@ -543,7 +563,7 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="false" checked="Qt::Unchecked" name="02_all_wgt">
+        <legendgroup open="true" checked="Qt::Unchecked" name="02_all_wgt">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_all_weights_stats" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="rwr_eu26_all_weights_stats20160915132200722" visible="0"/>
@@ -555,7 +575,7 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="false" checked="Qt::Unchecked" name="03_es">
+        <legendgroup open="true" checked="Qt::Unchecked" name="03_es">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_es_stats" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="rwr_eu26_es_stats20160915132251273" visible="0"/>
@@ -580,7 +600,7 @@
           </legendlayer>
         </legendgroup>
       </legendgroup>
-      <legendgroup open="true" checked="Qt::Unchecked" name="Zonation">
+      <legendgroup open="true" checked="Qt::PartiallyChecked" name="Zonation">
         <legendgroup open="false" checked="Qt::Unchecked" name="01_caz"/>
         <legendgroup open="false" checked="Qt::Unchecked" name="02_abf"/>
         <legendgroup open="false" checked="Qt::Unchecked" name="03_caz_wgt"/>
@@ -597,7 +617,12 @@
           </legendlayer>
         </legendgroup>
         <legendgroup open="false" checked="Qt::Unchecked" name="05_caz_es"/>
-        <legendgroup open="false" checked="Qt::Unchecked" name="06_abf_es">
+        <legendgroup open="true" checked="Qt::PartiallyChecked" name="06_abf_es">
+          <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="06_abf_es_nwout3" showFeatureCount="0">
+            <filegroup open="true" hidden="false">
+              <legendlayerfile isInOverview="0" layerid="06_abf_es_nwout320161109103644520" visible="1"/>
+            </filegroup>
+          </legendlayer>
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="06_abf_es_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="06_abf_es_nwout120160714095149833" visible="0"/>
@@ -3228,6 +3253,398 @@ def my_form_open(dialog, layer, feature):
         <fieldstyles/>
       </conditionalstyles>
     </maplayer>
+    <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" readOnly="0" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
+      <extent>
+        <xmin>2635899.31063916347920895</xmin>
+        <ymin>1386017.57182906032539904</ymin>
+        <xmax>6084606.4614658709615469</xmax>
+        <ymax>5307233.80053918063640594</ymax>
+      </extent>
+      <id>06_abf_es_nwout320161109103644520</id>
+      <datasource>../../analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es_nwout3.shp</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>06_abf_es_nwout3</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
+          <srsid>100001</srsid>
+          <srid>0</srid>
+          <authid>USER:100001</authid>
+          <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <provider encoding="UTF-8">ogr</provider>
+      <previewExpression></previewExpression>
+      <vectorjoins/>
+      <layerDependencies/>
+      <expressionfields/>
+      <defaults>
+        <default field="ID" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="STAT_LEVL_" expression=""/>
+        <default field="SHAPE_AREA" expression=""/>
+        <default field="SHAPE_LEN" expression=""/>
+        <default field="country" expression=""/>
+        <default field="Area_cells" expression=""/>
+        <default field="F1" expression=""/>
+        <default field="F2" expression=""/>
+        <default field="F3" expression=""/>
+        <default field="F4" expression=""/>
+        <default field="F5" expression=""/>
+        <default field="F6" expression=""/>
+        <default field="F7" expression=""/>
+        <default field="F8" expression=""/>
+        <default field="F9" expression=""/>
+      </defaults>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <edittypes>
+        <edittype widgetv2type="TextEdit" name="ID">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="NUTS_ID">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="STAT_LEVL_">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="SHAPE_AREA">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="SHAPE_LEN">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="country">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="Area_cells">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="F1">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="F2">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="F3">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="F4">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="F5">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="F6">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="F7">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="F8">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="F9">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+      </edittypes>
+      <renderer-v2 forceraster="0" symbollevels="0" type="singleSymbol" enableorderby="0">
+        <symbols>
+          <symbol alpha="1" clip_to_extent="1" type="fill" name="0">
+            <layer pass="0" class="SimpleFill" locked="0">
+              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="color" v="44,123,182,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="0,0,0,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="no"/>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale scalemethod="diameter"/>
+      </renderer-v2>
+      <labeling type="simple"/>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="labeling" value="pal"/>
+        <property key="labeling/addDirectionSymbol" value="false"/>
+        <property key="labeling/angleOffset" value="0"/>
+        <property key="labeling/blendMode" value="0"/>
+        <property key="labeling/bufferBlendMode" value="0"/>
+        <property key="labeling/bufferColorA" value="255"/>
+        <property key="labeling/bufferColorB" value="255"/>
+        <property key="labeling/bufferColorG" value="255"/>
+        <property key="labeling/bufferColorR" value="255"/>
+        <property key="labeling/bufferDraw" value="false"/>
+        <property key="labeling/bufferJoinStyle" value="64"/>
+        <property key="labeling/bufferNoFill" value="false"/>
+        <property key="labeling/bufferSize" value="1"/>
+        <property key="labeling/bufferSizeInMapUnits" value="false"/>
+        <property key="labeling/bufferSizeMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/bufferTransp" value="0"/>
+        <property key="labeling/centroidInside" value="false"/>
+        <property key="labeling/centroidWhole" value="false"/>
+        <property key="labeling/decimals" value="3"/>
+        <property key="labeling/displayAll" value="false"/>
+        <property key="labeling/dist" value="0"/>
+        <property key="labeling/distInMapUnits" value="false"/>
+        <property key="labeling/distMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/drawLabels" value="false"/>
+        <property key="labeling/enabled" value="false"/>
+        <property key="labeling/fieldName" value=""/>
+        <property key="labeling/fitInPolygonOnly" value="false"/>
+        <property key="labeling/fontCapitals" value="0"/>
+        <property key="labeling/fontFamily" value="Noto Sans"/>
+        <property key="labeling/fontItalic" value="false"/>
+        <property key="labeling/fontLetterSpacing" value="0"/>
+        <property key="labeling/fontLimitPixelSize" value="false"/>
+        <property key="labeling/fontMaxPixelSize" value="10000"/>
+        <property key="labeling/fontMinPixelSize" value="3"/>
+        <property key="labeling/fontSize" value="10"/>
+        <property key="labeling/fontSizeInMapUnits" value="false"/>
+        <property key="labeling/fontSizeMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/fontStrikeout" value="false"/>
+        <property key="labeling/fontUnderline" value="false"/>
+        <property key="labeling/fontWeight" value="50"/>
+        <property key="labeling/fontWordSpacing" value="0"/>
+        <property key="labeling/formatNumbers" value="false"/>
+        <property key="labeling/isExpression" value="true"/>
+        <property key="labeling/labelOffsetInMapUnits" value="true"/>
+        <property key="labeling/labelOffsetMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/labelPerPart" value="false"/>
+        <property key="labeling/leftDirectionSymbol" value="&lt;"/>
+        <property key="labeling/limitNumLabels" value="false"/>
+        <property key="labeling/maxCurvedCharAngleIn" value="20"/>
+        <property key="labeling/maxCurvedCharAngleOut" value="-20"/>
+        <property key="labeling/maxNumLabels" value="2000"/>
+        <property key="labeling/mergeLines" value="false"/>
+        <property key="labeling/minFeatureSize" value="0"/>
+        <property key="labeling/multilineAlign" value="0"/>
+        <property key="labeling/multilineHeight" value="1"/>
+        <property key="labeling/namedStyle" value="Regular"/>
+        <property key="labeling/obstacle" value="true"/>
+        <property key="labeling/obstacleFactor" value="1"/>
+        <property key="labeling/obstacleType" value="0"/>
+        <property key="labeling/offsetType" value="0"/>
+        <property key="labeling/placeDirectionSymbol" value="0"/>
+        <property key="labeling/placement" value="1"/>
+        <property key="labeling/placementFlags" value="10"/>
+        <property key="labeling/plussign" value="false"/>
+        <property key="labeling/predefinedPositionOrder" value="TR,TL,BR,BL,R,L,TSR,BSR"/>
+        <property key="labeling/preserveRotation" value="true"/>
+        <property key="labeling/previewBkgrdColor" value="#ffffff"/>
+        <property key="labeling/priority" value="5"/>
+        <property key="labeling/quadOffset" value="4"/>
+        <property key="labeling/repeatDistance" value="0"/>
+        <property key="labeling/repeatDistanceMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/repeatDistanceUnit" value="1"/>
+        <property key="labeling/reverseDirectionSymbol" value="false"/>
+        <property key="labeling/rightDirectionSymbol" value=">"/>
+        <property key="labeling/scaleMax" value="10000000"/>
+        <property key="labeling/scaleMin" value="1"/>
+        <property key="labeling/scaleVisibility" value="false"/>
+        <property key="labeling/shadowBlendMode" value="6"/>
+        <property key="labeling/shadowColorB" value="0"/>
+        <property key="labeling/shadowColorG" value="0"/>
+        <property key="labeling/shadowColorR" value="0"/>
+        <property key="labeling/shadowDraw" value="false"/>
+        <property key="labeling/shadowOffsetAngle" value="135"/>
+        <property key="labeling/shadowOffsetDist" value="1"/>
+        <property key="labeling/shadowOffsetGlobal" value="true"/>
+        <property key="labeling/shadowOffsetMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shadowOffsetUnits" value="1"/>
+        <property key="labeling/shadowRadius" value="1.5"/>
+        <property key="labeling/shadowRadiusAlphaOnly" value="false"/>
+        <property key="labeling/shadowRadiusMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shadowRadiusUnits" value="1"/>
+        <property key="labeling/shadowScale" value="100"/>
+        <property key="labeling/shadowTransparency" value="30"/>
+        <property key="labeling/shadowUnder" value="0"/>
+        <property key="labeling/shapeBlendMode" value="0"/>
+        <property key="labeling/shapeBorderColorA" value="255"/>
+        <property key="labeling/shapeBorderColorB" value="128"/>
+        <property key="labeling/shapeBorderColorG" value="128"/>
+        <property key="labeling/shapeBorderColorR" value="128"/>
+        <property key="labeling/shapeBorderWidth" value="0"/>
+        <property key="labeling/shapeBorderWidthMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shapeBorderWidthUnits" value="1"/>
+        <property key="labeling/shapeDraw" value="false"/>
+        <property key="labeling/shapeFillColorA" value="255"/>
+        <property key="labeling/shapeFillColorB" value="255"/>
+        <property key="labeling/shapeFillColorG" value="255"/>
+        <property key="labeling/shapeFillColorR" value="255"/>
+        <property key="labeling/shapeJoinStyle" value="64"/>
+        <property key="labeling/shapeOffsetMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shapeOffsetUnits" value="1"/>
+        <property key="labeling/shapeOffsetX" value="0"/>
+        <property key="labeling/shapeOffsetY" value="0"/>
+        <property key="labeling/shapeRadiiMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shapeRadiiUnits" value="1"/>
+        <property key="labeling/shapeRadiiX" value="0"/>
+        <property key="labeling/shapeRadiiY" value="0"/>
+        <property key="labeling/shapeRotation" value="0"/>
+        <property key="labeling/shapeRotationType" value="0"/>
+        <property key="labeling/shapeSVGFile" value=""/>
+        <property key="labeling/shapeSizeMapUnitScale" value="0,0,0,0,0,0"/>
+        <property key="labeling/shapeSizeType" value="0"/>
+        <property key="labeling/shapeSizeUnits" value="1"/>
+        <property key="labeling/shapeSizeX" value="0"/>
+        <property key="labeling/shapeSizeY" value="0"/>
+        <property key="labeling/shapeTransparency" value="0"/>
+        <property key="labeling/shapeType" value="0"/>
+        <property key="labeling/substitutions" value="&lt;substitutions/>"/>
+        <property key="labeling/textColorA" value="255"/>
+        <property key="labeling/textColorB" value="0"/>
+        <property key="labeling/textColorG" value="0"/>
+        <property key="labeling/textColorR" value="0"/>
+        <property key="labeling/textTransp" value="0"/>
+        <property key="labeling/upsidedownLabels" value="0"/>
+        <property key="labeling/useSubstitutions" value="false"/>
+        <property key="labeling/wrapChar" value=""/>
+        <property key="labeling/xOffset" value="0"/>
+        <property key="labeling/yOffset" value="0"/>
+        <property key="labeling/zIndex" value="0"/>
+        <property key="variableNames" value="_fields_"/>
+        <property key="variableValues" value=""/>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerTransparency>0</layerTransparency>
+      <displayfield>ID</displayfield>
+      <label>0</label>
+      <labelattributes>
+        <label fieldname="" text="Label"/>
+        <family fieldname="" name="Noto Sans"/>
+        <size fieldname="" units="pt" value="12"/>
+        <bold fieldname="" on="0"/>
+        <italic fieldname="" on="0"/>
+        <underline fieldname="" on="0"/>
+        <strikeout fieldname="" on="0"/>
+        <color fieldname="" red="0" blue="0" green="0"/>
+        <x fieldname=""/>
+        <y fieldname=""/>
+        <offset x="0" y="0" units="pt" yfieldname="" xfieldname=""/>
+        <angle fieldname="" value="0" auto="0"/>
+        <alignment fieldname="" value="center"/>
+        <buffercolor fieldname="" red="255" blue="255" green="255"/>
+        <buffersize fieldname="" units="pt" value="1"/>
+        <bufferenabled fieldname="" on=""/>
+        <multilineenabled fieldname="" on=""/>
+        <selectedonly on=""/>
+      </labelattributes>
+      <SingleCategoryDiagramRenderer diagramType="Pie" sizeLegend="0" attributeLegend="1">
+        <DiagramCategory penColor="#000000" labelPlacementMethod="XHeight" penWidth="0" diagramOrientation="Up" sizeScale="0,0,0,0,0,0" minimumSize="0" barWidth="5" penAlpha="255" maxScaleDenominator="1e+08" backgroundColor="#ffffff" transparency="0" width="15" scaleDependency="Area" backgroundAlpha="255" angleOffset="1440" scaleBasedVisibility="0" enabled="0" height="15" lineSizeScale="0,0,0,0,0,0" sizeType="MM" lineSizeType="MM" minScaleDenominator="100000">
+          <fontProperties description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
+          <attribute field="" color="#000000" label=""/>
+        </DiagramCategory>
+        <symbol alpha="1" clip_to_extent="1" type="marker" name="sizeSymbol">
+          <layer pass="0" class="SimpleMarker" locked="0">
+            <prop k="angle" v="0"/>
+            <prop k="color" v="255,0,0,255"/>
+            <prop k="horizontal_anchor_point" v="1"/>
+            <prop k="joinstyle" v="bevel"/>
+            <prop k="name" v="circle"/>
+            <prop k="offset" v="0,0"/>
+            <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
+            <prop k="offset_unit" v="MM"/>
+            <prop k="outline_color" v="0,0,0,255"/>
+            <prop k="outline_style" v="solid"/>
+            <prop k="outline_width" v="0"/>
+            <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
+            <prop k="outline_width_unit" v="MM"/>
+            <prop k="scale_method" v="diameter"/>
+            <prop k="size" v="2"/>
+            <prop k="size_map_unit_scale" v="0,0,0,0,0,0"/>
+            <prop k="size_unit" v="MM"/>
+            <prop k="vertical_anchor_point" v="1"/>
+          </layer>
+        </symbol>
+      </SingleCategoryDiagramRenderer>
+      <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
+      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <aliases>
+        <alias field="ID" index="0" name=""/>
+        <alias field="NUTS_ID" index="1" name=""/>
+        <alias field="STAT_LEVL_" index="2" name=""/>
+        <alias field="SHAPE_AREA" index="3" name=""/>
+        <alias field="SHAPE_LEN" index="4" name=""/>
+        <alias field="country" index="5" name=""/>
+        <alias field="Area_cells" index="6" name=""/>
+        <alias field="F1" index="7" name=""/>
+        <alias field="F2" index="8" name=""/>
+        <alias field="F3" index="9" name=""/>
+        <alias field="F4" index="10" name=""/>
+        <alias field="F5" index="11" name=""/>
+        <alias field="F6" index="12" name=""/>
+        <alias field="F7" index="13" name=""/>
+        <alias field="F8" index="14" name=""/>
+        <alias field="F9" index="15" name=""/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <attributeactions default="-1"/>
+      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
+        <columns>
+          <column width="-1" hidden="0" type="field" name="ID"/>
+          <column width="-1" hidden="0" type="field" name="NUTS_ID"/>
+          <column width="-1" hidden="0" type="field" name="country"/>
+          <column width="-1" hidden="1" type="actions"/>
+          <column width="-1" hidden="0" type="field" name="STAT_LEVL_"/>
+          <column width="-1" hidden="0" type="field" name="SHAPE_AREA"/>
+          <column width="-1" hidden="0" type="field" name="SHAPE_LEN"/>
+          <column width="-1" hidden="0" type="field" name="Area_cells"/>
+          <column width="-1" hidden="0" type="field" name="F1"/>
+          <column width="-1" hidden="0" type="field" name="F2"/>
+          <column width="-1" hidden="0" type="field" name="F3"/>
+          <column width="-1" hidden="0" type="field" name="F4"/>
+          <column width="-1" hidden="0" type="field" name="F5"/>
+          <column width="-1" hidden="0" type="field" name="F6"/>
+          <column width="-1" hidden="0" type="field" name="F7"/>
+          <column width="-1" hidden="0" type="field" name="F8"/>
+          <column width="-1" hidden="0" type="field" name="F9"/>
+        </columns>
+      </attributetableconfig>
+      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+QGIS forms can have a Python function that is called when the form is
+opened.
+
+Use this function to add extra logic to your forms.
+
+Enter the name of the function in the "Python Init function"
+field.
+An example follows:
+"""
+from PyQt4.QtGui import QWidget
+
+def my_form_open(dialog, layer, feature):
+	geom = feature.geometry()
+	control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <widgets/>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+    </maplayer>
     <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
       <extent>
         <xmin>2000000</xmin>
@@ -4742,15 +5159,57 @@ def my_form_open(dialog, layer, feature):
           <rasterTransparency/>
           <rastershader>
             <colorrampshader colorRampType="INTERPOLATED" clip="0">
-              <item alpha="255" value="0" label="0" color="#440154"/>
-              <item alpha="255" value="66025.8" label="66025.8" color="#472878"/>
-              <item alpha="255" value="132052" label="132052" color="#3e4a89"/>
+              <item alpha="0" value="0" label="0" color="#440154"/>
+              <item alpha="255" value="11651.6" label="11651.6" color="#46085c"/>
+              <item alpha="255" value="23303.2" label="23303.2" color="#471063"/>
+              <item alpha="255" value="34954.8" label="34954.8" color="#481769"/>
+              <item alpha="255" value="46606.4" label="46606.4" color="#481d6f"/>
+              <item alpha="255" value="58258" label="58258" color="#482475"/>
+              <item alpha="255" value="69909.6" label="69909.6" color="#472a7a"/>
+              <item alpha="255" value="81561.3" label="81561.3" color="#46307e"/>
+              <item alpha="255" value="93213" label="93213" color="#453781"/>
+              <item alpha="255" value="104865" label="104865" color="#433d84"/>
+              <item alpha="255" value="116516" label="116516" color="#414287"/>
+              <item alpha="255" value="128168" label="128168" color="#3f4889"/>
+              <item alpha="255" value="139819" label="139819" color="#3d4e8a"/>
+              <item alpha="255" value="151471" label="151471" color="#3a538b"/>
+              <item alpha="255" value="163123" label="163123" color="#38598c"/>
+              <item alpha="255" value="174774" label="174774" color="#355e8d"/>
+              <item alpha="255" value="186425" label="186425" color="#33638d"/>
               <item alpha="255" value="198077" label="198077" color="#31688e"/>
-              <item alpha="255" value="264103" label="264103" color="#25838e"/>
-              <item alpha="255" value="330129" label="330129" color="#1e9e89"/>
+              <item alpha="255" value="209729" label="209729" color="#2e6d8e"/>
+              <item alpha="255" value="221381" label="221381" color="#2c718e"/>
+              <item alpha="255" value="233032" label="233032" color="#2a768e"/>
+              <item alpha="255" value="244684" label="244684" color="#297b8e"/>
+              <item alpha="255" value="256336" label="256336" color="#27808e"/>
+              <item alpha="255" value="267987" label="267987" color="#25848e"/>
+              <item alpha="255" value="279638" label="279638" color="#23898e"/>
+              <item alpha="255" value="291290" label="291290" color="#218e8d"/>
+              <item alpha="255" value="302942" label="302942" color="#20928c"/>
+              <item alpha="255" value="314594" label="314594" color="#1f978b"/>
+              <item alpha="255" value="326245" label="326245" color="#1e9c89"/>
+              <item alpha="255" value="337896" label="337896" color="#1fa188"/>
+              <item alpha="255" value="349548" label="349548" color="#21a585"/>
+              <item alpha="255" value="361200" label="361200" color="#24aa83"/>
+              <item alpha="255" value="372851" label="372851" color="#28ae80"/>
+              <item alpha="255" value="384503" label="384503" color="#2eb37c"/>
               <item alpha="255" value="396155" label="396155" color="#35b779"/>
-              <item alpha="255" value="462180" label="462180" color="#6cce59"/>
-              <item alpha="255" value="528206" label="528206" color="#b5de2c"/>
+              <item alpha="255" value="407807" label="407807" color="#3dbc74"/>
+              <item alpha="255" value="419458" label="419458" color="#46c06f"/>
+              <item alpha="255" value="431109" label="431109" color="#50c46a"/>
+              <item alpha="255" value="442761" label="442761" color="#5ac864"/>
+              <item alpha="255" value="454413" label="454413" color="#65cb5e"/>
+              <item alpha="255" value="466064" label="466064" color="#70cf57"/>
+              <item alpha="255" value="477716" label="477716" color="#7cd250"/>
+              <item alpha="255" value="489367" label="489367" color="#89d548"/>
+              <item alpha="255" value="501019" label="501019" color="#95d840"/>
+              <item alpha="255" value="512671" label="512671" color="#a2da37"/>
+              <item alpha="255" value="524322" label="524322" color="#b0dd2f"/>
+              <item alpha="255" value="535974" label="535974" color="#bddf26"/>
+              <item alpha="255" value="547626" label="547626" color="#cae11f"/>
+              <item alpha="255" value="559277" label="559277" color="#d8e219"/>
+              <item alpha="255" value="570929" label="570929" color="#e5e419"/>
+              <item alpha="255" value="582580" label="582580" color="#f1e51d"/>
               <item alpha="255" value="594232" label="594232" color="#fde725"/>
             </colorrampshader>
           </rastershader>
@@ -10328,6 +10787,108 @@ def my_form_open(dialog, layer, feature):
               <item alpha="255" value="33" label="33" color="#5dc962"/>
               <item alpha="255" value="38" label="38" color="#abdc32"/>
               <item alpha="255" value="43" label="43" color="#fde725"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>woodprod_average20161109104208734</id>
+      <datasource>../../data/processed/features/datadryad/forest_production_europe/woodprod_average.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>woodprod_average</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="2.5" classificationMinMaxOrigin="MinMaxFullExtentExact" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0" color="#440154"/>
+              <item alpha="255" value="0.049" label="0.049" color="#46085c"/>
+              <item alpha="255" value="0.098" label="0.098" color="#471063"/>
+              <item alpha="255" value="0.147" label="0.147" color="#481769"/>
+              <item alpha="255" value="0.196" label="0.196" color="#481d6f"/>
+              <item alpha="255" value="0.245" label="0.245" color="#482475"/>
+              <item alpha="255" value="0.294" label="0.294" color="#472a7a"/>
+              <item alpha="255" value="0.343" label="0.343" color="#46307e"/>
+              <item alpha="255" value="0.392" label="0.392" color="#453781"/>
+              <item alpha="255" value="0.441" label="0.441" color="#433d84"/>
+              <item alpha="255" value="0.49" label="0.49" color="#414287"/>
+              <item alpha="255" value="0.539" label="0.539" color="#3f4889"/>
+              <item alpha="255" value="0.588" label="0.588" color="#3d4e8a"/>
+              <item alpha="255" value="0.637" label="0.637" color="#3a538b"/>
+              <item alpha="255" value="0.686" label="0.686" color="#38598c"/>
+              <item alpha="255" value="0.735" label="0.735" color="#355e8d"/>
+              <item alpha="255" value="0.784" label="0.784" color="#33638d"/>
+              <item alpha="255" value="0.833" label="0.833" color="#31688e"/>
+              <item alpha="255" value="0.882" label="0.882" color="#2e6d8e"/>
+              <item alpha="255" value="0.931" label="0.931" color="#2c718e"/>
+              <item alpha="255" value="0.98" label="0.98" color="#2a768e"/>
+              <item alpha="255" value="1.03" label="1.03" color="#297b8e"/>
+              <item alpha="255" value="1.08" label="1.08" color="#27808e"/>
+              <item alpha="255" value="1.13" label="1.13" color="#25848e"/>
+              <item alpha="255" value="1.18" label="1.18" color="#23898e"/>
+              <item alpha="255" value="1.23" label="1.23" color="#218e8d"/>
+              <item alpha="255" value="1.27" label="1.27" color="#20928c"/>
+              <item alpha="255" value="1.32" label="1.32" color="#1f978b"/>
+              <item alpha="255" value="1.37" label="1.37" color="#1e9c89"/>
+              <item alpha="255" value="1.42" label="1.42" color="#1fa188"/>
+              <item alpha="255" value="1.47" label="1.47" color="#21a585"/>
+              <item alpha="255" value="1.52" label="1.52" color="#24aa83"/>
+              <item alpha="255" value="1.57" label="1.57" color="#28ae80"/>
+              <item alpha="255" value="1.62" label="1.62" color="#2eb37c"/>
+              <item alpha="255" value="1.67" label="1.67" color="#35b779"/>
+              <item alpha="255" value="1.72" label="1.72" color="#3dbc74"/>
+              <item alpha="255" value="1.76" label="1.76" color="#46c06f"/>
+              <item alpha="255" value="1.81" label="1.81" color="#50c46a"/>
+              <item alpha="255" value="1.86" label="1.86" color="#5ac864"/>
+              <item alpha="255" value="1.91" label="1.91" color="#65cb5e"/>
+              <item alpha="255" value="1.96" label="1.96" color="#70cf57"/>
+              <item alpha="255" value="2.01" label="2.01" color="#7cd250"/>
+              <item alpha="255" value="2.06" label="2.06" color="#89d548"/>
+              <item alpha="255" value="2.11" label="2.11" color="#95d840"/>
+              <item alpha="255" value="2.16" label="2.16" color="#a2da37"/>
+              <item alpha="255" value="2.21" label="2.21" color="#b0dd2f"/>
+              <item alpha="255" value="2.25" label="2.25" color="#bddf26"/>
+              <item alpha="255" value="2.3" label="2.3" color="#cae11f"/>
+              <item alpha="255" value="2.35" label="2.35" color="#d8e219"/>
+              <item alpha="255" value="2.4" label="2.4" color="#e5e419"/>
+              <item alpha="255" value="2.45" label="2.45" color="#f1e51d"/>
+              <item alpha="255" value="2.5" label="2.5" color="#fde725"/>
             </colorrampshader>
           </rastershader>
         </rasterrenderer>
