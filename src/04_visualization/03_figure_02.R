@@ -58,6 +58,8 @@ labels[7] <- gsub(" - ", " %", labels[7])
 
 # Make plots --------------------------------------------------------------
 
+# ES
+
 rwr_rastermap_es <- tm_eur +
   tm_shape(rwr_raster_es, bbox = project_bbox, is.master = TRUE) +
   tm_raster(palette = colors, labels = labels,
@@ -67,6 +69,26 @@ rwr_rastermap_es <- tm_eur +
   tm_borders(col = "black", lwd = 0.3) +
   tm_format_Europe(title = "A", title.size = title_size)
 
+zon_rastermap_es <- tm_eur +
+  tm_shape(zon_raster_es, bbox = project_bbox, is.master = TRUE) +
+  tm_raster(palette = colors, labels = labels,
+            breaks = breaks, auto.palette.mapping = FALSE,
+            legend.show = FALSE) +
+  tm_shape(Europe) +
+  tm_borders(col = "black", lwd = 0.3) +
+  tm_format_Europe(title = "B", title.size = title_size)
+
+ilp_rastermap_es <- tm_eur +
+  tm_shape(ilp_raster_es, bbox = project_bbox, is.master = TRUE) +
+  tm_raster(palette = colors, labels = labels,
+            breaks = breaks, auto.palette.mapping = FALSE,
+            legend.show = FALSE) +
+  tm_shape(Europe) +
+  tm_borders(col = "black", lwd = 0.3) +
+  tm_format_Europe(title = "C", title.size = title_size)
+
+# ALL
+
 rwr_rastermap_all <- tm_eur +
   tm_shape(rwr_raster_all, bbox = project_bbox, is.master = TRUE) +
     tm_raster(palette = colors, labels = labels,
@@ -74,7 +96,7 @@ rwr_rastermap_all <- tm_eur +
               legend.show = FALSE) +
   tm_shape(Europe) +
     tm_borders(col = "black", lwd = 0.3) +
-  tm_format_Europe(title = "B", title.size = title_size)
+  tm_format_Europe(title = "D", title.size = title_size)
 
 rwr_rastermap_legend <- tm_eur +
   tm_shape(rwr_raster_all, bbox = project_bbox, is.master = TRUE) +
@@ -83,24 +105,6 @@ rwr_rastermap_legend <- tm_eur +
             auto.palette.mapping = FALSE,
             legend.show = TRUE) +
   tm_format_Europe(legend.only = TRUE, legend.position = c("left", "center"))
-
-rwr_rastermap_bd <- tm_eur +
-  tm_shape(rwr_raster_bd, bbox = project_bbox, is.master = TRUE) +
-  tm_raster(palette = colors, labels = labels,
-            breaks = breaks, auto.palette.mapping = FALSE,
-            legend.show = FALSE) +
-  tm_shape(Europe) +
-  tm_borders(col = "black", lwd = 0.3) +
-  tm_format_Europe(title = "C", title.size = title_size)
-
-zon_rastermap_es <- tm_eur +
-  tm_shape(zon_raster_es, bbox = project_bbox, is.master = TRUE) +
-  tm_raster(palette = colors, labels = labels,
-            breaks = breaks, auto.palette.mapping = FALSE,
-            legend.show = FALSE) +
-  tm_shape(Europe) +
-  tm_borders(col = "black", lwd = 0.3) +
-  tm_format_Europe(title = "D", title.size = title_size)
 
 zon_rastermap_all <- tm_eur +
   tm_shape(zon_raster_all, bbox = project_bbox, is.master = TRUE) +
@@ -111,8 +115,8 @@ zon_rastermap_all <- tm_eur +
   tm_borders(col = "black", lwd = 0.3) +
   tm_format_Europe(title = "E", title.size = title_size)
 
-zon_rastermap_bd <- tm_eur +
-  tm_shape(zon_raster_bd, bbox = project_bbox, is.master = TRUE) +
+ilp_rastermap_all <- tm_eur +
+  tm_shape(ilp_raster_all, bbox = project_bbox, is.master = TRUE) +
   tm_raster(palette = colors, labels = labels,
             breaks = breaks, auto.palette.mapping = FALSE,
             legend.show = FALSE) +
@@ -120,8 +124,10 @@ zon_rastermap_bd <- tm_eur +
   tm_borders(col = "black", lwd = 0.3) +
   tm_format_Europe(title = "F", title.size = title_size)
 
-ilp_rastermap_es <- tm_eur +
-  tm_shape(ilp_raster_es, bbox = project_bbox, is.master = TRUE) +
+# BD
+
+rwr_rastermap_bd <- tm_eur +
+  tm_shape(rwr_raster_bd, bbox = project_bbox, is.master = TRUE) +
   tm_raster(palette = colors, labels = labels,
             breaks = breaks, auto.palette.mapping = FALSE,
             legend.show = FALSE) +
@@ -129,8 +135,8 @@ ilp_rastermap_es <- tm_eur +
   tm_borders(col = "black", lwd = 0.3) +
   tm_format_Europe(title = "G", title.size = title_size)
 
-ilp_rastermap_all <- tm_eur +
-  tm_shape(ilp_raster_all, bbox = project_bbox, is.master = TRUE) +
+zon_rastermap_bd <- tm_eur +
+  tm_shape(zon_raster_bd, bbox = project_bbox, is.master = TRUE) +
   tm_raster(palette = colors, labels = labels,
             breaks = breaks, auto.palette.mapping = FALSE,
             legend.show = FALSE) +
@@ -156,13 +162,13 @@ png(file_main, width = 1800, height = 1800)
 grid.newpage()
 pushViewport(viewport(layout = grid.layout(3,3)))
 print(rwr_rastermap_es, vp = viewport(layout.pos.row = 1, layout.pos.col = 1))
-print(rwr_rastermap_all, vp = viewport(layout.pos.row = 1, layout.pos.col = 2))
-print(rwr_rastermap_bd, vp = viewport(layout.pos.row = 1, layout.pos.col = 3))
-print(zon_rastermap_es, vp = viewport(layout.pos.row = 2, layout.pos.col = 1))
+print(zon_rastermap_es, vp = viewport(layout.pos.row = 1, layout.pos.col = 2))
+print(ilp_rastermap_es, vp = viewport(layout.pos.row = 1, layout.pos.col = 3))
+print(rwr_rastermap_all, vp = viewport(layout.pos.row = 2, layout.pos.col = 1))
 print(zon_rastermap_all, vp = viewport(layout.pos.row = 2, layout.pos.col = 2))
-print(zon_rastermap_bd, vp = viewport(layout.pos.row = 2, layout.pos.col = 3))
-print(ilp_rastermap_es, vp = viewport(layout.pos.row = 3, layout.pos.col = 1))
-print(ilp_rastermap_all, vp = viewport(layout.pos.row = 3, layout.pos.col = 2))
+print(ilp_rastermap_all, vp = viewport(layout.pos.row = 2, layout.pos.col = 3))
+print(zon_rastermap_bd, vp = viewport(layout.pos.row = 3, layout.pos.col = 1))
+print(rwr_rastermap_bd, vp = viewport(layout.pos.row = 3, layout.pos.col = 2))
 print(ilp_rastermap_bd, vp = viewport(layout.pos.row = 3, layout.pos.col = 3))
 dev.off()
 
