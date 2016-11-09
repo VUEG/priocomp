@@ -138,10 +138,18 @@ x_scale <- scale_x_continuous(breaks = seq(0, 1, 0.2),
                               labels = paste(100 * seq(1, 0, -0.2), "%"))
 y_scale <- scale_y_continuous(breaks = seq(0, 1, 0.2),
                               labels = paste(100 * seq(0, 1, 0.2), "%"))
+# Define x-axis vlines that are used to link to Fig 5
+vlines_x <- c(0.75, 0.9, 0.98)
+vlines_labs <- c("25%", "10%", "2%")
+vlines_labs_x <- vlines_x + 0.03
+vlines_labs_y <- 1.0
 
 p1 <- ggplot2::ggplot(datag_perf, aes(x = pr_lost, y = ave_pr,
                                           color = variant,
                                           linetype = variant)) +
+  geom_vline(xintercept = vlines_x[2], alpha = 0.5, linetype = 3) +
+  annotate("text", x = vlines_labs_x[2], y = vlines_labs_y,
+           label = vlines_labs[2], size = 3) +
   geom_line(size = 0.9) + xlab(x_lab) +
   scale_linetype_manual("", values = rep(1:3, 2)) +
   scale_color_manual("", values =  rev(rep(viridis(2, end = 0.7), 3, each = 3))) +
@@ -154,6 +162,9 @@ p1 <- ggplot2::ggplot(datag_perf, aes(x = pr_lost, y = ave_pr,
 p2 <- ggplot2::ggplot(method_perf, aes(x = pr_lost, y = ave_pr,
                                       color = variant,
                                       linetype = variant)) +
+  geom_vline(xintercept = vlines_x, alpha = 0.5, linetype = 3) +
+  annotate("text", x = vlines_labs_x, y = vlines_labs_y,
+           label = vlines_labs, size = 3) +
   geom_line(size = 1) + x_scale + y_scale + xlab(x_lab) + ylab("") +
   scale_linetype_manual("", values = rep(1:3, 3)) +
   scale_color_manual("", values =  rev(rep(viridis(3, end = 0.9), 1, each = 3))) +
@@ -162,17 +173,33 @@ p2 <- ggplot2::ggplot(method_perf, aes(x = pr_lost, y = ave_pr,
         legend.justification = c(0.5, 0),
         legend.key.width = unit(1,"cm"))
 
-stats <- metho_perf %>%
-  group_by(variant) %>%
-  summarize(
-    mean_pr = mean(ave_pr),
-    median_pr = median(ave_pr)
-  ) %>%
-  arrange(variant)
-
 fig3 <- gridExtra::grid.arrange(p1, p2, ncol = 2, nrow = 1)
 
 # Save Figure -------------------------------------------------------------
 
 ggsave("reports/figures/11_figure_04.png", fig3, width = 12, height = 6)
 
+# Extra -------------------------------------------------------------------
+
+# Performance levels for the top 25%, 10% and 2% of the solution
+
+get_perf_level <- function(data, variant_str, x) {
+  if (!variant_str %in% unique(data$variant)) {
+    stop("Bad variant name")
+  }
+  perf_data <- data %>%
+    dplyr::filter(variant == variant_str) %>%
+    dplyr::filter(pr_lost >= x) %>%
+    dplyr::arrange(pr_lost) %>%
+    dplyr::slice(1) %>%
+    dplyr::mutate(level = x)
+  return(perf_data)
+}
+
+bd_only_top10 <- get_perf_level(v08_mean, "BD only", 0.9)
+bdes_top10 <- get_perf_level(v04_grp_mean, "BD (rank ES+BD)", 0.9)
+bd_esonly_top10 <- get_perf_level(v11_mean, "BD only (rank ES only)", 0.9)
+
+es_only_top10 <- get_perf_level(v06_mean, "ES only", 0.9)
+esbd_top10 <- get_perf_level(v04_grp_mean, "ES (rank BD+ES)", 0.9)
+es_bdonly_top10 <- get_perf_level(v12_mean, "ES only (rank BD only)", 0.9)
