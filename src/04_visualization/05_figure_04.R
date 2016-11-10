@@ -90,7 +90,7 @@ p1 <- ggplot2::ggplot(datag_perf, aes(x = pr_lost, y = ave_pr,
   scale_linetype_manual("", values = rep(1:3, 2)) +
   scale_color_manual("", values =  rev(rep(viridis(2, end = 0.7), 3, each = 3))) +
   x_scale + y_scale + ylab("Average feature distribution covered\n") +
-  ggtitle("A") + theme_minimal() +
+  theme_minimal() +
   theme(legend.position = c(0.25, 0.075),
         legend.justification = c(0.5, 0),
         legend.key.width = unit(1,"cm"))
