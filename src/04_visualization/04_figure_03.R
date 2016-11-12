@@ -35,7 +35,7 @@ mean_labels[,2] <- paste(mean_labels[,2], "%")
 mean_labels <- apply(mean_labels, 1, paste, collapse = " - ")
 
 tm_mean_top <- tm_eur + tm_shape(nuts2_var, is.master = TRUE) +
-  tm_polygons("agg_mean", title = "Mean top fraction", style = "fixed",
+  tm_polygons("agg_mean", title = "Mean best X% of \nthe solutions", style = "fixed",
               palette = mean_colors, labels = mean_labels, breaks = mean_breaks,
               border.col = "lightgrey", lwd = 0.3,
               auto.palette.mapping = FALSE) +
@@ -47,14 +47,14 @@ tm_mean_top <- tm_eur + tm_shape(nuts2_var, is.master = TRUE) +
 
 sd_colors <- rev(RColorBrewer::brewer.pal(7, "RdYlBu"))
 sd_breaks <- seq(0, 0.35, 0.05)
-sd_labels <- format(sd_breaks * 100, nsmall = 0)
+sd_labels <- format(sd_breaks, nsmall = 0)
 sd_labels <- cbind(sd_labels[1:(length(sd_labels) - 1)],
                      gsub(" ", "", sd_labels[2:length(sd_labels)]))
-sd_labels[,2] <- paste(sd_labels[,2], "%")
+sd_labels[,2] <- sd_labels[,2]
 sd_labels <- apply(sd_labels, 1, paste, collapse = " - ")
 
 tm_sd_top <- tm_eur + tm_shape(nuts2_var, is.master = TRUE) +
-  tm_polygons("agg_std", title = "SD top fraction",
+  tm_polygons("agg_std", title = "SD mean priority rank",
               palette = sd_colors, labels = sd_labels, breaks = sd_breaks,
               border.col = "lightgrey", lwd = 0.3,
               auto.palette.mapping = FALSE) +
