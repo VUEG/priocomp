@@ -56,9 +56,9 @@ grid_arrange_shared_legend <- function(..., ncol = length(list(...)),
 
   gl <- lapply(plots, function(x) x + theme(legend.position = "none"))
   # Insert legend into the list of grobs
-  gll <- gl[1:3]
-  gll[[4]] <- legend
-  gll[5:9] <- gl[5:9]
+  gll <- gl[1:5]
+  gll[[6]] <- legend
+  gll[7:9] <- gl[7:9]
   gl <- c(gl, ncol = ncol, nrow = nrow)
   combined <- do.call(arrangeGrob, gll)
   return(ggdraw(combined))
@@ -135,16 +135,17 @@ plot_stat <- function(x, title, ...) {
     sub_p <- ggplot(xx , aes(x = f1_type, y = f2_type, fill = value)) +
       geom_tile(color = "white", size = 0.1) +
       geom_text(aes(label = sprintf("%0.2f", round(value, digits = 2))),
-                color = "black", size = 3) +
+                color = "black", size = 4) +
       scale_fill_viridis(name = title, label = comma,
                          limits = c(min_lim, max_lim),
                          breaks = seq(min_lim, max_lim, by = step)) +
-      coord_equal() + coord_flip() +
+      coord_equal() +
       labs(x = unique(xx$f1_method), y = unique(xx$f2_method)) +
       theme_tufte(base_family = "Helvetica") +
       theme(title = element_blank(),
             axis.ticks = element_blank(),
             axis.text = element_text(size = 7),
+            legend.text = element_text(size = 12),
             plot.margin = margins)
 
     if (!axis_titles) {
@@ -174,10 +175,10 @@ plot_stat <- function(x, title, ...) {
   ilp_ilp_p <- create_subplot(ilp_ilp_stat, axis_titles = FALSE,
                               axis_text = FALSE, ...)
 
-  p <- grid_arrange_shared_legend(rwr_rwr_p, rwr_zon_p, rwr_ilp_p,
-                                  zon_rwr_p, zon_zon_p, zon_ilp_p,
-                                  ilp_rwr_p, ilp_zon_p, ilp_ilp_p,
-                                  ncol = 3, nrow = 3, position = "left")
+  p <- grid_arrange_shared_legend(rwr_ilp_p, rwr_zon_p, rwr_rwr_p,
+                                  zon_ilp_p, zon_zon_p, zon_rwr_p,
+                                  ilp_ilp_p, ilp_zon_p, ilp_rwr_p,
+                                  ncol = 3, nrow = 3, position = "right")
   return(p)
 }
 
@@ -245,7 +246,7 @@ all_stats <- all_stats %>%
   dplyr::mutate(f1_type = gsub("ALL_WGT", "ALL", f1_type),
                 f2_type = gsub("ALL_WGT", "ALL", f2_type)) %>%
   # Convert f1_type and f2_type to factors
-  dplyr::mutate(f1_type = factor(f1_type, levels = c("BD", "ES", "ALL"), ordered = TRUE),
+  dplyr::mutate(f1_type = factor(f1_type, levels = c("ALL", "ES", "BD"), ordered = TRUE),
                 f2_type = factor(f2_type, levels = c("ALL", "ES", "BD"), ordered = TRUE)) %>%
   dplyr::arrange(f1_method, f1_type, f2_method, f2_type)
 
@@ -261,7 +262,7 @@ p2 <- plot_stat(cmcs, title = "MCS")
 p3 <- plot_stat(jac_01, title = "J10")
 p4 <- plot_stat(jac_09, title = "J90")
 
-p_combined <- grid.arrange(p1, p2, p3, p4, nrow = 2, ncol = 2)
+#p_combined <- grid.arrange(p1, p2, p3, p4, nrow = 2, ncol = 2)
 
 # Save plots --------------------------------------------------------------
 
