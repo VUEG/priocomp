@@ -41,11 +41,11 @@ v04_grp_mean <- dplyr::bind_rows(v04_es_mean, v04_bd_mean)
 # variants
 v06_mean <- v06_crvs %>%
   dplyr::select(pr_lost, ave_pr) %>%
-  dplyr::mutate(variant = "ES only")
+  dplyr::mutate(variant = "ES")
 
 v08_mean <- v08_crvs %>%
   dplyr::select(pr_lost, ave_pr) %>%
-  dplyr::mutate(variant = "BD only")
+  dplyr::mutate(variant = "BD")
 
 # Pre-load ----------------------------------------------------------------
 
@@ -55,20 +55,20 @@ v08_mean <- v08_crvs %>%
 v11_crvs <- zonator::read_curves("analyses/zonation/priocomp/11_load_abf_es_bd/11_load_abf_es_bd_out/11_load_abf_es_bd.curves.txt")
 v11_mean <- v11_crvs %>%
   dplyr::select(pr_lost, ave_pr) %>%
-  dplyr::mutate(variant = "BD only (rank ES only)")
+  dplyr::mutate(variant = "BD (rank ES)")
 
 v12_crvs <- zonator::read_curves("analyses/zonation/priocomp/12_load_abf_bd_es/12_load_abf_bd_es_out/12_load_abf_bd_es.curves.txt")
 v12_mean <- v12_crvs %>%
   dplyr::select(pr_lost, ave_pr) %>%
-  dplyr::mutate(variant = "ES only (rank BD only)")
+  dplyr::mutate(variant = "ES (rank BD)")
 
 
 # Combine data ------------------------------------------------------------
 
 # Between data groups
 
-v04_grp_mean$variant <- gsub("ZON_BD", "BD (rank ES+BD)", v04_grp_mean$variant)
-v04_grp_mean$variant <- gsub("ZON_ES", "ES (rank BD+ES)", v04_grp_mean$variant)
+v04_grp_mean$variant <- gsub("ZON_BD", "BD (rank ALL)", v04_grp_mean$variant)
+v04_grp_mean$variant <- gsub("ZON_ES", "ES (rank ALL)", v04_grp_mean$variant)
 
 datag_perf <- dplyr::bind_rows(list(v04_grp_mean, v06_mean, v08_mean,
                                     v11_mean, v12_mean))
@@ -116,10 +116,10 @@ get_perf_level <- function(data, variant_str, x) {
   return(perf_data)
 }
 
-bd_only_top10 <- get_perf_level(v08_mean, "BD only", 0.9)
-bdes_top10 <- get_perf_level(v04_grp_mean, "BD (rank ES+BD)", 0.9)
-bd_esonly_top10 <- get_perf_level(v11_mean, "BD only (rank ES only)", 0.9)
+bd_only_top10 <- get_perf_level(v08_mean, "BD", 0.9)
+bdes_top10 <- get_perf_level(v04_grp_mean, "BD (rank ALL)", 0.9)
+bd_esonly_top10 <- get_perf_level(v11_mean, "BD (rank ES)", 0.9)
 
-es_only_top10 <- get_perf_level(v06_mean, "ES only", 0.9)
-esbd_top10 <- get_perf_level(v04_grp_mean, "ES (rank BD+ES)", 0.9)
-es_bdonly_top10 <- get_perf_level(v12_mean, "ES only (rank BD only)", 0.9)
+es_only_top10 <- get_perf_level(v06_mean, "ES", 0.9)
+esbd_top10 <- get_perf_level(v04_grp_mean, "ES (rank ALL)", 0.9)
+es_bdonly_top10 <- get_perf_level(v12_mean, "ES (rank BD)", 0.9)
