@@ -162,14 +162,17 @@ file_main <- "reports/figures/04_figure_02_main.png"
 png(file_main, width = 1800, height = 1800)
 grid.newpage()
 pushViewport(viewport(layout = grid.layout(3,3)))
+
 print(rwr_rastermap_all, vp = viewport(layout.pos.row = 1, layout.pos.col = 1))
 print(zon_rastermap_all, vp = viewport(layout.pos.row = 1, layout.pos.col = 2))
 print(ilp_rastermap_all, vp = viewport(layout.pos.row = 1, layout.pos.col = 3))
+
 print(rwr_rastermap_es, vp = viewport(layout.pos.row = 2, layout.pos.col = 1))
 print(zon_rastermap_es, vp = viewport(layout.pos.row = 2, layout.pos.col = 2))
 print(ilp_rastermap_es, vp = viewport(layout.pos.row = 2, layout.pos.col = 3))
-print(zon_rastermap_bd, vp = viewport(layout.pos.row = 3, layout.pos.col = 1))
-print(rwr_rastermap_bd, vp = viewport(layout.pos.row = 3, layout.pos.col = 2))
+
+print(rwr_rastermap_bd, vp = viewport(layout.pos.row = 3, layout.pos.col = 1))
+print(zon_rastermap_bd, vp = viewport(layout.pos.row = 3, layout.pos.col = 2))
 print(ilp_rastermap_bd, vp = viewport(layout.pos.row = 3, layout.pos.col = 3))
 dev.off()
 
