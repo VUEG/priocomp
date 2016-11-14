@@ -24,7 +24,7 @@
       </layer-tree-group>
       <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="provide">
         <customproperties/>
-        <layer-tree-layer expanded="0" checked="Qt::Checked" id="carbon_sequestration20161026153021690" name="carbon_sequestration">
+        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="carbon_sequestration20161026153021690" name="carbon_sequestration">
           <customproperties/>
         </layer-tree-layer>
         <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="cultural_landscape_index_agro20161107094747173" name="cultural_landscape_index_agro">
@@ -42,7 +42,7 @@
         <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="nature_tourism20160715102902464" name="nature_tourism">
           <customproperties/>
         </layer-tree-layer>
-        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="pollination_flows20161107095027666" name="pollination_flows">
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="pollination_flows20161107095027666" name="pollination_flows">
           <customproperties/>
         </layer-tree-layer>
         <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="species_richness_vascular_plants20161107095054521" name="species_richness_vascular_plants">
@@ -241,10 +241,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>3226229.64544821251183748</xmin>
-      <ymin>2400795.65418585669249296</ymin>
-      <xmax>5036800.89987009391188622</xmax>
-      <ymax>4459434.17477724421769381</ymax>
+      <xmin>3332793.94811914395540953</xmin>
+      <ymin>2281430.5061222342774272</ymin>
+      <xmax>5143365.20254100207239389</xmax>
+      <ymax>4340069.02671361342072487</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -297,8 +297,8 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="variation20160919145156034"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="07_caz_bd_rank_compressed20160627133346369"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="cultural_landscape_index_forest20160714120655387"/>
-      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="03_caz_wgt_nwout120160617085900595"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100001" srcDatumTransform="-1" destDatumTransform="-1" layerid="06_abf_es_nwout320161109103644520"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="03_caz_wgt_nwout120160617085900595"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="carbon_sequestration20161026153021690"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="lagopus_lagopus20160802122959777"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="budget_level_0_0520160909123307262"/>
@@ -428,9 +428,9 @@
         </legendlayer>
       </legendgroup>
       <legendgroup open="true" checked="Qt::PartiallyChecked" name="provide">
-        <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="carbon_sequestration" showFeatureCount="0">
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="carbon_sequestration" showFeatureCount="0">
           <filegroup open="false" hidden="false">
-            <legendlayerfile isInOverview="0" layerid="carbon_sequestration20161026153021690" visible="1"/>
+            <legendlayerfile isInOverview="0" layerid="carbon_sequestration20161026153021690" visible="0"/>
           </filegroup>
         </legendlayer>
         <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="cultural_landscape_index_agro" showFeatureCount="0">
@@ -458,9 +458,9 @@
             <legendlayerfile isInOverview="0" layerid="nature_tourism20160715102902464" visible="0"/>
           </filegroup>
         </legendlayer>
-        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="pollination_flows" showFeatureCount="0">
-          <filegroup open="false" hidden="false">
-            <legendlayerfile isInOverview="0" layerid="pollination_flows20161107095027666" visible="0"/>
+        <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="pollination_flows" showFeatureCount="0">
+          <filegroup open="true" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="pollination_flows20161107095027666" visible="1"/>
           </filegroup>
         </legendlayer>
         <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="species_richness_vascular_plants" showFeatureCount="0">
@@ -8336,11 +8336,11 @@ def my_form_open(dialog, layer, feature):
         <map-layer-style name=""/>
       </map-layer-style-manager>
       <pipe>
-        <rasterrenderer opacity="1" alphaBand="0" classificationMax="100" classificationMinMaxOrigin="CumulativeCutFullExtentEstimated" band="1" classificationMin="0" type="singlebandpseudocolor">
+        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="100" classificationMinMaxOrigin="CumulativeCutFullExtentEstimated" band="1" classificationMin="0" type="singlebandpseudocolor">
           <rasterTransparency/>
           <rastershader>
             <colorrampshader colorRampType="INTERPOLATED" clip="0">
-              <item alpha="255" value="0" label="0" color="#440154"/>
+              <item alpha="0" value="0" label="0" color="#440154"/>
               <item alpha="255" value="10" label="10" color="#482475"/>
               <item alpha="255" value="20" label="20" color="#404387"/>
               <item alpha="255" value="30" label="30" color="#345f8d"/>
