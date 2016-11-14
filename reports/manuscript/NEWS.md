@@ -1,9 +1,20 @@
+## 0.5.3 (2016-11-14)
+
+
+
++ Re-organize abstract for DDI
++ ​
+
+
+
 ## 0.5.2 (2016-11-07)
 
 + Fix several bugs in RWR, ILP and in the comparison code
 + Re-make all figures
-+ Add new Figure 5
-+ ​
++ Add new Figure 6
++ Add sections:
+  + 3.1
+  + 3.2
 
 ## 0.5.1 (2016-10-31)
 
@@ -12,8 +23,6 @@
   + 2.4 
   + 2.5
 + Fig 1 updated
-
-
 
 ## 0.5.0 (2016-10-21)
 
