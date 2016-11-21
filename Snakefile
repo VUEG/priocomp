@@ -2,6 +2,7 @@ import fiona
 import geopandas as gpd
 import gdal
 import numpy as np
+import numpy.ma as ma
 import os
 import pandas as pd
 import pdb
@@ -962,3 +963,64 @@ rule test_ilp:
         gurobi.prioritize_gurobi(input.spp_files, output[0], logger=llogger,
                                  ol_normalize=True, save_intermediate=True,
                                  verbose=True)
+
+rule test_ilp_hierarchy:
+    # Rule to test if the solutions produced in the hierarchical ILP
+    # optimization are indeed completely nested. In a set of
+    # [f+x, ...,  f+nx] where f is 0,  n is a the number of consequtive
+    # steps - 1, and x is 1 / n, make sure that the solution at f+(n-1) is
+    # always a complete spatial subset of f+n.
+    input:
+        "analyses/ILP/ilp_all_weights"
+    output:
+        "analyses/ILP/ilp_all_weights/check.txt"
+    log:
+        "logs/test_ILP_hierarchy.log"
+    message:
+        "Testing ILP hierarchy..."
+    run:
+        llogger = utils.get_local_logger("test_ilp_hierarchy", log[0])
+        # What's the file prefix?
+        file_prefix = "budget_level_"
+        # Define step used
+        step = 0.02
+        fractions = np.linspace(step, 1.0, 1/step)[:-1]
+        # Genrate names for individual solutions
+        solution_files = ["{0}{1}.tif".format(file_prefix, str(round(frac, 2)).replace(".", "_")) for frac in fractions]
+        n_rasters = len(solution_files)
+
+        previous_selected = None
+        current_selected = None
+        # Store names of non-subset rasters
+        non_subsets = []
+
+        for i, solution_file in enumerate(reversed(solution_files)):
+            input_raster = os.path.join(input[0], solution_file)
+            prefix = utils.get_iteration_prefix(i+1, n_rasters)
+            llogger.info("{0} Processing raster {1}".format(prefix,
+                                                            input_raster))
+            with rasterio.open(input_raster) as in_raster:
+                in_src = in_raster.read(1, masked=True)
+
+                if i == 0:
+                    # Store the selected elements. Original in_src has three
+                    # values: [0, 1, --]. Fill masked array's masked values
+                    # with 0's. Now 1s are selected unints, 0s either
+                    # unselected units or NoData.
+                    previous_selected = ma.filled(in_src, 0) == 1
+                else:
+                    # Get the current selected (see comment above)
+                    current_selected = ma.filled(in_src, 0) == 1
+                    # See if the current selected is a true subset of the
+                    # previous
+                    #import pdb; pdb.set_trace()
+                    if not np.all(previous_selected[current_selected]):
+                        llogger.warning("{0} is not a subset of {1}".format(solution_files[i],
+                                                                            solution_files[i-1]))
+                        non_subsets.append(solution_files[i])
+
+                    previous_selected = current_selected
+
+        with open(output[0], 'w') as file_handler:
+            for item in non_subsets:
+                file_handler.write("{}\n".format(item))
