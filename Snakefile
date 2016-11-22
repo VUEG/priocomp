@@ -8,6 +8,7 @@ import pandas as pd
 import pdb
 import pypandoc
 import rasterio
+import rasterio.tools.mask
 import rasterstats
 import sys
 from importlib.machinery import SourceFileLoader
@@ -909,31 +910,54 @@ rule generate_table_S1:
 
 rule generate_test_data:
     input:
-        features=rules.harmonize_data.output.harmonized,
+        features=UDR_SRC_DATASETS,
         clip_shp="tests/scratch/data/nl_clipper.shp"
-    output:
-        [os.path.join("tests/scratch/data", os.path.basename(file_path)) for file_path in rules.harmonize_data.output.harmonized]
     run:
         llogger = utils.get_local_logger("clip_test_data")
         nsteps = len(input.features)
-        bleft = 3944600
-        bbottom = 3226043
-        bright = 4076370
-        btop = 3379897
-        bounds = "{0} {1} {2} {3}".format(bleft, bbottom, bright, btop)
-        for i, s_raster in enumerate(input.features):
-            # Target raster
-            clipped_raster = output[i]
-            prefix = utils.get_iteration_prefix(i+1, nsteps)
 
-            llogger.info("{0} Clipping dataset {1}".format(prefix, s_raster))
-            llogger.debug("{0} Target dataset {1}".format(prefix, clipped_raster))
-            # Clip data. NOTE: UDR species rasters do not have a SRS defined,
-            # but they are in EPSG:3035
-            cmd_str = ('gdalwarp -s_srs EPSG:3035 -t_srs EPSG:3035 -te {bounds} ' +
-                      '-cutline {0} {1} {2} -co COMPRESS=DEFLATE'.format(input.clip_shp, s_raster, clipped_raster))
-            for line in utils.process_stdout(shell(cmd_str, read=True), prefix=prefix):
-                llogger.debug(line)
+        # Read in the clipping shapefile
+        with fiona.open(input.clip_shp, "r") as shapefile:
+            features = [feature["geometry"] for feature in shapefile]
+
+            for i, s_raster in enumerate(input.features):
+                prefix = utils.get_iteration_prefix(i+1, nsteps)
+
+                llogger.info("{0} Clipping dataset {1}".format(prefix, s_raster))
+                # Clip data. NOTE: UDR species rasters do not have a SRS defined,
+                # but they are in EPSG:3035
+                target_crs = rasterio.crs.CRS({'init':'epsg:3035'})
+                with rasterio.open(s_raster) as src:
+                    nodata_value = src.nodata
+                    src_data = src.read(1, masked=True)
+
+                    out_image, out_transform = rasterio.tools.mask.mask(src, features,
+                                                                        crop=True)
+                    # Replace NoData with 0s
+                    out_image_src = out_image.copy()
+                    out_image_src[out_image_src == nodata_value] = 0
+                    if np.max(out_image_src) > 0:
+                        out_meta = src.meta.copy()
+                        out_meta.update({"driver": "GTiff",
+                                         "height": out_image.shape[1],
+                                         "width": out_image.shape[2],
+                                         "transform": out_transform,
+                                         "crs": target_crs})
+                        # Check/create paths
+                        input_path = os.path.dirname(s_raster)
+                        input_name = os.path.basename(s_raster)
+                        parent_dir = input_path.split(os.path.sep)[-1]
+                        target_dir = os.path.join("tests/scratch/data/european_tetrapods_nl/",
+                                                  parent_dir)
+                        if not os.path.exists(target_dir):
+                            os.makedirs(target_dir)
+                        clipped_raster = os.path.join(target_dir, input_name)
+
+                        llogger.debug("{0} Target dataset {1}".format(prefix, clipped_raster))
+                        with rasterio.open(clipped_raster, "w", **out_meta) as dest:
+                            dest.write(out_image)
+                    else:
+                        llogger.warning("{0} Empty dataset {1}".format(prefix, s_raster))
 
 rule test_rwr:
     input:
