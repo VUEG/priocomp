@@ -148,7 +148,7 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     assert step > 0.0 and step < 1.0, "Step argument must be in range (0, 1)"
     # Construct budget levels based on the step provided. 0.0 (nothing) and
     # 1.0 (everything) are not needed.
-    budget_levels = np.linspace(0.0+step, 1.0, 1/step)[:-1]
+    budget_levels = np.linspace(0.0+step, 1.0, 1/step)
 
     # 2. Pre-processing  -----------------------------------------------------
 
@@ -180,9 +180,8 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     llogger.info(" [NOTE] Target budget levels: {}".format(blevels_str))
 
     # Construct a ndarray (matrix) that will hold the selection frequency.
-    # Populate it with 1.0s as the final budget level 1.0 will include
-    # everything.
-    sel_freq = np.full((height, width), 1.0)
+    # Populate it with 0s
+    sel_freq = np.full((height, width), 0)
 
     # Define budget and optimize_maxcover
     for i, blevel in enumerate(budget_levels):
