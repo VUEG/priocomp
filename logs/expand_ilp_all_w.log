@@ -1,5 +1,5 @@
-2016-11-07 13:37:01 [expand_ilp_w] [INFO ] Reading and processing raster analyses/ILP/ilp_all_weights.tif
-2016-11-07 13:37:01 [expand_ilp_w] [DEBUG] Number of informative cells in the data: 4302082
-2016-11-07 13:37:01 [expand_ilp_w] [DEBUG] Number of informative cells in the expand mask: 4301923
-2016-11-07 13:37:02 [expand_ilp_w] [INFO ] Writing output raster analyses/ILP/ilp_all_weights_expanded.tif
-2016-11-07 13:37:03 [expand_ilp_w] [INFO ]  [TIME] Masking took 3.33 sec
+2016-11-24 10:01:56 [expand_ilp_w] [INFO ] Reading and processing raster analyses/ILP/ilp_all_weights.tif
+2016-11-24 10:01:57 [expand_ilp_w] [DEBUG] Number of informative cells in the data: 4302082
+2016-11-24 10:01:57 [expand_ilp_w] [DEBUG] Number of informative cells in the expand mask: 4301923
+2016-11-24 10:01:57 [expand_ilp_w] [INFO ] Writing output raster analyses/ILP/ilp_all_weights_expanded.tif
+2016-11-24 10:01:59 [expand_ilp_w] [INFO ]  [TIME] Masking took 3.65 sec
