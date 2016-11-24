@@ -112,7 +112,7 @@
           <customproperties/>
         </layer-tree-layer>
       </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="RWR">
+      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="RWR">
         <customproperties/>
         <layer-tree-group expanded="0" checked="Qt::Unchecked" name="01_all">
           <customproperties/>
@@ -123,12 +123,12 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="02_all_wgt">
+        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="02_all_wgt">
           <customproperties/>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="rwr_eu26_all_weights_stats20160915132200722" name="rwr_all_weights_stats">
             <customproperties/>
           </layer-tree-layer>
-          <layer-tree-layer expanded="0" checked="Qt::Checked" id="rwr_eu26_all_weights20160909092552438" name="rwr_all_weights">
+          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="rwr_eu26_all_weights20160909092552438" name="rwr_all_weights">
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
@@ -151,7 +151,7 @@
           </layer-tree-layer>
         </layer-tree-group>
       </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="Zonation">
+      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="Zonation">
         <customproperties/>
         <layer-tree-group expanded="0" checked="Qt::Unchecked" name="01_caz">
           <customproperties/>
@@ -174,12 +174,12 @@
         <layer-tree-group expanded="0" checked="Qt::Unchecked" name="05_caz_es">
           <customproperties/>
         </layer-tree-group>
-        <layer-tree-group expanded="0" checked="Qt::Unchecked" name="06_abf_es">
+        <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="06_abf_es">
           <customproperties/>
           <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="06_abf_es_nwout320161109103644520" name="06_abf_es_nwout3">
             <customproperties/>
           </layer-tree-layer>
-          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="06_abf_es_nwout120160714095149833" name="06_abf_es_nwout1">
+          <layer-tree-layer expanded="0" checked="Qt::Checked" id="06_abf_es_nwout120160714095149833" name="06_abf_es_nwout1">
             <customproperties/>
           </layer-tree-layer>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="06_abf_es_rank_compressed20160617090219527" name="06_abf_es.rank.compressed">
@@ -241,9 +241,9 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>1886850</xmin>
-      <ymin>889749.99999999906867743</ymin>
-      <xmax>6639150</xmax>
+      <xmin>2072070</xmin>
+      <ymin>889749.99999999953433871</ymin>
+      <xmax>6824370</xmax>
       <ymax>5520250</ymax>
     </extent>
     <rotation>0</rotation>
@@ -550,7 +550,7 @@
           </filegroup>
         </legendlayer>
       </legendgroup>
-      <legendgroup open="true" checked="Qt::PartiallyChecked" name="RWR">
+      <legendgroup open="true" checked="Qt::Unchecked" name="RWR">
         <legendgroup open="false" checked="Qt::Unchecked" name="01_all">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_all" showFeatureCount="0">
             <filegroup open="false" hidden="false">
@@ -563,15 +563,15 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="true" checked="Qt::PartiallyChecked" name="02_all_wgt">
+        <legendgroup open="true" checked="Qt::Unchecked" name="02_all_wgt">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_all_weights_stats" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="rwr_eu26_all_weights_stats20160915132200722" visible="0"/>
             </filegroup>
           </legendlayer>
-          <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="rwr_all_weights" showFeatureCount="0">
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_all_weights" showFeatureCount="0">
             <filegroup open="false" hidden="false">
-              <legendlayerfile isInOverview="0" layerid="rwr_eu26_all_weights20160909092552438" visible="1"/>
+              <legendlayerfile isInOverview="0" layerid="rwr_eu26_all_weights20160909092552438" visible="0"/>
             </filegroup>
           </legendlayer>
         </legendgroup>
@@ -600,7 +600,7 @@
           </legendlayer>
         </legendgroup>
       </legendgroup>
-      <legendgroup open="true" checked="Qt::Unchecked" name="Zonation">
+      <legendgroup open="true" checked="Qt::PartiallyChecked" name="Zonation">
         <legendgroup open="false" checked="Qt::Unchecked" name="01_caz"/>
         <legendgroup open="false" checked="Qt::Unchecked" name="02_abf"/>
         <legendgroup open="false" checked="Qt::Unchecked" name="03_caz_wgt"/>
@@ -617,15 +617,15 @@
           </legendlayer>
         </legendgroup>
         <legendgroup open="false" checked="Qt::Unchecked" name="05_caz_es"/>
-        <legendgroup open="false" checked="Qt::Unchecked" name="06_abf_es">
+        <legendgroup open="true" checked="Qt::PartiallyChecked" name="06_abf_es">
           <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="06_abf_es_nwout3" showFeatureCount="0">
             <filegroup open="true" hidden="false">
               <legendlayerfile isInOverview="0" layerid="06_abf_es_nwout320161109103644520" visible="0"/>
             </filegroup>
           </legendlayer>
-          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="06_abf_es_nwout1" showFeatureCount="0">
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="06_abf_es_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
-              <legendlayerfile isInOverview="0" layerid="06_abf_es_nwout120160714095149833" visible="0"/>
+              <legendlayerfile isInOverview="0" layerid="06_abf_es_nwout120160714095149833" visible="1"/>
             </filegroup>
           </legendlayer>
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="06_abf_es.rank.compressed" showFeatureCount="0">
