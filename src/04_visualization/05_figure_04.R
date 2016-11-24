@@ -216,9 +216,9 @@ jac <- readr::read_csv("analyses/comparison/cross_jaccard.csv") %>%
                 f2_method = match_method(feature2), f2_type = match_type(feature2),
                 key = paste(f1_method, f1_type, f2_method, f2_type,
                             sep = "_")) %>%
-  # Floating point precision issues (e.g. 0.9000000001) caused by NumPy
-  dplyr::mutate(threshold = round(threshold, 2)) %>%
-  dplyr::filter(threshold == 0.10 | threshold == 0.90) %>%
+  dplyr::mutate(threshold = gsub("\\(0.0, 0.1, 0.0, 0.1\\)", 0.10, threshold)) %>%
+  dplyr::mutate(threshold = gsub("\\(0.9, 1.0, 0.9, 1.0\\)", 0.90, threshold)) %>%
+  #dplyr::filter(threshold == 0.10 | threshold == 0.90) %>%
   dplyr::select(key, f1_method, f1_type, f2_method, f2_type, threshold, coef) %>%
   dplyr::mutate(threshold = paste0("jac_", gsub("\\.", "", threshold))) %>%
   tidyr::spread(threshold, coef) %>%
@@ -259,8 +259,8 @@ cmcs <- extract_stat(all_stats, "cmcs")
 
 p1 <- plot_stat(tau, title = "COR", min_lim = -0.25, max_lim = 1.0, step = 0.25)
 p2 <- plot_stat(cmcs, title = "MCS")
-p3 <- plot_stat(jac_01, title = "J10")
-p4 <- plot_stat(jac_09, title = "J90")
+p3 <- plot_stat(jac_09, title = "top10")
+p4 <- plot_stat(jac_01, title = "low10")
 
 #p_combined <- grid.arrange(p1, p2, p3, p4, nrow = 2, ncol = 2)
 
