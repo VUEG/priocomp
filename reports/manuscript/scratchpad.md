@@ -1,4 +1,4 @@
-### Introduction
+### 2Introduction
 
 + Why are ESs relevant for BD conservation in general?
   + Trade-offs important
@@ -54,7 +54,7 @@
     + Data preprocessing almost the same to RWR
     + Solver if proprietary but available with an academic license
     + Runtimes:
-      + ALL: 3640 s (~60 min), ES: 2162 s (~36 min), BD: 3476 s (~58 min) 
+      + ALL: 9448 s (~2 hrs 37 min), ES: 7042 s (~1 hr 57 min), BD: 9223 s (~2 hrs 33 min) 
     + Major advances lately as demonstrated by Beyer et al. (2016)
   + NOTE! All the above are heavily dependant on the implementation details. 
 + However, it is important to note that the prioritization analyses we have used are simple; For any real-life application several complicating factors would probably need to be included. 
