@@ -750,7 +750,7 @@ rule compare_correlation:
     log:
         "logs/compare_results_correlation.log"
     message:
-        "Comparing results correlation using Kendal tau..."
+        "Comparing results correlation using Kendall tau..."
     run:
         llogger = utils.get_local_logger("compare_correlation", log[0])
         correlations = similarity.cross_correlation(input, verbose=False,
