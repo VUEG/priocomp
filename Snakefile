@@ -777,8 +777,8 @@ rule compare_jaccard:
         "Comparing results overlap with Jaccard's index..."
     run:
         llogger = utils.get_local_logger("compare_jaccard", log[0])
-        # Define thresholds every 10% of the rank priority map
-        thresholds = np.arange(0.05, 1.0, 0.05)
+        # Define thresholds for the top 10% and the low 10% for all rasters
+        thresholds = [(0.0, 0.1, 0.0, 0.1), (0.9, 1.0, 0.9, 1.0)]
         jaccard_coefs = similarity.cross_jaccard(input, thresholds,
                                                  verbose=False, logger=llogger)
         llogger.info("Saving results to {}".format(output[0]))

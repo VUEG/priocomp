@@ -57,10 +57,10 @@ def compute_jaccard(x, y, x_min=0.0, x_max=1.0, y_min=0.0, y_max=1.0,
     """
     if not disable_checks:
         assert x_min >= np.round(np.min(x), limit_tolerance), "Min threshold smaller than computed min of x"
-        assert x_max >= np.round(np.max(x), limit_tolerance), "Max threshold smaller than computed max of x"
+        assert x_max <= np.round(np.max(x), limit_tolerance), "Max threshold greater than computed max of x"
         assert x_min < x_max, "Min threshold for x larger to max threshold"
         assert y_min >= np.round(np.min(y), limit_tolerance), "Min threshold smaller than computed min of y"
-        assert y_max <= np.round(np.max(y), limit_tolerance), "Max threshold smaller than computed max of y"
+        assert y_max <= np.round(np.max(y), limit_tolerance), "Max threshold greater than computed max of y"
         assert y_min < y_max, "Min threshold for y larger to max threshold"
 
     # Get the values according to the limits provided
@@ -168,11 +168,10 @@ def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None):
     """ Calculate Jaccard coefficients between all the inpur rasters.
 
     This is a utility function that is intented to be used to compare
-    top-fractions of the landscape. Thus, x_max and y_max for
-    jaccard are fixed to 1.0.
+    fractions of the landscape.
 
     :param input_rasters list of input raster paths.
-    :param thresholds Numeric vector values of thresholds.
+    :param thresholds vector of numeric tuples (x_min, x_max, y_min, y_max) values of thresholds.
     :param verbose: Boolean indicating how much information is printed out.
     :param logger: logger object to be used.
     :param ... additional arguments passed on to jaccard().
@@ -192,7 +191,7 @@ def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None):
 
     # Check the inputs
     assert len(input_rasters) > 1, "More than one input rasters are needed"
-    assert len(thresholds) >= 1, "At least one threshold is needed"
+    assert len(thresholds) >= 1, "At least one tuple of thresholds is needed"
 
     # 2. Calculations --------------------------------------------------------
 
@@ -207,7 +206,11 @@ def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None):
     no_computation = 1
 
     for threshold in thresholds:
+        if len(threshold) != 4:
+            llogger.error("Threshold tuple needs 4 values")
+            next
         for i in range(0, n_rasters):
+            x_min, x_max, y_min, y_max = threshold
             raster1 = rasterio.open(input_rasters[i])
             # To calculate the Jaccard index we are dealing with binary data
             # only. Avoid using masked arrays and replace NoData values with
@@ -219,17 +222,19 @@ def cross_jaccard(input_rasters, thresholds, verbose=False, logger=None):
                 raster2 = rasterio.open(input_rasters[j])
                 raster2_nodata = raster2.nodata
                 raster2_src = raster2.read(1)
-                np.place(raster2_src, np.isclose(raster2_src, raster2_nodata), 0.0)
+                np.place(raster2_src, np.isclose(raster2_src, raster2_nodata),
+                         0.0)
                 prefix = utils.get_iteration_prefix(no_computation,
                                                     n_computations)
                 llogger.info(("{} Calculating Jaccard ".format(prefix) +
-                              "index for [{}".format(threshold) +
-                              ", 1.0] between {} ".format(input_rasters[i]) +
-                              "and {}".format(input_rasters[j])))
+                              "index for [{0}, {1}] ".format(x_min, x_max) +
+                              "in {} ".format(input_rasters[i]) +
+                              "and, [{0}, {1}] ".format(y_min, y_max) +
+                              "in {}".format(input_rasters[j])))
 
                 coef = compute_jaccard(raster1_src, raster2_src,
-                                       x_min=threshold, x_max=1.0,
-                                       y_min=threshold, y_max=1.0)
+                                       x_min=x_min, x_max=x_max,
+                                       y_min=y_min, y_max=y_max)
                 jaccards = pd.DataFrame({"feature1": [input_rasters[i]],
                                          "feature2": [input_rasters[j]],
                                          "threshold": [threshold],
