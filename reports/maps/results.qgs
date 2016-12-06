@@ -5,8 +5,14 @@
   <evaluateDefaultValues active="0"/>
   <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="">
     <customproperties/>
-    <layer-tree-group expanded="1" checked="Qt::Unchecked" name="data">
+    <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="data">
       <customproperties/>
+      <layer-tree-group expanded="1" checked="Qt::Checked" name="EEA">
+        <customproperties/>
+        <layer-tree-layer expanded="0" checked="Qt::Checked" id="popu01clcv520161205155107591" name="popu01clcv5">
+          <customproperties/>
+        </layer-tree-layer>
+      </layer-tree-group>
       <layer-tree-group expanded="0" checked="Qt::Unchecked" name="WDPA">
         <customproperties/>
       </layer-tree-group>
@@ -101,7 +107,7 @@
         </layer-tree-group>
       </layer-tree-group>
     </layer-tree-group>
-    <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="analyses">
+    <layer-tree-group expanded="1" checked="Qt::Unchecked" name="analyses">
       <customproperties/>
       <layer-tree-group expanded="0" checked="Qt::Unchecked" name="comparison">
         <customproperties/>
@@ -151,7 +157,7 @@
           </layer-tree-layer>
         </layer-tree-group>
       </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="Zonation">
+      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="Zonation">
         <customproperties/>
         <layer-tree-group expanded="0" checked="Qt::Unchecked" name="01_caz">
           <customproperties/>
@@ -174,12 +180,12 @@
         <layer-tree-group expanded="0" checked="Qt::Unchecked" name="05_caz_es">
           <customproperties/>
         </layer-tree-group>
-        <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="06_abf_es">
+        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="06_abf_es">
           <customproperties/>
           <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="06_abf_es_nwout320161109103644520" name="06_abf_es_nwout3">
             <customproperties/>
           </layer-tree-layer>
-          <layer-tree-layer expanded="0" checked="Qt::Checked" id="06_abf_es_nwout120160714095149833" name="06_abf_es_nwout1">
+          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="06_abf_es_nwout120160714095149833" name="06_abf_es_nwout1">
             <customproperties/>
           </layer-tree-layer>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="06_abf_es_rank_compressed20160617090219527" name="06_abf_es.rank.compressed">
@@ -199,17 +205,17 @@
           </layer-tree-layer>
         </layer-tree-group>
       </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="ILP">
+      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="ILP">
         <customproperties/>
         <layer-tree-group expanded="1" checked="Qt::Unchecked" name="01_all">
           <customproperties/>
         </layer-tree-group>
-        <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="02_all_wgt">
+        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="02_all_wgt">
           <customproperties/>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_all_weights_stats20161107145937848" name="ilp_all_weights_stats">
             <customproperties/>
           </layer-tree-layer>
-          <layer-tree-layer expanded="0" checked="Qt::Checked" id="ilp_all_weights20161107124326548" name="ilp_all_weights">
+          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_all_weights20161107124326548" name="ilp_all_weights">
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
@@ -241,10 +247,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>2072070</xmin>
-      <ymin>889749.99999999953433871</ymin>
-      <xmax>6824370</xmax>
-      <ymax>5520250</ymax>
+      <xmin>3521365.3125</xmin>
+      <ymin>2240955.62499999953433871</ymin>
+      <xmax>4709440.3125</xmax>
+      <ymax>3398580.62499999953433871</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -300,6 +306,7 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100001" srcDatumTransform="-1" destDatumTransform="-1" layerid="06_abf_es_nwout320161109103644520"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="03_caz_wgt_nwout120160617085900595"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="carbon_sequestration20161026153021690"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="popu01clcv520161205155107591"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="lagopus_lagopus20160802122959777"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="budget_level_0_0520160909123307262"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_eu26_es_stats20160915133349888"/>
@@ -408,10 +415,18 @@
       <item>ilp_es20161107150230521</item>
       <item>06_abf_es_nwout320161109103644520</item>
       <item>woodprod_average20161109104208734</item>
+      <item>popu01clcv520161205155107591</item>
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
-    <legendgroup open="true" checked="Qt::Unchecked" name="data">
+    <legendgroup open="true" checked="Qt::PartiallyChecked" name="data">
+      <legendgroup open="true" checked="Qt::Checked" name="EEA">
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="popu01clcv5" showFeatureCount="0">
+          <filegroup open="false" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="popu01clcv520161205155107591" visible="1"/>
+          </filegroup>
+        </legendlayer>
+      </legendgroup>
       <legendgroup open="false" checked="Qt::Unchecked" name="WDPA"/>
       <legendgroup open="false" checked="Qt::Unchecked" name="eurostat">
         <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="NUTS_RG_01M_2013_level2" showFeatureCount="0">
@@ -537,7 +552,7 @@
         </legendgroup>
       </legendgroup>
     </legendgroup>
-    <legendgroup open="true" checked="Qt::PartiallyChecked" name="analyses">
+    <legendgroup open="true" checked="Qt::Unchecked" name="analyses">
       <legendgroup open="false" checked="Qt::Unchecked" name="comparison">
         <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="nuts2_rank_variation_std" showFeatureCount="0">
           <filegroup open="false" hidden="false">
@@ -600,7 +615,7 @@
           </legendlayer>
         </legendgroup>
       </legendgroup>
-      <legendgroup open="true" checked="Qt::PartiallyChecked" name="Zonation">
+      <legendgroup open="true" checked="Qt::Unchecked" name="Zonation">
         <legendgroup open="false" checked="Qt::Unchecked" name="01_caz"/>
         <legendgroup open="false" checked="Qt::Unchecked" name="02_abf"/>
         <legendgroup open="false" checked="Qt::Unchecked" name="03_caz_wgt"/>
@@ -617,15 +632,15 @@
           </legendlayer>
         </legendgroup>
         <legendgroup open="false" checked="Qt::Unchecked" name="05_caz_es"/>
-        <legendgroup open="true" checked="Qt::PartiallyChecked" name="06_abf_es">
+        <legendgroup open="true" checked="Qt::Unchecked" name="06_abf_es">
           <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="06_abf_es_nwout3" showFeatureCount="0">
             <filegroup open="true" hidden="false">
               <legendlayerfile isInOverview="0" layerid="06_abf_es_nwout320161109103644520" visible="0"/>
             </filegroup>
           </legendlayer>
-          <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="06_abf_es_nwout1" showFeatureCount="0">
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="06_abf_es_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
-              <legendlayerfile isInOverview="0" layerid="06_abf_es_nwout120160714095149833" visible="1"/>
+              <legendlayerfile isInOverview="0" layerid="06_abf_es_nwout120160714095149833" visible="0"/>
             </filegroup>
           </legendlayer>
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="06_abf_es.rank.compressed" showFeatureCount="0">
@@ -648,17 +663,17 @@
           </legendlayer>
         </legendgroup>
       </legendgroup>
-      <legendgroup open="true" checked="Qt::PartiallyChecked" name="ILP">
+      <legendgroup open="true" checked="Qt::Unchecked" name="ILP">
         <legendgroup open="true" checked="Qt::Unchecked" name="01_all"/>
-        <legendgroup open="true" checked="Qt::PartiallyChecked" name="02_all_wgt">
+        <legendgroup open="true" checked="Qt::Unchecked" name="02_all_wgt">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_all_weights_stats" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="ilp_all_weights_stats20161107145937848" visible="0"/>
             </filegroup>
           </legendlayer>
-          <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="ilp_all_weights" showFeatureCount="0">
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_all_weights" showFeatureCount="0">
             <filegroup open="false" hidden="false">
-              <legendlayerfile isInOverview="0" layerid="ilp_all_weights20161107124326548" visible="1"/>
+              <legendlayerfile isInOverview="0" layerid="ilp_all_weights20161107124326548" visible="0"/>
             </filegroup>
           </legendlayer>
         </legendgroup>
@@ -8351,6 +8366,108 @@ def my_form_open(dialog, layer, feature):
               <item alpha="255" value="80" label="80" color="#7ad251"/>
               <item alpha="255" value="90" label="90" color="#bcdf27"/>
               <item alpha="255" value="100" label="100" color="#fde725"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>1500000</xmin>
+        <ymin>940000</ymin>
+        <xmax>6550000</xmax>
+        <ymax>5310000</ymax>
+      </extent>
+      <id>popu01clcv520161205155107591</id>
+      <datasource>../../../../../../../../data/EEA/pop_density/popu01clcv5.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>popu01clcv5</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="1510" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0" color="#440154"/>
+              <item alpha="255" value="29.61" label="29.61" color="#46085c"/>
+              <item alpha="255" value="59.22" label="59.22" color="#471063"/>
+              <item alpha="255" value="88.82" label="88.82" color="#481769"/>
+              <item alpha="255" value="118.4" label="118.4" color="#481d6f"/>
+              <item alpha="255" value="148" label="148" color="#482475"/>
+              <item alpha="255" value="177.6" label="177.6" color="#472a7a"/>
+              <item alpha="255" value="207.3" label="207.3" color="#46307e"/>
+              <item alpha="255" value="236.9" label="236.9" color="#453781"/>
+              <item alpha="255" value="266.5" label="266.5" color="#433d84"/>
+              <item alpha="255" value="296.1" label="296.1" color="#414287"/>
+              <item alpha="255" value="325.7" label="325.7" color="#3f4889"/>
+              <item alpha="255" value="355.3" label="355.3" color="#3d4e8a"/>
+              <item alpha="255" value="384.9" label="384.9" color="#3a538b"/>
+              <item alpha="255" value="414.5" label="414.5" color="#38598c"/>
+              <item alpha="255" value="444.1" label="444.1" color="#355e8d"/>
+              <item alpha="255" value="473.7" label="473.7" color="#33638d"/>
+              <item alpha="255" value="503.3" label="503.3" color="#31688e"/>
+              <item alpha="255" value="532.9" label="532.9" color="#2e6d8e"/>
+              <item alpha="255" value="562.5" label="562.5" color="#2c718e"/>
+              <item alpha="255" value="592.2" label="592.2" color="#2a768e"/>
+              <item alpha="255" value="621.8" label="621.8" color="#297b8e"/>
+              <item alpha="255" value="651.4" label="651.4" color="#27808e"/>
+              <item alpha="255" value="681" label="681" color="#25848e"/>
+              <item alpha="255" value="710.6" label="710.6" color="#23898e"/>
+              <item alpha="255" value="740.2" label="740.2" color="#218e8d"/>
+              <item alpha="255" value="769.8" label="769.8" color="#20928c"/>
+              <item alpha="255" value="799.4" label="799.4" color="#1f978b"/>
+              <item alpha="255" value="829" label="829" color="#1e9c89"/>
+              <item alpha="255" value="858.6" label="858.6" color="#1fa188"/>
+              <item alpha="255" value="888.2" label="888.2" color="#21a585"/>
+              <item alpha="255" value="917.8" label="917.8" color="#24aa83"/>
+              <item alpha="255" value="947.5" label="947.5" color="#28ae80"/>
+              <item alpha="255" value="977.1" label="977.1" color="#2eb37c"/>
+              <item alpha="255" value="1007" label="1007" color="#35b779"/>
+              <item alpha="255" value="1036" label="1036" color="#3dbc74"/>
+              <item alpha="255" value="1066" label="1066" color="#46c06f"/>
+              <item alpha="255" value="1095" label="1095" color="#50c46a"/>
+              <item alpha="255" value="1125" label="1125" color="#5ac864"/>
+              <item alpha="255" value="1155" label="1155" color="#65cb5e"/>
+              <item alpha="255" value="1184" label="1184" color="#70cf57"/>
+              <item alpha="255" value="1214" label="1214" color="#7cd250"/>
+              <item alpha="255" value="1244" label="1244" color="#89d548"/>
+              <item alpha="255" value="1273" label="1273" color="#95d840"/>
+              <item alpha="255" value="1303" label="1303" color="#a2da37"/>
+              <item alpha="255" value="1332" label="1332" color="#b0dd2f"/>
+              <item alpha="255" value="1362" label="1362" color="#bddf26"/>
+              <item alpha="255" value="1392" label="1392" color="#cae11f"/>
+              <item alpha="255" value="1421" label="1421" color="#d8e219"/>
+              <item alpha="255" value="1451" label="1451" color="#e5e419"/>
+              <item alpha="255" value="1480" label="1480" color="#f1e51d"/>
+              <item alpha="255" value="1510" label="1510" color="#fde725"/>
             </colorrampshader>
           </rastershader>
         </rasterrenderer>
