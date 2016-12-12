@@ -29,6 +29,9 @@ PROJECT_EXTENT = {"bottom": 1000000.0, "left": 2000000.0, "right": 6526000.0,
 # EPSG for project
 PROJECT_CRS = 3035
 
+# Project resolution in units of PROJECT_CRS
+PROJECT_RES = 100
+
 # Offset the bounds given in extent_yml. Values are in order
 # (left, bottom, right, top) and interpreted in the CRS units. values
 # are added to bounds given by PROJECT_EXTENT
@@ -51,6 +54,8 @@ beehub_url = "https://beehub.nl/environmental-geography-group"
 # Define source and desination datasets. NOTE: data/Snakefile must be run
 # before this Snakefile will work
 DATADRYAD_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in dm.get_resources(provider="datadryad", full_path=True)]
+
+EEA_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in dm.get_resources(provider="eea", full_path=True)]
 
 # Get specific NUTS collections from Eurostat
 NUTS_LEVEL0_DATA = [url.replace(beehub_url, external_data) for url in dm.get_resources(collection="nuts_level0", full_path=True)]
@@ -366,13 +371,13 @@ rule clip_udr_data:
 
 rule harmonize_data:
     input:
-        external=DATADRYAD_SRC_DATASETS+PROVIDE_SRC_DATASETS,
+        external=DATADRYAD_SRC_DATASETS+PROVIDE_SRC_DATASETS+EEA_SRC_DATASETS,
         like_raster=[path for path in DATADRYAD_SRC_DATASETS if "woodprod_average" in path][0],
         clip_shp=utils.pick_from_list(rules.preprocess_nuts_level0_data.output.processed, ".shp")
     output:
         # NOTE: UDR_SRC_DATASETS do not need to processed
-        warped=temp([path.replace("external", "interim/warped") for path in DATADRYAD_SRC_DATASETS+PROVIDE_SRC_DATASETS]),
-        harmonized=[path.replace("external", "processed/features") for path in DATADRYAD_SRC_DATASETS+PROVIDE_SRC_DATASETS]
+        warped=temp([path.replace("external", "interim/warped") for path in DATADRYAD_SRC_DATASETS+PROVIDE_SRC_DATASETS+EEA_SRC_DATASETS]),
+        harmonized=[path.replace("external", "processed/features") for path in DATADRYAD_SRC_DATASETS+PROVIDE_SRC_DATASETS+EEA_SRC_DATASETS]
     log:
         "logs/harmonize_data.log"
     message:
@@ -395,6 +400,7 @@ rule harmonize_data:
                 llogger.debug("{0} Target dataset {1}".format(prefix, warped_raster))
                 ret = shell("rio warp " + s_raster + " --like " + input.like_raster + \
                             " " + warped_raster + " --dst-crs " + str(PROJECT_CRS) + \
+                            " --res " + str(PROJECT_RES) + \
                             " --co 'COMPRESS=DEFLATE' --threads {threads}")
             for line in utils.process_stdout(ret, prefix=prefix):
                 llogger.debug(line)
