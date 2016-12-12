@@ -8383,7 +8383,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5310000</ymax>
       </extent>
       <id>popu01clcv520161205155107591</id>
-      <datasource>../../../../../../../../data/EEA/pop_density/popu01clcv5.tif</datasource>
+      <datasource>../../../../../../../../data/EEA/pop_density/data/pop_density/pop_density_v5.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
