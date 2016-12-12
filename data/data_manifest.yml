@@ -62,6 +62,14 @@
             - NUTS_RG_01M_2013_level2.prj
             - NUTS_RG_01M_2013_level2.shx
             - NUTS_RG_01M_2013_level2.shp
+  - provider: eea
+    collections:
+      - pop_density:
+          category: auxiliary
+          metadata:
+            - README.md
+          resources:
+            - pop_density_v5.tif
   - provider: udr
     collections:
       - european_tetrapods:
