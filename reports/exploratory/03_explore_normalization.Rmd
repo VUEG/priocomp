@@ -1,7 +1,11 @@
 ---
-title: Testing normalization
+title: "Testing normalization"
+output:
+  html_document: 
+    highlight: tango
+    theme: flatly
+  html_notebook: default
 date: "Aug 08, 2016"
-output: html_notebook
 ---
 
 ```{r setup, echo=FALSE,message=FALSE,warning=FALSE}
@@ -24,7 +28,7 @@ if (basename(getwd()) == "priocomp") {
 
 # Read in the unmodified raw raster data
   
-raw_data_files <- list.files(file.path(data_path, "external"), 
+raw_data_files <- list.files(file.path(data_path, "processed/features/provide"), 
                              pattern = ".\\.tif$", recursive = TRUE, 
                              full.names = TRUE)
 # Create a raster list (NOTE! Extents may be different)
@@ -61,7 +65,7 @@ normalize <- function(x) {
 
 ### Occurrence level normalization
 
-Similar to *normalization*, but each cell values is divided by the sum of all other cell values. Values are not bound in ranve [0, 1].
+Similar to *normalization*, but each cell values is divided by the sum of all other cell values. Values are not bound in range [0, 1].
 
 $$ x_{new} = \frac{x - x_{min}}{\sum_{}^{} (x - x_{min})} $$
 
@@ -112,7 +116,7 @@ or scale linearly so that the 5th and 95th percentiles meet some standard range.
 
 Use function `gaussian_field()` from package [`protectr`](https://github.com/mstrimas/protectr) to generat 9 simulated features.
 
-```{r generate-features}
+```{r generate-features, warning=FALSE}
 set.seed(42)
 e <- raster::extent(0, 100, 0, 100)
 r <- raster::raster(e, nrows = 100, ncols = 100, vals = 1)
@@ -151,13 +155,13 @@ grid.arrange(
 
 ### ES features
 
+The maps and histograms below are for feature `r names(raw_rasters[[1]])`
+
 ```{r normalize-es-features, fig.width=16}
-es_stack <- raster::stack(raw_rasters[[2]], 
-                          normalize(raw_rasters[[2]]),
-                          ol_normalize(raw_rasters[[2]]),
-                          standardize(raw_rasters[[2]]),
-                          IQRize(raw_rasters[[2]]))
-names(es_stack) <- c("Original", "Normalized", "OL_normalized", "Standardized", "IQRized")
+es_stack <- raster::stack(raw_rasters[[1]], 
+                          normalize(raw_rasters[[1]]),
+                          ol_normalize(raw_rasters[[1]]))
+names(es_stack) <- c("Original", "Normalized", "OL_normalized")
 grid.arrange(
   levelplot(es_stack[[1]], main = names(es_stack[[1]]), margin = FALSE, col.regions = viridis),
   levelplot(es_stack[[2]], main = names(es_stack[[2]]), margin = FALSE, col.regions = viridis),
@@ -166,4 +170,5 @@ grid.arrange(
   rasterVis::histogram(es_stack[[2]]),
   rasterVis::histogram(es_stack[[3]]),
   ncol = 3, nrow = 2)
- ```
+
+```
