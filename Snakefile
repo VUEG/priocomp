@@ -983,7 +983,7 @@ rule test_ilp:
         spp_files=expand("/home/jlehtoma/dev/git-data/zonation-tutorial/data/species{ID}.tif",
                          ID=list(range(1, 8)))
     output:
-        "analyses/ILP/test_implementation/test_python.tif"
+        "analyses/ILP/test_implementation/ilp_old.tif"
     log:
         "logs/test_ILP.log"
     message:

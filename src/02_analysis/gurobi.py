@@ -24,13 +24,13 @@ utils = SourceFileLoader("lib.utils", "src/00_lib/utils.py").load_module()
 spatutils = SourceFileLoader("lib.spatutils", "src/00_lib/spatutils.py").load_module()
 
 
-def optimize_maxcover(x, budget, rij, verbose=False, logger=None):
+def optimize_maxcover(cost, fraction, rij, verbose=False, logger=None):
     """ Solve maximum coverage problem using Gurobi.
 
-    :param x: Numpy ndarray of planning unit costs. In this case the spatial
-              representation of the planning units is not provided.
-    :param budget: numeric indicating the budget for the maximum coverage
-                   problem.
+    :param cost: Numpy ndarray of planning unit costs. In this case the spatial
+                 representation of the planning units is not provided.
+    :param fraction: numeric indicating the fraction of the landscape that's
+                     the target for the maximum coverage problem.
     :param rij: Numpy ndarray; Column sums of the matrix of representation
                 levels of conservation features (rows) within planning units
                 (columns).
@@ -38,6 +38,10 @@ def optimize_maxcover(x, budget, rij, verbose=False, logger=None):
     :param logger: logger object to be used.
     :return
     """
+
+    # cost array contains the actual cost values per pixel. Create another
+    # array that
+
     try:
         # Create a new model
         m = Model("mip1")
@@ -52,14 +56,20 @@ def optimize_maxcover(x, budget, rij, verbose=False, logger=None):
 
         # Set objective and constraint
         obj = LinExpr()
-        expr = LinExpr()
+        # Fractional constraint
+        frac_constr = LinExpr()
+        # Cost constraint
+        cost_constr = LinExpr()
 
         for i in range(rij.size):
             obj.addTerms(rij[i], vars[i])
-            expr.addTerms(x[i], vars[i])
+            frac_constr.addTerms(cost[i], vars[i])
 
         m.setObjective(obj, sense=GRB.MAXIMIZE)
-        m.addConstr(lhs=expr, sense=GRB.LESS_EQUAL, rhs=budget)
+        # Match fractional constraint EQUAL
+        m.addConstr(lhs=frac_constr, sense=GRB.EQUAL, rhs=fraction)
+        # Match cost constraint LESS_EQUAL
+        m.addConstr(lhs=cost_constr, sense=GRB.LESS_EQUAL, rhs=fraction)
         m.update()
 
         # The the log file directory from the logger, but log into a separate
@@ -89,8 +99,8 @@ def optimize_maxcover(x, budget, rij, verbose=False, logger=None):
 
 def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
                       save_intermediate=False, compress='DEFLATE',
-                      ol_normalize=False, weights=None, verbose=False,
-                      logger=None):
+                      ol_normalize=False, weights=None, cost=None,
+                      verbose=False, logger=None):
     """ Solve (multiple) maximum coverage problems for a set of input rasters.
 
     Create a hierarchical spatial prioritization using Gurobi solver to solve
@@ -118,6 +128,8 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     :param ol_normalize: Boolean setting OL (Occurrence Level) normalization.
     :param weights: list of weights. Length must match the number of input
                     rasters.
+    :param cost: String path to a raster defining the cost surface. If None
+                 (default), an equal cost is used for all cells.
     :param verbose Boolean indicating how much information is printed out.
     :param logger logger object to be used.
     """
@@ -165,9 +177,19 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     mask = ma.getmask(sum_array_masked)
     # Get all the non-masked data as a 1-D array.
     sum_array = ma.compressed(sum_array_masked)
-    # Create equal cost array
-    cost = np.ones(sum_array.size)
 
+    # If no cost feature is provided, use equal cost for everything
+    if cost is None:
+        cost_array = np.ones(sum_array.size)
+    else:
+        cost_raster = rasterio.open(cost, 'r')
+        cost_array = cost_raster.read(1, masked=True)
+        # Get all the non-masked data as a 1-D array
+        cost_array = ma.compressed(cost_array)
+        # Check that cost value is available for all sum_array cells
+        if cost_array.shape != sum_array.shape:
+            llogger.error(" Cost raster and summed array have different shapes")
+            return(-1)
     load_end = timer()
     load_elapsed = round(load_end - load_start, 2)
     llogger.info(" [TIME] Pre-processing took {} sec".format(load_elapsed))
@@ -188,10 +210,10 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
         no_blevel = i + 1
         prefix = utils.get_iteration_prefix(no_blevel, len(budget_levels))
 
-        budget = blevel * cost.size
+        budget = blevel * cost_array.size
         llogger.info("{} Optimizing with ".format(prefix) +
                      "budget level {}...".format(blevel))
-        x = optimize_maxcover(cost, budget, sum_array, verbose=verbose,
+        x = optimize_maxcover(cost_array, budget, sum_array, verbose=verbose,
                               logger=llogger)
         # Create a full (filled with 0s) raster template
         x_selection = np.full((height, width), 0.0)
