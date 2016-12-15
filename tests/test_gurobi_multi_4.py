@@ -44,7 +44,7 @@ try:
     model.setParam(GRB.Param.PoolSolutions, 100)
 
     # Set number of objectives
-    model.NumObj = 4
+    model.NumObj = 2
 
     # Set and configure i-th objective
     for i in Subsets:
