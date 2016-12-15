@@ -11,30 +11,27 @@ from gurobipy import *
 
 
 try:
-    # Sample data
-    Groundset = range(20)
-    Subsets   = range(2)
-    Budget    = 3
-    Set = [ [ 1, 4, 1, 1, 1, 1, 1, 1, 1, 4, 0, 0, 0, 4, 0, 0, 4, 0, 0, 4 ],
-            [ 0, 2, 0, 0, 0, 1, 1, 1, 1, 2, 0, 0, 0, 2, 0, 1, 3, 1, 1, 2 ]]
-    elem_fractions = [1 / len(Set[0])] * len(Set[0])
+    # Values to be maximized
+    values = [1, 4, 1, 1, 1, 1, 1, 1, 1, 4, 0, 0, 0, 4, 0, 0, 4, 0, 0, 4]
+    # Cost of each element in 'values'
+    cost = [0, 2, 0, 0, 0, 1, 1, 1, 1, 2, 0, 0, 0, 2, 0, 1, 3, 1, 1, 2]
+    # Fractions of elements out of the total number of elements
+    elem_fractions = [1 / len(values)] * len(values)
+    # Total fraction ([0, 1]) of the elements in 'values' that can be used.
+    # E.g. fraction of 0.2 corresponds to 4 elements when there are 20
+    # elements in total
     fraction = 0.2
-    SetObjWeight   = [1.0, -1.0]
-    SetObjName = ["Value", "Cost"]
 
     # Create initial model
     model = Model('multiobj')
 
     # Initialize decision variables for ground set:
-    # x[e] == 1 if element e is chosen for the covering.
-    Elem = model.addVars(Groundset, vtype=GRB.BINARY, name='El')
+    vars = model.addVars(range(len(values)), vtype=GRB.BINARY, name='El')
 
     # Constraint: limit total number of elements to be picked to be at most
-    # Budget
-    # Fraction constraint
+    # fraction of total number of elements
     frac_constr = LinExpr()
-    frac_constr.addTerms(elem_fractions, Elem.values())
-    # Match frac constraint EQUAL
+    frac_constr.addTerms(elem_fractions, vars.values())
     model.addConstr(lhs=frac_constr, sense=GRB.EQUAL, rhs=fraction)
 
     # Set global sense for ALL objectives
@@ -46,15 +43,23 @@ try:
     # Set number of objectives
     model.NumObj = 2
 
-    # Set and configure i-th objective
-    for i in Subsets:
-        model.setParam(GRB.Param.ObjNumber, i)
-        model.ObjNWeight   = SetObjWeight[i]
+    # Objective 1: maximize values
+    model.setParam(GRB.Param.ObjNumber, 0)
+    model.ObjNWeight = 1
+    model.ObjNName = "Values"
+    model.ObjNRelTol = 0.01
+    model.ObjNAbsTol = 1.0
+    model.setAttr(GRB.Attr.ObjN, vars, values)
 
-        model.ObjNName = SetObjName[i]
-        model.ObjNRelTol = 0.01
-        model.ObjNAbsTol = 1.0 + i
-        model.setAttr(GRB.Attr.ObjN, Elem, Set[i])
+    # Objective 2: minimize values
+    model.setParam(GRB.Param.ObjNumber, 1)
+    # Minimizing an objective function is equivalent to maximizing the
+    # negation of that function -> use ObjNWeight = -1.0
+    model.ObjNWeight = -1.0
+    model.ObjNName = "Costs"
+    model.ObjNRelTol = 0.01
+    model.ObjNAbsTol = 2.0
+    model.setAttr(GRB.Attr.ObjN, vars, cost)
 
     # Save problem
     model.write('multiobj.lp')
@@ -73,44 +78,43 @@ try:
         sys.exit(1)
 
     if status != GRB.Status.OPTIMAL:
-        print('Optimization was stopped with status ' + str(status))
+        print('Optimization was stopped with status {}'.format(status))
         sys.exit(1)
 
-    # Print best selected set
-    print('Selected elements in best solution:')
+    # Find out which elements are in the solution
     selected = []
-    for e in Groundset:
-        if Elem[e].X > 0.9:
-            print(' El%d' % e, end='')
+    for e in range(len(values)):
+        if vars[e].X > 0.9:
             selected.append("*")
         else:
             selected.append(" ")
-    print('')
 
+    # Print best selected set
+    print('Selected elements (values and costs) in best solution:')
     i_str = " ".join(["{0: <2}".format(i) for i in range(20)])
     print("\nindex:    {}".format(i_str))
     s_str = " ".join(["{0: <2}".format(i) for i in selected])
     print("selected: {}".format(s_str))
-    v_str = " ".join(["{0: <2}".format(i) for i in Set[0]])
+    v_str = " ".join(["{0: <2}".format(i) for i in values])
     print("values:   {}".format(v_str))
-    c_str = " ".join(["{0: <2}".format(i) for i in Set[1]])
+    c_str = " ".join(["{0: <2}".format(i) for i in cost])
     print("cost:     {}".format(c_str))
 
     # Print number of solutions stored
     nSolutions = model.SolCount
-    print('\nNumber of solutions found: ' + str(nSolutions))
+    print('\nNumber of solutions found: {}'.format(nSolutions))
 
     # Print objective values of solutions
     if nSolutions > 10:
         nSolutions = 10
-    print('Objective values for first ' + str(nSolutions) + ' solutions:')
-    for i in Subsets:
+    print('Objective values for first {} solutions:'.format(nSolutions))
+    for i in [0, 1]:
         model.setParam(GRB.Param.ObjNumber, i)
 
         for e in range(nSolutions):
             model.setParam(GRB.Param.SolutionNumber, e)
-            print('\t{}'.format(model.ObjNName), end='')
-            print(' %6g' % model.ObjNVal, end='')
+            print('\t{0: >6}'.format(model.ObjNName), end='')
+            print(' {0: >6}'.format(model.ObjNVal), end='')
         print('')
 
 except GurobiError as e:
