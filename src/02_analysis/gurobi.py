@@ -6,14 +6,14 @@ Module can be used alone or as part of Snakemake workflow.
 """
 
 import click
-import glob
 import logging
+import matplotlib
+matplotlib.use('Qt4Agg')
+from matplotlib import pyplot
 import numpy as np
 import numpy.ma as ma
-import os
 import pdb
 import rasterio
-import sys
 
 from gurobipy import *
 from importlib.machinery import SourceFileLoader
@@ -24,7 +24,8 @@ utils = SourceFileLoader("lib.utils", "src/00_lib/utils.py").load_module()
 spatutils = SourceFileLoader("lib.spatutils", "src/00_lib/spatutils.py").load_module()
 
 
-def optimize_maxcover(cost, fraction, rij, verbose=False, logger=None):
+def optimize_maxcover(cost, fraction, rij, normalize=False, verbose=False,
+                      logger=None):
     """ Solve maximum coverage problem using Gurobi.
 
     :param cost: Numpy ndarray of planning unit costs. In this case the spatial
@@ -34,6 +35,10 @@ def optimize_maxcover(cost, fraction, rij, verbose=False, logger=None):
     :param rij: Numpy ndarray; Column sums of the matrix of representation
                 levels of conservation features (rows) within planning units
                 (columns).
+    :param normalize: Boolean defining whehter cost and rij arrays are
+                      normalized in range [0, 1] before optimization. This may
+                      be necessary since the multiobjective optimization uses
+                      blending approach.
     :param verbose: Boolean indicating how much information is printed out.
     :param logger: logger object to be used.
     :return
@@ -42,35 +47,24 @@ def optimize_maxcover(cost, fraction, rij, verbose=False, logger=None):
     # cost array contains the actual cost values per pixel. Create another
     # array that
 
+    assert rij.size == cost.size, 'Representation and cost array sizes must match'
+
+    # Fractions of elements out of the total number of elements
+    elem_fractions = np.full(rij.size, 1 / rij.size, dtype=np.float)
+    # Calculate cumsum to define what is the closest fraction multiple to
+    # desired fraction
+    cs_elem_fractions = np.cumsum(elem_fractions)
+    # Find the index of closest cumsum value to the requested fraction
+    fraction_approx = utils.find_nearest(cs_elem_fractions, fraction)
+
+    if normalize:
+        logger.info(" [NOTE] Normalizing cost and rij arrays")
+        rij = spatutils.normalize(rij)
+        cost = spatutils.normalize(cost)
+
     try:
-        # Create a new model
-        m = Model("mip1")
-
-        # Create variables
-        for element in np.nditer(rij):
-            m.addVar(vtype=GRB.BINARY)
-
-        # Integrate new variables
-        m.update()
-        vars = m.getVars()
-
-        # Set objective and constraint
-        obj = LinExpr()
-        # Fractional constraint
-        frac_constr = LinExpr()
-        # Cost constraint
-        cost_constr = LinExpr()
-
-        for i in range(rij.size):
-            obj.addTerms(rij[i], vars[i])
-            frac_constr.addTerms(cost[i], vars[i])
-
-        m.setObjective(obj, sense=GRB.MAXIMIZE)
-        # Match fractional constraint EQUAL
-        m.addConstr(lhs=frac_constr, sense=GRB.EQUAL, rhs=fraction)
-        # Match cost constraint LESS_EQUAL
-        m.addConstr(lhs=cost_constr, sense=GRB.LESS_EQUAL, rhs=fraction)
-        m.update()
+        # Create initial model
+        model = Model('multiobj')
 
         # The the log file directory from the logger, but log into a separate
         # file. NOTE: handler location is hard coded.
@@ -78,29 +72,69 @@ def optimize_maxcover(cost, fraction, rij, verbose=False, logger=None):
         log_file = os.path.join(log_dir, "gurobi.log")
         if os.path.exists(log_dir):
             logger.debug("See {} for Gurobi log".format(log_file))
-            m.params.logToConsole = 0
-            m.params.logFile = log_file
+            model.params.logToConsole = 0
+            model.params.logFile = log_file
         else:
             logger.debug("Log dir {} not found".format(log_dir))
-            m.params.logToConsole = 0
-        # m.params.mipgap = 0.001
-        # m.params.solutionLimit = 1
-        # m.params.presolve = -1
+            model.params.logToConsole = 0
+            # model.params.mipgap = 0.001
+            # model.params.solutionLimit = 1
+            # model.params.presolve = -1
 
-        m.optimize()
+        # Initialize decision variables for ground set:
+        for element in np.nditer(rij):
+            model.addVar(vtype=GRB.BINARY)
+        # Integrate new variables
+        model.update()
+        vars = model.getVars()
+
+        # Constraint: limit total number of elements to be picked to be at most
+        # fraction of total number of elements
+        frac_constr = LinExpr()
+        frac_constr.addTerms(elem_fractions.tolist(), vars)
+        model.addConstr(lhs=frac_constr, sense=GRB.EQUAL, rhs=fraction_approx)
+
+        # Set global sense for ALL objectives
+        model.ModelSense = GRB.MAXIMIZE
+
+        # Limit how many solutions to collect
+        model.setParam(GRB.Param.PoolSolutions, 100)
+
+        # Set number of objectives
+        model.NumObj = 2
+
+        # Objective 1: maximize values
+        model.setParam(GRB.Param.ObjNumber, 0)
+        model.ObjNWeight = 1
+        model.ObjNName = "Values"
+        # model.ObjNRelTol = 0.01
+        # model.ObjNAbsTol = 1.0
+        model.setAttr(GRB.Attr.ObjN, vars, rij.tolist())
+
+        # Objective 2: minimize values
+        model.setParam(GRB.Param.ObjNumber, 1)
+        # Minimizing an objective function is equivalent to maximizing the
+        # negation of that function -> use ObjNWeight = -1.0
+        model.ObjNWeight = -1.0
+        model.ObjNName = "Costs"
+        # model.ObjNRelTol = 0.01
+        # model.ObjNAbsTol = 2.0
+        model.setAttr(GRB.Attr.ObjN, vars, cost.tolist())
+
+        model.optimize()
 
     except GurobiError:
         raise
 
     # Construct a result array and return that
-    res = np.asarray([var.x for var in m.getVars()], dtype=np.uint8)
+    res = np.asarray([var.x for var in model.getVars()], dtype=np.uint8)
     return res
 
 
-def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
-                      save_intermediate=False, compress='DEFLATE',
-                      ol_normalize=False, weights=None, cost=None,
-                      verbose=False, logger=None):
+def prioritize_gurobi(input_rasters, output_rank_raster, cost_raster=None,
+                      step=0.05, save_intermediate=False, compress='DEFLATE',
+                      ol_normalize=False, weights=None, verbose=False,
+                      logger=None):
     """ Solve (multiple) maximum coverage problems for a set of input rasters.
 
     Create a hierarchical spatial prioritization using Gurobi solver to solve
@@ -120,6 +154,8 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
 
     :param input_rasters: List of String paths of input rasters.
     :param output_raster: String path to the rank raster file to be created.
+    :param cost_rasters: String path to a raster defining the cost surface. If None
+                 (default), an equal cost is used for all cells.
     :param step: numeric value in (0, 1) defining the step length for budget
                  levels.
     :param save_intermediate: should intermediate optiomization results be
@@ -128,8 +164,6 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     :param ol_normalize: Boolean setting OL (Occurrence Level) normalization.
     :param weights: list of weights. Length must match the number of input
                     rasters.
-    :param cost: String path to a raster defining the cost surface. If None
-                 (default), an equal cost is used for all cells.
     :param verbose Boolean indicating how much information is printed out.
     :param logger logger object to be used.
     """
@@ -158,9 +192,9 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
         llogger.error("'step' must be coercible to float")
         sys.exit(1)
     assert step > 0.0 and step < 1.0, "Step argument must be in range (0, 1)"
-    # Construct budget levels based on the step provided. 0.0 (nothing) and
+    # Construct fraction levels based on the step provided. 0.0 (nothing) and
     # 1.0 (everything) are not needed.
-    budget_levels = np.linspace(0.0+step, 1.0, 1/step)
+    fraction_levels = np.linspace(0.0+step, 1.0, 1/step)
 
     # 2. Pre-processing  -----------------------------------------------------
 
@@ -179,11 +213,10 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
     sum_array = ma.compressed(sum_array_masked)
 
     # If no cost feature is provided, use equal cost for everything
-    if cost is None:
+    if cost_raster is None:
         cost_array = np.ones(sum_array.size)
     else:
-        cost_raster = rasterio.open(cost, 'r')
-        cost_array = cost_raster.read(1, masked=True)
+        cost_array = rasterio.open(cost_raster, 'r').read(1, masked=True)
         # Get all the non-masked data as a 1-D array
         cost_array = ma.compressed(cost_array)
         # Check that cost value is available for all sum_array cells
@@ -198,23 +231,22 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
 
     opt_start = timer()
     llogger.info(" [** OPTIMIZING **]")
-    blevels_str = ", ".join([str(level) for level in budget_levels])
-    llogger.info(" [NOTE] Target budget levels: {}".format(blevels_str))
+    flevels_str = ", ".join([str(level) for level in fraction_levels])
+    llogger.info(" [NOTE] Target budget levels: {}".format(flevels_str))
 
     # Construct a ndarray (matrix) that will hold the selection frequency.
     # Populate it with 0s
     sel_freq = np.full((height, width), 0)
 
     # Define budget and optimize_maxcover
-    for i, blevel in enumerate(budget_levels):
-        no_blevel = i + 1
-        prefix = utils.get_iteration_prefix(no_blevel, len(budget_levels))
+    for i, flevel in enumerate(fraction_levels):
+        no_flevel = i + 1
+        prefix = utils.get_iteration_prefix(no_flevel, len(fraction_levels))
 
-        budget = blevel * cost_array.size
         llogger.info("{} Optimizing with ".format(prefix) +
-                     "budget level {}...".format(blevel))
-        x = optimize_maxcover(cost_array, budget, sum_array, verbose=verbose,
-                              logger=llogger)
+                     "fraction level {}...".format(flevel))
+        x = optimize_maxcover(cost=cost_array, fraction=flevel, rij=sum_array,
+                              normalize=True, verbose=verbose, logger=llogger)
         # Create a full (filled with 0s) raster template
         x_selection = np.full((height, width), 0.0)
         # Place the values of result array (it's binary = {0, 1}) into template
@@ -223,7 +255,6 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
         # Add the selected elements (planning units) into the selection
         # frequency matrix
         sel_freq += x_selection
-
         # Get the raster profile from the input raster files
         profile = spatutils.get_profile(input_rasters, logger=llogger)
 
@@ -234,7 +265,7 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
             # Create a masked array
             output_x = ma.masked_values(x_selection, nodata_value)
             # Construct the output raster name
-            btoken = str(blevel).replace('.', '_')
+            ftoken = str(flevel).replace('.', '_')
             # Construct a subdir name based on the basename
             output_bname = os.path.basename(output_rank_raster).split('.')[0]
             output_subir = os.path.join(os.path.dirname(output_rank_raster),
@@ -242,7 +273,7 @@ def prioritize_gurobi(input_rasters, output_rank_raster, step=0.05,
             if not os.path.exists(output_subir):
                 os.makedirs(output_subir)
             output_raster = os.path.join(output_subir,
-                                         "budget_level_{}.tif".format(btoken))
+                                         "budget_level_{}.tif".format(ftoken))
             # Write out the data
             llogger.debug(" Writing intermediate output to " +
                           "{}".format(output_raster))

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """ Utility module for the workflow."""
 import logging
+import numpy as np
 import os
 import pprint
 import yaml
@@ -286,6 +287,10 @@ class DataManager(object):
         pprint.pprint(self.data)
 
 # Functions -------------------------------------------------------------------
+
+def find_nearest(array, value):
+    idx = (np.abs(array - value)).argmin()
+    return array[idx]
 
 
 def get_iteration_prefix(i, total):
