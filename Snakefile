@@ -91,6 +91,16 @@ WEIGHTS = [N_BD / N_ES] * N_ES + [1.0] * N_BD
 NORMALIZED_DATASETS = {"carbon_sequestration.tif":
                        "carbon_sequestration_rescaled.tif"}
 
+
+# Define a group of rasters that need to be smoothed (9x9 median filter + log transformation)
+# for the following reasons:
+#
+# pop_density_v5.tif = smooth the differences in population density so that the raster is
+#                      more reasonable proxy for land cost
+#
+SMOOTHED_DATASETS = {"pop_density_v5.tif":
+                     "pop_density_v5_smoothed.tif"}
+
 # PROJECT RULES ----------------------------------------------------------------
 
 rule all:
@@ -412,7 +422,7 @@ rule harmonize_data:
             for line in utils.process_stdout(shell(cmd_str, read=True), prefix=prefix):
                 llogger.debug(line)
 
-            # Finally, rescale (normalize) dataset if needed
+            # Rescale (normalize) dataset if needed
             org_raster = os.path.basename(harmonized_raster)
             if org_raster in NORMALIZED_DATASETS.keys():
                 rescaled_raster = harmonized_raster.replace(org_raster,
@@ -425,6 +435,22 @@ rule harmonize_data:
                 os.remove(harmonized_raster)
                 llogger.debug("{0} Renaming dataset {1} to {2}".format(prefix, rescaled_raster, harmonized_raster))
                 os.rename(rescaled_raster, harmonized_raster)
+                harmonized_raster = rescaled_raster
+
+            # Finally, smooth dataset if needed
+            org_raster = os.path.basename(harmonized_raster)
+            if org_raster in SMOOTHED_DATASETS.keys():
+                smoothed_raster = harmonized_raster.replace(org_raster,
+                                                            SMOOTHED_DATASETS[org_raster])
+                llogger.info("{0} Smoothing dataset {1}".format(prefix, harmonized_raster))
+                llogger.debug("{0} Target dataset {1}".format(prefix, smoothed_raster))
+                spatutils.smooth_raster(harmonized_raster, smoothed_raster,
+                                        log_transform=True, method="medfilt",
+                                        verbose=False)
+                os.remove(harmonized_raster)
+                llogger.debug("{0} Renaming dataset {1} to {2}".format(prefix, smoothed_raster, harmonized_raster))
+                os.rename(smoothed_raster, harmonized_raster)
+
 
 
 rule ol_normalize_data:

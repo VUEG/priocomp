@@ -11,6 +11,7 @@ import rasterio
 import scipy.stats
 
 from importlib.machinery import SourceFileLoader
+from scipy.signal import medfilt
 
 utils = SourceFileLoader("lib.utils", "src/00_lib/utils.py").load_module()
 
@@ -208,6 +209,80 @@ def rescale_raster(input_raster, output_raster, method, fill_w_zeros=False,
             llogger.debug("Wrote raster {}".format(output_raster))
         return True
 
+def smooth_raster(input_raster, output_raster, method, log_transform=False,
+                  fill_w_zeros=False, compress='DEFLATE', verbose=False,
+                  logger=None):
+    """ Smooth a raster according ot a given method.
+
+    Currently only one method is implemented:
+        1. 'medfilt'
+
+    :param input_raster: String path to raster file to be normalized.
+    :param output_raster: String path to raster file to be created.
+    :param method: String method to use.
+    :param log_transform: Boolean indicating whether values are log transformed.
+    :param fill_w_zeros:  Boolean indicating whether NoData is encoded as real
+                          NoData or filled with zeros.
+    :param compress: String compression level used for the output raster.
+    :param verbose: Boolean indicating how much information is printed out.
+    :param logger: Logger object.
+    :return Boolean True if success, False otherwise
+    """
+    # Set up logging
+    if not logger:
+        logging.basicConfig()
+        llogger = logging.getLogger('smooth_raster')
+        llogger.setLevel(logging.DEBUG if verbose else logging.INFO)
+    else:
+        llogger = logger
+
+    if not os.path.exists(input_raster):
+        raise OSError("Input raster {} not found".format(input_raster))
+
+    with rasterio.open(input_raster) as in_src:
+        NODATA_VALUE = in_src.nodata
+        llogger.debug("Using internal NoData value {}".format(NODATA_VALUE))
+
+        # Read the first band
+        src_data = in_src.read(1, masked=True)
+        # Check min and max
+        decimals = 12
+        src_min = np.round(src_data.min(), decimals)
+        src_max = np.round(src_data.max(), decimals)
+        if src_min == 0.0 and src_max == 0.0:
+            llogger.warning('{} has all zero values, '.format(input_raster +
+                            'skipping'))
+            return False
+
+        if log_transform:
+            llogger.debug("Log transforming data")
+            src_data = ma.log(src_data)
+
+        # Do the actual rescaling
+        if method == 'medfilt':
+            llogger.debug("Using method '{}'".format(method))
+            smoothed_data = medfilt(src_data, kernel_size=9)
+        else:
+            raise TypeError("Method {} not implemented".format(method))
+
+        # Write the product
+        profile = in_src.profile
+        profile.update(compress=compress)
+        # Replace the NoData values and set the fill value for NoData, unless
+        # the result is to be filled with zeros
+        if fill_w_zeros:
+            rescaled_data = ma.filled(smoothed_data, 0)
+            llogger.debug("Filling NoData with zeros")
+        else:
+            rescaled_data = ma.filled(smoothed_data, NODATA_VALUE)
+
+        with rasterio.open(output_raster, 'w', **profile) as dst:
+            if not fill_w_zeros:
+                # Set the NoData mask
+                dst.write_mask(in_src.read_masks(1))
+            dst.write(rescaled_data.astype(profile['dtype']), 1)
+            llogger.debug("Wrote raster {}".format(output_raster))
+        return True
 
 def sum_raster(input_rasters, olnormalize=False, weights=None, verbose=False,
                logger=None):
