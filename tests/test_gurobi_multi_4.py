@@ -8,13 +8,21 @@
 
 from __future__ import print_function
 from gurobipy import *
+import tabulate
+
+
+def normalize(x):
+    return [float(i)/max(x) for i in x]
 
 
 try:
     # Values to be maximized
-    values = [1, 4, 1, 1, 1, 1, 1, 1, 1, 4, 0, 0, 0, 4, 0, 0, 4, 0, 0, 4]
+    values = [1, 14, 1, 1, 1, 1, 1, 1, 1, 14, 0, 0, 0, 14, 0, 0, 4, 0, 0, 14]
+    values = [i / 100 for i in values]
+    values = normalize(values)
     # Cost of each element in 'values'
-    cost = [0, 2, 0, 0, 0, 1, 1, 1, 1, 2, 0, 0, 0, 2, 0, 1, 3, 1, 1, 2]
+    cost =   [0, 2, 1, 0, 1, 1, 1, 1, 1, 2, 0, 1, 1, 2, 0, 1, 3, 1, 1, 2]
+    cost = normalize(cost)
     # Fractions of elements out of the total number of elements
     elem_fractions = [1 / len(values)] * len(values)
     # Total fraction ([0, 1]) of the elements in 'values' that can be used.
@@ -90,15 +98,12 @@ try:
             selected.append(" ")
 
     # Print best selected set
-    print('Selected elements (values and costs) in best solution:')
-    i_str = " ".join(["{0: <2}".format(i) for i in range(20)])
-    print("\nindex:    {}".format(i_str))
-    s_str = " ".join(["{0: <2}".format(i) for i in selected])
-    print("selected: {}".format(s_str))
-    v_str = " ".join(["{0: <2}".format(i) for i in values])
-    print("values:   {}".format(v_str))
-    c_str = " ".join(["{0: <2}".format(i) for i in cost])
-    print("cost:     {}".format(c_str))
+    data = []
+    for i in range(len(values)):
+        data.append([i, values[i], cost[i], selected[i]])
+    header = ["index", "values", "cost", "selected"]
+    print(tabulate.tabulate(data, headers=header, tablefmt="pipe",
+                            floatfmt=".2f"))
 
     # Print number of solutions stored
     nSolutions = model.SolCount
