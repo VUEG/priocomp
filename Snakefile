@@ -1007,16 +1007,17 @@ rule test_ilp:
     # maximum coverage problem
     input:
         spp_files=expand("/home/jlehtoma/dev/git-data/zonation-tutorial/data/species{ID}.tif",
-                         ID=list(range(1, 8)))
+                         ID=list(range(1, 8))),
+        cost_file="/home/jlehtoma/dev/git-data/zonation-tutorial/data/cost.tif"
     output:
-        "analyses/ILP/test_implementation/ilp_old.tif"
+        "analyses/ILP/test_implementation/test_ilp_new_wcost.tif"
     log:
-        "logs/test_ILP.log"
+        "logs/test_ILP_new_wcost.log"
     message:
         "Runnning ILP tests..."
     run:
         llogger = utils.get_local_logger("test_optimize_gurobi", log[0])
-        gurobi.prioritize_gurobi(input.spp_files, output[0], logger=llogger,
+        gurobi.prioritize_gurobi(input.spp_files, output[0], input.cost_file, logger=llogger,
                                  ol_normalize=True, save_intermediate=True,
                                  verbose=True)
 
@@ -1027,9 +1028,9 @@ rule test_ilp_hierarchy:
     # steps - 1, and x is 1 / n, make sure that the solution at f+(n-1) is
     # always a complete spatial subset of f+n.
     input:
-        "analyses/ILP/ilp_all_weights"
+        "analyses/ILP/test_implementation/test_ilp_new_wcost"
     output:
-        "analyses/ILP/ilp_all_weights/check.txt"
+        "analyses/ILP/test_implementation/test_ilp_new_wcost/check.txt"
     log:
         "logs/test_ILP_hierarchy.log"
     message:
@@ -1039,7 +1040,7 @@ rule test_ilp_hierarchy:
         # What's the file prefix?
         file_prefix = "budget_level_"
         # Define step used
-        step = 0.02
+        step = 0.05
         fractions = np.linspace(step, 1.0, 1/step)[:-1]
         # Genrate names for individual solutions
         solution_files = ["{0}{1}.tif".format(file_prefix, str(round(frac, 2)).replace(".", "_")) for frac in fractions]
