@@ -220,8 +220,9 @@ def prioritize_gurobi(input_rasters, output_rank_raster, cost_raster=None,
         # Get all the non-masked data as a 1-D array
         cost_array = ma.compressed(cost_array)
         # Check that cost value is available for all sum_array cells
+        import pdb; pdb.set_trace()
         if cost_array.shape != sum_array.shape:
-            llogger.error(" Cost raster and summed array have different shapes")
+            llogger.error(" [ERROR] Cost raster and summed array have different shapes")
             return(-1)
     load_end = timer()
     load_elapsed = round(load_end - load_start, 2)

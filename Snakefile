@@ -679,7 +679,9 @@ rule prioritize_ilp_all:
 
 rule prioritize_ilp_es:
     input:
-        es=rules.harmonize_data.output.harmonized
+        # pop_density_v5.tif is the last item in harmonized datasets
+        es=rules.harmonize_data.output.harmonized[:-1],
+        cost=rules.harmonize_data.output.harmonized[-1]
     output:
         es="analyses/ILP/ilp_es.tif"
     log:
@@ -688,8 +690,8 @@ rule prioritize_ilp_es:
         "Optimizing ES with Gurobi..."
     run:
         llogger = utils.get_local_logger("optimize_gurobi_es", log.es)
-        gurobi.prioritize_gurobi(input.es, output.es, logger=llogger,
-                                 ol_normalize=True, step=0.01,
+        gurobi.prioritize_gurobi(input.es, output.es, input.cost, logger=llogger,
+                                 ol_normalize=True, step=0.05,
                                  save_intermediate=False, verbose=True)
 
 rule prioritize_ilp_bd:
