@@ -72,11 +72,11 @@ def optimize_maxcover(cost, fraction, rij, normalize=False, verbose=False,
         log_file = os.path.join(log_dir, "gurobi.log")
         if os.path.exists(log_dir):
             logger.debug("See {} for Gurobi log".format(log_file))
-            model.params.logToConsole = 0
+            #model.params.logToConsole = 0
             model.params.logFile = log_file
         else:
             logger.debug("Log dir {} not found".format(log_dir))
-            model.params.logToConsole = 0
+            #model.params.logToConsole = 0
             # model.params.mipgap = 0.001
             # model.params.solutionLimit = 1
             # model.params.presolve = -1
@@ -209,21 +209,32 @@ def prioritize_gurobi(input_rasters, output_rank_raster, cost_raster=None,
     # NoData cells for now, 2) flatten the array.
     (height, width) = sum_array_masked.shape
     mask = ma.getmask(sum_array_masked)
-    # Get all the non-masked data as a 1-D array.
-    sum_array = ma.compressed(sum_array_masked)
 
     # If no cost feature is provided, use equal cost for everything
-    if cost_raster is None:
-        cost_array = np.ones(sum_array.size)
-    else:
-        cost_array = rasterio.open(cost_raster, 'r').read(1, masked=True)
-        # Get all the non-masked data as a 1-D array
-        cost_array = ma.compressed(cost_array)
+    if cost_raster is not None:
+        cost_array_masked = rasterio.open(cost_raster, 'r').read(1, masked=True)
+        # Get the mask to see if it's different to sum_array
+        cost_mask = ma.getmask(cost_array_masked)
         # Check that cost value is available for all sum_array cells
-        import pdb; pdb.set_trace()
-        if cost_array.shape != sum_array.shape:
-            llogger.error(" [ERROR] Cost raster and summed array have different shapes")
-            return(-1)
+        if not np.all(cost_mask == mask):
+            mask_diff = np.sum(cost_mask) - np.sum(mask)
+            llogger.warning(" [WARNING] Different masks for cost and feature sum rasters, diff: {}".format(mask_diff))
+            llogger.warning(" [WARNING] Using data only from cells that have both cost and occurrence data")
+            # Get an intersection of the cost and sum array masks
+            intersect_mask = np.logical_and(~cost_mask, ~mask)
+            # Set the intersection mask to both cost and sum array data. NOTE: no
+            # need to set masked values since using intersection.
+            sum_array_masked.mask = intersect_mask
+            cost_array_masked.mask = intersect_mask
+            mask = intersect_mask
+
+        sum_array = ma.compressed(sum_array_masked)
+        cost_array = ma.compressed(cost_array_masked)
+    else:
+        # Get all the non-masked data as a 1-D array
+        sum_array = ma.compressed(sum_array_masked)
+        cost_array = np.ones(sum_array.size)
+
     load_end = timer()
     load_elapsed = round(load_end - load_start, 2)
     llogger.info(" [TIME] Pre-processing took {} sec".format(load_elapsed))
