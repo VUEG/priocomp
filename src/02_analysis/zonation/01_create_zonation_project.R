@@ -132,7 +132,7 @@ variant4 <- set_dat_param(variant4, "use groups", 1)
 groups_file <- file.path(variant4@name, paste0(variant4@name, "_groups.txt"))
 variant4 <- set_dat_param(variant4, "groups file", groups_file)
 
-# Give weight of 759 / 12 to each. Altogether, there are 759 spcies
+# Give weight of 759 / 12 to each. Altogether, there are 759 species
 # features. Give weight 1 to each.
 sppweights(variant4) <- c(rep(nfeatures(variant4) / NESFEATURES, NESFEATURES),
                           rep(1, nfeatures(variant4) - NESFEATURES))
