@@ -656,7 +656,7 @@ rule match_zon_esbd_coverages:
 
 rule prioritize_ilp_all:
     input:
-        all=rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS,
+        all=rules.harmonize_data.output.harmonized[:-1]+UDR_SRC_DATASETS,
         cost=rules.harmonize_data.output.harmonized[-1]
     output:
         all_w="analyses/ILP/ilp_all_weights_costs.tif"
