@@ -683,9 +683,9 @@ rule prioritize_ilp_es:
         es=rules.harmonize_data.output.harmonized[:-1],
         cost=rules.harmonize_data.output.harmonized[-1]
     output:
-        es="analyses/ILP/ilp_es.tif"
+        es="analyses/ILP/ilp_es_costs.tif"
     log:
-        es="logs/prioritize_ilp_es.log"
+        es="logs/prioritize_ilp_es_costs.log"
     message:
         "Optimizing ES with Gurobi..."
     run:
