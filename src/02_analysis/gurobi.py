@@ -127,7 +127,7 @@ def optimize_maxcover(cost, fraction, rij, normalize=False, verbose=False,
     # Check the number of solutions
     n_solutions = model.SolCount
     if n_solutions > 1:
-        logger.warning( " [WARNING] {} solutions found, using the first (best) solution".format(n_solutions))
+        logger.warning( " [WARN] {} solutions found, using the first (best) solution".format(n_solutions))
 
     # Construct a result array and return that
     res = np.asarray([var.x for var in model.getVars()], dtype=np.uint8)
