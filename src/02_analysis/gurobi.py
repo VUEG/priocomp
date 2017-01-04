@@ -263,7 +263,7 @@ def prioritize_gurobi(input_rasters, output_rank_raster, cost_raster=None,
         x = optimize_maxcover(cost=cost_array, fraction=flevel, rij=sum_array,
                               normalize=True, verbose=verbose, logger=llogger)
         # Create a full (filled with 0s) raster template
-        x_selection = np.full((height, width), 0.0)
+        x_selection = np.full((height, width), 0.0, dtype=np.uint8)
         # Place the values of result array (it's binary = {0, 1}) into template
         # elements that are False in the original mask
         x_selection[~mask] = x
