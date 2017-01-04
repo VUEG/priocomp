@@ -251,7 +251,7 @@ def prioritize_gurobi(input_rasters, output_rank_raster, cost_raster=None,
 
     # Construct a ndarray (matrix) that will hold the selection frequency.
     # Populate it with 0s
-    sel_freq = np.full((height, width), 0, dtype=np.int8)
+    sel_freq = np.full((height, width), 0, dtype=rasterio.float64)
 
     # Define budget and optimize_maxcover
     for i, flevel in enumerate(fraction_levels):
