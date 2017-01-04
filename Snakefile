@@ -656,11 +656,12 @@ rule match_zon_esbd_coverages:
 
 rule prioritize_ilp_all:
     input:
-        all=rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS
+        all=rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS,
+        cost=rules.harmonize_data.output.harmonized[-1]
     output:
-        all_w="analyses/ILP/ilp_all_weights.tif",
+        all_w="analyses/ILP/ilp_all_weights_costs.tif"
     log:
-        all_w="logs/prioritize_ilp_all_weights.log",
+        all_w="logs/prioritize_ilp_all_weights_costs.log"
     message:
         "Optimizing ALL with Gurobi..."
     run:
@@ -672,9 +673,9 @@ rule prioritize_ilp_all:
         # With weights
         llogger = utils.get_local_logger("optimize_gurobi_all_weights",
                                          log.all_w)
-        gurobi.prioritize_gurobi(input.all, output.all_w, logger=llogger,
+        gurobi.prioritize_gurobi(input.all, output.all_w, input.cost, logger=llogger,
                                  ol_normalize=True, weights=WEIGHTS,
-                                 step=0.01, save_intermediate=True,
+                                 step=0.05, save_intermediate=True,
                                  verbose=True)
 
 rule prioritize_ilp_es:
@@ -696,18 +697,19 @@ rule prioritize_ilp_es:
 
 rule prioritize_ilp_bd:
     input:
-        bd=UDR_SRC_DATASETS
+        bd=UDR_SRC_DATASETS,
+        cost=rules.harmonize_data.output.harmonized[-1]
     output:
-        bd="analyses/ILP/ilp_bd.tif"
+        bd="analyses/ILP/ilp_bd_costs.tif"
     log:
-        bd="logs/prioritize_ilp_bd.log"
+        bd="logs/prioritize_ilp_bd._costslog"
     message:
         "Optimizing BD with Gurobi..."
     run:
         llogger = utils.get_local_logger("optimize_gurobi_bd", log.bd)
-        gurobi.prioritize_gurobi(input.bd, output.bd, logger=llogger,
-                                 ol_normalize=True, step=0.01,
-                                 save_intermediate=False, verbose=True)
+        gurobi.prioritize_gurobi(input.bd, output.bd, input.cost, logger=llogger,
+                                 ol_normalize=True, step=0.05,
+                                 save_intermediate=True, verbose=True)
 
 rule prioritize_ilp:
     input:
