@@ -675,7 +675,7 @@ rule prioritize_ilp_all:
                                          log.all_w)
         gurobi.prioritize_gurobi(input.all, output.all_w, input.cost, logger=llogger,
                                  ol_normalize=True, weights=WEIGHTS,
-                                 step=0.05, save_intermediate=True,
+                                 step=0.01, save_intermediate=True,
                                  verbose=True)
 
 rule prioritize_ilp_es:
@@ -692,7 +692,7 @@ rule prioritize_ilp_es:
     run:
         llogger = utils.get_local_logger("optimize_gurobi_es", log.es)
         gurobi.prioritize_gurobi(input.es, output.es, input.cost, logger=llogger,
-                                 ol_normalize=True, step=0.05,
+                                 ol_normalize=True, step=0.01,
                                  save_intermediate=True, verbose=True)
 
 rule prioritize_ilp_bd:
@@ -708,7 +708,7 @@ rule prioritize_ilp_bd:
     run:
         llogger = utils.get_local_logger("optimize_gurobi_bd", log.bd)
         gurobi.prioritize_gurobi(input.bd, output.bd, input.cost, logger=llogger,
-                                 ol_normalize=True, step=0.05,
+                                 ol_normalize=True, step=0.01,
                                  save_intermediate=True, verbose=True)
 
 rule prioritize_ilp:
