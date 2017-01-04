@@ -53,16 +53,23 @@ EQUAL_WEIGHTS_BD <- c(rep(1, NBDFEATURES), 0)
 # weights in other groups to be multiples of 1.0.
 W_ES <- rep(NBDFEATURES / NESFEATURES, NESFEATURES)
 W_BD <- rep(1, NBDFEATURES)
-W_COST <- rep(NBDFEATURES / NCOSTFEATURES, NCOSTFEATURES)
-GROUP_WEIGHTS_ALL <- round(c(W_ES, W_BD, W_COST), 2)
+W_NO_COST <- rep(0, NCOSTFEATURES)
+W_COST <- rep(-(NBDFEATURES / NCOSTFEATURES), NCOSTFEATURES)
+GROUP_WEIGHTS_ALL <- round(c(W_ES, W_BD, W_NO_COST), 2)
+GROUP_WEIGHTS_ALL_COST <- round(c(W_ES, W_BD, W_COST), 2)
 # Note: not implemented yet
 GROUP_WEIGHTS_ES <- EQUAL_WEIGHTS_ES
 GROUP_WEIGHTS_BD <- EQUAL_WEIGHTS_BD
 
 # Project variables
 
-VARIANTS <- c("01_caz", "02_abf", "03_caz_wgt", "04_abf_wgt",
-              "05_caz_es", "06_abf_es", "07_caz_bd", "08_abf_bd")
+VARIANTS <- c("01_caz_all",         "02_abf_all",
+              "03_caz_all_wgt",     "04_abf_all_wgt",
+              "05_caz_all_wgt_cst", "06_abf_all_wgt_cst",
+              "07_caz_es",          "08_abf_es",
+              "09_caz_es_cst",      "10_abf_es_cst",
+              "11_caz_bd",          "12_abf_bd",
+              "13_caz_bd_cst",      "14_abf_bd_cst")
 
 ZSETUP_ROOT <- "analyses/zonation"
 
@@ -228,38 +235,38 @@ save_changes(variant4)
 
 # Just ecoystem services ----------------------------------------------------
 
-## 05_caz_es ----------------------------------------------------------------
-
-variant5 <- get_variant(priocomp_zproject, 5)
-variant5 <- setup_sppdata(variant5, group = "ES")
-variant5 <- setup_groups(variant5, group = "ES", weights = FALSE)
-variant5 <- setup_ppa(variant5)
-save_changes(variant5)
-
-## 06_abf_es ----------------------------------------------------------------
-
-variant6 <- get_variant(priocomp_zproject, 6)
-variant6 <- setup_sppdata(variant6, group = "ES")
-variant6 <- setup_groups(variant6, group = "ES", weights = FALSE)
-variant6 <- set_dat_param(variant6, "removal rule", 2)
-variant6 <- setup_ppa(variant6)
-save_changes(variant6)
-
-# Just biodiversity features ------------------------------------------------
-
-## 07_caz_bd ----------------------------------------------------------------
+## 07_caz_es ----------------------------------------------------------------
 
 variant7 <- get_variant(priocomp_zproject, 7)
-variant7 <- setup_sppdata(variant7, group = "BD")
-variant7 <- setup_groups(variant7, group = "BD", weights = FALSE)
+variant7 <- setup_sppdata(variant7, group = "ES")
+variant7 <- setup_groups(variant7, group = "ES", weights = FALSE)
 variant7 <- setup_ppa(variant7)
 save_changes(variant7)
 
-## 08_abf_bd ----------------------------------------------------------------
+## 08_abf_es ----------------------------------------------------------------
 
 variant8 <- get_variant(priocomp_zproject, 8)
-variant8 <- setup_sppdata(variant8, group = "BD")
-variant8 <- setup_groups(variant8, group = "BD", weights = FALSE)
+variant8 <- setup_sppdata(variant8, group = "ES")
+variant8 <- setup_groups(variant8, group = "ES", weights = FALSE)
 variant8 <- set_dat_param(variant8, "removal rule", 2)
 variant8 <- setup_ppa(variant8)
 save_changes(variant8)
+
+# Just biodiversity features ------------------------------------------------
+
+## 11_caz_bd ----------------------------------------------------------------
+
+variant11 <- get_variant(priocomp_zproject, 11)
+variant11 <- setup_sppdata(variant11, group = "BD")
+variant11 <- setup_groups(variant11, group = "BD", weights = FALSE)
+variant11 <- setup_ppa(variant11)
+save_changes(variant11)
+
+## 12_abf_bd ----------------------------------------------------------------
+
+variant12 <- get_variant(priocomp_zproject, 12)
+variant12 <- setup_sppdata(variant12, group = "BD")
+variant12 <- setup_groups(variant12, group = "BD", weights = FALSE)
+variant12 <- set_dat_param(variant12, "removal rule", 2)
+variant12 <- setup_ppa(variant12)
+save_changes(variant12)
