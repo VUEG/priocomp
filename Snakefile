@@ -692,7 +692,7 @@ rule prioritize_ilp_es:
         llogger = utils.get_local_logger("optimize_gurobi_es", log.es)
         gurobi.prioritize_gurobi(input.es, output.es, input.cost, logger=llogger,
                                  ol_normalize=True, step=0.05,
-                                 save_intermediate=False, verbose=True)
+                                 save_intermediate=True, verbose=True)
 
 rule prioritize_ilp_bd:
     input:
@@ -1030,9 +1030,9 @@ rule test_ilp_hierarchy:
     # steps - 1, and x is 1 / n, make sure that the solution at f+(n-1) is
     # always a complete spatial subset of f+n.
     input:
-        "analyses/ILP/test_implementation/test_ilp_new_wcost"
+        "analyses/ILP/ilp_es"
     output:
-        "analyses/ILP/test_implementation/test_ilp_new_wcost/check.txt"
+        "analyses/ILP/ilp_es/check.txt"
     log:
         "logs/test_ILP_hierarchy.log"
     message:

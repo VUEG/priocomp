@@ -58,11 +58,12 @@ def optimize_maxcover(cost, fraction, rij, normalize=False, verbose=False,
     fraction_approx = utils.find_nearest(cs_elem_fractions, fraction)
 
     if normalize:
-        logger.info(" [NOTE] Normalizing cost and rij arrays")
+        logger.debug(" [DEBUG] Normalizing cost and rij arrays")
         rij = spatutils.normalize(rij)
         cost = spatutils.normalize(cost)
 
     try:
+        logger.debug(" [DEBUG] Starting optimization")
         # Create initial model
         model = Model('multiobj')
 
@@ -72,11 +73,11 @@ def optimize_maxcover(cost, fraction, rij, normalize=False, verbose=False,
         log_file = os.path.join(log_dir, "gurobi.log")
         if os.path.exists(log_dir):
             logger.debug("See {} for Gurobi log".format(log_file))
-            #model.params.logToConsole = 0
+            model.params.logToConsole = 0
             model.params.logFile = log_file
         else:
             logger.debug("Log dir {} not found".format(log_dir))
-            #model.params.logToConsole = 0
+            model.params.logToConsole = 0
             # model.params.mipgap = 0.001
             # model.params.solutionLimit = 1
             # model.params.presolve = -1
@@ -125,6 +126,11 @@ def optimize_maxcover(cost, fraction, rij, normalize=False, verbose=False,
 
     except GurobiError:
         raise
+
+    # Check the number of solutions
+    n_solutions = model.SolCount
+    if n_solutions > 1:
+        logger.warning( " [WARNING] {} solutions found, using the first (best) solution".format(n_solutions))
 
     # Construct a result array and return that
     res = np.asarray([var.x for var in model.getVars()], dtype=np.uint8)
@@ -224,9 +230,9 @@ def prioritize_gurobi(input_rasters, output_rank_raster, cost_raster=None,
             intersect_mask = np.logical_and(~cost_mask, ~mask)
             # Set the intersection mask to both cost and sum array data. NOTE: no
             # need to set masked values since using intersection.
-            sum_array_masked.mask = intersect_mask
-            cost_array_masked.mask = intersect_mask
-            mask = intersect_mask
+            sum_array_masked.mask = ~intersect_mask
+            cost_array_masked.mask = ~intersect_mask
+            mask = ~intersect_mask
 
         sum_array = ma.compressed(sum_array_masked)
         cost_array = ma.compressed(cost_array_masked)
@@ -248,7 +254,7 @@ def prioritize_gurobi(input_rasters, output_rank_raster, cost_raster=None,
 
     # Construct a ndarray (matrix) that will hold the selection frequency.
     # Populate it with 0s
-    sel_freq = np.full((height, width), 0)
+    sel_freq = np.full((height, width), 0, dtype=np.int8)
 
     # Define budget and optimize_maxcover
     for i, flevel in enumerate(fraction_levels):
@@ -256,7 +262,7 @@ def prioritize_gurobi(input_rasters, output_rank_raster, cost_raster=None,
         prefix = utils.get_iteration_prefix(no_flevel, len(fraction_levels))
 
         llogger.info("{} Optimizing with ".format(prefix) +
-                     "fraction level {}...".format(flevel))
+                     "fraction level {}...".format(np.round(flevel, 2)))
         x = optimize_maxcover(cost=cost_array, fraction=flevel, rij=sum_array,
                               normalize=True, verbose=verbose, logger=llogger)
         # Create a full (filled with 0s) raster template
