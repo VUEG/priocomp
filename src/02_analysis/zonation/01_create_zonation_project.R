@@ -8,8 +8,10 @@ library(zonator)
 
 source("src/00_lib/utils.R")
 
-# Number of features in groups ------------------------------------------------
-# NOTE: the numbers are hard coded and are not updated if the data change.
+# GLOBALS -----------------------------------------------------------------
+
+# Number of features in groups. NOTE: the numbers are hard coded and are
+# not updated if the data change.
 
 NAMPHIBIANS <- 83
 NBIRDS <- 404
@@ -18,229 +20,246 @@ NREPTILES <- 112
 
 NESFEATURES <- 9
 NBDFEATURES <- NAMPHIBIANS + NBIRDS + NMAMMALS + NREPTILES
+NCOSTFEATURES <- 1
+NALLFEATURES <- NESFEATURES + NBDFEATURES + NCOSTFEATURES
 
-# Generate variants for all taxa ----------------------------------------------
+# Groups
 
-variants <- c("01_caz", "02_abf", "03_caz_wgt", "04_abf_wgt",
+GROUPS_ALL <- c(rep(1, NESFEATURES), rep(2, NBDFEATURES), rep(3, NCOSTFEATURES))
+GROUPNAMES_ALL <- c("1" = "ecosystem_services", "2" = "species", "3" = "costs")
+
+GROUPS_ES <- c(rep(1, NESFEATURES), rep(2, NCOSTFEATURES))
+GROUPNAMES_ES <- c("1" = "ecosystem_services", "2" = "costs")
+
+GROUPS_BD <- c(rep(1, NAMPHIBIANS), rep(2, NBIRDS),
+               rep(3, NMAMMALS), rep(4, NREPTILES), rep(5, NCOSTFEATURES))
+GROUPNAMES_BD <- c("1" = "amphibians", "2" = "birds", "3" = "mammals",
+                   "4" = "reptiles", "5" = "costs")
+
+# Weights
+
+# Create two weight vectors: 1) equal weights for all features (1.0) and
+# zero-weight for costs (0.0), and 2) equal aggregate weights.
+
+# 1) Equal feature weights
+EQUAL_WEIGHTS_ALL <- c(rep(1, NESFEATURES), rep(1, NBDFEATURES), 0)
+EQUAL_WEIGHTS_ES <- c(rep(1, NESFEATURES), 0)
+EQUAL_WEIGHTS_BD <- c(rep(1, NBDFEATURES), 0)
+
+# 2) Equal group aggregate weights
+
+# Each group has an equal aggregate weight. To have more intuitive values,
+# set the weights of the most numerous group (BD) to 1.0 and have the the
+# weights in other groups to be multiples of 1.0.
+W_ES <- rep(NBDFEATURES / NESFEATURES, NESFEATURES)
+W_BD <- rep(1, NBDFEATURES)
+W_COST <- rep(NBDFEATURES / NCOSTFEATURES, NCOSTFEATURES)
+GROUP_WEIGHTS_ALL <- round(c(W_ES, W_BD, W_COST), 2)
+# Note: not implemented yet
+GROUP_WEIGHTS_ES <- EQUAL_WEIGHTS_ES
+GROUP_WEIGHTS_BD <- EQUAL_WEIGHTS_BD
+
+# Project variables
+
+VARIANTS <- c("01_caz", "02_abf", "03_caz_wgt", "04_abf_wgt",
               "05_caz_es", "06_abf_es", "07_caz_bd", "08_abf_bd")
 
-zsetup_root <- "analyses/zonation"
+ZSETUP_ROOT <- "analyses/zonation"
 
-ppa_raster_file <- "../../../data/processed/eurostat/nuts_level2/NUTS_RG_01M_2013_level2.tif"
-ppa_config_file <- "ppa_config.txt"
+PPA_RASTER_FILE <- "../../../data/processed/eurostat/nuts_level2/NUTS_RG_01M_2013_level2.tif"
+PPA_CONFIG_FILE <- "ppa_config.txt"
 
-project_name <- "_priocomp"
+PROJECT_NAME <- "_priocomp"
 
-zonator::create_zproject(name = project_name, dir = zsetup_root, variants = variants,
+# Helper functions --------------------------------------------------------
+
+create_sh_file <- function(variant) {
+  bat_file <- variant@bat.file
+  sh_file <- gsub("\\.bat", "\\.sh", bat_file)
+
+  cmd_lines <- readLines(bat_file)
+  new_cmd_lines <- c("#!/bin/sh")
+
+  for (line in cmd_lines) {
+    line <- gsub("call ", "", line)
+    new_cmd_lines <- c(new_cmd_lines, line)
+  }
+
+  file_con <- file(sh_file)
+  writeLines(new_cmd_lines, file_con)
+  close(file_con)
+
+  return(invisible(TRUE))
+}
+
+rearrange_features <- function(variant) {
+  spp_data <- sppdata(variant)
+  new_spp_data <- rbind(spp_data[c(1, 3:nrow(spp_data)),], spp_data[2,])
+  row.names(new_spp_data) <- 1:nrow(new_spp_data)
+  sppdata(variant) <- new_spp_data
+  return(variant)
+}
+
+setup_groups <- function(variant, group, weights) {
+  if (group == "ALL") {
+    groups(variant) <- GROUPS_ALL
+    groupnames(variant) <- GROUPNAMES_ALL
+    if (weights) {
+      sppweights(variant) <- GROUP_WEIGHTS_ALL
+    } else {
+      sppweights(variant) <- EQUAL_WEIGHTS_ALL
+    }
+  } else if (group == "ES") {
+    groups(variant) <- GROUPS_ES
+    groupnames(variant) <- GROUPNAMES_ES
+    if (weights) {
+      sppweights(variant) <- GROUP_WEIGHTS_ES
+    } else {
+      sppweights(variant) <- EQUAL_WEIGHTS_ES
+    }
+  } else if (group == "BD") {
+    groups(variant) <- GROUPS_BD
+    groupnames(variant) <- GROUPNAMES_BD
+    if (weights) {
+      sppweights(variant) <- GROUP_WEIGHTS_BD
+    } else {
+      sppweights(variant) <- EQUAL_WEIGHTS_BD
+    }
+  } else {
+    stop("Unknown group: ", group)
+  }
+  # Set groups use and groups file
+  variant <- set_dat_param(variant, "use groups", 1)
+  # Note that groups file location is always relative to the bat file
+  groups_file <- file.path(variant@name, paste0(variant@name, "_groups.txt"))
+  variant <- set_dat_param(variant, "groups file", groups_file)
+  return(variant)
+}
+
+setup_ppa <- function(variant) {
+  # Set post-processing (LSM). First, let's create the file itself (zonator
+  # can't handle this yet). The file needs to be created only once per taxon
+  # since all the variants can use the same file.
+  if (!file.exists(PPA_CONFIG_FILE)) {
+    ppa_file_name <- file.path(ZSETUP_ROOT, PROJECT_NAME, PPA_CONFIG_FILE)
+    ppa_cmd_string <- paste(c("LSM", PPA_RASTER_FILE, 0, -1, 0), collapse = " ")
+    write(ppa_cmd_string, ppa_file_name)
+  }
+
+  # Need to define ppa_config.txt relative to the bat-file (same dir)
+  variant <- set_dat_param(variant, "post-processing list file",
+                           PPA_CONFIG_FILE)
+  return(variant)
+}
+
+setup_sppdata <- function(variant, group) {
+  variant <- rearrange_features(variant)
+  spp_data <- sppdata(variant)
+  if (group == "ALL") {
+    spp_data <- spp_data
+  } else if (group == "ES") {
+    spp_data <- rbind(spp_data[1:NESFEATURES,],
+                      tail(spp_data, n = NCOSTFEATURES))
+  } else if (group == "BD") {
+    spp_data <- spp_data[(nrow(spp_data) - NBDFEATURES):nrow(spp_data),]
+  } else {
+    stop("Unknown group: ", group)
+  }
+  row.names(spp_data) <- 1:nrow(spp_data)
+  sppdata(variant) <- spp_data
+  return(variant)
+}
+
+save_changes <- function(variant) {
+  # Save variant
+  save_zvariant(variant, dir = file.path(ZSETUP_ROOT, PROJECT_NAME),
+                overwrite = TRUE, debug_msg = FALSE)
+
+  # Create a sh file for Linux
+  create_sh_file(variant)
+  return(invisible(TRUE))
+}
+
+# Generate variants for all taxa ------------------------------------------
+
+zonator::create_zproject(name = PROJECT_NAME, dir = ZSETUP_ROOT, variants = VARIANTS,
                          dat_template_file = "analyses/zonation/template.dat",
                          spp_template_dir = "data/processed/features",
                          override_path = "../../../data/processed/features",
                          recursive = TRUE, overwrite = TRUE, debug = TRUE)
-priocomp_zproject <- load_zproject(file.path(zsetup_root, project_name))
+priocomp_zproject <- load_zproject(file.path(ZSETUP_ROOT, PROJECT_NAME))
 
 # Set run configuration parameters --------------------------------------------
 
 ## 01_caz ---------------------------------------------------------------------
 
 variant1 <- get_variant(priocomp_zproject, 1)
-
-# Set post-processing (LSM). First, let's create the file itself (zonator
-# can't handle this yet). The file needs to be created only once per raxon
-# since all the variants can use the same file.
-ppa_file_name <- file.path(zsetup_root, project_name, ppa_config_file)
-ppa_cmd_string <- paste(c("LSM", ppa_raster_file, 0, -1, 0), collapse = " ")
-write(ppa_cmd_string, ppa_file_name)
-
-# Need to define ppa_config.txt relative to the bat-file (same dir)-
-variant1 <- set_dat_param(variant1, "post-processing list file",
-                          ppa_config_file)
-
-# Define groups. Features 1-12 are ecosystem services, Features 13-771 are
-# species features.
-groups(variant1) <- c(rep(1, NESFEATURES),
-                      rep(2, NBDFEATURES))
-groupnames(variant1) <- c("1" = "ecosystem_services", "2" = "species")
-# Set groups use and groups file
-variant1 <- set_dat_param(variant1, "use groups", 1)
-# Note that groups file location is always relative to the bat file
-groups_file <- file.path(variant1@name, paste0(variant1@name, "_groups.txt"))
-variant1 <- set_dat_param(variant1, "groups file", groups_file)
-
-# Save variant
-save_zvariant(variant1, dir = file.path(zsetup_root, project_name),
-              overwrite = TRUE, debug_msg = FALSE)
+variant1 <- setup_sppdata(variant1, group = "ALL")
+variant1 <- setup_groups(variant1, group = "ALL", weights = FALSE)
+variant1 <- setup_ppa(variant1)
+save_changes(variant1)
 
 ## 02_abf ---------------------------------------------------------------------
 
 variant2 <- get_variant(priocomp_zproject, 2)
+variant2 <- setup_sppdata(variant2, group = "ALL")
+variant2 <- setup_groups(variant2, group = "ALL", weights = FALSE)
+# Set removal rule
 variant2 <- set_dat_param(variant2, "removal rule", 2)
-variant2 <- set_dat_param(variant2, "post-processing list file",
-                          ppa_config_file)
-
-# Define groups. Features 1-12 are ecosystem services, Features 13-771 are
-# species features.
-groups(variant2) <- c(rep(1, NESFEATURES),
-                      rep(2, NBDFEATURES))
-groupnames(variant2) <- c("1" = "ecosystem_services", "2" = "species")
-# Set groups use and groups file
-variant2 <- set_dat_param(variant2, "use groups", 1)
-# Note that groups file location is always relative to the bat file
-groups_file <- file.path(variant2@name, paste0(variant2@name, "_groups.txt"))
-variant2 <- set_dat_param(variant2, "groups file", groups_file)
-
-save_zvariant(variant2, dir = file.path(zsetup_root, project_name),
-              overwrite = TRUE, debug_msg = FALSE)
+variant2 <- setup_ppa(variant2)
+save_changes(variant2)
 
 ## 03_caz_wgt ----------------------------------------------------------------
+
 variant3 <- get_variant(priocomp_zproject, 3)
-variant3 <- set_dat_param(variant3, "removal rule", 1)
-variant3 <- set_dat_param(variant3, "post-processing list file",
-                          ppa_config_file)
-
-# Define groups. Features 1-12 are ecosystem services, Features 13-771 are
-# species features.
-groups(variant3) <- c(rep(1, NESFEATURES),
-                      rep(2, NBDFEATURES))
-groupnames(variant3) <- c("1" = "ecosystem_services", "2" = "species")
-# Set groups use and groups file
-variant3 <- set_dat_param(variant3, "use groups", 1)
-# Note that groups file location is always relative to the bat file
-groups_file <- file.path(variant3@name, paste0(variant3@name, "_groups.txt"))
-variant3 <- set_dat_param(variant3, "groups file", groups_file)
-
-# Give weight of NESFEATURES + NBDFEATURES / NESFEATURES to each ES. Altogether,
-# there are NBDFEATURES species features. Give weight 1 to each.
-sppweights(variant3) <- c(rep(nfeatures(variant3) / NESFEATURES, NESFEATURES),
-                          rep(1, nfeatures(variant3) - NESFEATURES))
-
-save_zvariant(variant3, dir = file.path(zsetup_root, project_name),
-              overwrite = TRUE, debug_msg = FALSE)
+variant3 <- setup_sppdata(variant3, group = "ALL")
+variant3 <- setup_groups(variant3, group = "ALL", weights = TRUE)
+variant3 <- setup_ppa(variant3)
+save_changes(variant3)
 
 ## 04_abf_wgt ----------------------------------------------------------------
+
 variant4 <- get_variant(priocomp_zproject, 4)
+variant4 <- setup_sppdata(variant4, group = "ALL")
+variant4 <- setup_groups(variant4, group = "ALL", weights = TRUE)
 variant4 <- set_dat_param(variant4, "removal rule", 2)
-variant4 <- set_dat_param(variant4, "post-processing list file",
-                          ppa_config_file)
-
-# Define groups.
-groups(variant4) <-  c(rep(1, NESFEATURES),
-                       rep(2, NBDFEATURES))
-groupnames(variant4) <- c("1" = "ecosystem_services", "2" = "species")
-# Set groups use and groups file
-variant4 <- set_dat_param(variant4, "use groups", 1)
-# Note that groups file location is always relative to the bat file
-groups_file <- file.path(variant4@name, paste0(variant4@name, "_groups.txt"))
-variant4 <- set_dat_param(variant4, "groups file", groups_file)
-
-# Give weight of 759 / 12 to each. Altogether, there are 759 species
-# features. Give weight 1 to each.
-sppweights(variant4) <- c(rep(nfeatures(variant4) / NESFEATURES, NESFEATURES),
-                          rep(1, nfeatures(variant4) - NESFEATURES))
-
-save_zvariant(variant4, dir = file.path(zsetup_root, project_name),
-              overwrite = TRUE, debug_msg = FALSE)
-
+variant4 <- setup_ppa(variant4)
+save_changes(variant4)
 
 # Just ecoystem services ----------------------------------------------------
 
 ## 05_caz_es ----------------------------------------------------------------
 
 variant5 <- get_variant(priocomp_zproject, 5)
+variant5 <- setup_sppdata(variant5, group = "ES")
+variant5 <- setup_groups(variant5, group = "ES", weights = FALSE)
+variant5 <- setup_ppa(variant5)
+save_changes(variant5)
 
-ppa_file_name <- file.path(zsetup_root, project_name, ppa_config_file)
-ppa_cmd_string <- paste(c("LSM", ppa_raster_file, 0, -1, 0), collapse = " ")
-write(ppa_cmd_string, ppa_file_name)
-variant5 <- set_dat_param(variant5, "post-processing list file",
-                          ppa_config_file)
-
-# Select ONLY ES features
-sppdata(variant5) <- sppdata(variant5)[1:NESFEATURES,]
-
-# Save variant
-save_zvariant(variant5, dir = file.path(zsetup_root, project_name),
-              overwrite = TRUE, debug_msg = FALSE)
-
-## 06_abf ----------------------------------------------------------------
+## 06_abf_es ----------------------------------------------------------------
 
 variant6 <- get_variant(priocomp_zproject, 6)
+variant6 <- setup_sppdata(variant6, group = "ES")
+variant6 <- setup_groups(variant6, group = "ES", weights = FALSE)
 variant6 <- set_dat_param(variant6, "removal rule", 2)
-variant6 <- set_dat_param(variant6, "post-processing list file",
-                          ppa_config_file)
-
-ppa_file_name <- file.path(zsetup_root, project_name, ppa_config_file)
-ppa_cmd_string <- paste(c("LSM", ppa_raster_file, 0, -1, 0), collapse = " ")
-write(ppa_cmd_string, ppa_file_name)
-variant6 <- set_dat_param(variant6, "post-processing list file",
-                          ppa_config_file)
-
-# Select ONLY ES features
-sppdata(variant6) <- sppdata(variant6)[1:NESFEATURES,]
-
-# Save variant
-save_zvariant(variant6, dir = file.path(zsetup_root, project_name),
-              overwrite = TRUE, debug_msg = FALSE)
+variant6 <- setup_ppa(variant6)
+save_changes(variant6)
 
 # Just biodiversity features ------------------------------------------------
 
 ## 07_caz_bd ----------------------------------------------------------------
 
 variant7 <- get_variant(priocomp_zproject, 7)
-
-ppa_file_name <- file.path(zsetup_root, project_name, ppa_config_file)
-ppa_cmd_string <- paste(c("LSM", ppa_raster_file, 0, -1, 0), collapse = " ")
-write(ppa_cmd_string, ppa_file_name)
-variant7 <- set_dat_param(variant7, "post-processing list file",
-                          ppa_config_file)
-
-# Select ONLY BD features
-sppdata(variant7) <- sppdata(variant7)[(NESFEATURES + 1):nfeatures(variant7),]
-
-# Define groups based on taxon. NOTE: for now, groups hard coded
-groups(variant7) <- c(rep(1, NAMPHIBIANS),
-                      rep(2, NBIRDS),
-                      rep(3, NMAMMALS),
-                      rep(4, NREPTILES))
-groupnames(variant7) <- c("1" = "amphibians", "2" = "birds", "3" = "mammals",
-                          "4" = "reptiles")
-# Set groups use and groups file
-variant7 <- set_dat_param(variant7, "use groups", 1)
-# Note that groups file location is always relative to the bat file
-groups_file <- file.path(variant7@name, paste0(variant7@name, "_groups.txt"))
-variant7 <- set_dat_param(variant7, "groups file", groups_file)
-
-# Save variant
-save_zvariant(variant7, dir = file.path(zsetup_root, project_name),
-              overwrite = TRUE, debug_msg = FALSE)
+variant7 <- setup_sppdata(variant7, group = "BD")
+variant7 <- setup_groups(variant7, group = "BD", weights = FALSE)
+variant7 <- setup_ppa(variant7)
+save_changes(variant7)
 
 ## 08_abf_bd ----------------------------------------------------------------
 
 variant8 <- get_variant(priocomp_zproject, 8)
+variant8 <- setup_sppdata(variant8, group = "BD")
+variant8 <- setup_groups(variant8, group = "BD", weights = FALSE)
 variant8 <- set_dat_param(variant8, "removal rule", 2)
-variant8 <- set_dat_param(variant8, "post-processing list file",
-                          ppa_config_file)
-
-ppa_file_name <- file.path(zsetup_root, project_name, ppa_config_file)
-ppa_cmd_string <- paste(c("LSM", ppa_raster_file, 0, -1, 0), collapse = " ")
-write(ppa_cmd_string, ppa_file_name)
-variant8 <- set_dat_param(variant8, "post-processing list file",
-                          ppa_config_file)
-
-# Select ONLY BD features
-sppdata(variant8) <- sppdata(variant8)[(NESFEATURES + 1):nfeatures(variant8),]
-
-# Define groups based on taxon. NOTE: for now, groups hard coded
-groups(variant8) <- c(rep(1, NAMPHIBIANS),
-                      rep(2, NBIRDS),
-                      rep(3, NMAMMALS),
-                      rep(4, NREPTILES))
-groupnames(variant8) <- c("1" = "amphibians", "2" = "birds", "3" = "mammals",
-                          "4" = "reptiles")
-# Set groups use and groups file
-variant8 <- set_dat_param(variant8, "use groups", 1)
-# Note that groups file location is always relative to the bat file
-groups_file <- file.path(variant8@name, paste0(variant8@name, "_groups.txt"))
-variant8 <- set_dat_param(variant8, "groups file", groups_file)
-
-# Save variant
-save_zvariant(variant8, dir = file.path(zsetup_root, project_name),
-              overwrite = TRUE, debug_msg = FALSE)
+variant8 <- setup_ppa(variant8)
+save_changes(variant8)
