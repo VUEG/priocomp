@@ -42,9 +42,10 @@ GROUPNAMES_BD <- c("1" = "amphibians", "2" = "birds", "3" = "mammals",
 # zero-weight for costs (0.0), and 2) equal aggregate weights.
 
 # 1) Equal feature weights
-EQUAL_WEIGHTS_ALL <- c(rep(1, NESFEATURES), rep(1, NBDFEATURES), 0)
-EQUAL_WEIGHTS_ES <- c(rep(1, NESFEATURES), 0)
-EQUAL_WEIGHTS_BD <- c(rep(1, NBDFEATURES), 0)
+EQUAL_WEIGHTS_ALL <- c(rep(1, NESFEATURES), rep(1, NBDFEATURES),
+                       rep(0, NCOSTFEATURES))
+EQUAL_WEIGHTS_ES <- c(rep(1, NESFEATURES), rep(0, NCOSTFEATURES))
+EQUAL_WEIGHTS_BD <- c(rep(1, NBDFEATURES), rep(0, NCOSTFEATURES))
 
 # 2) Equal group aggregate weights
 
@@ -55,11 +56,17 @@ W_ES <- rep(NBDFEATURES / NESFEATURES, NESFEATURES)
 W_BD <- rep(1, NBDFEATURES)
 W_NO_COST <- rep(0, NCOSTFEATURES)
 W_COST <- rep(-(NBDFEATURES / NCOSTFEATURES), NCOSTFEATURES)
-GROUP_WEIGHTS_ALL <- round(c(W_ES, W_BD, W_NO_COST), 2)
-GROUP_WEIGHTS_ALL_COST <- round(c(W_ES, W_BD, W_COST), 2)
-# Note: not implemented yet
+
+GROUP_WEIGHTS_ALL <- round(c(W_ES, W_BD, W_NO_COST), 3)
+GROUP_WEIGHTS_ALL_COST <- round(c(W_ES, W_BD, W_COST), 3)
+
 GROUP_WEIGHTS_ES <- EQUAL_WEIGHTS_ES
+GROUP_WEIGHTS_ES_COST <- round(c(rep(1, NESFEATURES),
+                                 rep(-(NESFEATURES / NCOSTFEATURES), NCOSTFEATURES)), 3)
+
 GROUP_WEIGHTS_BD <- EQUAL_WEIGHTS_BD
+GROUP_WEIGHTS_BD_COST <- round(c(rep(1, NBDFEATURES),
+                                 rep(-(NBDFEATURES / NCOSTFEATURES), NCOSTFEATURES)), 3)
 
 # Project variables
 
@@ -104,6 +111,19 @@ rearrange_features <- function(variant) {
   new_spp_data <- rbind(spp_data[c(1, 3:nrow(spp_data)),], spp_data[2,])
   row.names(new_spp_data) <- 1:nrow(new_spp_data)
   sppdata(variant) <- new_spp_data
+  return(variant)
+}
+
+setup_costs <- function(variant, group) {
+  if (group == "ALL") {
+    sppweights(variant) <- GROUP_WEIGHTS_ALL_COST
+  } else if (group == "ES") {
+    sppweights(variant) <- GROUP_WEIGHTS_ES_COST
+  } else if (group == "BD") {
+    sppweights(variant) <- GROUP_WEIGHTS_BD_COST
+  } else {
+    stop("Unknown group: ", group)
+  }
   return(variant)
 }
 
@@ -232,6 +252,25 @@ variant4 <- setup_groups(variant4, group = "ALL", weights = TRUE)
 variant4 <- set_dat_param(variant4, "removal rule", 2)
 variant4 <- setup_ppa(variant4)
 save_changes(variant4)
+
+## 05_caz_wgt_cst ------------------------------------------------------------
+
+variant5 <- get_variant(priocomp_zproject, 5)
+variant5 <- setup_sppdata(variant5, group = "ALL")
+variant5 <- setup_groups(variant5, group = "ALL", weights = TRUE)
+variant5 <- setup_costs(variant5, group = "ALL")
+variant5 <- setup_ppa(variant5)
+save_changes(variant5)
+
+## 06_abf_wgt_----------------------------------------------------------------
+
+variant6 <- get_variant(priocomp_zproject, 6)
+variant6 <- setup_sppdata(variant6, group = "ALL")
+variant6 <- setup_groups(variant6, group = "ALL", weights = TRUE)
+variant6 <- set_dat_param(variant6, "removal rule", 2)
+variant6 <- setup_costs(variant6, group = "ALL")
+variant6 <- setup_ppa(variant6)
+save_changes(variant6)
 
 # Just ecoystem services ----------------------------------------------------
 
