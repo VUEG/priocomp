@@ -262,7 +262,7 @@ variant5 <- setup_costs(variant5, group = "ALL")
 variant5 <- setup_ppa(variant5)
 save_changes(variant5)
 
-## 06_abf_wgt_----------------------------------------------------------------
+## 06_abf_wgt_cst -----------------------------------------------------------
 
 variant6 <- get_variant(priocomp_zproject, 6)
 variant6 <- setup_sppdata(variant6, group = "ALL")
@@ -271,8 +271,6 @@ variant6 <- set_dat_param(variant6, "removal rule", 2)
 variant6 <- setup_costs(variant6, group = "ALL")
 variant6 <- setup_ppa(variant6)
 save_changes(variant6)
-
-# Just ecoystem services ----------------------------------------------------
 
 ## 07_caz_es ----------------------------------------------------------------
 
@@ -291,7 +289,24 @@ variant8 <- set_dat_param(variant8, "removal rule", 2)
 variant8 <- setup_ppa(variant8)
 save_changes(variant8)
 
-# Just biodiversity features ------------------------------------------------
+## 09_caz_es_cst -----------------------------------------------------------
+
+variant9 <- get_variant(priocomp_zproject, 9)
+variant9 <- setup_sppdata(variant9, group = "ES")
+variant9 <- setup_groups(variant9, group = "ES", weights = FALSE)
+variant9 <- setup_costs(variant9, group = "ES")
+variant9 <- setup_ppa(variant9)
+save_changes(variant9)
+
+## 10_abf_es_cst -----------------------------------------------------------
+
+variant10 <- get_variant(priocomp_zproject, 10)
+variant10 <- setup_sppdata(variant10, group = "ES")
+variant10 <- setup_groups(variant10, group = "ES", weights = FALSE)
+variant10 <- set_dat_param(variant10, "removal rule", 2)
+variant10 <- setup_costs(variant10, group = "ES")
+variant10 <- setup_ppa(variant10)
+save_changes(variant10)
 
 ## 11_caz_bd ----------------------------------------------------------------
 
@@ -309,3 +324,22 @@ variant12 <- setup_groups(variant12, group = "BD", weights = FALSE)
 variant12 <- set_dat_param(variant12, "removal rule", 2)
 variant12 <- setup_ppa(variant12)
 save_changes(variant12)
+
+## 13_caz_bd_cst -----------------------------------------------------------
+
+variant13 <- get_variant(priocomp_zproject, 13)
+variant13 <- setup_sppdata(variant13, group = "BD")
+variant13 <- setup_groups(variant13, group = "BD", weights = FALSE)
+variant13 <- setup_costs(variant13, group = "BD")
+variant13 <- setup_ppa(variant13)
+save_changes(variant13)
+
+## 14_abf_bd_cst -----------------------------------------------------------
+
+variant14 <- get_variant(priocomp_zproject, 14)
+variant14 <- setup_sppdata(variant14, group = "BD")
+variant14 <- setup_groups(variant14, group = "BD", weights = FALSE)
+variant14 <- set_dat_param(variant14, "removal rule", 2)
+variant14 <- setup_costs(variant14, group = "BD")
+variant14 <- setup_ppa(variant14)
+save_changes(variant14)
