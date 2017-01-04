@@ -1,10 +1,11 @@
 name: priocomp
 channels:
   - defaults
+  - conda-forge
+  - anaconda
   - bioconda
   - mutirri
   - gurobi
-  - conda-forge
 dependencies:
   - python=3.5*
   - click
