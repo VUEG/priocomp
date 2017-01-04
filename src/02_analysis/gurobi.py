@@ -7,9 +7,6 @@ Module can be used alone or as part of Snakemake workflow.
 
 import click
 import logging
-import matplotlib
-matplotlib.use('Qt4Agg')
-from matplotlib import pyplot
 import numpy as np
 import numpy.ma as ma
 import pdb
