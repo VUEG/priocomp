@@ -659,8 +659,8 @@ rule prioritize_ilp_all:
         all=rules.harmonize_data.output.harmonized[:-1]+UDR_SRC_DATASETS,
         cost=rules.harmonize_data.output.harmonized[-1]
     output:
-        all_w="analyses/ILP/ilp_all_weights.tif",
-        all_w_c="analyses/ILP/ilp_all_weights_costs.tif"
+        all_w="analyses/ILP/ilp_all_weights.tif"
+        #all_w_c="analyses/ILP/ilp_all_weights_costs.tif"
     log:
         all_w="logs/prioritize_ilp_all_weights.log",
         all_w_c="logs/prioritize_ilp_all_weights_costs.log"
@@ -680,12 +680,12 @@ rule prioritize_ilp_all:
                                  step=0.01, save_intermediate=True,
                                  verbose=True)
         # With weights and costs
-        llogger = utils.get_local_logger("optimize_gurobi_all_weights_costs",
-                                         log.all_w_c)
-        gurobi.prioritize_gurobi(input.all, output.all_w_c, input.cost, logger=llogger,
-                                 ol_normalize=True, weights=WEIGHTS,
-                                 step=0.01, save_intermediate=True,
-                                 verbose=True)
+        #llogger = utils.get_local_logger("optimize_gurobi_all_weights_costs",
+        #                                 log.all_w_c)
+        #gurobi.prioritize_gurobi(input.all, output.all_w_c, input.cost, logger=llogger,
+        #                         ol_normalize=True, weights=WEIGHTS,
+        #                         step=0.01, save_intermediate=True,
+        #                         verbose=True)
 
 rule prioritize_ilp_es:
     input:
@@ -693,8 +693,8 @@ rule prioritize_ilp_es:
         es=rules.harmonize_data.output.harmonized[:-1],
         cost=rules.harmonize_data.output.harmonized[-1]
     output:
-        es="analyses/ILP/ilp_es.tif",
-        es_c="analyses/ILP/ilp_es_costs.tif"
+        es="analyses/ILP/ilp_es.tif"
+        #es_c="analyses/ILP/ilp_es_costs.tif"
     log:
         es="logs/prioritize_ilp_es.log",
         es_c="logs/prioritize_ilp_es_costs.log"
@@ -707,18 +707,18 @@ rule prioritize_ilp_es:
                                  ol_normalize=True, step=0.01,
                                  save_intermediate=True, verbose=True)
         # With costs
-        llogger = utils.get_local_logger("optimize_gurobi_es_c", log.es_c)
-        gurobi.prioritize_gurobi(input.es, output.es_c, input.cost, logger=llogger,
-                                 ol_normalize=True, step=0.01,
-                                 save_intermediate=True, verbose=True)
+        #llogger = utils.get_local_logger("optimize_gurobi_es_c", log.es_c)
+        #gurobi.prioritize_gurobi(input.es, output.es_c, input.cost, logger=llogger,
+        #                         ol_normalize=True, step=0.01,
+        #                         save_intermediate=True, verbose=True)
 
 rule prioritize_ilp_bd:
     input:
         bd=UDR_SRC_DATASETS,
         cost=rules.harmonize_data.output.harmonized[-1]
     output:
-        bd="analyses/ILP/ilp_bd.tif",
-        bd_c="analyses/ILP/ilp_bd_costs.tif"
+        bd="analyses/ILP/ilp_bd.tif"
+        #bd_c="analyses/ILP/ilp_bd_costs.tif"
     log:
         bd="logs/prioritize_ilp_bd.log",
         bd_c="logs/prioritize_ilp_bd_costs.log"
@@ -732,10 +732,10 @@ rule prioritize_ilp_bd:
                                  save_intermediate=True, verbose=True)
 
         # With costs
-        llogger = utils.get_local_logger("optimize_gurobi_bd_c", log.bd_c)
-        gurobi.prioritize_gurobi(input.bd, output.bd, input.cost, logger=llogger,
-                                 ol_normalize=True, step=0.01,
-                                 save_intermediate=True, verbose=True)
+        #llogger = utils.get_local_logger("optimize_gurobi_bd_c", log.bd_c)
+        #gurobi.prioritize_gurobi(input.bd, output.bd, input.cost, logger=llogger,
+        #                         ol_normalize=True, step=0.01,
+        #                         save_intermediate=True, verbose=True)
 
 rule prioritize_ilp:
     input:
