@@ -81,6 +81,9 @@ def normalize(x):
     return (x - x_min) / (x_max - x_min)
 
 
+    return x_normalized
+
+
 def ol_normalize(x):
     """ Normalize layer based on occurrence levels in the array.
 

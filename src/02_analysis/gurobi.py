@@ -57,7 +57,9 @@ def optimize_maxcover(cost, fraction, rij, normalize=False, verbose=False,
     if normalize:
         logger.debug(" [DEBUG] Normalizing cost and rij arrays")
         rij = spatutils.normalize(rij)
-        cost = spatutils.normalize(cost)
+        # Don't normalize costs if everything is equal
+        if not np.max(cost) == np.min(cost):
+            cost = spatutils.normalize(cost)
 
     try:
         logger.debug(" [DEBUG] Starting optimization")
