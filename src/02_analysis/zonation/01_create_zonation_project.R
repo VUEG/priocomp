@@ -87,8 +87,13 @@ PROJECT_NAME <- "_priocomp"
 
 # Helper functions --------------------------------------------------------
 
-create_sh_file <- function(variant) {
-  bat_file <- variant@bat.file
+create_sh_file <- function(x) {
+  if (class(x) == "Zvariant") {
+    bat_file <- x@bat.file
+  } else {
+    bat_file <- x
+  }
+
   sh_file <- gsub("\\.bat", "\\.sh", bat_file)
 
   cmd_lines <- readLines(bat_file)
@@ -96,12 +101,56 @@ create_sh_file <- function(variant) {
 
   for (line in cmd_lines) {
     line <- gsub("call ", "", line)
+    line <- gsub("\\.exe", "", line)
     new_cmd_lines <- c(new_cmd_lines, line)
   }
 
   file_con <- file(sh_file)
   writeLines(new_cmd_lines, file_con)
   close(file_con)
+  Sys.chmod(sh_file)
+  return(invisible(TRUE))
+}
+
+create_load_variant <- function(name, setup_variant, load_raster) {
+  from_name <- setup_variant@name
+  to_name <- name
+  # Copy and rename the setup variant
+  from_dir <- file.path(ZSETUP_ROOT, PROJECT_NAME, from_name)
+  to_dir <- file.path(ZSETUP_ROOT, PROJECT_NAME, to_name)
+  dir.create(to_dir)
+  from_files <- list.files(from_dir, full.names = TRUE,
+                           recursive = TRUE, include.dirs = TRUE)
+  invisible(file.copy(from_files, to_dir, recursive = TRUE))
+  # Rename subcomponents
+  to_files <- list.files(to_dir, full.names = TRUE,
+                         recursive = TRUE, include.dirs = TRUE)
+  for (from_item in to_files) {
+    to_item <- gsub(from_name, to_name, from_item)
+    file.rename(from_item, to_item)
+  }
+  # List renamed files
+  to_files <- list.files(to_dir, full.names = TRUE,
+                         recursive = TRUE, include.dirs = TRUE)
+
+  # Rename the groups file definition in dat file
+  dat_file <- to_files[grepl("\\.dat$", to_files)]
+  dat_content <- readLines(dat_file, -1)
+  grp_file_def <- dat_content[grepl("^groups file", dat_content)]
+  dat_content[grepl("^groups file", dat_content)] <- gsub(from_name, to_name, grp_file_def)
+  writeLines(dat_content, dat_file)
+
+  # Copy and modify the bat-file
+  from_bat_file <- setup_variant@bat.file
+  to_bat_file <- gsub(from_name, to_name, from_bat_file)
+  invisible(file.copy(from_bat_file, to_bat_file))
+  bat_content <- readLines(to_bat_file, -1)
+  bat_content <- gsub(from_name, to_name, bat_content)
+  # Replace new solution call with the loading command
+  bat_content <- gsub("-r", paste0("-l", load_raster), bat_content)
+  writeLines(bat_content, to_bat_file)
+  # Create a sh-file
+  create_sh_file(to_bat_file)
 
   return(invisible(TRUE))
 }
@@ -343,3 +392,99 @@ variant14 <- set_dat_param(variant14, "removal rule", 2)
 variant14 <- setup_costs(variant14, group = "BD")
 variant14 <- setup_ppa(variant14)
 save_changes(variant14)
+
+# PRE-LOADING
+
+folder_prefix <- paste0(ZSETUP_ROOT, "/", PROJECT_NAME, "/")
+
+## 15_load_es_all ----------------------------------------------------------
+#  -> setup from 04_abf_wgt, ranking from (expanded) 08_abf_es
+
+load_rank_raster <- file.path(gsub(folder_prefix,"", variant8@results@root),
+                              "08_abf_es.rank_expanded.compressed.tif")
+create_load_variant(name = "15_load_es_all", setup_variant = variant4,
+                    load_raster = load_rank_raster)
+
+## 16_load_bd_all ----------------------------------------------------------
+#  -> setup from 04_abf_wgt, ranking from (expanded) 12_abf_bd
+
+load_rank_raster <- file.path(gsub(folder_prefix,"", variant12@results@root),
+                              "12_abf_bd.rank_expanded.compressed.tif")
+create_load_variant(name = "16_load_bd_all", setup_variant = variant4,
+                    load_raster = load_rank_raster)
+
+## 17_load_es_all_cst ------------------------------------------------------
+#  -> setup from 06_abf_wgt_cst, ranking from (expanded) 10_abf_es_cst
+
+load_rank_raster <- file.path(gsub(folder_prefix,"", variant10@results@root),
+                              "10_abf_es_cst.rank_expanded.compressed.tif")
+create_load_variant(name = "17_load_es_all_cst", setup_variant = variant6,
+                    load_raster = load_rank_raster)
+
+## 18_load_bd_all_cst ------------------------------------------------------
+#  -> setup from 06_abf_wgt_cst, ranking from (expanded) 14_abf_bd_cst
+
+load_rank_raster <- "14_abf_bd_cst.rank_expanded.compressed.tif"
+create_load_variant(name = "18_load_bd_all_cst", setup_variant = variant6,
+                    load_raster = file.path(variant14@results@root,
+                                            load_rank_raster))
+
+## 19_load_es_bd -----------------------------------------------------------
+#  -> setup from 12_abf_bd, ranking from (matched) 08_abf_es
+
+load_rank_raster <- file.path(gsub(folder_prefix,"", variant12@results@root),
+                              "08_abf_es.rank_bd_matched.compressed.tif")
+create_load_variant(name = "19_load_es_bd", setup_variant = variant12,
+                    load_raster = load_rank_raster)
+
+## 20_load_bd_es -----------------------------------------------------------
+#  -> setup from 08_abf_es, ranking from (matched) 12_abf_bd
+
+load_rank_raster <- file.path(gsub(folder_prefix,"", variant8@results@root),
+                              "12_abf_bd.rank_es_matched.compressed.tif")
+create_load_variant(name = "20_load_bd_es", setup_variant = variant8,
+                    load_raster = load_rank_raster)
+
+## 21_load_es_bd_cst -------------------------------------------------------
+#  -> setup from 14_abf_bd_cst, ranking from (matched) 10_abf_es_cst
+
+load_rank_raster <- file.path(gsub(folder_prefix,"", variant10@results@root),
+                              "10_abf_es_cst.rank_bd_matched.compressed.tif")
+create_load_variant(name = "21_load_es_bd_cst", setup_variant = variant14,
+                    load_raster = load_rank_raster)
+
+## 22_load_bd_es_cst -------------------------------------------------------
+#  -> setup from 10_abf_es_cst, ranking from (matched) 14_abf_bd_cst
+
+load_rank_raster <- file.path(gsub(folder_prefix,"", variant14@results@root),
+                              "14_abf_bd_cst.rank_es_matched.compressed.tif")
+create_load_variant(name = "22_load_bd_es_cst", setup_variant = variant10,
+                    load_raster = load_rank_raster)
+
+## 23_load_rwr_all ---------------------------------------------------------
+#  -> setup from 04_abf_wgt, ranking from (expanded) rwr_all_weights
+
+load_rank_raster <- "../../RWR/rwr_all_weights_expanded.tif"
+create_load_variant(name = "23_load_rwr_all", setup_variant = variant4,
+                    load_raster = load_rank_raster)
+
+## 24_load_ilp_all ---------------------------------------------------------
+#  -> setup from 04_abf_wgt, ranking from (expanded) ilp_all_weights
+
+load_rank_raster <- "../../ILP/ilp_all_weights_expanded.tif"
+create_load_variant(name = "24_load_ilp_all", setup_variant = variant4,
+                    load_raster = load_rank_raster)
+
+## 25_load_rwr_all_cst -----------------------------------------------------
+#  -> setup from 06_abf_wgt_cst, ranking from (expanded) rwr_all_weights_cost
+
+load_rank_raster <- "../../RWR/rwr_all_weights_costs_expanded.tif"
+create_load_variant(name = "25_load_rwr_all_cst", setup_variant = variant6,
+                    load_raster = load_rank_raster)
+
+## 26_load_ilp_all_cst -----------------------------------------------------
+#  -> setup from 06_abf_wgt_cst, ranking from (expanded) ilp_all_weights_cost
+
+load_rank_raster <- "../../ILP/ilp_all_weights_costs_expanded.tif"
+create_load_variant(name = "26_load_ilp_all_cst", setup_variant = variant6,
+                    load_raster = load_rank_raster)
