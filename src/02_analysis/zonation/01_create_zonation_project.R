@@ -83,7 +83,7 @@ ZSETUP_ROOT <- "analyses/zonation"
 PPA_RASTER_FILE <- "../../../data/processed/eurostat/nuts_level2/NUTS_RG_01M_2013_level2.tif"
 PPA_CONFIG_FILE <- "ppa_config.txt"
 
-PROJECT_NAME <- "_priocomp"
+PROJECT_NAME <- "priocomp"
 
 # Helper functions --------------------------------------------------------
 
