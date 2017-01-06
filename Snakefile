@@ -613,23 +613,37 @@ rule create_zon_coverage:
 
 rule expand_zon_coverage:
     input:
-        all_w="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
-        es="analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif",
-        bd="analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif",
+        all_w="analyses/zonation/priocomp/04_abf_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif",
+        all_w_c="analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst.rank.compressed.tif",
+        es="analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es.rank.compressed.tif",
+        es_c="analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst.rank.compressed.tif",
+        bd="analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd.rank.compressed.tif",
+        bd_c="analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst.rank.compressed.tif"
     output:
-        es_expanded="analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank_expanded.compressed.tif",
-        bd_expanded="analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank_expanded.compressed.tif"
+        es_expanded="analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es.rank_expanded.compressed.tif",
+        es_c_expanded="analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst.rank_expanded.compressed.tif",
+        bd_expanded="analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd.rank_expanded.compressed.tif",
+        bd_c_expanded="analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst.rank_expanded.compressed.tif"
     log:
-        es="logs/expand_zon_06_es.log",
-        bd="logs/expand_zon_08_bd.log"
+        es="logs/expand_zon_08_es.log",
+        es_c="logs/expand_zon_10_es_cost.log",
+        bd="logs/expand_zon_12_bd.log",
+        bd_c="logs/expand_zon_14_bd_cost.log",
     message:
         "Post-processing (expanding) ZON results..."
     run:
         llogger = utils.get_local_logger("expand_es", log.es)
         coverage.expand_value_coverage(input.es, input.all_w, output.es_expanded,
                                        logger=llogger)
+        llogger = utils.get_local_logger("expand_es_cost", log.es_c)
+        coverage.expand_value_coverage(input.es_c, input.all_w_c, output.es_c_expanded,
+                                       logger=llogger)
+
         llogger = utils.get_local_logger("expand_bd", log.bd)
         coverage.expand_value_coverage(input.bd, input.all_w, output.bd_expanded,
+                                       logger=llogger)
+        llogger = utils.get_local_logger("expand_bd_cost", log.bd_c)
+        coverage.expand_value_coverage(input.bd_c, input.all_w_c, output.bd_c_expanded,
                                        logger=llogger)
 
 rule match_zon_esbd_coverages:
