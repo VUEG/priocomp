@@ -648,22 +648,35 @@ rule expand_zon_coverage:
 
 rule match_zon_esbd_coverages:
     input:
-        es="analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif",
-        bd="analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif",
+        es="analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es.rank.compressed.tif",
+        es_c="analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst.rank.compressed.tif",
+        bd="analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd.rank.compressed.tif",
+        bd_c="analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst.rank.compressed.tif"
     output:
-        es_matched="analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank_bd_matched.compressed.tif",
-        bd_matched="analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank_es_matched.compressed.tif"
+        es_matched="analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es.rank_bd_matched.compressed.tif",
+        es_c_matched="analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst.rank_bd_matched.compressed.tif",
+        bd_matched="analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd.rank_es_matched.compressed.tif",
+        bd_c_matched="analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst.rank_es_matched.compressed.tif"
     log:
-        es="logs/match_zon_06_es_bd.log",
-        bd="logs/match_zon_08_bd_es.log"
+        es="logs/match_zon_08_es_bd.log",
+        es_c="logs/match_zon_10_es_bd_cost.log",
+        bd="logs/match_zon_12_bd_es.log",
+        bd_c="logs/match_zon_14_bd_es_cost.log"
     message:
         "Post-processing (matching) ZON results..."
     run:
         llogger = utils.get_local_logger("match_es_bd", log.es)
         coverage.expand_value_coverage(input.es, input.bd, output.es_matched,
                                        logger=llogger)
+        llogger = utils.get_local_logger("match_es_bd_cost", log.es_c)
+        coverage.expand_value_coverage(input.es_C, input.bd_c, output.es_c_matched,
+                                       logger=llogger)
+
         llogger = utils.get_local_logger("match_bd_es", log.bd)
         coverage.expand_value_coverage(input.bd, input.es, output.bd_matched,
+                                       logger=llogger)
+        llogger = utils.get_local_logger("match_bd_es_cost", log.bd_c)
+        coverage.expand_value_coverage(input.bd_c, input.es_c, output.bd_c_matched,
                                        logger=llogger)
 
 # ILP ------------------------------------------------------------------------
