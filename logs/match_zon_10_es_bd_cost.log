@@ -1,0 +1,5 @@
+2017-01-10 18:06:50 [match_es_bd_cost] [INFO ] Reading and processing raster analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst.rank.compressed.tif
+2017-01-10 18:06:51 [match_es_bd_cost] [DEBUG] Number of informative cells in the data: 4300866
+2017-01-10 18:06:51 [match_es_bd_cost] [DEBUG] Number of informative cells in the expand mask: 4295634
+2017-01-10 18:06:51 [match_es_bd_cost] [INFO ] Writing output raster analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst.rank_bd_matched.compressed.tif
+2017-01-10 18:06:52 [match_es_bd_cost] [INFO ]  [TIME] Masking took 2.34 sec
