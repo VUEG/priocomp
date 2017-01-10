@@ -1,0 +1,12 @@
+List of biodiversity features (e.g. species) and weights used in analysis in order of columns:
+Weight  distribution-sum  IGRetained TviolationFractRem  Distr-mean-X   Distr-mean-Y  MapFileName
+0,111 	412210,531	412210,53	0,00000	1250,74	1051,45	../../../data/processed/features/datadryad/forest_production_europe/woodprod_average.tif
+0,111 	398752,125	398752,12	0,00000	1211,97	1214,08	../../../data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif
+0,111 	625982,812	625982,81	0,00000	1122,93	1325,32	../../../data/processed/features/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif
+0,111 	485391,156	485391,16	0,00000	1266,90	1091,37	../../../data/processed/features/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif
+0,111 	1264068736,000	1264068736,00	0,00000	1076,29	1399,87	../../../data/processed/features/provide/erosion_prevention/erosion_prevention.tif
+0,111 	1470617,000	1470617,00	0,00000	1158,58	1233,53	../../../data/processed/features/provide/floodregulation/floodregulation.tif
+0,111 	14701539328,000	14701539328,00	0,00000	1203,14	1151,32	../../../data/processed/features/provide/nature_tourism/nature_tourism.tif
+0,111 	61561728,000	61561728,00	0,00000	1194,71	1265,34	../../../data/processed/features/provide/pollination_flows/pollination_flows.tif
+0,111 	89145256,000	89145256,00	0,00000	1134,63	1228,04	../../../data/processed/features/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif
+-1,000	6826632,000	6826632,00	0,00000	1161,81	1297,41	../../../data/processed/features/eea/pop_density/pop_density_v5.tif
