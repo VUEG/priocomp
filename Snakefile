@@ -494,8 +494,8 @@ rule rescale_data:
 
 rule prioritize_rwr:
     input:
-        all=rules.harmonize_data.output.harmonized+UDR_SRC_DATASETS,
-        es=rules.harmonize_data.output.harmonized,
+        all=rules.harmonize_data.output.harmonized[:-1]+UDR_SRC_DATASETS,
+        es=rules.harmonize_data.output.harmonized[:-1],
         bd=UDR_SRC_DATASETS
     output:
         all="analyses/RWR/rwr_all.tif",
