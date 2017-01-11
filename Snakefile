@@ -613,7 +613,7 @@ rule create_zon_coverage:
 
 rule expand_zon_coverage:
     input:
-        all_w="analyses/zonation/priocomp/04_abf_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif",
+        all_w="analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif",
         all_w_c="analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst.rank.compressed.tif",
         es="analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es.rank.compressed.tif",
         es_c="analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst.rank.compressed.tif",
@@ -669,7 +669,7 @@ rule match_zon_esbd_coverages:
         coverage.expand_value_coverage(input.es, input.bd, output.es_matched,
                                        logger=llogger)
         llogger = utils.get_local_logger("match_es_bd_cost", log.es_c)
-        coverage.expand_value_coverage(input.es_C, input.bd_c, output.es_c_matched,
+        coverage.expand_value_coverage(input.es_c, input.bd_c, output.es_c_matched,
                                        logger=llogger)
 
         llogger = utils.get_local_logger("match_bd_es", log.bd)
