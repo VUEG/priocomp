@@ -432,7 +432,7 @@ create_load_variant(name = "18_load_bd_all_cst", setup_variant = variant6,
 ## 19_load_es_bd -----------------------------------------------------------
 #  -> setup from 12_abf_bd, ranking from (matched) 08_abf_es
 
-load_rank_raster <- file.path(gsub(folder_prefix,"", variant12@results@root),
+load_rank_raster <- file.path(gsub(folder_prefix,"", variant8@results@root),
                               "08_abf_es.rank_bd_matched.compressed.tif")
 create_load_variant(name = "19_load_es_bd", setup_variant = variant12,
                     load_raster = load_rank_raster)
@@ -440,7 +440,7 @@ create_load_variant(name = "19_load_es_bd", setup_variant = variant12,
 ## 20_load_bd_es -----------------------------------------------------------
 #  -> setup from 08_abf_es, ranking from (matched) 12_abf_bd
 
-load_rank_raster <- file.path(gsub(folder_prefix,"", variant8@results@root),
+load_rank_raster <- file.path(gsub(folder_prefix,"", variant12@results@root),
                               "12_abf_bd.rank_es_matched.compressed.tif")
 create_load_variant(name = "20_load_bd_es", setup_variant = variant8,
                     load_raster = load_rank_raster)
