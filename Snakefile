@@ -559,7 +559,7 @@ rule postprocess_rwr:
 
 rule expand_rwr_coverage:
     input:
-        template="analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
+        template="analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif",
         target=rules.prioritize_rwr.output.all_w
     output:
         "analyses/RWR/rwr_all_weights_expanded.tif"
