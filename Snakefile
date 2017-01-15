@@ -686,7 +686,7 @@ rule prioritize_ilp_all:
         all=rules.harmonize_data.output.harmonized[:-1]+UDR_SRC_DATASETS,
         cost=rules.harmonize_data.output.harmonized[-1]
     output:
-        all_w="analyses/ILP/ilp_all_weights.tif"
+        all_w="analyses/ILP/ilp_all_weights.tif",
         all_w_c="analyses/ILP/ilp_all_weights_costs.tif"
     log:
         all_w="logs/prioritize_ilp_all_weights.log",
