@@ -808,18 +808,27 @@ rule postprocess_ilp:
 
 rule expand_ilp_coverage:
     input:
-        template="analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif",,
-        target=rules.prioritize_ilp_all.output.all_w
+        template_w="analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif",
+        template_w_c="analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst.rank.compressed.tif",,
+        all_w=rules.prioritize_ilp_all.output.all_w,
+        all_w_c=rules.prioritize_ilp_all.output.all_w_c,
     output:
-        "analyses/ILP/ilp_all_weights_expanded.tif"
+        all_w="analyses/ILP/ilp_all_weights_expanded.tif",
+        all_w_c="analyses/ILP/ilp_all_weights_costs_expanded.tif"
     log:
-        "logs/expand_ilp_all_w.log"
+        all_w="logs/expand_ilp_all_w.log",
+        all_w_c="logs/expand_ilp_all_w_c.log"
     message:
         "Post-processing (expanding) ILP results..."
     run:
-        llogger = utils.get_local_logger("expand_ilp_w", log[0])
-        coverage.expand_value_coverage(input.target, input.template,
-                                       output[0], logger=llogger)
+        # With weights
+        llogger = utils.get_local_logger("expand_ilp_w", log.all_w)
+        coverage.expand_value_coverage(input.all_w, input.template_w,
+                                       output.all_w, logger=llogger)
+       # With weights and costs
+       llogger = utils.get_local_logger("expand_ilp_w_c", log.all_w_c)
+       coverage.expand_value_coverage(input.all_w_c, input.template_w,
+                                      output.all_w_c, logger=llogger)
 
 ## Compare results ------------------------------------------------------------
 
