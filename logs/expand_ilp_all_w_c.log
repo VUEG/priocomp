@@ -1,0 +1,5 @@
+2017-01-15 13:00:51 [expand_ilp_w_c] [INFO ] Reading and processing raster analyses/ILP/ilp_all_weights_costs.tif
+2017-01-15 13:00:51 [expand_ilp_w_c] [DEBUG] Number of informative cells in the data: 4244781
+2017-01-15 13:00:51 [expand_ilp_w_c] [DEBUG] Number of informative cells in the expand mask: 4302156
+2017-01-15 13:00:52 [expand_ilp_w_c] [INFO ] Writing output raster analyses/ILP/ilp_all_weights_costs_expanded.tif
+2017-01-15 13:00:53 [expand_ilp_w_c] [INFO ]  [TIME] Masking took 2.52 sec
