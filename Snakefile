@@ -825,10 +825,10 @@ rule expand_ilp_coverage:
         llogger = utils.get_local_logger("expand_ilp_w", log.all_w)
         coverage.expand_value_coverage(input.all_w, input.template_w,
                                        output.all_w, logger=llogger)
-       # With weights and costs
-       llogger = utils.get_local_logger("expand_ilp_w_c", log.all_w_c)
-       coverage.expand_value_coverage(input.all_w_c, input.template_w,
-                                      output.all_w_c, logger=llogger)
+        # With weights and costs
+        llogger = utils.get_local_logger("expand_ilp_w_c", log.all_w_c)
+        coverage.expand_value_coverage(input.all_w_c, input.template_w,
+                                       output.all_w_c, logger=llogger)
 
 ## Compare results ------------------------------------------------------------
 
