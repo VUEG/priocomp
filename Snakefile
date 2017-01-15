@@ -809,7 +809,7 @@ rule postprocess_ilp:
 rule expand_ilp_coverage:
     input:
         template_w="analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif",
-        template_w_c="analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst.rank.compressed.tif",,
+        template_w_c="analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst.rank.compressed.tif"
         all_w=rules.prioritize_ilp_all.output.all_w,
         all_w_c=rules.prioritize_ilp_all.output.all_w_c,
     output:
