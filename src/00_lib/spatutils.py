@@ -212,6 +212,7 @@ def rescale_raster(input_raster, output_raster, method, fill_w_zeros=False,
             llogger.debug("Wrote raster {}".format(output_raster))
         return True
 
+
 def smooth_raster(input_raster, output_raster, method, log_transform=False,
                   fill_w_zeros=False, compress='DEFLATE', verbose=False,
                   logger=None):
@@ -270,7 +271,8 @@ def smooth_raster(input_raster, output_raster, method, log_transform=False,
 
         # Write the product
         profile = in_src.profile
-        profile.update(compress=compress)
+        # Remember to fill the data into Float32
+        profile.update(compress=compress, dtype=rasterio.float32)
         # Replace the NoData values and set the fill value for NoData, unless
         # the result is to be filled with zeros
         if fill_w_zeros:
@@ -286,6 +288,7 @@ def smooth_raster(input_raster, output_raster, method, log_transform=False,
             dst.write(rescaled_data.astype(profile['dtype']), 1)
             llogger.debug("Wrote raster {}".format(output_raster))
         return True
+
 
 def sum_raster(input_rasters, olnormalize=False, weights=None, verbose=False,
                logger=None):
