@@ -1,0 +1,932 @@
+<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
+<qgis projectname="" version="2.18.2">
+  <title></title>
+  <autotransaction active="0"/>
+  <evaluateDefaultValues active="0"/>
+  <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="">
+    <customproperties/>
+    <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="New implementation">
+      <customproperties/>
+      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="Costs">
+        <customproperties/>
+        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_all_weights_costs20170104143049955" name="ilp_all_weights_costs">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer expanded="0" checked="Qt::Checked" id="ilp_es_costs20170104143224842" name="ilp_es_costs">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_bd_costs20170105100441111" name="ilp_bd_costs">
+          <customproperties/>
+        </layer-tree-layer>
+      </layer-tree-group>
+      <layer-tree-group expanded="0" checked="Qt::Unchecked" name="No costs">
+        <customproperties/>
+        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_all_weights20170105121427561" name="ilp_all_weights">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_es20170105121427836" name="ilp_es">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_bd20170105135838514" name="ilp_bd">
+          <customproperties/>
+        </layer-tree-layer>
+      </layer-tree-group>
+    </layer-tree-group>
+    <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="Old implementation">
+      <customproperties/>
+      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="RWR">
+        <customproperties/>
+        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="rwr_all_weights20170105122259527" name="rwr_all_weights">
+          <customproperties/>
+        </layer-tree-layer>
+      </layer-tree-group>
+      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="ZON">
+        <customproperties/>
+        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="08_abf_es_rank_compressed20170106152515574" name="08_abf_es.rank.compressed">
+          <customproperties/>
+        </layer-tree-layer>
+        <layer-tree-layer expanded="0" checked="Qt::Checked" id="10_abf_es_cst_rank_compressed20170106152533469" name="10_abf_es_cst.rank.compressed">
+          <customproperties/>
+        </layer-tree-layer>
+      </layer-tree-group>
+      <layer-tree-group expanded="0" checked="Qt::Unchecked" name="ILP">
+        <customproperties/>
+        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="No costs">
+          <customproperties/>
+          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_all_weights20170105100551573" name="ilp_all_weights">
+            <customproperties/>
+          </layer-tree-layer>
+          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_es20170105100551607" name="ilp_es">
+            <customproperties/>
+          </layer-tree-layer>
+          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_bd20170105100551586" name="ilp_bd">
+            <customproperties/>
+          </layer-tree-layer>
+        </layer-tree-group>
+      </layer-tree-group>
+    </layer-tree-group>
+  </layer-tree-group>
+  <relations/>
+  <mapcanvas>
+    <units>meters</units>
+    <extent>
+      <xmin>3972734.0625</xmin>
+      <ymin>2711723.125</ymin>
+      <xmax>4566771.5625</xmax>
+      <ymax>3290535.625</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <projections>1</projections>
+    <destinationsrs>
+      <spatialrefsys>
+        <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+        <srsid>1000</srsid>
+        <srid>3035</srid>
+        <authid>EPSG:3035</authid>
+        <description>ETRS89 / ETRS-LAEA</description>
+        <projectionacronym>laea</projectionacronym>
+        <ellipsoidacronym>GRS80</ellipsoidacronym>
+        <geographicflag>false</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+    <layer_coordinate_transform_info>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="budget_level_0_0520170104174007184"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_bd20170105135838514"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_es20170105100551607"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_bd20170104143124566"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_bd20170105100551586"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="budget_level_0_0220170104174036930"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_all_weights20170105100551573"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="08_abf_es_rank_compressed20170106152515574"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_all_weights20170105121427561"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_es_costs20170104143224842"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_bd_costs20170105100441111"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="10_abf_es_cst_rank_compressed20170106152533469"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_bd_costs20170104143124588"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_all_weights20170105122259527"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_all_weights20170104142956953"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_all_weights_costs20170104143049955"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_es20170104143224828"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_es20170105121427836"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="budget_level_0_220170104174028728"/>
+    </layer_coordinate_transform_info>
+  </mapcanvas>
+  <layer-tree-canvas>
+    <custom-order enabled="0">
+      <item>ilp_all_weights_costs20170104143049955</item>
+      <item>ilp_es_costs20170104143224842</item>
+      <item>ilp_bd_costs20170105100441111</item>
+      <item>ilp_all_weights20170105100551573</item>
+      <item>ilp_bd20170105100551586</item>
+      <item>ilp_es20170105100551607</item>
+      <item>ilp_all_weights20170105121427561</item>
+      <item>ilp_es20170105121427836</item>
+      <item>rwr_all_weights20170105122259527</item>
+      <item>ilp_bd20170105135838514</item>
+      <item>08_abf_es_rank_compressed20170106152515574</item>
+      <item>10_abf_es_cst_rank_compressed20170106152533469</item>
+    </custom-order>
+  </layer-tree-canvas>
+  <legend updateDrawingOrder="true">
+    <legendgroup open="true" checked="Qt::PartiallyChecked" name="New implementation">
+      <legendgroup open="true" checked="Qt::PartiallyChecked" name="Costs">
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_all_weights_costs" showFeatureCount="0">
+          <filegroup open="false" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="ilp_all_weights_costs20170104143049955" visible="0"/>
+          </filegroup>
+        </legendlayer>
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="ilp_es_costs" showFeatureCount="0">
+          <filegroup open="false" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="ilp_es_costs20170104143224842" visible="1"/>
+          </filegroup>
+        </legendlayer>
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_bd_costs" showFeatureCount="0">
+          <filegroup open="false" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="ilp_bd_costs20170105100441111" visible="0"/>
+          </filegroup>
+        </legendlayer>
+      </legendgroup>
+      <legendgroup open="false" checked="Qt::Unchecked" name="No costs">
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_all_weights" showFeatureCount="0">
+          <filegroup open="false" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="ilp_all_weights20170105121427561" visible="0"/>
+          </filegroup>
+        </legendlayer>
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_es" showFeatureCount="0">
+          <filegroup open="false" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="ilp_es20170105121427836" visible="0"/>
+          </filegroup>
+        </legendlayer>
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_bd" showFeatureCount="0">
+          <filegroup open="false" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="ilp_bd20170105135838514" visible="0"/>
+          </filegroup>
+        </legendlayer>
+      </legendgroup>
+    </legendgroup>
+    <legendgroup open="true" checked="Qt::PartiallyChecked" name="Old implementation">
+      <legendgroup open="true" checked="Qt::Unchecked" name="RWR">
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_all_weights" showFeatureCount="0">
+          <filegroup open="false" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="rwr_all_weights20170105122259527" visible="0"/>
+          </filegroup>
+        </legendlayer>
+      </legendgroup>
+      <legendgroup open="true" checked="Qt::PartiallyChecked" name="ZON">
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="08_abf_es.rank.compressed" showFeatureCount="0">
+          <filegroup open="false" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="08_abf_es_rank_compressed20170106152515574" visible="0"/>
+          </filegroup>
+        </legendlayer>
+        <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="10_abf_es_cst.rank.compressed" showFeatureCount="0">
+          <filegroup open="false" hidden="false">
+            <legendlayerfile isInOverview="0" layerid="10_abf_es_cst_rank_compressed20170106152533469" visible="1"/>
+          </filegroup>
+        </legendlayer>
+      </legendgroup>
+      <legendgroup open="false" checked="Qt::Unchecked" name="ILP">
+        <legendgroup open="true" checked="Qt::Unchecked" name="No costs">
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_all_weights" showFeatureCount="0">
+            <filegroup open="false" hidden="false">
+              <legendlayerfile isInOverview="0" layerid="ilp_all_weights20170105100551573" visible="0"/>
+            </filegroup>
+          </legendlayer>
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_es" showFeatureCount="0">
+            <filegroup open="false" hidden="false">
+              <legendlayerfile isInOverview="0" layerid="ilp_es20170105100551607" visible="0"/>
+            </filegroup>
+          </legendlayer>
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_bd" showFeatureCount="0">
+            <filegroup open="false" hidden="false">
+              <legendlayerfile isInOverview="0" layerid="ilp_bd20170105100551586" visible="0"/>
+            </filegroup>
+          </legendlayer>
+        </legendgroup>
+      </legendgroup>
+    </legendgroup>
+  </legend>
+  <projectlayers>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>08_abf_es_rank_compressed20170106152515574</id>
+      <datasource>../../../../../../../Data/priocomp_temp/08_abf_es/08_abf_es_out/08_abf_es.rank.compressed.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>08_abf_es.rank.compressed</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>10_abf_es_cst_rank_compressed20170106152533469</id>
+      <datasource>../../../../../../../Data/priocomp_temp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst.rank.compressed.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>10_abf_es_cst.rank.compressed</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>ilp_all_weights20170105100551573</id>
+      <datasource>../../analyses/ILP/old_solutions/ilp_all_weights.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>ilp_all_weights</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>ilp_all_weights20170105121427561</id>
+      <datasource>../../analyses/ILP/ilp_all_weights.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>ilp_all_weights</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>ilp_all_weights_costs20170104143049955</id>
+      <datasource>../../analyses/ILP/ilp_all_weights_costs.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>ilp_all_weights_costs</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>1999999.99999999906867743</xmin>
+        <ymin>1000000.00000000093132257</ymin>
+        <xmax>6525999.99999999906867743</xmax>
+        <ymax>5410000.00000000093132257</ymax>
+      </extent>
+      <id>ilp_bd20170105100551586</id>
+      <datasource>../../analyses/ILP/old_solutions/ilp_bd.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>ilp_bd</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>1999999.99999999906867743</xmin>
+        <ymin>1000000.00000000093132257</ymin>
+        <xmax>6525999.99999999906867743</xmax>
+        <ymax>5410000.00000000093132257</ymax>
+      </extent>
+      <id>ilp_bd20170105135838514</id>
+      <datasource>../../analyses/ILP/ilp_bd.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>ilp_bd</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>1999999.99999999906867743</xmin>
+        <ymin>1000000.00000000093132257</ymin>
+        <xmax>6525999.99999999906867743</xmax>
+        <ymax>5410000.00000000093132257</ymax>
+      </extent>
+      <id>ilp_bd_costs20170105100441111</id>
+      <datasource>../../analyses/ILP/ilp_bd_costs.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>ilp_bd_costs</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>ilp_es20170105100551607</id>
+      <datasource>../../analyses/ILP/old_solutions/ilp_es.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>ilp_es</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>ilp_es20170105121427836</id>
+      <datasource>../../analyses/ILP/ilp_es.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>ilp_es</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>ilp_es_costs20170104143224842</id>
+      <datasource>../../analyses/ILP/ilp_es_costs.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>ilp_es_costs</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>rwr_all_weights20170105122259527</id>
+      <datasource>../../analyses/RWR/rwr_all_weights.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>rwr_all_weights</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="0" label="0.00 - 0.20" color="#4575b4"/>
+              <item alpha="255" value="0.2" label="0.20 - 0.50" color="#91bfdb"/>
+              <item alpha="255" value="0.5" label="0.50 - 0.75" color="#e0f3f8"/>
+              <item alpha="255" value="0.75" label="0.75 - 0.90" color="#ffffbf"/>
+              <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
+              <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
+              <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+  </projectlayers>
+  <properties>
+    <Measurement>
+      <DistanceUnits type="QString">meters</DistanceUnits>
+      <AreaUnits type="QString">m2</AreaUnits>
+    </Measurement>
+    <SpatialRefSys>
+      <ProjectCRSProj4String type="QString">+proj=longlat +datum=WGS84 +no_defs</ProjectCRSProj4String>
+      <ProjectCrs type="QString">EPSG:4326</ProjectCrs>
+      <ProjectCRSID type="int">3452</ProjectCRSID>
+      <ProjectionsEnabled type="int">1</ProjectionsEnabled>
+    </SpatialRefSys>
+    <Paths>
+      <Absolute type="bool">false</Absolute>
+    </Paths>
+    <Gui>
+      <SelectionColorBluePart type="int">251</SelectionColorBluePart>
+      <CanvasColorGreenPart type="int">255</CanvasColorGreenPart>
+      <CanvasColorRedPart type="int">255</CanvasColorRedPart>
+      <SelectionColorRedPart type="int">0</SelectionColorRedPart>
+      <SelectionColorAlphaPart type="int">255</SelectionColorAlphaPart>
+      <SelectionColorGreenPart type="int">255</SelectionColorGreenPart>
+      <CanvasColorBluePart type="int">255</CanvasColorBluePart>
+    </Gui>
+    <Digitizing>
+      <DefaultSnapToleranceUnit type="int">2</DefaultSnapToleranceUnit>
+      <LayerSnappingList type="QStringList"/>
+      <LayerSnappingEnabledList type="QStringList"/>
+      <SnappingMode type="QString">current_layer</SnappingMode>
+      <AvoidIntersectionsList type="QStringList"/>
+      <LayerSnappingToleranceUnitList type="QStringList"/>
+      <LayerSnapToList type="QStringList"/>
+      <DefaultSnapType type="QString">off</DefaultSnapType>
+      <DefaultSnapTolerance type="double">0</DefaultSnapTolerance>
+      <LayerSnappingToleranceList type="QStringList"/>
+    </Digitizing>
+    <PositionPrecision>
+      <DecimalPlaces type="int">2</DecimalPlaces>
+      <Automatic type="bool">true</Automatic>
+    </PositionPrecision>
+    <Legend>
+      <filterByMap type="bool">false</filterByMap>
+    </Legend>
+  </properties>
+  <visibility-presets/>
+</qgis>
