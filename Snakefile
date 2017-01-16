@@ -720,8 +720,8 @@ rule prioritize_ilp_es:
         es=rules.harmonize_data.output.harmonized[:-1],
         cost=rules.harmonize_data.output.harmonized[-1]
     output:
-        es="analyses/ILP/ilp_es.tif"
-        #es_c="analyses/ILP/ilp_es_costs.tif"
+        es="analyses/ILP/ilp_es.tif",
+        es_c="analyses/ILP/ilp_es_costs.tif"
     log:
         es="logs/prioritize_ilp_es.log",
         es_c="logs/prioritize_ilp_es_costs.log"
@@ -734,18 +734,18 @@ rule prioritize_ilp_es:
                                  ol_normalize=True, step=0.01,
                                  save_intermediate=True, verbose=True)
         # With costs
-        #llogger = utils.get_local_logger("optimize_gurobi_es_c", log.es_c)
-        #gurobi.prioritize_gurobi(input.es, output.es_c, input.cost, logger=llogger,
-        #                         ol_normalize=True, step=0.01,
-        #                         save_intermediate=True, verbose=True)
+        llogger = utils.get_local_logger("optimize_gurobi_es_c", log.es_c)
+        gurobi.prioritize_gurobi(input.es, output.es_c, input.cost, logger=llogger,
+                                 ol_normalize=True, step=0.01,
+                                 save_intermediate=True, verbose=True)
 
 rule prioritize_ilp_bd:
     input:
         bd=UDR_SRC_DATASETS,
         cost=rules.harmonize_data.output.harmonized[-1]
     output:
-        bd="analyses/ILP/ilp_bd.tif"
-        #bd_c="analyses/ILP/ilp_bd_costs.tif"
+        bd="analyses/ILP/ilp_bd.tif",
+        bd_c="analyses/ILP/ilp_bd_costs.tif"
     log:
         bd="logs/prioritize_ilp_bd.log",
         bd_c="logs/prioritize_ilp_bd_costs.log"
@@ -759,10 +759,10 @@ rule prioritize_ilp_bd:
                                  save_intermediate=True, verbose=True)
 
         # With costs
-        #llogger = utils.get_local_logger("optimize_gurobi_bd_c", log.bd_c)
-        #gurobi.prioritize_gurobi(input.bd, output.bd, input.cost, logger=llogger,
-        #                         ol_normalize=True, step=0.01,
-        #                         save_intermediate=True, verbose=True)
+        llogger = utils.get_local_logger("optimize_gurobi_bd_c", log.bd_c)
+        gurobi.prioritize_gurobi(input.bd, output.bd, input.cost, logger=llogger,
+                                 ol_normalize=True, step=0.01,
+                                 save_intermediate=True, verbose=True)
 
 rule prioritize_ilp:
     input:
@@ -774,37 +774,54 @@ rule prioritize_ilp:
 
 rule postprocess_ilp:
     input:
-        #all=rules.prioritize_ilp_all.output.all,
         all_w=rules.prioritize_ilp_all.output.all_w,
+        all_w_c=rules.prioritize_ilp_all.output.all_w_c,
         es=rules.prioritize_ilp_es.output.es,
+        es_c=rules.prioritize_ilp_es.output.es_c,
         bd=rules.prioritize_ilp_bd.output.bd,
+        bd_c=rules.prioritize_ilp_bd.output.bd_c,
         plu=utils.pick_from_list(rules.preprocess_nuts_level2_data.output.processed,
                                  ".shp")
     output:
-        #all="analyses/ILP/ilp_all_stats.geojson",
         all_w="analyses/ILP/ilp_all_weights_stats.geojson",
+        all_w_c="analyses/ILP/ilp_all_weights_costs_stats.geojson",
         es="analyses/ILP/ilp_es_stats.geojson",
-        bd="analyses/ILP/ilp_bd_stats.geojson"
+        es_c="analyses/ILP/ilp_es_costs_stats.geojson",
+        bd="analyses/ILP/ilp_bd_stats.geojson",
+        bd_c="analyses/ILP/ilp_bd_costs_stats.geojson"
     log:
-        #all="logs/postprocess_ilp_all.log",
         all_w="logs/postprocess_ilp_all_weights.log",
+        all_w_c="logs/postprocess_ilp_all_weights_costs.log",
         es="logs/postprocess_ilp_es.log",
-        bd="logs/postprocess_ilp_bd.log"
+        es_c="logs/postprocess_ilp_es_costs.log",
+        bd="logs/postprocess_ilp_bd.log",
+        bd_c="logs/postprocess_ilp_bd_costs.log"
     message:
         "Post-processing ILP results..."
     run:
-        #llogger = utils.get_local_logger("calculate_ilp_all", log.all)
-        #llogger.info(" [1/4] Post-processing {}".format(input.all))
-        #shell("fio cat {input.plu} | rio zonalstats -r {input.all} > {output.all}")
         llogger = utils.get_local_logger("calculate_ilp_all_weights", log.all_w)
-        llogger.info(" [1/3] Post-processing {}".format(input.all_w))
+        llogger.info(" [1/6] Post-processing {}".format(input.all_w))
         shell("fio cat {input.plu} | rio zonalstats -r {input.all_w} > {output.all_w}")
+
+        llogger = utils.get_local_logger("calculate_ilp_all_weights_costs", log.all_w_c)
+        llogger.info(" [2/6] Post-processing {}".format(input.all_w_c))
+        shell("fio cat {input.plu} | rio zonalstats -r {input.all_w_c} > {output.all_w_c}")
+
         llogger = utils.get_local_logger("calculate_ilp_es", log.es)
-        llogger.info(" [2/3] Post-processing {}".format(input.es))
+        llogger.info(" [3/6] Post-processing {}".format(input.es))
         shell("fio cat {input.plu} | rio zonalstats -r {input.es} > {output.es}")
+
+        llogger = utils.get_local_logger("calculate_ilp_es_costs", log.es_c)
+        llogger.info(" [4/6] Post-processing {}".format(input.es_c))
+        shell("fio cat {input.plu} | rio zonalstats -r {input.es_c} > {output.es_c}")
+
         llogger = utils.get_local_logger("calculate_ilp_bd", log.bd)
-        llogger.info(" [3/3] Post-processing {}".format(input.bd))
+        llogger.info(" [5/6] Post-processing {}".format(input.bd))
         shell("fio cat {input.plu} | rio zonalstats -r {input.bd} > {output.bd}")
+
+        llogger = utils.get_local_logger("calculate_ilp_bd_costs", log.bd_c)
+        llogger.info(" [6/6] Post-processing {}".format(input.bd_c))
+        shell("fio cat {input.plu} | rio zonalstats -r {input.bd_c} > {output.bd_c}")
 
 rule expand_ilp_coverage:
     input:
