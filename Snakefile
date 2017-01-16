@@ -882,14 +882,20 @@ rule compare_correlation:
 rule compare_jaccard:
     input:
         rules.prioritize_rwr.output.all_w,
-        "analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt.rank.compressed.tif",
+        "analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif",
         rules.prioritize_ilp_all.output.all_w,
+        "analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst.rank.compressed.tif",
+        rules.prioritize_ilp_all.output.all_w_c,
         rules.prioritize_rwr.output.es,
-        "analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es.rank.compressed.tif",
+        "analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es.rank.compressed.tif",
         rules.prioritize_ilp_es.output.es,
+        "analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst.rank.compressed.tif",
+        rules.prioritize_ilp_es.output.es_c,
         rules.prioritize_rwr.output.bd,
-        "analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd.rank.compressed.tif",
-        rules.prioritize_ilp_bd.output.bd
+        "analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd.rank.compressed.tif",
+        rules.prioritize_ilp_bd.output.bd,
+        "analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst.rank.compressed.tif",
+        rules.prioritize_ilp_bd.output.bd_c
     output:
         "analyses/comparison/cross_jaccard.csv"
     log:
