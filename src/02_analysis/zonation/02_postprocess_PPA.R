@@ -7,7 +7,9 @@ priocomp_root <- "analyses/zonation/priocomp/"
 # variants <- c("01_caz", "02_abf", "03_caz_wgt", "04_abf_wgt", "05_caz_es",
 #               "06_abf_es", "07_caz_bd", "08_abf_bd")
 
-variants <- c("04_abf_wgt", "06_abf_es", "08_abf_bd")
+variants <- c("04_abf_all_wgt", "06_abf_all_wgt_cst",
+              "08_abf_es", "10_abf_es_cst",
+              "12_abf_bd", "14_abf_bd_cst")
 
 ppa_shp <- "data/processed/eurostat/nuts_level2/NUTS_RG_01M_2013_level2.shp"
 
