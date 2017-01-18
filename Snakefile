@@ -760,7 +760,7 @@ rule prioritize_ilp_bd:
 
         # With costs
         llogger = utils.get_local_logger("optimize_gurobi_bd_c", log.bd_c)
-        gurobi.prioritize_gurobi(input.bd, output.bd, input.cost, logger=llogger,
+        gurobi.prioritize_gurobi(input.bd, output.bd_c, input.cost, logger=llogger,
                                  ol_normalize=True, step=0.01,
                                  save_intermediate=True, verbose=True)
 
