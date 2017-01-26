@@ -131,7 +131,7 @@ def calculate_rwr(input_rasters, output_raster, weights=None,
     # Rescaled data is always float, and we have only 1 band. Remember
     # to set NoData-value correctly.
     profile.update(dtype=rasterio.float64, compress=compress,
-                   nodata=-3.4e+38)
+                   nodata=-3.4e+38, transform=None)
 
     with rasterio.open(output_raster, 'w', **profile) as dst:
         dst.write_mask(ma.getmask(rank_data_masked))
