@@ -8,7 +8,7 @@ priocomp_project <- load_zproject(root = "analyses/zonation/priocomp/",
                                   debug = TRUE)
 
 # We also need to original NUTS data to map which NUTS2 region is which
-ppa_shp <- "data/processed/eurostat/nuts_level2/NUTS_RG_01M_2013_level2.shp"
+ppa_shp <- "data/processedeurostat/nuts_level2/NUTS_RG_01M_2013_level2.shp"
 PPA_units_sp <- rgdal::readOGR(ppa_shp, ogrListLayers(ppa_shp))
 nuts2_data <- as.data.frame(PPA_units_sp)
 
