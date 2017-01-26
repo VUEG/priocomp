@@ -17,6 +17,7 @@ dependencies:
   # cultine with invalid geometry (such as NUTS data)
   - gdal=2.0.2
   - gurobi
+  - joblib  
   - libgdal
   - netcdf4
   - numpy
