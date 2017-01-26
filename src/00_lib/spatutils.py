@@ -392,36 +392,11 @@ def sum_raster(input_rasters, olnormalize=False, weights=None, verbose=False,
             src_data = ma.filled(src_data, 0)
 
             sum_array += src_data
-            #import pdb; pdb.set_trace()
-
-    # -8<----------------------------------------------------------------------
-    # FOR TESTING PURPOSES!
-
-    # Get the raster profile from the input raster files
-    #profile = get_profile(input_rasters, logger=llogger)
-
-    # Rescaled data is always float, and we have only 1 band. Remember
-    # to set NoData-value correctly.
-    #profile.update(dtype=rasterio.int16, compress=True, nodata=-1)
-
-    #with rasterio.open("tests/scratch/union_mask.tif", 'w', **profile) as dst:
-    #    dst.write(union_mask.astype(rasterio.int16), 1)
-
-    # -8<----------------------------------------------------------------------
 
     # Re-mask the data based on the union mask constructed dynamically. At this
     # point, union_mask = 0 means that the cell doesn't have a value in any of
     # the inputs.
     sum_array = ma.masked_where(union_mask == 0, sum_array)
-
-    # -8<----------------------------------------------------------------------
-    # FOR TESTING PURPOSES!
-    #profile.update(dtype=rasterio.float32, compress=True, nodata=-1)
-
-    #with rasterio.open("tests/scratch/sum_array.tif", 'w', **profile) as dst:
-    #    dst.write_mask(ma.getmask(sum_array))
-    #    dst.write(sum_array.astype(rasterio.float32), 1)
-    # -8<----------------------------------------------------------------------
 
     return sum_array
 
