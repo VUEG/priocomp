@@ -6,14 +6,17 @@ import logging
 import numpy as np
 import numpy.ma as ma
 import os
-import pdb
 import rasterio
 import scipy.stats
 
 from importlib.machinery import SourceFileLoader
+from joblib import Memory
 from scipy.signal import medfilt
 
 utils = SourceFileLoader("lib.utils", "src/00_lib/utils.py").load_module()
+
+# Define caching dir
+memory = Memory(cachedir="./.cache", verbose=0)
 
 
 def get_profile(input_rasters, warn_inconistent=True, pick="first",
@@ -79,9 +82,6 @@ def normalize(x):
     x_min = ma.min(x)
     x_max = ma.max(x)
     return (x - x_min) / (x_max - x_min)
-
-
-    return x_normalized
 
 
 def ol_normalize(x):
@@ -290,6 +290,7 @@ def smooth_raster(input_raster, output_raster, method, log_transform=False,
         return True
 
 
+@memory.cache(ignore=['logger', 'verbose'])
 def sum_raster(input_rasters, olnormalize=False, weights=None, verbose=False,
                logger=None):
     """ Sum a group of input rasters.
@@ -304,6 +305,8 @@ def sum_raster(input_rasters, olnormalize=False, weights=None, verbose=False,
     These values are used as simple multipliers for each feature when summing
     the values over all features. If provided, the list must match the number
     of input rasters exactly.
+
+    NOTE: sum_raster uses Memory from joblib to cache the computed sum raster.
 
     :param input_rasters: String list of input raster paths.
     :param ol_normalize: Boolean indicating wether OL normalization is done.
