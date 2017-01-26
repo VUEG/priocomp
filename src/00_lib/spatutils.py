@@ -16,7 +16,7 @@ from scipy.signal import medfilt
 utils = SourceFileLoader("lib.utils", "src/00_lib/utils.py").load_module()
 
 # Define caching dir
-memory = Memory(cachedir="./.cache", verbose=0)
+memory = Memory(cachedir="./.cache", verbose=2)
 
 
 def get_profile(input_rasters, warn_inconistent=True, pick="first",
