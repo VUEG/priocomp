@@ -1017,14 +1017,23 @@ rule compare_mcs:
 rule compute_variation:
     input:
         rules.postprocess_rwr.output.all_w,
-        "analyses/zonation/priocomp/04_abf_wgt/04_abf_wgt_out/04_abf_wgt_nwout1.shp",
+        "analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt_nwout1.shp",
         rules.postprocess_ilp.output.all_w,
+        rules.postprocess_rwr.output.all_w_c,
+        "analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst_nwout1.shp",
+        rules.postprocess_ilp.output.all_w_c,
         rules.postprocess_rwr.output.es,
-        "analyses/zonation/priocomp/06_abf_es/06_abf_es_out/06_abf_es_nwout1.shp",
+        "analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es_nwout1.shp",
         rules.postprocess_ilp.output.es,
+        rules.postprocess_rwr.output.es_c,
+        "analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst_nwout1.shp",
+        rules.postprocess_ilp.output.es_c,
         rules.postprocess_rwr.output.bd,
-        "analyses/zonation/priocomp/08_abf_bd/08_abf_bd_out/08_abf_bd_nwout1.shp",
-        rules.postprocess_ilp.output.bd
+        "analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd_nwout1.shp",
+        rules.postprocess_ilp.output.bd,
+        rules.postprocess_rwr.output.bd_c,
+        "analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst_nwout1.shp",
+        rules.postprocess_ilp.output.bd_c
     output:
         "analyses/comparison/nuts2_rank_variation.shp"
     log:
@@ -1036,8 +1045,11 @@ rule compute_variation:
 
         # FIXME: Codes are now hardcoded
         input_codes = ["rwr_all", "zon_all", "ilp_all",
+                       "rwr_all_costs", "zon_all_costs", "ilp_all_costs",
                        "rwr_es", "zon_es", "ilp_es",
-                       "rwr_bd", "zon_bd", "ilp_bd"]
+                       "rwr_es_costs", "zon_es_costs", "ilp_es_costs",
+                       "rwr_bd", "zon_bd", "ilp_bd",
+                       "rwr_bd_costs", "zon_bd_costs", "ilp_bd_costs"]
 
         n_features = len(input)
         # Create an empty DataFrame to store the rank priority cols
