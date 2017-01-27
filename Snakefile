@@ -554,50 +554,83 @@ rule postprocess_rwr:
     input:
         all=rules.prioritize_rwr.output.all,
         all_w=rules.prioritize_rwr.output.all_w,
+        all_w_c=rules.prioritize_rwr.output.all_w_c,
         es=rules.prioritize_rwr.output.es,
+        es_c=rules.prioritize_rwr.output.es_c,
         bd=rules.prioritize_rwr.output.bd,
+        bd_c=rules.prioritize_rwr.output.bd,
         plu=utils.pick_from_list(rules.preprocess_nuts_level2_data.output.processed,
                                  ".shp")
     output:
         all="analyses/RWR/rwr_all_stats.geojson",
         all_w="analyses/RWR/rwr_all_weights_stats.geojson",
+        all_w_c="analyses/RWR/rwr_all_weights_costs_stats.geojson",
         es="analyses/RWR/rwr_es_stats.geojson",
-        bd="analyses/RWR/rwr_bd_stats.geojson"
+        es_c="analyses/RWR/rwr_es_costs_stats.geojson",
+        bd="analyses/RWR/rwr_bd_stats.geojson",
+        bd_c="analyses/RWR/rwr_bd_costs_stats.geojson"
     log:
         all="logs/postprocess_rwr_all.log",
         all_w="logs/postprocess_rwr_all_weights.log",
+        all_w_c="logs/postprocess_rwr_all_weights_costs.log",
         es="logs/postprocess_rwr_es.log",
-        bd="logs/postprocess_rwr_bd.log"
+        es_c="logs/postprocess_rwr_es_costs.log",
+        bd="logs/postprocess_rwr_bd.log",
+        bd_c="logs/postprocess_rwr_bd_costs.log"
     message:
         "Post-processing RWR results..."
     run:
         llogger = utils.get_local_logger("calculate_rwr_all", log.all)
-        llogger.info(" [1/4] Post-processing {}".format(input.all))
+        llogger.info(" [1/7] Post-processing {}".format(input.all))
         shell("fio cat {input.plu} | rio zonalstats -r {input.all} > {output.all}")
+
         llogger = utils.get_local_logger("calculate_rwr_all_weights", log.all_w)
-        llogger.info(" [2/4] Post-processing {}".format(input.all_w))
+        llogger.info(" [2/7] Post-processing {}".format(input.all_w))
         shell("fio cat {input.plu} | rio zonalstats -r {input.all_w} > {output.all_w}")
+
+        llogger = utils.get_local_logger("calculate_rwr_all_weights_costs",
+                                         log.all_w)
+        llogger.info(" [3/7] Post-processing {}".format(input.all_w_c))
+        shell("fio cat {input.plu} | rio zonalstats -r {input.all_w_c} > {output.all_w_c}")
+
         llogger = utils.get_local_logger("calculate_rwr_es", log.es)
-        llogger.info(" [3/4] Post-processing {}".format(input.es))
+        llogger.info(" [4/7] Post-processing {}".format(input.es))
         shell("fio cat {input.plu} | rio zonalstats -r {input.es} > {output.es}")
+
+        llogger = utils.get_local_logger("calculate_rwr_es_costs", log.es_c)
+        llogger.info(" [5/7] Post-processing {}".format(input.es_c))
+        shell("fio cat {input.plu} | rio zonalstats -r {input.es_c} > {output.es_c}")
+
         llogger = utils.get_local_logger("calculate_rwr_bd", log.bd)
-        llogger.info(" [4/4] Post-processing {}".format(input.bd))
+        llogger.info(" [6/7] Post-processing {}".format(input.bd))
         shell("fio cat {input.plu} | rio zonalstats -r {input.bd} > {output.bd}")
+
+        llogger = utils.get_local_logger("calculate_rwr_bd_costs", log.bd_c)
+        llogger.info(" [7/7] Post-processing {}".format(input.bd_c))
+        shell("fio cat {input.plu} | rio zonalstats -r {input.bd_c} > {output.bd_c}")
 
 rule expand_rwr_coverage:
     input:
-        template="analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif",
-        target=rules.prioritize_rwr.output.all_w
+        zon_all_w="analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif",
+        zon_all_w_c="analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst.rank.compressed.tif",
+        rwr_all_w=rules.prioritize_rwr.output.all_w,
+        rwr_all_w_c=rules.prioritize_rwr.output.all_w_c
     output:
-        "analyses/RWR/rwr_all_weights_expanded.tif"
+        all_w="analyses/RWR/rwr_all_weights_expanded.tif",
+        all_w_c="analyses/RWR/rwr_all_weights_costs_expanded.tif"
     log:
-        "logs/expand_rwr_all_w.log"
+        all_w="logs/expand_rwr_all_w.log",
+        all_w_c="logs/expand_rwr_all_w_c.log"
     message:
         "Post-processing (expanding) RWR results..."
     run:
-        llogger = utils.get_local_logger("expand_rwr_w", log[0])
-        coverage.expand_value_coverage(input.target, input.template,
-                                       output[0], logger=llogger)
+        llogger = utils.get_local_logger("expand_rwr_w", log.all_w)
+        coverage.expand_value_coverage(input.rwr_all_w, input.zon_all_w,
+                                       output.all_w, logger=llogger)
+
+        llogger = utils.get_local_logger("expand_rwr_w_c", log.all_w_c)
+        coverage.expand_value_coverage(input.rwr_all_w_c, input.zon_all_w_c,
+                                       output.all_w_c, logger=llogger)
 
 # # Zonation ---------------------------------------------------------------------
 #
@@ -881,16 +914,19 @@ rule compare_correlation:
         rules.prioritize_rwr.output.all_w,
         "analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif",
         rules.prioritize_ilp_all.output.all_w,
+        rules.prioritize_rwr.output.all_w_c,
         "analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst.rank.compressed.tif",
         rules.prioritize_ilp_all.output.all_w_c,
         rules.prioritize_rwr.output.es,
         "analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es.rank.compressed.tif",
         rules.prioritize_ilp_es.output.es,
+        rules.prioritize_rwr.output.es_c,
         "analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst.rank.compressed.tif",
         rules.prioritize_ilp_es.output.es_c,
         rules.prioritize_rwr.output.bd,
         "analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd.rank.compressed.tif",
         rules.prioritize_ilp_bd.output.bd,
+        rules.prioritize_rwr.output.bd_c,
         "analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst.rank.compressed.tif",
         rules.prioritize_ilp_bd.output.bd_c
     output:
@@ -911,16 +947,19 @@ rule compare_jaccard:
         rules.prioritize_rwr.output.all_w,
         "analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif",
         rules.prioritize_ilp_all.output.all_w,
+        rules.prioritize_rwr.output.all_w_c,
         "analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst.rank.compressed.tif",
         rules.prioritize_ilp_all.output.all_w_c,
         rules.prioritize_rwr.output.es,
         "analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es.rank.compressed.tif",
         rules.prioritize_ilp_es.output.es,
+        rules.prioritize_rwr.output.es_c,
         "analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst.rank.compressed.tif",
         rules.prioritize_ilp_es.output.es_c,
         rules.prioritize_rwr.output.bd,
         "analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd.rank.compressed.tif",
         rules.prioritize_ilp_bd.output.bd,
+        rules.prioritize_rwr.output.bd_c,
         "analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst.rank.compressed.tif",
         rules.prioritize_ilp_bd.output.bd_c
     output:
@@ -944,16 +983,19 @@ rule compare_mcs:
         rules.postprocess_rwr.output.all_w,
         "analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt_nwout1.shp",
         rules.postprocess_ilp.output.all_w,
+        rules.postprocess_rwr.output.all_w_c,
         "analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst_nwout1.shp",
         rules.postprocess_ilp.output.all_w_c,
         rules.postprocess_rwr.output.es,
         "analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es_nwout1.shp",
         rules.postprocess_ilp.output.es,
+        rules.postprocess_rwr.output.es_c,
         "analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst_nwout1.shp",
         rules.postprocess_ilp.output.es_c,
         rules.postprocess_rwr.output.bd,
         "analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd_nwout1.shp",
         rules.postprocess_ilp.output.bd,
+        rules.postprocess_rwr.output.bd_c,
         "analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst_nwout1.shp",
         rules.postprocess_ilp.output.bd_c
     output:
@@ -964,9 +1006,9 @@ rule compare_mcs:
         "Comparing NUTS2 mean ranks with MCS..."
     run:
         llogger = utils.get_local_logger("compare_mcs", log[0])
-        value_fields = ['_mean', 'Men_rnk', '_mean', 'Men_rnk', '_mean',
-                        '_mean', 'Men_rnk', '_mean', 'Men_rnk', '_mean',
-                        '_mean', 'Men_rnk', '_mean', 'Men_rnk', '_mean']
+        value_fields = ['_mean', 'Men_rnk', '_mean', '_mean', 'Men_rnk', '_mean',
+                        '_mean', 'Men_rnk', '_mean', '_mean', 'Men_rnk', '_mean',
+                        '_mean', 'Men_rnk', '_mean', '_mean', 'Men_rnk', '_mean']
         mcs_scores_all = similarity.cross_mcs(input, value_fields,
                                               verbose=False, logger=llogger)
         llogger.info("Saving results to {}".format(output[0]))
