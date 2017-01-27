@@ -558,7 +558,7 @@ rule postprocess_rwr:
         es=rules.prioritize_rwr.output.es,
         es_c=rules.prioritize_rwr.output.es_c,
         bd=rules.prioritize_rwr.output.bd,
-        bd_c=rules.prioritize_rwr.output.bd,
+        bd_c=rules.prioritize_rwr.output.bd_c,
         plu=utils.pick_from_list(rules.preprocess_nuts_level2_data.output.processed,
                                  ".shp")
     output:
