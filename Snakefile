@@ -1016,87 +1016,54 @@ rule compare_mcs:
 
 rule compute_variation:
     input:
-        rules.postprocess_rwr.output.all_w,
-        "analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt_nwout1.shp",
-        rules.postprocess_ilp.output.all_w,
-        rules.postprocess_rwr.output.all_w_c,
-        "analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst_nwout1.shp",
-        rules.postprocess_ilp.output.all_w_c,
-        rules.postprocess_rwr.output.es,
-        "analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es_nwout1.shp",
-        rules.postprocess_ilp.output.es,
-        rules.postprocess_rwr.output.es_c,
-        "analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst_nwout1.shp",
-        rules.postprocess_ilp.output.es_c,
-        rules.postprocess_rwr.output.bd,
-        "analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd_nwout1.shp",
-        rules.postprocess_ilp.output.bd,
-        rules.postprocess_rwr.output.bd_c,
-        "analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst_nwout1.shp",
-        rules.postprocess_ilp.output.bd_c
+        no_costs=[rules.postprocess_rwr.output.all_w,
+                  "analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt_nwout1.shp",
+                  rules.postprocess_ilp.output.all_w,
+                  rules.postprocess_rwr.output.es,
+                  "analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es_nwout1.shp",
+                  rules.postprocess_ilp.output.es,
+                  rules.postprocess_rwr.output.bd,
+                  "analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd_nwout1.shp",
+                  rules.postprocess_ilp.output.bd],
+        costs=[rules.postprocess_rwr.output.all_w_c,
+               "analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst_nwout1.shp",
+               rules.postprocess_ilp.output.all_w_c,
+               rules.postprocess_rwr.output.es_c,
+               "analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst_nwout1.shp",
+               rules.postprocess_ilp.output.es_c,
+               rules.postprocess_rwr.output.bd_c,
+               "analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst_nwout1.shp",
+               rules.postprocess_ilp.output.bd_c]
     output:
-        "analyses/comparison/nuts2_rank_variation.shp"
+        no_costs="analyses/comparison/nuts2_rank_variation.shp",
+        costs="analyses/comparison/nuts2_rank_variation_costs.shp"
     log:
-        "logs/compute_variation.log"
+        no_costs="logs/compute_variation.log",
+        costs="logs/compute_variation_costs.log"
     message:
         "Computing mean and variation stats of rank priorities for NUTS2 units..."
     run:
-        llogger = utils.get_local_logger("compute_variation", log[0])
-
+        # No costs
+        llogger = utils.get_local_logger("compute_variation", log.no_costs)
         # FIXME: Codes are now hardcoded
         input_codes = ["rwr_all", "zon_all", "ilp_all",
-                       "rwr_all_costs", "zon_all_costs", "ilp_all_costs",
                        "rwr_es", "zon_es", "ilp_es",
+                       "rwr_bd", "zon_bd", "ilp_bd"]
+        out_feature = similarity.plu_variation(input.no_costs, input_codes,
+                                               logger=llogger)
+        llogger.info(" Saving results to {}".format(output.no_costs))
+        out_feature.to_file(output.no_costs)
+
+        # Costs
+        llogger = utils.get_local_logger("compute_variation_costs", log.costs)
+        # FIXME: Codes are now hardcoded
+        input_codes = ["rwr_all_costs", "zon_all_costs", "ilp_all_costs",
                        "rwr_es_costs", "zon_es_costs", "ilp_es_costs",
-                       "rwr_bd", "zon_bd", "ilp_bd",
                        "rwr_bd_costs", "zon_bd_costs", "ilp_bd_costs"]
-
-        n_features = len(input)
-        # Create an empty DataFrame to store the rank priority cols
-        rank_values = pd.DataFrame({'NUTS_ID': []})
-
-        llogger.info("[1/3] Reading in {} features...".format(n_features))
-
-        for i, feature_file in enumerate(input):
-            feature_code = input_codes[i]
-            prefix = utils.get_iteration_prefix(i+1, n_features)
-            llogger.debug("{0} Processing feature {1}".format(prefix,
-                                                              feature_file))
-            # Read in the feature as GeoPandas dataframe
-            feat_data = gpd.read_file(feature_file)
-            # Two different field names are used to store the mean rank
-            # information: "_mean" for geojson-files and 'Men_rnk' for
-            # shapefiles. Figure out which is currently used.
-            if '_mean' in feat_data.columns:
-                mean_field = '_mean'
-            elif 'Men_rnk' in feat_data.columns:
-                mean_field = 'Men_rnk'
-            else:
-                llogger.error("Field '_mean' or 'Men_rnk' not found")
-                sys.exit(-1)
-            # On first iteration, also get the NUTS_ID column
-            if i == 1:
-                rank_values['NUTS_ID'] = feat_data['NUTS_ID']
-            # Get the rank priority column and place if the store DataFrame
-            rank_values[feature_code] = feat_data[mean_field]
-
-        llogger.info("[2/3] Calculating mean and STD...")
-        # Read in the first input feature to act as a template. Remember,
-        # output[0] is a tuple
-        output_feature = gpd.read_file(input[0])
-        # Only take one field: NUTS_ID
-        output_feature = output_feature[['geometry', 'NUTS_ID']]
-        # Merge with the collected data
-        output_feature = output_feature.merge(rank_values, on='NUTS_ID')
-        # Calculate mean
-        agg_means = output_feature.mean(1)
-        # Calculate STD
-        agg_stds = output_feature.std(1)
-        output_feature['agg_mean'] = agg_means
-        output_feature['agg_std'] = agg_stds
-
-        llogger.info("[3/3] Saving results to {}".format(output[0]))
-        output_feature.to_file(output[0])
+        out_feature = similarity.plu_variation(input.costs, input_codes,
+                                               logger=llogger)
+        llogger.info(" Saving results to {}".format(output.costs))
+        out_feature.to_file(output.costs)
 
 ## Auxiliary operations -----------------------------------------------------
 
