@@ -496,32 +496,59 @@ rule prioritize_rwr:
     input:
         all=rules.harmonize_data.output.harmonized[:-1]+UDR_SRC_DATASETS,
         es=rules.harmonize_data.output.harmonized[:-1],
-        bd=UDR_SRC_DATASETS
+        bd=UDR_SRC_DATASETS,
+        cost=rules.harmonize_data.output.harmonized[-1]
     output:
         all="analyses/RWR/rwr_all.tif",
         all_w="analyses/RWR/rwr_all_weights.tif",
+        all_w_c="analyses/RWR/rwr_all_weights_costs.tif",
         es="analyses/RWR/rwr_es.tif",
-        bd="analyses/RWR/rwr_bd.tif"
+        es_c="analyses/RWR/rwr_es_costs.tif",
+        bd="analyses/RWR/rwr_bd.tif",
+        bd_c="analyses/RWR/rwr_bd_costs.tif"
     log:
         all="logs/calculate_rwr_all.log",
         all_w="logs/calculate_rwr_all_weights.log",
+        all_w_c="logs/calculate_rwr_all_weights_costs.log",
         es="logs/calculate_rwr_es.log",
-        bd="logs/calculate_rwr_bd.log"
+        es_c="logs/calculate_rwr_es_costs.log",
+        bd="logs/calculate_rwr_bd.log",
+        bd_c="logs/calculate_rwr_bd_costs.log"
     message:
         "Calculating RWR..."
     run:
-        # Without weights
+        # All without weights
         llogger = utils.get_local_logger("calculate_rwr_all", log.all)
         rwr.calculate_rwr(input.all, output.all, logger=llogger)
-        # With weights
+
+        # All with weights
         llogger = utils.get_local_logger("calculate_rwr_all_weights", log.all_w)
         rwr.calculate_rwr(input.all, output.all_w, weights=WEIGHTS,
                           logger=llogger)
 
+        # All with weights and costs
+        llogger = utils.get_local_logger("calculate_rwr_all_weights_costs",
+                                         log.all_w_c)
+        rwr.calculate_rwr(input.all, output.all_w_c, cost_raster=input.cost,
+                          weights=WEIGHTS, logger=llogger)
+
+        # ES
         llogger = utils.get_local_logger("calculate_rwr_es", log.es)
         rwr.calculate_rwr(input.es, output.es, logger=llogger)
+
+        # ES with costs
+        llogger = utils.get_local_logger("calculate_rwr_es_costs", log.es_c)
+        rwr.calculate_rwr(input.es, output.es_c, cost_raster=input.cost,
+                          logger=llogger)
+
+        # BD
         llogger = utils.get_local_logger("calculate_rwr_bd", log.bd)
         rwr.calculate_rwr(input.bd, output.bd, logger=llogger)
+
+        # BD with costs
+        llogger = utils.get_local_logger("calculate_rwr_bd_costs", log.bd_c)
+        rwr.calculate_rwr(input.bd, output.bd_c, cost_raster=input.cost,
+                          logger=llogger)
 
 rule postprocess_rwr:
     input:
