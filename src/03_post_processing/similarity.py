@@ -6,7 +6,6 @@ Module can be used alone or as part of Snakemake workflow.
 """
 import logging
 import rasterio
-import os
 import geopandas as gpd
 import pandas as pd
 import numpy as np
@@ -354,3 +353,70 @@ def cross_mcs(input_vectors, value_fields, verbose=False, logger=None):
     llogger.info(" [TIME] All processing took {} sec".format(all_elapsed))
 
     return all_mcs
+
+
+def plu_variation(input_files, input_codes, logger=None):
+    """ Compute per planning unit (PLU) variation statistics.
+
+    Given a list of input features describing the same planinng units,
+    calculate statistics based on defined field names.
+
+    :param input_files: String list of paths to input (vector) features.
+    :param input_codes: String list of field names corresponding to each
+                        input feature. The statistics will calculated based on
+                        these fields.
+    :param logger: Logger object.
+    :return: GeoPandas DataFrame object.
+    """
+    # Set up logging
+    if not logger:
+        logging.basicConfig()
+        llogger = logging.getLogger('plu_variation')
+        llogger.setLevel(logging.INFO)
+    else:
+        llogger = logger
+    n_features = len(input_files)
+
+    # Create an empty DataFrame to store the rank priority cols
+    rank_values = pd.DataFrame({'NUTS_ID': []})
+
+    llogger.info("[1/2] Reading in {} features...".format(n_features))
+
+    for i, feature_file in enumerate(input_files):
+        feature_code = input_codes[i]
+        prefix = utils.get_iteration_prefix(i+1, n_features)
+        llogger.debug("{0} Processing feature {1}".format(prefix,
+                                                          feature_file))
+        # Read in the feature as GeoPandas dataframe
+        feat_data = gpd.read_file(feature_file)
+        # Two different field names are used to store the mean rank
+        # information: "_mean" for geojson-files and 'Men_rnk' for
+        # shapefiles. Figure out which is currently used.
+        if '_mean' in feat_data.columns:
+            mean_field = '_mean'
+        elif 'Men_rnk' in feat_data.columns:
+            mean_field = 'Men_rnk'
+        else:
+            llogger.error("Field '_mean' or 'Men_rnk' not found")
+            raise ValueError
+        # On first iteration, also get the NUTS_ID column
+        if i == 1:
+            rank_values['NUTS_ID'] = feat_data['NUTS_ID']
+        # Get the rank priority column and place if the store DataFrame
+        rank_values[feature_code] = feat_data[mean_field]
+
+    llogger.info("[2/2] Calculating mean and STD...")
+    # Read in the first input feature to act as a template.
+    output_feature = gpd.read_file(input_files[0])
+    # Only take one field: NUTS_ID
+    output_feature = output_feature[['geometry', 'NUTS_ID']]
+    # Merge with the collected data
+    output_feature = output_feature.merge(rank_values, on='NUTS_ID')
+    # Calculate mean
+    agg_means = output_feature.mean(1)
+    # Calculate STD
+    agg_stds = output_feature.std(1)
+    output_feature['agg_mean'] = agg_means
+    output_feature['agg_std'] = agg_stds
+
+    return output_feature
