@@ -22,7 +22,7 @@ utils = SourceFileLoader("lib.utils", "src/00_lib/utils.py").load_module()
 spatutils = SourceFileLoader("lib.spatutils", "src/00_lib/spatutils.py").load_module()
 
 
-def calculate_rwr(input_rasters, output_raster, weights=None,
+def calculate_rwr(input_rasters, output_raster, weights=None, cost_raster=None,
                   compress='DEFLATE', verbose=False, logger=None):
     """ Calculate rarity-weighted richness (RWR) based on input rasters.
 
@@ -49,12 +49,16 @@ def calculate_rwr(input_rasters, output_raster, weights=None,
     It is possible to provide a list (vector) of weights for each features.
     These values are used as simple multipliers for each feature when summing
     the values over all features. If provided, the list must match the number
-    of input rasters exactly.
+    of input rasters exactly. NOTE: if cost raster is used, it always receives
+    the same (negative) weight as the aggregate weights of all input features.
 
     :param input_rasters: List of String paths of input rasters.
     :param output_raster: String path to raster file to be created.
     :param weights: list of weights. Length must match the number of input
                     rasters.
+    :param cost_rasters: String path to a raster defining the cost surface.
+                             If None (default), an equal cost is used for all
+                             cells.
     :param compress: String compression level used for the output raster.
     :param verbose Boolean indicating how much information is printed out.
     :param log_file String path to log file used.
@@ -89,8 +93,47 @@ def calculate_rwr(input_rasters, output_raster, weights=None,
     # NoData cells for now, 2) flatten the array.
     (height, width) = sum_array_masked.shape
     mask = ma.getmask(sum_array_masked)
-    # Get all the non-masked data as a 1-D array.
-    sum_array = ma.compressed(sum_array_masked)
+
+    # If no cost feature is provided, use equal cost for everything
+    if cost_raster is None:
+        sum_array = ma.compressed(sum_array_masked)
+    else:
+        cost_array_masked = rasterio.open(cost_raster, 'r').read(1, masked=True)
+        # Get the mask to see if it's different to sum_array
+        cost_mask = ma.getmask(cost_array_masked)
+        # Check that cost value is available for all sum_array cells
+        if not np.all(cost_mask == mask):
+            mask_diff = np.sum(cost_mask) - np.sum(mask)
+            llogger.warning(" [WARNING] Different masks for cost and feature sum rasters, diff: {}".format(mask_diff))
+            llogger.warning(" [WARNING] Using data only from cells that have both cost and occurrence data")
+            # Get an intersection of the cost and sum array masks
+            intersect_mask = np.logical_and(~cost_mask, ~mask)
+            # Set the intersection mask to both cost and sum array data.
+            # NOTE: no need to set masked values since using intersection.
+            sum_array_masked.mask = ~intersect_mask
+            cost_array_masked.mask = ~intersect_mask
+            mask = ~intersect_mask
+
+        # Get all the non-masked data as a 1-D array
+        sum_array = ma.compressed(sum_array_masked)
+        cost_array = ma.compressed(cost_array_masked)
+
+        # Figure out the aggregate weight for all input features. If weights
+        # are not provide, it's the number of features
+        if weights is None:
+            agg_weight = -(len(input_rasters))
+        # Else, it's the sum of the actual weights
+        else:
+            agg_weight = -(np.sum(weights))
+        llogger.debug(" [DEBUG] Using aggregate weight {} for costs".format(agg_weight))
+
+        # Occurrence level normalize cost data
+        llogger.debug(" [DEBUG] OL normalizing and multiplying cost data")
+        cost_array = spatutils.ol_normalize(cost_array)
+        cost_array = np.multiply(cost_array, agg_weight)
+
+        # Add negatively weighted cost data to sum_array
+        sum_array = sum_array + cost_array
 
     load_end = timer()
     load_elapsed = round(load_end - load_start, 2)
@@ -103,7 +146,8 @@ def calculate_rwr(input_rasters, output_raster, weights=None,
     llogger.info(" [1/3] Ranking values (this can take a while...)")
 
     nodata_value = -3.4e+38
-
+    from scipy.stats import describe
+    print(describe(sum_array))
     # Since we don't have NoData in sum_array (i.e. no need for mask), we can
     # use scipy.stats.rankdata, which is slightly faster than
     # scipy.stats.mstats.rankdata
@@ -114,6 +158,7 @@ def calculate_rwr(input_rasters, output_raster, weights=None,
     rank_data = np.full((height, width), nodata_value)
     # Then, populate the cells where mask == False with the rank array
     rank_data[~mask] = rank_array
+
     # Create a masked array.
     # NOTE: use ma.masked_values() because we're replacing with a float value
     rank_data_masked = ma.masked_values(rank_data, nodata_value)
@@ -131,10 +176,10 @@ def calculate_rwr(input_rasters, output_raster, weights=None,
     # Rescaled data is always float, and we have only 1 band. Remember
     # to set NoData-value correctly.
     profile.update(dtype=rasterio.float64, compress=compress,
-                   nodata=-3.4e+38)
+                   nodata=-3.4e+38, transform=None)
 
     with rasterio.open(output_raster, 'w', **profile) as dst:
-        dst.write_mask(ma.getmask(rank_data_masked))
+        #dst.write_mask(ma.getmask(rank_data_masked))
         dst.write(rank_data_masked, 1)
 
     post_end = timer()

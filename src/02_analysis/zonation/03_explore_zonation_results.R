@@ -8,16 +8,16 @@ priocomp_project <- load_zproject(root = "analyses/zonation/priocomp/",
                                   debug = TRUE)
 
 # We also need to original NUTS data to map which NUTS2 region is which
-ppa_shp <- "data/processed/eurostat/nuts_level2/NUTS_RG_01M_2013_level2.shp"
+ppa_shp <- "data/processedeurostat/nuts_level2/NUTS_RG_01M_2013_level2.shp"
 PPA_units_sp <- rgdal::readOGR(ppa_shp, ogrListLayers(ppa_shp))
 nuts2_data <- as.data.frame(PPA_units_sp)
 
 # Get the cost data
-cost_raster <- raster::raster("data/processed/features/eea/pop_density/pop_density_v5.tif")
-cost_raster_bin <- raster::raster("tests/tmp/pop_density_v5.tif")
-val_cr <- raster::getValues(cost_raster)
-unique(val_cr)
-hist(cost_raster)
+#cost_raster <- raster::raster("data/processed/features/eea/pop_density/pop_density_v5.tif")
+#cost_raster_bin <- raster::raster("tests/tmp/pop_density_v5.tif")
+#val_cr <- raster::getValues(cost_raster)
+#unique(val_cr)
+#hist(cost_raster)
 
 # Helper functions --------------------------------------------------------
 
@@ -133,3 +133,4 @@ variant26 <- zonator::get_variant(priocomp_project, 26)
 zonator::groupnames(variant26) <- bdes_groups
 plot_groups(variant6)
 plot_groups(variant26)
+3

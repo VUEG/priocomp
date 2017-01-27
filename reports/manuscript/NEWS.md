@@ -1,20 +1,16 @@
+## 0.7.0
+
++ Introduce cost variants in ILP and ZON
+
 ## 0.6.0 (2016-11-24)
-
-
 
 + Fix bug in ILP implementation and re-run everything ILP-related
 + Replace figure 2, 3, 4 and 6.
-+ ​
-
-
 
 ## 0.5.3 (2016-11-14)
 
-
-
 + Re-organize abstract for DDI
   + Add Discussion
-
 
 
 ## 0.5.2 (2016-11-07)

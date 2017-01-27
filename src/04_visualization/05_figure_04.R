@@ -85,14 +85,20 @@ match_method <- Vectorize(
 # a 3-character code is returned.
 match_type <- Vectorize(
   function(x) {
-    if (grepl("_all.tif", x) | grepl("_all_stats", x) | grepl("02_abf", x)) {
+    if (grepl("_all.tif$", x) | grepl("_all_stats$", x) | grepl("02_abf_all", x)) {
       mtype <- "ALL"
-    } else if (grepl("_all_weights.tif", x) | grepl("_all_weights_stats", x) | grepl("wgt", x)) {
+    } else if (grepl("_all_weights.tif", x) | grepl("_all_weights_stats", x) | grepl("04_abf_all_wgt", x)) {
       mtype <- "ALL_WGT"
-    } else if (grepl("_es", x)) {
+    } else if (grepl("_all_weights_costs.tif", x) | grepl("_all_weights_costs_stats", x) | grepl("06_abf_all_wgt_cst", x)) {
+      mtype <- "ALL_WGT_CST"
+    } else if (grepl("_es\\.", x)) {
       mtype <- "ES"
-    } else if (grepl("_bd", x)) {
+    } else if (grepl("_es_cst\\.", x) | grepl("_es_costs\\.", x)) {
+      mtype <- "ES_CST"
+    } else if (grepl("_bd\\.", x)) {
       mtype <- "BD"
+    } else if (grepl("_bd_cst\\.", x) | grepl("_bd_costs\\.", x)) {
+      mtype <- "BD_CST"
     } else {
       stop("Type ", x, " not matched")
     }

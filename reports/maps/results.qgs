@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis projectname="" version="2.18.2">
+<qgis projectname="" version="2.18.3">
   <title></title>
   <autotransaction active="0"/>
   <evaluateDefaultValues active="0"/>
@@ -140,6 +140,9 @@
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="rwr_eu26_all_weights20160909092552438" name="rwr_all_weights">
             <customproperties/>
           </layer-tree-layer>
+          <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="rwr_all_weights_copy20170124143138500" name="rwr_all_weights_worst_10">
+            <customproperties/>
+          </layer-tree-layer>
         </layer-tree-group>
         <layer-tree-group expanded="0" checked="Qt::Unchecked" name="03_es">
           <customproperties/>
@@ -160,7 +163,7 @@
           </layer-tree-layer>
         </layer-tree-group>
       </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="Zonation">
+      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="Zonation">
         <customproperties/>
         <layer-tree-group expanded="0" checked="Qt::Unchecked" name="01_caz">
           <customproperties/>
@@ -177,12 +180,15 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="06_abf_all_wgt_cst">
+        <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="06_abf_all_wgt_cst">
           <customproperties/>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="06_abf_all_wgt_cst_nwout120170116110759981" name="06_abf_all_wgt_cst_nwout1">
             <customproperties/>
           </layer-tree-layer>
-          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="06_abf_all_wgt_cst_rank_compressed20170116110732262" name="06_abf_all_wgt_cst.rank.compressed">
+          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="06_abf_all_wgt_cst_rank_compressed20170116110732262" name="06_abf_all_wgt_cst">
+            <customproperties/>
+          </layer-tree-layer>
+          <layer-tree-layer expanded="1" checked="Qt::Checked" id="06_abf_all_wgt_cst_copy20170124143225629" name="06_abf_all_wgt_cst_bin">
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
@@ -223,7 +229,7 @@
           </layer-tree-layer>
         </layer-tree-group>
       </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="ILP">
+      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="ILP">
         <customproperties/>
         <layer-tree-group expanded="1" checked="Qt::Unchecked" name="01_all">
           <customproperties/>
@@ -237,12 +243,12 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="03_all_wgt_cst">
+        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="03_all_wgt_cst">
           <customproperties/>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_all_weights_costs_stats20170116111531838" name="ilp_all_weights_costs_stats">
             <customproperties/>
           </layer-tree-layer>
-          <layer-tree-layer expanded="0" checked="Qt::Checked" id="ilp_all_weights_costs20170116111435303" name="ilp_all_weights_costs">
+          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_all_weights_costs20170116111435303" name="ilp_all_weights_costs">
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
@@ -292,10 +298,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>3666148.828125</xmin>
-      <ymin>2329948.04687499813735485</ymin>
-      <xmax>4854223.828125</xmax>
-      <ymax>3487573.04687499813735485</ymax>
+      <xmin>2529975.00000000698491931</xmin>
+      <ymin>812574.99999999487772584</ymin>
+      <xmax>7282275.0000000074505806</xmax>
+      <ymax>5443074.9999999962747097</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -387,6 +393,7 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:4326" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_bd_stats20170116111824747"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_eu26_bd20160826164604136"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="01_caz_nwout120160518102609121"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_all_weights_copy20170124143138500"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="05_caz_es_nwout120160617090137652"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="07_caz_bd_nwout120160627133412768"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="nuts2_rank_variation20160920133849421"/>
@@ -403,6 +410,7 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_eu26_all_weights20160909104742389"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_all_weights20161107124326548"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100001" srcDatumTransform="-1" destDatumTransform="-1" layerid="10_abf_es_cst_nwout120170116111009166"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="06_abf_all_wgt_cst_copy20170124143225629"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="budget_level_0_520160909123218731"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_eu26_all_weights_stats20160915133329236"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="02_abf_nwout120160518103800583"/>
@@ -493,6 +501,8 @@
       <item>ilp_bd_costs20170116111802656</item>
       <item>ilp_bd_costs_stats20170116112016721</item>
       <item>pop_density_v520170116144143653</item>
+      <item>rwr_all_weights_copy20170124143138500</item>
+      <item>06_abf_all_wgt_cst_copy20170124143225629</item>
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
@@ -671,6 +681,11 @@
               <legendlayerfile isInOverview="0" layerid="rwr_eu26_all_weights20160909092552438" visible="0"/>
             </filegroup>
           </legendlayer>
+          <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="rwr_all_weights_worst_10" showFeatureCount="0">
+            <filegroup open="true" hidden="false">
+              <legendlayerfile isInOverview="0" layerid="rwr_all_weights_copy20170124143138500" visible="0"/>
+            </filegroup>
+          </legendlayer>
         </legendgroup>
         <legendgroup open="false" checked="Qt::Unchecked" name="03_es">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_es_stats" showFeatureCount="0">
@@ -697,7 +712,7 @@
           </legendlayer>
         </legendgroup>
       </legendgroup>
-      <legendgroup open="true" checked="Qt::Unchecked" name="Zonation">
+      <legendgroup open="true" checked="Qt::PartiallyChecked" name="Zonation">
         <legendgroup open="false" checked="Qt::Unchecked" name="01_caz"/>
         <legendgroup open="false" checked="Qt::Unchecked" name="02_abf"/>
         <legendgroup open="false" checked="Qt::Unchecked" name="04_abf_all_wgt">
@@ -712,15 +727,20 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="true" checked="Qt::Unchecked" name="06_abf_all_wgt_cst">
+        <legendgroup open="true" checked="Qt::PartiallyChecked" name="06_abf_all_wgt_cst">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="06_abf_all_wgt_cst_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="06_abf_all_wgt_cst_nwout120170116110759981" visible="0"/>
             </filegroup>
           </legendlayer>
-          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="06_abf_all_wgt_cst.rank.compressed" showFeatureCount="0">
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="06_abf_all_wgt_cst" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="06_abf_all_wgt_cst_rank_compressed20170116110732262" visible="0"/>
+            </filegroup>
+          </legendlayer>
+          <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="06_abf_all_wgt_cst_bin" showFeatureCount="0">
+            <filegroup open="true" hidden="false">
+              <legendlayerfile isInOverview="0" layerid="06_abf_all_wgt_cst_copy20170124143225629" visible="1"/>
             </filegroup>
           </legendlayer>
         </legendgroup>
@@ -773,7 +793,7 @@
           </legendlayer>
         </legendgroup>
       </legendgroup>
-      <legendgroup open="true" checked="Qt::PartiallyChecked" name="ILP">
+      <legendgroup open="true" checked="Qt::Unchecked" name="ILP">
         <legendgroup open="true" checked="Qt::Unchecked" name="01_all"/>
         <legendgroup open="false" checked="Qt::Unchecked" name="02_all_wgt">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_all_weights_stats" showFeatureCount="0">
@@ -787,15 +807,15 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="true" checked="Qt::PartiallyChecked" name="03_all_wgt_cst">
+        <legendgroup open="true" checked="Qt::Unchecked" name="03_all_wgt_cst">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_all_weights_costs_stats" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="ilp_all_weights_costs_stats20170116111531838" visible="0"/>
             </filegroup>
           </legendlayer>
-          <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="ilp_all_weights_costs" showFeatureCount="0">
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_all_weights_costs" showFeatureCount="0">
             <filegroup open="false" hidden="false">
-              <legendlayerfile isInOverview="0" layerid="ilp_all_weights_costs20170116111435303" visible="1"/>
+              <legendlayerfile isInOverview="0" layerid="ilp_all_weights_costs20170116111435303" visible="0"/>
             </filegroup>
           </legendlayer>
         </legendgroup>
@@ -2806,6 +2826,57 @@ def my_form_open(dialog, layer, feature):
       </pipe>
       <blendMode>0</blendMode>
     </maplayer>
+    <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>06_abf_all_wgt_cst_copy20170124143225629</id>
+      <datasource>../../analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst.rank.compressed.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>06_abf_all_wgt_cst_bin</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="DISCRETE" clip="0">
+              <item alpha="255" value="0.1" label="&lt;= 0.10" color="#440154"/>
+              <item alpha="255" value="inf" label="> 0.10" color="#fde725"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" readOnly="0" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>06_abf_all_wgt_cst_nwout120170116110759981</id>
       <datasource>../../analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst_nwout1.shp</datasource>
@@ -3366,7 +3437,7 @@ def my_form_open(dialog, layer, feature):
       <keywordList>
         <value></value>
       </keywordList>
-      <layername>06_abf_all_wgt_cst.rank.compressed</layername>
+      <layername>06_abf_all_wgt_cst</layername>
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
@@ -6940,14 +7011,14 @@ def my_form_open(dialog, layer, feature):
       <expressionfields/>
       <defaults>
         <default field="id" expression=""/>
-        <default field="STAT_LEVL_" expression=""/>
-        <default field="NUTS_ID" expression=""/>
+        <default field="country" expression=""/>
+        <default field="_mean" expression=""/>
         <default field="_min" expression=""/>
         <default field="_max" expression=""/>
-        <default field="_mean" expression=""/>
+        <default field="NUTS_ID" expression=""/>
         <default field="SHAPE_AREA" expression=""/>
+        <default field="STAT_LEVL_" expression=""/>
         <default field="SHAPE_LEN" expression=""/>
-        <default field="country" expression=""/>
         <default field="_count" expression=""/>
       </defaults>
       <map-layer-style-manager current="">
@@ -6957,10 +7028,10 @@ def my_form_open(dialog, layer, feature):
         <edittype widgetv2type="TextEdit" name="id">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="STAT_LEVL_">
+        <edittype widgetv2type="TextEdit" name="country">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="NUTS_ID">
+        <edittype widgetv2type="TextEdit" name="_mean">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="_min">
@@ -6969,16 +7040,16 @@ def my_form_open(dialog, layer, feature):
         <edittype widgetv2type="TextEdit" name="_max">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="_mean">
+        <edittype widgetv2type="TextEdit" name="NUTS_ID">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="SHAPE_AREA">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="SHAPE_LEN">
+        <edittype widgetv2type="TextEdit" name="STAT_LEVL_">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="country">
+        <edittype widgetv2type="TextEdit" name="SHAPE_LEN">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="_count">
@@ -7380,14 +7451,14 @@ def my_form_open(dialog, layer, feature):
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
-        <alias field="STAT_LEVL_" index="1" name=""/>
-        <alias field="NUTS_ID" index="2" name=""/>
+        <alias field="country" index="1" name=""/>
+        <alias field="_mean" index="2" name=""/>
         <alias field="_min" index="3" name=""/>
         <alias field="_max" index="4" name=""/>
-        <alias field="_mean" index="5" name=""/>
+        <alias field="NUTS_ID" index="5" name=""/>
         <alias field="SHAPE_AREA" index="6" name=""/>
-        <alias field="SHAPE_LEN" index="7" name=""/>
-        <alias field="country" index="8" name=""/>
+        <alias field="STAT_LEVL_" index="7" name=""/>
+        <alias field="SHAPE_LEN" index="8" name=""/>
         <alias field="_count" index="9" name=""/>
       </aliases>
       <excludeAttributesWMS/>
@@ -7471,14 +7542,14 @@ def my_form_open(dialog, layer, feature):
       <defaults>
         <default field="id" expression=""/>
         <default field="_count" expression=""/>
-        <default field="NUTS_ID" expression=""/>
-        <default field="SHAPE_LEN" expression=""/>
-        <default field="_max" expression=""/>
-        <default field="SHAPE_AREA" expression=""/>
         <default field="_min" expression=""/>
+        <default field="NUTS_ID" expression=""/>
         <default field="country" expression=""/>
+        <default field="SHAPE_AREA" expression=""/>
+        <default field="SHAPE_LEN" expression=""/>
         <default field="_mean" expression=""/>
         <default field="STAT_LEVL_" expression=""/>
+        <default field="_max" expression=""/>
       </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
@@ -7490,28 +7561,28 @@ def my_form_open(dialog, layer, feature):
         <edittype widgetv2type="TextEdit" name="_count">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
+        <edittype widgetv2type="TextEdit" name="_min">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
         <edittype widgetv2type="TextEdit" name="NUTS_ID">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="SHAPE_LEN">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="_max">
+        <edittype widgetv2type="TextEdit" name="country">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="SHAPE_AREA">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="_min">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="country">
+        <edittype widgetv2type="TextEdit" name="SHAPE_LEN">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="_mean">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="STAT_LEVL_">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="_max">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
       </edittypes>
@@ -7911,14 +7982,14 @@ def my_form_open(dialog, layer, feature):
       <aliases>
         <alias field="id" index="0" name=""/>
         <alias field="_count" index="1" name=""/>
-        <alias field="NUTS_ID" index="2" name=""/>
-        <alias field="SHAPE_LEN" index="3" name=""/>
-        <alias field="_max" index="4" name=""/>
+        <alias field="_min" index="2" name=""/>
+        <alias field="NUTS_ID" index="3" name=""/>
+        <alias field="country" index="4" name=""/>
         <alias field="SHAPE_AREA" index="5" name=""/>
-        <alias field="_min" index="6" name=""/>
-        <alias field="country" index="7" name=""/>
-        <alias field="_mean" index="8" name=""/>
-        <alias field="STAT_LEVL_" index="9" name=""/>
+        <alias field="SHAPE_LEN" index="6" name=""/>
+        <alias field="_mean" index="7" name=""/>
+        <alias field="STAT_LEVL_" index="8" name=""/>
+        <alias field="_max" index="9" name=""/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
@@ -8114,15 +8185,15 @@ def my_form_open(dialog, layer, feature):
       <expressionfields/>
       <defaults>
         <default field="id" expression=""/>
-        <default field="SHAPE_LEN" expression=""/>
+        <default field="SHAPE_AREA" expression=""/>
         <default field="_max" expression=""/>
-        <default field="_min" expression=""/>
         <default field="_count" expression=""/>
+        <default field="SHAPE_LEN" expression=""/>
         <default field="country" expression=""/>
+        <default field="_min" expression=""/>
+        <default field="_mean" expression=""/>
         <default field="NUTS_ID" expression=""/>
         <default field="STAT_LEVL_" expression=""/>
-        <default field="SHAPE_AREA" expression=""/>
-        <default field="_mean" expression=""/>
       </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
@@ -8131,31 +8202,31 @@ def my_form_open(dialog, layer, feature):
         <edittype widgetv2type="TextEdit" name="id">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="SHAPE_LEN">
+        <edittype widgetv2type="TextEdit" name="SHAPE_AREA">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="_max">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="_min">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
         <edittype widgetv2type="TextEdit" name="_count">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
+        <edittype widgetv2type="TextEdit" name="SHAPE_LEN">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
         <edittype widgetv2type="TextEdit" name="country">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="_min">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="_mean">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="NUTS_ID">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="STAT_LEVL_">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="SHAPE_AREA">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="_mean">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
       </edittypes>
@@ -8554,15 +8625,15 @@ def my_form_open(dialog, layer, feature):
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
-        <alias field="SHAPE_LEN" index="1" name=""/>
+        <alias field="SHAPE_AREA" index="1" name=""/>
         <alias field="_max" index="2" name=""/>
-        <alias field="_min" index="3" name=""/>
-        <alias field="_count" index="4" name=""/>
+        <alias field="_count" index="3" name=""/>
+        <alias field="SHAPE_LEN" index="4" name=""/>
         <alias field="country" index="5" name=""/>
-        <alias field="NUTS_ID" index="6" name=""/>
-        <alias field="STAT_LEVL_" index="7" name=""/>
-        <alias field="SHAPE_AREA" index="8" name=""/>
-        <alias field="_mean" index="9" name=""/>
+        <alias field="_min" index="6" name=""/>
+        <alias field="_mean" index="7" name=""/>
+        <alias field="NUTS_ID" index="8" name=""/>
+        <alias field="STAT_LEVL_" index="9" name=""/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
@@ -8638,15 +8709,15 @@ def my_form_open(dialog, layer, feature):
       <expressionfields/>
       <defaults>
         <default field="id" expression=""/>
-        <default field="NUTS_ID" expression=""/>
-        <default field="STAT_LEVL_" expression=""/>
         <default field="_mean" expression=""/>
+        <default field="STAT_LEVL_" expression=""/>
+        <default field="_count" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="SHAPE_LEN" expression=""/>
         <default field="_min" expression=""/>
         <default field="_max" expression=""/>
         <default field="country" expression=""/>
         <default field="SHAPE_AREA" expression=""/>
-        <default field="_count" expression=""/>
-        <default field="SHAPE_LEN" expression=""/>
       </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
@@ -8655,13 +8726,19 @@ def my_form_open(dialog, layer, feature):
         <edittype widgetv2type="TextEdit" name="id">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="NUTS_ID">
+        <edittype widgetv2type="TextEdit" name="_mean">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="STAT_LEVL_">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="_mean">
+        <edittype widgetv2type="TextEdit" name="_count">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="NUTS_ID">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="SHAPE_LEN">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="_min">
@@ -8674,12 +8751,6 @@ def my_form_open(dialog, layer, feature):
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="SHAPE_AREA">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="_count">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="SHAPE_LEN">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
       </edittypes>
@@ -9076,15 +9147,15 @@ def my_form_open(dialog, layer, feature):
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
-        <alias field="NUTS_ID" index="1" name=""/>
+        <alias field="_mean" index="1" name=""/>
         <alias field="STAT_LEVL_" index="2" name=""/>
-        <alias field="_mean" index="3" name=""/>
-        <alias field="_min" index="4" name=""/>
-        <alias field="_max" index="5" name=""/>
-        <alias field="country" index="6" name=""/>
-        <alias field="SHAPE_AREA" index="7" name=""/>
-        <alias field="_count" index="8" name=""/>
-        <alias field="SHAPE_LEN" index="9" name=""/>
+        <alias field="_count" index="3" name=""/>
+        <alias field="NUTS_ID" index="4" name=""/>
+        <alias field="SHAPE_LEN" index="5" name=""/>
+        <alias field="_min" index="6" name=""/>
+        <alias field="_max" index="7" name=""/>
+        <alias field="country" index="8" name=""/>
+        <alias field="SHAPE_AREA" index="9" name=""/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
@@ -9279,14 +9350,14 @@ def my_form_open(dialog, layer, feature):
       <defaults>
         <default field="id" expression=""/>
         <default field="_mean" expression=""/>
+        <default field="SHAPE_AREA" expression=""/>
+        <default field="country" expression=""/>
         <default field="STAT_LEVL_" expression=""/>
         <default field="NUTS_ID" expression=""/>
-        <default field="SHAPE_LEN" expression=""/>
         <default field="_max" expression=""/>
-        <default field="country" expression=""/>
         <default field="_min" expression=""/>
-        <default field="SHAPE_AREA" expression=""/>
         <default field="_count" expression=""/>
+        <default field="SHAPE_LEN" expression=""/>
       </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
@@ -9298,28 +9369,28 @@ def my_form_open(dialog, layer, feature):
         <edittype widgetv2type="TextEdit" name="_mean">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
+        <edittype widgetv2type="TextEdit" name="SHAPE_AREA">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="country">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
         <edittype widgetv2type="TextEdit" name="STAT_LEVL_">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="NUTS_ID">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="SHAPE_LEN">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
         <edittype widgetv2type="TextEdit" name="_max">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="country">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="_min">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="SHAPE_AREA">
+        <edittype widgetv2type="TextEdit" name="_count">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="_count">
+        <edittype widgetv2type="TextEdit" name="SHAPE_LEN">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
       </edittypes>
@@ -9719,14 +9790,14 @@ def my_form_open(dialog, layer, feature):
       <aliases>
         <alias field="id" index="0" name=""/>
         <alias field="_mean" index="1" name=""/>
-        <alias field="STAT_LEVL_" index="2" name=""/>
-        <alias field="NUTS_ID" index="3" name=""/>
-        <alias field="SHAPE_LEN" index="4" name=""/>
-        <alias field="_max" index="5" name=""/>
-        <alias field="country" index="6" name=""/>
+        <alias field="SHAPE_AREA" index="2" name=""/>
+        <alias field="country" index="3" name=""/>
+        <alias field="STAT_LEVL_" index="4" name=""/>
+        <alias field="NUTS_ID" index="5" name=""/>
+        <alias field="_max" index="6" name=""/>
         <alias field="_min" index="7" name=""/>
-        <alias field="SHAPE_AREA" index="8" name=""/>
-        <alias field="_count" index="9" name=""/>
+        <alias field="_count" index="8" name=""/>
+        <alias field="SHAPE_LEN" index="9" name=""/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
@@ -9802,15 +9873,15 @@ def my_form_open(dialog, layer, feature):
       <expressionfields/>
       <defaults>
         <default field="id" expression=""/>
-        <default field="STAT_LEVL_" expression=""/>
-        <default field="_max" expression=""/>
         <default field="_mean" expression=""/>
-        <default field="country" expression=""/>
-        <default field="NUTS_ID" expression=""/>
-        <default field="_min" expression=""/>
-        <default field="SHAPE_AREA" expression=""/>
-        <default field="_count" expression=""/>
+        <default field="_max" expression=""/>
         <default field="SHAPE_LEN" expression=""/>
+        <default field="STAT_LEVL_" expression=""/>
+        <default field="country" expression=""/>
+        <default field="_min" expression=""/>
+        <default field="NUTS_ID" expression=""/>
+        <default field="_count" expression=""/>
+        <default field="SHAPE_AREA" expression=""/>
       </defaults>
       <map-layer-style-manager current="">
         <map-layer-style name=""/>
@@ -9819,31 +9890,31 @@ def my_form_open(dialog, layer, feature):
         <edittype widgetv2type="TextEdit" name="id">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="STAT_LEVL_">
+        <edittype widgetv2type="TextEdit" name="_mean">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="_max">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="_mean">
+        <edittype widgetv2type="TextEdit" name="SHAPE_LEN">
+          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
+        </edittype>
+        <edittype widgetv2type="TextEdit" name="STAT_LEVL_">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="country">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="NUTS_ID">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
         <edittype widgetv2type="TextEdit" name="_min">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="SHAPE_AREA">
+        <edittype widgetv2type="TextEdit" name="NUTS_ID">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="_count">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
-        <edittype widgetv2type="TextEdit" name="SHAPE_LEN">
+        <edittype widgetv2type="TextEdit" name="SHAPE_AREA">
           <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
         </edittype>
       </edittypes>
@@ -10242,15 +10313,15 @@ def my_form_open(dialog, layer, feature):
       <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
-        <alias field="STAT_LEVL_" index="1" name=""/>
+        <alias field="_mean" index="1" name=""/>
         <alias field="_max" index="2" name=""/>
-        <alias field="_mean" index="3" name=""/>
-        <alias field="country" index="4" name=""/>
-        <alias field="NUTS_ID" index="5" name=""/>
+        <alias field="SHAPE_LEN" index="3" name=""/>
+        <alias field="STAT_LEVL_" index="4" name=""/>
+        <alias field="country" index="5" name=""/>
         <alias field="_min" index="6" name=""/>
-        <alias field="SHAPE_AREA" index="7" name=""/>
+        <alias field="NUTS_ID" index="7" name=""/>
         <alias field="_count" index="8" name=""/>
-        <alias field="SHAPE_LEN" index="9" name=""/>
+        <alias field="SHAPE_AREA" index="9" name=""/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
@@ -11839,6 +11910,58 @@ def my_form_open(dialog, layer, feature):
             <colorrampshader colorRampType="INTERPOLATED" clip="0">
               <item alpha="255" value="0" label="0" color="#000000"/>
               <item alpha="255" value="1" label="1" color="#2ce721"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>rwr_all_weights_copy20170124143138500</id>
+      <datasource>../../analyses/RWR/rwr_all_weights.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>rwr_all_weights_worst_10</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="DISCRETE" clip="0">
+              <item alpha="255" value="0.1" label="&lt;= 0.10" color="#440154"/>
+              <item alpha="255" value="inf" label="> 0.10" color="#fde725"/>
             </colorrampshader>
           </rastershader>
         </rasterrenderer>
