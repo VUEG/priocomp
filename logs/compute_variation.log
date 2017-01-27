@@ -1,12 +1,12 @@
-2017-01-27 15:53:00 [compute_variation] [INFO ] [1/3] Reading in 9 features...
-2017-01-27 15:53:00 [compute_variation] [DEBUG]  [1/9] Processing feature analyses/RWR/rwr_all_weights_stats.geojson
-2017-01-27 15:53:01 [compute_variation] [DEBUG]  [2/9] Processing feature analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt_nwout1.shp
-2017-01-27 15:53:02 [compute_variation] [DEBUG]  [3/9] Processing feature analyses/ILP/ilp_all_weights_stats.geojson
-2017-01-27 15:53:03 [compute_variation] [DEBUG]  [4/9] Processing feature analyses/RWR/rwr_es_stats.geojson
-2017-01-27 15:53:04 [compute_variation] [DEBUG]  [5/9] Processing feature analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es_nwout1.shp
-2017-01-27 15:53:05 [compute_variation] [DEBUG]  [6/9] Processing feature analyses/ILP/ilp_es_stats.geojson
-2017-01-27 15:53:06 [compute_variation] [DEBUG]  [7/9] Processing feature analyses/RWR/rwr_bd_stats.geojson
-2017-01-27 15:53:07 [compute_variation] [DEBUG]  [8/9] Processing feature analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd_nwout1.shp
-2017-01-27 15:53:08 [compute_variation] [DEBUG]  [9/9] Processing feature analyses/ILP/ilp_bd_stats.geojson
-2017-01-27 15:53:09 [compute_variation] [INFO ] [2/3] Calculating mean and STD...
-2017-01-27 15:53:11 [compute_variation] [INFO ]  Saving results to analyses/comparison/nuts2_rank_variation.shp
+2017-01-27 16:21:44 [compute_variation] [INFO ] [1/2] Reading in 9 features...
+2017-01-27 16:21:44 [compute_variation] [DEBUG]  [1/9] Processing feature analyses/RWR/rwr_all_weights_stats.geojson
+2017-01-27 16:21:45 [compute_variation] [DEBUG]  [2/9] Processing feature analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt_nwout1.shp
+2017-01-27 16:21:46 [compute_variation] [DEBUG]  [3/9] Processing feature analyses/ILP/ilp_all_weights_stats.geojson
+2017-01-27 16:21:47 [compute_variation] [DEBUG]  [4/9] Processing feature analyses/RWR/rwr_es_stats.geojson
+2017-01-27 16:21:48 [compute_variation] [DEBUG]  [5/9] Processing feature analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es_nwout1.shp
+2017-01-27 16:21:49 [compute_variation] [DEBUG]  [6/9] Processing feature analyses/ILP/ilp_es_stats.geojson
+2017-01-27 16:21:51 [compute_variation] [DEBUG]  [7/9] Processing feature analyses/RWR/rwr_bd_stats.geojson
+2017-01-27 16:21:52 [compute_variation] [DEBUG]  [8/9] Processing feature analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd_nwout1.shp
+2017-01-27 16:21:53 [compute_variation] [DEBUG]  [9/9] Processing feature analyses/ILP/ilp_bd_stats.geojson
+2017-01-27 16:21:54 [compute_variation] [INFO ] [2/2] Calculating mean and STD...
+2017-01-27 16:21:56 [compute_variation] [INFO ]  Saving results to analyses/comparison/nuts2_rank_variation.shp
