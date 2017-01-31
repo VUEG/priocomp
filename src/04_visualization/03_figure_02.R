@@ -95,7 +95,7 @@ create_map <- function(raster, title) {
   return(raster_map)
 }
 
-create_map_stack <- function(input_rasters) {
+create_map_list <- function(input_rasters) {
   map_list <- list()
 
   for (i in 1:length(input_rasters)) {
@@ -107,66 +107,79 @@ create_map_stack <- function(input_rasters) {
   return(map_list)
 }
 
+print_map_list <- function(x, filepath, width = 1800, height = 1800,
+                           nrow = 3, ncol = 3) {
+
+  if ((nrow * ncol) != length(x)) {
+    stop("The multiple of nrow and ncol must be the same as ",
+         "length of x")
+  }
+
+  # Generate row/col indexes for the grid layout
+  indexes <- mapply(c, rep(1:nrow, each = 3, times = 1),
+                    rep(1:ncol, times = 3), SIMPLIFY = FALSE)
+
+  message("Creating composite image ", filepath)
+  # Create a new image
+  png(filepath, width = width, height = height)
+  # Establish a grid layout to which the image panels are printed
+  # to
+  grid.newpage()
+  pushViewport(viewport(layout = grid.layout(nrow, ncol)))
+
+  for (i in 1:length(x)) {
+    message("Printing ", names(x[i])[1], " in grid position (",
+            indexes[[i]][1], ", ", indexes[[i]][2], ")...")
+    print(x[[i]], vp = viewport(layout.pos.row = indexes[[i]][1],
+                                layout.pos.col = indexes[[i]][2]))
+  }
+  dev.off()
+  message("All done")
+  return(invisible(TRUE))
+}
+
 # Read in pixel-based rank data -------------------------------------------
+
+# NOTE: the order matters -> the order is retained in the composite image
+# layout.
 
 input_rasters <- list(
   "rwr_raster_all" = "analyses/RWR/rwr_all_weights.tif",
-  "rwr_raster_es" = "analyses/RWR/rwr_es.tif",
-  "rwr_raster_bd" = "analyses/RWR/rwr_bd.tif",
   "zon_raster_all" = "analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif",
-  "zon_raster_es" = "analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es.rank.compressed.tif",
-  "zon_raster_bd" = "analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd.rank.compressed.tif",
   "ilp_raster_all" = "analyses/ILP/ilp_all_weights.tif",
+  "rwr_raster_es" = "analyses/RWR/rwr_es.tif",
+  "zon_raster_es" = "analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es.rank.compressed.tif",
   "ilp_raster_es" = "analyses/ILP/ilp_es.tif",
+  "rwr_raster_bd" = "analyses/RWR/rwr_bd.tif",
+  "zon_raster_bd" = "analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd.rank.compressed.tif",
   "ilp_raster_bd" = "analyses/ILP/ilp_bd.tif")
 
 input_rasters_costs <- list(
   "rwr_raster_all_cst" = "analyses/RWR/rwr_all_weights_costs.tif",
-  "rwr_raster_es_cst" = "analyses/RWR/rwr_es_costs.tif",
-  "rwr_raster_bd_cst" = "analyses/RWR/rwr_bd_costs.tif",
   "zon_raster_all_cst" = "analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst.rank.compressed.tif",
-  "zon_raster_es_cst" = "analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst.rank.compressed.tif",
-  "zon_raster_bd_cst" = "analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst.rank.compressed.tif",
   "ilp_raster_all_cst" = "analyses/ILP/ilp_all_weights_costs.tif",
+  "rwr_raster_es_cst" = "analyses/RWR/rwr_es_costs.tif",
+  "zon_raster_es_cst" = "analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst.rank.compressed.tif",
   "ilp_raster_es_cst" = "analyses/ILP/ilp_es_costs.tif",
+  "rwr_raster_bd_cst" = "analyses/RWR/rwr_bd_costs.tif",
+  "zon_raster_bd_cst" = "analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst.rank.compressed.tif",
   "ilp_raster_bd_cst" = "analyses/ILP/ilp_bd_costs.tif")
 
 # Create maps -------------------------------------------------------------
 
-#maps <- create_map_stack(input_rasters)
-#maps_cost <- create_map_stack(input_rasters_costs)
+maps <- create_map_list(input_rasters)
+maps_costs <- create_map_list(input_rasters_costs)
 
 # Save plots --------------------------------------------------------------
 
 file_legend <- "reports/figures/02_figure_02_legend.png"
 file_main <- "reports/figures/04_figure_02_main.png"
+file_main_costs <- "reports/figures/04_figure_02_main_costs.png"
 
-
-png(file_main, width = 1800, height = 1800)
-grid.newpage()
-pushViewport(viewport(layout = grid.layout(3,3)))
-
-print(create_map(raster::raster(input_rasters[[1]]), title = LETTERS[1]),
-      vp = viewport(layout.pos.row = 1, layout.pos.col = 1))
-print(create_map(raster::raster(input_rasters[[4]]), title = LETTERS[2]),
-      vp = viewport(layout.pos.row = 1, layout.pos.col = 2))
-print(create_map(raster::raster(input_rasters[[7]]), title = LETTERS[3]),
-      vp = viewport(layout.pos.row = 1, layout.pos.col = 3))
-
-print(create_map(raster::raster(input_rasters[[2]]), title = LETTERS[4]),
-      vp = viewport(layout.pos.row = 2, layout.pos.col = 1))
-print(create_map(raster::raster(input_rasters[[5]]), title = LETTERS[5]),
-      vp = viewport(layout.pos.row = 2, layout.pos.col = 2))
-print(create_map(raster::raster(input_rasters[[8]]), title = LETTERS[6]),
-      vp = viewport(layout.pos.row = 2, layout.pos.col = 3))
-
-print(create_map(raster::raster(input_rasters[[3]]), title = LETTERS[7]),
-      vp = viewport(layout.pos.row = 3, layout.pos.col = 1))
-print(create_map(raster::raster(input_rasters[[6]]), title = LETTERS[8]),
-      vp = viewport(layout.pos.row = 3, layout.pos.col = 2))
-print(create_map(raster::raster(input_rasters[[9]]), title = LETTERS[9]),
-      vp = viewport(layout.pos.row = 3, layout.pos.col = 3))
-dev.off()
+print_map_list(maps, file_main, width = 1800, height = 1800,
+               nrow = 3, ncol = 3)
+print_map_list(maps_costs, file_main_costs, width = 1800, height = 1800,
+               nrow = 3, ncol = 3)
 
 # Create legend separately and only once based on a single raster map
 rastermap_legend <- create_legend(raster::raster(input_rasters[[1]]),
@@ -175,12 +188,8 @@ rastermap_legend <- create_legend(raster::raster(input_rasters[[1]]),
 
 save_tmap(rastermap_legend, file_legend, width = 400, height = 600)
 
-# Combine images
-
-# Combine images using magick (couldn't figure a better way...)
-#img_main <- magick::image_read(file_main)
+# Crop legend
 img_legend <- magick::image_read(file_legend)
 img_legend <- magick::image_crop(img_legend, geometry = "290x435+20+80")
-#img_composite <- magick::image_append(c(img_main, img_legend), stack = TRUE)
 magick::image_write(img_legend, path = file_legend)
 
