@@ -85,23 +85,35 @@ match_method <- Vectorize(
 # a 3-character code is returned.
 match_type <- Vectorize(
   function(x) {
-    if (grepl("_all.tif$", x) | grepl("_all_stats$", x) | grepl("02_abf_all", x)) {
-      mtype <- "ALL"
-    } else if (grepl("_all_weights.tif", x) | grepl("_all_weights_stats", x) | grepl("04_abf_all_wgt", x)) {
-      mtype <- "ALL_WGT"
-    } else if (grepl("_all_weights_costs.tif", x) | grepl("_all_weights_costs_stats", x) | grepl("06_abf_all_wgt_cst", x)) {
-      mtype <- "ALL_WGT_CST"
-    } else if (grepl("_es\\.", x)) {
-      mtype <- "ES"
-    } else if (grepl("_es_cst\\.", x) | grepl("_es_costs\\.", x)) {
-      mtype <- "ES_CST"
-    } else if (grepl("_bd\\.", x)) {
-      mtype <- "BD"
-    } else if (grepl("_bd_cst\\.", x) | grepl("_bd_costs\\.", x)) {
-      mtype <- "BD_CST"
-    } else {
+
+    match_list <- list(
+      "ALL" = c("_all\\.tif$", "_all_stats\\.", "02_abf_all.+"),
+      "ALL_WGT" = c("_all_weights\\.tif", "_all_weights_stats\\.", "04_abf_all_wgt.+"),
+      "ALL_WGT_CST" = c("_all_weights_costs\\.tif", "_all_weights_costs_stats\\.",
+                        "06_abf_all_wgt_cst"),
+      "ES" = c("_es\\.", "_es\\/", "_es_stats\\."),
+      "ES_CST" = c("_es_cst\\.", "_es_cst\\/", "_es_costs\\.", "_es_costs_stats\\."),
+      "BD" = c("_bd\\.", "_bd\\/", "_bd_stats\\."),
+      "BD_CST" = c("_bd_cst\\.", "_bd_cst\\/", "_bd_costs\\.", "_bd_costs_stats\\.")
+    )
+
+    mtype <- NA
+    for (i in 1:length(match_list)) {
+      mtype_candidate <- names(match_list)[i]
+      patterns <- match_list[mtype_candidate]
+      if (any(sapply(patterns[[1]], function(pattern) grepl(pattern, x)))) {
+        if (is.na(mtype)) {
+          mtype <- mtype_candidate
+        } else {
+          warning("Multiple matches found, keeping only the first")
+        }
+      }
+    }
+
+    if (is.na(mtype)) {
       stop("Type ", x, " not matched")
     }
+
     return(mtype)
   }, c("x"), USE.NAMES = FALSE, SIMPLIFY = TRUE)
 
