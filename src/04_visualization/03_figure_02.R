@@ -190,6 +190,6 @@ save_tmap(rastermap_legend, file_legend, width = 400, height = 600)
 
 # Crop legend
 img_legend <- magick::image_read(file_legend)
-img_legend <- magick::image_crop(img_legend, geometry = "290x435+20+80")
+img_legend <- magick::image_crop(img_legend, geometry = "236x354+30+123")
 magick::image_write(img_legend, path = file_legend)
 
