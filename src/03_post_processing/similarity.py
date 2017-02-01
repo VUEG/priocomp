@@ -257,16 +257,23 @@ def compute_mcs(a, b):
     :param b numeric vector.
     :return ndarray of computed MCS scores.
     """
+
     assert len(a) == len(b), "Vectors a and b must be of same length"
     N = len(a)
     # Create an array filled with -1s to store the MCS.
     mcs = 0
     nans = False
+
     for i in range(0, N):
         if np.isnan(a[i]) or np.isnan(b[i]):
             nans = True
         else:
-            mcs += np.abs(a[i] - b[i]) / np.max([a[i], b[i]])
+            # If eiher a or b is 0, do nothing as division would fail
+            if a[i] == 0.0 or b[i] == 0.0:
+                pass
+            else:
+                abs_subs = np.abs(a[i] - b[i]) / np.max([a[i], b[i]])
+                mcs += abs_subs
     if nans:
         print("WARNING: a and/or b contain NaNs")
 
@@ -338,8 +345,10 @@ def cross_mcs(input_vectors, value_fields, verbose=False, logger=None):
                           "between {} ".format(vector1_path) +
                           "and {}".format(vector2_path)))
 
-            mcs_value = compute_mcs(vector1[value_fields[i]],
-                                    vector2[value_fields[j]])
+            a = vector1[value_fields[i]]
+            b = vector2[value_fields[j]]
+
+            mcs_value = compute_mcs(a, b)
             mcs = pd.DataFrame({"feature1": [vector1_path],
                                 "feature2": [vector2_path],
                                 "mcs": [mcs_value]})
