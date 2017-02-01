@@ -172,9 +172,9 @@ maps_costs <- create_map_list(input_rasters_costs)
 
 # Save plots --------------------------------------------------------------
 
-file_legend <- "reports/figures/02_figure_02_legend.png"
-file_main <- "reports/figures/04_figure_02_main.png"
-file_main_costs <- "reports/figures/04_figure_02_main_costs.png"
+file_legend <- "reports/figures/figure2/01_figure_02_legend.png"
+file_main <- "reports/figures/02_figure_02_main_nocosts.png"
+file_main_costs <- "reports/figures/03_figure_02_main_costs.png"
 
 print_map_list(maps, file_main, width = 1800, height = 1800,
                nrow = 3, ncol = 3)
