@@ -5,63 +5,106 @@ library(tidyr)
 library(zonator)
 library(viridis)
 
-# Load variants and get curves data ---------------------------------------
+
+# Load variants and configure groups --------------------------------------
 
 zproject <- zonator::load_zproject('analyses/zonation/priocomp/')
 
-v04_abf_all_wgt <- zonator::get_variant(zproject, 4)
-v06_abf_es <- zonator::get_variant(zproject, 6)
-v08_abf_bd <- zonator::get_variant(zproject, 8)
+all_groups <- c("1" = "ZON_ES", "2" = "ZON_BD", "3" = "ZON_CST")
+es_groups <- c("1" = "ZON_ES", "2" = "ZON_CST")
+bd_taxon_groups <- c("1" = "amphibians", "2" = "birds", "3" = "mammals",
+                     "4" = "reptiles", "5" = "ZON_CST")
+bd_groups <- c("1" = "ZON_BD", "2" = "ZON_CST")
 
-v04_crvs <- zonator::curves(v04_abf_all_wgt, groups = FALSE)
-v06_crvs <- zonator::curves(v06_abf_es, groups = FALSE)
-v08_crvs <- zonator::curves(v08_abf_bd, groups = FALSE)
+# ALL
+v04_abf_all_wgt <- zonator::get_variant(zproject, 4)
+v06_abf_all_wgt_cst <- zonator::get_variant(zproject, 6)
+zonator::groupnames(v04_abf_all_wgt) <- all_groups
+zonator::groupnames(v06_abf_all_wgt_cst) <- all_groups
+
+# ES
+v08_abf_es <- zonator::get_variant(zproject, 8)
+v10_abf_es_cst <- zonator::get_variant(zproject, 10)
+zonator::groupnames(v08_abf_es) <- es_groups
+zonator::groupnames(v10_abf_es_cst) <- es_groups
+
+# BD
+v12_abf_bd <- zonator::get_variant(zproject, 12)
+v14_abf_bd_cst <- zonator::get_variant(zproject, 14)
+# NOTE: variants 12 and 14 have been run with taxon groups. Convert
+# these to more generic groups.
+generic_groups <- c(rep(1, zonator::nfeatures(v12_abf_bd) - 1), 2)
+zonator::groups(v12_abf_bd) <- generic_groups
+zonator::groupnames(v12_abf_bd) <- bd_groups
+zonator::groups(v14_abf_bd_cst) <- generic_groups
+zonator::groupnames(v14_abf_bd_cst) <- bd_groups
+
+# Load ranking from ES, features from BD
+v19_load_es_bd <- zonator::get_variant(zproject, 19)
+zonator::groups(v19_load_es_bd) <- generic_groups
+zonator::groupnames(v19_load_es_bd) <- bd_groups
+
+# Load ranking from BD, features from ES
+v20_load_bd_es <- zonator::get_variant(zproject, 20)
+zonator::groupnames(v20_load_bd_es) <- es_groups
+
+# Load ranking from ES, features from BD, COSTS
+v21_load_es_bd_cst <- zonator::get_variant(zproject, 21)
+zonator::groups(v21_load_es_bd_cst) <- generic_groups
+zonator::groupnames(v21_load_es_bd_cst) <- bd_groups
+
+# Load ranking from BD, features from ES, COSTS
+v22_load_bd_es_cst <- zonator::get_variant(zproject, 22)
+zonator::groupnames(v22_load_bd_es_cst) <- es_groups
+
+# Get group curves data ---------------------------------------------------
+
+v04_grp_crvs <- zonator::curves(v04_abf_all_wgt, groups = TRUE)
+v06_grp_crvs <- zonator::curves(v06_abf_all_wgt_cst, groups = TRUE)
+v08_grp_crvs <- zonator::curves(v08_abf_es, groups = TRUE)
+v10_grp_crvs <- zonator::curves(v10_abf_es_cst, groups = TRUE)
+v12_grp_crvs <- zonator::curves(v12_abf_bd, groups = TRUE)
+v14_grp_crvs <- zonator::curves(v14_abf_bd_cst, groups = TRUE)
+v19_grp_crvs <- zonator::curves(v19_load_es_bd, groups = TRUE)
+v20_grp_crvs <- zonator::curves(v20_load_bd_es, groups = TRUE)
+v21_grp_crvs <- zonator::curves(v21_load_es_bd_cst, groups = TRUE)
+v22_grp_crvs <- zonator::curves(v22_load_bd_es_cst, groups = TRUE)
 
 # Re-arrange data ---------------------------------------------------------
 
-# FIXME! For now (2016-11-08), calculate means manually. Groups file
-# definition were not correct in the last run.
-v04_es_mean <- v04_crvs %>%
-  dplyr::select(woodprod_average:species_richness_vascular_plants) %>%
-  dplyr::mutate(ave_pr = rowMeans(., na.rm = TRUE)) %>%
-  dplyr::select(ave_pr) %>%
-  dplyr::bind_cols(dplyr::select(v04_crvs, pr_lost), .) %>%
-  dplyr::mutate(variant = "ZON_ES")
+v04_grp_mean <- v04_grp_crvs %>%
+  dplyr::select(pr_lost, ZON_ES = mean.ZON_ES, ZON_BD = mean.ZON_BD) %>%
+  tidyr::gather(variant, ave_pr, -pr_lost)
+v06_grp_mean <- v06_grp_crvs %>%
+  dplyr::select(pr_lost, ZON_ES = mean.ZON_ES, ZON_BD = mean.ZON_BD) %>%
+  tidyr::gather(variant, ave_pr, -pr_lost)
 
-v04_bd_mean <- v04_crvs %>%
-  dplyr::select(-(pr_lost:species_richness_vascular_plants)) %>%
-  dplyr::mutate(ave_pr = rowMeans(., na.rm = TRUE)) %>%
-  dplyr::select(ave_pr) %>%
-  dplyr::bind_cols(dplyr::select(v04_crvs, pr_lost), .) %>%
-  dplyr::mutate(variant = "ZON_BD")
-
-v04_grp_mean <- dplyr::bind_rows(v04_es_mean, v04_bd_mean)
-
-# Get the average proportion remaining over all features in respective
-# variants
-v06_mean <- v06_crvs %>%
-  dplyr::select(pr_lost, ave_pr) %>%
+v08_mean <- v08_grp_crvs %>%
+  dplyr::select(pr_lost, ave_pr = mean.ZON_ES) %>%
+  dplyr::mutate(variant = "ES")
+v10_mean <- v10_grp_crvs %>%
+  dplyr::select(pr_lost, ave_pr = mean.ZON_ES) %>%
   dplyr::mutate(variant = "ES")
 
-v08_mean <- v08_crvs %>%
-  dplyr::select(pr_lost, ave_pr) %>%
+v12_mean <- v12_grp_crvs %>%
+  dplyr::select(pr_lost, ave_pr = mean.ZON_BD) %>%
+  dplyr::mutate(variant = "BD")
+v14_mean <- v14_grp_crvs %>%
+  dplyr::select(pr_lost, ave_pr = mean.ZON_BD) %>%
   dplyr::mutate(variant = "BD")
 
-# Pre-load ----------------------------------------------------------------
-
-# zonator can't deal with pre-loaded variants, so manually load up the
-# curves data
-
-v11_crvs <- zonator::read_curves("analyses/zonation/priocomp/11_load_abf_es_bd/11_load_abf_es_bd_out/11_load_abf_es_bd.curves.txt")
-v11_mean <- v11_crvs %>%
-  dplyr::select(pr_lost, ave_pr) %>%
+v19_mean <- v19_grp_crvs %>%
+  dplyr::select(pr_lost, ave_pr = mean.ZON_BD) %>%
   dplyr::mutate(variant = "BD (rank ES)")
-
-v12_crvs <- zonator::read_curves("analyses/zonation/priocomp/12_load_abf_bd_es/12_load_abf_bd_es_out/12_load_abf_bd_es.curves.txt")
-v12_mean <- v12_crvs %>%
-  dplyr::select(pr_lost, ave_pr) %>%
+v20_mean <- v20_grp_crvs %>%
+  dplyr::select(pr_lost, ave_pr = mean.ZON_ES) %>%
   dplyr::mutate(variant = "ES (rank BD)")
-
+v21_mean <- v21_grp_crvs %>%
+  dplyr::select(pr_lost, ave_pr = mean.ZON_BD) %>%
+  dplyr::mutate(variant = "BD (rank ES)")
+v22_mean <- v22_grp_crvs %>%
+  dplyr::select(pr_lost, ave_pr = mean.ZON_ES) %>%
+  dplyr::mutate(variant = "ES (rank BD)")
 
 # Combine data ------------------------------------------------------------
 
@@ -70,8 +113,8 @@ v12_mean <- v12_crvs %>%
 v04_grp_mean$variant <- gsub("ZON_BD", "BD (rank ALL)", v04_grp_mean$variant)
 v04_grp_mean$variant <- gsub("ZON_ES", "ES (rank ALL)", v04_grp_mean$variant)
 
-datag_perf <- dplyr::bind_rows(list(v04_grp_mean, v06_mean, v08_mean,
-                                    v11_mean, v12_mean))
+datag_perf <- dplyr::bind_rows(list(v04_grp_mean, v08_mean, v12_mean,
+                                    v19_mean, v20_mean))
 
 # Plot mean curves --------------------------------------------------------
 
@@ -97,29 +140,4 @@ p1 <- ggplot2::ggplot(datag_perf, aes(x = pr_lost, y = ave_pr,
 
 # Save Figure -------------------------------------------------------------
 
-ggsave("reports/figures/14_figure_05.png", p1, width = 6, height = 6)
-
-# Extra -------------------------------------------------------------------
-
-# Performance levels for the top 25%, 10% and 2% of the solution
-
-get_perf_level <- function(data, variant_str, x) {
-  if (!variant_str %in% unique(data$variant)) {
-    stop("Bad variant name")
-  }
-  perf_data <- data %>%
-    dplyr::filter(variant == variant_str) %>%
-    dplyr::filter(pr_lost >= x) %>%
-    dplyr::arrange(pr_lost) %>%
-    dplyr::slice(1) %>%
-    dplyr::mutate(level = x)
-  return(perf_data)
-}
-
-bd_only_top10 <- get_perf_level(v08_mean, "BD", 0.9)
-bdes_top10 <- get_perf_level(v04_grp_mean, "BD (rank ALL)", 0.9)
-bd_esonly_top10 <- get_perf_level(v11_mean, "BD (rank ES)", 0.9)
-
-es_only_top10 <- get_perf_level(v06_mean, "ES", 0.9)
-esbd_top10 <- get_perf_level(v04_grp_mean, "ES (rank ALL)", 0.9)
-es_bdonly_top10 <- get_perf_level(v12_mean, "ES (rank BD)", 0.9)
+ggsave("reports/figures/figure05/14_figure_05.png", p1, width = 6, height = 6)
