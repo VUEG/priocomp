@@ -122,7 +122,6 @@ v06_grp_mean$variant <- gsub("ZON_ES", "ES (rank ALL)", v06_grp_mean$variant)
 datag_perf_costs <- dplyr::bind_rows(list(v06_grp_mean, v10_mean, v14_mean,
                                           v21_mean, v22_mean))
 
-
 # Plot mean curves --------------------------------------------------------
 
 x_lab <- "\nFraction of the landscape"
