@@ -32,4 +32,4 @@ tm_aoi <- tm_shape(aoi, is.master = TRUE) +
 
 tm <- tm_eur + tm_aoi + tm_scale_bar(position = c("left", "top"))
 
-save_tmap(tm, "reports/figures/01_figure_01.png", width = 1200, height = 1400)
+save_tmap(tm, "reports/figures/figure1/01_figure_01.png", width = 1200, height = 1400)
