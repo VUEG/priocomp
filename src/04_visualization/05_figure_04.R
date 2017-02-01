@@ -24,7 +24,7 @@ extract_stat <- function(x, stat) {
 # Generate self-crossing comparison stats (i.e. 1.0).
 generate_self_cross <- function(stat_name, stat_value = 1.0) {
   method_codes <- c("RWR", "ZON", "ILP")
-  type_codes <- c("ALL", "ALL_WGT", "ES", "BD")
+  type_codes <- c("ALL_WGT", "ALL_WGT_CST", "ES", "ES_CST", "BD", "BD_CST")
 
   keys <- c()
   f_methods <- c()
@@ -87,7 +87,7 @@ match_type <- Vectorize(
   function(x) {
 
     match_list <- list(
-      "ALL" = c("_all\\.tif$", "_all_stats\\.", "02_abf_all.+"),
+      #"ALL" = c("_all\\.tif$", "_all_stats\\.", "02_abf_all.+"),
       "ALL_WGT" = c("_all_weights\\.tif", "_all_weights_stats\\.", "04_abf_all_wgt.+"),
       "ALL_WGT_CST" = c("_all_weights_costs\\.tif", "_all_weights_costs_stats\\.",
                         "06_abf_all_wgt_cst"),
@@ -248,11 +248,30 @@ jac <- readr::read_csv("analyses/comparison/cross_jaccard.csv") %>%
 # Join correlation and map comparison statistics
 all_stats <- dplyr::left_join(cors, mcss, by = c("key" = "key")) %>%
   dplyr::select(key, f1_method = f1_method.x, f2_method = f2_method.x,
-                f1_type = f1_type.x, f2_type = f2_type.x, tau, cmcs)
-# Join in also the jaccard coefficients
-all_stats <- dplyr::left_join(all_stats, jac, by = c("key" = "key")) %>%
+                f1_type = f1_type.x, f2_type = f2_type.x, tau, cmcs) %>%
+  # Join in also the jaccard coefficients
+  dplyr::left_join(., jac, by = c("key" = "key")) %>%
   dplyr::select(f1_method = f1_method.x, f1_type = f1_type.x,
-                f2_method = f2_method.x, f2_type = f2_type.x, tau, cmcs, jac_01, jac_09)
+                f2_method = f2_method.x, f2_type = f2_type.x,
+                tau, cmcs, jac_01, jac_09) %>%
+  # Create additional columns f1_cost and f2_cost indicating whether cost are
+  # used. The information is teased apart from content of f1_type and f2_type.
+  # Note that temporay columns "f1_type_" and "f2_type_" are created
+  tidyr::extract(f1_type, into = c('f1_type_', 'f1_cost'), '(.*)_{1}([CST]+)$',
+                 remove = FALSE) %>%
+  tidyr::extract(f2_type, into = c('f2_type_', 'f2_cost'), '(.*)_{1}([CST]+)$',
+                 remove = FALSE) %>%
+  # The remove the "_CST" identifier in the original fX_type column,
+  # copy over values from the temporary column unless they are NA
+  dplyr::mutate(f1_type = ifelse(is.na(f1_type_), f1_type, f1_type_),
+                f2_type = ifelse(is.na(f2_type_), f2_type, f2_type_)) %>%
+  # Remove temporay columns "f1_type_" and "f2_type_" and reorder
+  dplyr::select(f1_method, f1_type, f1_cost, f2_method, f2_type, f2_cost,
+                tau, cmcs, jac_01, jac_09) %>%
+  # Make f1_cost and f2_cost logical
+  dplyr::mutate(f1_cost = ifelse(is.na(f1_cost), FALSE, TRUE),
+                f2_cost = ifelse(is.na(f2_cost), FALSE, TRUE))
+
 # Remove ALL and rename ALL_WGT to ALL. From this point on, "ALL" means all
 # features with weights. In same go, make f1_type and f2_type ordered
 # factors
@@ -268,27 +287,53 @@ all_stats <- all_stats %>%
                 f2_type = factor(f2_type, levels = c("ALL", "ES", "BD"), ordered = TRUE)) %>%
   dplyr::arrange(f1_method, f1_type, f2_method, f2_type)
 
-# Create the plot ---------------------------------------------------------
+all_stats_nocosts <- all_stats %>%
+  dplyr::filter(f1_cost == FALSE & f2_cost == FALSE)
 
-tau <- extract_stat(all_stats, "tau")
-jac_01 <- extract_stat(all_stats, "jac_01")
-jac_09 <- extract_stat(all_stats, "jac_09")
-cmcs <- extract_stat(all_stats, "cmcs")
+all_stats_costs <- all_stats %>%
+  dplyr::filter(f1_cost == TRUE & f2_cost == TRUE)
 
-p1 <- plot_stat(tau, title = "COR", min_lim = -0.25, max_lim = 1.0, step = 0.25)
-p2 <- plot_stat(cmcs, title = "MCS")
-p3 <- plot_stat(jac_09, title = "top10")
-p4 <- plot_stat(jac_01, title = "low10")
+# Create the plots --------------------------------------------------------
 
-#p_combined <- grid.arrange(p1, p2, p3, p4, nrow = 2, ncol = 2)
+tau_nocosts <- extract_stat(all_stats_nocosts, "tau")
+tau_costs <- extract_stat(all_stats_costs, "tau")
+jac_01_nocosts <- extract_stat(all_stats_nocosts, "jac_01")
+jac_01_costs <- extract_stat(all_stats_costs, "jac_01")
+jac_09_nocosts <- extract_stat(all_stats_nocosts, "jac_09")
+jac_09_costs <- extract_stat(all_stats_costs, "jac_09")
+cmcs_nocosts <- extract_stat(all_stats_nocosts, "cmcs")
+cmcs_costs <- extract_stat(all_stats_costs, "cmcs")
+
+p1 <- plot_stat(tau_nocosts, title = "COR", min_lim = -0.25,
+                max_lim = 1.0, step = 0.25)
+p2 <- plot_stat(cmcs_nocosts, title = "MCS")
+p3 <- plot_stat(jac_09_nocosts, title = "top10")
+p4 <- plot_stat(jac_01_nocosts, title = "low10")
+
+p5 <- plot_stat(tau_costs, title = "COR")
+p6 <- plot_stat(cmcs_costs, title = "MCS")
+p7 <- plot_stat(jac_09_costs, title = "top10")
+p8 <- plot_stat(jac_01_costs, title = "low10")
 
 # Save plots --------------------------------------------------------------
 
 img_width <- 7
 img_width <- 6.6
 
-ggsave("reports/figures/09_figure_04_A.png", p1, width = img_width, height = img_width)
-ggsave("reports/figures/10_figure_04_B.png", p2, width = img_width, height = img_width)
-ggsave("reports/figures/11_figure_04_C.png", p3, width = img_width, height = img_width)
-ggsave("reports/figures/12_figure_04_D.png", p4, width = img_width, height = img_width)
+ggsave("reports/figures/figure4/01_figure_04_A_nocosts.png",
+       p1, width = img_width, height = img_width)
+ggsave("reports/figures/figure4/02_figure_04_B_nocosts.png",
+       p2, width = img_width, height = img_width)
+ggsave("reports/figures/figure4/03_figure_04_C_nocosts.png",
+       p3, width = img_width, height = img_width)
+ggsave("reports/figures/figure4/04_figure_04_D_nocosts.png",
+       p4, width = img_width, height = img_width)
 
+ggsave("reports/figures/figure4/06_figure_04_A_costs.png",
+       p5, width = img_width, height = img_width)
+ggsave("reports/figures/figure4/07_figure_04_B_costs.png",
+       p6, width = img_width, height = img_width)
+ggsave("reports/figures/figure4/08_figure_04_C_costs.png",
+       p7, width = img_width, height = img_width)
+ggsave("reports/figures/figure4/09_figure_04_D_costs.png",
+       p8, width = img_width, height = img_width)
