@@ -2,6 +2,10 @@
 
 + Introduce cost variants in ILP and ZON
 
++ Update figures 2-6
+
+  ​
+
 ## 0.6.0 (2016-11-24)
 
 + Fix bug in ILP implementation and re-run everything ILP-related
