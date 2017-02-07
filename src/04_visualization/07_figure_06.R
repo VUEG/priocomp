@@ -254,3 +254,27 @@ fig5 <- gridExtra::grid.arrange(p2, p3, p4, ncol = 2, nrow = 2)
 # Save Figure -------------------------------------------------------------
 
 ggsave("reports/figures/figure06/01_figure_06.png", fig5, width = 9, height = 9)
+
+
+#  Extra: cost distribution -----------------------------------------------
+
+cost_raster_src <- raster::getValues(cost_raster)
+cost_raster_src <- cost_raster_src[!is.na(cost_raster_src)]
+# Rescale into [0, 1]
+cost_raster_src <- cost_raster_src / max(cost_raster_src)
+
+costs <- data.frame(value = cost_raster_src,
+                    value_cat = cut(cost_raster_src, breaks = seq(0, 1, 0.1),
+                                    include.lowest = TRUE))
+costs$value_cat <-  factor(costs$value_cat,
+                           levels = levels(costs$value_cat))
+
+agg_costs <- costs %>%
+  dplyr::group_by(value_cat) %>%
+  dplyr::summarise(
+    count = n(),
+    total = sum(value)
+  )
+
+p5 <- ggplot2::ggplot(agg_costs, aes(x = value_cat, y = count)) +
+  ggplot2::geom_bar(stat = "identity")
