@@ -1,4 +1,8 @@
-### 2Introduction
+### Introduction
+
+
+
+#### Old (rough) structure
 
 + Why are ESs relevant for BD conservation in general?
   + Trade-offs important
@@ -14,6 +18,32 @@
 + Why can direct application of SCP methods to ESs create issues? (**MISSING**)
 + In this manuscript, we...
 
+
+
+
+#### New structure
+
++ Ecosystem services (ES) quantify many perceived benefits that nature provides for people. ES are intricately linked with biodiversity, which is in places on Earth threatened. 
+  + The whole rationale behind ES can be understood as to help to understand and to promote and protect the living environment. Besides being an boundary object in the broad sense (Schröter et al. 2014), ESs have gained traction in as guiding decision-making on the spatial allocation and land use (REF) and management (REF).
+  + So far, considerable amount of research has been done on the spatial mapping and characterization of ES. However, devoid of clearly defined objectives and a decision-making framework, the usefulness of ES is hard to assess.
+  + Furthermore, how the spatial assessment of ESs and biodiversity (BD) features is and should be combined is not clear. Some authors consider biodiversity as just another ES, where others (minority) combine both in the same analysis. How the combination exactly is done, matters greatly both conceptually and methodologically. 
++ Several different decision-making  frameworks have been used in the spatial assessment of ES
+  + The exact details vary, but most have at least the following components in them: 1) problem definition, 2) setting the objectives, 3) describing potential alternatives, 4) quantifying trade-offs, and 5) making decisions preferably accompanied by some form on monitoring.
+  + For practical applications, assessing the usefulness of either 1) the data or 2) the methods used for decision support depends greatly on the defined objectives. However, the validity of both can (and should) also be assessed in isolation. This information when combined, should be highly useful for decision-makers and planners.
+  + Multi-criteria decision-analysis (MCDA) has proved to be one of the most popular frameworks for analyzing the spatial patterns of ESs.
++ What is spatial conservation prioritization (SCP)?
+  - SCP-methods have been primarily developed for biodiversity, often with strong background in spatial ecology
+  - SCP can be understood as the technical assessment phase within a broad decision-making context
+  - Multiple SCP methods are available
+    - This is also reflected in what types of datasets are used
+    - More data covering broad geographical ranges and species is becoming available (RS)
+  - Complementarity-based methods: an improvement over simple scoring methods.
+  - While prioritization based on distributional patterns can be useful, an operational prioritization needs to account for costs, condition and benefits (Evans et al. 2015)
+  - Several authors to date have explored the implications of prioritizing areas (REF) and actions (REF) targeting both ESs and BD. 
++ How is SP for ESs different?
+  - What has already been done?
+  - Why is application of SCP methods nevertheless useful?
+  - Why can direct application of SCP methods to ESs create issues? (**MISSING**)
 
 
 
