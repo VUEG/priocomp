@@ -83,3 +83,6 @@ rsconnect/
 # Test data
 tests/data
 reports/manuscript/~$*.docx
+
+# Ignore HTML files
+*.html
