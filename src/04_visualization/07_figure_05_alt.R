@@ -48,6 +48,7 @@ all_costs <- get_stat_curves(zproject, variant_ids = c(10, 14, 21, 22)) %>%
 p1 <- all_nocosts %>%
   plot_curves(title = "", non_param = TRUE, invert_x = TRUE,
               nrow = 3, ncol = 2, highlights = highlights,
+              plot_min = TRUE, plot_max = TRUE,
               labels = c("ES", "BD",
                          "ES (rank ALL)", "BD (rank ALL)",
                          "ES (rank BD)", "BD (rank ES)"))
