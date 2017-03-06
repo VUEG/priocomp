@@ -67,6 +67,10 @@ PROVIDE_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in dm.get
 # it directly to "processed/features"
 UDR_SRC_DATASETS = [url.replace(beehub_url, external_data) for url in dm.get_resources(provider="udr", full_path=True)]
 
+# Construct lists for processed BD and ES datasets
+BD_DST_DATASETS = [url.replace(beehub_url, feature_data) for url in dm.get_resources(category="biodiversity", full_path=True)]
+ES_DST_DATASETS = [url.replace(beehub_url, feature_data) for url in dm.get_resources(category="ecosystemservices", full_path=True)]
+
 ALL_SRC_DATASETS = DATADRYAD_SRC_DATASETS + PROVIDE_SRC_DATASETS + UDR_SRC_DATASETS
 
 # Let's build weight vectors needed for the weighted analysis variants
@@ -1057,7 +1061,7 @@ rule compute_variation:
         # Costs
         llogger = utils.get_local_logger("compute_variation_costs", log.costs)
         # FIXME: Codes are now hardcoded
-        input_codes = ["rwr_all_costs", "zon_all_costs", "ilp_all_costs",
+        input_codes = ["rwr_all_costs", "ilp_all_costs",
                        "rwr_es_costs", "zon_es_costs", "ilp_es_costs",
                        "rwr_bd_costs", "zon_bd_costs", "ilp_bd_costs"]
         out_feature = similarity.plu_variation(input.costs, input_codes,
@@ -1066,6 +1070,38 @@ rule compute_variation:
         out_feature.to_file(output.costs)
 
 ## Auxiliary operations -----------------------------------------------------
+
+rule generate_range_data:
+    input:
+        "data/data_manifest.yml"
+    output:
+        csv="data/feature_ranges.csv"
+    log:
+        "logs/generate_range_data.log"
+    message:
+        "Generating feature ranges..."
+    run:
+        llogger = utils.get_local_logger("generate_range_data", log[0],
+                                         debug=True)
+
+        range_stats = pd.DataFrame({"feature": [], "count": [], "sum": [],
+                                    "q25_ol": [], "mean_ol": [],
+                                    "median_ol": [], "q75_ol": []})
+
+        features = ES_DST_DATASETS + BD_DST_DATASETS
+        for i, feature in enumerate(features):
+            prefix = utils.get_iteration_prefix(i+1, len(features))
+
+            llogger.info("{} Processing {}".format(prefix, feature))
+
+            feature_stats = spatutils.get_range_size(feature, logger = llogger)
+            range_stats = pd.concat([range_stats, feature_stats])
+
+        llogger.info(" Saving results to {}".format(output.csv))
+        range_stats.to_csv(output.csv, columns=["feature", "count", "sum",
+                                                "q25_ol", "mean_ol",
+                                                "median_ol", "q75_ol"],
+                                                index=False)
 
 rule generate_table_S1:
     input:

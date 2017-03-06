@@ -6,6 +6,7 @@ import logging
 import numpy as np
 import numpy.ma as ma
 import os
+import pandas as pd
 import rasterio
 import scipy.stats
 
@@ -99,6 +100,56 @@ def ol_normalize(x):
     min_val = ma.min(x)
 
     return (x - min_val) / (ma.sum(x - min_val))
+
+
+def get_range_size(input_raster, verbose=False, logger=None):
+    """ Get range size of an input raster based on stat provided.
+
+    :param input_raster: String path to an input raster.
+    :param stat: String defining which type of statistic is used to calculate
+                 the range size. Currently implemented:
+
+    :param pick: String of either value "first" or "last". Former picks the
+                 profile from the first raster in the list, "last" the last.
+    :param logger: Logger object.
+    :return: A Pandas dataframe of numeric values for the following statistics:
+            "count": number of cells with positive values
+            "sum": summed values of all cells
+            "median_ol": median occurrence level over all cells > 0
+    """
+    # Set up logging
+    if not logger:
+        logging.basicConfig()
+        llogger = logging.getLogger('get_range_size')
+    else:
+        llogger = logger
+    llogger.setLevel(logging.DEBUG if verbose else logging.INFO)
+
+    if not os.path.exists(input_raster):
+        raise OSError("Input raster {} not found".format(input_raster))
+
+    with rasterio.open(input_raster) as in_src:
+        # Read the first band
+        src_data = in_src.read(1, masked=True)
+        stat_count = np.sum(src_data > 0)
+        stat_sum = np.sum(src_data)
+        # Compress data
+        src_data = src_data.compressed()
+        src_data_ol = ol_normalize(src_data)
+        stat_q75, stat_q25 = np.nanpercentile(src_data_ol, (75, 25))
+        stat_mean_ol = np.mean(src_data_ol[src_data_ol > 0])
+        stat_median_ol = np.median(src_data_ol[src_data_ol > 0])
+
+        stat = pd.DataFrame({"feature": [input_raster],
+                             "count": [stat_count],
+                             "sum": [stat_sum],
+                             "q25_ol": [stat_q25],
+                             "mean_ol": [stat_mean_ol],
+                             "median_ol": [stat_median_ol],
+                             "q75_ol": [stat_q75]})
+        llogger.debug(stat)
+
+    return stat
 
 
 def rescale_raster(input_raster, output_raster, method, fill_w_zeros=False,
