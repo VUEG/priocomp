@@ -39,7 +39,7 @@ for (i in 1:n_files) {
 
 morans <- do.call("rbind", morans)
 
-filename <- file.path("..", "..", "data",
+filename <- file.path("data",
                       paste0("morans_I_values_",
                              nrow(morans), "_features_",
                              format(Sys.time(), "%Y-%m-%d_%H-%M-%S"),
