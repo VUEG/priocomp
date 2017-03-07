@@ -11,13 +11,16 @@
      + What's missing
   2. **Figure 2**: Priority rank maps for the three methods x three data groups including the costs.
      + Main messages
-       + ​
+       + Spatial distribution and patterns of priorities for different methods / datasets
      + What's missing
   3. **Figure 3**: Aggregate similarity/dissimilarity over NUTS2-regions
      + Main messages
+       + Consistently best areas in the north and the south
+       + Agreement among different methods generally high in terms of areas
      + What's missing
   4. **Figure 4:** Similarity/dissimilarity triangles for Kendall's Tau, CMCS, and Jaccards for the best and worst 10%. 
      + Main messages
+       + BD and ES generally dissimilar
      + What's missing
   5. **Figure 5**: Data group cross-performance (using Zonation only)
      + Main messages
@@ -34,11 +37,11 @@
   + ​
 
 
+### Potential additional analyses/visualizations
 
-### Suggestions
-
-1. ​
-
+1. From Casalegno et al. (2014):
+   1. Moran's I for global spatial autocorrelation
+   2. Testing spatial covariance between each of the features using the Clifford Richardson Hemon correlation method (CRH) on rank transformed inputs to correct statistical significance for spatial autocorrelation.
 
 
 
