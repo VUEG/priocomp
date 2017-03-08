@@ -12,18 +12,12 @@
         <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="pop_density_v520170116144143653" name="pop_density_v5">
           <customproperties/>
         </layer-tree-layer>
-        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="popu01clcv520161205155107591" name="popu01clcv5">
-          <customproperties/>
-        </layer-tree-layer>
       </layer-tree-group>
       <layer-tree-group expanded="0" checked="Qt::Unchecked" name="WDPA">
         <customproperties/>
       </layer-tree-group>
       <layer-tree-group expanded="0" checked="Qt::Unchecked" name="eurostat">
         <customproperties/>
-        <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="NUTS_RG_01M_2013_level220160714120910095" name="NUTS_RG_01M_2013_level2">
-          <customproperties/>
-        </layer-tree-layer>
       </layer-tree-group>
       <layer-tree-group expanded="0" checked="Qt::Unchecked" name="datadryad">
         <customproperties/>
@@ -39,16 +33,10 @@
         <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="cultural_landscape_index_agro20161107094747173" name="cultural_landscape_index_agro">
           <customproperties/>
         </layer-tree-layer>
-        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="cultural_landscape_index_forest20160714120655387" name="cultural_landscape_index_forest">
-          <customproperties/>
-        </layer-tree-layer>
         <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="erosion_prevention20161107094834349" name="erosion_prevention">
           <customproperties/>
         </layer-tree-layer>
         <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="floodregulation20161107094937234" name="floodregulation">
-          <customproperties/>
-        </layer-tree-layer>
-        <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="nature_tourism20160715102902464" name="nature_tourism">
           <customproperties/>
         </layer-tree-layer>
         <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="pollination_flows20161107095027666" name="pollination_flows">
@@ -152,7 +140,7 @@
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="rwr_all_weights_costs_stats20170127160218809" name="rwr_all_weights_costs_stats">
             <customproperties/>
           </layer-tree-layer>
-          <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="rwr_all_weights_costs20170127155646045" name="rwr_all_weights_costs">
+          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="rwr_all_weights_costs20170127155646045" name="rwr_all_weights_costs">
             <customproperties/>
           </layer-tree-layer>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="rwr_all_weights_costs_copy20170127155834527" name="rwr_all_weights_costs_best_10">
@@ -215,6 +203,9 @@
         </layer-tree-group>
         <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="06_abf_all_wgt_cst">
           <customproperties/>
+          <layer-tree-layer expanded="1" checked="Qt::Checked" id="06_abf_all_wgt_cst_wrscr_compressed20170307173118336" name="06_abf_all_wgt_cst.wrscr.compressed">
+            <customproperties/>
+          </layer-tree-layer>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="06_abf_all_wgt_cst_nwout120170116110759981" name="06_abf_all_wgt_cst_nwout1">
             <customproperties/>
           </layer-tree-layer>
@@ -331,10 +322,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>3080315.21295295562595129</xmin>
-      <ymin>1385893.02511098142713308</ymin>
-      <xmax>6701457.72132100071758032</xmax>
-      <ymax>5503170.06525660958141088</ymax>
+      <xmin>3954369.79322361899539828</xmin>
+      <ymin>2312037.48801671992987394</ymin>
+      <xmax>4067530.49661012040451169</xmax>
+      <ymax>2440702.39552127104252577</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -369,6 +360,7 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_eu26_bd_stats20160915133420520"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_bd_costs20170127160542266"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="pica_pica20160802122655629"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="06_abf_all_wgt_cst_wrscr_compressed20170307173118336"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="woodprod_average20161109104208734"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_es_costs_stats20170116111650845"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_es_costs20170116111636556"/>
@@ -485,9 +477,6 @@
   <layer-tree-canvas>
     <custom-order enabled="0">
       <item>04_abf_wgt_nwout120160615125613505</item>
-      <item>cultural_landscape_index_forest20160714120655387</item>
-      <item>NUTS_RG_01M_2013_level220160714120910095</item>
-      <item>nature_tourism20160715102902464</item>
       <item>acrocephalus_agricola20160802121436173</item>
       <item>alytes_muletensis20160802121713728</item>
       <item>alces_alces20160802121950586</item>
@@ -524,7 +513,6 @@
       <item>ilp_bd_stats20161107150200771</item>
       <item>ilp_es20161107150230521</item>
       <item>woodprod_average20161109104208734</item>
-      <item>popu01clcv520161205155107591</item>
       <item>06_abf_all_wgt_cst_rank_compressed20170116110732262</item>
       <item>06_abf_all_wgt_cst_nwout120170116110759981</item>
       <item>08_abf_es_rank_compressed20170116110842021</item>
@@ -552,6 +540,7 @@
       <item>rwr_es_costs_stats20170127160414361</item>
       <item>rwr_bd_costs20170127160542266</item>
       <item>rwr_bd_costs_stats20170127160557857</item>
+      <item>06_abf_all_wgt_cst_wrscr_compressed20170307173118336</item>
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
@@ -562,20 +551,9 @@
             <legendlayerfile isInOverview="0" layerid="pop_density_v520170116144143653" visible="0"/>
           </filegroup>
         </legendlayer>
-        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="popu01clcv5" showFeatureCount="0">
-          <filegroup open="false" hidden="false">
-            <legendlayerfile isInOverview="0" layerid="popu01clcv520161205155107591" visible="0"/>
-          </filegroup>
-        </legendlayer>
       </legendgroup>
       <legendgroup open="false" checked="Qt::Unchecked" name="WDPA"/>
-      <legendgroup open="false" checked="Qt::Unchecked" name="eurostat">
-        <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="NUTS_RG_01M_2013_level2" showFeatureCount="0">
-          <filegroup open="true" hidden="false">
-            <legendlayerfile isInOverview="0" layerid="NUTS_RG_01M_2013_level220160714120910095" visible="0"/>
-          </filegroup>
-        </legendlayer>
-      </legendgroup>
+      <legendgroup open="false" checked="Qt::Unchecked" name="eurostat"/>
       <legendgroup open="false" checked="Qt::Unchecked" name="datadryad">
         <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="woodprod_average" showFeatureCount="0">
           <filegroup open="false" hidden="false">
@@ -594,11 +572,6 @@
             <legendlayerfile isInOverview="0" layerid="cultural_landscape_index_agro20161107094747173" visible="0"/>
           </filegroup>
         </legendlayer>
-        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="cultural_landscape_index_forest" showFeatureCount="0">
-          <filegroup open="false" hidden="false">
-            <legendlayerfile isInOverview="0" layerid="cultural_landscape_index_forest20160714120655387" visible="0"/>
-          </filegroup>
-        </legendlayer>
         <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="erosion_prevention" showFeatureCount="0">
           <filegroup open="false" hidden="false">
             <legendlayerfile isInOverview="0" layerid="erosion_prevention20161107094834349" visible="0"/>
@@ -607,11 +580,6 @@
         <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="floodregulation" showFeatureCount="0">
           <filegroup open="false" hidden="false">
             <legendlayerfile isInOverview="0" layerid="floodregulation20161107094937234" visible="0"/>
-          </filegroup>
-        </legendlayer>
-        <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="nature_tourism" showFeatureCount="0">
-          <filegroup open="false" hidden="false">
-            <legendlayerfile isInOverview="0" layerid="nature_tourism20160715102902464" visible="0"/>
           </filegroup>
         </legendlayer>
         <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="pollination_flows" showFeatureCount="0">
@@ -747,8 +715,8 @@
               <legendlayerfile isInOverview="0" layerid="rwr_all_weights_costs_stats20170127160218809" visible="0"/>
             </filegroup>
           </legendlayer>
-          <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="rwr_all_weights_costs" showFeatureCount="0">
-            <filegroup open="true" hidden="false">
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_all_weights_costs" showFeatureCount="0">
+            <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="rwr_all_weights_costs20170127155646045" visible="0"/>
             </filegroup>
           </legendlayer>
@@ -823,6 +791,11 @@
           </legendlayer>
         </legendgroup>
         <legendgroup open="true" checked="Qt::PartiallyChecked" name="06_abf_all_wgt_cst">
+          <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="06_abf_all_wgt_cst.wrscr.compressed" showFeatureCount="0">
+            <filegroup open="true" hidden="false">
+              <legendlayerfile isInOverview="0" layerid="06_abf_all_wgt_cst_wrscr_compressed20170307173118336" visible="1"/>
+            </filegroup>
+          </legendlayer>
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="06_abf_all_wgt_cst_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="06_abf_all_wgt_cst_nwout120170116110759981" visible="0"/>
@@ -2319,7 +2292,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5307233.80053918063640594</ymax>
       </extent>
       <id>04_abf_wgt_nwout120160615125613505</id>
-      <datasource>../../analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt_nwout1.shp</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt_nwout1.shp</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -2327,10 +2300,10 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100001</srsid>
+          <srsid>100000</srsid>
           <srid>0</srid>
-          <authid>USER:100001</authid>
-          <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
+          <authid></authid>
+          <description></description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
           <geographicflag>false</geographicflag>
@@ -2778,7 +2751,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="ID" index="0" name=""/>
         <alias field="NUTS_ID" index="1" name=""/>
@@ -2819,10 +2792,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="1" type="actions"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -2873,7 +2846,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>04_abf_wgt_rank_compressed20161107121624141</id>
-      <datasource>../../analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -2929,7 +2902,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>06_abf_all_wgt_cst_copy20170124143225629</id>
-      <datasource>../../analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst.rank.compressed.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst.rank.compressed.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -2974,7 +2947,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>06_abf_all_wgt_cst_nwout120170116110759981</id>
-      <datasource>../../analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst_nwout1.shp</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst_nwout1.shp</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -2982,9 +2955,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100001</srsid>
+          <srsid>100000</srsid>
           <srid>0</srid>
-          <authid>USER:100001</authid>
+          <authid>USER:100000</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -3433,7 +3406,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="ID" index="0" name=""/>
         <alias field="NUTS_ID" index="1" name=""/>
@@ -3474,10 +3447,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="1" type="actions"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -3528,7 +3501,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>06_abf_all_wgt_cst_rank_compressed20170116110732262</id>
-      <datasource>../../analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst.rank.compressed.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst.rank.compressed.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -3576,9 +3549,64 @@ def my_form_open(dialog, layer, feature):
       </pipe>
       <blendMode>0</blendMode>
     </maplayer>
+    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>06_abf_all_wgt_cst_wrscr_compressed20170307173118336</id>
+      <datasource>E:\Projects\VU\OPERAs\SP2\priocomp\analyses\zonation\priocomp\06_abf_all_wgt_cst\06_abf_all_wgt_cst_out\06_abf_all_wgt_cst.wrscr.compressed.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>06_abf_all_wgt_cst.wrscr.compressed</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1.15099e-06" classificationMinMaxOrigin="CumulativeCutFullExtentEstimated" band="1" classificationMin="-2.82071e-07" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="INTERPOLATED" clip="0">
+              <item alpha="255" value="-2.82e-07" label="-2.82e-07" color="#2b83ba"/>
+              <item alpha="255" value="7.62e-08" label="7.62e-08" color="#abdda4"/>
+              <item alpha="255" value="4.34e-07" label="4.34e-07" color="#ffffbf"/>
+              <item alpha="255" value="7.93e-07" label="7.93e-07" color="#fdae61"/>
+              <item alpha="255" value="1.15e-06" label="1.15e-06" color="#d7191c"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>08_abf_es_nwout120170116110904256</id>
-      <datasource>../../analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es_nwout1.shp</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es_nwout1.shp</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -3586,9 +3614,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100001</srsid>
+          <srsid>100000</srsid>
           <srid>0</srid>
-          <authid>USER:100001</authid>
+          <authid>USER:100000</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -4037,7 +4065,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="ID" index="0" name=""/>
         <alias field="NUTS_ID" index="1" name=""/>
@@ -4078,10 +4106,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="1" type="actions"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -4132,7 +4160,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>08_abf_es_rank_compressed20170116110842021</id>
-      <datasource>../../analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es.rank.compressed.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es.rank.compressed.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -4182,7 +4210,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>10_abf_es_cst_nwout120170116111009166</id>
-      <datasource>../../analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst_nwout1.shp</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst_nwout1.shp</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -4190,9 +4218,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100001</srsid>
+          <srsid>100000</srsid>
           <srid>0</srid>
-          <authid>USER:100001</authid>
+          <authid>USER:100000</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -4641,7 +4669,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="ID" index="0" name=""/>
         <alias field="NUTS_ID" index="1" name=""/>
@@ -4682,10 +4710,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="1" type="actions"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -4736,7 +4764,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>10_abf_es_cst_rank_compressed20170116110951002</id>
-      <datasource>../../analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst.rank.compressed.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst.rank.compressed.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -4786,7 +4814,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>12_abf_bd_nwout120170116111103780</id>
-      <datasource>../../analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd_nwout1.shp</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd_nwout1.shp</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -4794,9 +4822,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100001</srsid>
+          <srsid>100000</srsid>
           <srid>0</srid>
-          <authid>USER:100001</authid>
+          <authid>USER:100000</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -5245,7 +5273,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="ID" index="0" name=""/>
         <alias field="NUTS_ID" index="1" name=""/>
@@ -5286,10 +5314,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="1" type="actions"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -5340,7 +5368,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>12_abf_bd_rank_compressed20170116111046351</id>
-      <datasource>../../analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd.rank.compressed.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd.rank.compressed.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -5390,7 +5418,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>14_abf_bd_cst_nwout120170116111241695</id>
-      <datasource>../../analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst_nwout1.shp</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst_nwout1.shp</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -5398,9 +5426,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100001</srsid>
+          <srsid>100000</srsid>
           <srid>0</srid>
-          <authid>USER:100001</authid>
+          <authid>USER:100000</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -5849,7 +5877,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="ID" index="0" name=""/>
         <alias field="NUTS_ID" index="1" name=""/>
@@ -5890,10 +5918,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="1" type="actions"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -5944,7 +5972,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>14_abf_bd_cst_rank_compressed20170116111221192</id>
-      <datasource>../../analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst.rank.compressed.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst.rank.compressed.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -6000,7 +6028,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>NUTS_RG_01M_2013_level0_data_mask20161104172209031</id>
-      <datasource>../../data/processed/eurostat/nuts_level0/NUTS_RG_01M_2013_level0_data_mask.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/eurostat/nuts_level0/NUTS_RG_01M_2013_level0_data_mask.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -6044,330 +6072,6 @@ def my_form_open(dialog, layer, feature):
       </pipe>
       <blendMode>0</blendMode>
     </maplayer>
-    <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
-      <id>NUTS_RG_01M_2013_level220160714120910095</id>
-      <datasource>../../../../../../../../dev/git-projects/priocomp/data/processed/eurostat/nuts/level2/NUTS_RG_01M_2013_level2.shp</datasource>
-      <keywordList>
-        <value></value>
-      </keywordList>
-      <layername>NUTS_RG_01M_2013_level2</layername>
-      <srs>
-        <spatialrefsys>
-          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100001</srsid>
-          <srid>0</srid>
-          <authid>USER:100001</authid>
-          <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
-          <projectionacronym>laea</projectionacronym>
-          <ellipsoidacronym>GRS80</ellipsoidacronym>
-          <geographicflag>false</geographicflag>
-        </spatialrefsys>
-      </srs>
-      <provider encoding="System">ogr</provider>
-      <previewExpression></previewExpression>
-      <vectorjoins/>
-      <layerDependencies/>
-      <expressionfields/>
-      <map-layer-style-manager current="">
-        <map-layer-style name=""/>
-      </map-layer-style-manager>
-      <edittypes>
-        <edittype widgetv2type="TextEdit" name="NUTS_ID">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="STAT_LEVL_">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="SHAPE_AREA">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="SHAPE_LEN">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="ID">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="country">
-          <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-        </edittype>
-      </edittypes>
-      <renderer-v2 forceraster="0" symbollevels="0" type="singleSymbol" enableorderby="0">
-        <symbols>
-          <symbol alpha="1" clip_to_extent="1" type="fill" name="0">
-            <layer pass="0" class="SimpleFill" locked="0">
-              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="color" v="110,179,89,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="0,0,0,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.26"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="no"/>
-            </layer>
-          </symbol>
-        </symbols>
-        <rotation/>
-        <sizescale scalemethod="diameter"/>
-      </renderer-v2>
-      <labeling type="simple"/>
-      <customproperties>
-        <property key="embeddedWidgets/count" value="0"/>
-        <property key="labeling" value="pal"/>
-        <property key="labeling/addDirectionSymbol" value="false"/>
-        <property key="labeling/angleOffset" value="0"/>
-        <property key="labeling/blendMode" value="0"/>
-        <property key="labeling/bufferBlendMode" value="0"/>
-        <property key="labeling/bufferColorA" value="255"/>
-        <property key="labeling/bufferColorB" value="255"/>
-        <property key="labeling/bufferColorG" value="255"/>
-        <property key="labeling/bufferColorR" value="255"/>
-        <property key="labeling/bufferDraw" value="false"/>
-        <property key="labeling/bufferJoinStyle" value="64"/>
-        <property key="labeling/bufferNoFill" value="false"/>
-        <property key="labeling/bufferSize" value="1"/>
-        <property key="labeling/bufferSizeInMapUnits" value="false"/>
-        <property key="labeling/bufferSizeMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/bufferTransp" value="0"/>
-        <property key="labeling/centroidInside" value="false"/>
-        <property key="labeling/centroidWhole" value="false"/>
-        <property key="labeling/decimals" value="3"/>
-        <property key="labeling/displayAll" value="false"/>
-        <property key="labeling/dist" value="0"/>
-        <property key="labeling/distInMapUnits" value="false"/>
-        <property key="labeling/distMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/drawLabels" value="false"/>
-        <property key="labeling/enabled" value="false"/>
-        <property key="labeling/fieldName" value=""/>
-        <property key="labeling/fitInPolygonOnly" value="false"/>
-        <property key="labeling/fontCapitals" value="0"/>
-        <property key="labeling/fontFamily" value="Noto Sans"/>
-        <property key="labeling/fontItalic" value="false"/>
-        <property key="labeling/fontLetterSpacing" value="0"/>
-        <property key="labeling/fontLimitPixelSize" value="false"/>
-        <property key="labeling/fontMaxPixelSize" value="10000"/>
-        <property key="labeling/fontMinPixelSize" value="3"/>
-        <property key="labeling/fontSize" value="10"/>
-        <property key="labeling/fontSizeInMapUnits" value="false"/>
-        <property key="labeling/fontSizeMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/fontStrikeout" value="false"/>
-        <property key="labeling/fontUnderline" value="false"/>
-        <property key="labeling/fontWeight" value="50"/>
-        <property key="labeling/fontWordSpacing" value="0"/>
-        <property key="labeling/formatNumbers" value="false"/>
-        <property key="labeling/isExpression" value="true"/>
-        <property key="labeling/labelOffsetInMapUnits" value="true"/>
-        <property key="labeling/labelOffsetMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/labelPerPart" value="false"/>
-        <property key="labeling/leftDirectionSymbol" value="&lt;"/>
-        <property key="labeling/limitNumLabels" value="false"/>
-        <property key="labeling/maxCurvedCharAngleIn" value="20"/>
-        <property key="labeling/maxCurvedCharAngleOut" value="-20"/>
-        <property key="labeling/maxNumLabels" value="2000"/>
-        <property key="labeling/mergeLines" value="false"/>
-        <property key="labeling/minFeatureSize" value="0"/>
-        <property key="labeling/multilineAlign" value="0"/>
-        <property key="labeling/multilineHeight" value="1"/>
-        <property key="labeling/namedStyle" value="Regular"/>
-        <property key="labeling/obstacle" value="true"/>
-        <property key="labeling/obstacleFactor" value="1"/>
-        <property key="labeling/obstacleType" value="0"/>
-        <property key="labeling/offsetType" value="0"/>
-        <property key="labeling/placeDirectionSymbol" value="0"/>
-        <property key="labeling/placement" value="1"/>
-        <property key="labeling/placementFlags" value="10"/>
-        <property key="labeling/plussign" value="false"/>
-        <property key="labeling/predefinedPositionOrder" value="TR,TL,BR,BL,R,L,TSR,BSR"/>
-        <property key="labeling/preserveRotation" value="true"/>
-        <property key="labeling/previewBkgrdColor" value="#ffffff"/>
-        <property key="labeling/priority" value="5"/>
-        <property key="labeling/quadOffset" value="4"/>
-        <property key="labeling/repeatDistance" value="0"/>
-        <property key="labeling/repeatDistanceMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/repeatDistanceUnit" value="1"/>
-        <property key="labeling/reverseDirectionSymbol" value="false"/>
-        <property key="labeling/rightDirectionSymbol" value=">"/>
-        <property key="labeling/scaleMax" value="10000000"/>
-        <property key="labeling/scaleMin" value="1"/>
-        <property key="labeling/scaleVisibility" value="false"/>
-        <property key="labeling/shadowBlendMode" value="6"/>
-        <property key="labeling/shadowColorB" value="0"/>
-        <property key="labeling/shadowColorG" value="0"/>
-        <property key="labeling/shadowColorR" value="0"/>
-        <property key="labeling/shadowDraw" value="false"/>
-        <property key="labeling/shadowOffsetAngle" value="135"/>
-        <property key="labeling/shadowOffsetDist" value="1"/>
-        <property key="labeling/shadowOffsetGlobal" value="true"/>
-        <property key="labeling/shadowOffsetMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/shadowOffsetUnits" value="1"/>
-        <property key="labeling/shadowRadius" value="1.5"/>
-        <property key="labeling/shadowRadiusAlphaOnly" value="false"/>
-        <property key="labeling/shadowRadiusMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/shadowRadiusUnits" value="1"/>
-        <property key="labeling/shadowScale" value="100"/>
-        <property key="labeling/shadowTransparency" value="30"/>
-        <property key="labeling/shadowUnder" value="0"/>
-        <property key="labeling/shapeBlendMode" value="0"/>
-        <property key="labeling/shapeBorderColorA" value="255"/>
-        <property key="labeling/shapeBorderColorB" value="128"/>
-        <property key="labeling/shapeBorderColorG" value="128"/>
-        <property key="labeling/shapeBorderColorR" value="128"/>
-        <property key="labeling/shapeBorderWidth" value="0"/>
-        <property key="labeling/shapeBorderWidthMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/shapeBorderWidthUnits" value="1"/>
-        <property key="labeling/shapeDraw" value="false"/>
-        <property key="labeling/shapeFillColorA" value="255"/>
-        <property key="labeling/shapeFillColorB" value="255"/>
-        <property key="labeling/shapeFillColorG" value="255"/>
-        <property key="labeling/shapeFillColorR" value="255"/>
-        <property key="labeling/shapeJoinStyle" value="64"/>
-        <property key="labeling/shapeOffsetMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/shapeOffsetUnits" value="1"/>
-        <property key="labeling/shapeOffsetX" value="0"/>
-        <property key="labeling/shapeOffsetY" value="0"/>
-        <property key="labeling/shapeRadiiMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/shapeRadiiUnits" value="1"/>
-        <property key="labeling/shapeRadiiX" value="0"/>
-        <property key="labeling/shapeRadiiY" value="0"/>
-        <property key="labeling/shapeRotation" value="0"/>
-        <property key="labeling/shapeRotationType" value="0"/>
-        <property key="labeling/shapeSVGFile" value=""/>
-        <property key="labeling/shapeSizeMapUnitScale" value="0,0,0,0,0,0"/>
-        <property key="labeling/shapeSizeType" value="0"/>
-        <property key="labeling/shapeSizeUnits" value="1"/>
-        <property key="labeling/shapeSizeX" value="0"/>
-        <property key="labeling/shapeSizeY" value="0"/>
-        <property key="labeling/shapeTransparency" value="0"/>
-        <property key="labeling/shapeType" value="0"/>
-        <property key="labeling/textColorA" value="255"/>
-        <property key="labeling/textColorB" value="0"/>
-        <property key="labeling/textColorG" value="0"/>
-        <property key="labeling/textColorR" value="0"/>
-        <property key="labeling/textTransp" value="0"/>
-        <property key="labeling/upsidedownLabels" value="0"/>
-        <property key="labeling/wrapChar" value=""/>
-        <property key="labeling/xOffset" value="0"/>
-        <property key="labeling/yOffset" value="0"/>
-        <property key="labeling/zIndex" value="0"/>
-        <property key="variableNames" value="_fields_"/>
-        <property key="variableValues" value=""/>
-      </customproperties>
-      <blendMode>0</blendMode>
-      <featureBlendMode>0</featureBlendMode>
-      <layerTransparency>0</layerTransparency>
-      <displayfield>NUTS_ID</displayfield>
-      <label>0</label>
-      <labelattributes>
-        <label fieldname="" text="Label"/>
-        <family fieldname="" name="Noto Sans"/>
-        <size fieldname="" units="pt" value="12"/>
-        <bold fieldname="" on="0"/>
-        <italic fieldname="" on="0"/>
-        <underline fieldname="" on="0"/>
-        <strikeout fieldname="" on="0"/>
-        <color fieldname="" red="0" blue="0" green="0"/>
-        <x fieldname=""/>
-        <y fieldname=""/>
-        <offset x="0" y="0" units="pt" yfieldname="" xfieldname=""/>
-        <angle fieldname="" value="0" auto="0"/>
-        <alignment fieldname="" value="center"/>
-        <buffercolor fieldname="" red="255" blue="255" green="255"/>
-        <buffersize fieldname="" units="pt" value="1"/>
-        <bufferenabled fieldname="" on=""/>
-        <multilineenabled fieldname="" on=""/>
-        <selectedonly on=""/>
-      </labelattributes>
-      <SingleCategoryDiagramRenderer diagramType="Histogram" sizeLegend="0" attributeLegend="1">
-        <DiagramCategory penColor="#000000" labelPlacementMethod="XHeight" penWidth="0" diagramOrientation="Up" sizeScale="0,0,0,0,0,0" minimumSize="0" barWidth="5" penAlpha="255" maxScaleDenominator="1e+08" backgroundColor="#ffffff" transparency="0" width="15" scaleDependency="Area" backgroundAlpha="255" angleOffset="1440" scaleBasedVisibility="0" enabled="0" height="15" lineSizeScale="0,0,0,0,0,0" sizeType="MM" lineSizeType="MM" minScaleDenominator="100000">
-          <fontProperties description="Noto Sans,10,-1,0,50,0,0,0,0,0" style=""/>
-          <attribute field="" color="#000000" label=""/>
-        </DiagramCategory>
-        <symbol alpha="1" clip_to_extent="1" type="marker" name="sizeSymbol">
-          <layer pass="0" class="SimpleMarker" locked="0">
-            <prop k="angle" v="0"/>
-            <prop k="color" v="255,0,0,255"/>
-            <prop k="horizontal_anchor_point" v="1"/>
-            <prop k="joinstyle" v="bevel"/>
-            <prop k="name" v="circle"/>
-            <prop k="offset" v="0,0"/>
-            <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
-            <prop k="offset_unit" v="MM"/>
-            <prop k="outline_color" v="0,0,0,255"/>
-            <prop k="outline_style" v="solid"/>
-            <prop k="outline_width" v="0"/>
-            <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
-            <prop k="outline_width_unit" v="MM"/>
-            <prop k="scale_method" v="diameter"/>
-            <prop k="size" v="2"/>
-            <prop k="size_map_unit_scale" v="0,0,0,0,0,0"/>
-            <prop k="size_unit" v="MM"/>
-            <prop k="vertical_anchor_point" v="1"/>
-          </layer>
-        </symbol>
-      </SingleCategoryDiagramRenderer>
-      <DiagramLayerSettings yPosColumn="-1" showColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
-      <aliases>
-        <alias field="NUTS_ID" index="0" name=""/>
-        <alias field="STAT_LEVL_" index="1" name=""/>
-        <alias field="SHAPE_AREA" index="2" name=""/>
-        <alias field="SHAPE_LEN" index="3" name=""/>
-        <alias field="ID" index="4" name=""/>
-        <alias field="country" index="5" name=""/>
-      </aliases>
-      <excludeAttributesWMS/>
-      <excludeAttributesWFS/>
-      <attributeactions default="-1"/>
-      <attributetableconfig actionWidgetStyle="dropDown" sortExpression="" sortOrder="0">
-        <columns>
-          <column width="-1" hidden="0" type="field" name="NUTS_ID"/>
-          <column width="-1" hidden="0" type="field" name="STAT_LEVL_"/>
-          <column width="-1" hidden="0" type="field" name="SHAPE_AREA"/>
-          <column width="-1" hidden="0" type="field" name="SHAPE_LEN"/>
-          <column width="-1" hidden="0" type="field" name="ID"/>
-          <column width="-1" hidden="0" type="field" name="country"/>
-          <column width="-1" hidden="1" type="actions"/>
-        </columns>
-      </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
-      <editforminit/>
-      <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
-      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
-"""
-QGIS forms can have a Python function that is called when the form is
-opened.
-
-Use this function to add extra logic to your forms.
-
-Enter the name of the function in the "Python Init function"
-field.
-An example follows:
-"""
-from qgis.PyQt.QtWidgets import QWidget
-
-def my_form_open(dialog, layer, feature):
-	geom = feature.geometry()
-	control = dialog.findChild(QWidget, "MyLineEdit")
-]]></editforminitcode>
-      <featformsuppress>0</featformsuppress>
-      <editorlayout>generatedlayout</editorlayout>
-      <widgets/>
-      <conditionalstyles>
-        <rowstyles/>
-        <fieldstyles/>
-      </conditionalstyles>
-      <defaults>
-        <default field="NUTS_ID" expression=""/>
-        <default field="STAT_LEVL_" expression=""/>
-        <default field="SHAPE_AREA" expression=""/>
-        <default field="SHAPE_LEN" expression=""/>
-        <default field="ID" expression=""/>
-        <default field="country" expression=""/>
-      </defaults>
-    </maplayer>
     <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
       <extent>
         <xmin>1999999.99999999906867743</xmin>
@@ -6376,7 +6080,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>ablepharus_kitaibelii20160802122107779</id>
-      <datasource>../../data/processed/features/udr/european_tetrapods/reptiles/ablepharus_kitaibelii.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/udr/european_tetrapods/reptiles/ablepharus_kitaibelii.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -6428,7 +6132,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>acrocephalus_agricola20160802121436173</id>
-      <datasource>../../data/processed/features/udr/european_tetrapods/birds/acrocephalus_agricola.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/udr/european_tetrapods/birds/acrocephalus_agricola.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -6480,7 +6184,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>alces_alces20160802121950586</id>
-      <datasource>../../data/processed/features/udr/european_tetrapods/mammals/alces_alces.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/udr/european_tetrapods/mammals/alces_alces.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -6532,7 +6236,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>alytes_muletensis20160802121713728</id>
-      <datasource>../../data/processed/features/udr/european_tetrapods/amphibians/alytes_muletensis.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/udr/european_tetrapods/amphibians/alytes_muletensis.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -6584,7 +6288,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>carbon_sequestration20161026153021690</id>
-      <datasource>../../data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/provide/carbon_sequestration/carbon_sequestration.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -6686,7 +6390,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>cultural_landscape_index_agro20161107094747173</id>
-      <datasource>../../data/processed/features/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/provide/cultural_landscape_index_agro/cultural_landscape_index_agro.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -6738,67 +6442,6 @@ def my_form_open(dialog, layer, feature):
       </pipe>
       <blendMode>0</blendMode>
     </maplayer>
-    <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
-      <extent>
-        <xmin>2000000</xmin>
-        <ymin>999999.99999999906867743</ymin>
-        <xmax>6526000.00000000093132257</xmax>
-        <ymax>5410000</ymax>
-      </extent>
-      <id>cultural_landscape_index_forest20160714120655387</id>
-      <datasource>../../../../../../../../dev/git-projects/priocomp/data/processed/features/provide/cultural_landscape_index_forest/cultural_landscape_index_forest.tif</datasource>
-      <keywordList>
-        <value></value>
-      </keywordList>
-      <layername>cultural_landscape_index_forest</layername>
-      <srs>
-        <spatialrefsys>
-          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
-          <srsid>1000</srsid>
-          <srid>3035</srid>
-          <authid>EPSG:3035</authid>
-          <description>ETRS89 / ETRS-LAEA</description>
-          <projectionacronym>laea</projectionacronym>
-          <ellipsoidacronym>GRS80</ellipsoidacronym>
-          <geographicflag>false</geographicflag>
-        </spatialrefsys>
-      </srs>
-      <customproperties>
-        <property key="embeddedWidgets/count" value="0"/>
-        <property key="identify/format" value="Value"/>
-      </customproperties>
-      <provider>gdal</provider>
-      <noData>
-        <noDataList bandNo="1" useSrcNoData="1"/>
-      </noData>
-      <map-layer-style-manager current="">
-        <map-layer-style name=""/>
-      </map-layer-style-manager>
-      <pipe>
-        <rasterrenderer opacity="1" alphaBand="0" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
-          <rasterTransparency/>
-          <rastershader>
-            <colorrampshader colorRampType="INTERPOLATED" clip="0">
-              <item alpha="255" value="0" label="0" color="#2b83ba"/>
-              <item alpha="255" value="0.1" label="0.1" color="#5ea7b1"/>
-              <item alpha="255" value="0.2" label="0.2" color="#91cba9"/>
-              <item alpha="255" value="0.3" label="0.3" color="#bce4aa"/>
-              <item alpha="255" value="0.4" label="0.4" color="#def2b4"/>
-              <item alpha="255" value="0.5" label="0.5" color="#ffffbf"/>
-              <item alpha="255" value="0.6" label="0.6" color="#ffdf9a"/>
-              <item alpha="255" value="0.7" label="0.7" color="#febe74"/>
-              <item alpha="255" value="0.8" label="0.8" color="#f69053"/>
-              <item alpha="255" value="0.9" label="0.9" color="#e75437"/>
-              <item alpha="255" value="1" label="1" color="#d7191c"/>
-            </colorrampshader>
-          </rastershader>
-        </rasterrenderer>
-        <brightnesscontrast brightness="15" contrast="0"/>
-        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
-        <rasterresampler maxOversampling="2"/>
-      </pipe>
-      <blendMode>0</blendMode>
-    </maplayer>
     <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
       <extent>
         <xmin>2000000</xmin>
@@ -6807,7 +6450,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>erosion_prevention20161107094834349</id>
-      <datasource>../../data/processed/features/provide/erosion_prevention/erosion_prevention.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/provide/erosion_prevention/erosion_prevention.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -6909,7 +6552,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>floodregulation20161107094937234</id>
-      <datasource>../../data/processed/features/provide/floodregulation/floodregulation.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/provide/floodregulation/floodregulation.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -6970,7 +6613,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>ilp_all_weights20161107124326548</id>
-      <datasource>../../analyses/ILP/ilp_all_weights.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/ILP/ilp_all_weights.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -7026,7 +6669,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>ilp_all_weights_costs20170116111435303</id>
-      <datasource>../../analyses/ILP/ilp_all_weights_costs.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/ILP/ilp_all_weights_costs.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -7082,7 +6725,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5307233.80053918063640594</ymax>
       </extent>
       <id>ilp_all_weights_costs_stats20170116111531838</id>
-      <datasource>../../analyses/ILP/ilp_all_weights_costs_stats.geojson</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/ILP/ilp_all_weights_costs_stats.geojson</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -7531,7 +7174,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
         <alias field="country" index="1" name=""/>
@@ -7563,10 +7206,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="0" type="field" name="_max"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -7612,7 +7255,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5307233.80053918063640594</ymax>
       </extent>
       <id>ilp_all_weights_stats20161107145937848</id>
-      <datasource>../../analyses/ILP/ilp_all_weights_stats.geojson</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/ILP/ilp_all_weights_stats.geojson</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -8061,7 +7704,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
         <alias field="_count" index="1" name=""/>
@@ -8093,10 +7736,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="0" type="field" name="_max"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -8142,7 +7785,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>ilp_bd20161107124654793</id>
-      <datasource>../../analyses/ILP/ilp_bd.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/ILP/ilp_bd.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -8199,7 +7842,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>ilp_bd_costs20170116111802656</id>
-      <datasource>../../analyses/ILP/ilp_bd_costs.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/ILP/ilp_bd_costs.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -8256,7 +7899,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5307233.80053918063640594</ymax>
       </extent>
       <id>ilp_bd_costs_stats20170116112016721</id>
-      <datasource>../../analyses/ILP/ilp_bd_costs_stats.geojson</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/ILP/ilp_bd_costs_stats.geojson</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -8705,7 +8348,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
         <alias field="SHAPE_AREA" index="1" name=""/>
@@ -8737,10 +8380,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="0" type="field" name="_max"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -8780,7 +8423,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>ilp_bd_stats20161107150200771</id>
-      <datasource>../../analyses/ILP/ilp_bd_stats.geojson</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/ILP/ilp_bd_stats.geojson</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -9227,7 +8870,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
         <alias field="_mean" index="1" name=""/>
@@ -9259,10 +8902,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="0" type="field" name="_max"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -9308,7 +8951,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>ilp_es20161107150230521</id>
-      <datasource>../../analyses/ILP/ilp_es.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/ILP/ilp_es.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -9364,7 +9007,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>ilp_es_costs20170116111636556</id>
-      <datasource>../../analyses/ILP/ilp_es_costs.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/ILP/ilp_es_costs.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -9420,7 +9063,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5307233.80053918063640594</ymax>
       </extent>
       <id>ilp_es_costs_stats20170116111650845</id>
-      <datasource>../../analyses/ILP/ilp_es_costs_stats.geojson</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/ILP/ilp_es_costs_stats.geojson</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -9869,7 +9512,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
         <alias field="_mean" index="1" name=""/>
@@ -9901,10 +9544,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="0" type="field" name="_max"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -9944,7 +9587,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>ilp_es_stats20161107150126111</id>
-      <datasource>../../analyses/ILP/ilp_es_stats.geojson</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/ILP/ilp_es_stats.geojson</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -10393,7 +10036,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
         <alias field="_mean" index="1" name=""/>
@@ -10425,10 +10068,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="0" type="field" name="_max"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -10474,7 +10117,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>lacerta_viridis20160802123844905</id>
-      <datasource>../../data/processed/features/udr/european_tetrapods/reptiles/lacerta_viridis.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/udr/european_tetrapods/reptiles/lacerta_viridis.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -10526,7 +10169,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>lagopus_lagopus20160802122959777</id>
-      <datasource>../../data/processed/features/udr/european_tetrapods/birds/lagopus_lagopus.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/udr/european_tetrapods/birds/lagopus_lagopus.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -10578,7 +10221,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>lemmus_lemmus20160802122502197</id>
-      <datasource>../../data/processed/features/udr/european_tetrapods/mammals/lemmus_lemmus.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/udr/european_tetrapods/mammals/lemmus_lemmus.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -10630,7 +10273,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>lutra_lutra20160802122200372</id>
-      <datasource>../../data/processed/features/udr/european_tetrapods/mammals/lutra_lutra.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/udr/european_tetrapods/mammals/lutra_lutra.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -10682,7 +10325,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>microtus_agrestis20160802122311635</id>
-      <datasource>../../data/processed/features/udr/european_tetrapods/mammals/microtus_agrestis.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/udr/european_tetrapods/mammals/microtus_agrestis.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -10726,64 +10369,9 @@ def my_form_open(dialog, layer, feature):
       </pipe>
       <blendMode>0</blendMode>
     </maplayer>
-    <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
-      <extent>
-        <xmin>2000000</xmin>
-        <ymin>999999.99999999906867743</ymin>
-        <xmax>6526000.00000000093132257</xmax>
-        <ymax>5410000</ymax>
-      </extent>
-      <id>nature_tourism20160715102902464</id>
-      <datasource>../../../../../../../../dev/git-projects/priocomp/data/processed/features/provide/nature_tourism/nature_tourism.tif</datasource>
-      <keywordList>
-        <value></value>
-      </keywordList>
-      <layername>nature_tourism</layername>
-      <srs>
-        <spatialrefsys>
-          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
-          <srsid>1000</srsid>
-          <srid>3035</srid>
-          <authid>EPSG:3035</authid>
-          <description>ETRS89 / ETRS-LAEA</description>
-          <projectionacronym>laea</projectionacronym>
-          <ellipsoidacronym>GRS80</ellipsoidacronym>
-          <geographicflag>false</geographicflag>
-        </spatialrefsys>
-      </srs>
-      <customproperties>
-        <property key="embeddedWidgets/count" value="0"/>
-        <property key="identify/format" value="Value"/>
-      </customproperties>
-      <provider>gdal</provider>
-      <noData>
-        <noDataList bandNo="1" useSrcNoData="1"/>
-      </noData>
-      <map-layer-style-manager current="">
-        <map-layer-style name=""/>
-      </map-layer-style-manager>
-      <pipe>
-        <rasterrenderer opacity="1" alphaBand="0" classificationMax="10000" classificationMinMaxOrigin="MinMaxFullExtentExact" band="1" classificationMin="0" type="singlebandpseudocolor">
-          <rasterTransparency/>
-          <rastershader>
-            <colorrampshader colorRampType="INTERPOLATED" clip="0">
-              <item alpha="255" value="0" label="0" color="#f1eef6"/>
-              <item alpha="255" value="2500" label="2500" color="#d7b5d8"/>
-              <item alpha="255" value="5000" label="5000" color="#df65b0"/>
-              <item alpha="255" value="7500" label="7500" color="#dd1c77"/>
-              <item alpha="255" value="10000" label="1e+04" color="#980043"/>
-            </colorrampshader>
-          </rastershader>
-        </rasterrenderer>
-        <brightnesscontrast brightness="0" contrast="0"/>
-        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
-        <rasterresampler maxOversampling="2"/>
-      </pipe>
-      <blendMode>0</blendMode>
-    </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>nuts2_rank_variation20160920133849421</id>
-      <datasource>../../analyses/comparison/nuts2_rank_variation.shp</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/comparison/nuts2_rank_variation.shp</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -11156,7 +10744,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>.</annotationform>
+      <annotationform>E:/Projects/VU/OPERAs/SP2/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="NUTS_ID" index="0" name=""/>
         <alias field="rwr_all" index="1" name=""/>
@@ -11191,10 +10779,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="0" type="field" name="ilp_bd"/>
         </columns>
       </attributetableconfig>
-      <editform>.</editform>
+      <editform>E:/Projects/VU/OPERAs/SP2/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>.</editforminitfilepath>
+      <editforminitfilepath>E:/Projects/VU/OPERAs/SP2/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -11236,7 +10824,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>nuts2_rank_variation20160920135233196</id>
-      <datasource>../../analyses/comparison/nuts2_rank_variation.shp</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/comparison/nuts2_rank_variation.shp</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -11609,7 +11197,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>.</annotationform>
+      <annotationform>E:/Projects/VU/OPERAs/SP2/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="NUTS_ID" index="0" name=""/>
         <alias field="rwr_all" index="1" name=""/>
@@ -11644,10 +11232,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="1" type="actions"/>
         </columns>
       </attributetableconfig>
-      <editform>.</editform>
+      <editform>E:/Projects/VU/OPERAs/SP2/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>.</editforminitfilepath>
+      <editforminitfilepath>E:/Projects/VU/OPERAs/SP2/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -11695,7 +11283,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>pica_pica20160802122655629</id>
-      <datasource>../../data/processed/features/udr/european_tetrapods/birds/pica_pica.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/udr/european_tetrapods/birds/pica_pica.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -11747,7 +11335,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>pollination_flows20161107095027666</id>
-      <datasource>../../data/processed/features/provide/pollination_flows/pollination_flows.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/provide/pollination_flows/pollination_flows.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -11808,7 +11396,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>pop_density_v520170116144143653</id>
-      <datasource>../../data/processed/features/eea/pop_density/pop_density_v5.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/eea/pop_density/pop_density_v5.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -11860,108 +11448,6 @@ def my_form_open(dialog, layer, feature):
       </pipe>
       <blendMode>0</blendMode>
     </maplayer>
-    <maplayer minimumScale="inf" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
-      <extent>
-        <xmin>1500000</xmin>
-        <ymin>940000</ymin>
-        <xmax>6550000</xmax>
-        <ymax>5310000</ymax>
-      </extent>
-      <id>popu01clcv520161205155107591</id>
-      <datasource>../../../../../../../../data/EEA/pop_density/data/pop_density/pop_density_v5.tif</datasource>
-      <keywordList>
-        <value></value>
-      </keywordList>
-      <layername>popu01clcv5</layername>
-      <srs>
-        <spatialrefsys>
-          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
-          <srsid>1000</srsid>
-          <srid>3035</srid>
-          <authid>EPSG:3035</authid>
-          <description>ETRS89 / ETRS-LAEA</description>
-          <projectionacronym>laea</projectionacronym>
-          <ellipsoidacronym>GRS80</ellipsoidacronym>
-          <geographicflag>false</geographicflag>
-        </spatialrefsys>
-      </srs>
-      <customproperties>
-        <property key="embeddedWidgets/count" value="0"/>
-        <property key="identify/format" value="Value"/>
-      </customproperties>
-      <provider>gdal</provider>
-      <noData>
-        <noDataList bandNo="1" useSrcNoData="1"/>
-      </noData>
-      <map-layer-style-manager current="">
-        <map-layer-style name=""/>
-      </map-layer-style-manager>
-      <pipe>
-        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="1510" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
-          <rasterTransparency/>
-          <rastershader>
-            <colorrampshader colorRampType="INTERPOLATED" clip="0">
-              <item alpha="255" value="0" label="0" color="#440154"/>
-              <item alpha="255" value="29.61" label="29.61" color="#46085c"/>
-              <item alpha="255" value="59.22" label="59.22" color="#471063"/>
-              <item alpha="255" value="88.82" label="88.82" color="#481769"/>
-              <item alpha="255" value="118.4" label="118.4" color="#481d6f"/>
-              <item alpha="255" value="148" label="148" color="#482475"/>
-              <item alpha="255" value="177.6" label="177.6" color="#472a7a"/>
-              <item alpha="255" value="207.3" label="207.3" color="#46307e"/>
-              <item alpha="255" value="236.9" label="236.9" color="#453781"/>
-              <item alpha="255" value="266.5" label="266.5" color="#433d84"/>
-              <item alpha="255" value="296.1" label="296.1" color="#414287"/>
-              <item alpha="255" value="325.7" label="325.7" color="#3f4889"/>
-              <item alpha="255" value="355.3" label="355.3" color="#3d4e8a"/>
-              <item alpha="255" value="384.9" label="384.9" color="#3a538b"/>
-              <item alpha="255" value="414.5" label="414.5" color="#38598c"/>
-              <item alpha="255" value="444.1" label="444.1" color="#355e8d"/>
-              <item alpha="255" value="473.7" label="473.7" color="#33638d"/>
-              <item alpha="255" value="503.3" label="503.3" color="#31688e"/>
-              <item alpha="255" value="532.9" label="532.9" color="#2e6d8e"/>
-              <item alpha="255" value="562.5" label="562.5" color="#2c718e"/>
-              <item alpha="255" value="592.2" label="592.2" color="#2a768e"/>
-              <item alpha="255" value="621.8" label="621.8" color="#297b8e"/>
-              <item alpha="255" value="651.4" label="651.4" color="#27808e"/>
-              <item alpha="255" value="681" label="681" color="#25848e"/>
-              <item alpha="255" value="710.6" label="710.6" color="#23898e"/>
-              <item alpha="255" value="740.2" label="740.2" color="#218e8d"/>
-              <item alpha="255" value="769.8" label="769.8" color="#20928c"/>
-              <item alpha="255" value="799.4" label="799.4" color="#1f978b"/>
-              <item alpha="255" value="829" label="829" color="#1e9c89"/>
-              <item alpha="255" value="858.6" label="858.6" color="#1fa188"/>
-              <item alpha="255" value="888.2" label="888.2" color="#21a585"/>
-              <item alpha="255" value="917.8" label="917.8" color="#24aa83"/>
-              <item alpha="255" value="947.5" label="947.5" color="#28ae80"/>
-              <item alpha="255" value="977.1" label="977.1" color="#2eb37c"/>
-              <item alpha="255" value="1007" label="1007" color="#35b779"/>
-              <item alpha="255" value="1036" label="1036" color="#3dbc74"/>
-              <item alpha="255" value="1066" label="1066" color="#46c06f"/>
-              <item alpha="255" value="1095" label="1095" color="#50c46a"/>
-              <item alpha="255" value="1125" label="1125" color="#5ac864"/>
-              <item alpha="255" value="1155" label="1155" color="#65cb5e"/>
-              <item alpha="255" value="1184" label="1184" color="#70cf57"/>
-              <item alpha="255" value="1214" label="1214" color="#7cd250"/>
-              <item alpha="255" value="1244" label="1244" color="#89d548"/>
-              <item alpha="255" value="1273" label="1273" color="#95d840"/>
-              <item alpha="255" value="1303" label="1303" color="#a2da37"/>
-              <item alpha="255" value="1332" label="1332" color="#b0dd2f"/>
-              <item alpha="255" value="1362" label="1362" color="#bddf26"/>
-              <item alpha="255" value="1392" label="1392" color="#cae11f"/>
-              <item alpha="255" value="1421" label="1421" color="#d8e219"/>
-              <item alpha="255" value="1451" label="1451" color="#e5e419"/>
-              <item alpha="255" value="1480" label="1480" color="#f1e51d"/>
-              <item alpha="255" value="1510" label="1510" color="#fde725"/>
-            </colorrampshader>
-          </rastershader>
-        </rasterrenderer>
-        <brightnesscontrast brightness="0" contrast="0"/>
-        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
-        <rasterresampler maxOversampling="2"/>
-      </pipe>
-      <blendMode>0</blendMode>
-    </maplayer>
     <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
       <extent>
         <xmin>1999999.99999999906867743</xmin>
@@ -11970,7 +11456,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>rana_arvalis20160802123137238</id>
-      <datasource>../../data/processed/features/udr/european_tetrapods/amphibians/rana_arvalis.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/udr/european_tetrapods/amphibians/rana_arvalis.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -12022,7 +11508,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>rwr_all_weights_copy20170124143138500</id>
-      <datasource>../../analyses/RWR/rwr_all_weights.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_all_weights.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -12074,7 +11560,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>rwr_all_weights_costs20170127155646045</id>
-      <datasource>../../analyses/RWR/rwr_all_weights_costs.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_all_weights_costs.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -12130,7 +11616,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>rwr_all_weights_costs_copy20170127155834527</id>
-      <datasource>../../analyses/RWR/rwr_all_weights_costs.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_all_weights_costs.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -12181,7 +11667,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5307233.80053918063640594</ymax>
       </extent>
       <id>rwr_all_weights_costs_stats20170127160218809</id>
-      <datasource>../../analyses/RWR/rwr_all_weights_costs_stats.geojson</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_all_weights_costs_stats.geojson</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -12630,7 +12116,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
         <alias field="_max" index="1" name=""/>
@@ -12661,10 +12147,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="0" type="field" name="_max"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -12710,7 +12196,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>rwr_all_weights_worst_10_copy20170127155727083</id>
-      <datasource>../../analyses/RWR/rwr_all_weights.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_all_weights.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -12762,7 +12248,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>rwr_bd_costs20170127160542266</id>
-      <datasource>../../analyses/RWR/rwr_bd_costs.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_bd_costs.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -12819,7 +12305,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5307233.80053918063640594</ymax>
       </extent>
       <id>rwr_bd_costs_stats20170127160557857</id>
-      <datasource>../../analyses/RWR/rwr_bd_costs_stats.geojson</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_bd_costs_stats.geojson</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -13266,7 +12752,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
         <alias field="SHAPE_LEN" index="1" name=""/>
@@ -13298,10 +12784,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="0" type="field" name="_max"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -13347,7 +12833,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>rwr_es_costs20170127160406575</id>
-      <datasource>../../analyses/RWR/rwr_es_costs.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_es_costs.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -13403,7 +12889,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5307233.80053918063640594</ymax>
       </extent>
       <id>rwr_es_costs_stats20170127160414361</id>
-      <datasource>../../analyses/RWR/rwr_es_costs_stats.geojson</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_es_costs_stats.geojson</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -13852,7 +13338,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
         <alias field="_mean" index="1" name=""/>
@@ -13883,10 +13369,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="0" type="field" name="_max"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -13932,7 +13418,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>rwr_eu26_all20160826164620183</id>
-      <datasource>../../analyses/RWR/rwr_all.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_all.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -13940,9 +13426,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100001</srsid>
+          <srsid>100000</srsid>
           <srid>0</srid>
-          <authid>USER:100001</authid>
+          <authid>USER:100000</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -13988,7 +13474,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5307233.80053918063640594</ymax>
       </extent>
       <id>rwr_eu26_all_stats20160915131954903</id>
-      <datasource>../../analyses/RWR/rwr_all_stats.geojson</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_all_stats.geojson</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -14435,7 +13921,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
         <alias field="SHAPE_LEN" index="1" name=""/>
@@ -14467,10 +13953,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="0" type="field" name="_max"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -14516,7 +14002,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>rwr_eu26_all_weights20160909092552438</id>
-      <datasource>../../analyses/RWR/rwr_all_weights.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_all_weights.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -14566,7 +14052,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>rwr_eu26_all_weights_stats20160915132200722</id>
-      <datasource>../../analyses/RWR/rwr_all_weights_stats.geojson</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_all_weights_stats.geojson</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -15013,7 +14499,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
         <alias field="_max" index="1" name=""/>
@@ -15045,10 +14531,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="0" type="field" name="_max"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -15094,7 +14580,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000.00000000093132257</ymax>
       </extent>
       <id>rwr_eu26_bd20160826164604136</id>
-      <datasource>../../analyses/RWR/rwr_bd.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_bd.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -15151,7 +14637,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5307233.80053918063640594</ymax>
       </extent>
       <id>rwr_eu26_bd_stats20160915132316486</id>
-      <datasource>../../analyses/RWR/rwr_bd_stats.geojson</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_bd_stats.geojson</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -15598,7 +15084,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
         <alias field="_min" index="1" name=""/>
@@ -15630,10 +15116,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="0" type="field" name="_max"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -15679,7 +15165,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>rwr_eu26_es20160826164545086</id>
-      <datasource>../../analyses/RWR/rwr_es.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_es.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -15687,9 +15173,9 @@ def my_form_open(dialog, layer, feature):
       <srs>
         <spatialrefsys>
           <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs</proj4>
-          <srsid>100001</srsid>
+          <srsid>100000</srsid>
           <srid>0</srid>
-          <authid>USER:100001</authid>
+          <authid>USER:100000</authid>
           <description> * Generated CRS (+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs)</description>
           <projectionacronym>laea</projectionacronym>
           <ellipsoidacronym>GRS80</ellipsoidacronym>
@@ -15729,7 +15215,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer simplifyAlgorithm="0" minimumScale="100000" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" readOnly="0" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>rwr_eu26_es_stats20160915132251273</id>
-      <datasource>../../analyses/RWR/rwr_es_stats.geojson</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_es_stats.geojson</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -16176,7 +15662,7 @@ def my_form_open(dialog, layer, feature):
         </symbol>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" showColumn="0" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" zIndex="0" showAll="1"/>
-      <annotationform>../../../../../../../../dev/git-projects/priocomp/reports/maps</annotationform>
+      <annotationform>dev/git-projects/priocomp/reports/maps</annotationform>
       <aliases>
         <alias field="id" index="0" name=""/>
         <alias field="_max" index="1" name=""/>
@@ -16208,10 +15694,10 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" hidden="0" type="field" name="_max"/>
         </columns>
       </attributetableconfig>
-      <editform>../../../../../../../../dev/git-projects/priocomp/reports/maps</editform>
+      <editform>dev/git-projects/priocomp/reports/maps</editform>
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
-      <editforminitfilepath>../../../../../../../../dev/git-projects/priocomp/reports/maps</editforminitfilepath>
+      <editforminitfilepath>dev/git-projects/priocomp/reports/maps</editforminitfilepath>
       <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
 """
 QGIS forms can have a Python function that is called when the form is
@@ -16257,7 +15743,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>species_richness_vascular_plants20161107095054521</id>
-      <datasource>../../data/processed/features/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/provide/species_richness_vascular_plants/species_richness_vascular_plants.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -16316,7 +15802,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>5410000</ymax>
       </extent>
       <id>woodprod_average20161109104208734</id>
-      <datasource>../../data/processed/features/datadryad/forest_production_europe/woodprod_average.tif</datasource>
+      <datasource>E:/Projects/VU/OPERAs/SP2/priocomp/data/processed/features/datadryad/forest_production_europe/woodprod_average.tif</datasource>
       <keywordList>
         <value></value>
       </keywordList>
