@@ -1,9 +1,10 @@
 library(dplyr)
 library(ggplot2)
+library(hrbrthemes)
 library(readr)
 library(tidyr)
 library(zonator)
-
+library(viridis)
 
 # Helper functions --------------------------------------------------------
 
@@ -25,8 +26,6 @@ plot_pairs <- function(dat, taxon_name = NULL) {
   if (is.null(taxon_name)) {
     title <- "All taxa"
     dat <- dat %>%
-      dplyr::mutate(log_count = log(count),
-                    log_mean_ol = log(mean_ol)) %>%
       dplyr::select(log_count, log_mean_ol, morans_i, pr_rem)
   } else {
     title <- taxon_name
@@ -43,11 +42,33 @@ zproject <- zonator::load_zproject('analyses/zonation/priocomp/')
 
 # Get performance for top 5% and Drop first (pr_lost) and last (cost)
 # columns
-v04_top5 <- zonator::get_variant(zproject, 4) %>%
+v04_top10 <- zonator::get_variant(zproject, 4) %>%
   zonator::results() %>%
-  zonator::performance(pr.lost = 0.95) %>%
+  zonator::performance(pr.lost = 0.9) %>%
   dplyr::select(-pr_lost, -pop_density_v5) %>%
-  tidyr::gather(feature, pr_rem)
+  tidyr::gather(feature, pr_rem) %>%
+  # Remove ES feautures
+  dplyr::slice(10:n()) %>%
+  dplyr::mutate(variant = "ALL")
+
+v12_top10 <- zonator::get_variant(zproject, 12) %>%
+  zonator::results() %>%
+  zonator::performance(pr.lost = 0.9) %>%
+  dplyr::select(-pr_lost, -pop_density_v5) %>%
+  tidyr::gather(feature, pr_rem) %>%
+  dplyr::mutate(variant = "BD")
+
+v21_top10 <- zonator::get_variant(zproject, 21) %>%
+  zonator::results() %>%
+  zonator::performance(pr.lost = 0.9) %>%
+  dplyr::select(-pr_lost, -pop_density_v5) %>%
+  tidyr::gather(feature, pr_rem) %>%
+  # Remove ES feautures
+  dplyr::mutate(variant = "BD_rank_ES")
+
+# Fix groups
+new_groups <- c(rep("Amphibians", 83), rep("Birds", 404), rep("Mammals", 164),
+                rep("Reptiles", 112))
 
 # Load auxiliary data -----------------------------------------------------
 
@@ -59,11 +80,86 @@ feature_ranges <- readr::read_csv("data/feature_ranges.csv") %>%
 feature_autocor <- readr::read_csv("data/morans_I_values_772_features_2017-03-08_04-08-05.csv") %>%
   dplyr::mutate(feature = gsub("\\.tif$", "", basename(feature)))
 
-feature_data <- feature_ranges %>%
+v04_feature_data <- v04_top10 %>%
+  dplyr::left_join(feature_ranges) %>%
   dplyr::left_join(feature_autocor) %>%
-  dplyr::left_join(v04_top5)
+  dplyr::mutate(log_count = log(count),
+                log_mean_ol = log(mean_ol),
+                count_rank = row_number(count),
+                mean_ol_rank = row_number(-mean_ol))
 
+v04_feature_data$group <- new_groups
+
+v12_feature_data <- v12_top10 %>%
+  dplyr::left_join(feature_ranges) %>%
+  dplyr::left_join(feature_autocor) %>%
+  dplyr::mutate(log_count = log(count),
+                log_mean_ol = log(mean_ol),
+                count_rank = row_number(count),
+                mean_ol_rank = row_number(-mean_ol))
+
+v12_feature_data$group <- new_groups
+
+v21_feature_data <- v21_top10 %>%
+  dplyr::left_join(feature_ranges) %>%
+  dplyr::left_join(feature_autocor) %>%
+  dplyr::mutate(log_count = log(count),
+                log_mean_ol = log(mean_ol),
+                count_rank = row_number(count),
+                mean_ol_rank = row_number(-mean_ol))
+
+v21_feature_data$group <- new_groups
+
+all_feature_data <- dplyr::bind_rows(list(v12_feature_data, v04_feature_data,
+                                          v21_feature_data))
+all_feature_data$variant <- factor(all_feature_data$variant,
+                                   levels = c("BD", "ALL", "BD_rank_ES"))
+
+# Count differences between ranks in different variants
+variant_comp <- all_feature_data %>%
+  dplyr::select(feature, group, count_rank, log_count, variant, pr_rem) %>%
+  tidyr::spread(variant, pr_rem) %>%
+  dplyr::mutate(first_diff = ALL - BD,
+                second_diff = BD_rank_ES - BD) %>%
+  dplyr::select(count_rank, log_count, group, first_diff, second_diff) %>%
+  tidyr::gather(diff, value, -count_rank, -log_count, -group) %>%
+  dplyr::mutate(diff = factor(diff, levels = c("first_diff", "second_diff"),
+                              labels = c("Between ALL and BD",
+                                         "Between BD_rank_ES and BD")))
 
 # Plot cross-correlation matrix -------------------------------------------
 
-plot_pairs(feature_data)
+
+# Plot orderd coverage ----------------------------------------------------
+
+# Order data by area
+
+p3 <- ggplot(all_feature_data, aes(x = count_rank, y = pr_rem)) +
+  geom_point(alpha = 0.1) + geom_smooth() + ylab("Proportion of range covered") +
+  facet_wrap(~ variant, nrow = 1, ncol = 3) +
+  ylim(c(0, 1)) + scale_x_discrete("Range rank (from smallest to largest)",
+                                   limits = c(1, 763)) +
+  theme_ipsum_rc()
+
+ggsave("reports/figures/figureExtra/BD_coverage.png", p3,
+       width = 10, height = 4)
+
+# Plot diffs --------------------------------------------------------------
+
+p4 <- ggplot(variant_comp, aes(x = log_count, y = value, color = diff)) +
+  geom_point(alpha = 0.5, size = 0.5) + geom_smooth(size = 0.5) +
+  scale_color_viridis(discrete = TRUE, end = 0.7) +
+  scale_y_continuous(breaks = seq(-1, 0.25, 0.25),
+                     labels = paste0(seq(-1, 0.25, 0.25) * 100, "%")) +
+  ylab("Difference in proportion of range covered") +
+  xlab("log(range size)") +
+  theme_ipsum_rc() + theme(legend.position = "top", legend.title = element_blank())
+
+# Wrap per group
+p5 <- p4 + facet_wrap(~ group)
+
+ggsave("reports/figures/figureExtra/BD_coverage_diff.png", p4,
+       width = 6, height = 6)
+ggsave("reports/figures/figureExtra/BD_coverage_diff_group.png", p5,
+       width = 7, height = 7)
+
