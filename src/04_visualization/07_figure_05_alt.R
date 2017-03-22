@@ -11,7 +11,7 @@ source("~/Dropbox/project.J-PriPA/japan-zsetup/R/00_lib/utils.R")
 
 zproject <- zonator::load_zproject('analyses/zonation/priocomp/')
 
-highlights <- c(0.1, 0.25)
+highlights <- c(0.1)
 
 # Separate ES and BD from ALL
 v04_nocosts <- get_stat_curves(zproject, variant_ids = 4, groups = TRUE) %>%
