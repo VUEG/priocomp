@@ -74,7 +74,6 @@ get_costs <- function(cost_raster, rank_raster, n = 1002,
   # Get only non-NoData data
   cost_raster_src <- cost_raster_src[!mask]
   rank_raster_src <- rank_raster_src[!mask]
-
   # Make matrix
   cost_matrix <- cbind(rank_raster_src, cost_raster_src)
   # Order by rank

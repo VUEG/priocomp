@@ -1,0 +1,109 @@
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+library(tidyr)
+library(zonator)
+library(viridis)
+
+source("~/Dropbox/project.J-PriPA/japan-zsetup/R/00_lib/utils.R")
+
+# Load variants and configure groups --------------------------------------
+
+zproject <- zonator::load_zproject('analyses/zonation/priocomp/')
+
+highlights <- c(0.1)
+
+# RWR
+rwr_nocosts <- get_stat_curves(zproject, variant_ids = 23, groups = TRUE) %>%
+  dplyr::mutate(variant = gsub("_1", "_es", variant)) %>%
+  dplyr::mutate(variant = gsub("_2", "_bd", variant)) %>%
+  dplyr::mutate(variant = factor(variant, levels = c("23_load_rwr_all_es",
+                                                     "23_load_rwr_all_bd"),
+                                 ordered = TRUE))
+
+rwr_costs <- get_stat_curves(zproject, variant_ids = 25, groups = TRUE) %>%
+  dplyr::mutate(variant = gsub("_1", "_es", variant)) %>%
+  dplyr::mutate(variant = gsub("_2", "_bd", variant)) %>%
+  dplyr::mutate(variant = factor(variant, levels = c("25_load_rwr_all_cst_es",
+                                                     "25_load_rwr_all_cst_bd"),
+                                 ordered = TRUE))
+
+# Zonation
+zon_nocosts <- get_stat_curves(zproject, variant_ids = 4, groups = TRUE) %>%
+  dplyr::mutate(variant = gsub("_1", "_es", variant)) %>%
+  dplyr::mutate(variant = gsub("_2", "_bd", variant)) %>%
+  dplyr::mutate(variant = factor(variant, levels = c("04_abf_all_wgt_es",
+                                                     "04_abf_all_wgt_bd"),
+                                 ordered = TRUE))
+
+zon_costs <- get_stat_curves(zproject, variant_ids = 6, groups = TRUE) %>%
+  dplyr::mutate(variant = gsub("_1", "_es", variant)) %>%
+  dplyr::mutate(variant = gsub("_2", "_bd", variant)) %>%
+  dplyr::mutate(variant = factor(variant, levels = c("06_abf_all_wgt_cst_es",
+                                                     "06_abf_all_wgt_cst_bd"),
+                                 ordered = TRUE))
+
+# ILP
+ilp_nocosts <- get_stat_curves(zproject, variant_ids = 24, groups = TRUE) %>%
+  dplyr::mutate(variant = gsub("_1", "_es", variant)) %>%
+  dplyr::mutate(variant = gsub("_2", "_bd", variant)) %>%
+  dplyr::mutate(variant = factor(variant, levels = c("24_load_ilp_all_es",
+                                                     "24_load_ilp_all_bd"),
+                                 ordered = TRUE))
+
+ilp_costs <- get_stat_curves(zproject, variant_ids = 26, groups = TRUE) %>%
+  dplyr::mutate(variant = gsub("_1", "_es", variant)) %>%
+  dplyr::mutate(variant = gsub("_2", "_bd", variant)) %>%
+  dplyr::mutate(variant = factor(variant, levels = c("26_load_ilp_all_cst_es",
+                                                     "26_load_ilp_all_cst_bd"),
+                                 ordered = TRUE))
+
+
+# Combine data ------------------------------------------------------------
+
+all_nocosts <- dplyr::bind_rows(rwr_nocosts, zon_nocosts, ilp_nocosts) %>%
+  dplyr::mutate(variant = factor(variant, levels = c("23_load_rwr_all_es",
+                                                     "23_load_rwr_all_bd",
+                                                     "04_abf_all_wgt_es",
+                                                     "04_abf_all_wgt_bd",
+                                                     "24_load_ilp_all_es",
+                                                     "24_load_ilp_all_bd"),
+                                 ordered = TRUE))
+
+all_costs <- dplyr::bind_rows(rwr_costs, zon_costs, ilp_costs) %>%
+  dplyr::mutate(variant = factor(variant, levels = c("25_load_rwr_all_cst_es",
+                                                     "25_load_rwr_all_cst_bd",
+                                                     "06_abf_all_wgt_cst_es",
+                                                     "06_abf_all_wgt_cst_bd",
+                                                     "26_load_ilp_all_cst_es",
+                                                     "26_load_ilp_all_cst_bd"),
+                                 ordered = TRUE))
+
+# Plot --------------------------------------------------------------------
+
+p1 <- all_nocosts %>%
+  plot_curves(title = "No costs", non_param = TRUE, invert_x = TRUE,
+              nrow = 3, ncol = 2, highlights = highlights,
+              plot_min = TRUE, plot_max = TRUE,
+              labels = c("RWR_ES", "RWR_BD",
+                         "ZON_ES", "ZON_BD",
+                         "ILP_ES", "ILP_BD"),
+              ylab = "Fraction of feature occurrence level covered\n",
+              xlab = "\nFraction of the landscape")
+
+p2 <- all_costs %>%
+  plot_curves(title = "Costs", non_param = TRUE, invert_x = TRUE,
+              nrow = 3, ncol = 2, highlights = highlights,
+              plot_min = TRUE, plot_max = TRUE,
+              labels = c("RWR_ES", "RWR_BD",
+                         "ZON_ES", "ZON_BD",
+                         "ILP_ES", "ILP_BD"),
+              ylab = "Fraction of feature occurrence level covered\n",
+              xlab = "\nFraction of the landscape")
+
+# Save Figures ------------------------------------------------------------
+
+ggsave("reports/figures/figure06/02_figure_06_nocosts_methods.png", p1,
+       width = 6, height = 9)
+ggsave("reports/figures/figure06/03_figure_06_costs_methods.png", p2,
+       width = 6, height = 9)
