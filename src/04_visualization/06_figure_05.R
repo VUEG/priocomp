@@ -320,20 +320,20 @@ p8 <- plot_stat(jac_01_costs, title = "low10")
 img_width <- 7
 img_width <- 6.6
 
-ggsave("reports/figures/figure4/01_figure_04_A_nocosts.png",
+ggsave("reports/figures/figure05/01_figure_05_A_nocosts.png",
        p1, width = img_width, height = img_width)
-ggsave("reports/figures/figure4/02_figure_04_B_nocosts.png",
+ggsave("reports/figures/figure05/02_figure_05_B_nocosts.png",
        p2, width = img_width, height = img_width)
-ggsave("reports/figures/figure4/03_figure_04_C_nocosts.png",
+ggsave("reports/figures/figure05/03_figure_05_C_nocosts.png",
        p3, width = img_width, height = img_width)
-ggsave("reports/figures/figure4/04_figure_04_D_nocosts.png",
+ggsave("reports/figures/figure05/04_figure_05_D_nocosts.png",
        p4, width = img_width, height = img_width)
 
-ggsave("reports/figures/figure4/06_figure_04_A_costs.png",
+ggsave("reports/figures/figure05/06_figure_05_A_costs.png",
        p5, width = img_width, height = img_width)
-ggsave("reports/figures/figure4/07_figure_04_B_costs.png",
+ggsave("reports/figures/figure05/07_figure_05_B_costs.png",
        p6, width = img_width, height = img_width)
-ggsave("reports/figures/figure4/08_figure_04_C_costs.png",
+ggsave("reports/figures/figure05/08_figure_05_C_costs.png",
        p7, width = img_width, height = img_width)
-ggsave("reports/figures/figure4/09_figure_04_D_costs.png",
+ggsave("reports/figures/figure05/09_figure_05_D_costs.png",
        p8, width = img_width, height = img_width)

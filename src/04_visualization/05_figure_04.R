@@ -107,13 +107,13 @@ tm_sd_top_costs <- create_sd_map(nuts2_var_costs, upper.limit = 0.20,
 
 # Save maps ---------------------------------------------------------------
 
-file_mean_top_nocosts <- "reports/figures/figure3/01_figure_03_A_nocosts.png"
-file_mean_sd_nocosts <- "reports/figures/figure3/02_figure_03_B_nocosts.png"
-file_composite_nocosts <- "reports/figures/figure3/03_figure_03_nocosts.png"
+file_mean_top_nocosts <- "reports/figures/figure04/01_figure_04_A_nocosts.png"
+file_mean_sd_nocosts <- "reports/figures/figure04/02_figure_04_B_nocosts.png"
+file_composite_nocosts <- "reports/figures/figure04/03_figure_04_nocosts.png"
 
-file_mean_top_costs <- "reports/figures/figure3/04_figure_03_A_costs.png"
-file_mean_sd_costs <- "reports/figures/figure3/05_figure_03_B_costs.png"
-file_composite_costs <- "reports/figures/figure3/06_figure_03_costs.png"
+file_mean_top_costs <- "reports/figures/figure04/04_figure_04_A_costs.png"
+file_mean_sd_costs <- "reports/figures/figure04/05_figure_04_B_costs.png"
+file_composite_costs <- "reports/figures/figure04/06_figure_04_costs.png"
 
 save_tmap(tm_mean_top_nocosts, file_mean_top_nocosts, width = 1500, height = 1800)
 save_tmap(tm_sd_top_nocosts, file_mean_sd_nocosts, width = 1500, height = 1800)
