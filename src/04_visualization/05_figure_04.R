@@ -1,339 +1,134 @@
-library(cowplot)
-library(dplyr)
-library(ggplot2)
-library(ggthemes)
-library(grid)
 library(gridExtra)
-library(readr)
-library(scales)
-library(tidyr)
-library(viridis)
+library(magick)
+library(maptools)
+library(RColorBrewer)
+library(sp)
+library(tmap)
 
-# Utility functions -------------------------------------------------------
+data(Europe)
 
-# Extract given statistic. NOTE: no reality checking is done, use with care.
-extract_stat <- function(x, stat) {
-  requested_stat <- x %>%
-    dplyr::select(f1_type, f1_method, f2_type, f2_method, tau, cmcs, jac_01, jac_09) %>%
-    tidyr::gather(statistic, value, -f1_type, -f1_method, -f2_type, -f2_method) %>%
-    dplyr::filter(statistic == stat) %>%
-    dplyr::select(-statistic)
-  return(requested_stat)
+# Helper functions --------------------------------------------------------
+
+create_mean_map <- function(x, width, height, inner.margins = NULL) {
+  mean_colors <- RColorBrewer::brewer.pal(10, "RdYlBu")
+  mean_breaks <- seq(1, 0, -(1 / length(mean_colors)))
+  mean_labels <- format((100 - mean_breaks * 100), nsmall = 0)
+  mean_labels <- cbind(mean_labels[1:(length(mean_labels) - 1)],
+                       gsub(" ", "", mean_labels[2:length(mean_labels)]))
+  mean_labels[,2] <- paste(mean_labels[,2], "%")
+  mean_labels <- apply(mean_labels, 1, paste, collapse = " - ")
+  mean_labels[1] <- gsub(" 0 - ", "", mean_labels[1])
+
+  # Manually categorize data to get an inverted legenf
+  x$agg_mean_cat <-  cut(x$agg_mean, breaks = mean_breaks)
+  x$agg_mean_cat <- factor(x$agg_mean_cat,
+                           levels = rev(levels(x$agg_mean_cat)))
+
+  tm_mean_top <- tm_shape(Europe) +
+    tm_fill("lightgrey") +
+    tm_format_Europe(inner.margins = inner.margins) +
+    tm_shape(x, is.master = TRUE) +
+    tm_polygons("agg_mean_cat", title = "Mean best X% of \nthe solutions", style = "fixed",
+                palette = mean_colors, labels = mean_labels, breaks = mean_breaks,
+                border.col = "lightgrey", lwd = 0.3,
+                auto.palette.mapping = FALSE) +
+    tm_layout(title.size = 1.5) +
+    tm_format_Europe(title = "A", inner.margins = inner.margins,
+                     legend.position = c("left", "top"),
+                     legend.bg.color = "white",
+                     title.position = c("right", "top"))
+  return(tm_mean_top)
 }
 
-# Generate self-crossing comparison stats (i.e. 1.0).
-generate_self_cross <- function(stat_name, stat_value = 1.0) {
-  method_codes <- c("RWR", "ZON", "ILP")
-  type_codes <- c("ALL_WGT", "ALL_WGT_CST", "ES", "ES_CST", "BD", "BD_CST")
+create_sd_map <-  function(x, upper.limit, step = 0.05, width, height,
+                           inner.margins = NULL) {
 
-  keys <- c()
-  f_methods <- c()
-  f_types <- c()
+  sd_colors <- rev(RColorBrewer::brewer.pal(upper.limit / step, "RdYlBu"))
+  sd_breaks <- seq(0, upper.limit, step)
+  sd_labels <- format(sd_breaks, nsmall = 0)
+  sd_labels <- cbind(sd_labels[1:(length(sd_labels) - 1)],
+                     gsub(" ", "", sd_labels[2:length(sd_labels)]))
+  sd_labels[,2] <- sd_labels[,2]
+  sd_labels <- apply(sd_labels, 1, paste, collapse = " - ")
 
-  for (i in method_codes) {
-    for (j in type_codes) {
-      keys <- c(keys, paste(i, j, i, j, sep = "_"))
-      f_methods <- c(f_methods, i)
-      f_types <- c(f_types, j)
-    }
-  }
-  df <- data_frame(key = keys, f1_method = f_methods, f1_type = f_types,
-                   f2_method = f_methods, f2_type = f_types)
-  for (name in stat_name) {
-    df[,stat_name] <- stat_value
-  }
-  return(df)
+  tm_sd_top <- tm_shape(Europe) +
+    tm_fill("lightgrey") +
+    tm_format_Europe(inner.margins = inner.margins) +
+    tm_shape(x, is.master = TRUE) +
+    tm_polygons("agg_std", title = "SD mean priority rank",
+                palette = sd_colors, labels = sd_labels, breaks = sd_breaks,
+                border.col = "lightgrey", lwd = 0.3,
+                auto.palette.mapping = FALSE) +
+    tm_layout(title.size = 1.5) +
+    tm_format_Europe(title = "B", inner.margins = inner.margins,
+                     legend.show = TRUE, legend.position = c("left", "top"),
+                     legend.bg.color = "white",
+                     title.position = c("right", "top"))
+  return(tm_sd_top)
 }
 
-# Custom grid arrangement with only one legend
-grid_arrange_shared_legend <- function(..., ncol = length(list(...)),
-                                       nrow = 1, position = c("bottom", "right", "left")) {
+# Load data ---------------------------------------------------------------
 
-  plots <- list(...)
-  position <- match.arg(position)
-  g <- ggplotGrob(plots[[1]] + theme(legend.position = position))$grobs
-  legend <- g[[which(sapply(g, function(x) x$name) == "guide-box")]]
+nuts2_var_ds_nocosts <- "analyses/comparison/nuts2_rank_variation.shp"
+nuts2_var_ds_costs <- "analyses/comparison/nuts2_rank_variation_costs.shp"
 
-  gl <- lapply(plots, function(x) x + theme(legend.position = "none"))
-  # Insert legend into the list of grobs
-  gll <- gl[1:5]
-  gll[[6]] <- legend
-  gll[7:9] <- gl[7:9]
-  gl <- c(gl, ncol = ncol, nrow = nrow)
-  combined <- do.call(arrangeGrob, gll)
-  return(ggdraw(combined))
-}
+nuts2_var_nocosts <- maptools::readShapePoly(nuts2_var_ds_nocosts,
+                                             proj4string = CRS("+init=epsg:3035"))
+nuts2_var_costs <- maptools::readShapePoly(nuts2_var_ds_costs,
+                                           proj4string = CRS("+init=epsg:3035"))
 
+# Common parameters -------------------------------------------------------
 
-# Simplify a character string name of a method used so that a 3-character
-# code is returned.
-match_method <- Vectorize(
-  function(x) {
-    if (grepl(".+\\/zonation\\/.+", x)) {
-      method <- "ZON"
-    } else if (grepl(".+\\/RWR\\/.+", x)) {
-      method <- "RWR"
-    } else if (grepl(".+\\/ILP\\/.+", x)) {
-      method <- "ILP"
-    } else {
-      stop("Method", x, " not matched")
-    }
-    return(method)
-  }, c("x"), USE.NAMES = FALSE, SIMPLIFY = TRUE)
+img_width <- 3000
+img_height <- 1800
+inner_margins <- c(0.02, 0.02, 0.02, -0.05)
 
-# Simplify a character string name of a data collection type used so that
-# a 3-character code is returned.
-match_type <- Vectorize(
-  function(x) {
+# Plot mean data ----------------------------------------------------------
 
-    match_list <- list(
-      #"ALL" = c("_all\\.tif$", "_all_stats\\.", "02_abf_all.+"),
-      "ALL_WGT" = c("_all_weights\\.tif", "_all_weights_stats\\.", "04_abf_all_wgt.+"),
-      "ALL_WGT_CST" = c("_all_weights_costs\\.tif", "_all_weights_costs_stats\\.",
-                        "06_abf_all_wgt_cst"),
-      "ES" = c("_es\\.", "_es\\/", "_es_stats\\."),
-      "ES_CST" = c("_es_cst\\.", "_es_cst\\/", "_es_costs\\.", "_es_costs_stats\\."),
-      "BD" = c("_bd\\.", "_bd\\/", "_bd_stats\\."),
-      "BD_CST" = c("_bd_cst\\.", "_bd_cst\\/", "_bd_costs\\.", "_bd_costs_stats\\.")
-    )
+tm_mean_top_nocosts <- create_mean_map(nuts2_var_nocosts, width = img_width,
+                                       height = img_height,
+                                       inner.margins = inner_margins)
 
-    mtype <- NA
-    for (i in 1:length(match_list)) {
-      mtype_candidate <- names(match_list)[i]
-      patterns <- match_list[mtype_candidate]
-      if (any(sapply(patterns[[1]], function(pattern) grepl(pattern, x)))) {
-        if (is.na(mtype)) {
-          mtype <- mtype_candidate
-        } else {
-          warning("Multiple matches found, keeping only the first")
-        }
-      }
-    }
+tm_mean_top_costs <- create_mean_map(nuts2_var_costs, width = img_width,
+                                     height = img_height,
+                                     inner.margins = inner_margins)
 
-    if (is.na(mtype)) {
-      stop("Type ", x, " not matched")
-    }
+# Plot SD data ------------------------------------------------------------
 
-    return(mtype)
-  }, c("x"), USE.NAMES = FALSE, SIMPLIFY = TRUE)
+tm_sd_top_nocosts <- create_sd_map(nuts2_var_nocosts, upper.limit = 0.35,
+                                   width = img_width, height = img_height,
+                                   inner.margins = inner_margins)
 
+tm_sd_top_costs <- create_sd_map(nuts2_var_costs, upper.limit = 0.20,
+                                 step = 0.04,
+                                 width = img_width,
+                                 height = img_height,
+                                 inner.margins = inner_margins)
 
-# Plot a cross-comparison stat heatmap
-plot_stat <- function(x, title, ...) {
+# Save maps ---------------------------------------------------------------
 
-  rwr_rwr_stat <- x %>%
-    filter(f1_method == "RWR" & f2_method == "RWR")
-  rwr_zon_stat <- x %>%
-    filter(f1_method == "RWR" & f2_method == "ZON")
-  rwr_ilp_stat <- x %>%
-    filter(f1_method == "RWR" & f2_method == "ILP")
-  zon_zon_stat <- x %>%
-    filter(f1_method == "ZON" & f2_method == "ZON")
-  zon_ilp_stat <- x %>%
-    filter(f1_method == "ZON" & f2_method == "ILP")
-  ilp_ilp_stat <- x %>%
-    filter(f1_method == "ILP" & f2_method == "ILP")
+file_mean_top_nocosts <- "reports/figures/figure3/01_figure_03_A_nocosts.png"
+file_mean_sd_nocosts <- "reports/figures/figure3/02_figure_03_B_nocosts.png"
+file_composite_nocosts <- "reports/figures/figure3/03_figure_03_nocosts.png"
 
-  create_empty_subplot <- function(xx) {
-    sub_p <- ggplot(xx , aes(x = f1_type, y = f2_type, fill = value)) +
-      geom_blank() +
-      coord_equal() + coord_flip() +
-      labs(x = NULL, y = NULL, title = "") +
-      theme(axis.title = element_blank(),
-            axis.text = element_blank(),
-            axis.ticks = element_blank(),
-            axis.line = element_blank())
-    return(sub_p)
-  }
+file_mean_top_costs <- "reports/figures/figure3/04_figure_03_A_costs.png"
+file_mean_sd_costs <- "reports/figures/figure3/05_figure_03_B_costs.png"
+file_composite_costs <- "reports/figures/figure3/06_figure_03_costs.png"
 
-  create_subplot <- function(xx, min_lim = 0.0, max_lim = 1.0, step = 0.25,
-                             axis_titles = TRUE, axis_text = TRUE,
-                             margins = unit(c(1, 1, 1, 1), "mm")) {
+save_tmap(tm_mean_top_nocosts, file_mean_top_nocosts, width = 1500, height = 1800)
+save_tmap(tm_sd_top_nocosts, file_mean_sd_nocosts, width = 1500, height = 1800)
+save_tmap(tm_mean_top_costs, file_mean_top_costs, width = 1500, height = 1800)
+save_tmap(tm_sd_top_costs, file_mean_sd_costs, width = 1500, height = 1800)
 
-    sub_p <- ggplot(xx , aes(x = f1_type, y = f2_type, fill = value)) +
-      geom_tile(color = "white", size = 0.1) +
-      geom_text(aes(label = sprintf("%0.2f", round(value, digits = 2))),
-                color = "black", size = 4) +
-      scale_fill_viridis(name = title, label = comma,
-                         limits = c(min_lim, max_lim),
-                         breaks = seq(min_lim, max_lim, by = step)) +
-      coord_equal() +
-      labs(x = unique(xx$f1_method), y = unique(xx$f2_method)) +
-      theme_tufte(base_family = "Helvetica") +
-      theme(title = element_blank(),
-            axis.ticks = element_blank(),
-            axis.text = element_text(size = 7),
-            legend.text = element_text(size = 12),
-            plot.margin = margins)
+# Combine images using magick (couldn't figure a better way...)
+img_mean_top_nocosts <- magick::image_read(file_mean_top_nocosts)
+img_mean_sd_nocosts <- magick::image_read(file_mean_sd_nocosts)
+img_composite_nocosts <- magick::image_append(c(img_mean_top_nocosts,
+                                                img_mean_sd_nocosts))
+magick::image_write(img_composite_nocosts, path = file_composite_nocosts)
 
-    if (!axis_titles) {
-      sub_p <- sub_p + theme(axis.title = element_blank())
-    }
-    if (!axis_text) {
-      sub_p <- sub_p + theme(axis.text = element_blank())
-    }
-
-    return(sub_p)
-  }
-
-  rwr_rwr_p <- create_subplot(rwr_rwr_stat, axis_titles = FALSE,
-                              axis_text = FALSE, ...)
-  rwr_zon_p <- create_subplot(rwr_zon_stat, axis_titles = FALSE,
-                              axis_text = FALSE, ...)
-  rwr_ilp_p <- create_subplot(rwr_ilp_stat, axis_titles = FALSE,
-                              axis_text = FALSE, ...)
-  # Make a blank panel to set the layout correctly
-  zon_rwr_p <- create_empty_subplot(zon_zon_stat)
-  zon_zon_p <- create_subplot(zon_zon_stat, axis_titles = FALSE,
-                              axis_text = FALSE, ...)
-  zon_ilp_p <- create_subplot(zon_ilp_stat, axis_titles = FALSE,
-                              axis_text = FALSE, ...)
-  ilp_rwr_p <- create_empty_subplot(ilp_ilp_stat)
-  ilp_zon_p <- create_empty_subplot(ilp_ilp_stat)
-  ilp_ilp_p <- create_subplot(ilp_ilp_stat, axis_titles = FALSE,
-                              axis_text = FALSE, ...)
-
-  p <- grid_arrange_shared_legend(rwr_ilp_p, rwr_zon_p, rwr_rwr_p,
-                                  zon_ilp_p, zon_zon_p, zon_rwr_p,
-                                  ilp_ilp_p, ilp_zon_p, ilp_rwr_p,
-                                  ncol = 3, nrow = 3, position = "right")
-  return(p)
-}
-
-# Read in and arrange the data ---------------------------------------------
-
-## Kendall tau rank correlation
-
-cors <- readr::read_csv("analyses/comparison/cross_correlation.csv") %>%
-  dplyr::mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
-                f2_method = match_method(feature2), f2_type = match_type(feature2),
-                key = paste(f1_method, f1_type, f2_method, f2_type,
-                            sep = "_")) %>%
-  dplyr::select(key, f1_method, f1_type, f2_method, f2_type, tau) %>%
-  # Manully fill in the diagonal values (i.e. self-cross, 1.0) since they
-  # have not been included in the data
-  dplyr::bind_rows(., generate_self_cross("tau", 1.0)) %>%
-  dplyr::arrange(key)
-
-## Map comparison statistic
-
-# NOTE: use the complement of MCS: CMCS = 1 - MCS
-mcss <- readr::read_csv("analyses/comparison/cross_mcs.csv") %>%
-  dplyr::mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
-                f2_method = match_method(feature2), f2_type = match_type(feature2),
-                key = paste(f1_method, f1_type, f2_method, f2_type,
-                            sep = "_"), cmcs = 1 - mcs) %>%
-  dplyr::select(key, f1_method, f1_type, f2_method, f2_type, cmcs) %>%
-  dplyr::bind_rows(., generate_self_cross("cmcs", 1.0)) %>%
-  dplyr::arrange(key)
-
-## Jaccard coefficients for different thresholds
-
-jac <- readr::read_csv("analyses/comparison/cross_jaccard.csv") %>%
-  dplyr::mutate(f1_method = match_method(feature1), f1_type = match_type(feature1),
-                f2_method = match_method(feature2), f2_type = match_type(feature2),
-                key = paste(f1_method, f1_type, f2_method, f2_type,
-                            sep = "_")) %>%
-  dplyr::mutate(threshold = gsub("\\(0.0, 0.1, 0.0, 0.1\\)", 0.10, threshold)) %>%
-  dplyr::mutate(threshold = gsub("\\(0.9, 1.0, 0.9, 1.0\\)", 0.90, threshold)) %>%
-  #dplyr::filter(threshold == 0.10 | threshold == 0.90) %>%
-  dplyr::select(key, f1_method, f1_type, f2_method, f2_type, threshold, coef) %>%
-  dplyr::mutate(threshold = paste0("jac_", gsub("\\.", "", threshold))) %>%
-  tidyr::spread(threshold, coef) %>%
-  dplyr::bind_rows(., generate_self_cross(c("jac_01", "jac_09"), 1.0)) %>%
-  dplyr::arrange(key)
-
-## Join all stats and do additional filtering
-
-# Join correlation and map comparison statistics
-all_stats <- dplyr::left_join(cors, mcss, by = c("key" = "key")) %>%
-  dplyr::select(key, f1_method = f1_method.x, f2_method = f2_method.x,
-                f1_type = f1_type.x, f2_type = f2_type.x, tau, cmcs) %>%
-  # Join in also the jaccard coefficients
-  dplyr::left_join(., jac, by = c("key" = "key")) %>%
-  dplyr::select(f1_method = f1_method.x, f1_type = f1_type.x,
-                f2_method = f2_method.x, f2_type = f2_type.x,
-                tau, cmcs, jac_01, jac_09) %>%
-  # Create additional columns f1_cost and f2_cost indicating whether cost are
-  # used. The information is teased apart from content of f1_type and f2_type.
-  # Note that temporay columns "f1_type_" and "f2_type_" are created
-  tidyr::extract(f1_type, into = c('f1_type_', 'f1_cost'), '(.*)_{1}([CST]+)$',
-                 remove = FALSE) %>%
-  tidyr::extract(f2_type, into = c('f2_type_', 'f2_cost'), '(.*)_{1}([CST]+)$',
-                 remove = FALSE) %>%
-  # The remove the "_CST" identifier in the original fX_type column,
-  # copy over values from the temporary column unless they are NA
-  dplyr::mutate(f1_type = ifelse(is.na(f1_type_), f1_type, f1_type_),
-                f2_type = ifelse(is.na(f2_type_), f2_type, f2_type_)) %>%
-  # Remove temporay columns "f1_type_" and "f2_type_" and reorder
-  dplyr::select(f1_method, f1_type, f1_cost, f2_method, f2_type, f2_cost,
-                tau, cmcs, jac_01, jac_09) %>%
-  # Make f1_cost and f2_cost logical
-  dplyr::mutate(f1_cost = ifelse(is.na(f1_cost), FALSE, TRUE),
-                f2_cost = ifelse(is.na(f2_cost), FALSE, TRUE))
-
-# Remove ALL and rename ALL_WGT to ALL. From this point on, "ALL" means all
-# features with weights. In same go, make f1_type and f2_type ordered
-# factors
-all_stats <- all_stats %>%
-  # Remove original "ALL" types
-  dplyr::filter(f1_type != "ALL") %>%
-  dplyr::filter(f2_type != "ALL") %>%
-  # Rename original "ALL_WGT" to "ALL"
-  dplyr::mutate(f1_type = gsub("ALL_WGT", "ALL", f1_type),
-                f2_type = gsub("ALL_WGT", "ALL", f2_type)) %>%
-  # Convert f1_type and f2_type to factors
-  dplyr::mutate(f1_type = factor(f1_type, levels = c("ALL", "ES", "BD"), ordered = TRUE),
-                f2_type = factor(f2_type, levels = c("ALL", "ES", "BD"), ordered = TRUE)) %>%
-  dplyr::arrange(f1_method, f1_type, f2_method, f2_type)
-
-all_stats_nocosts <- all_stats %>%
-  dplyr::filter(f1_cost == FALSE & f2_cost == FALSE)
-
-all_stats_costs <- all_stats %>%
-  dplyr::filter(f1_cost == TRUE & f2_cost == TRUE)
-
-# Create the plots --------------------------------------------------------
-
-tau_nocosts <- extract_stat(all_stats_nocosts, "tau")
-tau_costs <- extract_stat(all_stats_costs, "tau")
-jac_01_nocosts <- extract_stat(all_stats_nocosts, "jac_01")
-jac_01_costs <- extract_stat(all_stats_costs, "jac_01")
-jac_09_nocosts <- extract_stat(all_stats_nocosts, "jac_09")
-jac_09_costs <- extract_stat(all_stats_costs, "jac_09")
-cmcs_nocosts <- extract_stat(all_stats_nocosts, "cmcs")
-cmcs_costs <- extract_stat(all_stats_costs, "cmcs")
-
-p1 <- plot_stat(tau_nocosts, title = "COR", min_lim = -0.25,
-                max_lim = 1.0, step = 0.25)
-p2 <- plot_stat(cmcs_nocosts, title = "MCS")
-p3 <- plot_stat(jac_09_nocosts, title = "top10")
-p4 <- plot_stat(jac_01_nocosts, title = "low10")
-
-p5 <- plot_stat(tau_costs, title = "COR")
-p6 <- plot_stat(cmcs_costs, title = "MCS")
-p7 <- plot_stat(jac_09_costs, title = "top10")
-p8 <- plot_stat(jac_01_costs, title = "low10")
-
-# Save plots --------------------------------------------------------------
-
-img_width <- 7
-img_width <- 6.6
-
-ggsave("reports/figures/figure4/01_figure_04_A_nocosts.png",
-       p1, width = img_width, height = img_width)
-ggsave("reports/figures/figure4/02_figure_04_B_nocosts.png",
-       p2, width = img_width, height = img_width)
-ggsave("reports/figures/figure4/03_figure_04_C_nocosts.png",
-       p3, width = img_width, height = img_width)
-ggsave("reports/figures/figure4/04_figure_04_D_nocosts.png",
-       p4, width = img_width, height = img_width)
-
-ggsave("reports/figures/figure4/06_figure_04_A_costs.png",
-       p5, width = img_width, height = img_width)
-ggsave("reports/figures/figure4/07_figure_04_B_costs.png",
-       p6, width = img_width, height = img_width)
-ggsave("reports/figures/figure4/08_figure_04_C_costs.png",
-       p7, width = img_width, height = img_width)
-ggsave("reports/figures/figure4/09_figure_04_D_costs.png",
-       p8, width = img_width, height = img_width)
+img_mean_top_costs <- magick::image_read(file_mean_top_costs)
+img_mean_sd_costs <- magick::image_read(file_mean_sd_costs)
+img_composite_costs <- magick::image_append(c(img_mean_top_costs,
+                                                img_mean_sd_costs))
+magick::image_write(img_composite_costs, path = file_composite_costs)

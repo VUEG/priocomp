@@ -1,134 +1,195 @@
-library(gridExtra)
+# Figure 2: Rank priority maps for different methods (RWR, ZON and ILP) in
+# columns, and for different datasets in rows (ALL, ES, BD).
+
+library(dplyr)
+library(grid)
+library(lazyeval)
 library(magick)
 library(maptools)
+library(raster)
 library(RColorBrewer)
+library(rgdal)
 library(sp)
 library(tmap)
 
-data(Europe)
+data(Europe, land)
 
 # Helper functions --------------------------------------------------------
 
-create_mean_map <- function(x, width, height, inner.margins = NULL) {
-  mean_colors <- RColorBrewer::brewer.pal(10, "RdYlBu")
-  mean_breaks <- seq(1, 0, -(1 / length(mean_colors)))
-  mean_labels <- format((100 - mean_breaks * 100), nsmall = 0)
-  mean_labels <- cbind(mean_labels[1:(length(mean_labels) - 1)],
-                       gsub(" ", "", mean_labels[2:length(mean_labels)]))
-  mean_labels[,2] <- paste(mean_labels[,2], "%")
-  mean_labels <- apply(mean_labels, 1, paste, collapse = " - ")
-  mean_labels[1] <- gsub(" 0 - ", "", mean_labels[1])
 
-  # Manually categorize data to get an inverted legenf
-  x$agg_mean_cat <-  cut(x$agg_mean, breaks = mean_breaks)
-  x$agg_mean_cat <- factor(x$agg_mean_cat,
-                           levels = rev(levels(x$agg_mean_cat)))
+get_map_params <- function(legend.reversed=FALSE) {
+  # Define a suitable bounding box
+  bbox <- matrix(c(2635899, 1386018, 6084606, 5307234),
+                         nrow = 2, ncol = 2, dimnames = list(c("x", "y"),
+                                                             c("min", "max")))
 
-  tm_mean_top <- tm_shape(Europe) +
-    tm_fill("lightgrey") +
-    tm_format_Europe(inner.margins = inner.margins) +
-    tm_shape(x, is.master = TRUE) +
-    tm_polygons("agg_mean_cat", title = "Mean best X% of \nthe solutions", style = "fixed",
-                palette = mean_colors, labels = mean_labels, breaks = mean_breaks,
-                border.col = "lightgrey", lwd = 0.3,
-                auto.palette.mapping = FALSE) +
-    tm_layout(title.size = 1.5) +
-    tm_format_Europe(title = "A", inner.margins = inner.margins,
-                     legend.position = c("left", "top"),
-                     legend.bg.color = "white",
-                     title.position = c("right", "top"))
-  return(tm_mean_top)
+  breaks <- c(0, 0.2, 0.5, 0.75, 0.9, 0.95, 0.98, 1)
+  colors <- rev(RColorBrewer::brewer.pal(length(breaks) - 1, "RdYlBu"))
+  labels <- (100 - breaks * 100)
+  labels <- cbind(labels[1:(length(labels) - 1)], labels[2:length(labels)])
+  labels[,2] <- paste(labels[,2], "%")
+  labels[7,2] <- ""
+  labels <- apply(labels, 1, paste, collapse = " - ")
+  labels[7] <- gsub(" - ", " %", labels[7])
+
+  params <- list()
+
+  params$bbox <- bbox
+
+  if (legend.reversed) {
+    params$breaks <- rev(breaks)
+    params$colors <- rev(colors)
+    params$labels <- rev(labels)
+  } else {
+    params$breaks <- breaks
+    params$colors <- colors
+    params$labels <- labels
+  }
+  return(params)
 }
 
-create_sd_map <-  function(x, upper.limit, step = 0.05, width, height,
-                           inner.margins = NULL) {
+create_raster_levels <- function(raster) {
 
-  sd_colors <- rev(RColorBrewer::brewer.pal(upper.limit / step, "RdYlBu"))
-  sd_breaks <- seq(0, upper.limit, step)
-  sd_labels <- format(sd_breaks, nsmall = 0)
-  sd_labels <- cbind(sd_labels[1:(length(sd_labels) - 1)],
-                     gsub(" ", "", sd_labels[2:length(sd_labels)]))
-  sd_labels[,2] <- sd_labels[,2]
-  sd_labels <- apply(sd_labels, 1, paste, collapse = " - ")
+  params <- get_map_params()
 
-  tm_sd_top <- tm_shape(Europe) +
-    tm_fill("lightgrey") +
-    tm_format_Europe(inner.margins = inner.margins) +
-    tm_shape(x, is.master = TRUE) +
-    tm_polygons("agg_std", title = "SD mean priority rank",
-                palette = sd_colors, labels = sd_labels, breaks = sd_breaks,
-                border.col = "lightgrey", lwd = 0.3,
-                auto.palette.mapping = FALSE) +
-    tm_layout(title.size = 1.5) +
-    tm_format_Europe(title = "B", inner.margins = inner.margins,
-                     legend.show = TRUE, legend.position = c("left", "top"),
-                     legend.bg.color = "white",
-                     title.position = c("right", "top"))
-  return(tm_sd_top)
+  # Create a RasterLayer with a RAT
+  rat_raster <- raster::ratify(raster)
+  rat <- levels(rat_raster)[[1]]
+  rat$priorities_cat <- cut(rat$ID, breaks = params$breaks)
+  rat$priorities_cat <- factor(rat$priorities_cat,
+                               levels = rev(levels(rat$priorities_cat)))
+  levels(rat_raster) <- rat
+  return(rat_raster)
 }
 
-# Load data ---------------------------------------------------------------
+create_legend <- function(raster, title, legend.reversed = FALSE) {
 
-nuts2_var_ds_nocosts <- "analyses/comparison/nuts2_rank_variation.shp"
-nuts2_var_ds_costs <- "analyses/comparison/nuts2_rank_variation_costs.shp"
+  params <- get_map_params(legend.reversed)
 
-nuts2_var_nocosts <- maptools::readShapePoly(nuts2_var_ds_nocosts,
-                                             proj4string = CRS("+init=epsg:3035"))
-nuts2_var_costs <- maptools::readShapePoly(nuts2_var_ds_costs,
-                                           proj4string = CRS("+init=epsg:3035"))
+  if (legend.reversed) {
+    raster <- create_raster_levels(raster)
+  }
 
-# Common parameters -------------------------------------------------------
+  raster_legend <- tm_shape(raster, is.master = TRUE) +
+    tm_raster(title = title, palette = params$colors,
+              labels = params$labels, breaks = params$breaks,
+              auto.palette.mapping = FALSE,
+              legend.show = TRUE) +
+    tm_format_Europe(legend.only = TRUE, legend.position = c("left", "center"))
+  return(raster_legend)
+}
 
-img_width <- 3000
-img_height <- 1800
-inner_margins <- c(0.02, 0.02, 0.02, -0.05)
+create_map <- function(raster, title) {
 
-# Plot mean data ----------------------------------------------------------
+  params <- get_map_params()
 
-tm_mean_top_nocosts <- create_mean_map(nuts2_var_nocosts, width = img_width,
-                                       height = img_height,
-                                       inner.margins = inner_margins)
+  raster_map <- tm_shape(Europe, bbox = params$bbox, is.master = TRUE) +
+    tm_fill("lightgrey") +
+    tm_shape(raster) +
+    tm_raster(palette = params$colors, labels = params$labels,
+              breaks = params$breaks, auto.palette.mapping = FALSE,
+              legend.show = FALSE) +
+    tm_shape(Europe, bbox = params$bbox) +
+    tm_borders(col = "black", lwd = 0.3) +
+    tm_format_Europe(title = title, title.size = 4.0)
+  return(raster_map)
+}
 
-tm_mean_top_costs <- create_mean_map(nuts2_var_costs, width = img_width,
-                                     height = img_height,
-                                     inner.margins = inner_margins)
+create_map_list <- function(input_rasters) {
+  map_list <- list()
 
-# Plot SD data ------------------------------------------------------------
+  for (i in 1:length(input_rasters)) {
+    raster_name <- names(input_rasters[i])[1]
+    raster_path <- input_rasters[[raster_name]]
+    map_list[[raster_name]] <- create_map(raster::raster(raster_path),
+                                          title = LETTERS[i])
+  }
+  return(map_list)
+}
 
-tm_sd_top_nocosts <- create_sd_map(nuts2_var_nocosts, upper.limit = 0.35,
-                                   width = img_width, height = img_height,
-                                   inner.margins = inner_margins)
+print_map_list <- function(x, filepath, width = 1800, height = 1800,
+                           nrow = 3, ncol = 3) {
 
-tm_sd_top_costs <- create_sd_map(nuts2_var_costs, upper.limit = 0.20,
-                                 step = 0.04,
-                                 width = img_width,
-                                 height = img_height,
-                                 inner.margins = inner_margins)
+  if ((nrow * ncol) != length(x)) {
+    stop("The multiple of nrow and ncol must be the same as ",
+         "length of x")
+  }
 
-# Save maps ---------------------------------------------------------------
+  # Generate row/col indexes for the grid layout
+  indexes <- mapply(c, rep(1:nrow, each = 3, times = 1),
+                    rep(1:ncol, times = 3), SIMPLIFY = FALSE)
 
-file_mean_top_nocosts <- "reports/figures/figure3/01_figure_03_A_nocosts.png"
-file_mean_sd_nocosts <- "reports/figures/figure3/02_figure_03_B_nocosts.png"
-file_composite_nocosts <- "reports/figures/figure3/03_figure_03_nocosts.png"
+  message("Creating composite image ", filepath)
+  # Create a new image
+  png(filepath, width = width, height = height)
+  # Establish a grid layout to which the image panels are printed
+  # to
+  grid.newpage()
+  pushViewport(viewport(layout = grid.layout(nrow, ncol)))
 
-file_mean_top_costs <- "reports/figures/figure3/04_figure_03_A_costs.png"
-file_mean_sd_costs <- "reports/figures/figure3/05_figure_03_B_costs.png"
-file_composite_costs <- "reports/figures/figure3/06_figure_03_costs.png"
+  for (i in 1:length(x)) {
+    message("Printing ", names(x[i])[1], " in grid position (",
+            indexes[[i]][1], ", ", indexes[[i]][2], ")...")
+    print(x[[i]], vp = viewport(layout.pos.row = indexes[[i]][1],
+                                layout.pos.col = indexes[[i]][2]))
+  }
+  dev.off()
+  message("All done")
+  return(invisible(TRUE))
+}
 
-save_tmap(tm_mean_top_nocosts, file_mean_top_nocosts, width = 1500, height = 1800)
-save_tmap(tm_sd_top_nocosts, file_mean_sd_nocosts, width = 1500, height = 1800)
-save_tmap(tm_mean_top_costs, file_mean_top_costs, width = 1500, height = 1800)
-save_tmap(tm_sd_top_costs, file_mean_sd_costs, width = 1500, height = 1800)
+# Read in pixel-based rank data -------------------------------------------
 
-# Combine images using magick (couldn't figure a better way...)
-img_mean_top_nocosts <- magick::image_read(file_mean_top_nocosts)
-img_mean_sd_nocosts <- magick::image_read(file_mean_sd_nocosts)
-img_composite_nocosts <- magick::image_append(c(img_mean_top_nocosts,
-                                                img_mean_sd_nocosts))
-magick::image_write(img_composite_nocosts, path = file_composite_nocosts)
+# NOTE: the order matters -> the order is retained in the composite image
+# layout.
 
-img_mean_top_costs <- magick::image_read(file_mean_top_costs)
-img_mean_sd_costs <- magick::image_read(file_mean_sd_costs)
-img_composite_costs <- magick::image_append(c(img_mean_top_costs,
-                                                img_mean_sd_costs))
-magick::image_write(img_composite_costs, path = file_composite_costs)
+input_rasters <- list(
+  "rwr_raster_all" = "analyses/RWR/rwr_all_weights.tif",
+  "zon_raster_all" = "analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif",
+  "ilp_raster_all" = "analyses/ILP/ilp_all_weights.tif",
+  "rwr_raster_es" = "analyses/RWR/rwr_es.tif",
+  "zon_raster_es" = "analyses/zonation/priocomp/08_abf_es/08_abf_es_out/08_abf_es.rank.compressed.tif",
+  "ilp_raster_es" = "analyses/ILP/ilp_es.tif",
+  "rwr_raster_bd" = "analyses/RWR/rwr_bd.tif",
+  "zon_raster_bd" = "analyses/zonation/priocomp/12_abf_bd/12_abf_bd_out/12_abf_bd.rank.compressed.tif",
+  "ilp_raster_bd" = "analyses/ILP/ilp_bd.tif")
+
+input_rasters_costs <- list(
+  "rwr_raster_all_cst" = "analyses/RWR/rwr_all_weights_costs.tif",
+  "zon_raster_all_cst" = "analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst.rank.compressed.tif",
+  "ilp_raster_all_cst" = "analyses/ILP/ilp_all_weights_costs.tif",
+  "rwr_raster_es_cst" = "analyses/RWR/rwr_es_costs.tif",
+  "zon_raster_es_cst" = "analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst.rank.compressed.tif",
+  "ilp_raster_es_cst" = "analyses/ILP/ilp_es_costs.tif",
+  "rwr_raster_bd_cst" = "analyses/RWR/rwr_bd_costs.tif",
+  "zon_raster_bd_cst" = "analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst.rank.compressed.tif",
+  "ilp_raster_bd_cst" = "analyses/ILP/ilp_bd_costs.tif")
+
+# Create maps -------------------------------------------------------------
+
+maps <- create_map_list(input_rasters)
+maps_costs <- create_map_list(input_rasters_costs)
+
+# Save plots --------------------------------------------------------------
+
+file_legend <- "reports/figures/figure2/01_figure_02_legend.png"
+file_main <- "reports/figures/02_figure_02_main_nocosts.png"
+file_main_costs <- "reports/figures/03_figure_02_main_costs.png"
+
+print_map_list(maps, file_main, width = 1800, height = 1800,
+               nrow = 3, ncol = 3)
+print_map_list(maps_costs, file_main_costs, width = 1800, height = 1800,
+               nrow = 3, ncol = 3)
+
+# Create legend separately and only once based on a single raster map
+rastermap_legend <- create_legend(raster::raster(input_rasters[[1]]),
+                                  legend.reversed = TRUE,
+                                  title = "Best X% of \nthe solution")
+
+save_tmap(rastermap_legend, file_legend, width = 400, height = 600)
+
+# Crop legend
+img_legend <- magick::image_read(file_legend)
+img_legend <- magick::image_crop(img_legend, geometry = "236x354+30+123")
+magick::image_write(img_legend, path = file_legend)
+
