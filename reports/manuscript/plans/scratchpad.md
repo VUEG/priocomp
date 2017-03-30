@@ -2,11 +2,7 @@
 
 
 
-#### ES and MCDA
-
-
-
-
++ Objectives and conceptualization matter in spatial prioritization of...
 
 
 
@@ -41,8 +37,16 @@
   + Furthermore, how the spatial assessment of ESs and biodiversity (BD) features is and should be combined is not clear. Some authors consider biodiversity as just another ES, where others (minority) combine both in the same analysis. How the combination exactly is done, matters greatly both conceptually and methodologically. 
 + Several different decision-making  frameworks have been used in the spatial assessment of ES
   + The exact details vary, but most have at least the following components in them: 1) problem definition, 2) setting the objectives, 3) describing potential alternatives, 4) quantifying trade-offs, and 5) making decisions preferably accompanied by some form on monitoring.
+    + Mustajoki & Marttunen specify the following features of environmental problems in particular:
+      1. The systemic and complex nature of the impacts and ill-defined nature of the problems
+      2. Multiple stakeholders having different objectives
+      3. Geographical distribution of the impacts 
+      4. Uncertainties related to, e.g., the cause-effect relations of the impacts
   + For practical applications, assessing the usefulness of either 1) the data or 2) the methods used for decision support depends greatly on the defined objectives. However, the validity of both can (and should) also be assessed in isolation. This information when combined, should be highly useful for decision-makers and planners.
   + Multi-criteria decision-analysis (MCDA) has proved to be one of the most popular frameworks for analyzing the spatial patterns of ESs.
+    + Eg. Grêt-Regamey et al. (2016), Koschke et al. (2012), Langenmeyer et al. (2016), Mustajoki & Marttunen (2017), Saarikoski et al. (2016), Zucca et al. (2008)
+    + Lookup tables, criteria setting, additivity, etc.
+    + Non-spatial and spatial MCDA
 + What is spatial conservation prioritization (SCP)?
   - SCP-methods have been primarily developed for biodiversity, often with strong background in spatial ecology
   - SCP can be understood as the technical assessment phase within a broad decision-making context
@@ -56,10 +60,45 @@
   - What has already been done?
   - Why is application of SCP methods nevertheless useful?
   - Why can direct application of SCP methods to ESs create issues? (**MISSING**)
-
++ So, what's the real issue here?
+  + Spatial scoring of things disregards the relative distributions between features
+  + The notion of complementarity may or may not be relevant for spatial prioritization of ES in particular. It is certainly relevant for BD.
+  + The specific question we try to answer are:
+    1. How does a simple scoring method perform against more advanced spatial prioritization methods?
+    2. Does complementarity offer significant advances in terms of ES?
+    3. What are the operative considerations of each method in combined spatial prioritization for ES and BD?
+  + Here, we are going to...
+    1. ... by constructing a realistic enough spatial prioritization (including a proxy for costs)
+    2. ... by discussing the ramifications on a operational planning use
 
 
 ### Discussion
+
+
+
+#### What do I actually want to say?
+
+
+
++ Questions posed in the introduction
+  1. Comparison of three methods: RWR, ILP and ZON
+  2. The assumptions needed to make in order to use the methods
+     1. RWR conceptually similar to MCDA > connection to MCDA. **BUT** can we really call RWR MCDA?
+  3. Discuss the method performance and offer guidance on how to use them
+     1. I can list things, but I don't think the analyses are needed for that
+
+
+
+
++ Things that are there, but probably shouldn't go into this MS
+  1. Trade-offs
+
+
+
+
+#### What actually goes into discussion?
+
+
 
 ##### Rank priority patterns
 
@@ -73,12 +112,13 @@
   - BD: biomodal distribution
 - Stats
   - Not surprisingly, the highest priorities overlapped more than the lowest
-- Performance and trade-offs
-  - Cimon-Morin et al. (2016): “ Achieving all conservation targets starting from a network that was primarily built for either ES or biodiversity features alone was two to five times less efficient than considering both ES and biodiversity simultaneously in conservation assessment. A better framework is required to translate these spatial synergies into effective joint conservation actions.”
-- **Bottom line**: the data and purpose of the prioritization matters
+- **Bottom line**:
+  - ​
 
 ##### Method performance
 
++ Performance and trade-offs
+  - Cimon-Morin et al. (2016): “ Achieving all conservation targets starting from a network that was primarily built for either ES or biodiversity features alone was two to five times less efficient than considering both ES and biodiversity simultaneously in conservation assessment. A better framework is required to translate these spatial synergies into effective joint conservation actions.”
 + We show that performance-wise, all methods are very similar
   + Only for ES, Zonation seemed to produce a more balanced solution. This is probably because more spatially aggregated distributional patterns in the BD features, and the higher number of features. In any case, the result is related to the iterative cell removal process
   + Previous studies (e.g. Albuquerque & Beier, 2015) have suggested similar performance for RWR and ZON (though with CAZ) and suggested that they are close to optimal. Here, we show similar results.
@@ -106,7 +146,7 @@
 
 ##### Integrated prioritization of biodiversity conservation andecosystem services supply
 
-+ Trade-offs between ecosystem service provision and biodiversity conservation are most likely common, ***as we have shown***. It does not necessarily follow that priority areas for the provision of ecosystem services are automatically priority areas also for biodiversity (Anderson et al., 2009; Thomas et al., 2012). 
++ Trade-offs between ecosystem service provision and biodiversity conservation are most likely common, ***as we have shown***. It does not necessarily follow that priority areas for the provision of ecosystem services are automatically priority areas also for biodiversity (Anderson et al., 2009; Thomas et al., 2012). 
 
 + It still remains unclear how exactly ecosystem services should best be incorporated into prioritization schemes that have been developed with biodiversity conservation in mind.
 

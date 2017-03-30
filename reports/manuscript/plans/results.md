@@ -116,6 +116,6 @@ Summary table of each taxon: number of total species, endemic species, endangere
 
 ### Figure S1
 
-![figure_S01](../../figures/figureS01/17_figure_s_01.png)
+![figure_S01](../../figures/figureS01/17_figure_s_01_alt.png)
 
 **Fig S1** 

@@ -1,6 +1,30 @@
+## 0.7.1
+
+
+
++ Use costs versions for now. The contribution of including costs still needs to be discussed
++ Revised all sections
++ Note: log-transforming the population density data raster to create a cost raster is probably not a realistic thing. Now the following holds
+
+```R
+        pop_density_v5
+Min.          0.000000
+1st Qu.       0.000000
+Median        2.397895
+3rd Qu.       3.295837
+Max.         10.222014
+NA's          0.000000
+```
+
++ The cost effect is hence very low
+
+![04_figure_06_just_costs](E:\Projects\VU\OPERAs\SP2\priocomp\reports\figures\figure06\04_figure_06_just_costs.png)
+
+
+
 ## 0.7.0
 
-+ Introduce cost variants in ILP and ZON
++ Introduce cost variants in RWR, ZON and ILP
 
 + Update figures 2-6
 
