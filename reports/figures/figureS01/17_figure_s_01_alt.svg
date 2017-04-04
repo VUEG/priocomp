@@ -32,7 +32,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -518,16 +518,16 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1920"
-     inkscape:window-height="1025"
+     inkscape:window-height="1145"
      id="namedview226"
      showgrid="false"
      inkscape:zoom="0.70710678"
-     inkscape:cx="610.54972"
+     inkscape:cx="697.52385"
      inkscape:cy="772.39462"
      inkscape:window-x="0"
      inkscape:window-y="26"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer7"
      showguides="false"
      inkscape:guide-bbox="true">
     <sodipodi:guide
@@ -704,27 +704,24 @@
              style="font-size:22px;fill:#ffffff;fill-opacity:1">EUROSTAT</tspan></text>
       </g>
     </g>
-    <g
-       id="g5124">
-      <rect
-         y="51.104328"
-         x="987.14545"
-         height="48"
-         width="164"
-         id="rect4379-3-3-5"
-         style="opacity:1;fill:url(#linearGradient4357);fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <text
-         id="text4381-5-6-3"
-         y="82.983719"
+    <rect
+       style="opacity:1;fill:#9e9e9e;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4379-3-3-5"
+       width="164"
+       height="48"
+       x="987.14545"
+       y="51.104328" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10px;line-height:1000%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1046.2271"
+       y="82.983719"
+       id="text4381-5-6-3"><tspan
+         sodipodi:role="line"
+         id="tspan4383-6-06-5"
          x="1046.2271"
-         style="font-style:normal;font-weight:normal;font-size:10px;line-height:1000%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"><tspan
-           style="font-size:22px;fill:#ffffff;fill-opacity:1"
-           y="82.983719"
-           x="1046.2271"
-           id="tspan4383-6-06-5"
-           sodipodi:role="line">EEA</tspan></text>
-    </g>
+         y="82.983719"
+         style="font-size:22px;fill:#ffffff;fill-opacity:1">EEA</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -866,31 +863,28 @@
          y="251.97087"
          style="font-size:16px;line-height:100%;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1"
          id="tspan4644-2-2-1">Level 2</tspan></text>
-    <g
-       id="g5119">
-      <rect
-         inkscape:export-ydpi="300"
-         inkscape:export-xdpi="300"
-         y="249.82976"
-         x="996.13458"
-         height="53.599998"
-         width="143.90036"
-         id="rect4542-6-7-2-2"
-         style="display:inline;opacity:1;fill:url(#linearGradient4351);fill-opacity:1;stroke:none;stroke-width:1.2439872;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <text
-         inkscape:export-ydpi="300"
-         inkscape:export-xdpi="300"
-         id="text4381-1-2-5-9-9"
-         y="283.29617"
+    <rect
+       style="display:inline;opacity:1;fill:#707070;fill-opacity:1;stroke:none;stroke-width:1.2439872;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4542-6-7-2-2"
+       width="143.90036"
+       height="53.599998"
+       x="996.13458"
+       y="249.82976"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10px;line-height:100%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1067.7625"
+       y="283.29617"
+       id="text4381-1-2-5-9-9"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
          x="1067.7625"
-         style="font-style:normal;font-weight:normal;font-size:10px;line-height:100%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"><tspan
-           id="tspan4644-2-2-1-2"
-           style="font-size:22px;line-height:100%;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:1px"
-           y="283.29617"
-           x="1067.7625"
-           sodipodi:role="line">COST</tspan></text>
-    </g>
+         y="283.29617"
+         style="font-size:22px;line-height:100%;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:1px"
+         id="tspan4644-2-2-1-2">COST</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -1566,7 +1560,7 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <path
-       style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutL-63-4-7)"
+       style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.74999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.24999997,2.24999997;stroke-opacity:1;marker-end:url(#TriangleOutL-63-4-7);stroke-dashoffset:0"
        d="M 1064.9028,98.587866 V 244.72658"
        id="path4952-06-6-9"
        inkscape:connector-type="polyline"
@@ -1574,13 +1568,20 @@
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
     <path
-       style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.74999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutL-63-5-3)"
+       style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.74999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.24999997,2.24999997;stroke-opacity:1;marker-end:url(#TriangleOutL-63-5-3);stroke-dashoffset:0"
        d="M 995.43932,276.62976 H 778.45867"
        id="path4952-06-9-0"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#3a3a3a;stroke-width:0.74999999;stroke-miterlimit:4;stroke-dasharray:4.49999993,1.49999998;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5085"
+       width="181.39224"
+       height="272.61322"
+       x="977.91901"
+       y="42.209984" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -1711,5 +1712,18 @@
          y="90.25898"
          style="font-size:18px;line-height:110.00000238%;text-align:end;text-anchor:end;fill:#000000;fill-opacity:1"
          id="tspan4521-3">sources</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10px;line-height:110.00000238%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#707070;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       x="1098.2159"
+       y="328.58496"
+       id="text4381-6-43-7-36"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         x="1098.2159"
+         y="328.58496"
+         style="font-size:14px;line-height:110.00000238%;text-align:end;text-anchor:end;fill:#707070;fill-opacity:1;stroke-width:1px;"
+         id="tspan5264-5">See Suppl. material</tspan></text>
   </g>
 </svg>
