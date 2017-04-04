@@ -81,13 +81,15 @@ all_costs <- dplyr::bind_rows(rwr_costs, zon_costs, ilp_costs) %>%
 
 # Plot --------------------------------------------------------------------
 
+labels <- c("RWR_ALL ES", "RWR_ALL BD",
+            "ZON_ALL ES", "ZON_ALL BD",
+            "ILP_ALL ES", "ILP_ALL BD")
+
 p1 <- all_nocosts %>%
   plot_curves(title = "No costs", non_param = TRUE, invert_x = TRUE,
               nrow = 3, ncol = 2, highlights = highlights,
               plot_min = TRUE, plot_max = TRUE,
-              labels = c("RWR_ES", "RWR_BD",
-                         "ZON_ES", "ZON_BD",
-                         "ILP_ES", "ILP_BD"),
+              labels = labels,
               ylab = "Fraction of feature occurrence level covered\n",
               xlab = "\nFraction of the landscape")
 
@@ -95,9 +97,7 @@ p2 <- all_costs %>%
   plot_curves(title = "Costs", non_param = TRUE, invert_x = TRUE,
               nrow = 3, ncol = 2, highlights = highlights,
               plot_min = TRUE, plot_max = TRUE,
-              labels = c("RWR_ES", "RWR_BD",
-                         "ZON_ES", "ZON_BD",
-                         "ILP_ES", "ILP_BD"),
+              labels = labels,
               ylab = "Fraction of feature occurrence level covered\n",
               xlab = "\nFraction of the landscape")
 
@@ -107,3 +107,78 @@ ggsave("reports/figures/figure06/02_figure_06_nocosts_methods.png", p1,
        width = 6, height = 9)
 ggsave("reports/figures/figure06/03_figure_06_costs_methods.png", p2,
        width = 6, height = 9)
+
+
+# Extra - get exact figures -----------------------------------------------
+
+get_perf_stats <- function(dat, level) {
+  perf_dat <- dat %>%
+    dplyr::group_by(variant) %>%
+    dplyr::filter(pr_lost > level) %>%
+    dplyr::slice(1) %>%
+    dplyr::ungroup()
+  return(perf_dat)
+}
+
+make_long <- function(dat) {
+  dat_long <- dat %>%
+    tidyr::gather(stat, value, -pr_lost, -variant) %>%
+    dplyr::mutate(variant = gsub("24_load_ilp_all", "ILP", variant)) %>%
+    dplyr::mutate(variant = gsub("04_abf_all_wgt", "ZON", variant)) %>%
+    dplyr::mutate(variant = gsub("23_load_rwr_all", "RWR", variant)) %>%
+    dplyr::mutate(variant = toupper(variant)) %>%
+    tidyr::separate(variant, into = c("method", "group")) %>%
+    dplyr::mutate(method = factor(method, levels = c("ILP", "ZON", "RWR"),
+                                  ordered = TRUE)) %>%
+    dplyr::mutate(group = factor(group, levels = c("ES", "BD"),
+                                 ordered = TRUE))
+  return(dat_long)
+}
+
+plot_perf_stats <- function(dat, title) {
+  p <- ggplot(dat, aes(x = method, y = value, fill = group)) +
+    geom_bar(stat = "identity", position = "dodge") +
+    facet_wrap(~ stat, scales = "free_x") + coord_flip() +
+    ggtitle(title)
+  return(p)
+}
+
+# Top 2%
+perf_2 <- get_perf_stats(all_nocosts, 0.98)
+plot_perf_stats(make_long(perf_2), "Top 2%")
+
+# Top 10%
+perf_10 <- get_perf_stats(all_nocosts, 0.90)
+plot_perf_stats(make_long(perf_10), "Top 10%")
+
+# Top 25%
+perf_25 <- get_perf_stats(all_nocosts, 0.75)
+plot_perf_stats(make_long(perf_25), "Top 25%")
+
+
+# Statistical significance ------------------------------------------------
+
+rwr_all_nocosts <- zonator::get_variant(zproject, 23)
+rwr_all_nocosts_curves <- zonator::curves(rwr_all_nocosts)
+rwr_es_nocosts <- rwr_all_nocosts_curves %>%
+  dplyr::select(pr_lost, woodprod_average:species_richness_vascular_plants)
+rwr_bd_nocosts <- rwr_all_nocosts_curves %>%
+  dplyr::select(pr_lost, alytes_cisternasii:zamenis_situla)
+
+rwr_es_nocosts_top10 <- rwr_es_nocosts %>%
+  dplyr::filter(pr_lost > 0.90) %>%
+  dplyr::slice(1) %>%
+  dplyr::select(-pr_lost) %>%
+  tidyr::gather(feature, value) %>%
+  dplyr::mutate(group = "ES")
+
+rwr_bd_nocosts_top10 <- rwr_bd_nocosts %>%
+  dplyr::filter(pr_lost > 0.90) %>%
+  dplyr::slice(1) %>%
+  dplyr::select(-pr_lost) %>%
+  tidyr::gather(feature, value) %>%
+  dplyr::mutate(group = "BD")
+
+rwr_all_nocosts_data <- dplyr::bind_rows(rwr_es_nocosts_top10, rwr_bd_nocosts_top10)
+
+wilcox.test(value ~ group, data = rwr_all_nocosts_data)
