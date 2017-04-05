@@ -147,7 +147,7 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="03_all_wgt_cst">
+        <layer-tree-group expanded="0" checked="Qt::Unchecked" name="03_all_wgt_cst">
           <customproperties/>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="rwr_all_weights_costs_stats20170127160218809" name="rwr_all_weights_costs_stats">
             <customproperties/>
@@ -165,6 +165,9 @@
             <customproperties/>
           </layer-tree-layer>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="rwr_eu26_es20160826164545086" name="rwr_es">
+            <customproperties/>
+          </layer-tree-layer>
+          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="rwr_es_copy20170403205609590" name="rwr_es_best_10">
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
@@ -185,6 +188,9 @@
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="rwr_eu26_bd20160826164604136" name="rwr_bd">
             <customproperties/>
           </layer-tree-layer>
+          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="rwr_bd_copy20170403205645153" name="rwr_bd_best_10">
+            <customproperties/>
+          </layer-tree-layer>
         </layer-tree-group>
         <layer-tree-group expanded="0" checked="Qt::Unchecked" name="07_bd_cst">
           <customproperties/>
@@ -196,7 +202,7 @@
           </layer-tree-layer>
         </layer-tree-group>
       </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="Zonation">
+      <layer-tree-group expanded="0" checked="Qt::Unchecked" name="Zonation">
         <customproperties/>
         <layer-tree-group expanded="0" checked="Qt::Unchecked" name="01_caz">
           <customproperties/>
@@ -213,7 +219,7 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="06_abf_all_wgt_cst">
+        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="06_abf_all_wgt_cst">
           <customproperties/>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="06_abf_all_wgt_cst_nwout120170116110759981" name="06_abf_all_wgt_cst_nwout1">
             <customproperties/>
@@ -221,7 +227,7 @@
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="06_abf_all_wgt_cst_rank_compressed20170116110732262" name="06_abf_all_wgt_cst">
             <customproperties/>
           </layer-tree-layer>
-          <layer-tree-layer expanded="1" checked="Qt::Checked" id="06_abf_all_wgt_cst_copy20170124143225629" name="06_abf_all_wgt_cst_bin">
+          <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="06_abf_all_wgt_cst_copy20170124143225629" name="06_abf_all_wgt_cst_bin">
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
@@ -261,14 +267,14 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="1" checked="Qt::Checked" name="25_load_rwr_all">
+        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="25_load_rwr_all">
           <customproperties/>
-          <layer-tree-layer expanded="1" checked="Qt::Checked" id="25_load_rwr_all_cst_rank_compressed20170323140321863" name="25_load_rwr_all_cst.rank.compressed">
+          <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="25_load_rwr_all_cst_rank_compressed20170323140321863" name="25_load_rwr_all_cst.rank.compressed">
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
       </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::Unchecked" name="ILP">
+      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="ILP">
         <customproperties/>
         <layer-tree-group expanded="1" checked="Qt::Unchecked" name="01_all">
           <customproperties/>
@@ -291,12 +297,15 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="0" checked="Qt::Unchecked" name="04_es">
+        <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="04_es">
           <customproperties/>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_es_stats20161107150126111" name="ilp_es_stats">
             <customproperties/>
           </layer-tree-layer>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_es20161107150230521" name="ilp_es">
+            <customproperties/>
+          </layer-tree-layer>
+          <layer-tree-layer expanded="0" checked="Qt::Checked" id="ilp_es_copy20170403205712686" name="ilp_es_best_10">
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
@@ -309,12 +318,15 @@
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
-        <layer-tree-group expanded="0" checked="Qt::Unchecked" name="06_bd">
+        <layer-tree-group expanded="1" checked="Qt::Unchecked" name="06_bd">
           <customproperties/>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_bd_stats20161107150200771" name="ilp_bd_stats">
             <customproperties/>
           </layer-tree-layer>
           <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_bd20161107124654793" name="ilp_bd">
+            <customproperties/>
+          </layer-tree-layer>
+          <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="ilp_bd_copy20170403205736460" name="ilp_bd_best_10">
             <customproperties/>
           </layer-tree-layer>
         </layer-tree-group>
@@ -337,10 +349,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>2976460.13066229037940502</xmin>
-      <ymin>1230687.37435436993837357</ymin>
-      <xmax>6597602.63903033547103405</xmax>
-      <ymax>5347964.41449999809265137</ymax>
+      <xmin>2740062.54352653073146939</xmin>
+      <ymin>1464115.01287053944543004</ymin>
+      <xmax>3645348.17061854200437665</xmax>
+      <ymax>2493434.27290694089606404</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -423,10 +435,12 @@
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="alytes_muletensis20160802121713728"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="08_abf_es_rank_compressed20170116110842021"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="USER:100002" srcDatumTransform="-1" destDatumTransform="-1" layerid="08_abf_bd_nwout120160627133515561"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_es_copy20170403205712686"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_eu26_all20160909122900968"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_eu26_all_stats20160915133305272"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="14_abf_bd_cst_rank_compressed20170116111221192"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="lacerta_viridis20160802123844905"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_es_copy20170403205609590"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="03_caz_wgt_rank_compressed20160610095226793"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_all_weights_costs_stats20170127160218809"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="05_caz_es_rank_compressed20160617090109009"/>
@@ -560,6 +574,10 @@
       <item>rwr_bd_costs20170127160542266</item>
       <item>rwr_bd_costs_stats20170127160557857</item>
       <item>25_load_rwr_all_cst_rank_compressed20170323140321863</item>
+      <item>rwr_es_copy20170403205609590</item>
+      <item>rwr_bd_copy20170403205645153</item>
+      <item>ilp_es_copy20170403205712686</item>
+      <item>ilp_bd_copy20170403205736460</item>
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
@@ -749,7 +767,7 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="true" checked="Qt::Unchecked" name="03_all_wgt_cst">
+        <legendgroup open="false" checked="Qt::Unchecked" name="03_all_wgt_cst">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_all_weights_costs_stats" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="rwr_all_weights_costs_stats20170127160218809" visible="0"/>
@@ -777,6 +795,11 @@
               <legendlayerfile isInOverview="0" layerid="rwr_eu26_es20160826164545086" visible="0"/>
             </filegroup>
           </legendlayer>
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_es_best_10" showFeatureCount="0">
+            <filegroup open="false" hidden="false">
+              <legendlayerfile isInOverview="0" layerid="rwr_es_copy20170403205609590" visible="0"/>
+            </filegroup>
+          </legendlayer>
         </legendgroup>
         <legendgroup open="false" checked="Qt::Unchecked" name="05_es_cst">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_es_costs_stats" showFeatureCount="0">
@@ -801,6 +824,11 @@
               <legendlayerfile isInOverview="0" layerid="rwr_eu26_bd20160826164604136" visible="0"/>
             </filegroup>
           </legendlayer>
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_bd_best_10" showFeatureCount="0">
+            <filegroup open="false" hidden="false">
+              <legendlayerfile isInOverview="0" layerid="rwr_bd_copy20170403205645153" visible="0"/>
+            </filegroup>
+          </legendlayer>
         </legendgroup>
         <legendgroup open="false" checked="Qt::Unchecked" name="07_bd_cst">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_bd_costs_stats" showFeatureCount="0">
@@ -815,7 +843,7 @@
           </legendlayer>
         </legendgroup>
       </legendgroup>
-      <legendgroup open="true" checked="Qt::PartiallyChecked" name="Zonation">
+      <legendgroup open="false" checked="Qt::Unchecked" name="Zonation">
         <legendgroup open="false" checked="Qt::Unchecked" name="01_caz"/>
         <legendgroup open="false" checked="Qt::Unchecked" name="02_abf"/>
         <legendgroup open="false" checked="Qt::Unchecked" name="04_abf_all_wgt">
@@ -830,7 +858,7 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="true" checked="Qt::PartiallyChecked" name="06_abf_all_wgt_cst">
+        <legendgroup open="true" checked="Qt::Unchecked" name="06_abf_all_wgt_cst">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="06_abf_all_wgt_cst_nwout1" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="06_abf_all_wgt_cst_nwout120170116110759981" visible="0"/>
@@ -841,9 +869,9 @@
               <legendlayerfile isInOverview="0" layerid="06_abf_all_wgt_cst_rank_compressed20170116110732262" visible="0"/>
             </filegroup>
           </legendlayer>
-          <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="06_abf_all_wgt_cst_bin" showFeatureCount="0">
+          <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="06_abf_all_wgt_cst_bin" showFeatureCount="0">
             <filegroup open="true" hidden="false">
-              <legendlayerfile isInOverview="0" layerid="06_abf_all_wgt_cst_copy20170124143225629" visible="1"/>
+              <legendlayerfile isInOverview="0" layerid="06_abf_all_wgt_cst_copy20170124143225629" visible="0"/>
             </filegroup>
           </legendlayer>
         </legendgroup>
@@ -895,15 +923,15 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="true" checked="Qt::Checked" name="25_load_rwr_all">
-          <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="25_load_rwr_all_cst.rank.compressed" showFeatureCount="0">
+        <legendgroup open="true" checked="Qt::Unchecked" name="25_load_rwr_all">
+          <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="25_load_rwr_all_cst.rank.compressed" showFeatureCount="0">
             <filegroup open="true" hidden="false">
-              <legendlayerfile isInOverview="0" layerid="25_load_rwr_all_cst_rank_compressed20170323140321863" visible="1"/>
+              <legendlayerfile isInOverview="0" layerid="25_load_rwr_all_cst_rank_compressed20170323140321863" visible="0"/>
             </filegroup>
           </legendlayer>
         </legendgroup>
       </legendgroup>
-      <legendgroup open="true" checked="Qt::Unchecked" name="ILP">
+      <legendgroup open="true" checked="Qt::PartiallyChecked" name="ILP">
         <legendgroup open="true" checked="Qt::Unchecked" name="01_all"/>
         <legendgroup open="false" checked="Qt::Unchecked" name="02_all_wgt">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_all_weights_stats" showFeatureCount="0">
@@ -929,7 +957,7 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="false" checked="Qt::Unchecked" name="04_es">
+        <legendgroup open="true" checked="Qt::PartiallyChecked" name="04_es">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_es_stats" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="ilp_es_stats20161107150126111" visible="0"/>
@@ -938,6 +966,11 @@
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_es" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="ilp_es20161107150230521" visible="0"/>
+            </filegroup>
+          </legendlayer>
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="ilp_es_best_10" showFeatureCount="0">
+            <filegroup open="false" hidden="false">
+              <legendlayerfile isInOverview="0" layerid="ilp_es_copy20170403205712686" visible="1"/>
             </filegroup>
           </legendlayer>
         </legendgroup>
@@ -953,7 +986,7 @@
             </filegroup>
           </legendlayer>
         </legendgroup>
-        <legendgroup open="false" checked="Qt::Unchecked" name="06_bd">
+        <legendgroup open="true" checked="Qt::Unchecked" name="06_bd">
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_bd_stats" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="ilp_bd_stats20161107150200771" visible="0"/>
@@ -962,6 +995,11 @@
           <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_bd" showFeatureCount="0">
             <filegroup open="false" hidden="false">
               <legendlayerfile isInOverview="0" layerid="ilp_bd20161107124654793" visible="0"/>
+            </filegroup>
+          </legendlayer>
+          <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_bd_best_10" showFeatureCount="0">
+            <filegroup open="false" hidden="false">
+              <legendlayerfile isInOverview="0" layerid="ilp_bd_copy20170403205736460" visible="0"/>
             </filegroup>
           </legendlayer>
         </legendgroup>
@@ -8270,6 +8308,57 @@ def my_form_open(dialog, layer, feature):
         <xmax>6525999.99999999906867743</xmax>
         <ymax>5410000.00000000093132257</ymax>
       </extent>
+      <id>ilp_bd_copy20170403205736460</id>
+      <datasource>../../analyses/ILP/ilp_bd.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>ilp_bd_best_10</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="DISCRETE" clip="0">
+              <item alpha="255" value="0.899999" label="&lt;= 0.8999990" color="#440154"/>
+              <item alpha="255" value="inf" label="> 0.8999990" color="#fde725"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>1999999.99999999906867743</xmin>
+        <ymin>1000000.00000000093132257</ymin>
+        <xmax>6525999.99999999906867743</xmax>
+        <ymax>5410000.00000000093132257</ymax>
+      </extent>
       <id>ilp_bd_costs20170116111802656</id>
       <datasource>../../analyses/ILP/ilp_bd_costs.tif</datasource>
       <keywordList>
@@ -9419,6 +9508,57 @@ def my_form_open(dialog, layer, feature):
               <item alpha="255" value="0.9" label="0.90 - 0.95" color="#fee090"/>
               <item alpha="255" value="0.98" label="0.95 - 0.98" color="#fc8d59"/>
               <item alpha="255" value="1" label="0.98 - 1.00" color="#d73027"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>ilp_es_copy20170403205712686</id>
+      <datasource>../../analyses/ILP/ilp_es.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>ilp_es_best_10</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="DISCRETE" clip="0">
+              <item alpha="255" value="0.899999" label="&lt;= 0.8999990" color="#440154"/>
+              <item alpha="255" value="inf" label="> 0.8999990" color="#fde725"/>
             </colorrampshader>
           </rastershader>
         </rasterrenderer>
@@ -12833,6 +12973,57 @@ def my_form_open(dialog, layer, feature):
         <xmax>6525999.99999999906867743</xmax>
         <ymax>5410000.00000000093132257</ymax>
       </extent>
+      <id>rwr_bd_copy20170403205645153</id>
+      <datasource>../../analyses/RWR/rwr_bd.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>rwr_bd_best_10</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
+          <srsid>3452</srsid>
+          <srid>4326</srid>
+          <authid>EPSG:4326</authid>
+          <description>WGS 84</description>
+          <projectionacronym>longlat</projectionacronym>
+          <ellipsoidacronym>WGS84</ellipsoidacronym>
+          <geographicflag>true</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="DISCRETE" clip="0">
+              <item alpha="255" value="0.899999" label="&lt;= 0.8999990" color="#440154"/>
+              <item alpha="255" value="inf" label="> 0.8999990" color="#fde725"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
+    </maplayer>
+    <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>1999999.99999999906867743</xmin>
+        <ymin>1000000.00000000093132257</ymin>
+        <xmax>6525999.99999999906867743</xmax>
+        <ymax>5410000.00000000093132257</ymax>
+      </extent>
       <id>rwr_bd_costs20170127160542266</id>
       <datasource>../../analyses/RWR/rwr_bd_costs.tif</datasource>
       <keywordList>
@@ -13410,6 +13601,57 @@ def my_form_open(dialog, layer, feature):
         <default field="NUTS_ID" expression=""/>
         <default field="_min" expression=""/>
       </defaults>
+    </maplayer>
+    <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
+      <extent>
+        <xmin>2000000</xmin>
+        <ymin>999999.99999999906867743</ymin>
+        <xmax>6526000.00000000093132257</xmax>
+        <ymax>5410000</ymax>
+      </extent>
+      <id>rwr_es_copy20170403205609590</id>
+      <datasource>../../analyses/RWR/rwr_es.tif</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>rwr_es_best_10</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>1000</srsid>
+          <srid>3035</srid>
+          <authid>EPSG:3035</authid>
+          <description>ETRS89 / ETRS-LAEA</description>
+          <projectionacronym>laea</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <customproperties>
+        <property key="identify/format" value="Value"/>
+      </customproperties>
+      <provider>gdal</provider>
+      <noData>
+        <noDataList bandNo="1" useSrcNoData="1"/>
+      </noData>
+      <map-layer-style-manager current="">
+        <map-layer-style name=""/>
+      </map-layer-style-manager>
+      <pipe>
+        <rasterrenderer opacity="1" alphaBand="-1" classificationMax="1" classificationMinMaxOrigin="User" band="1" classificationMin="0" type="singlebandpseudocolor">
+          <rasterTransparency/>
+          <rastershader>
+            <colorrampshader colorRampType="DISCRETE" clip="0">
+              <item alpha="255" value="0.899999" label="&lt;= 0.8999990" color="#440154"/>
+              <item alpha="255" value="inf" label="> 0.8999990" color="#fde725"/>
+            </colorrampshader>
+          </rastershader>
+        </rasterrenderer>
+        <brightnesscontrast brightness="0" contrast="0"/>
+        <huesaturation colorizeGreen="128" colorizeOn="0" colorizeRed="255" colorizeBlue="128" grayscaleMode="0" saturation="0" colorizeStrength="100"/>
+        <rasterresampler maxOversampling="2"/>
+      </pipe>
+      <blendMode>0</blendMode>
     </maplayer>
     <maplayer minimumScale="100000" maximumScale="1e+08" type="raster" hasScaleBasedVisibilityFlag="0">
       <extent>
