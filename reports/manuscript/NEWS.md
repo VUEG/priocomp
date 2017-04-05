@@ -1,3 +1,17 @@
+## 0.8.0
+
+
+
++ Add new Fig 1 (prioritization methods in the bigger picture)
++ Move all cost variants to supplements
++ Remove old Fig 5 (method specific tradeoffs)
++ Finish first complete version of Introduction and Discussion
++ Sent to Peter for comments.
+
+
+
+
+
 ## 0.7.1
 
 
