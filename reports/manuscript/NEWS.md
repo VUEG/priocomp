@@ -1,3 +1,16 @@
+## 0.10
+
++ All previous changes approved
++ Sent to Astrid
+
+## 0.9.0
+
+
+
++ Peter's comments included and consolidated
+
+
+
 ## 0.8.0
 
 
