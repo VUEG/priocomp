@@ -23,7 +23,7 @@ aoi <- subset(aoi, aoi$NUTS_ID != "LI")
 tm_aoi <- tm_shape(Europe) +
   tm_fill("lightgrey") +
   tm_shape(cost_raster) +
-  tm_raster(palette = viridis(8)) +
+  tm_raster(title = "Cost proxy", palette = viridis(8)) +
   tm_shape(aoi, is.master = TRUE) +
   tm_borders("lightgrey", lwd = 0.3) +
   tm_format_Europe(inner.margins = c(0, 0.05, 0.02, 0)) +
