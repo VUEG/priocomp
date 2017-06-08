@@ -111,18 +111,55 @@ labels <- c("Ecosystem services", "Amphibian", "Birds", "Mammals",
 # Over all group performance ----------------------------------------------
 
 # 04_abf_all_wgt
-abf_all_wgt_cstat <- get_group_stats(zproject, 4)
+zon_all_wgt_cstat <- get_group_stats(zproject, 4)
 # 06_abf_all_wgt_cst
-abf_all_wgt_cst_cstat <- get_group_stats(zproject, 6)
+zon_all_wgt_cst_cstat <- get_group_stats(zproject, 6)
 
-p1 <- plot_curves(abf_all_wgt_cstat, title = "", non_param = TRUE,
-                  invert_x = TRUE, nrow = 3, ncol = 2,
-                  highlights = highlights, labels = labels)
+# 23_load_rwr_all
+rwr_all_wgt_cstat <- get_group_stats(zproject, 23)
+# 25_load_rwr_all_cst
+rwr_all_wgt_cstat <- get_group_stats(zproject, 25)
 
-p2 <- plot_curves(abf_all_wgt_cst_cstat, title = "", non_param = TRUE,
-                  invert_x = TRUE, nrow = 3, ncol = 2,
-                  highlights = highlights, labels = labels)
+# 24_load_ilp_all
+ilp_all_wgt_cstat <- get_group_stats(zproject, 24)
+# 26_load_ilp_all_cst
+ilp_all_wgt_cstat <- get_group_stats(zproject, 26)
 
+
+# No coverage -------------------------------------------------------------
+
+# No costs, how many features are not covered by 10%?
+
+get_zeros <- function(x, fraction) {
+  no_cov <- x %>%
+    dplyr::group_by(variant) %>%
+    dplyr::select(pr_lost, zeros, variant) %>%
+    dplyr::filter(pr_lost >= fraction) %>%
+    dplyr::slice(1) %>%
+    dplyr::mutate(fraction = fraction) %>%
+    dplyr::ungroup()
+  return(no_cov)
+}
+
+rwr_no_cov_10 <- get_zeros(rwr_all_wgt_cstat, 0.9)
+zon_no_cov_10 <- get_zeros(zon_all_wgt_cstat, 0.9)
+ilp_no_cov_10 <- get_zeros(ilp_all_wgt_cstat, 0.9)
+
+no_cov_10 <- dplyr::bind_rows(rwr_no_cov_10, zon_no_cov_10, ilp_no_cov_10)
+
+no_cov_10$method <- ifelse(grepl("^04", no_cov_10$variant), "ZON",
+                           ifelse(grepl("^25", no_cov_10$variant), "RWR", "ILP"))
+group_names <- get_group_names()
+no_cov_10$group <- sapply(no_cov_10$variant, function(x) {
+                                                    items <- unlist(strsplit(x, "_"))
+                                                    group_no <- items[length(items)]
+                                                    return(group_names[group_no])
+                                                  })
+no_cov_10 <- no_cov_10 %>%
+  dplyr::select(method, group, zeros) %>%
+  tidyr::spread(group, zeros) %>%
+  dplyr::select(method, ES, Amphibians, Birds, Mammals, Reptiles) %>%
+  dplyr::slice(match(c("RWR", "ZON", "ILP"), method))
 
 # Feature-specific performance --------------------------------------------
 
@@ -146,6 +183,8 @@ ilp_all_nc <- zonator::get_variant(zproject, 24)
 ilp_all_nc_es_sum <- get_es_feature_perf(ilp_all_nc)
 ## BD
 ilp_all_nc_bd <- get_bd_feature_perf(ilp_all_nc)
+
+# Top and bottom performers -----------------------------------------------
 
 top_bd_features <- dplyr::bind_cols(rwr_all_nc_bd[["top10"]],
                                     zon_all_nc_bd[["top10"]],
