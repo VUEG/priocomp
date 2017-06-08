@@ -16,8 +16,8 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.1 r"
-   sodipodi:docname="01_figure_01.svg"
-   inkscape:export-filename="/home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/reports/figures/figure01/01_figure_01.png"
+   sodipodi:docname="01_figure_01_alt.svg"
+   inkscape:export-filename="/home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/reports/figures/figure01/01_figure_01_alt.png"
    inkscape:export-xdpi="299.97763"
    inkscape:export-ydpi="299.97763">
   <defs
@@ -30,12 +30,12 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.1694726"
-     inkscape:cx="463.14105"
-     inkscape:cy="409.99653"
+     inkscape:cx="342.89907"
+     inkscape:cy="515.33383"
      inkscape:document-units="mm"
-     inkscape:current-layer="g4679"
+     inkscape:current-layer="layer11"
      showgrid="true"
-     showguides="true"
+     showguides="false"
      inkscape:guide-bbox="true"
      inkscape:window-width="1920"
      inkscape:window-height="1145"
@@ -77,6 +77,11 @@
        inkscape:locked="false"
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="44.979166,164.04167"
+       orientation="1,0"
+       id="guide5724"
+       inkscape:locked="false" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -86,7 +91,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -427,37 +432,35 @@
      id="layer6"
      inkscape:label="Central_venn"
      style="display:inline">
-    <g
-       id="g4751"
-       transform="rotate(60,147.51077,133.18067)">
-      <ellipse
-         style="opacity:1;fill:#440154;fill-opacity:0.8627451;stroke:#808080;stroke-width:0.10867788;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-         id="path4485-3-6-6"
-         cx="151"
-         cy="194"
-         rx="9.9456615"
-         ry="9.9456606" />
-      <ellipse
-         style="opacity:1;fill:#bbdf27;fill-opacity:0.8627451;stroke:#808080;stroke-width:0.10867788;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-         id="path4485-7"
-         cx="155"
-         cy="200.93001"
-         rx="9.9456615"
-         ry="9.9456606" />
-      <ellipse
-         style="opacity:1;fill:#25848e;fill-opacity:0.8627451;stroke:#808080;stroke-width:0.10867788;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-         id="path4485-3-5"
-         cx="159"
-         cy="194"
-         rx="9.9456615"
-         ry="9.9456606" />
-      <path
-         id="ellipse4740"
-         transform="scale(0.26458333)"
-         d="m 585.82617,721.83008 a 37.589902,37.589898 0 0 0 -22.23633,7.33789 37.589902,37.589898 0 0 0 -0.23437,4.06055 37.589902,37.589898 0 0 0 22.44336,34.37695 37.589902,37.589898 0 0 0 22.5,-34.37695 37.589902,37.589898 0 0 0 -0.26758,-4.08594 37.589902,37.589898 0 0 0 -22.20508,-7.3125 z"
-         style="opacity:1;fill:#414141;fill-opacity:0.8627451;stroke:#808080;stroke-width:0.41075104;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-         inkscape:connector-curvature="0" />
-    </g>
+    <ellipse
+       ry="9.9456606"
+       rx="9.9456615"
+       cy="-0.33840916"
+       cx="192.58246"
+       id="path4485-3-6-6"
+       style="opacity:1;fill:#440154;fill-opacity:0.8627451;stroke:#808080;stroke-width:0.10867788;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       transform="rotate(60)" />
+    <ellipse
+       ry="9.9456606"
+       rx="9.9456615"
+       cy="6.591599"
+       cx="196.58246"
+       id="path4485-7"
+       style="opacity:1;fill:#bbdf27;fill-opacity:0.8627451;stroke:#808080;stroke-width:0.10867788;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       transform="rotate(60)" />
+    <ellipse
+       ry="9.9456606"
+       rx="9.9456615"
+       cy="-0.33840916"
+       cx="200.58246"
+       id="path4485-3-5"
+       style="opacity:1;fill:#25848e;fill-opacity:0.8627451;stroke:#808080;stroke-width:0.10867788;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       transform="rotate(60)" />
+    <path
+       inkscape:connector-curvature="0"
+       style="opacity:1;fill:#414141;fill-opacity:0.8627451;stroke:#808080;stroke-width:0.10867788;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 101.19597,168.56817 a 9.9456617,9.9456606 60 0 0 -4.623051,-4.1244 9.9456617,9.9456606 60 0 0 -0.961423,0.48347 9.9456617,9.9456606 60 0 0 -4.907923,9.69037 9.9456617,9.9456606 60 0 0 10.853557,0.60777 9.9456617,9.9456606 60 0 0 0.90084,-0.60185 9.9456617,9.9456606 60 0 0 -1.262,-6.05536 z"
+       id="ellipse4740" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -479,7 +482,7 @@
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.11666679px;line-height:1px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';text-align:center;text-anchor:middle;fill:#e9e9e9;fill-opacity:1;stroke-width:0.26458332px"
              y="86.328262"
              x="122.70348"
-             sodipodi:role="line">RARITY</tspan></text>
+             sodipodi:role="line">PRIORITY</tspan></text>
         <text
            id="text4843-3"
            y="88.535187"
@@ -490,42 +493,57 @@
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.11666679px;line-height:1px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';text-align:center;text-anchor:middle;fill:#e9e9e9;fill-opacity:1;stroke-width:0.26458332px"
              y="88.535187"
              x="122.76221"
-             sodipodi:role="line">RICHNESS</tspan></text>
+             sodipodi:role="line">AREAS</tspan></text>
       </g>
     </g>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:3.30729151px;line-height:0px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="93.384972"
-       y="161.24626"
+       x="96.563866"
+       y="160.47319"
        id="text4609"><tspan
          sodipodi:role="line"
          id="tspan4607"
-         x="93.384972"
-         y="161.24626"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.46944451px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';fill:#ffffff;fill-opacity:1;stroke-width:0.26458332px">RWR</tspan></text>
+         x="96.563866"
+         y="160.47319"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.76388907px;line-height:1.69333339px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458332px">rarity-</tspan><tspan
+         sodipodi:role="line"
+         x="96.563866"
+         y="162.16652"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.76388907px;line-height:1.69333339px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458332px"
+         id="tspan5720">weighted richness</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:3.30729175px;line-height:0px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="84.260262"
-       y="173.29581"
+       x="83.139183"
+       y="173.55452"
        id="text4609-6"><tspan
          sodipodi:role="line"
          id="tspan4607-2"
-         x="84.260262"
-         y="173.29581"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.46944451px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';fill:#ffffff;fill-opacity:1;stroke-width:0.26458332px">ZON</tspan></text>
+         x="83.139183"
+         y="173.55452"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.76388919px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';fill:#ffffff;fill-opacity:1;stroke-width:0.26458332px">Zonation</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:3.30729175px;line-height:0px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="103.57092"
-       y="176.30357"
-       id="text4609-9"><tspan
+       style="font-style:normal;font-weight:normal;font-size:3.30729175px;line-height:0px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;opacity:0.978;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="101.05566"
+       y="177.24338"
+       id="text4609-7"><tspan
          sodipodi:role="line"
-         id="tspan4607-1"
-         x="103.57092"
-         y="176.30357"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.46944451px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';fill:#ffffff;fill-opacity:1;stroke-width:0.26458332px">ILP</tspan></text>
+         id="tspan4607-0"
+         x="101.05566"
+         y="177.24338"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.76388907px;line-height:1.69333339px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458332px">integer</tspan><tspan
+         sodipodi:role="line"
+         x="101.28475"
+         y="178.93671"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.76388907px;line-height:1.69333339px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458332px"
+         id="tspan5720-9">linear </tspan><tspan
+         sodipodi:role="line"
+         x="101.05566"
+         y="180.63005"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.76388907px;line-height:1.69333339px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.26458332px"
+         id="tspan5753">programming</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
