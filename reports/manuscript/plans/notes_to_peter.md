@@ -1,10 +1,6 @@
 ## Version 0.8.0 (2017-04-05)
 
-
-
 ### Main text
-
-
 
 #### General
 
@@ -12,19 +8,11 @@
 
 + Introduction and Discussion are still a bit of a mess, I would appreciate comments/focus especially on these.
 
-+ I'm still working on putting the Supplementary Material together, but you can start with the main MS.
-
-  ​
-
-
++ I'm still working on putting the Supplementary Material together, but you can start with the main MS.  ​
 
 #### Introduction
 
 + Fig. 1 is still unfinished, tell me what you think about it (some reference already in Introduction and Discussion).
-
-  ​
-
-
 
 #### Material
 
@@ -39,37 +27,22 @@
 
      3. Come up with alternatives for either RWR or ILP (implementation). 
 
-        ​
-
-
-
 #### Results
 
 + This section is quite short. In fact, it's not completely impossible to include costs here (now in the supplements
-
-  ​
-
 
 
 #### Discussion
 
 + There's still quite some interpretation of the priority pattern within Europe. Some is needed for sure, but I don't want to concentrate on it too much.
 
-  ​
-
-
-
 #### Conclusions
 
 + To be added when the content is fixed
 
-  ​
-
 ### Appendix
 
 + Note that there currently are both Appendix (at the end of the main text) and Electronic Supplementary Material (separate file). Appendix has miscellaneous content relevant for the main text, Supplement is costs only.
-
-  ​
 
 ### Supplementary Material
 
