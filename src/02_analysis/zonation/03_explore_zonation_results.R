@@ -133,4 +133,4 @@ variant26 <- zonator::get_variant(priocomp_project, 26)
 zonator::groupnames(variant26) <- bdes_groups
 plot_groups(variant6)
 plot_groups(variant26)
-3
+
