@@ -80,9 +80,15 @@ feature_ranges <- readr::read_csv("data/feature_ranges.csv") %>%
 feature_autocor <- readr::read_csv("data/morans_I_values_772_features_2017-03-08_04-08-05.csv") %>%
   dplyr::mutate(feature = gsub("\\.tif$", "", basename(feature)))
 
+feature_rl <- readr::read_csv("data/spp_rl_statuses.csv") %>%
+  dplyr::mutate(feature = tolower(gsub("\\s", "_", species))) %>%
+  dplyr::mutate(status = gsub("LR/nt", "NT", status)) %>%
+  dplyr::mutate(status = factor(status, levels = c("DD", "LC", "NT", "VU", "EN", "CR")))
+
 v04_feature_data <- v04_top10 %>%
   dplyr::left_join(feature_ranges) %>%
   dplyr::left_join(feature_autocor) %>%
+  dplyr::left_join(feature_rl) %>%
   dplyr::mutate(log_count = log(count),
                 log_mean_ol = log(mean_ol),
                 count_rank = row_number(count),
@@ -93,6 +99,7 @@ v04_feature_data$group <- new_groups
 v12_feature_data <- v12_top10 %>%
   dplyr::left_join(feature_ranges) %>%
   dplyr::left_join(feature_autocor) %>%
+  dplyr::left_join(feature_rl) %>%
   dplyr::mutate(log_count = log(count),
                 log_mean_ol = log(mean_ol),
                 count_rank = row_number(count),
@@ -103,6 +110,7 @@ v12_feature_data$group <- new_groups
 v21_feature_data <- v21_top10 %>%
   dplyr::left_join(feature_ranges) %>%
   dplyr::left_join(feature_autocor) %>%
+  dplyr::left_join(feature_rl) %>%
   dplyr::mutate(log_count = log(count),
                 log_mean_ol = log(mean_ol),
                 count_rank = row_number(count),
@@ -127,8 +135,27 @@ variant_comp <- all_feature_data %>%
                               labels = c("Between ALL and BD",
                                          "Between BD_rank_ES and BD")))
 
+variant_comp_rl <- all_feature_data %>%
+  dplyr::select(feature, status, count_rank, log_count, variant, pr_rem) %>%
+  tidyr::spread(variant, pr_rem) %>%
+  dplyr::mutate(first_diff = ALL - BD,
+                second_diff = BD_rank_ES - BD) %>%
+  dplyr::select(count_rank, log_count, status, first_diff, second_diff) %>%
+  tidyr::gather(diff, value, -count_rank, -log_count, -status) %>%
+  dplyr::mutate(diff = factor(diff, levels = c("first_diff", "second_diff"),
+                              labels = c("Between ALL and BD",
+                                         "Between BD_rank_ES and BD")))
+
 # Plot cross-correlation matrix -------------------------------------------
 
+p1 <- plot_pairs(dat = all_feature_data)
+
+
+# Plot range size vs RL status --------------------------------------------
+
+p1_1 <- ggplot(dplyr::filter(all_feature_data, variant == "ALL"),
+               aes(x = status, y = log_count)) +
+  geom_boxplot(varwidth = TRUE) + theme_ipsum_rc()
 
 # Plot orderd coverage ----------------------------------------------------
 
@@ -157,6 +184,19 @@ p4 <- ggplot(variant_comp, aes(x = log_count, y = value, color = diff)) +
 
 # Wrap per group
 p5 <- p4 + facet_wrap(~ group)
+
+# Per red-list
+p6 <- ggplot(variant_comp_rl, aes(x = log_count, y = value, color = diff)) +
+  geom_point(alpha = 0.5, size = 0.5) + geom_smooth(size = 0.5) +
+  scale_color_viridis(discrete = TRUE, end = 0.7) +
+  scale_y_continuous(breaks = seq(-1, 0.25, 0.25),
+                     labels = paste0(seq(-1, 0.25, 0.25) * 100, "%")) +
+  ylab("Difference in proportion of range covered") +
+  xlab("log(range size)") +
+  theme_ipsum_rc() + theme(legend.position = "top", legend.title = element_blank())
+
+# Wrap per group
+p7 <- p6 + facet_wrap(~ status)
 
 ggsave("reports/figures/figureExtra/BD_coverage_diff.png", p4,
        width = 6, height = 6)
