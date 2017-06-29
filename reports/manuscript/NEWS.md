@@ -1,3 +1,8 @@
+## 0.10.1
+
+- Comments from Astrid received and incorporated
+- Fig 2. moved to S1 -> all other figures re-numbered accordingly.
+
 ## 0.10
 
 + All previous changes approved
