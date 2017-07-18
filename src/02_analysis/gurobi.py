@@ -56,7 +56,7 @@ def optimize_maxcover(cost, fraction, rij, normalize=False, verbose=False,
     # NO COSTS USED
     if np.max(cost) == np.min(cost):
         try:
-            logger.debug(" [DEBUG] Starting single-objective optimization")
+            logger.info(" [INFO] Starting single-objective optimization")
             # Create a new model
             model = Model("singleobj")
 
@@ -74,7 +74,7 @@ def optimize_maxcover(cost, fraction, rij, normalize=False, verbose=False,
 
             for i in range(rij.size):
                 obj.addTerms(rij[i], vars[i])
-                expr.addTerms(x[i], vars[i])
+                expr.addTerms(cost[i], vars[i])
 
             model.setObjective(obj, sense=GRB.MAXIMIZE)
             model.addConstr(lhs=expr, sense=GRB.LESS_EQUAL,
@@ -106,7 +106,7 @@ def optimize_maxcover(cost, fraction, rij, normalize=False, verbose=False,
             rij = spatutils.normalize(rij)
             cost = spatutils.normalize(cost)
         try:
-            logger.debug(" [DEBUG] Starting multi-objective optimization")
+            logger.info(" [INFO] Starting multi-objective optimization")
             # Create initial model
             model = Model('multiobj')
 
