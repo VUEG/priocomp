@@ -43,7 +43,6 @@ def optimize_maxcover(cost, fraction, rij, normalize=False, verbose=False,
 
     # cost array contains the actual cost values per pixel. Create another
     # array that
-
     assert rij.size == cost.size, 'Representation and cost array sizes must match'
 
     # Fractions of elements out of the total number of elements
@@ -54,77 +53,123 @@ def optimize_maxcover(cost, fraction, rij, normalize=False, verbose=False,
     # Find the index of closest cumsum value to the requested fraction
     fraction_approx = utils.find_nearest(cs_elem_fractions, fraction)
 
-    if normalize:
-        logger.debug(" [DEBUG] Normalizing cost and rij arrays")
-        rij = spatutils.normalize(rij)
-        # Don't normalize costs if everything is equal
-        if not np.max(cost) == np.min(cost):
-            cost = spatutils.normalize(cost)
+    # NO COSTS USED
+    if np.max(cost) == np.min(cost):
+        try:
+            logger.debug(" [DEBUG] Starting single-objective optimization")
+            # Create a new model
+            model = Model("singleobj")
 
-    try:
-        logger.debug(" [DEBUG] Starting optimization")
-        # Create initial model
-        model = Model('multiobj')
+            # Create variables
+            for element in np.nditer(rij):
+                model.addVar(vtype=GRB.BINARY)
 
-        # The the log file directory from the logger, but log into a separate
-        # file. NOTE: handler location is hard coded.
-        log_dir = os.path.dirname(logger.handlers[1].baseFilename)
-        log_file = os.path.join(log_dir, "gurobi.log")
-        if os.path.exists(log_dir):
-            logger.debug("See {} for Gurobi log".format(log_file))
-            model.params.logToConsole = 0
-            model.params.logFile = log_file
-        else:
-            logger.debug("Log dir {} not found".format(log_dir))
-            model.params.logToConsole = 0
+            # Integrate new variables
+            model.update()
+            vars = model.getVars()
+
+            # Set objective and constraint
+            obj = LinExpr()
+            expr = LinExpr()
+
+            for i in range(rij.size):
+                obj.addTerms(rij[i], vars[i])
+                expr.addTerms(x[i], vars[i])
+
+            model.setObjective(obj, sense=GRB.MAXIMIZE)
+            model.addConstr(lhs=expr, sense=GRB.LESS_EQUAL,
+                            rhs=fraction_approx)
+            model.update()
+
+            # The the log file directory from the logger, but log into a
+            # separate file. NOTE: handler location is hard coded.
+            log_dir = os.path.dirname(logger.handlers[1].baseFilename)
+            log_file = os.path.join(log_dir, "gurobi.log")
+            if os.path.exists(log_dir):
+                logger.debug("See {} for Gurobi log".format(log_file))
+                model.params.logToConsole = 0
+                model.params.logFile = log_file
+            else:
+                logger.debug("Log dir {} not found".format(log_dir))
+                model.params.logToConsole = 0
             # model.params.mipgap = 0.001
             # model.params.solutionLimit = 1
             # model.params.presolve = -1
+            model.optimize()
 
-        # Initialize decision variables for ground set:
-        for element in np.nditer(rij):
-            model.addVar(vtype=GRB.BINARY)
-        # Integrate new variables
-        model.update()
-        vars = model.getVars()
+        except GurobiError:
+            raise
+    # COSTS USED
+    else:
+        if normalize:
+            logger.debug(" [DEBUG] Normalizing cost and rij arrays")
+            rij = spatutils.normalize(rij)
+            cost = spatutils.normalize(cost)
+        try:
+            logger.debug(" [DEBUG] Starting multi-objective optimization")
+            # Create initial model
+            model = Model('multiobj')
 
-        # Constraint: limit total number of elements to be picked to be at most
-        # fraction of total number of elements
-        frac_constr = LinExpr()
-        frac_constr.addTerms(elem_fractions.tolist(), vars)
-        model.addConstr(lhs=frac_constr, sense=GRB.EQUAL, rhs=fraction_approx)
+            # The the log file directory from the logger, but log into a
+            # separate file. NOTE: handler location is hard coded.
+            log_dir = os.path.dirname(logger.handlers[1].baseFilename)
+            log_file = os.path.join(log_dir, "gurobi.log")
+            if os.path.exists(log_dir):
+                logger.debug("See {} for Gurobi log".format(log_file))
+                model.params.logToConsole = 0
+                model.params.logFile = log_file
+            else:
+                logger.debug("Log dir {} not found".format(log_dir))
+                model.params.logToConsole = 0
+                # model.params.mipgap = 0.001
+                # model.params.solutionLimit = 1
+                # model.params.presolve = -1
 
-        # Set global sense for ALL objectives
-        model.ModelSense = GRB.MAXIMIZE
+            # Initialize decision variables for ground set:
+            for element in np.nditer(rij):
+                model.addVar(vtype=GRB.BINARY)
+            # Integrate new variables
+            model.update()
+            vars = model.getVars()
 
-        # Limit how many solutions to collect
-        model.setParam(GRB.Param.PoolSolutions, 100)
+            # Constraint: limit total number of elements to be picked to be at
+            # most fraction of total number of elements
+            frac_constr = LinExpr()
+            frac_constr.addTerms(elem_fractions.tolist(), vars)
+            model.addConstr(lhs=frac_constr, sense=GRB.EQUAL,
+                            rhs=fraction_approx)
 
-        # Set number of objectives
-        model.NumObj = 2
+            # Set global sense for ALL objectives
+            model.ModelSense = GRB.MAXIMIZE
 
-        # Objective 1: maximize values
-        model.setParam(GRB.Param.ObjNumber, 0)
-        model.ObjNWeight = 1
-        model.ObjNName = "Values"
-        # model.ObjNRelTol = 0.01
-        # model.ObjNAbsTol = 1.0
-        model.setAttr(GRB.Attr.ObjN, vars, rij.tolist())
+            # Limit how many solutions to collect
+            model.setParam(GRB.Param.PoolSolutions, 100)
 
-        # Objective 2: minimize values
-        model.setParam(GRB.Param.ObjNumber, 1)
-        # Minimizing an objective function is equivalent to maximizing the
-        # negation of that function -> use ObjNWeight = -1.0
-        model.ObjNWeight = -1.0
-        model.ObjNName = "Costs"
-        # model.ObjNRelTol = 0.01
-        # model.ObjNAbsTol = 2.0
-        model.setAttr(GRB.Attr.ObjN, vars, cost.tolist())
+            # Set number of objectives
+            model.NumObj = 2
 
-        model.optimize()
+            # Objective 1: maximize values
+            model.setParam(GRB.Param.ObjNumber, 0)
+            model.ObjNWeight = 1
+            model.ObjNName = "Values"
+            # model.ObjNRelTol = 0.01
+            # model.ObjNAbsTol = 1.0
+            model.setAttr(GRB.Attr.ObjN, vars, rij.tolist())
 
-    except GurobiError:
-        raise
+            # Objective 2: minimize values
+            model.setParam(GRB.Param.ObjNumber, 1)
+            # Minimizing an objective function is equivalent to maximizing the
+            # negation of that function -> use ObjNWeight = -1.0
+            model.ObjNWeight = -1.0
+            model.ObjNName = "Costs"
+            # model.ObjNRelTol = 0.01
+            # model.ObjNAbsTol = 2.0
+            model.setAttr(GRB.Attr.ObjN, vars, cost.tolist())
+
+            model.optimize()
+
+        except GurobiError:
+            raise
 
     # Check the number of solutions
     n_solutions = model.SolCount
