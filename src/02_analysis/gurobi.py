@@ -183,7 +183,6 @@ def optimize_maxcover(cost, fraction, rij, normalize=False, verbose=False,
 
     # Construct a result array and return that
     res = np.asarray([var.x for var in model.getVars()], dtype=np.uint8)
-    pdb.set_trace()
     return res
 
 
