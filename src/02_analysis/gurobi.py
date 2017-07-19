@@ -55,6 +55,9 @@ def optimize_maxcover(cost, fraction, rij, normalize=False, verbose=False,
 
     # NO COSTS USED
     if np.max(cost) == np.min(cost):
+        # The total "budget" is the fraction provided times the number
+        # cells in the cost layer
+        budget = fraction * cost.size
         try:
             logger.info(" [INFO] Starting single-objective optimization")
             # Create a new model
@@ -76,9 +79,11 @@ def optimize_maxcover(cost, fraction, rij, normalize=False, verbose=False,
                 obj.addTerms(rij[i], vars[i])
                 expr.addTerms(cost[i], vars[i])
 
+            # Maximize the value in rij...
             model.setObjective(obj, sense=GRB.MAXIMIZE)
+            # ... while keeping the number of cells below the budget
             model.addConstr(lhs=expr, sense=GRB.LESS_EQUAL,
-                            rhs=fraction_approx)
+                            rhs=budget)
             model.update()
 
             # The the log file directory from the logger, but log into a
@@ -171,13 +176,14 @@ def optimize_maxcover(cost, fraction, rij, normalize=False, verbose=False,
         except GurobiError:
             raise
 
-    # Check the number of solutions
-    n_solutions = model.SolCount
-    if n_solutions > 1:
-        logger.warning( " [WARN] {} solutions found, using the first (best) solution".format(n_solutions))
+        # Check the number of solutions
+        n_solutions = model.SolCount
+        if n_solutions > 1:
+            logger.warning( " [WARN] {} solutions found, using the first (best) solution".format(n_solutions))
 
     # Construct a result array and return that
     res = np.asarray([var.x for var in model.getVars()], dtype=np.uint8)
+    pdb.set_trace()
     return res
 
 
