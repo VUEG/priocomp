@@ -1,8 +1,8 @@
-2017-01-27 13:45:57 [calculate_rwr_bd] [INFO ]  [** SUMMING RASTERS **]
-2017-01-27 13:45:57 [calculate_rwr_bd] [INFO ]  [TIME] Pre-processing took 0.09 sec
-2017-01-27 13:45:57 [calculate_rwr_bd] [INFO ]  [** POST-PROCESSING **]
-2017-01-27 13:45:57 [calculate_rwr_bd] [INFO ]  [1/3] Ranking values (this can take a while...)
-2017-01-27 13:45:59 [calculate_rwr_bd] [INFO ]  [2/3] Rescaling ranks
-2017-01-27 13:46:00 [calculate_rwr_bd] [INFO ]  [3/3] Writing output to analyses/RWR/rwr_bd.tif
-2017-01-27 13:46:03 [calculate_rwr_bd] [INFO ]  [TIME] Post-processing took 5.56 sec
-2017-01-27 13:46:03 [calculate_rwr_bd] [INFO ]  [TIME] All processing took 5.65 sec
+2017-07-25 13:20:47 [calculate_rwr_bd] [INFO ]  [** SUMMING RASTERS **]
+2017-07-25 13:20:48 [calculate_rwr_bd] [INFO ]  [TIME] Pre-processing took 1.34 sec
+2017-07-25 13:20:48 [calculate_rwr_bd] [INFO ]  [** POST-PROCESSING **]
+2017-07-25 13:20:48 [calculate_rwr_bd] [INFO ]  [1/3] Ranking values (this can take a while...)
+2017-07-25 13:20:49 [calculate_rwr_bd] [INFO ]  [2/3] Rescaling ranks
+2017-07-25 13:20:50 [calculate_rwr_bd] [INFO ]  [3/3] Writing output to analyses/RWR/rwr_bd.tif
+2017-07-25 13:20:51 [calculate_rwr_bd] [INFO ]  [TIME] Post-processing took 3.41 sec
+2017-07-25 13:20:51 [calculate_rwr_bd] [INFO ]  [TIME] All processing took 4.75 sec
