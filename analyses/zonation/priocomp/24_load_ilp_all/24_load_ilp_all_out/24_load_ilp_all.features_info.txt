@@ -772,4 +772,4 @@ Weight  distribution-sum  IGRetained TviolationFractRem  Distr-mean-X   Distr-me
 0.012 	6526182.000	6526182.00	0.00000	1398.26	1776.54	../../../data/processed/features/udr/european_tetrapods/reptiles/zamenis_lineatus.tif
 0.012 	98245216.000	98245216.00	0.00000	1252.49	1400.36	../../../data/processed/features/udr/european_tetrapods/reptiles/zamenis_longissimus.tif
 0.012 	9308160.000	9308160.00	0.00000	1689.87	1780.58	../../../data/processed/features/udr/european_tetrapods/reptiles/zamenis_situla.tif
-0.000 	6826632.000	6826632.00	0.00000	1161.81	1297.41	../../../data/processed/features/eea/pop_density/pop_density_v5.tif
+0.000 	8369949.000	8369949.00	0.00000	1157.45	1291.69	../../../data/processed/features/eea/pop_density/pop_density_v5.tif

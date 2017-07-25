@@ -1,4 +1,4 @@
-# Figure 1: Area of interest spanning 26 EU Member States.
+# Figure XX: Area of interest spanning 26 EU Member States.
 
 library(maptools)
 library(sp)
@@ -32,4 +32,4 @@ tm_aoi <- tm_shape(aoi, is.master = TRUE) +
 
 tm <- tm_eur + tm_aoi + tm_scale_bar(position = c("left", "top"))
 
-save_tmap(tm, "reports/figures/figure02/01_figure_02.png", width = 1200, height = 1400)
+save_tmap(tm, "reports/figures/figureExtra/countries_included.png", width = 1200, height = 1400)

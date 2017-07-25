@@ -3,11 +3,11 @@
   <title></title>
   <autotransaction active="0"/>
   <evaluateDefaultValues active="0"/>
-  <layer-tree-group expanded="1" checked="Qt::Unchecked" name="">
+  <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="">
     <customproperties/>
-    <layer-tree-group expanded="1" checked="Qt::Unchecked" name="ALL">
+    <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="ALL">
       <customproperties/>
-      <layer-tree-layer expanded="0" providerKey="gdal" checked="Qt::Unchecked" id="ilp_all_weights20170629160719534" source="/home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/analyses/ILP/ilp_all_weights.tif" name="ilp_all_weights">
+      <layer-tree-layer expanded="0" providerKey="gdal" checked="Qt::Checked" id="ilp_all_weights20170629160719534" source="/home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/analyses/ILP/ilp_all_weights.tif" name="ilp_all_weights">
         <customproperties/>
       </layer-tree-layer>
       <layer-tree-layer expanded="0" providerKey="gdal" checked="Qt::Unchecked" id="ilp_all_weights20170629160735947" source="/home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/analyses/ILP/old_solutions/old_single_implementation/ilp_all_weights.tif" name="ilp_all_weights_old">
@@ -16,7 +16,7 @@
       <layer-tree-layer expanded="0" providerKey="gdal" checked="Qt::Unchecked" id="ilp_all_weights_costs20170629161935926" source="/home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/analyses/ILP/ilp_all_weights_costs.tif" name="ilp_all_weights_costs">
         <customproperties/>
       </layer-tree-layer>
-      <layer-tree-layer expanded="0" providerKey="gdal" checked="Qt::Unchecked" id="rwr_all_weights20170629160759932" source="/home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_all_weights.tif" name="rwr_all_weights">
+      <layer-tree-layer expanded="0" providerKey="gdal" checked="Qt::Checked" id="rwr_all_weights20170629160759932" source="/home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_all_weights.tif" name="rwr_all_weights">
         <customproperties/>
       </layer-tree-layer>
       <layer-tree-layer expanded="0" providerKey="gdal" checked="Qt::Unchecked" id="rwr_all_weights_costs20170629162021344" source="/home/jlehtoma/Dropbox/Projects/VU/OPERAs/SP2/priocomp/analyses/RWR/rwr_all_weights_costs.tif" name="rwr_all_weights_costs">
@@ -58,10 +58,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>3129432.00672645680606365</xmin>
-      <ymin>1211600.89686098694801331</ymin>
-      <xmax>5505582.00672645680606365</xmax>
-      <ymax>3526850.89686098694801331</ymax>
+      <xmin>2963202.58877463033422828</xmin>
+      <ymin>1271095.46472835959866643</ymin>
+      <xmax>5339352.58877462707459927</xmax>
+      <ymax>3586345.46472835959866643</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -79,7 +79,9 @@
     </destinationsrs>
     <rendermaptile>0</rendermaptile>
     <layer_coordinate_transform_info>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="budget_level_0_120170719085718117"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_bd20170629161238779"/>
+      <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="budget_level_0_120170719085746685"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_all_weights20170629160719534"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="ilp_all_weights_costs20170629161935926"/>
       <layer_coordinate_transform destAuthId="EPSG:3035" srcAuthId="EPSG:3035" srcDatumTransform="-1" destDatumTransform="-1" layerid="rwr_es20170629160955395"/>
@@ -112,10 +114,10 @@
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
-    <legendgroup open="true" checked="Qt::Unchecked" name="ALL">
-      <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_all_weights" showFeatureCount="0">
+    <legendgroup open="true" checked="Qt::PartiallyChecked" name="ALL">
+      <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="ilp_all_weights" showFeatureCount="0">
         <filegroup open="false" hidden="false">
-          <legendlayerfile isInOverview="0" layerid="ilp_all_weights20170629160719534" visible="0"/>
+          <legendlayerfile isInOverview="0" layerid="ilp_all_weights20170629160719534" visible="1"/>
         </filegroup>
       </legendlayer>
       <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="ilp_all_weights_old" showFeatureCount="0">
@@ -128,9 +130,9 @@
           <legendlayerfile isInOverview="0" layerid="ilp_all_weights_costs20170629161935926" visible="0"/>
         </filegroup>
       </legendlayer>
-      <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_all_weights" showFeatureCount="0">
+      <legendlayer drawingOrder="-1" open="false" checked="Qt::Checked" name="rwr_all_weights" showFeatureCount="0">
         <filegroup open="false" hidden="false">
-          <legendlayerfile isInOverview="0" layerid="rwr_all_weights20170629160759932" visible="0"/>
+          <legendlayerfile isInOverview="0" layerid="rwr_all_weights20170629160759932" visible="1"/>
         </filegroup>
       </legendlayer>
       <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="rwr_all_weights_costs" showFeatureCount="0">
@@ -550,6 +552,7 @@
         </spatialrefsys>
       </srs>
       <customproperties>
+        <property key="embeddedWidgets/count" value="0"/>
         <property key="identify/format" value="Value"/>
       </customproperties>
       <provider>gdal</provider>
@@ -943,9 +946,15 @@
     </Gui>
     <Digitizing>
       <DefaultSnapToleranceUnit type="int">2</DefaultSnapToleranceUnit>
+      <LayerSnappingList type="QStringList"/>
+      <LayerSnappingEnabledList type="QStringList"/>
       <SnappingMode type="QString">current_layer</SnappingMode>
+      <AvoidIntersectionsList type="QStringList"/>
+      <LayerSnappingToleranceUnitList type="QStringList"/>
+      <LayerSnapToList type="QStringList"/>
       <DefaultSnapType type="QString">off</DefaultSnapType>
       <DefaultSnapTolerance type="double">0</DefaultSnapTolerance>
+      <LayerSnappingToleranceList type="QStringList"/>
     </Digitizing>
     <PositionPrecision>
       <DecimalPlaces type="int">2</DecimalPlaces>
