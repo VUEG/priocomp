@@ -1,12 +1,12 @@
-2017-01-27 16:21:59 [compute_variation_costs] [INFO ] [1/2] Reading in 9 features...
-2017-01-27 16:21:59 [compute_variation_costs] [DEBUG]  [1/9] Processing feature analyses/RWR/rwr_all_weights_costs_stats.geojson
-2017-01-27 16:22:00 [compute_variation_costs] [DEBUG]  [2/9] Processing feature analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst_nwout1.shp
-2017-01-27 16:22:01 [compute_variation_costs] [DEBUG]  [3/9] Processing feature analyses/ILP/ilp_all_weights_costs_stats.geojson
-2017-01-27 16:22:03 [compute_variation_costs] [DEBUG]  [4/9] Processing feature analyses/RWR/rwr_es_costs_stats.geojson
-2017-01-27 16:22:04 [compute_variation_costs] [DEBUG]  [5/9] Processing feature analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst_nwout1.shp
-2017-01-27 16:22:05 [compute_variation_costs] [DEBUG]  [6/9] Processing feature analyses/ILP/ilp_es_costs_stats.geojson
-2017-01-27 16:22:06 [compute_variation_costs] [DEBUG]  [7/9] Processing feature analyses/RWR/rwr_bd_costs_stats.geojson
-2017-01-27 16:22:07 [compute_variation_costs] [DEBUG]  [8/9] Processing feature analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst_nwout1.shp
-2017-01-27 16:22:08 [compute_variation_costs] [DEBUG]  [9/9] Processing feature analyses/ILP/ilp_bd_costs_stats.geojson
-2017-01-27 16:22:09 [compute_variation_costs] [INFO ] [2/2] Calculating mean and STD...
-2017-01-27 16:22:10 [compute_variation_costs] [INFO ]  Saving results to analyses/comparison/nuts2_rank_variation_costs.shp
+2017-07-25 14:17:22 [compute_variation_costs] [INFO ] [1/2] Reading in 9 features...
+2017-07-25 14:17:22 [compute_variation_costs] [DEBUG]  [1/9] Processing feature analyses/RWR/rwr_all_weights_costs_stats.geojson
+2017-07-25 14:17:24 [compute_variation_costs] [DEBUG]  [2/9] Processing feature analyses/zonation/priocomp/06_abf_all_wgt_cst/06_abf_all_wgt_cst_out/06_abf_all_wgt_cst_nwout1.shp
+2017-07-25 14:17:25 [compute_variation_costs] [DEBUG]  [3/9] Processing feature analyses/ILP/ilp_all_weights_costs_stats.geojson
+2017-07-25 14:17:26 [compute_variation_costs] [DEBUG]  [4/9] Processing feature analyses/RWR/rwr_es_costs_stats.geojson
+2017-07-25 14:17:27 [compute_variation_costs] [DEBUG]  [5/9] Processing feature analyses/zonation/priocomp/10_abf_es_cst/10_abf_es_cst_out/10_abf_es_cst_nwout1.shp
+2017-07-25 14:17:28 [compute_variation_costs] [DEBUG]  [6/9] Processing feature analyses/ILP/ilp_es_costs_stats.geojson
+2017-07-25 14:17:29 [compute_variation_costs] [DEBUG]  [7/9] Processing feature analyses/RWR/rwr_bd_costs_stats.geojson
+2017-07-25 14:17:30 [compute_variation_costs] [DEBUG]  [8/9] Processing feature analyses/zonation/priocomp/14_abf_bd_cst/14_abf_bd_cst_out/14_abf_bd_cst_nwout1.shp
+2017-07-25 14:17:31 [compute_variation_costs] [DEBUG]  [9/9] Processing feature analyses/ILP/ilp_bd_costs_stats.geojson
+2017-07-25 14:17:33 [compute_variation_costs] [INFO ] [2/2] Calculating mean and STD...
+2017-07-25 14:17:34 [compute_variation_costs] [INFO ]       Saving results to analyses/comparison/nuts2_rank_variation_costs.shp
