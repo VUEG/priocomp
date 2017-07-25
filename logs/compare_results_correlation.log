@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2017-07-25 13:37:51 [compare_correlation] [INFO ]  [** COMPUTING KENDALL TAU RANK CORRELATIONS **]
 2017-07-25 13:37:53 [compare_correlation] [INFO ]  [1/153] Calculating correlation between analyses/RWR/rwr_all_weights.tif and analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif
 2017-07-25 13:37:57 [compare_correlation] [DEBUG] Tau: 0.9009819951339354 (p-value: 0.0)
@@ -307,3 +308,11 @@
 2017-07-25 13:48:21 [compare_correlation] [DEBUG] Tau: 0.814198336199086 (p-value: 0.0)
 2017-07-25 13:48:22 [compare_correlation] [INFO ]  [TIME] All processing took 630.62 sec
 2017-07-25 13:48:22 [compare_correlation] [INFO ] Saving results to analyses/comparison/cross_correlation.csv
+=======
+2017-07-25 13:20:56 [compare_correlation] [INFO ]  [** COMPUTING KENDALL TAU RANK CORRELATIONS **]
+2017-07-25 13:20:57 [compare_correlation] [INFO ]  [1/153] Calculating correlation between analyses/RWR/rwr_all_weights.tif and analyses/zonation/priocomp/04_abf_all_wgt/04_abf_all_wgt_out/04_abf_all_wgt.rank.compressed.tif
+2017-07-25 13:23:59 [compare_correlation] [DEBUG] Tau: 0.900981995133936 (p-value: 0.0)
+2017-07-25 13:24:00 [compare_correlation] [INFO ]  [2/153] Calculating correlation between analyses/RWR/rwr_all_weights.tif and analyses/ILP/ilp_all_weights.tif
+2017-07-25 13:36:20 [compare_correlation] [DEBUG] Tau: 0.9993961140322379 (p-value: 0.0)
+2017-07-25 13:36:21 [compare_correlation] [INFO ]  [3/153] Calculating correlation between analyses/RWR/rwr_all_weights.tif and analyses/RWR/rwr_all_weights_costs.tif
+>>>>>>> 018dda6b2ebb88cbe5399db75c1e9a1af73af7ca

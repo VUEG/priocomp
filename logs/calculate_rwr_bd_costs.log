@@ -1,12 +1,12 @@
-2017-01-27 13:46:03 [calculate_rwr_bd_costs] [INFO ]  [** SUMMING RASTERS **]
-2017-01-27 13:46:03 [calculate_rwr_bd_costs] [WARNI]  [WARNING] Different masks for cost and feature sum rasters, diff: 24013
-2017-01-27 13:46:03 [calculate_rwr_bd_costs] [WARNI]  [WARNING] Using data only from cells that have both cost and occurrence data
-2017-01-27 13:46:04 [calculate_rwr_bd_costs] [DEBUG]  [DEBUG] Using aggregate weight -763 for costs
-2017-01-27 13:46:04 [calculate_rwr_bd_costs] [DEBUG]  [DEBUG] OL normalizing and multiplying cost data
-2017-01-27 13:46:04 [calculate_rwr_bd_costs] [INFO ]  [TIME] Pre-processing took 1.16 sec
-2017-01-27 13:46:04 [calculate_rwr_bd_costs] [INFO ]  [** POST-PROCESSING **]
-2017-01-27 13:46:04 [calculate_rwr_bd_costs] [INFO ]  [1/3] Ranking values (this can take a while...)
-2017-01-27 13:46:06 [calculate_rwr_bd_costs] [INFO ]  [2/3] Rescaling ranks
-2017-01-27 13:46:07 [calculate_rwr_bd_costs] [INFO ]  [3/3] Writing output to analyses/RWR/rwr_bd_costs.tif
-2017-01-27 13:46:09 [calculate_rwr_bd_costs] [INFO ]  [TIME] Post-processing took 5.65 sec
-2017-01-27 13:46:09 [calculate_rwr_bd_costs] [INFO ]  [TIME] All processing took 6.8 sec
+2017-07-25 13:20:51 [calculate_rwr_bd_costs] [INFO ]  [** SUMMING RASTERS **]
+2017-07-25 13:20:52 [calculate_rwr_bd_costs] [WARNI]  [WARNING] Different masks for cost and feature sum rasters, diff: 24013
+2017-07-25 13:20:52 [calculate_rwr_bd_costs] [WARNI]  [WARNING] Using data only from cells that have both cost and occurrence data
+2017-07-25 13:20:52 [calculate_rwr_bd_costs] [DEBUG]  [DEBUG] Using aggregate weight -763 for costs
+2017-07-25 13:20:52 [calculate_rwr_bd_costs] [DEBUG]  [DEBUG] OL normalizing and multiplying cost data
+2017-07-25 13:20:52 [calculate_rwr_bd_costs] [INFO ]  [TIME] Pre-processing took 0.72 sec
+2017-07-25 13:20:52 [calculate_rwr_bd_costs] [INFO ]  [** POST-PROCESSING **]
+2017-07-25 13:20:52 [calculate_rwr_bd_costs] [INFO ]  [1/3] Ranking values (this can take a while...)
+2017-07-25 13:20:53 [calculate_rwr_bd_costs] [INFO ]  [2/3] Rescaling ranks
+2017-07-25 13:20:54 [calculate_rwr_bd_costs] [INFO ]  [3/3] Writing output to analyses/RWR/rwr_bd_costs.tif
+2017-07-25 13:20:56 [calculate_rwr_bd_costs] [INFO ]  [TIME] Post-processing took 3.55 sec
+2017-07-25 13:20:56 [calculate_rwr_bd_costs] [INFO ]  [TIME] All processing took 4.27 sec
