@@ -2,6 +2,7 @@ library(dplyr)
 library(ggplot2)
 library(ggthemes)
 library(gridExtra)
+library(hrbrthemes)
 library(tidyr)
 library(raster)
 library(zonator)
@@ -12,23 +13,25 @@ library(viridis)
 create_cost_plot <- function(x, title = NULL) {
 
   x_lab <- "\nFraction of the landscape"
-  x_scale <- scale_x_continuous(breaks = seq(0, 1, 0.2),
-                                labels = paste(100 * seq(1, 0, -0.2), "%"))
+  x_scale <- scale_x_continuous(breaks = seq(0, 1, 0.1),
+                                labels = paste(100 * seq(0, 1, 0.1), "%"))
   y_scale <- scale_y_continuous(breaks = seq(0, 1, 0.2))
   # Define x-axis vlines that are used to link to Fig 5
-  vlines_x <- c(0.75, 0.9, 0.98)
-  vlines_labs <- c("25%", "10%", "2%")
-  vlines_labs_x <- vlines_x + 0.02
+  vlines_x <- c(0.9)
+  vlines_labs <- c("Top 10%")
+  vlines_labs_x <- vlines_x + 0.04
   vlines_labs_y <- 1.03
 
-  p1 <- ggplot2::ggplot(x, aes(x = pr_lost, y = cost, color = variant)) +
+  p1 <- ggplot2::ggplot(x, aes(x = pr_lost, y = cost, color = variant,
+                               linetype = cost_type)) +
     geom_vline(xintercept = vlines_x, alpha = 0.5, linetype = 3) +
     annotate("text", x = vlines_labs_x, y = vlines_labs_y,
              label = vlines_labs, size = 3) +
-    geom_line(size = 1) + x_scale + y_scale + xlab(x_lab) + ylab("") +
+    geom_line(size = 0.8) + x_scale + y_scale + xlab(x_lab) + ylab("") +
     scale_color_manual("", values =  rev(viridis(3, end = 0.9))) +
+    scale_linetype_manual("", values = c("solid", "dotted")) +
     ylab("Relateive cost of the solution\n") + ggtitle(title) +
-    theme_minimal() +
+    theme_ipsum_rc() +
     theme(legend.position = c(0.20, 0.35),
           legend.justification = c(0.5, 0),
           legend.key.width = unit(1,"cm"))
@@ -43,19 +46,18 @@ create_perf_plot <- function(x, title = NULL) {
   y_scale <- scale_y_continuous(breaks = seq(0, 1, 0.2),
                                 labels = paste(100 * seq(0, 1, 0.2), "%"))
   # Define x-axis vlines that are used to link to Fig 5
-  vlines_x <- c(0.75, 0.9, 0.98)
-  vlines_labs <- c("25%", "10%", "2%")
+  vlines_x <- c(0.9)
+  vlines_labs <- c("10%")
   vlines_labs_x <- vlines_x + 0.02
   vlines_labs_y <- 1.03
 
-  p1 <- ggplot2::ggplot(x, aes(x = pr_lost, y = ave_pr, color = variant,
-                               linetype = variant)) +
+  p1 <- ggplot2::ggplot(x, aes(x = pr_lost, y = ave_pr, color = method)) +
     geom_vline(xintercept = vlines_x, alpha = 0.5, linetype = 3) +
+    facet_wrap(~ group) +
     annotate("text", x = vlines_labs_x, y = vlines_labs_y,
              label = vlines_labs, size = 3) +
     geom_line(size = 1) + x_scale + y_scale + xlab(x_lab) + ylab("") +
-    scale_linetype_manual("", values = rep(1:3, 3)) +
-    scale_color_manual("", values =  rev(rep(viridis(3, end = 0.9), 1, each = 3))) +
+    scale_color_manual("", values =  rev(rep(viridis(3, end = 0.9), 3))) +
     ylab("Average feature distribution covered\n") + ggtitle(title) +
     theme_minimal() +
     theme(legend.position = c(0.20, 0.05),
@@ -74,6 +76,7 @@ get_costs <- function(cost_raster, rank_raster, n = 1002,
   # Get only non-NoData data
   cost_raster_src <- cost_raster_src[!mask]
   rank_raster_src <- rank_raster_src[!mask]
+
   # Make matrix
   cost_matrix <- cbind(rank_raster_src, cost_raster_src)
   # Order by rank
@@ -176,6 +179,24 @@ method_perf_cost <- dplyr::bind_rows(v06_grp_mean, v25_grp_mean,
 
 # Read in the cost data rasters
 cost_raster <- raster::raster("data/processed/features/eea/pop_density/pop_density_v5.tif")
+# No costs
+v04_rank_raster <- zonator::rank_raster(v04_abf_all_wgt)
+v23_rank_raster <- zonator::rank_raster(v23_load_rwr_all)
+v24_rank_raster <- zonator::rank_raster(v24_load_ilp_all)
+
+v04_cost <- get_costs(cost_raster = cost_raster,
+                      rank_raster = v04_rank_raster)
+v04_cost$variant <- "ZON_ALL"
+v23_cost <- get_costs(cost_raster = cost_raster,
+                      rank_raster = v23_rank_raster)
+v23_cost$variant <- "RWR_ALL"
+v24_cost <- get_costs(cost_raster = cost_raster,
+                      rank_raster = v24_rank_raster)
+v24_cost$variant <- "ILP_ALL"
+
+nocost_perf_cost <- dplyr::bind_rows(v04_cost, v23_cost, v24_cost)
+
+# With costs
 v06_rank_raster <- zonator::rank_raster(v06_abf_all_wgt_cst)
 v25_rank_raster <- zonator::rank_raster(v25_load_rwr_all_cst)
 v26_rank_raster <- zonator::rank_raster(v26_load_ilp_all_cst)
@@ -192,12 +213,28 @@ v26_cost$variant <- "ILP_ALL"
 
 cost_perf_cost <- dplyr::bind_rows(v06_cost, v25_cost, v26_cost)
 
+# Combine no-cost and cost data
+nocost_perf_cost$cost_type <- "Cost not included"
+cost_perf_cost$cost_type <- "Cost included"
+all_cost_perf_cost <- dplyr::bind_rows(nocost_perf_cost, cost_perf_cost)
+
+# HACK
+method_perf_cost <- method_perf_cost %>%
+  tidyr::separate(variant, sep = "_", into = c("method", "group"))
+method_perf_nocost <- method_perf_nocost %>%
+  tidyr::separate(variant, sep = "_", into = c("method", "group"))
+
 # Plot data ---------------------------------------------------------------
 
 p1 <- create_perf_plot(method_perf_nocost, title = "A")
 p2 <- create_perf_plot(method_perf_cost, title = "A")
 
-p3 <- create_cost_plot(cost_perf_cost, title = "B")
+#p3 <- create_cost_plot(cost_perf_cost, title = "B")
+#p3_2 <- create_cost_plot(nocost_perf_cost, title = "B")
+p3 <- create_cost_plot(all_cost_perf_cost)
+
+ggsave("reports/figures/figure06/04_figure_06_just_costs.png",
+       p3, width = 6, height = 6)
 
 # All curves data ---------------------------------------------------------
 
@@ -238,21 +275,25 @@ perf_details$level <- factor(perf_details$level,
                              levels = perf_levels,
                              labels = paste0(100 - perf_levels * 100, "%"))
 
+perf_details <- perf_details %>%
+  dplyr::filter(level == "10%")
+
 p4 <- ggplot(perf_details, aes(x = factor(group), y = pr_rem,
                                  fill = factor(variant))) +
   scale_fill_manual("Method", values =  rev(rep(viridis(3, end = 0.9), 3, each = 1))) +
   geom_boxplot(outlier.colour = "darkgrey", outlier.size = 0.2) +
-  facet_wrap(~level) +
   ylab("Feature distribution covered\n") + xlab("\nData group") +
   scale_y_continuous(breaks = seq(0, 1, 0.25), labels = paste0(seq(0, 100, 25), "%")) +
-  ggtitle("C") + theme_minimal()
+  theme_minimal()
+
+ggsave("reports/figures/figure04/01_figure_04_boxplot.png", p4, width = 5, height = 5)
 
 # Combine panels
 fig5 <- gridExtra::grid.arrange(p2, p3, p4, ncol = 2, nrow = 2)
 
 # Save Figure -------------------------------------------------------------
 
-ggsave("reports/figures/figure06/01_figure_06.png", fig5, width = 9, height = 9)
+ggsave("reports/figures/figure04/01_figure_04.png", fig5, width = 9, height = 9)
 
 
 #  Extra: cost distribution -----------------------------------------------
