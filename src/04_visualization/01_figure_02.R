@@ -2,9 +2,9 @@
 #
 library(gridExtra)
 library(magick)
-library(maptools)
 library(RColorBrewer)
 library(sp)
+library(sf)
 library(tmap)
 
 data(Europe)
@@ -74,10 +74,10 @@ create_sd_map <-  function(x, upper.limit, step = 0.05, width, height,
 nuts2_var_ds_nocosts <- "analyses/comparison/nuts2_rank_variation.shp"
 nuts2_var_ds_costs <- "analyses/comparison/nuts2_rank_variation_costs.shp"
 
-nuts2_var_nocosts <- maptools::readShapePoly(nuts2_var_ds_nocosts,
-                                             proj4string = CRS("+init=epsg:3035"))
-nuts2_var_costs <- maptools::readShapePoly(nuts2_var_ds_costs,
-                                           proj4string = CRS("+init=epsg:3035"))
+nuts2_var_nocosts <- sf::st_read(nuts2_var_ds_nocosts, quiet = TRUE) #%>%
+sf::st_crs(nuts2_var_nocosts) <- 3035
+nuts2_var_costs <-  sf::st_read(nuts2_var_ds_costs, quiet = TRUE)
+sf::st_crs(nuts2_var_costs) <- 3035
 
 # Common parameters -------------------------------------------------------
 
@@ -111,7 +111,7 @@ tm_sd_top_costs <- create_sd_map(nuts2_var_costs, upper.limit = 0.20,
 
 file_mean_top_nocosts <- "reports/figures/figure02/01_figure_02_A_nocosts.png"
 file_mean_sd_nocosts <- "reports/figures/figure02/02_figure_02_B_nocosts.png"
-file_composite_nocosts <- "reports/figures/figure04/03_figure_02_nocosts.png"
+file_composite_nocosts <- "reports/figures/figure02/03_figure_02_nocosts.png"
 
 file_mean_top_costs <- "reports/figures/figure02/04_figure_02_A_costs.png"
 file_mean_sd_costs <- "reports/figures/figure02/05_figure_02_B_costs.png"
