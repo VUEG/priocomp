@@ -304,17 +304,18 @@ jac_01_nocosts <- extract_stat(all_stats_nocosts, "jac_01")
 jac_01_costs <- extract_stat(all_stats_costs, "jac_01")
 jac_09_nocosts <- extract_stat(all_stats_nocosts, "jac_09")
 jac_09_costs <- extract_stat(all_stats_costs, "jac_09")
-cmcs_nocosts <- extract_stat(all_stats_nocosts, "cmcs")
-cmcs_costs <- extract_stat(all_stats_costs, "cmcs")
+#cmcs_nocosts <- extract_stat(all_stats_nocosts, "cmcs")
+#cmcs_costs <- extract_stat(all_stats_costs, "cmcs")
 
 p1 <- plot_stat(tau_nocosts, title = "COR", min_lim = -0.25,
                 max_lim = 1.0, step = 0.25)
-p2 <- plot_stat(cmcs_nocosts, title = "MCS")
+#p2 <- plot_stat(cmcs_nocosts, title = "MCS")
 p3 <- plot_stat(jac_09_nocosts, title = "top10")
 p4 <- plot_stat(jac_01_nocosts, title = "low10")
 
-p5 <- plot_stat(tau_costs, title = "COR")
-p6 <- plot_stat(cmcs_costs, title = "MCS")
+p5 <- plot_stat(tau_costs, title = "COR", min_lim = -0.25,
+                max_lim = 1.0, step = 0.25)
+#p6 <- plot_stat(cmcs_costs, title = "MCS")
 p7 <- plot_stat(jac_09_costs, title = "top10")
 p8 <- plot_stat(jac_01_costs, title = "low10")
 
@@ -327,16 +328,16 @@ ggsave("reports/figures/figure03/01_figure_03_A_nocosts.png",
        p1, width = img_width, height = img_width)
 ggsave("reports/figures/figure03/02_figure_03_B_nocosts.png",
        p2, width = img_width, height = img_width)
-ggsave("reports/figures/figure03/03_figure_03_C_nocosts.png",
-       p3, width = img_width, height = img_width)
-ggsave("reports/figures/figure03/04_figure_03_D_nocosts.png",
+#ggsave("reports/figures/figure03/03_figure_03_C_nocosts.png",
+#       p3, width = img_width, height = img_width)
+ggsave("reports/figures/figureS04/01_figure_S04_A_nocosts.png",
        p4, width = img_width, height = img_width)
 
 ggsave("reports/figures/figure03/06_figure_03_A_costs.png",
        p5, width = img_width, height = img_width)
 ggsave("reports/figures/figure03/07_figure_03_B_costs.png",
        p6, width = img_width, height = img_width)
-ggsave("reports/figures/figure03/08_figure_03_C_costs.png",
-       p7, width = img_width, height = img_width)
-ggsave("reports/figures/figure03/09_figure_03_D_costs.png",
+#ggsave("reports/figures/figure03/08_figure_03_C_costs.png",
+#       p7, width = img_width, height = img_width)
+ggsave("reports/figures/figureS04/02_figure_S04_B_costs.png",
        p8, width = img_width, height = img_width)
