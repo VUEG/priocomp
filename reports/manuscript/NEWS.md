@@ -1,3 +1,19 @@
+##  0.11.0
+
+- Re-structuring of the story
+  - Bring costs into the main document
+  - Send (most of) priority maps into the supplement
+- New figure order:
+  - Fig 1: Conceptual setting (circles)
+  - Fig 2: Variation in priority rank maps for no-costs and costs (altered from old Fig 4)
+  - Fig 3: Similarities between methods/data. Kendall Tau, Jaccard top-10 for no-costs and costs. (DROP map comparison stat completely)
+  - Fig 4: Performance curves for methods/dataset for no-costs/costs
+  - Fig 5: Cost variation in different methods
+  - Fig S1: Study design
+  - Fig S2: Cost proxy
+  - Fig S3: full priority rank pattern maps
+  - Fig S4: Jaccard bottom-10 for no-costs and costs
+
 ## 0.10.1
 
 - Comments from Astrid received and incorporated
