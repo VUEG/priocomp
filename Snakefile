@@ -1055,18 +1055,18 @@ rule compute_variation:
                        "rwr_bd", "zon_bd", "ilp_bd"]
         out_feature = similarity.plu_variation(input.no_costs, input_codes,
                                                logger=llogger)
-        llogger.info(" Saving results to {}".format(output.no_costs))
+        llogger.info("      Saving results to {}".format(output.no_costs))
         out_feature.to_file(output.no_costs)
 
         # Costs
         llogger = utils.get_local_logger("compute_variation_costs", log.costs)
         # FIXME: Codes are now hardcoded
-        input_codes = ["rwr_all_costs", "ilp_all_costs",
+        input_codes = ["rwr_all_costs", "zon_all_costs", "ilp_all_costs",
                        "rwr_es_costs", "zon_es_costs", "ilp_es_costs",
                        "rwr_bd_costs", "zon_bd_costs", "ilp_bd_costs"]
         out_feature = similarity.plu_variation(input.costs, input_codes,
                                                logger=llogger)
-        llogger.info(" Saving results to {}".format(output.costs))
+        llogger.info("      Saving results to {}".format(output.costs))
         out_feature.to_file(output.costs)
 
 ## Auxiliary operations -----------------------------------------------------
