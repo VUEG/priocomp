@@ -1,4 +1,4 @@
-# Figure 2: Rank priority maps for different methods (RWR, ZON and ILP) in
+# Figure S3: Rank priority maps for different methods (RWR, ZON and ILP) in
 # columns, and for different datasets in rows (ALL, ES, BD).
 
 library(dplyr)
@@ -172,9 +172,9 @@ maps_costs <- create_map_list(input_rasters_costs)
 
 # Save plots --------------------------------------------------------------
 
-file_legend <- "reports/figures/figure03/01_figure_03_legend.png"
-file_main <- "reports/figures/figure03/02_figure_03_main_nocosts.png"
-file_main_costs <- "reports/figures/figure03/03_figure_03_main_costs.png"
+file_legend <- "reports/figures/figureS03/01_figure_S03_legend.png"
+file_main <- "reports/figures/figureS03/02_figure_S03_main_nocosts.png"
+file_main_costs <- "reports/figures/figureS03/03_figure_S03_main_costs.png"
 
 print_map_list(maps, file_main, width = 1800, height = 1800,
                nrow = 3, ncol = 3)
