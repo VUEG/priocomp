@@ -1,0 +1,511 @@
+2017-07-20 20:15:46 [optimize_gurobi_es] [INFO ]  [** PRE-PROCESSING **]
+2017-07-20 20:15:46 [optimize_gurobi_es] [INFO ]  [TIME] Pre-processing took 0.06 sec
+2017-07-20 20:15:46 [optimize_gurobi_es] [INFO ]  [** OPTIMIZING **]
+2017-07-20 20:15:46 [optimize_gurobi_es] [INFO ]  [NOTE] Target budget levels: 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2, 0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3, 0.31, 0.32, 0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.4, 0.41, 0.42, 0.43, 0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.5, 0.51, 0.52, 0.53, 0.54, 0.55, 0.56, 0.57, 0.58, 0.59, 0.6, 0.61, 0.62, 0.63, 0.64, 0.65, 0.66, 0.67, 0.68, 0.69, 0.7, 0.71, 0.72, 0.73, 0.74, 0.75, 0.76, 0.77, 0.78, 0.79, 0.8, 0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87, 0.88, 0.89, 0.9, 0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99, 1.0
+2017-07-20 20:15:46 [optimize_gurobi_es] [INFO ]  [1/100] Optimizing with fraction level 0.01...
+2017-07-20 20:15:46 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:16:11 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:16:30 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:16:30 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_01.tif
+2017-07-20 20:16:31 [optimize_gurobi_es] [INFO ]  [2/100] Optimizing with fraction level 0.02...
+2017-07-20 20:16:31 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:16:57 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:17:17 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:17:17 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_02.tif
+2017-07-20 20:17:17 [optimize_gurobi_es] [INFO ]  [3/100] Optimizing with fraction level 0.03...
+2017-07-20 20:17:17 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:17:42 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:18:00 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:18:00 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_03.tif
+2017-07-20 20:18:01 [optimize_gurobi_es] [INFO ]  [4/100] Optimizing with fraction level 0.04...
+2017-07-20 20:18:01 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:18:27 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:18:45 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:18:45 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_04.tif
+2017-07-20 20:18:46 [optimize_gurobi_es] [INFO ]  [5/100] Optimizing with fraction level 0.05...
+2017-07-20 20:18:46 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:19:12 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:19:33 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:19:33 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_05.tif
+2017-07-20 20:19:34 [optimize_gurobi_es] [INFO ]  [6/100] Optimizing with fraction level 0.06...
+2017-07-20 20:19:34 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:19:59 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:20:18 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:20:18 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_06.tif
+2017-07-20 20:20:19 [optimize_gurobi_es] [INFO ]  [7/100] Optimizing with fraction level 0.07...
+2017-07-20 20:20:19 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:20:42 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:21:00 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:21:01 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_07.tif
+2017-07-20 20:21:01 [optimize_gurobi_es] [INFO ]  [8/100] Optimizing with fraction level 0.08...
+2017-07-20 20:21:01 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:21:28 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:21:47 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:21:47 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_08.tif
+2017-07-20 20:21:48 [optimize_gurobi_es] [INFO ]  [9/100] Optimizing with fraction level 0.09...
+2017-07-20 20:21:48 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:22:14 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:22:32 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:22:32 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_09.tif
+2017-07-20 20:22:33 [optimize_gurobi_es] [INFO ]  [10/100] Optimizing with fraction level 0.1...
+2017-07-20 20:22:33 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:23:00 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:23:19 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:23:19 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_1.tif
+2017-07-20 20:23:20 [optimize_gurobi_es] [INFO ]  [11/100] Optimizing with fraction level 0.11...
+2017-07-20 20:23:20 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:23:48 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:24:07 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:24:07 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_11.tif
+2017-07-20 20:24:07 [optimize_gurobi_es] [INFO ]  [12/100] Optimizing with fraction level 0.12...
+2017-07-20 20:24:08 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:24:34 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:24:53 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:24:53 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_12.tif
+2017-07-20 20:24:53 [optimize_gurobi_es] [INFO ]  [13/100] Optimizing with fraction level 0.13...
+2017-07-20 20:24:53 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:25:22 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:25:42 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:25:43 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_13.tif
+2017-07-20 20:25:43 [optimize_gurobi_es] [INFO ]  [14/100] Optimizing with fraction level 0.14...
+2017-07-20 20:25:43 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:26:10 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:26:29 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:26:29 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_14.tif
+2017-07-20 20:26:30 [optimize_gurobi_es] [INFO ]  [15/100] Optimizing with fraction level 0.15...
+2017-07-20 20:26:30 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:26:56 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:27:16 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:27:16 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_15.tif
+2017-07-20 20:27:16 [optimize_gurobi_es] [INFO ]  [16/100] Optimizing with fraction level 0.16...
+2017-07-20 20:27:16 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:27:42 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:28:00 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:28:00 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_16.tif
+2017-07-20 20:28:01 [optimize_gurobi_es] [INFO ]  [17/100] Optimizing with fraction level 0.17...
+2017-07-20 20:28:01 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:28:27 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:28:46 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:28:46 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_17.tif
+2017-07-20 20:28:46 [optimize_gurobi_es] [INFO ]  [18/100] Optimizing with fraction level 0.18...
+2017-07-20 20:28:46 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:29:13 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:29:33 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:29:33 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_18.tif
+2017-07-20 20:29:33 [optimize_gurobi_es] [INFO ]  [19/100] Optimizing with fraction level 0.19...
+2017-07-20 20:29:33 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:29:59 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:30:17 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:30:17 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_19.tif
+2017-07-20 20:30:18 [optimize_gurobi_es] [INFO ]  [20/100] Optimizing with fraction level 0.2...
+2017-07-20 20:30:18 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:30:44 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:31:03 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:31:03 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_2.tif
+2017-07-20 20:31:04 [optimize_gurobi_es] [INFO ]  [21/100] Optimizing with fraction level 0.21...
+2017-07-20 20:31:04 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:31:30 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:31:50 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:31:50 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_21.tif
+2017-07-20 20:31:50 [optimize_gurobi_es] [INFO ]  [22/100] Optimizing with fraction level 0.22...
+2017-07-20 20:31:50 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:32:14 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:32:32 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:32:32 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_22.tif
+2017-07-20 20:32:33 [optimize_gurobi_es] [INFO ]  [23/100] Optimizing with fraction level 0.23...
+2017-07-20 20:32:33 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:32:59 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:33:19 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:33:19 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_23.tif
+2017-07-20 20:33:20 [optimize_gurobi_es] [INFO ]  [24/100] Optimizing with fraction level 0.24...
+2017-07-20 20:33:20 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:33:44 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:34:02 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:34:02 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_24.tif
+2017-07-20 20:34:02 [optimize_gurobi_es] [INFO ]  [25/100] Optimizing with fraction level 0.25...
+2017-07-20 20:34:02 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:34:26 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:34:44 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:34:44 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_25.tif
+2017-07-20 20:34:45 [optimize_gurobi_es] [INFO ]  [26/100] Optimizing with fraction level 0.26...
+2017-07-20 20:34:45 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:35:12 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:35:31 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:35:31 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_26.tif
+2017-07-20 20:35:32 [optimize_gurobi_es] [INFO ]  [27/100] Optimizing with fraction level 0.27...
+2017-07-20 20:35:32 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:35:55 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:36:13 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:36:13 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_27.tif
+2017-07-20 20:36:14 [optimize_gurobi_es] [INFO ]  [28/100] Optimizing with fraction level 0.28...
+2017-07-20 20:36:14 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:36:39 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:36:57 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:36:57 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_28.tif
+2017-07-20 20:36:58 [optimize_gurobi_es] [INFO ]  [29/100] Optimizing with fraction level 0.29...
+2017-07-20 20:36:58 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:37:25 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:37:45 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:37:45 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_29.tif
+2017-07-20 20:37:46 [optimize_gurobi_es] [INFO ]  [30/100] Optimizing with fraction level 0.3...
+2017-07-20 20:37:46 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:38:11 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:38:30 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:38:30 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_3.tif
+2017-07-20 20:38:31 [optimize_gurobi_es] [INFO ]  [31/100] Optimizing with fraction level 0.31...
+2017-07-20 20:38:31 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:38:58 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:39:15 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:39:15 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_31.tif
+2017-07-20 20:39:16 [optimize_gurobi_es] [INFO ]  [32/100] Optimizing with fraction level 0.32...
+2017-07-20 20:39:16 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:39:40 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:39:59 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:39:59 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_32.tif
+2017-07-20 20:40:00 [optimize_gurobi_es] [INFO ]  [33/100] Optimizing with fraction level 0.33...
+2017-07-20 20:40:00 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:40:26 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:40:45 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:40:45 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_33.tif
+2017-07-20 20:40:46 [optimize_gurobi_es] [INFO ]  [34/100] Optimizing with fraction level 0.34...
+2017-07-20 20:40:46 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:41:11 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:41:30 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:41:30 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_34.tif
+2017-07-20 20:41:31 [optimize_gurobi_es] [INFO ]  [35/100] Optimizing with fraction level 0.35...
+2017-07-20 20:41:31 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:41:59 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:42:19 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:42:19 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_35.tif
+2017-07-20 20:42:20 [optimize_gurobi_es] [INFO ]  [36/100] Optimizing with fraction level 0.36...
+2017-07-20 20:42:20 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:42:46 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:43:05 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:43:06 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_36.tif
+2017-07-20 20:43:06 [optimize_gurobi_es] [INFO ]  [37/100] Optimizing with fraction level 0.37...
+2017-07-20 20:43:06 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:43:28 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:43:47 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:43:47 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_37.tif
+2017-07-20 20:43:48 [optimize_gurobi_es] [INFO ]  [38/100] Optimizing with fraction level 0.38...
+2017-07-20 20:43:48 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:44:16 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:44:36 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:44:36 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_38.tif
+2017-07-20 20:44:37 [optimize_gurobi_es] [INFO ]  [39/100] Optimizing with fraction level 0.39...
+2017-07-20 20:44:37 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:45:03 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:45:23 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:45:23 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_39.tif
+2017-07-20 20:45:24 [optimize_gurobi_es] [INFO ]  [40/100] Optimizing with fraction level 0.4...
+2017-07-20 20:45:24 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:45:51 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:46:10 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:46:11 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_4.tif
+2017-07-20 20:46:11 [optimize_gurobi_es] [INFO ]  [41/100] Optimizing with fraction level 0.41...
+2017-07-20 20:46:11 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:46:38 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:46:58 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:46:58 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_41.tif
+2017-07-20 20:46:59 [optimize_gurobi_es] [INFO ]  [42/100] Optimizing with fraction level 0.42...
+2017-07-20 20:46:59 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:47:24 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:47:44 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:47:44 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_42.tif
+2017-07-20 20:47:45 [optimize_gurobi_es] [INFO ]  [43/100] Optimizing with fraction level 0.43...
+2017-07-20 20:47:45 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:48:12 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:48:31 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:48:31 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_43.tif
+2017-07-20 20:48:32 [optimize_gurobi_es] [INFO ]  [44/100] Optimizing with fraction level 0.44...
+2017-07-20 20:48:32 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:48:58 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:49:17 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:49:17 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_44.tif
+2017-07-20 20:49:18 [optimize_gurobi_es] [INFO ]  [45/100] Optimizing with fraction level 0.45...
+2017-07-20 20:49:18 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:49:44 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:50:02 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:50:02 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_45.tif
+2017-07-20 20:50:03 [optimize_gurobi_es] [INFO ]  [46/100] Optimizing with fraction level 0.46...
+2017-07-20 20:50:03 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:50:29 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:50:48 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:50:49 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_46.tif
+2017-07-20 20:50:49 [optimize_gurobi_es] [INFO ]  [47/100] Optimizing with fraction level 0.47...
+2017-07-20 20:50:49 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:51:15 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:51:34 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:51:34 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_47.tif
+2017-07-20 20:51:34 [optimize_gurobi_es] [INFO ]  [48/100] Optimizing with fraction level 0.48...
+2017-07-20 20:51:34 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:51:59 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:52:16 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:52:17 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_48.tif
+2017-07-20 20:52:17 [optimize_gurobi_es] [INFO ]  [49/100] Optimizing with fraction level 0.49...
+2017-07-20 20:52:17 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:52:42 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:53:02 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:53:02 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_49.tif
+2017-07-20 20:53:03 [optimize_gurobi_es] [INFO ]  [50/100] Optimizing with fraction level 0.5...
+2017-07-20 20:53:03 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:53:29 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:53:47 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:53:47 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_5.tif
+2017-07-20 20:53:47 [optimize_gurobi_es] [INFO ]  [51/100] Optimizing with fraction level 0.51...
+2017-07-20 20:53:47 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:54:14 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:54:33 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:54:33 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_51.tif
+2017-07-20 20:54:34 [optimize_gurobi_es] [INFO ]  [52/100] Optimizing with fraction level 0.52...
+2017-07-20 20:54:34 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:55:02 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:55:22 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:55:22 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_52.tif
+2017-07-20 20:55:23 [optimize_gurobi_es] [INFO ]  [53/100] Optimizing with fraction level 0.53...
+2017-07-20 20:55:23 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:55:49 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:56:08 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:56:08 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_53.tif
+2017-07-20 20:56:09 [optimize_gurobi_es] [INFO ]  [54/100] Optimizing with fraction level 0.54...
+2017-07-20 20:56:09 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:56:37 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:56:56 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:56:56 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_54.tif
+2017-07-20 20:56:57 [optimize_gurobi_es] [INFO ]  [55/100] Optimizing with fraction level 0.55...
+2017-07-20 20:56:57 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:57:24 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:57:43 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:57:43 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_55.tif
+2017-07-20 20:57:44 [optimize_gurobi_es] [INFO ]  [56/100] Optimizing with fraction level 0.56...
+2017-07-20 20:57:44 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:58:08 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:58:26 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:58:26 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_56.tif
+2017-07-20 20:58:27 [optimize_gurobi_es] [INFO ]  [57/100] Optimizing with fraction level 0.57...
+2017-07-20 20:58:27 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:58:52 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 20:59:12 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 20:59:12 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_57.tif
+2017-07-20 20:59:13 [optimize_gurobi_es] [INFO ]  [58/100] Optimizing with fraction level 0.58...
+2017-07-20 20:59:13 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 20:59:40 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:00:00 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:00:01 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_58.tif
+2017-07-20 21:00:01 [optimize_gurobi_es] [INFO ]  [59/100] Optimizing with fraction level 0.59...
+2017-07-20 21:00:01 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:00:28 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:00:48 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:00:48 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_59.tif
+2017-07-20 21:00:48 [optimize_gurobi_es] [INFO ]  [60/100] Optimizing with fraction level 0.6...
+2017-07-20 21:00:48 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:01:14 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:01:34 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:01:34 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_6.tif
+2017-07-20 21:01:34 [optimize_gurobi_es] [INFO ]  [61/100] Optimizing with fraction level 0.61...
+2017-07-20 21:01:34 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:02:01 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:02:21 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:02:21 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_61.tif
+2017-07-20 21:02:22 [optimize_gurobi_es] [INFO ]  [62/100] Optimizing with fraction level 0.62...
+2017-07-20 21:02:22 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:02:47 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:03:05 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:03:06 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_62.tif
+2017-07-20 21:03:06 [optimize_gurobi_es] [INFO ]  [63/100] Optimizing with fraction level 0.63...
+2017-07-20 21:03:06 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:03:31 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:03:50 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:03:50 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_63.tif
+2017-07-20 21:03:51 [optimize_gurobi_es] [INFO ]  [64/100] Optimizing with fraction level 0.64...
+2017-07-20 21:03:51 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:04:16 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:04:37 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:04:37 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_64.tif
+2017-07-20 21:04:38 [optimize_gurobi_es] [INFO ]  [65/100] Optimizing with fraction level 0.65...
+2017-07-20 21:04:38 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:05:01 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:05:20 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:05:21 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_65.tif
+2017-07-20 21:05:21 [optimize_gurobi_es] [INFO ]  [66/100] Optimizing with fraction level 0.66...
+2017-07-20 21:05:21 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:05:49 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:06:08 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:06:09 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_66.tif
+2017-07-20 21:06:09 [optimize_gurobi_es] [INFO ]  [67/100] Optimizing with fraction level 0.67...
+2017-07-20 21:06:09 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:06:35 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:06:54 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:06:54 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_67.tif
+2017-07-20 21:06:55 [optimize_gurobi_es] [INFO ]  [68/100] Optimizing with fraction level 0.68...
+2017-07-20 21:06:55 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:07:23 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:07:41 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:07:42 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_68.tif
+2017-07-20 21:07:42 [optimize_gurobi_es] [INFO ]  [69/100] Optimizing with fraction level 0.69...
+2017-07-20 21:07:42 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:08:09 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:08:28 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:08:28 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_69.tif
+2017-07-20 21:08:29 [optimize_gurobi_es] [INFO ]  [70/100] Optimizing with fraction level 0.7...
+2017-07-20 21:08:29 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:08:54 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:09:14 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:09:14 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_7.tif
+2017-07-20 21:09:15 [optimize_gurobi_es] [INFO ]  [71/100] Optimizing with fraction level 0.71...
+2017-07-20 21:09:15 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:09:40 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:09:59 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:09:59 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_71.tif
+2017-07-20 21:10:00 [optimize_gurobi_es] [INFO ]  [72/100] Optimizing with fraction level 0.72...
+2017-07-20 21:10:00 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:10:27 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:10:47 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:10:47 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_72.tif
+2017-07-20 21:10:47 [optimize_gurobi_es] [INFO ]  [73/100] Optimizing with fraction level 0.73...
+2017-07-20 21:10:47 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:11:12 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:11:31 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:11:31 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_73.tif
+2017-07-20 21:11:31 [optimize_gurobi_es] [INFO ]  [74/100] Optimizing with fraction level 0.74...
+2017-07-20 21:11:32 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:11:56 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:12:13 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:12:14 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_74.tif
+2017-07-20 21:12:14 [optimize_gurobi_es] [INFO ]  [75/100] Optimizing with fraction level 0.75...
+2017-07-20 21:12:14 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:12:41 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:13:01 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:13:01 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_75.tif
+2017-07-20 21:13:02 [optimize_gurobi_es] [INFO ]  [76/100] Optimizing with fraction level 0.76...
+2017-07-20 21:13:02 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:13:26 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:13:44 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:13:44 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_76.tif
+2017-07-20 21:13:45 [optimize_gurobi_es] [INFO ]  [77/100] Optimizing with fraction level 0.77...
+2017-07-20 21:13:45 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:14:08 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:14:27 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:14:28 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_77.tif
+2017-07-20 21:14:28 [optimize_gurobi_es] [INFO ]  [78/100] Optimizing with fraction level 0.78...
+2017-07-20 21:14:28 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:14:53 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:15:11 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:15:11 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_78.tif
+2017-07-20 21:15:11 [optimize_gurobi_es] [INFO ]  [79/100] Optimizing with fraction level 0.79...
+2017-07-20 21:15:11 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:15:34 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:15:54 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:15:54 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_79.tif
+2017-07-20 21:15:54 [optimize_gurobi_es] [INFO ]  [80/100] Optimizing with fraction level 0.8...
+2017-07-20 21:15:54 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:16:22 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:16:41 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:16:41 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_8.tif
+2017-07-20 21:16:42 [optimize_gurobi_es] [INFO ]  [81/100] Optimizing with fraction level 0.81...
+2017-07-20 21:16:42 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:17:09 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:17:29 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:17:29 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_81.tif
+2017-07-20 21:17:30 [optimize_gurobi_es] [INFO ]  [82/100] Optimizing with fraction level 0.82...
+2017-07-20 21:17:30 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:17:56 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:18:14 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:18:14 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_82.tif
+2017-07-20 21:18:14 [optimize_gurobi_es] [INFO ]  [83/100] Optimizing with fraction level 0.83...
+2017-07-20 21:18:14 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:18:41 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:19:00 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:19:01 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_83.tif
+2017-07-20 21:19:01 [optimize_gurobi_es] [INFO ]  [84/100] Optimizing with fraction level 0.84...
+2017-07-20 21:19:01 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:19:28 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:19:47 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:19:47 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_84.tif
+2017-07-20 21:19:47 [optimize_gurobi_es] [INFO ]  [85/100] Optimizing with fraction level 0.85...
+2017-07-20 21:19:47 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:20:14 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:20:33 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:20:34 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_85.tif
+2017-07-20 21:20:34 [optimize_gurobi_es] [INFO ]  [86/100] Optimizing with fraction level 0.86...
+2017-07-20 21:20:34 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:20:59 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:21:19 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:21:19 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_86.tif
+2017-07-20 21:21:19 [optimize_gurobi_es] [INFO ]  [87/100] Optimizing with fraction level 0.87...
+2017-07-20 21:21:19 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:21:44 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:22:03 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:22:03 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_87.tif
+2017-07-20 21:22:04 [optimize_gurobi_es] [INFO ]  [88/100] Optimizing with fraction level 0.88...
+2017-07-20 21:22:04 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:22:27 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:22:48 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:22:48 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_88.tif
+2017-07-20 21:22:48 [optimize_gurobi_es] [INFO ]  [89/100] Optimizing with fraction level 0.89...
+2017-07-20 21:22:48 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:23:15 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:23:33 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:23:33 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_89.tif
+2017-07-20 21:23:33 [optimize_gurobi_es] [INFO ]  [90/100] Optimizing with fraction level 0.9...
+2017-07-20 21:23:33 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:23:57 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:24:16 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:24:16 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_9.tif
+2017-07-20 21:24:17 [optimize_gurobi_es] [INFO ]  [91/100] Optimizing with fraction level 0.91...
+2017-07-20 21:24:17 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:24:43 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:25:02 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:25:02 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_91.tif
+2017-07-20 21:25:03 [optimize_gurobi_es] [INFO ]  [92/100] Optimizing with fraction level 0.92...
+2017-07-20 21:25:03 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:25:28 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:25:46 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:25:46 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_92.tif
+2017-07-20 21:25:47 [optimize_gurobi_es] [INFO ]  [93/100] Optimizing with fraction level 0.93...
+2017-07-20 21:25:47 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:26:11 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:26:29 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:26:29 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_93.tif
+2017-07-20 21:26:30 [optimize_gurobi_es] [INFO ]  [94/100] Optimizing with fraction level 0.94...
+2017-07-20 21:26:30 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:26:54 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:27:13 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:27:13 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_94.tif
+2017-07-20 21:27:13 [optimize_gurobi_es] [INFO ]  [95/100] Optimizing with fraction level 0.95...
+2017-07-20 21:27:13 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:27:38 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:27:57 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:27:58 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_95.tif
+2017-07-20 21:27:58 [optimize_gurobi_es] [INFO ]  [96/100] Optimizing with fraction level 0.96...
+2017-07-20 21:27:58 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:28:22 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:28:40 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:28:40 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_96.tif
+2017-07-20 21:28:41 [optimize_gurobi_es] [INFO ]  [97/100] Optimizing with fraction level 0.97...
+2017-07-20 21:28:41 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:29:06 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:29:24 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:29:24 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_97.tif
+2017-07-20 21:29:25 [optimize_gurobi_es] [INFO ]  [98/100] Optimizing with fraction level 0.98...
+2017-07-20 21:29:25 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:29:50 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:30:07 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:30:08 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_98.tif
+2017-07-20 21:30:08 [optimize_gurobi_es] [INFO ]  [99/100] Optimizing with fraction level 0.99...
+2017-07-20 21:30:08 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:30:33 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:30:51 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:30:52 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_0_99.tif
+2017-07-20 21:30:52 [optimize_gurobi_es] [INFO ]  [100/100] Optimizing with fraction level 1.0...
+2017-07-20 21:30:52 [optimize_gurobi_es] [INFO ]  [INFO] Starting single-objective optimization
+2017-07-20 21:31:17 [optimize_gurobi_es] [DEBUG] See /data/priocomp/logs/gurobi.log for Gurobi log
+2017-07-20 21:31:27 [optimize_gurobi_es] [WARNI]  [WARN] Inconsistent raster profiles detected
+2017-07-20 21:31:27 [optimize_gurobi_es] [DEBUG]  Writing intermediate output to analyses/ILP/ilp_es/budget_level_1_0.tif
+2017-07-20 21:31:28 [optimize_gurobi_es] [INFO ]  [TIME] Optimization took 4541.14 sec
+2017-07-20 21:31:28 [optimize_gurobi_es] [INFO ]  [** POST-PROCESSING **]
+2017-07-20 21:31:28 [optimize_gurobi_es] [INFO ]  [1/3] Ranking selection frequencies
+2017-07-20 21:31:38 [optimize_gurobi_es] [INFO ]  [2/3] Rescaling ranks
+2017-07-20 21:31:38 [optimize_gurobi_es] [INFO ]  [3/3] Writing output to analyses/ILP/ilp_es.tif
+2017-07-20 21:31:39 [optimize_gurobi_es] [INFO ]  [TIME] Post-processing took 11.72 sec
+2017-07-20 21:31:39 [optimize_gurobi_es] [INFO ]  [TIME] All processing took 4552.92 sec
