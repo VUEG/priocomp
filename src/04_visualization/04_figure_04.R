@@ -65,15 +65,15 @@ create_boxplot <- function(x, title = "", draw_legend = TRUE,
 create_cost_plot <- function(x, title = NULL, draw_legend = TRUE,
                              draw_y_label = TRUE) {
 
-  x_lab <- "\nFraction of the landscape"
+  x_lab <- "\nCumulative fraction of the landscape"
   x_scale <- scale_x_continuous(breaks = seq(0, 1, 0.2),
-                                labels = paste(100 * seq(1, 0, -0.2), "%"))
+                                labels = paste(100 * seq(0, 1, 0.2), "%"))
   y_scale <- scale_y_continuous(breaks = seq(0, 1, 0.2))
   # Define x-axis vlines that are used to link to Fig 5
   vlines_x <- c(0.9, 0.98)
-  vlines_labs <- c("10%", "2%")
-  vlines_labs_x <- vlines_x + 0.02
-  vlines_labs_y <- 1.03
+  vlines_labs <- c("top\n10%", "top\n2%")
+  vlines_labs_x <- vlines_x - 0.03
+  vlines_labs_y <- 1.06
 
   p1 <- ggplot2::ggplot(x, aes(x = pr_lost, y = cost, color = variant)) +
     geom_vline(xintercept = vlines_x, alpha = 0.5, linetype = 3) +
@@ -84,7 +84,7 @@ create_cost_plot <- function(x, title = NULL, draw_legend = TRUE,
     ggtitle(title) + theme_minimal() +
     theme(legend.key.width = unit(1,"cm"))
   if (draw_y_label) {
-    p1 <- p1 + ylab("Relateive cost of the solution\n")
+    p1 <- p1 + ylab("Cumulative cost of the solution\n")
   }
   if (!draw_legend) {
     p1 <- p1 + theme(legend.position = "none")
@@ -263,6 +263,7 @@ v04_cost$variant <- "ZON_ALL"
 v06_cost <- get_costs(cost_raster = cost_raster,
                       rank_raster = v06_rank_raster)
 v06_cost$variant <- "ZON_ALL"
+
 v23_cost <- get_costs(cost_raster = cost_raster,
                       rank_raster = v23_rank_raster)
 v23_cost$variant <- "RWR_ALL"
@@ -278,6 +279,23 @@ v26_cost$variant <- "ILP_ALL"
 
 cost_perf_nocost <- dplyr::bind_rows(v04_cost, v23_cost, v24_cost)
 cost_perf_cost <- dplyr::bind_rows(v06_cost, v25_cost, v26_cost)
+
+
+# Tests -------------------------------------------------------------------
+
+
+# cost_perf_cost %>%
+#   dplyr::group_by(variant) %>%
+#   dplyr::summarise(
+#     min = min(cost),
+#     mean = mean(cost),
+#     max = max(cost)
+#   )
+#
+# ggplot(cost_perf_cost, aes(x = pr_lost, y = log(cost), color = variant)) +
+#   geom_line()
+
+# Tests -------------------------------------------------------------------
 
 # All curves data ---------------------------------------------------------
 
@@ -321,7 +339,7 @@ fig5 <- gridExtra::grid.arrange(p1, p2, p5, p6, p3, p4, ncol = 2, nrow = 3)
 
 # Save Figure -------------------------------------------------------------
 
-ggsave("reports/figures/figure04/01_figure_04.png", fig5, width = 12, height = 10)
+ggsave("reports/figures/figure04/01_figure_04.png", fig5, width = 10, height = 8.5)
 
 
 #  Extra: cost distribution -----------------------------------------------
