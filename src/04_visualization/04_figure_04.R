@@ -65,7 +65,7 @@ create_boxplot <- function(x, title = "", draw_legend = TRUE,
 create_cost_plot <- function(x, title = NULL, draw_legend = TRUE,
                              draw_y_label = TRUE) {
 
-  x_lab <- "\nCumulative fraction of the landscape"
+  x_lab <- "\nFraction of the landscape selected"
   x_scale <- scale_x_continuous(breaks = seq(0, 1, 0.2),
                                 labels = paste(100 * seq(0, 1, 0.2), "%"))
   y_scale <- scale_y_continuous(breaks = seq(0, 1, 0.2))
@@ -87,7 +87,7 @@ create_cost_plot <- function(x, title = NULL, draw_legend = TRUE,
 create_perf_plot <- function(x, title = NULL, draw_legend = TRUE,
                              draw_y_label = TRUE) {
 
-  x_lab <- "\nFraction of the landscape"
+  x_lab <- "\nFraction of the landscape selected"
   x_scale <- scale_x_continuous(breaks = seq(0, 1, 0.2),
                                 labels = paste(100 * seq(1, 0, -0.2), "%"))
   y_scale <- scale_y_continuous(breaks = seq(0, 1, 0.2),
