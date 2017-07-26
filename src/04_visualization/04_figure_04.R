@@ -69,16 +69,8 @@ create_cost_plot <- function(x, title = NULL, draw_legend = TRUE,
   x_scale <- scale_x_continuous(breaks = seq(0, 1, 0.2),
                                 labels = paste(100 * seq(0, 1, 0.2), "%"))
   y_scale <- scale_y_continuous(breaks = seq(0, 1, 0.2))
-  # Define x-axis vlines that are used to link to Fig 5
-  vlines_x <- c(0.9, 0.98)
-  vlines_labs <- c("top\n10%", "top\n2%")
-  vlines_labs_x <- vlines_x - 0.03
-  vlines_labs_y <- 1.06
 
   p1 <- ggplot2::ggplot(x, aes(x = pr_lost, y = cost, color = variant)) +
-    geom_vline(xintercept = vlines_x, alpha = 0.5, linetype = 3) +
-    annotate("text", x = vlines_labs_x, y = vlines_labs_y,
-             label = vlines_labs, size = 3) +
     geom_line(size = 1) + x_scale + y_scale + xlab(x_lab) + ylab("") +
     scale_color_manual("", values =  rev(viridis(3, end = 0.9))) +
     ggtitle(title) + theme_minimal() +
