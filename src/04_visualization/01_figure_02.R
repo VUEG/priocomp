@@ -117,6 +117,8 @@ file_mean_top_costs <- "reports/figures/figure02/04_figure_02_A_costs.png"
 file_mean_sd_costs <- "reports/figures/figure02/05_figure_02_B_costs.png"
 file_composite_costs <- "reports/figures/figure02/06_figure_02_costs.png"
 
+file_composite_both <- "reports/figures/figure02/06_figure_02_both.png"
+
 save_tmap(tm_mean_top_nocosts, file_mean_top_nocosts, width = 1500, height = 1800)
 save_tmap(tm_sd_top_nocosts, file_mean_sd_nocosts, width = 1500, height = 1800)
 save_tmap(tm_mean_top_costs, file_mean_top_costs, width = 1500, height = 1800)
@@ -126,11 +128,17 @@ save_tmap(tm_sd_top_costs, file_mean_sd_costs, width = 1500, height = 1800)
 img_mean_top_nocosts <- magick::image_read(file_mean_top_nocosts)
 img_mean_sd_nocosts <- magick::image_read(file_mean_sd_nocosts)
 img_composite_nocosts <- magick::image_append(c(img_mean_top_nocosts,
-                                                img_mean_sd_nocosts))
-magick::image_write(img_composite_nocosts, path = file_composite_nocosts)
+                                                img_mean_sd_nocosts),
+                                              stack = TRUE)
+#magick::image_write(img_composite_nocosts, path = file_composite_nocosts)
 
 img_mean_top_costs <- magick::image_read(file_mean_top_costs)
 img_mean_sd_costs <- magick::image_read(file_mean_sd_costs)
 img_composite_costs <- magick::image_append(c(img_mean_top_costs,
-                                                img_mean_sd_costs))
-magick::image_write(img_composite_costs, path = file_composite_costs)
+                                              img_mean_sd_costs),
+                                            stack = TRUE)
+img_composite_both <- magick::image_append(c(img_composite_nocosts,
+                                             img_composite_costs))
+
+#magick::image_write(img_composite_costs, path = file_composite_costs)
+magick::image_write(img_composite_both, path = file_composite_both)
