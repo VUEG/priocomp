@@ -35,7 +35,7 @@ create_mean_map <- function(x, width, height, inner.margins = NULL) {
                 border.col = "lightgrey", lwd = 0.3,
                 auto.palette.mapping = FALSE) +
     tm_layout(title.size = 1.5) +
-    tm_format_Europe(title = "A", inner.margins = inner.margins,
+    tm_format_Europe(title = "", inner.margins = inner.margins,
                      legend.position = c("left", "top"),
                      legend.bg.color = "white",
                      title.position = c("right", "top"))
@@ -62,7 +62,7 @@ create_sd_map <-  function(x, upper.limit, step = 0.05, width, height,
                 border.col = "lightgrey", lwd = 0.3,
                 auto.palette.mapping = FALSE) +
     tm_layout(title.size = 1.5) +
-    tm_format_Europe(title = "B", inner.margins = inner.margins,
+    tm_format_Europe(title = "", inner.margins = inner.margins,
                      legend.show = TRUE, legend.position = c("left", "top"),
                      legend.bg.color = "white",
                      title.position = c("right", "top"))
