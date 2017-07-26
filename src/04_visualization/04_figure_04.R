@@ -5,6 +5,7 @@ library(ggplot2)
 library(ggthemes)
 library(gridExtra)
 library(hrbrthemes)
+library(magick)
 library(tidyr)
 library(raster)
 library(zonator)
@@ -70,7 +71,7 @@ create_cost_plot <- function(x, title = NULL, draw_legend = TRUE,
                                 labels = paste(100 * seq(0, 1, 0.2), "%"))
   y_scale <- scale_y_continuous(breaks = seq(0, 1, 0.2))
 
-  p1 <- ggplot2::ggplot(x, aes(x = pr_lost, y = cost, color = variant)) +
+  p1 <- ggplot2::ggplot(x, aes(x = rank, y = cost, color = variant)) +
     geom_line(size = 1) + x_scale + y_scale + xlab(x_lab) + ylab("") +
     scale_color_manual("", values =  rev(viridis(3, end = 0.9))) +
     ggtitle(title) + theme_minimal() +
@@ -89,16 +90,16 @@ create_perf_plot <- function(x, title = NULL, draw_legend = TRUE,
 
   x_lab <- "\nFraction of the landscape selected"
   x_scale <- scale_x_continuous(breaks = seq(0, 1, 0.2),
-                                labels = paste(100 * seq(1, 0, -0.2), "%"))
+                                labels = paste(100 * seq(0, 1, 0.2), "%"))
   y_scale <- scale_y_continuous(breaks = seq(0, 1, 0.2),
                                 labels = paste(100 * seq(0, 1, 0.2), "%"))
   # Define x-axis vlines that are used to link to Fig 5
-  vlines_x <- c(0.9, 0.98)
-  vlines_labs <- c("10%", "2%")
+  vlines_x <- c(0.02, 0.1)
+  vlines_labs <- c("2%", "10%")
   vlines_labs_x <- vlines_x + 0.02
   vlines_labs_y <- 1.03
 
-  p1 <- ggplot2::ggplot(x, aes(x = pr_lost, y = ave_pr, color = variant,
+  p1 <- ggplot2::ggplot(x, aes(x = rev(pr_lost), y = ave_pr, color = variant,
                                linetype = variant)) +
     geom_vline(xintercept = vlines_x, alpha = 0.5, linetype = 3) +
     annotate("text", x = vlines_labs_x, y = vlines_labs_y,
@@ -144,7 +145,7 @@ get_costs <- function(cost_raster, rank_raster, n = 1002,
   cost_matrix <- cost_matrix[seq(1, nrow(cost_matrix), every), ]
   # Coerce into a dataframe
   cost_df <- as.data.frame(cost_matrix)
-  names(cost_df) <- c("pr_lost", "cost_per_cell", "cost")
+  names(cost_df) <- c("rank", "cost_per_cell", "cost")
 
   if (rescale_cost) {
     cost_df$cost <- cost_df$cost / max(cost_df$cost)
@@ -284,7 +285,7 @@ cost_perf_cost <- dplyr::bind_rows(v06_cost, v25_cost, v26_cost)
 #     max = max(cost)
 #   )
 #
-# ggplot(cost_perf_cost, aes(x = pr_lost, y = log(cost), color = variant)) +
+#ggplot(v06_cost, aes(x = rank, y = cost, color = variant)) +
 #   geom_line()
 
 # Tests -------------------------------------------------------------------
@@ -330,9 +331,16 @@ p5 <- match_grob_width(p5, p6)
 fig5 <- gridExtra::grid.arrange(p1, p2, p5, p6, p3, p4, ncol = 2, nrow = 3)
 
 # Save Figure -------------------------------------------------------------
+outfile <- "reports/figures/figure04/01_figure_04.png"
+ggsave(outfile, fig5, width = 10, height = 8.5)
 
-ggsave("reports/figures/figure04/01_figure_04.png", fig5, width = 10, height = 8.5)
-
+# Crop image
+img_org <- magick::image_read(outfile)
+img_org_height <- magick::image_info(img_org)$height
+img_left <- magick::image_crop(img_org, geometry = paste0("1250x", img_org_height))
+img_right <- magick::image_crop(img_org, geometry = paste0("1500x", img_org_height, "+1550"))
+img_composite <- magick::image_append(c(img_left, img_right))
+magick::image_write(img_composite, path = outfile)
 
 #  Extra: cost distribution -----------------------------------------------
 
